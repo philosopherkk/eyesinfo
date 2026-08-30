@@ -50,9 +50,13 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-cataract", label: "超聲波乳化與併發症" },
     { href: "/t/t-yag", label: "後囊混濁（不是白內障復發）" },
   ],
-  d4: [{ href: "/tools/tunnel", label: "隧道視野示意" }],
-  d5: [{ href: "/amsler", label: "阿姆斯勒方格" }],
-  d6: [{ href: "/t/t-reports", label: "OCT／視野示意" }],
+  d4: [
+    { href: "/tools/tunnel", label: "隧道視野示意" },
+    { href: "/t/t-glaucoma", label: "目標眼壓與監察" },
+    { href: "/t/t-early", label: "遠視、淺前房與閉角" },
+  ],
+  d5: [{ href: "/amsler", label: "阿姆斯勒方格" }, { href: "/t/t-rvo", label: "視網膜血管阻塞" }],
+  d6: [{ href: "/t/t-reports", label: "OCT／視野示意" }, { href: "/t/t-rvo", label: "視網膜血管阻塞" }],
   d8: [{ href: "/tools/floaters", label: "飛蚊與簾幕" }, { href: "/t/t-rd", label: "脫離手術與風險" }],
   d9: [
     { href: "/tools/warm", label: "熱敷計時" },
@@ -78,7 +82,15 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-cl", label: "隱形眼鏡併發症" },
   ],
   "t-yag": [{ href: "/t/t-yag", label: "後囊混濁（不是白內障復發）" }],
-  "t-glaucoma": [{ href: "/tools/tunnel", label: "隧道視野示意" }],
+  "t-glaucoma": [
+    { href: "/tools/tunnel", label: "隧道視野示意" },
+    { href: "/t/t-early", label: "遠視、淺前房與閉角" },
+  ],
+  "t-rvo": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/amsler", label: "阿姆斯勒方格" },
+    { href: "/t/t-vegf", label: "玻璃體內注射" },
+  ],
   "t-rd": [{ href: "/tools/floaters", label: "飛蚊與簾幕" }],
   "t-vegf": [{ href: "/t/t-octm", label: "黃斑 OCT" }],
   "t-presbyopia": [
