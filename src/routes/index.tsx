@@ -7,6 +7,7 @@ import { TopicRow } from "@/components/topic-row";
 import { LegalBanner } from "@/components/legal-banner";
 import { useI18n, TOOL_TEXT } from "@/i18n";
 import type { UiKey } from "@/i18n/ui";
+import { CONTENT_UPDATED, CONTENT_VERSION } from "@/lib/site";
 
 export const Route = createFileRoute("/")({ component: Home });
 
@@ -37,6 +38,9 @@ function Home() {
       <section className="px-4 pb-4 pt-5">
         <p className="text-[0.75rem] font-semibold tracking-[0.14em] text-steel">
           {t("homeKicker")}
+        </p>
+        <p className="mt-1 text-[0.78rem] text-muted">
+          {t("contentVer")} {CONTENT_VERSION} · {t("contentUpdated")} {CONTENT_UPDATED}
         </p>
         <h1 className="mt-1 text-[1.55rem] font-semibold leading-tight tracking-tight text-navy">
           {t("homeTitle")}
