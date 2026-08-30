@@ -126,14 +126,6 @@ function Home() {
         </div>
       </section>
 
-      <p className="mx-4 mt-5 text-[0.82rem] leading-relaxed text-muted">
-        {t("yagHome")}
-        <Link to="/t/$topicId" params={{ topicId: "t-yag" }} className="font-semibold text-navy">
-          {t("yagLink")}
-        </Link>
-        {locale === "en" || locale === "ja" ? "." : "。"}
-      </p>
-
       <p className="mx-4 mt-6 mb-4 text-[0.75rem] leading-relaxed text-faint">
         {t("homeFoot")}
       </p>

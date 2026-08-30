@@ -27,9 +27,6 @@ const zhHant = {
   allTools: "全部教育工具",
   byAnatomy: "按解剖分類",
   top10: "十大常見眼疾",
-  yagHome:
-    "白內障術後數年視力再矇，多數是後囊混濁而不是「白內障復發」。並非所有視矇都需要 YAG，須醫生評估。見",
-  yagLink: "YAG 後囊切開",
   homeFoot: "本站不提供預約、購買或轉介服務。此教育內容與診所推廣完全獨立。",
   related: "打開相關示意",
   legalLink: "法律與專業守則說明",
@@ -165,9 +162,6 @@ const en: Record<Key, string> = {
   allTools: "All education tools",
   byAnatomy: "By anatomy",
   top10: "Ten common eye conditions",
-  yagHome:
-    "Blur years after cataract surgery is usually posterior capsule opacification, not a “returning cataract”. Not every blur needs YAG; a doctor must assess. See ",
-  yagLink: "YAG capsulotomy",
   homeFoot:
     "This site does not offer booking, sales or referrals. The education content is independent of any practice promotion.",
   related: "Open related diagrams",
@@ -306,9 +300,6 @@ const ja: Record<Key, string> = {
   allTools: "教育ツール一覧",
   byAnatomy: "解剖で探す",
   top10: "よくある10の目の病気",
-  yagHome:
-    "白内障手術の数年後に再びかすむ場合、多くは後嚢混濁であり「白内障の再発」ではありません。すべてのかすみにYAGが必要なわけではなく、医師の判断が必要です。",
-  yagLink: "YAG後嚢切開",
   homeFoot:
     "予約・販売・紹介は行いません。教育内容は診療所の宣伝から独立しています。",
   related: "関連する図を開く",

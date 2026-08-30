@@ -46,6 +46,8 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   d3: [
     { href: "/tools/haze", label: "白內障日夜示意" },
     { href: "/iol", label: "晶體視力示意" },
+    { href: "/t/t-cataract", label: "超聲波乳化與併發症" },
+    { href: "/t/t-yag", label: "後囊混濁（不是白內障復發）" },
   ],
   d4: [{ href: "/tools/tunnel", label: "隧道視野示意" }],
   d5: [{ href: "/amsler", label: "阿姆斯勒方格" }],
@@ -55,6 +57,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   "t-cataract": [
     { href: "/tools/haze", label: "白內障日夜示意" },
     { href: "/iol", label: "晶體視力示意" },
+    { href: "/t/t-yag", label: "後囊混濁（不是白內障復發）" },
   ],
   "t-iol": [{ href: "/iol", label: "晶體視力示意" }, { href: "/tools/halo", label: "夜間光暈比較" }],
   "t-mfiol": [{ href: "/tools/halo", label: "夜間光暈比較" }, { href: "/iol", label: "晶體視力示意" }],

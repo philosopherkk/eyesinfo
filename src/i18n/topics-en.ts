@@ -225,7 +225,15 @@ export const EN_PACKS: Record<string, TopicPack> = {
         ],
       },
       h("Complication figures from the literature (not any clinic’s success rate)"),
-      ul(["Posterior capsule rupture about 0.5–1.5%", "Posterior capsule opacification about 10–40% over years; outpatient YAG can treat it", "Clinically significant macular oedema about 1–2%", "Endophthalmitis <0.1% — an emergency"]),
+      ul([
+        "Posterior capsule rupture about 0.5–1.5% (higher with a denser nucleus or complex anatomy)",
+        "Clinically significant macular oedema about 1–2%",
+        "Endophthalmitis <0.1% — an emergency: redness, sudden drop in vision or discharge means A&E now",
+      ]),
+      h("Years later: posterior capsule opacification (not a returning cataract)"),
+      p("The implant stays in the original bag. Lens epithelial cells can cloud the posterior capsule over years (PCO, sometimes called an after-cataract). Literature: about 10–40%. This is not a new lens growing back, and it is not a failed operation."),
+      p("Blur years after cataract surgery is usually PCO, not a “returning cataract”. Not every blur needs YAG capsulotomy. A doctor must judge whether it affects function and exclude macular, corneal or other causes. The laser is outpatient, with no incision. See the YAG fact sheet."),
+      w("After YAG, a shower of new floaters, flashes, a curtain or severe pain: go to A&E."),
     ],
   },
   "t-warm": {
