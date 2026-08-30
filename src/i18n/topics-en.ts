@@ -438,10 +438,44 @@ export const EN_PACKS: Record<string, TopicPack> = {
   },
   "t-presbyopia": {
     title: "Presbyopia — classes of options",
-    tag: "Ageing focus",
-    meta: "Reading · glasses · drops · surgery talk",
+    tag: "Doctor’s decision",
+    meta: "Glasses · Hong Kong registration of miotic drops",
     blocks: [
-      p("Presbyopia is declining accommodation, not a classic refractive error, grouped with refraction because the optical approaches overlap. Options a doctor or optometrist may discuss include spectacles, contact lenses, and — after full examination — lens surgery. Pharmacological approaches, if mentioned, are prescription-only and depend on Hong Kong registration. This page does not sell drops."),
+      p("Presbyopia is declining accommodation with age. It is not a classic refractive error, grouped here because the optical approaches overlap. Nothing reverses lens ageing. Hong Kong doctors usually discuss reading glasses, progressives, bifocals or contact lenses first, and lens optics if cataract surgery is being considered."),
+      h("Miotic drops for near vision — mechanism, not a promise"),
+      p("Some overseas prescription drops constrict the pupil (a pinhole effect) and can make near work easier for a few hours. They do not restore youthful focusing. Suitability, duration and night driving need an eye examination including the fundus. They are not over-the-counter medicines."),
+      h("Hong Kong registration (check the Drug Office database)"),
+      p("Under the Pharmacy and Poisons Ordinance (Cap. 138), a pharmaceutical product generally needs Pharmacy and Poisons Board registration (often an HK-XXXXX number) before it can be sold, offered for sale or stocked for retail. FDA approval does not mean Hong Kong registration. The overseas trade names below are listed only to say they are not currently registered here as presbyopia products — not as a shopping list."),
+      {
+        type: "table",
+        rows: [
+          ["Ingredient class (INN)", "Overseas trade name (examples)", "As a “presbyopia drop” in Hong Kong"],
+          ["Pilocarpine 1.25%", "Vuity", "This specific presbyopia formulation is not freely sold as a registered presbyopia product"],
+          ["Aceclidine 1.44%", "Vizz", "Same"],
+          ["Carbachol 2.75% + brimonidine tartrate 0.1%", "Yuvezzi / Yuveezi (formerly Brimochol PF)", "Same"],
+        ],
+      },
+      p("Older generic pilocarpine and brimonidine drops registered in Hong Kong are generally indicated for glaucoma or ocular hypertension, not presbyopia, and the strength differs. Using them for near vision is off-label and only a registered doctor can decide — do not treat leftover glaucoma drops as a presbyopia medicine."),
+      h("Lawful route: named-patient only"),
+      ul([
+        "A registered doctor may prescribe an unregistered medicine for a named patient when no suitable registered alternative exists",
+        "A licensed pharmacy may then import and dispense against that prescription — currently the lawful route for those overseas formulations",
+        "This site does not book, prescribe, source or refer, and does not compare pharmacies",
+      ]),
+      h("Do not"),
+      ul([
+        "Buy from unofficial websites, social media or parallel import: quality, storage and authenticity cannot be checked",
+        "Selling, offering to sell or possessing unregistered pharmaceutical products can be a criminal offence",
+        "Dilute or reuse someone else’s glaucoma miotic as a near-vision drop",
+      ]),
+      h("Risks a doctor may discuss"),
+      ul([
+        "Headache, brow ache, redness, irritation",
+        "Brief blur, dim vision in low light, difficulty driving at night",
+        "Miotics can pull on the vitreous and retina; high myopes and anyone with a past tear or detachment need a dilated exam first",
+        "New flashes or many new floaters: same-day dilation; a curtain or sudden loss of vision: A&E",
+      ]),
+      w("This page is not a medicine advertisement and does not promise better near vision. Registration can change — check the Department of Health Drug Office public database. Whether to prescribe or import is only for the doctor who examines you."),
     ],
   },
   "t-protopic": {

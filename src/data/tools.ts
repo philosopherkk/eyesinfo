@@ -70,11 +70,19 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   "t-drops": [{ href: "/tools/drops", label: "點藥步驟" }, { href: "/t/t-lube", label: "眼表潤滑劑" }],
   "t-warm": [{ href: "/tools/warm", label: "熱敷計時" }],
   "t-myopia": [{ href: "/tools/outdoor", label: "兒童戶外時間" }],
-  d1: [{ href: "/tools/rx", label: "眼鏡度數解讀" }, { href: "/tools/outdoor", label: "兒童戶外時間" }],
+  d1: [
+    { href: "/tools/rx", label: "眼鏡度數解讀" },
+    { href: "/tools/outdoor", label: "兒童戶外時間" },
+    { href: "/t/t-presbyopia", label: "老花眼藥水本港現況" },
+  ],
   "t-yag": [{ href: "/t/t-yag", label: "後囊混濁（不是白內障復發）" }],
   "t-glaucoma": [{ href: "/tools/tunnel", label: "隧道視野示意" }],
   "t-rd": [{ href: "/tools/floaters", label: "飛蚊與簾幕" }],
   "t-vegf": [{ href: "/t/t-octm", label: "黃斑 OCT" }],
+  "t-presbyopia": [
+    { href: "/iol", label: "晶體視力示意" },
+    { href: "/tools/rx", label: "眼鏡度數解讀" },
+  ],
   "t-chalazion": [{ href: "/tools/warm", label: "熱敷計時" }],
   "t-strab": [
     { href: "/urgent", label: "急症與同日評估" },
