@@ -73,7 +73,9 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   d1: [
     { href: "/tools/rx", label: "眼鏡度數解讀" },
     { href: "/tools/outdoor", label: "兒童戶外時間" },
-    { href: "/t/t-presbyopia", label: "老花眼藥水本港現況" },
+    { href: "/t/t-presbyopia", label: "老花五類選擇" },
+    { href: "/t/t-lasik", label: "LASIK 與 SMILE" },
+    { href: "/t/t-cl", label: "隱形眼鏡併發症" },
   ],
   "t-yag": [{ href: "/t/t-yag", label: "後囊混濁（不是白內障復發）" }],
   "t-glaucoma": [{ href: "/tools/tunnel", label: "隧道視野示意" }],
@@ -82,7 +84,16 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   "t-presbyopia": [
     { href: "/iol", label: "晶體視力示意" },
     { href: "/tools/rx", label: "眼鏡度數解讀" },
+    { href: "/t/t-cl", label: "隱形眼鏡併發症" },
+    { href: "/t/t-lasik", label: "LASIK 與 SMILE" },
+    { href: "/t/t-cataract", label: "超聲波乳化與晶體" },
   ],
+  "t-lasik": [
+    { href: "/t/t-presbyopia", label: "老花五類選擇" },
+    { href: "/t/t-cl", label: "隱形眼鏡併發症" },
+    { href: "/iol", label: "晶體視力示意" },
+  ],
+  "t-cl": [{ href: "/t/t-lasik", label: "激光矯視" }, { href: "/t/t-lube", label: "眼表潤滑劑" }],
   "t-chalazion": [{ href: "/tools/warm", label: "熱敷計時" }],
   "t-strab": [
     { href: "/urgent", label: "急症與同日評估" },
