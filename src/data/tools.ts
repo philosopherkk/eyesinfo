@@ -42,6 +42,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   d2: [
     { href: "/tools/drops", label: "點藥步驟" },
     { href: "/tools/warm", label: "熱敷計時" },
+    { href: "/t/t-lube", label: "眼表潤滑劑" },
   ],
   d3: [
     { href: "/tools/haze", label: "白內障日夜示意" },
@@ -52,8 +53,11 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   d4: [{ href: "/tools/tunnel", label: "隧道視野示意" }],
   d5: [{ href: "/amsler", label: "阿姆斯勒方格" }],
   d6: [{ href: "/t/t-reports", label: "OCT／視野示意" }],
-  d8: [{ href: "/tools/floaters", label: "飛蚊與簾幕" }],
-  d9: [{ href: "/tools/warm", label: "熱敷計時" }],
+  d8: [{ href: "/tools/floaters", label: "飛蚊與簾幕" }, { href: "/t/t-rd", label: "脫離手術與風險" }],
+  d9: [
+    { href: "/tools/warm", label: "熱敷計時" },
+    { href: "/t/t-chalazion", label: "霰粒腫切開刮除" },
+  ],
   "t-cataract": [
     { href: "/tools/haze", label: "白內障日夜示意" },
     { href: "/iol", label: "晶體視力示意" },
@@ -61,13 +65,17 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   ],
   "t-iol": [{ href: "/iol", label: "晶體視力示意" }, { href: "/tools/halo", label: "夜間光暈比較" }],
   "t-mfiol": [{ href: "/tools/halo", label: "夜間光暈比較" }, { href: "/iol", label: "晶體視力示意" }],
-  "t-drops": [{ href: "/tools/drops", label: "點藥步驟" }],
+  "t-dry": [{ href: "/tools/drops", label: "點藥步驟" }, { href: "/t/t-lube", label: "眼表潤滑劑" }, { href: "/tools/warm", label: "熱敷計時" }],
+  "t-lube": [{ href: "/tools/drops", label: "點藥步驟" }, { href: "/t/t-dry", label: "乾眼處理梯階" }],
+  "t-drops": [{ href: "/tools/drops", label: "點藥步驟" }, { href: "/t/t-lube", label: "眼表潤滑劑" }],
   "t-warm": [{ href: "/tools/warm", label: "熱敷計時" }],
   "t-myopia": [{ href: "/tools/outdoor", label: "兒童戶外時間" }],
   d1: [{ href: "/tools/rx", label: "眼鏡度數解讀" }, { href: "/tools/outdoor", label: "兒童戶外時間" }],
   "t-yag": [{ href: "/t/t-yag", label: "後囊混濁（不是白內障復發）" }],
   "t-glaucoma": [{ href: "/tools/tunnel", label: "隧道視野示意" }],
   "t-rd": [{ href: "/tools/floaters", label: "飛蚊與簾幕" }],
+  "t-vegf": [{ href: "/t/t-octm", label: "黃斑 OCT" }],
+  "t-chalazion": [{ href: "/tools/warm", label: "熱敷計時" }],
 };
 
 export const SIM_FOOTER =
