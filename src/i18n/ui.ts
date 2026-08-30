@@ -76,6 +76,8 @@ const zhHant = {
   toolCaveat:
     "此工具結果正常不能排除眼疾。示意／自我監察不能代替散瞳眼底、視野或光學相干斷層掃描（OCT）。新出現異常須盡快由眼科專科醫生檢查；突然視力下降請到急症室。",
   reviewed: "最近覆核",
+  contentVer: "內容版本",
+  contentUpdated: "更新日期",
   installTitle: "加到手機主畫面",
   installLead:
     "本程式是可安裝的網頁應用（PWA）。加到主畫面後，會像一般 App 全螢幕開啟，並可收藏專題、調校字體。",
@@ -218,6 +220,8 @@ const en: Record<Key, string> = {
   toolCaveat:
     "A normal result here does not rule out disease. Demonstration / self-checks cannot replace dilated fundus exam, visual field or OCT. New changes need prompt review by a registered ophthalmologist; sudden vision loss — go to A&E.",
   reviewed: "Last reviewed",
+  contentVer: "Content version",
+  contentUpdated: "Updated",
   installTitle: "Add to your phone’s Home Screen",
   installLead:
     "This is an installable web app (PWA). After adding it, it opens full screen like an app. You can save topics and change type size.",
@@ -355,6 +359,8 @@ const ja: Record<Key, string> = {
   toolCaveat:
     "ここで異常がなくても病気を否定できません。図示／自己観察は散瞳眼底・視野・OCTの代わりにはなりません。新しい変化は眼科専門医の早めの診察を。突然の視力低下は救急外来へ。",
   reviewed: "最終確認",
+  contentVer: "コンテンツ版",
+  contentUpdated: "更新日",
   installTitle: "スマホのホーム画面に追加",
   installLead:
     "インストール可能なウェブアプリ（PWA）です。追加後は通常のアプリのように全画面で開き、解説の保存や文字サイズ変更ができます。",
