@@ -1,0 +1,53 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { localizedUrgent, useI18n } from "@/i18n";
+
+export const Route = createFileRoute("/urgent")({ component: UrgentPage });
+
+function UrgentPage() {
+  const { t, locale } = useI18n();
+  const { flags, same } = localizedUrgent(locale);
+  return (
+    <div className="px-4 pt-5 pb-8">
+      <h1 className="text-[1.35rem] font-semibold text-danger">{t("urgentTitle")}</h1>
+      <p className="mt-2 text-[0.92rem] leading-relaxed">{t("urgentLead")}</p>
+
+      <section className="mt-5 rounded-xl bg-danger px-4 py-4 text-paper">
+        <h2 className="text-[1rem] font-semibold">{t("urgent999")}</h2>
+        <ul className="mt-2 list-disc space-y-1 pl-5 text-[0.9rem] leading-relaxed">
+          {flags.map((s) => (
+            <li key={s}>{s}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="mt-5 rounded-xl bg-danger px-4 py-4 text-paper">
+        <h2 className="text-[1rem] font-semibold">{t("chemH")}</h2>
+        <ol className="mt-2 list-decimal space-y-1.5 pl-5 text-[0.9rem] leading-relaxed">
+          <li>{t("chem1")}</li>
+          <li>{t("chem2")}</li>
+          <li>{t("chem3")}</li>
+          <li>{t("chem4")}</li>
+        </ol>
+      </section>
+
+      <section className="mt-5">
+        <h2 className="text-[1rem] font-semibold text-navy">{t("sameDayH")}</h2>
+        <p className="mt-1 text-[0.85rem] leading-relaxed text-muted">{t("sameDayP")}</p>
+        <ul className="mt-3 space-y-2">
+          {same.map((s) => (
+            <li key={s} className="rounded-lg border border-line bg-card px-3 py-2.5 text-[0.92rem]">
+              {s}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <p className="mt-6 text-[0.88rem] leading-relaxed text-muted">{t("urgentFollow")}</p>
+      <p className="mt-3 text-[0.8rem] leading-relaxed text-faint">
+        <Link to="/legal" className="text-navy underline">
+          {t("legalLink")}
+        </Link>
+      </p>
+    </div>
+  );
+}

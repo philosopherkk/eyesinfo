@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #1a2433;
+  --color-muted: #5c6b7a;
+  --color-faint: #8a96a3;
+  --color-paper: #f3f0e9;
+  --color-card: #fffdf8;
+  --color-line: #d8d2c6;
+  --color-navy: #003153;
+  --color-navy-2: #0a4468;
+  --color-steel: #4d6d86;
+  --color-danger: #8b1e2d;
+  --color-danger-bg: #f8e8ea;
+  --color-amsler-dark: #0c0c0c;
+  --color-amsler-light: #f6f4ee;
+  --font-sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", ui-sans-serif,
+    system-ui, sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  html,
+  body,
+  #app {
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-navy);
+    outline-offset: 2px;
+  }
+}
+
+.floater-layer {
+  will-change: transform;
+}
+.floater-idle {
+  animation: floater-idle 5.2s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@keyframes floater-idle {
+  0% { transform: translate(0px, 0px); }
+  20% { transform: translate(42px, 24px); }
+  40% { transform: translate(-22px, 48px); }
+  60% { transform: translate(36px, -18px); }
+  80% { transform: translate(-38px, 14px); }
+  100% { transform: translate(0px, 0px); }
+}
+.halo-glow {
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button,
+  a {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  header,
+  nav,
+  .no-print {
+    display: none !important;
+  }
+  main {
+    padding: 0 !important;
+  }
+}
