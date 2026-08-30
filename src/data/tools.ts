@@ -76,6 +76,15 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   "t-rd": [{ href: "/tools/floaters", label: "飛蚊與簾幕" }],
   "t-vegf": [{ href: "/t/t-octm", label: "黃斑 OCT" }],
   "t-chalazion": [{ href: "/tools/warm", label: "熱敷計時" }],
+  "t-strab": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-child", label: "兒童視力里程碑" },
+    { href: "/t/t-ted", label: "甲狀腺眼疾" },
+    { href: "/t/t-ptosis", label: "上瞼下垂" },
+  ],
+  "t-child": [{ href: "/t/t-strab", label: "斜視類型與急症" }],
+  "t-ted": [{ href: "/t/t-strab", label: "斜視與複視" }],
+  "t-ptosis": [{ href: "/t/t-strab", label: "斜視與複視" }],
 };
 
 export const SIM_FOOTER =

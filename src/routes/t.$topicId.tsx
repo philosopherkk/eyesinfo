@@ -92,6 +92,7 @@ function RelatedLink({ href, label }: { href: string; label: string }) {
     "inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy no-underline";
   if (href === "/amsler") return <Link to="/amsler" className={cls}>{label}</Link>;
   if (href === "/iol") return <Link to="/iol" className={cls}>{label}</Link>;
+  if (href === "/urgent") return <Link to="/urgent" className={cls}>{label}</Link>;
   if (href.startsWith("/tools/")) {
     const id = href.split("/").pop() ?? "map";
     return (

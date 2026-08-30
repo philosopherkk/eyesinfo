@@ -23,7 +23,7 @@ export const CATEGORIES: {
   title: string;
   subtitle: string;
 }[] = [
-  { id: "lens", title: "晶體與屈光", subtitle: "近視遠視 · 白內障 · 人工晶體" },
+  { id: "lens", title: "晶體與屈光", subtitle: "近視遠視 · 白內障 · 斜視" },
   { id: "lid", title: "眼瞼與淚膜", subtitle: "乾眼 · 瞼炎 · 內翻 · 溢淚" },
   { id: "glaucoma", title: "青光眼與視神經", subtitle: "目標眼壓 · OCT · 視野" },
   { id: "retina", title: "視網膜與黃斑", subtitle: "黃斑病變 · 糖尿病視網膜病變 · 脫離" },
