@@ -8,7 +8,7 @@ import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { AppShell } from "@/components/app-shell";
 import appCss from "../styles.css?url";
-import { PUBLIC_ORIGIN } from "@/lib/site";
+import { PUBLIC_ORIGIN, COPYRIGHT_LINE, COPYRIGHT_YEAR, COPYRIGHT_HOLDER } from "@/lib/site";
 
 const APP_NAME = "護眼學堂";
 const APP_DESC =
@@ -30,6 +30,8 @@ export const Route = createRootRoute({
       { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
       { name: "apple-mobile-web-app-title", content: APP_NAME },
       { name: "mobile-web-app-capable", content: "yes" },
+      { name: "copyright", content: COPYRIGHT_LINE },
+      { name: "application-name", content: APP_NAME },
       { property: "og:url", content: PUBLIC_ORIGIN },
       { property: "og:title", content: APP_NAME },
       { property: "og:description", content: APP_DESC },
@@ -66,6 +68,24 @@ function Root() {
         <HeadContent />
       </head>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: APP_NAME,
+              url: PUBLIC_ORIGIN,
+              description: APP_DESC,
+              inLanguage: ["zh-Hant", "zh-Hans", "en", "ja"],
+              copyrightHolder: { "@type": "Organization", name: COPYRIGHT_HOLDER },
+              copyrightYear: COPYRIGHT_YEAR,
+              isAccessibleForFree: true,
+              educationalUse: "public health education",
+              publishingPrinciples: `${PUBLIC_ORIGIN}/legal`,
+            }),
+          }}
+        />
         <PreviewHostBridge />
         <AuthProvider>
           <AppShell>

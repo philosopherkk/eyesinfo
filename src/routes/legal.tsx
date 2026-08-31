@@ -51,6 +51,10 @@ function LegalPage() {
             ))}
           </ul>
         </div>
+        <div>
+          <h2 className="font-semibold text-navy">{t("copyH")}</h2>
+          <p className="mt-1">{t("copyP")}</p>
+        </div>
         <p>
           <Link to="/privacy" className="font-semibold text-navy">
             {t("privacyLink")}

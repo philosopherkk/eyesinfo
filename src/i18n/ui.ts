@@ -32,6 +32,11 @@ const zhHant = {
   legalLink: "法律與專業守則說明",
   legalTitle: "法律與專業守則",
   legalIntro: "本程式在香港使用，內容按下列法例及守則的精神撰寫，並非法律意見。",
+  copyH: "版權",
+  copyP:
+    "© 2026 護眼學堂（eyesinfo.org）。公眾教育內容，保留所有權利。轉載或節錄須標明出處「護眼學堂 · eyesinfo.org」。不得刪除來源、不得改作後作為醫療廣告、診所推廣、預約或售賣藥物／手術。本站不提供預約或轉介。",
+  copyClip: "— 護眼學堂 公眾教育 https://eyesinfo.org （保留版權，不得作為醫療廣告）",
+  copyFoot: "© 2026 護眼學堂 · eyesinfo.org · 保留版權",
   umaoH: "不良廣告（醫藥）條例（第231章）",
   ppoH: "藥劑業及毒藥條例（第138章）",
   mchkH: "醫務委員會《專業守則》",
@@ -171,6 +176,11 @@ const en: Record<Key, string> = {
   legalTitle: "Law and professional code",
   legalIntro:
     "This app is written for use in Hong Kong in the spirit of the ordinances and code below. It is not legal advice.",
+  copyH: "Copyright",
+  copyP:
+    "© 2026 護眼學堂 (eyesinfo.org). Public education. All rights reserved. Reproduce only with the credit “護眼學堂 · eyesinfo.org”. Do not strip the source or reuse the text as a medical advertisement, clinic promotion, booking page or to sell medicines or surgery. This site does not book or refer.",
+  copyClip: "— 護眼學堂 public education https://eyesinfo.org (copyright; not a medical advertisement)",
+  copyFoot: "© 2026 護眼學堂 · eyesinfo.org · All rights reserved",
   umaoH: "Undesirable Medical Advertisements Ordinance (Cap. 231)",
   ppoH: "Pharmacy and Poisons Ordinance (Cap. 138)",
   mchkH: "Medical Council Code of Professional Conduct",
@@ -310,6 +320,11 @@ const ja: Record<Key, string> = {
   legalLink: "法令と職業倫理",
   legalTitle: "法令と職業倫理",
   legalIntro: "本アプリは香港での利用を想定し、下記の法令・規範の趣旨で書いています。法律相談ではありません。",
+  copyH: "著作権",
+  copyP:
+    "© 2026 護眼學堂（eyesinfo.org）。市民教育です。無断転載して医療広告・診療所宣伝・予約・医薬品や手術の販売に使うことはできません。出典は「護眼學堂 · eyesinfo.org」と明記してください。本サイトは予約や紹介をしません。",
+  copyClip: "— 護眼學堂 市民教育 https://eyesinfo.org （著作権。医療広告ではありません）",
+  copyFoot: "© 2026 護眼學堂 · eyesinfo.org · 無断転載禁止",
   umaoH: "不良広告（医薬）条例（第231章）",
   ppoH: "薬剤業及び毒物条例（第138章）",
   mchkH: "医師委員会「職業倫理規範」",

@@ -7,7 +7,7 @@ import { usePrefs } from "@/lib/prefs";
 import { useI18n } from "@/i18n";
 import { LOCALES } from "@/i18n/locale";
 import { LangSwitch } from "@/components/lang-switch";
-import { CONTENT_UPDATED, CONTENT_VERSION } from "@/lib/site";
+import { CONTENT_UPDATED, CONTENT_VERSION, COPYRIGHT_LINE, PUBLIC_ORIGIN } from "@/lib/site";
 
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -30,8 +30,23 @@ export function AppShell({ children }: { children: ReactNode }) {
     document.documentElement.lang = htmlLang;
   }, [locale]);
 
+  useEffect(() => {
+    const onCopy = (e: ClipboardEvent) => {
+      const sel = window.getSelection()?.toString() ?? "";
+      if (sel.length < 48 || !e.clipboardData) return;
+      e.clipboardData.setData("text/plain", `${sel.trim()}\n\n${t("copyClip")}`);
+      e.preventDefault();
+    };
+    document.addEventListener("copy", onCopy);
+    return () => document.removeEventListener("copy", onCopy);
+  }, [t]);
+
   return (
-    <div className="mx-auto flex min-h-dvh max-w-lg flex-col bg-paper text-ink">
+    <div
+      className="mx-auto flex min-h-dvh max-w-lg flex-col bg-paper text-ink"
+      data-site="eyesinfo.org"
+      data-copyright={COPYRIGHT_LINE}
+    >
       <header
         className="sticky top-0 z-30 border-b border-line/80 bg-navy text-paper"
         data-locale={locale}
@@ -70,6 +85,13 @@ export function AppShell({ children }: { children: ReactNode }) {
           {t("contentVer")} {CONTENT_VERSION}
           <span aria-hidden="true"> · </span>
           {t("contentUpdated")} {CONTENT_UPDATED}
+          <span className="mt-1 block">
+            {t("copyFoot")}
+            <span aria-hidden="true"> · </span>
+            <a href={PUBLIC_ORIGIN} className="text-faint no-underline">
+              eyesinfo.org
+            </a>
+          </span>
         </p>
       </main>
 

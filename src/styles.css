@@ -43,6 +43,18 @@
     text-rendering: optimizeLegibility;
   }
 
+  /* Repeating education-site watermark. Not a clinic advert. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    opacity: 0.055;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='520' height='340'><text x='40' y='200' fill='%23003153' font-size='20' font-family='Noto Sans TC, PingFang TC, Microsoft JhengHei, sans-serif' transform='rotate(-28 260 170)'>護眼學堂 · 公眾教育 · eyesinfo.org</text></svg>");
+    background-repeat: repeat;
+  }
+
   :focus-visible {
     outline: 2px solid var(--color-navy);
     outline-offset: 2px;
@@ -85,5 +97,15 @@
   }
   main {
     padding: 0 !important;
+  }
+  body::before {
+    opacity: 0.08;
+  }
+  body::after {
+    content: "© 護眼學堂 公眾教育 https://eyesinfo.org  保留版權，不得作為醫療廣告或診所推廣";
+    display: block;
+    margin-top: 1.5rem;
+    font-size: 9pt;
+    color: #003153;
   }
 }
