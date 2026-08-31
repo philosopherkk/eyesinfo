@@ -1,26 +1,34 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Dr Poon eye mark">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Dr Poon Ka Kin">
   <defs>
-    <radialGradient id="bg" cx="32%" cy="24%" r="82%">
-      <stop offset="0%" stop-color="#0B4E78"/>
-      <stop offset="100%" stop-color="#001526"/>
+    <radialGradient id="bg" cx="30%" cy="22%" r="80%">
+      <stop offset="0%" stop-color="#0E5A86"/>
+      <stop offset="55%" stop-color="#003153"/>
+      <stop offset="100%" stop-color="#00101C"/>
     </radialGradient>
-    <radialGradient id="iris" cx="36%" cy="32%" r="68%">
-      <stop offset="0%" stop-color="#F4E4B6"/>
-      <stop offset="28%" stop-color="#D4B36A"/>
-      <stop offset="62%" stop-color="#B0893A"/>
-      <stop offset="100%" stop-color="#5C4316"/>
+    <radialGradient id="iris" cx="38%" cy="34%" r="70%">
+      <stop offset="0%" stop-color="#F8E7B4"/>
+      <stop offset="22%" stop-color="#E0C27A"/>
+      <stop offset="58%" stop-color="#B0893A"/>
+      <stop offset="100%" stop-color="#4E3812"/>
     </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F3E2B0"/>
+      <stop offset="50%" stop-color="#C5A059"/>
+      <stop offset="100%" stop-color="#8C6A2B"/>
+    </linearGradient>
   </defs>
   <rect width="64" height="64" rx="16" fill="url(#bg)"/>
-  <rect x="3.2" y="3.2" width="57.6" height="57.6" rx="13.4" fill="none" stroke="#E0C27A" stroke-width="1.35"/>
-  <path d="M7.8 32C16.2 17.6 24.2 13 32 13s15.8 4.6 24.2 19C47.8 46.4 39.8 51 32 51S16.2 46.4 7.8 32z" fill="none" stroke="#E8C97A" stroke-width="1.7" stroke-linejoin="round"/>
-  <circle cx="32" cy="32" r="13.1" fill="url(#iris)"/>
-  <g stroke="#6F521C" stroke-width="0.55" opacity="0.55">
-    <path d="M32 19.4v5.2M32 39.4v5.2M19.4 32h5.2M39.4 32h5.2"/>
-    <path d="M23.1 23.1l3.6 3.6M37.3 37.3l3.6 3.6M40.9 23.1l-3.6 3.6M26.7 37.3l-3.6 3.6"/>
+  <rect x="3" y="3" width="58" height="58" rx="13.5" fill="none" stroke="url(#gold)" stroke-width="1.6"/>
+  <rect x="6.4" y="6.4" width="51.2" height="51.2" rx="11" fill="none" stroke="#E8C97A" stroke-width="0.4" opacity="0.35"/>
+  <path d="M8.2 32C16.8 16.8 24.4 12.2 32 12.2S47.2 16.8 55.8 32C47.2 47.2 39.6 51.8 32 51.8S16.8 47.2 8.2 32z" fill="none" stroke="url(#gold)" stroke-width="1.85" stroke-linejoin="round"/>
+  <circle cx="32" cy="32" r="12.6" fill="url(#iris)"/>
+  <g stroke="#6A4E18" stroke-width="0.55" opacity="0.45">
+    <path d="M32 20.2v4.6M32 39.2v4.6M20.2 32h4.6M39.2 32h4.6"/>
+    <path d="M23.6 23.6l3.2 3.2M37.2 37.2l3.2 3.2M40.4 23.6l-3.2 3.2M26.8 37.2l-3.2 3.2"/>
   </g>
-  <circle cx="32" cy="32" r="5.35" fill="#06141C"/>
-  <circle cx="32" cy="32" r="2.05" fill="#0A1C26"/>
-  <circle cx="36.2" cy="28.3" r="2.05" fill="#F7EED2"/>
-  <circle cx="28.6" cy="35.4" r="0.85" fill="#F3E2B4" opacity="0.55"/>
+  <circle cx="32" cy="32" r="5.2" fill="#06141C"/>
+  <circle cx="32" cy="32" r="2.15" fill="#0A1C26"/>
+  <circle cx="36.15" cy="28.15" r="2.15" fill="#F8F1D8"/>
+  <circle cx="28.7" cy="35.3" r="0.8" fill="#F3E2B4" opacity="0.55"/>
+  <path d="M22.5 54.2h19" stroke="#E0C27A" stroke-width="1.1" stroke-linecap="round" opacity="0.7"/>
 </svg>
