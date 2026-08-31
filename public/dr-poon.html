@@ -24,23 +24,24 @@ th{background:var(--navy);color:#fff}
 @media(max-width:800px){.grid{grid-template-columns:1fr}}
 .vid{background:#fff;border:1px solid #cfd8df;margin:0 0 1rem;overflow:hidden}
 .thumb{position:relative;display:block;background:#111}
-.thumb img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.thumb img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
 .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.play b{background:#c00;color:#fff;border-radius:12px;padding:.35rem .8rem;font-size:1.1rem}
+.play b{background:#c00;color:#fff;border-radius:12px;padding:.35rem .8rem}
 .vid-body{padding:.8rem 1rem 1rem}
 .yt{display:inline-block;margin-top:.4rem;background:var(--navy);color:#fff;text-decoration:none;padding:.55rem .9rem;border-radius:8px}
 .ver{opacity:.85;font-size:.88rem;margin:.6rem 0 0}
+.note{background:#fff;border-left:4px solid var(--navy);padding:.7rem .9rem}
+ol{padding-left:1.2rem}
 </style>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <header class="bar"><div class="wrap bar-inner">
 <div><strong>潘家健醫生</strong> · 眼科專科醫生</div>
 <div>
-<button onclick="setFont('16px',this)">A−</button>
-<button class="active" onclick="setFont('18px',this)">A</button>
-<button onclick="setFont('20px',this)">A+</button>
-<button onclick="setFont('22px',this)">A++</button>
+<button onclick="setFont('16px')">A−</button>
+<button class="active" onclick="setFont('18px')">A</button>
+<button onclick="setFont('20px')">A+</button>
+<button onclick="setFont('22px')">A++</button>
 <button class="active" data-lang="zh-HK" onclick="setLang('zh-HK')">繁</button>
 <button data-lang="zh-CN" onclick="setLang('zh-CN')">简</button>
 <button data-lang="en" onclick="setLang('en')">EN</button>
@@ -49,14 +50,13 @@ th{background:var(--navy);color:#fff}
 <div class="hero"><div class="wrap">
 <h1 id="h1">潘家健醫生</h1>
 <p id="h1s"></p>
-<p class="ver" id="ver">版本 1.2 · 更新日期 2026年8月31日</p>
+<p class="ver" id="ver">版本 1.3 · 更新日期 2026年8月31日</p>
 </div></div>
 <main class="wrap">
 <section><h2 id="sec_part"></h2>
 <p><strong>潘家健醫生 Dr. Poon Ka Kin</strong></p>
 <p id="spec"></p>
-<ul><li>MB ChB (CUHK)</li><li>MRCS(Ed)</li><li>FCOphth HK</li><li>FHKAM (Ophthalmology)</li></ul>
-</section>
+<ul><li>MB ChB (CUHK)</li><li>MRCS(Ed)</li><li>FCOphth HK</li><li>FHKAM (Ophthalmology)</li></ul></section>
 <section><h2 id="sec_svc"></h2><p id="svc_note"></p>
 <ul><li id="s1"></li><li id="s2"></li><li id="s3"></li><li id="s4"></li><li id="s5"></li><li id="s6"></li></ul></section>
 <section><h2 id="sec_loc"></h2>
@@ -85,53 +85,32 @@ th{background:var(--navy);color:#fff}
 <tr><td>四</td><td>15:00 – 18:00</td></tr>
 <tr><td>五</td><td>10:00 – 13:00</td></tr>
 <tr><td>六</td><td>10:00 – 13:00</td></tr>
-<tr><td>日</td><td id="closed3">休息</td></tr></table></div>
-</div></section>
+<tr><td>日</td><td id="closed3">休息</td></tr></table></div></div></section>
 <section><h2 id="sec_contact"></h2>
 <p>電話 <a href="tel:+85223634268">2363 4268</a><br>
 WhatsApp <a href="https://wa.me/85266102363" target="_blank" rel="noopener">6610 2363</a><br>
 Email <a href="mailto:drkkpoon@gmail.com">drkkpoon@gmail.com</a><br>
 Fax 2363 4618<br>
-LinkedIn <a href="https://www.linkedin.com/in/poon-kk-a67915a6/" target="_blank" rel="noopener">linkedin.com/in/poon-kk-a67915a6</a></p>
-</section>
+LinkedIn <a href="https://www.linkedin.com/in/poon-kk-a67915a6/" target="_blank" rel="noopener">linkedin.com/in/poon-kk-a67915a6</a></p></section>
 <section><h2 id="sec_vid"></h2><p id="vid_note"></p>
-<article class="vid">
-<a class="thumb" href="https://www.youtube.com/watch?v=os76aaq0bmo" target="_blank" rel="noopener">
-<img src="https://i.ytimg.com/vi/os76aaq0bmo/hqdefault.jpg" alt="" width="480" height="360">
-<span class="play"><b>▶</b></span></a>
-<div class="vid-body"><h3 id="v1"></h3>
-<a class="yt" href="https://www.youtube.com/watch?v=os76aaq0bmo" target="_blank" rel="noopener" id="open1">在 YouTube 開啟</a></div>
-</article>
-<article class="vid">
-<a class="thumb" href="https://www.youtube.com/watch?v=pG56Gd5arHg" target="_blank" rel="noopener">
-<img src="https://i.ytimg.com/vi/pG56Gd5arHg/hqdefault.jpg" alt="" width="480" height="360">
-<span class="play"><b>▶</b></span></a>
-<div class="vid-body"><h3 id="v2"></h3>
-<a class="yt" href="https://www.youtube.com/watch?v=pG56Gd5arHg" target="_blank" rel="noopener" id="open2">在 YouTube 開啟</a></div>
-</article>
-<article class="vid">
-<a class="thumb" href="https://www.youtube.com/watch?v=ibDCPvhVd3c&t=2s" target="_blank" rel="noopener">
-<img src="https://i.ytimg.com/vi/ibDCPvhVd3c/hqdefault.jpg" alt="" width="480" height="360">
-<span class="play"><b>▶</b></span></a>
-<div class="vid-body"><h3 id="v3"></h3>
-<a class="yt" href="https://www.youtube.com/watch?v=ibDCPvhVd3c&t=2s" target="_blank" rel="noopener" id="open3">在 YouTube 開啟</a></div>
-</article>
-</section>
+<article class="vid"><a class="thumb" href="https://www.youtube.com/watch?v=os76aaq0bmo" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/os76aaq0bmo/hqdefault.jpg" alt="" width="480" height="360"><span class="play"><b>▶</b></span></a><div class="vid-body"><h3 id="v1"></h3><a class="yt" href="https://www.youtube.com/watch?v=os76aaq0bmo" target="_blank" rel="noopener" id="open1">YouTube</a></div></article>
+<article class="vid"><a class="thumb" href="https://www.youtube.com/watch?v=pG56Gd5arHg" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/pG56Gd5arHg/hqdefault.jpg" alt="" width="480" height="360"><span class="play"><b>▶</b></span></a><div class="vid-body"><h3 id="v2"></h3><a class="yt" href="https://www.youtube.com/watch?v=pG56Gd5arHg" target="_blank" rel="noopener" id="open2">YouTube</a></div></article>
+<article class="vid"><a class="thumb" href="https://www.youtube.com/watch?v=ibDCPvhVd3c&t=2s" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/ibDCPvhVd3c/hqdefault.jpg" alt="" width="480" height="360"><span class="play"><b>▶</b></span></a><div class="vid-body"><h3 id="v3"></h3><a class="yt" href="https://www.youtube.com/watch?v=ibDCPvhVd3c&t=2s" target="_blank" rel="noopener" id="open3">YouTube</a></div></article></section>
+<section id="disclaimer"><h2 id="sec_disc">重要聲明及免責條款</h2>
+<p class="note" id="disc_lead"></p>
+<ol>
+<li id="d1"></li><li id="d2"></li><li id="d3"></li><li id="d4"></li><li id="d5"></li><li id="d6"></li><li id="d7"></li><li id="d8"></li><li id="d9"></li>
+</ol></section>
 </main>
-<footer><div class="wrap"><p id="disc"></p>
-<p id="copy">© 2026 潘家健醫生</p>
-<p class="ver" id="ver2">版本 1.2 · 更新日期 2026年8月31日</p>
-</div></footer>
+<footer><div class="wrap"><p id="disc"></p><p id="copy"></p><p class="ver" id="ver2"></p></div></footer>
 <script>
 const T={
-"zh-HK":{h1:"潘家健醫生",h1s:"香港醫務委員會註冊醫生 · 眼科專科醫生",sec_part:"執業資料",spec:"專科名衔：眼科專科醫生",sec_svc:"專業服務範圍",svc_note:"供查閱用，並非推廣或招攬。",s1:"眼科診症及檢查",s2:"白內障手術及人工晶體植入",s3:"青光眼",s4:"視網膜及黃斑疾病",s5:"兒童近視",s6:"乾眼症",sec_loc:"診所位置",tw_h:"荃灣診所",mk_h:"旺角診所",tw_addr:"新界荃灣青山公路189號百萬行一樓",mk_addr:"九龍旺角彌敦道688號旺角中心第一期17樓1708室",sec_hours:"診症時間",hours_note:"須預約。",sec_contact:"聯絡",sec_vid:"公開教育節目",vid_note:"請按縮圖於 YouTube 開啟。",v1:"老年黃斑病變對眼睛有甚麼影響？（潘家健醫生）",v2:"認識黃斑區內眼疾（潘家健醫生）",v3:"老花的迷思（潘家健醫生）",open1:"在 YouTube 開啟",open2:"在 YouTube 開啟",open3:"在 YouTube 開啟",disc:"執業資料網頁，並非招攬或廣告。",copy:"© 2026 潘家健醫生",ver:"版本 1.2 · 更新日期 2026年8月31日"},
-"zh-CN":{h1:"潘家健医生",h1s:"香港医务委员会注册医生",sec_part:"执业资料",spec:"眼科专科医生",sec_svc:"服务范围",svc_note:"供查阅用。",s1:"眼科诊症",s2:"白内障手术",s3:"青光眼",s4:"视网膜及黄斑",s5:"儿童近视",s6:"干眼症",sec_loc:"诊所",tw_h:"荃湾诊所",mk_h:"旺角诊所",tw_addr:"荃湾青山公路189号百万行一楼",mk_addr:"旺角弥敦道688号旺角中心一期1708室",sec_hours:"时间",hours_note:"须预约。",sec_contact:"联络",sec_vid:"教育节目",vid_note:"请按缩略图在 YouTube 打开。",v1:"老年黄斑变性（潘家健医生）",v2:"认识黄斑区疾病（潘家健医生）",v3:"老花的迷思（潘家健医生）",open1:"在 YouTube 打开",open2:"在 YouTube 打开",open3:"在 YouTube 打开",disc:"执业资料，非广告。",copy:"© 2026 潘家健医生",ver:"版本 1.2 · 更新日期 2026年8月31日"},
-en:{h1:"Dr. Poon Ka Kin",h1s:"Registered medical practitioner, Medical Council of Hong Kong",sec_part:"Particulars",spec:"Specialist in Ophthalmology",sec_svc:"Services",svc_note:"Factual list. Not an advertisement.",s1:"Consultation",s2:"Cataract surgery and IOL",s3:"Glaucoma",s4:"Retina and macula",s5:"Childhood myopia",s6:"Dry eye",sec_loc:"Locations",tw_h:"Tsuen Wan",mk_h:"Mong Kok",tw_addr:"1/F, Park Tsuen Commercial Building, 189 Castle Peak Road, Tsuen Wan",mk_addr:"Suite 1708, 17/F, Phase 1, Argyle Centre, 688 Nathan Road, Mong Kok",sec_hours:"Hours",hours_note:"By appointment.",sec_contact:"Contact",sec_vid:"Programmes",vid_note:"Tap a thumbnail to open YouTube.",v1:"Age-related macular degeneration (Dr. Poon Ka Kin)",v2:"Macular diseases (Dr. Poon Ka Kin)",v3:"Questions about presbyopia (Dr. Poon Ka Kin)",open1:"Open on YouTube",open2:"Open on YouTube",open3:"Open on YouTube",disc:"MCHK Code s.5.2 / Appendix H. Not canvassing.",copy:"© 2026 Dr. Poon Ka Kin",ver:"Version 1.2 · Updated 31 August 2026"},
-ja:{h1:"潘家健 医師",h1s:"香港医務委員会登録医師",sec_part:"開業情報",spec:"眼科専門医",sec_svc:"診療範囲",svc_note:"宣伝ではありません。",s1:"診察",s2:"白内障手術",s3:"緑内障",s4:"網膜・黄斑",s5:"小児近視",s6:"ドライアイ",sec_loc:"所在地",tw_h:"荃湾",mk_h:"旺角",tw_addr:"荃湾青山公路189号 百萬行1階",mk_addr:"旺角彌敦道688号 旺角中心1708",sec_hours:"時間",hours_note:"予約制。",sec_contact:"連絡先",sec_vid:"教育番組",vid_note:"サムネイルを押すとYouTubeが開きます。",v1:"加齢黄斑変性（潘家健医師）",v2:"黄斑部疾患（潘家健医師）",v3:"老眼の疑問（潘家健医師）",open1:"YouTubeで開く",open2:"YouTubeで開く",open3:"YouTubeで開く",disc:"開業情報であり宣伝ではありません。",copy:"© 2026 潘家健医師",ver:"バージョン 1.2 · 更新日 2026年8月31日"}
+"zh-HK":{h1:"潘家健醫生",h1s:"香港醫務委員會註冊醫生 · 眼科專科醫生",sec_part:"執業資料",spec:"眼科專科醫生",sec_svc:"服務範圍",svc_note:"供查閱，並非招攬。",s1:"眼科診症及檢查",s2:"白內障手術及人工晶體",s3:"青光眼",s4:"視網膜及黃斑",s5:"兒童近視",s6:"乾眼症",sec_loc:"診所",tw_h:"荃灣",mk_h:"旺角",tw_addr:"荃灣青山公路189號百萬行一樓",mk_addr:"旺角彌敦道688號旺角中心一期1708室",sec_hours:"診症時間",hours_note:"須預約。",sec_contact:"聯絡",sec_vid:"教育節目",vid_note:"請按縮圖開啟 YouTube。",v1:"老年黃斑病變（潘家健醫生）",v2:"黃斑區內眼疾（潘家健醫生）",v3:"老花的迷思（潘家健醫生）",open1:"在 YouTube 開啟",open2:"在 YouTube 開啟",open3:"在 YouTube 開啟",sec_disc:"重要聲明及免責條款",disc_lead:"使用本網站即接受下列條款。按香港法例及醫委會《專業守則》擬備，並非法律意見。",d1:"資料只供一般參考，並非醫療意見、診斷或治療，不能取代香港註冊醫生的面對面診症。",d2:"瀏覽或以電話、電郵、WhatsApp 聯絡，本身不構成醫生與病人關係，亦非遙距醫療。",d3:"任何眼疾須經註冊醫生個別評估。成效及風險因人而異，不作保證。",d4:"突然視力下降、眼痛、外傷、閃光、大量飛蚊或視野缺損，請立即前往急症室或致電 999。",d5:"資料以「現況」提供，可能有錯漏或過時。在香港法律許可範圍內，對依據本網站而引致的損失不承擔法律責任。",d6:"按《醫生註冊條例》（第161章）及醫委會《專業守則》第5.2節及附錄H刊載執業資料，並非招攬、比較醫生或醫療廣告。",d7:"YouTube、Google 地圖及 LinkedIn 為第三者網站，連結並非認可或業務宣傳。",d8:"聯絡方法僅供預約查詢，並非緊急熱線。",d9:"教育節目屬一般資訊。中英文不一致時以英文為準。",disc:"使用本網站即接受上述聲明。資料只供參考，並非醫療意見。",copy:"© 2026 潘家健醫生",ver:"版本 1.3 · 更新日期 2026年8月31日"},
+en:{h1:"Dr. Poon Ka Kin",h1s:"Registered medical practitioner, Medical Council of Hong Kong",sec_part:"Particulars",spec:"Specialist in Ophthalmology",sec_svc:"Services",svc_note:"Factual list. Not an advertisement.",s1:"Consultation",s2:"Cataract surgery and IOL",s3:"Glaucoma",s4:"Retina and macula",s5:"Childhood myopia",s6:"Dry eye",sec_loc:"Locations",tw_h:"Tsuen Wan",mk_h:"Mong Kok",tw_addr:"1/F, Park Tsuen Commercial Building, 189 Castle Peak Road, Tsuen Wan",mk_addr:"Suite 1708, 17/F, Phase 1, Argyle Centre, 688 Nathan Road, Mong Kok",sec_hours:"Hours",hours_note:"By appointment.",sec_contact:"Contact",sec_vid:"Programmes",vid_note:"Tap a thumbnail to open YouTube.",v1:"AMD (Dr. Poon Ka Kin)",v2:"Macular diseases (Dr. Poon Ka Kin)",v3:"Presbyopia (Dr. Poon Ka Kin)",open1:"Open on YouTube",open2:"Open on YouTube",open3:"Open on YouTube",sec_disc:"Important notice and disclaimer",disc_lead:"By using this website you accept the following. Prepared with regard to Hong Kong law and the MCHK Code. Not legal advice.",d1:"Information is for general reference only. It is not medical advice, diagnosis or treatment and does not replace an in-person consultation with a Hong Kong registered doctor.",d2:"Browsing or contacting by phone, email or WhatsApp does not create a doctor-patient relationship and is not telemedicine.",d3:"Any condition requires individual assessment. Outcomes and risks vary. No result is guaranteed.",d4:"For sudden vision loss, pain, injury, flashes, many new floaters or field loss, go to A&E or call 999.",d5:"Information is provided as is and may be incomplete or out of date. To the extent permitted by Hong Kong law, no liability is accepted for reliance on this website.",d6:"Published with regard to the Medical Registration Ordinance (Cap. 161) and MCHK Code s.5.2 and Appendix H. Not canvassing or advertising.",d7:"YouTube, Google Maps and LinkedIn are third-party sites. Links are not endorsements.",d8:"Contact details are for appointment enquiries only, not emergencies.",d9:"Educational programmes are general information. If translations differ, English prevails.",disc:"By using this website you accept the notice above. Not medical advice.",copy:"© 2026 Dr. Poon Ka Kin",ver:"Version 1.3 · Updated 31 August 2026"},
+"zh-CN":{h1:"潘家健医生",h1s:"香港医务委员会注册医生",sec_part:"执业资料",spec:"眼科专科医生",sec_svc:"服务范围",svc_note:"供查阅用。",s1:"诊症",s2:"白内障手术",s3:"青光眼",s4:"视网膜及黄斑",s5:"儿童近视",s6:"干眼症",sec_loc:"诊所",tw_h:"荃湾",mk_h:"旺角",tw_addr:"荃湾青山公路189号百万行一楼",mk_addr:"旺角弥敦道688号旺角中心1708室",sec_hours:"时间",hours_note:"须预约。",sec_contact:"联络",sec_vid:"节目",vid_note:"请按缩略图打开 YouTube。",v1:"老年黄斑变性",v2:"黄斑疾病",v3:"老花",open1:"YouTube",open2:"YouTube",open3:"YouTube",sec_disc:"重要声明及免责条款",disc_lead:"使用本网站即接受下列条款。并非法律意见。",d1:"资料只供参考，不是医疗意见或诊断。",d2:"浏览或联络不构成医患关系。",d3:"须由注册医生个别评估，不作保证。",d4:"紧急请前往急诊室或致电 999。",d5:"资料可能有误漏。在法律许可范围内不承担依据本站的损失。",d6:"按第161章及《专业守则》刊载，并非招揽或广告。",d7:"第三者链接不构成认可。",d8:"联络仅供预约。",d9:"中英文不一致时以英文为准。",disc:"资料只供参考，并非医疗意见。",copy:"© 2026 潘家健医生",ver:"版本 1.3 · 2026年8月31日"},
+ja:{h1:"潘家健 医師",h1s:"香港医務委員会登録医師",sec_part:"開業情報",spec:"眼科専門医",sec_svc:"診療範囲",svc_note:"宣伝ではありません。",s1:"診察",s2:"白内障手術",s3:"緑内障",s4:"網膜・黄斑",s5:"小児近視",s6:"ドライアイ",sec_loc:"所在地",tw_h:"荃湾",mk_h:"旺角",tw_addr:"荃湾青山公路189 百萬行1階",mk_addr:"旺角彌敦道688 旺角中心1708",sec_hours:"時間",hours_note:"予約制。",sec_contact:"連絡先",sec_vid:"番組",vid_note:"サムネイルでYouTubeを開く。",v1:"加齢黄斑変性",v2:"黄斑疾患",v3:"老眼",open1:"YouTube",open2:"YouTube",open3:"YouTube",sec_disc:"免責事項",disc_lead:"本サイト利用により以下に同意したものとみなします。法律意見ではありません。",d1:"一般情報であり医療助言ではありません。",d2:"閲覧のみでは医師患者関係は成立しません。",d3:"個別評価が必要で、結果は保証しません。",d4:"緊急時は救急または999へ。",d5:"情報は現状有姿です。香港法の許容範囲で責任を負いません。",d6:"第161章および専門守則に基づく開業情報であり宣伝ではありません。",d7:"第三者リンクは推奨ではありません。",d8:"連絡先は予約照会用です。",d9:"訳文が異なる場合は英文が優先します。",disc:"参考情報であり医療助言ではありません。",copy:"© 2026 潘家健医師",ver:"バージョン 1.3 · 2026年8月31日"}
 };
 function apply(lang){const p=T[lang]||T["zh-HK"];for(const k of Object.keys(p)){const el=document.getElementById(k);if(el)el.textContent=p[k];}const v2=document.getElementById("ver2");if(v2)v2.textContent=p.ver;document.getElementById("tw_h2").textContent=p.tw_h;document.getElementById("mk_h2").textContent=p.mk_h;document.getElementById("closed2").textContent=document.getElementById("closed").textContent;document.getElementById("closed3").textContent=document.getElementById("closed").textContent;document.querySelectorAll("[data-lang]").forEach(b=>b.classList.toggle("active",b.getAttribute("data-lang")===lang));}
-function setLang(l){apply(l);}
-function setFont(s){document.documentElement.style.setProperty("--fs",s);}
-apply("zh-HK");
+function setLang(l){apply(l);}function setFont(s){document.documentElement.style.setProperty("--fs",s);}apply("zh-HK");
 </script>
 </body></html>
