@@ -49,16 +49,16 @@ const zhHant = {
   clinicP2: "急症請致電 999 或前往公立醫院急症室。非急症請自行向眼科專科醫生求診，本站不作轉介。",
   backHome: "返回教育首頁",
   urgentTitle: "急症與盡快求醫",
-  urgentLead: "私家診所不是急症室。以下分開「立即急症室／999」與「同日散瞳眼科評估」。",
+  urgentLead: "私家診所不是急症室。以下分開「立即急症室／999」與「盡快（最好當日）散瞳眼科評估」。",
   urgent999: "立即到急症室；無法自行前往或化學傷請打 999",
   chemH: "化學濺入眼睛",
   chem1: "立刻用大量清水或生理鹽水持續沖洗至少 20–30 分鐘，張開眼瞼沖。運送途中盡量繼續沖。不必等特定沖洗液。",
   chem2: "隱形眼鏡若容易除就除，不要為除鏡而中斷沖洗太久。",
   chem3: "不要用中和劑、油或眼藥水「先睇下」。不要等私家診所。",
   chem4: "邊沖邊去急症室或打 999。若知道化學物名稱可帶上。",
-  sameDayH: "同日散瞳眼科評估（不必先打 999）",
+  sameDayH: "盡快（最好當日）散瞳眼科評估（不必先打 999）",
   sameDayP:
-    "沒有上述紅旗時，新閃光或飛蚊增多仍須在同一日接受散瞳眼底檢查。不必先打 999。請盡快前往可作散瞳眼底的急症室眼科或當日應診的眼科專科醫生。",
+    "沒有上述紅旗時，新閃光或飛蚊增多仍應盡快（最好當日）接受散瞳眼底檢查。不必先打 999。請盡快前往可作散瞳眼底的急症室眼科或當日應診的眼科專科醫生。",
   urgentFollow: "急症室分流後，或會轉介公立醫院眼科，或由你自行約見任何眼科專科醫生跟進。本站不作轉介。",
   searchPh: "眼疾名稱、徵狀、檢查、工具……",
   searchFound: "找到 {n} 項",
@@ -198,9 +198,9 @@ const en: Record<Key, string> = {
   chem2: "Remove contact lenses if they come out easily; do not stop irrigation for long just to remove them.",
   chem3: "Do not use neutralizing agents, oil or eye drops “to try first”. Do not wait for a private clinic.",
   chem4: "Go to A&E while irrigating, or call 999. Bring the chemical name if known.",
-  sameDayH: "Same-day dilated eye assessment (no need to call 999 first)",
+  sameDayH: "Prompt dilated eye assessment (same day if possible; no need to call 999 first)",
   sameDayP:
-    "New flashes or a shower of floaters without the red flags above still need a dilated fundus exam the same day. You do not need to call 999 first. Go to an A&E eye service or a registered ophthalmologist who can dilate that day.",
+    "New flashes or a shower of floaters without the red flags above still need a dilated fundus exam as soon as possible, ideally the same day. You do not need to call 999 first. Go to an A&E eye service or a registered ophthalmologist who can dilate that day.",
   urgentFollow:
     "After A&E triage you may be referred to public hospital ophthalmology, or you may see any registered ophthalmologist. This site does not refer.",
   searchPh: "Condition, symptom, test, tool…",
@@ -337,9 +337,9 @@ const ja: Record<Key, string> = {
   chem2: "コンタクトレンズは簡単に取れるなら外します。外すために洗浄を長く止めないでください。",
   chem3: "中和剤、油、点眼薬で「様子を見る」ことはしない。私設クリニックを待たない。",
   chem4: "洗いながら救急外来へ。または999。薬品名が分かれば持参。",
-  sameDayH: "同日の散瞳眼科評価（まず999に電話する必要はありません）",
+  sameDayH: "できるだけ早く（できれば当日）の散瞳眼科評価（まず999は不要）",
   sameDayP:
-    "上記の危険徴候がなければ、新しい光視症や飛蚊の急増でも同日の散瞳眼底検査が必要です。先に999へ電話する必要はありません。散瞳できる救急眼科か、当日診察できる眼科専門医を受診してください。",
+    "上記の危険徴候がなければ、新しい光視症や飛蚊の急増でも、できるだけ早く（できれば当日）散瞳眼底検査を。先に999へ電話する必要はありません。散瞳できる救急眼科か、当日診察できる眼科専門医を受診してください。",
   urgentFollow:
     "救急のトリアージ後、公立病院眼科へ紹介されることも、ご自身で眼科専門医を受診することもあります。本サイトは紹介しません。",
   searchPh: "病名、症状、検査、ツール…",

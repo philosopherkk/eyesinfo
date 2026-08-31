@@ -6,9 +6,9 @@ import { usePrefs } from "@/lib/prefs";
 const DROP_STEPS = [
   { t: "洗手", c: "洗好手", d: "用皂液洗淨，抹乾。唔好用未洗過的毛巾抹眼。" },
   { t: "拉低眼袋", c: "拉開下眼皮", d: "頭微仰，用食指拉低下瞼，形成小口袋。" },
-  { t: "一滴入袋", c: "一滴就夠", d: "瓶口離眼約 1–2 厘米，唔好掂到睫毛或眼。一滴已超過結膜囊容量。" },
-  { t: "按淚點", c: "按內眼角一分鐘", d: "輕閉眼，用指腹按內眼角淚點約 1 分鐘，減少藥水入鼻喉、減少全身吸收。" },
-  { t: "隔五分鐘", c: "先等五分鐘", d: "若有第二種藥水，最少隔五分鐘。先稀後稠，眼膏放最後。" },
+  { t: "一滴入袋", c: "瓶口唔好掂眼", d: "瓶口唔好掂到睫毛或眼。每次點幾多，跟該支藥說明書同醫生示範。" },
+  { t: "按淚點", c: "若醫生有示範", d: "有啲藥水醫生會教你輕閉眼、用指腹按內眼角。做唔做、按幾耐，跟該支藥說明書同示範，本頁唔係你的用法。" },
+  { t: "隔開第二種", c: "跟說明書", d: "若有第二種藥水，隔幾耐、邊支先，跟說明書同醫生示範。本頁唔規定分鐘。" },
 ];
 
 export function DropTrainer() {
@@ -34,7 +34,7 @@ export function DropTrainer() {
   return (
     <div>
       <p className="text-[0.88rem] leading-relaxed text-muted">
-        青光眼同乾眼最常「點錯」。呢度無品牌、無藥名。此步驟正常不能排除眼疾。
+        青光眼同乾眼最常「點錯」。呢度無品牌、無藥名。步驟只係示意，實際跟該支藥說明書同醫生示範。此工具結果正常不能排除眼疾。
       </p>
       <p className="mt-4 text-[0.75rem] font-semibold text-steel">
         步驟 {i + 1} / {DROP_STEPS.length}
@@ -62,7 +62,7 @@ export function DropTrainer() {
       </div>
       {i === 3 ? (
         <div className="mt-4 rounded-xl border border-line bg-card p-4 text-center">
-          <p className="text-[0.8rem] text-muted">按淚點計時（可選，約 60 秒）</p>
+          <p className="text-[0.8rem] text-muted">若醫生有教按淚點，可用呢個示意計時（可選）</p>
           <p className="mt-1 text-[2rem] font-semibold tabular-nums text-navy">{sec}</p>
           <button
             type="button"
@@ -111,7 +111,7 @@ export function WarmTimer() {
   return (
     <div>
       <p className="text-[0.88rem] leading-relaxed text-muted">
-        瞼板腺熱敷一般 8–10 分鐘，暖唔好燙：接觸眼瞼不宜超過約 45°C，先試手腕，痛就停。計時只在呢部手機進行。兒童、長者或感覺較差者更要小心。唔好用未熟雞蛋或過熱毛巾。
+        計時只係示意，唔係治療方案。溫度同分鐘須按醫生指示；暖唔好燙，痛就停。兒童、長者或感覺較差者更要小心。唔好用未熟雞蛋或過熱毛巾。
       </p>
       <p className="mt-6 text-center text-[3rem] font-semibold tabular-nums leading-none text-navy">
         {m}:{s.toString().padStart(2, "0")}
@@ -134,6 +134,7 @@ export function WarmTimer() {
           </button>
         ))}
       </div>
+      <p className="mt-2 text-center text-[0.75rem] text-muted">分鐘按鈕只係示意，唔係處方。</p>
       <button
         type="button"
         onClick={() => {
@@ -148,7 +149,7 @@ export function WarmTimer() {
       </button>
       {left === 0 ? (
         <p className="mt-3 text-center text-[0.9rem] font-semibold text-navy">
-          時間到。跟住輕輕按摩眼瞼（唔好壓眼球），再清潔睫毛根。
+          示意時間到。跟唔跟住按摩、點按，跟醫生指示。
         </p>
       ) : null}
       <Link

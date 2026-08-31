@@ -15,7 +15,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
     meta: "Myopia · hyperopia · astigmatism · presbyopia",
     blocks: [
       h("What it is"),
-      p("Light does not focus on the retina. Myopia blurs distance; hyperopia makes near work effortful; astigmatism distorts. Presbyopia is loss of lens focusing with age — strictly a decline in accommodation, not a classic refractive error, grouped here because the optical approaches overlap. In Hong Kong, 100 degrees = 1.00 D; high myopia is usually ≥ 600 degrees (−6.00 D). Myopia is often axial. About 1 mm of extra axial length is roughly 2.5–3.00 D. Myopia is common in local schoolchildren."),
+      p("Light does not focus on the retina. Myopia blurs distance; hyperopia makes near work effortful; astigmatism distorts. Presbyopia is loss of lens focusing with age — strictly a decline in accommodation, not a classic refractive error, grouped here because the optical approaches overlap. In Hong Kong, 100 degrees = 1.00 D; high myopia is usually ≥ 600 degrees (−6.00 D). Myopia is often axial. About 1 mm of extra axial length is roughly 2.5–3.00 D. Myopia is very common in local schoolchildren. Earlier school screening reports could exceed 80% in secondary school; more recent larger questionnaire surveys are about 60–70%. Figures depend on the method."),
       h("Long-term risks of high myopia (≥ 600 degrees)"),
       ul(["Retinal tear or detachment", "Myopic maculopathy", "Glaucoma and early cataract"]),
       h("What a doctor may discuss"),
@@ -32,7 +32,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       h("Symptoms / when to seek care"),
       ul(["Grit, burning, fluctuating blur, tearing that is still “dry eye”", "Pain, light sensitivity, sudden vision drop: same-day or emergency assessment"]),
       h("What a doctor may discuss"),
-      ul(["Warm compress and lid hygiene (see the dedicated pages)", "Lubricating drops; anti-inflammatory drops only on prescription", "Do not self-use steroid drops long term"]),
+      ul(["Cut long stretches of screen time; look into the distance from time to time, blink on purpose, humidify. “20-20-20” is a memory aid, not a regimen proven in a large trial", "Warm compress and lid hygiene (see the dedicated pages)", "Lubricating drops; anti-inflammatory drops only on prescription", "Do not self-use steroid drops long term"]),
     ],
   },
   d3: {
@@ -50,7 +50,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
   },
   d4: {
     title: "Glaucoma",
-    tag: "Lost field does not return",
+    tag: "Lost nerve fibres and field do not return",
     meta: "Open-angle · normal-tension · ocular hypertension · angle-closure attack",
     blocks: [
       h("What it is"),
@@ -89,7 +89,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       h("What it is"),
       p("Long-term high blood sugar damages retinal capillaries: leakage, macular oedema, ischaemia and new vessels, which can bleed or pull the retina off. Early disease can be silent. This is an ocular complication of endocrine disease and needs a registered doctor coordinating medical and eye care."),
       h("What a doctor may discuss"),
-      ul(["Medical control of sugar, blood pressure and lipids", "Dilated fundus exams at intervals the ophthalmologist sets — not a fixed “see you next year on this date” for every person", "Intravitreal anti-VEGF, laser or surgery as classes of options when indicated"]),
+      ul(["Sugar, blood pressure and lipids are followed by the medical team; ophthalmology does the fundus exams and treats eye complications", "Dilated fundus exams at intervals the ophthalmologist sets — not a fixed “see you next year on this date” for every person", "Intravitreal anti-VEGF, laser or surgery as classes of options when indicated"]),
     ],
   },
   d7: {
@@ -130,7 +130,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       h("What it is"),
       p("Blepharitis is chronic lash-line inflammation, often with meibomian dysfunction, Demodex or seborrhoea. A stye is an acute painful infection. A chalazion is a blocked meibomian granuloma, usually less painful. Incision is considered only if home care fails, and only after a doctor decides."),
       h("What a doctor may discuss"),
-      ul(["Warm compress 5–10 minutes, then massage and lid cleaning — do not squeeze", "A stye may need prescribed antibiotics. Repeated attacks: refraction or medical tests are considered by risk, not automatically every time", "Chalazion incision is usually from the conjunctival side. Recurrence in the literature is about 10–20%", "Atypical, non-resolving or recurrent lumps with lash loss, ulcer or thickening — especially in older patients — may need pathology; not every recurrent chalazion is automatically sent"]),
+      ul(["A doctor may suggest warm compress, massage and lid cleaning as home-care direction; time and method follow the consultation. Do not squeeze.", "A stye may need prescribed antibiotics. Repeated attacks: refraction or medical tests are considered by risk, not automatically every time", "Chalazion incision is usually from the conjunctival side. Recurrence in the literature is about 10–20%", "Atypical, non-resolving or recurrent lumps with lash loss, ulcer or thickening — especially in older patients — may need pathology; not every recurrent chalazion is automatically sent"]),
     ],
   },
   d10: {
@@ -241,7 +241,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
     blocks: [
       p("This summarises published research and classes of options often discussed in Hong Kong. It is not a pitch to buy drops, lenses or devices, and it cannot promise slower progression. Any medicine needs a prescription. Orthokeratology and contact lenses must be fitted by a qualified person."),
       h("Outdoor time (public-health measure)"),
-      p("About two hours a day of natural light. Intensity matters (literature often cites around 10,000 lux), not indoor sport as such."),
+      p("Outdoor natural light is linked with a lower chance of myopia appearing. Shade, corridors and walking to school count. You do not need to chase harsh sun. How long each day is for school or a doctor to discuss by age and lifestyle — this is not a light-dose prescription."),
       h("Low-concentration atropine (prescription)"),
       p("A muscarinic antagonist. Concentration, use and stopping must be a doctor’s decision. Do not dilute or buy unofficial preparations. The CUHK LAMP study compared 0.05%, 0.025%, 0.01% and placebo. It is important local literature, not a personal prescription."),
       {
@@ -338,8 +338,8 @@ export const EN_PACKS: Record<string, TopicPack> = {
     tag: "Home care",
     meta: "Meibomian dysfunction · blepharitis · chalazion",
     blocks: [
-      p("Heat softens stagnant oil; massage then helps it out. This is care advice, not a product sale."),
-      ul(["Clean cloth in warm water. Skin contact should be warm, not hot — about 45°C at most. Test on the wrist. Stop if it hurts. Extra care for children, older people or reduced sensation.", "On closed lids 5–10 minutes", "Then massage toward the lash line. Do not press the eyeball or use a fingernail.", "Clean the lash line as advised. Do not put undiluted essential oil on mucosa."]),
+      p("Heat can soften stagnant oil. This page explains the idea, not a treatment plan and not a product sale. Temperature, minutes and massage — if used — follow the doctor who examined you, not a webpage protocol."),
+      ul(["Warm, not hot; stop if it hurts. Extra care for children, older people or reduced sensation.", "Do not put a hot-water bag on the eye, do not compress over contact lenses, and do not use a raw egg or a scalding towel.", "After chalazion surgery, when to restart is the doctor’s instruction."]),
     ],
   },
   "t-demodex": {
@@ -363,18 +363,17 @@ export const EN_PACKS: Record<string, TopicPack> = {
     tag: "Follow-up",
     meta: "IOP · OCT · visual field",
     blocks: [
-      p("Lost vision does not return. Target pressure is individual — often about 20–40% below untreated baseline. Teaching ranges (early <18, moderate <15–18, advanced <12–15 mmHg) are not a guarantee for one person. Normal-tension glaucoma (CNTGS spirit) often needs a further ~30% drop. Ocular hypertension prevention was studied around a 20% drop (OHTS) — not everyone with high pressure is treated at once."),
-      p("Types (open-angle, normal-tension, ocular hypertension, angle closure) are explained on the main glaucoma page. Timing of drops follows the label and the doctor."),
+      p("Lost vision does not return. Target pressure is set by the doctor from the nerve, the field and how fast it is changing — not one line for everyone. Teaching millimetre ranges in the Chinese table are teaching figures only; do not self-match. Types (open-angle, normal-tension, ocular hypertension, angle closure) are on the main glaucoma page. Timing of drops follows the label and the doctor."),
       w("The tunnel demo is an illustration, not your field report. Field already lost does not return."),
     ],
   },
   "t-drops": {
     title: "How to use eye drops",
     tag: "Technique",
-    meta: "Punctal occlusion · five minutes apart",
+    meta: "Follow the label and the demonstration",
     blocks: [
-      ol(["Wash hands. Shake suspensions if needed.", "Tilt the head; pull down the lower lid to make a pocket.", "Hold the bottle 1–2 cm from the eye; do not touch. One drop is enough.", "Close gently 1–2 minutes; do not squeeze-blink.", "Press the inner corner (punctum) 3–5 minutes to cut systemic absorption."]),
-      p("Two drops at least five minutes apart. Thin then thick; ointment last. Timing follows the label and the doctor — not a blanket “always at bedtime” or “always in the morning” from this page."),
+      p("Education after a prescription, not a product pitch. Missed doses can make pressure control less stable — one factor among others, not the only cause."),
+      ol(["Wash hands. Shake if that product’s label says so.", "Tilt the head; pull down the lower lid to make a pocket.", "Do not let the tip touch the eye or lashes. How much to instil follows the demonstration.", "Close gently; do not squeeze-blink.", "Whether to press the inner corner, how long to wait between drops, and how long a bottle keeps after opening: follow that product’s label and the doctor. This page is not your regimen."]),
     ],
   },
   "t-iol": {
@@ -457,7 +456,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       h("2. Contact lenses"),
       p("Monovision, multifocal contacts, or distance contacts plus readers. Trialable and reversible. Microbial keratitis is higher with overnight wear and water; giant papillary conjunctivitis and dry eye occur. See the contact-lens page."),
       h("3. Miotic drops"),
-      p("A pinhole effect can ease near work for hours. They do not restore accommodation. Headache, dim night vision and vitreoretinal traction are discussed. Overseas miotic presbyopia products are not currently registered for retail in Hong Kong; named-patient import is the lawful route. Do not buy online. No trade names on this page. Check the Drug Office database."),
+      p("A pinhole effect can ease near work for hours. They do not restore accommodation. Headache, dim night vision and vitreoretinal traction are discussed. Overseas prescription miotic drops for presbyopia are not the same as Hong Kong registration or retail sale. Whether any class can be used is only for a doctor, after Drug Office status and a fundus exam. This page does not list ingredients as a menu. Do not buy online."),
       h("4. Corneal laser (including presbyopia designs)"),
       p("Excimer or femtosecond laser changes corneal shape (LASIK, SMILE, surface ablation). For presbyopia this may be monovision or a multifocal corneal pattern. It does not restore lens focusing. Dry eye, halos, under/over-correction; thin corneas and keratoconus are usually unsuitable. See the laser page."),
       h("5. Intraocular lens surgery"),
@@ -470,8 +469,8 @@ export const EN_PACKS: Record<string, TopicPack> = {
     tag: "Off-label",
     meta: "Atopic keratoconjunctivitis · doctor’s guidance",
     blocks: [
-      p("Tacrolimus ointment is registered in Hong Kong mainly for dermatology. Use on eyelids for atopic keratoconjunctivitis is off-label. Do not buy it to put in the eye as a drop. A doctor must assess and explain risks. This page names a drug class, not a consumer brand."),
-      w("Worse pain, sudden vision drop, clustered blisters (rule out herpes) or yellow-green pus: stop and seek care. The label carries malignancy-related warnings; use the lowest effective dose for the shortest needed course."),
+      p("Tacrolimus ointment is registered in Hong Kong mainly for dermatology. Use on eyelids for atopic keratoconjunctivitis is off-label. Do not buy it to put in the eye as a drop. A doctor must assess, decide and demonstrate. This page does not teach how to apply it, and does not state a dose or course."),
+      w("Worse pain, sudden vision drop, clustered blisters (rule out herpes) or yellow-green pus: stop and seek care. The label carries malignancy-related warnings. Dose and duration are only for the prescribing doctor."),
     ],
   },
   "t-ptk": {
@@ -479,7 +478,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
     tag: "Morning pain",
     meta: "RCE · epithelial basement-membrane dystrophy",
     blocks: [
-      p("The epithelium can tear on waking. Care is stepwise: lubricants and a bandage lens if a doctor advises, then procedures such as diamond burr or PTK in selected cases. Recurrence can still happen; this is not a cure promise."),
+      p("The epithelium can tear on waking. Night lubricant or hypertonic ointment is a direction doctors often try first; how well it works varies, and basement-membrane dystrophy tends to recur. How long to use it, and whether a bandage lens is needed, is the doctor’s decision. Later procedures such as diamond burr or PTK are selected cases. This is not a cure promise."),
     ],
   },
   "t-rd": {
@@ -593,7 +592,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
     meta: "Esotropia · exotropia · double vision · when it is urgent",
     blocks: [
       h("What it is"),
-      p("Squint (strabismus) means the two eyes do not point at the same target — one may turn in, out, up or down. It can be constant or intermittent (tiredness, fever, near or distance). Amblyopia is a developing brain that never received a clear image; even with the right glasses one eye stays weaker. Squint can cause amblyopia and amblyopia can make a squint more obvious. Earlier care tends to work better on average, but it is not useless after age 6. About 7–17 years can still improve; average gain falls with age."),
+      p("Squint (strabismus) means the two eyes do not point at the same target — one may turn in, out, up or down. It can be constant or intermittent (tiredness, fever, near or distance). Amblyopia is a developing brain that never received a clear image; even with the right glasses one eye stays weaker. Squint can cause amblyopia and amblyopia can make a squint more obvious. Progress can still occur after age 6; evidence is clearer at about 7–12. In the teens, especially after previous patching, further gain is often smaller. Assess earlier rather than decide at home that a birthday has closed the door."),
       h("Common types (labels, not a diagnosis)"),
       {
         type: "table",
@@ -749,10 +748,9 @@ export const EN_PACKS: Record<string, TopicPack> = {
       p("Multi-dose bottles often contain a preservative (for example a benzalkonium class). Occasional use is tolerated by many. If you need more than about four to six times a day, have surface disease, recent surgery or many other drops, evidence supports preservative-free unit doses or a vanishing-preservative system. Do not keep an opened unit dose overnight."),
       h("How often (education, not your prescription)"),
       ul([
-        "Mild, intermittent: as needed; many start two to four times a day",
-        "Ongoing symptoms: often four times a day or more; preservative-free drops may be used more often if a doctor agrees",
-        "Night ointment: usually once at bedtime; do not put thick ointment in just before driving",
-        "Wait at least five minutes between drops; thin then thick",
+        "Lubricants ease dryness; they do not cure it. How often, and whether preservative-free, follows the surface and a doctor or pharmacist — do not start from “hourly” on your own",
+        "Night ointment is usually bedtime; do not put thick ointment in just before driving",
+        "How long to wait between drops, and thin-then-thick order, follow the label and the demonstration",
         "Contact lenses: only products allowed for that lens type — sleeping in lenses is a separate risk",
       ]),
       h("What to expect"),
