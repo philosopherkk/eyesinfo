@@ -54,9 +54,13 @@ export function AppShell({ children }: { children: ReactNode }) {
       >
         <div className="flex items-center justify-between px-4 pb-2">
           <Link to="/" className="flex items-center gap-2.5 no-underline">
-            <span className="grid size-8 place-items-center rounded-md bg-paper text-sm font-semibold text-navy">
-              眼
-            </span>
+            <img
+              src="/logo.png"
+              alt=""
+              width={32}
+              height={32}
+              className="size-8 rounded-md"
+            />
             <span className="leading-tight">
               <span className="block text-[0.95rem] font-semibold tracking-tight">
                 {t("brand")}
