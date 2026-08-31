@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Eye mark">
+  <rect width="64" height="64" rx="14" fill="#003153"/>
+  <path d="M8.5 32c7.6-13.2 16.8-19.2 23.5-19.2S48 18.8 55.5 32C48 45.2 38.7 51.2 32 51.2S16.1 45.2 8.5 32z" fill="none" stroke="#C5A059" stroke-width="2.3" stroke-linejoin="round"/>
+  <path d="M13.2 32c6.2-10.2 13.4-14.8 18.8-14.8S44.6 21.8 50.8 32c-6.2 10.2-13.4 14.8-18.8 14.8S19.4 42.2 13.2 32z" fill="#fff"/>
+  <circle cx="32" cy="32" r="9.4" fill="#003153"/>
+  <circle cx="32" cy="32" r="9.4" fill="none" stroke="#C5A059" stroke-width="1.4"/>
+  <circle cx="36.2" cy="28.2" r="2.1" fill="#C5A059"/>
+</svg>
