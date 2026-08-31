@@ -3,6 +3,7 @@ import { ArrowLeft, Bookmark, BookmarkCheck } from "lucide-react";
 import { getTopic, TOPICS } from "@/data/topics";
 import { TOPIC_TOOLS } from "@/data/tools";
 import { TopicBody } from "@/components/topic-body";
+import { TopicRefs } from "@/components/topic-refs";
 import { LegalBanner } from "@/components/legal-banner";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { usePrefs } from "@/lib/prefs";
@@ -68,6 +69,7 @@ function TopicPage() {
       </header>
       <div className="px-4 pb-6">
         <TopicBody blocks={topic.blocks} />
+        <TopicRefs ids={raw.refs} />
         {tools.length > 0 ? (
           <div className="mt-4">
             <p className="mb-2 text-[0.8rem] font-semibold text-muted">

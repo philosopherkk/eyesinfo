@@ -15,6 +15,8 @@ export type Topic = {
   meta: string;
   category: CategoryId;
   featured: boolean;
+  /** Keys in src/data/citations.ts. Only PMID-verified papers. */
+  refs?: string[];
   blocks: Block[];
 };
 
@@ -39,6 +41,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "近視 · 遠視 · 散光 · 老花",
     category: "lens",
     featured: true,
+    refs: ["fan2004", "zhang2023", "he2015", "rose2008"],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -82,6 +85,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "淚水不足或油脂層不穩",
     category: "lid",
     featured: true,
+    refs: ["dews2"],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -161,6 +165,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "開角 · 正常眼壓 · 高眼壓症 · 閉角發作",
     category: "glaucoma",
     featured: true,
+    refs: ["cntgs1998", "ohts2002", "emgt2002", "eagle2016", "light2019"],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -218,6 +223,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "俗稱老年黃斑病變；乾性與濕性",
     category: "retina",
     featured: true,
+    refs: ["areds2", "catt2011"],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -256,6 +262,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "俗稱糖尿上眼",
     category: "retina",
     featured: true,
+    refs: ["ukpds33"],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -326,6 +333,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "玻璃體退化",
     category: "retina",
     featured: true,
+    refs: ["hollands2009"],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -500,6 +508,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "俗稱打眼底針",
     category: "retina",
     featured: false,
+    refs: ["catt2011"],
     blocks: [
       {
         type: "p",
@@ -626,6 +635,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "戶外 · 阿托品 · 光學離焦",
     category: "lens",
     featured: false,
+    refs: ["lamp2019", "lamp2020", "he2015", "rose2008"],
     blocks: [
       {
         type: "p",
@@ -686,6 +696,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "白內障手術類別",
     category: "lens",
     featured: false,
+    refs: ["escrs2007"],
     blocks: [
       { type: "h", text: "何時值得與醫生討論手術" },
       {
@@ -917,6 +928,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "眼壓 · OCT · 視野",
     category: "glaucoma",
     featured: false,
+    refs: ["ohts2002", "cntgs1998", "emgt2002"],
     blocks: [
       {
         type: "p",
@@ -1015,6 +1027,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "前房 · 房角 · 急症識別",
     category: "lens",
     featured: false,
+    refs: ["eagle2016"],
     blocks: [
       {
         type: "p",
@@ -1307,6 +1320,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "黃斑是否仍附著決定預後",
     category: "retina",
     featured: false,
+    refs: ["hollands2009"],
     blocks: [
       {
         type: "table",

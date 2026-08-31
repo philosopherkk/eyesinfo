@@ -151,6 +151,7 @@ export const EXTRA_TOPICS: Topic[] = [
     meta: "內斜 · 外斜 · 複視 · 何時急症",
     category: "lens",
     featured: false,
+    refs: ["pedig2005"],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -278,6 +279,7 @@ export const EXTRA_TOPICS: Topic[] = [
     meta: "過夜 · 水中戴鏡 · 何時除鏡求醫",
     category: "surface",
     featured: false,
+    refs: ["stapleton2008"],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -537,6 +539,7 @@ export const EXTRA_TOPICS: Topic[] = [
     meta: "滴眼液 · 凝膠 · 眼膏 · 防腐劑",
     category: "lid",
     featured: false,
+    refs: ["dews2"],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -604,6 +607,7 @@ export const EXTRA_TOPICS: Topic[] = [
     meta: "靜脈阻塞 · 動脈阻塞 · 何時急症",
     category: "retina",
     featured: false,
+    refs: ["hayreh2005"],
     blocks: [
       { type: "h", text: "是甚麼" },
       {

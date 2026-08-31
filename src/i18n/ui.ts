@@ -44,6 +44,8 @@ const zhHant = {
   termsH: "用語說明（香港臨床常用）",
   reviewH: "內容覆核與更正",
   refsH: "主要公開文獻（選列，非完整書目）",
+  refsLead:
+    "以下為本頁所據的公開研究，PMID 可在美國國家醫學圖書館 PubMed 核對。數字是該研究的結果，不是你的預後，亦不是任何診所的效果。連結不是售賣。",
   privacyLink: "私隱與本機資料",
   privacyTitle: "私隱與本機資料",
   privacyP2:
@@ -188,6 +190,8 @@ const en: Record<Key, string> = {
   termsH: "Hong Kong clinical terms",
   reviewH: "Review and corrections",
   refsH: "Selected public references (not a full bibliography)",
+  refsLead:
+    "These are the public studies this page draws on. PMID links go to PubMed (US National Library of Medicine) so you can check them. Figures are from those studies — not your prognosis and not a clinic success rate. Links are not a shop.",
   privacyLink: "Privacy and on-device data",
   privacyTitle: "Privacy and on-device data",
   privacyP2:
@@ -332,6 +336,8 @@ const ja: Record<Key, string> = {
   termsH: "香港でよく使う用語",
   reviewH: "内容の確認と訂正",
   refsH: "主な公開文献（抜粋）",
+  refsLead:
+    "この頁が依拠する公開研究です。PMIDは米国国立医学図書館PubMedで確認できます。数字はその研究の結果であり、あなたの予後でも診療所の成功率でもありません。",
   privacyLink: "プライバシーと端末内データ",
   privacyTitle: "プライバシーと端末内データ",
   privacyP2:
