@@ -16,14 +16,16 @@ export function TopicRefs({ ids }: { ids?: string[] }) {
           <li key={c.id}>
             <span className="font-medium">{c.authors}</span> {c.title}.{" "}
             <em>{c.source}</em>.{" "}
-            <a
-              href={`https://pubmed.ncbi.nlm.nih.gov/${c.pmid}/`}
-              className="font-semibold text-navy"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              PMID {c.pmid}
-            </a>
+            {c.pmid ? (
+              <a
+                href={`https://pubmed.ncbi.nlm.nih.gov/${c.pmid}/`}
+                className="font-semibold text-navy"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                PMID {c.pmid}
+              </a>
+            ) : null}
             <span className="mt-0.5 block text-muted">{c.note}</span>
           </li>
         ))}

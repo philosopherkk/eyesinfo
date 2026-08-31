@@ -5,7 +5,7 @@ export type Citation = {
   authors: string;
   title: string;
   source: string;
-  pmid: string;
+  pmid?: string;
   note: string;
 };
 
@@ -26,6 +26,21 @@ export const CITE: Record<string, Citation> = {
     source: "Ophthalmology. 2020;127(7):910-919",
     pmid: "32019700",
     note: "LAMP 第二年。濃度、是否繼續須由醫生決定。",
+  },
+  lam2004: {
+    id: "lam2004",
+    authors: "Lam CS, Goldschmidt E, Edwards MH",
+    title: "Prevalence of myopia in local and international schools in Hong Kong",
+    source: "Optom Vis Sci. 2004;81(5):317-322",
+    pmid: "15181356",
+    note: "本地中學篩查近視約 85–88%；國際學校約 60–66%。用來對應「中學階段可超過八成」。",
+  },
+  eddatax2021: {
+    id: "eddatax2021",
+    authors: "CUHK EdDataX Research Centre",
+    title: "Pupils' eyesight survey (questionnaire)",
+    source: "The Chinese University of Hong Kong, June 2021 (press briefing 20 Dec 2022)",
+    note: "中三問卷約 66%。問卷不是散瞳驗光，與學校篩查八成不可直接比較。無 PubMed 條目。",
   },
   fan2004: {
     id: "fan2004",
