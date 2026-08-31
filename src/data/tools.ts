@@ -11,8 +11,7 @@ export type ToolId =
   | "outdoor"
   | "rx"
   | "amsler"
-  | "iol"
-  | "qr";
+  | "iol";
 
 export type ToolDef = {
   id: ToolId;
@@ -37,7 +36,6 @@ export const TOOLS: ToolDef[] = [
   { id: "visit", title: "一次眼科檢查", blurb: "散瞳後唔好自己開車", canto: "去診所會做咩", href: "/tools/visit" },
   { id: "outdoor", title: "兒童戶外時間", blurb: "今日夠唔夠兩小時日光", canto: "出街睇日光", href: "/tools/outdoor" },
   { id: "rx", title: "眼鏡度數解讀", blurb: "球鏡、柱鏡、軸、老花加度", canto: "張紙寫緊咩", href: "/tools/rx" },
-  { id: "qr", title: "Lattice 二維碼", blurb: "網址或文字即時產生，可下載 PNG", canto: "印張 QR 出街", href: "/qr" },
 ];
 
 export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {

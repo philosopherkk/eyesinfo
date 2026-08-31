@@ -12,9 +12,9 @@ function QrPage() {
     <div className="pb-8">
       <div className="flex items-center gap-1 px-2 pt-3">
         <Link
-          to="/tools"
+          to="/"
           className="grid size-10 place-items-center rounded-md text-navy no-underline"
-          aria-label={t("backTools")}
+          aria-label={t("backHome")}
         >
           <ArrowLeft className="size-5" />
         </Link>

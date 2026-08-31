@@ -17,7 +17,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const tabs = [
     { to: "/", label: t("home"), icon: Home, match: (p: string) => p === "/" || p.startsWith("/c/") || p.startsWith("/t/") },
     { to: "/search", label: t("search"), icon: Search, match: (p: string) => p.startsWith("/search") },
-    { to: "/tools", label: t("tools"), icon: LayoutGrid, match: (p: string) => p.startsWith("/tools") || p.startsWith("/amsler") || p.startsWith("/iol") || p.startsWith("/qr") },
+    { to: "/tools", label: t("tools"), icon: LayoutGrid, match: (p: string) => p.startsWith("/tools") || p.startsWith("/amsler") || p.startsWith("/iol") },
     { to: "/saved", label: t("saved"), icon: Bookmark, match: (p: string) => p.startsWith("/saved") },
   ] as const;
 
