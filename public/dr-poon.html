@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <title>Dr. Poon Ka Kin | 潘家健醫生</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#003153;--fs:18px}
+:root{--navy:#003153;--gold:#C5A059;--fs:18px}
 html{font-size:var(--fs)}
 body{margin:0;color:#14202a;background:#f3f6f8;font-family:"Noto Sans TC","Noto Sans SC","Noto Sans JP","PingFang HK","Microsoft JhengHei","Hiragino Sans",sans-serif;line-height:1.75}
 html[lang="zh-CN"] body{font-family:"Noto Sans SC","Noto Sans TC","PingFang SC","Microsoft YaHei",sans-serif}
@@ -25,7 +26,7 @@ button{min-height:40px;margin:2px;border:1px solid rgba(255,255,255,.4);backgrou
 button.active{background:#fff;color:var(--navy)}
 section{padding:1.35rem 0;border-top:1px solid #d5dde3}
 h2,h3{color:var(--navy)}
-img.photo,img.card{width:100%;height:auto;display:block;background:#e6eef2}
+img.photo,img.card{width:100%;height:auto;display:block;background:#e6eef2;border-radius:8px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 @media(max-width:800px){.grid{grid-template-columns:1fr}}
 table{width:100%;border-collapse:collapse;background:#fff}
@@ -40,11 +41,14 @@ th{background:var(--navy);color:#fff}
 .yt{display:inline-block;margin-top:.4rem;background:var(--navy);color:#fff;text-decoration:none;padding:.5rem .85rem;border-radius:8px}
 .note{background:#fff;border-left:4px solid var(--navy);padding:.7rem .9rem}
 .ver{opacity:.85;font-size:.88rem}
+.brand-mark{flex:0 0 auto;border-radius:10px;box-shadow:0 0 0 1px rgba(197,160,89,.35)}
 </style>
 </head>
 <body>
 <header class="bar"><div class="wrap bar-inner"><div class="row">
-<div><div class="name" data-t="nav_name">潘家健醫生</div><div class="spec" data-t="nav_spec">眼科專科醫生</div></div>
+<div class="id-block" style="display:flex;align-items:center;gap:.65rem">
+<svg class="brand-mark" viewBox="0 0 64 64" width="40" height="40" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#003153"/><path d="M9.5 32c7.6-13.2 15.6-19.2 22.5-19.2S46.9 18.8 54.5 32c-7.6 13.2-15.6 19.2-22.5 19.2S17.1 45.2 9.5 32z" fill="none" stroke="#C5A059" stroke-width="2.2" stroke-linejoin="round"/><ellipse cx="32" cy="32" rx="13.2" ry="13.2" fill="none" stroke="#C5A059" stroke-width="1.7"/><circle cx="32" cy="32" r="8.1" fill="#C5A059"/><circle cx="32" cy="32" r="3.35" fill="#001f35"/><circle cx="35.1" cy="29.2" r="1.55" fill="#f6e7c2"/></svg>
+<div><div class="name" data-t="nav_name">潘家健醫生</div><div class="spec" data-t="nav_spec">眼科專科醫生</div></div></div>
 <div>
 <button onclick="setFont('16px')">A−</button>
 <button class="active" onclick="setFont('18px')">A</button>
@@ -58,7 +62,7 @@ th{background:var(--navy);color:#fff}
 <div class="hero"><div class="wrap">
 <h1 data-t="h1">潘家健醫生</h1>
 <p data-t="h1s">香港醫務委員會註冊醫生 · 眼科專科醫生</p>
-<p class="ver" data-t="ver">版本 1.4 · 更新日期 2026年8月31日</p>
+<p class="ver" data-t="ver">版本 1.7 · 更新日期 2026年8月31日</p>
 </div></div>
 <main class="wrap">
 <section>
@@ -67,10 +71,10 @@ th{background:var(--navy);color:#fff}
 <figure><img id="portraitImg" class="photo" alt="Dr. Poon Ka Kin" width="720" height="481"></figure>
 <div>
 <p><strong data-t="name_full">潘家健醫生 Dr. Poon Ka Kin</strong></p>
-<p data-t="spec">專科名行：眼科專科醫生</p>
+<p data-t="spec">專科名衔：眼科專科醫生</p>
 <ul><li>MB ChB (CUHK)</li><li>MRCS(Ed)</li><li>FCOphth HK</li><li>FHKAM (Ophthalmology)</li></ul>
 </div></div>
-<figure style="margin-top:1rem"><img id="cardImg" class="card" alt="name card" width="420" height="512"></figure>
+<figure style="margin-top:1rem"><img id="cardImg" class="card" alt="Name card of Dr. Poon Ka Kin" width="900" height="1088"></figure>
 </section>
 <section>
 <h2 data-t="sec_svc">專業服務範圍</h2>
@@ -149,20 +153,30 @@ LinkedIn <a href="https://www.linkedin.com/in/poon-kk-a67915a6/" target="_blank"
 <li data-t="d9">譬文不一致時以英文為準。</li>
 </ol></section>
 </main>
-<footer><div class="wrap"><p data-t="disc">資料只供參考，並非醫療意見。</p><p data-t="copy">© 2026 潘家健醫生</p><p class="ver" data-t="ver2">版本 1.4</p></div></footer>
+<footer><div class="wrap"><p data-t="disc">資料只供參考，並非醫療意見。</p><p data-t="copy">© 2026 潘家健醫生</p><p class="ver" data-t="ver2">版本 1.7</p></div></footer>
 <script src="./dr-poon-photos.js"></script>
+<script src="./dr-poon-card-0.js"></script>
+<script src="./dr-poon-card-1.js"></script>
+<script src="./dr-poon-card-2.js"></script>
 <script>
+function setPhotos(){
+  const P=window.DRPOON_PHOTOS||{};
+  const p=document.getElementById("portraitImg");
+  const c=document.getElementById("cardImg");
+  if(p&&P.portrait) p.src=P.portrait;
+  if(c&&P.card) c.src=P.card;
+}
 const T={};
 function fill(id,en,zh,ja,cn){T[id]={en:en, "zh-HK":zh, ja:ja, "zh-CN":cn||zh};}
 fill("nav_name","Dr. Poon Ka Kin","潘家健醫生","潘家健 医師","潘家健医生");
 fill("nav_spec","Specialist in Ophthalmology","眼科專科醫生","眼科専門医","眼科专科医生");
 fill("h1","Dr. Poon Ka Kin","潘家健醫生","潘家健 医師","潘家健医生");
 fill("h1s","Registered medical practitioner, Medical Council of Hong Kong","香港醫務委員會註冊醫生 · 眼科專科醫生","香港医務委員会登録医師 · 眼科専門医","香港医务委员会注册医生 · 眼科专科医生");
-fill("ver","Version 1.4 · Updated 31 August 2026","版本 1.4 · 更新日期 2026年8月31日","バージョン 1.4 · 2026年8月31日");
-fill("ver2","Version 1.4 · Updated 31 August 2026","版本 1.4 · 更新日期 2026年8月31日","バージョン 1.4 · 2026年8月31日");
+fill("ver","Version 1.7 · Updated 31 August 2026","版本 1.7 · 更新日期 2026年8月31日","バージョン 1.7 · 2026年8月31日");
+fill("ver2","Version 1.7 · Updated 31 August 2026","版本 1.7 · 更新日期 2026年8月31日","バージョン 1.7 · 2026年8月31日");
 fill("sec_part","Practice particulars","執業資料","開業情報","执业资料");
 fill("name_full","Dr. Poon Ka Kin","潘家健醫生 Dr. Poon Ka Kin","潘家健 医師 Dr. Poon Ka Kin","潘家健医生 Dr. Poon Ka Kin");
-fill("spec","Specialist in Ophthalmology","專科名行：眼科專科醫生","眼科専門医","专科名衔：眼科专科医生");
+fill("spec","Specialist in Ophthalmology","專科名衔：眼科專科醫生","眼科専門医","专科名衔：眼科专科医生");
 fill("sec_svc","Range of services","專業服務範圍","診療範囲","专业服务范围");
 fill("svc_note","Factual list. Not an advertisement.","供查閱用，並非推廣或招攬。","参照用であり宣伝ではありません。","供查阅用，并非推广或招揽。");
 fill("s1","Ophthalmic consultation","眼科診症及檢查","眼科診察","眼科诊症及检查");
@@ -211,7 +225,7 @@ fill("open_yt","Open on YouTube","在 YouTube 開啟","YouTubeで開く","在 Yo
 fill("sec_disc","Important notice and disclaimer","重要聲明及免責條款","免責事項","重要声明及免责条款");
 fill("disc_lead","By using this website you accept the following.","使用本網站即接受下列條款。","本サイト利用により以下に同意したものとみなします。","使用本网站即接受下列条款。");
 fill("d1","General reference only. Not medical advice.","資料只供參考，並非醫療意見、診斷或治療。","一般情報であり医療助言ではありません。","资料只供参考，并非医疗意见。");
-fill("d2","Contact does not create a doctor-patient relationship.","瀏覽或聯絡不構成醫生與病人關係。","閲覧や連絡のみでは医師患者関係は成立しません。","浏览或联络不构成医患关系。");
+fill("d2","Contact does not create a doctor-patient relationship.","瀏覽或聯絡不構成醫生與病人關係。","閱覧や連絡のみでは医師患者関係は成立しません。","浏览或联络不构成医患关系。");
 fill("d3","Individual assessment is required. No result is guaranteed.","須經註冊醫生個別評估，不作保證。","個別評価が必要で、結果は保証しません。","须经注册医生个别评估，不作保证。");
 fill("d4","For emergencies go to A&E or call 999.","緊急請前往急症室或致電 999。","緊急時は救急または999へ。","紧急请前往急诊室或致电 999。");
 fill("d5","Information is provided as is.","資料以「現況」提供。","情報は現状有姿で提供します。","资料以「现况」提供。");
@@ -229,13 +243,9 @@ function apply(lang){
  });
  document.documentElement.lang=lang;
  document.querySelectorAll("[data-lang]").forEach(b=>b.classList.toggle("active", b.getAttribute("data-lang")===lang));
- if(window.DRPOON_PHOTOS){
-  const p=document.getElementById("portraitImg"); const c=document.getElementById("cardImg");
-  if(p) p.src=DRPOON_PHOTOS.portrait; if(c) c.src=DRPOON_PHOTOS.card;
- }
 }
 function setLang(l){ localStorage.setItem("lang", l); apply(l); }
 function setFont(s){ document.documentElement.style.setProperty("--fs", s); }
-apply(localStorage.getItem("lang")||"zh-HK");
+setPhotos(); apply(localStorage.getItem("lang")||"zh-HK");
 </script>
 </body></html>
