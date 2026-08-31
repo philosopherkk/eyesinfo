@@ -21,8 +21,8 @@ import {
 
 export const Route = createFileRoute("/iol")({ component: IolPage });
 
-const TARGETS = Array.from({ length: 17 }, (_, i) =>
-  Number((2 - i * 0.25).toFixed(2)),
+const TARGETS = Array.from({ length: 25 }, (_, i) =>
+  Number((3 - i * 0.25).toFixed(2)),
 );
 
 function IolPage() {
@@ -114,12 +114,12 @@ function IolPage() {
           </p>
         </div>
         <p className="mt-1 text-[0.78rem] leading-relaxed text-muted">
-          由遠視 +2.00（不夠度）拖到近視 −2.00（預留近用）。多焦通常以正視為目標；偏離會令各個焦點一齊移位。
+          由遠視 +3.00（晶體度數明顯不夠）拖到近視 −3.00（預留更近）。每格 0.25 D（25 度）。多焦通常以正視為目標；偏離會令各個焦點一齊移位。
         </p>
         <input
           type="range"
           min={0}
-          max={16}
+          max={24}
           step={1}
           value={TARGETS.indexOf(target)}
           onChange={(e) => setTarget(TARGETS[Number(e.target.value)] ?? 0)}
@@ -127,15 +127,15 @@ function IolPage() {
           aria-label="目標球面度數"
         />
         <div className="mt-1 flex justify-between text-[0.7rem] text-faint">
-          <span>+2.00 遠視</span>
+          <span>+3.00 遠視</span>
           <span>0 正視</span>
-          <span>−2.00 近視</span>
+          <span>−3.00 近視</span>
         </div>
         <div className="mt-3 grid grid-cols-3 gap-2">
           {[
-            { t: 2, l: "+2.00 不夠度" },
+            { t: 3, l: "+3.00 不夠度" },
             { t: 0, l: "0 正視看遠" },
-            { t: -2, l: "−2.00 預留近用" },
+            { t: -3, l: "−3.00 預留近用" },
           ].map((b) => (
             <button
               key={b.t}
@@ -296,12 +296,12 @@ function IolPage() {
             ：看街、開車通常最清楚；中距離賽事新聞及近距離賽程多數要近用鏡。
           </li>
           <li>
-            單焦預留 <strong>近視 −2.00</strong>
-            ：約 50 厘米閱讀較易，遠處路牌會糊。有人一眼正視、一眼輕微近視（迷你單眼視），須個別討論。
+            單焦預留 <strong>近視 −3.00</strong>
+            ：約 33 厘米閱讀較易，遠處路牌會很糊。−2.00 則約 50 厘米。有人一眼正視、一眼輕微近視（迷你單眼視），須個別討論。
           </li>
           <li>
-            單焦預留 <strong>遠視 +2.00</strong>
-            ：遠近都不夠焦，是「晶體度數偏少」的示範，不是常用目標。
+            單焦預留 <strong>遠視 +3.00</strong>
+            ：遠近都不夠焦，是「晶體度數偏少」的示範，不是常用目標。+2.00 同樣遠近都偏糊，只是幅度較小。
           </li>
           <li>增強型單焦：中距離往往比普通單焦好一點，細字多數仍需鏡。</li>
           <li>延伸景深：遠到中距離較連貫，細字仍常需鏡，夜間光暈因產品而異。</li>
