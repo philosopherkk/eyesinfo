@@ -244,10 +244,10 @@ export function FloaterDemo() {
         <>
           <p className="mt-3 text-[0.85rem] leading-relaxed text-muted">
             {locale === "en"
-              ? "A few long-standing floaters should still have been checked with dilation. A sudden increase or new flashes without a curtain: same-day dilated exam, no need to call 999 first."
+              ? "A few long-standing floaters should still have been checked with dilation. A sudden increase or new flashes without a curtain: same-day dilated exam — see an ophthalmologist as soon as possible."
               : locale === "ja"
-                ? "長年変わらない少量の飛蚊でも、散瞳で確認されたことが望ましいです。カーテンがなくても急増や新しい光視は同日散瞳。まず999に電話する必要はありません。"
-                : tx("少量多年不變的飛蚊仍應曾由眼科專科醫生散瞳確認。突然增多或新閃光、但沒有簾幕：須同日散瞳眼科評估，不必先打 999。")}
+                ? "長年変わらない少量の飛蚊でも、散瞳で確認されたことが望ましいです。カーテンがなくても急増や新しい光視は同日散瞳。できるだけ早く眼科専門医を受診してください。"
+                : tx("少量多年不變的飛蚊仍應曾由眼科專科醫生散瞳確認。突然增多或新閃光、但沒有簾幕：須同日散瞳眼科評估，儘快睇眼科醫生。")}
           </p>
           <Link
             to="/urgent"

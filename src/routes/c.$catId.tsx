@@ -2,6 +2,8 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import { CATEGORIES, topicsByCategory, type CategoryId } from "@/data/topics";
 import { TopicRow } from "@/components/topic-row";
+import { EditorialFooter } from "@/components/editorial-footer";
+import { LegalBanner } from "@/components/legal-banner";
 import { useI18n } from "@/i18n";
 import type { UiKey } from "@/i18n/ui";
 
@@ -50,6 +52,10 @@ function CategoryPage() {
         {topics.map((topic) => (
           <TopicRow key={topic.id} topic={topic} />
         ))}
+      </div>
+      <div className="px-4 pb-8">
+        <EditorialFooter />
+        <LegalBanner compact />
       </div>
     </div>
   );

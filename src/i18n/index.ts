@@ -100,7 +100,7 @@ export function localizedUrgent(locale: Locale): { flags: string[]; same: string
         "After an injection: worse pain, worse redness, or a sharp vision drop (rule out endophthalmitis)",
       ],
       same: [
-        "New flashes or a clear increase in floaters, without a curtain, sudden blindness or severe pain — same-day dilated fundus exam. No need to call 999 first.",
+        "New flashes or a clear increase in floaters, without a curtain, sudden blindness or severe pain — same-day dilated fundus exam. See an ophthalmologist as soon as possible.",
         "A red, painful eye without vomiting or sudden blindness — same-day ophthalmic assessment",
         "Contact-lens-related pain and light sensitivity — same-day assessment; do not delay if pain continues after lens removal",
       ],
@@ -118,7 +118,7 @@ export function localizedUrgent(locale: Locale): { flags: string[]; same: string
         "注射後の痛み増悪・充血悪化・急な視力低下（眼内炎の除外）",
       ],
       same: [
-        "カーテンや突然の失明・激痛はないが、新しい光視や飛蚊の明らかな増加 — 同日の散瞳眼底。まず999に電話する必要はありません。",
+        "カーテンや突然の失明・激痛はないが、新しい光視や飛蚊の明らかな増加 — 同日の散瞳眼底。できるだけ早く眼科専門医を受診してください。",
         "嘔吐や突然の失明のない片眼の充血疼痛 — 同日の眼科評価",
         "Contact-lens-related pain and light sensitivity — same-day assessment; do not delay if pain continues after lens removal",
       ],
@@ -147,7 +147,7 @@ export function editorialBits(locale: Locale) {
           : EDITORIAL.registerNote;
   const reviewed =
     locale === "en"
-      ? "30 August 2026"
+      ? "31 August 2026"
       : locale === "ja"
         ? "2026年8月30日"
         : EDITORIAL.reviewed;

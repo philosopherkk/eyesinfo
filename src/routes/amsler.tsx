@@ -271,8 +271,7 @@ function AmslerPage() {
         </ul>
         <p className="mt-3 flex items-start gap-2 rounded-xl bg-danger-bg px-3 py-3 text-[0.88rem] leading-relaxed text-danger">
           <EyeOff className="mt-0.5 size-4 shrink-0" />
-          新出現或突然加重的變形、中央或旁中央暗點，須盡快由眼科專科醫生作散瞳眼底檢查。突然視力急降請致電
-          999 或前往急症室。
+          新出現或突然加重的變形、中央或旁中央暗點，須盡快由眼科專科醫生作散瞳眼底檢查。突然視力急降請立即到急症室；無法自行前往請儘快睇眼科醫生。
         </p>
       </section>
 
@@ -338,7 +337,7 @@ function AmslerNotebook() {
       </div>
       {last?.result === "warp" || last?.result === "spot" ? (
         <p className="mt-3 rounded-xl bg-danger-bg px-3 py-3 text-[0.88rem] leading-relaxed text-danger">
-          盡快散瞳眼底檢查。突然視力急降請 999／急症室，不要只等普通門診。
+          盡快散瞳眼底檢查。突然視力急降請立即到急症室，不要只等普通門診。無法自行前往請儘快睇眼科醫生。
         </p>
       ) : null}
       {notes.length > 0 ? (

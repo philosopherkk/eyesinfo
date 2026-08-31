@@ -23,7 +23,7 @@ const zhHant = {
   homeLead: "按解剖分組認識徵狀與求醫時機。資料不能代替與註冊眼科專科醫生的面診診斷，亦不是藥品或手術廣告。",
   homeUrgentTitle: "急症 · 去急症室",
   homeUrgentBody:
-    "突然失明、簾幕、劇痛兼嘔吐、穿通傷或化學濺入：立即急症室；無法自行前往請打 999。化學物先大量沖水。",
+    "突然失明、簾幕、劇痛兼嘔吐、穿通傷或化學濺入：立即急症室；無法自行前往請儘快睇眼科醫生。化學物先大量沖水。",
   allTools: "全部教育工具",
   byAnatomy: "按解剖分類",
   top10: "十大常見眼疾",
@@ -31,7 +31,7 @@ const zhHant = {
   related: "打開相關示意",
   legalLink: "法律與專業守則說明",
   legalTitle: "法律與專業守則",
-  legalIntro: "本程式在香港使用，內容按下列法例及守則的精神撰寫，並非法律意見。",
+  legalIntro: "本教育網站在香港使用，內容按下列法例及守則的精神撰寫，並非法律意見。",
   copyH: "版權",
   copyP:
     "© 2026 護眼學堂（eyesinfo.org）。公眾教育內容，保留所有權利。轉載或節錄須標明出處「護眼學堂 · eyesinfo.org」。不得刪除來源、不得改作後作為醫療廣告、診所推廣、預約或售賣藥物／手術。本站不提供預約或轉介。",
@@ -53,20 +53,21 @@ const zhHant = {
   clinicTitle: "本站不提供執業資料",
   clinicP1:
     "這是公眾教育網站，不提供診所地址、電話、收費、預約或即時通訊聯絡，亦沒有超連結通往任何執業網站。",
-  clinicP2: "急症請致電 999 或前往公立醫院急症室。非急症請自行向眼科專科醫生求診，本站不作轉介。",
+  clinicP2: "急症請立即到急症室；無法自行前往請儘快睇眼科醫生。非急症請自行向眼科專科醫生求診，本站不作轉介。",
   backHome: "返回教育首頁",
   urgentTitle: "急症與盡快求醫",
-  urgentLead: "私家診所不是急症室。以下分開「立即急症室／999」與「盡快（最好當日）散瞳眼科評估」。",
-  urgent999: "立即到急症室；無法自行前往或化學傷請打 999",
+  urgentLead: "私家診所不是急症室。以下分開「立即急症室」與「盡快（最好當日）散瞳眼科評估」。",
+  urgent999: "立即到急症室；無法自行前往或化學傷請儘快睇眼科醫生",
   chemH: "化學濺入眼睛",
   chem1: "立刻用大量清水或生理鹽水持續沖洗至少 20–30 分鐘，張開眼瞼沖。運送途中盡量繼續沖。不必等特定沖洗液。",
   chem2: "隱形眼鏡若容易除就除，不要為除鏡而中斷沖洗太久。",
   chem3: "不要用中和劑、油或眼藥水「先睇下」。不要等私家診所。",
-  chem4: "邊沖邊去急症室或打 999。若知道化學物名稱可帶上。",
-  sameDayH: "盡快（最好當日）散瞳眼科評估（不必先打 999）",
+  chem4: "邊沖邊去急症室；無法自行前往請儘快睇眼科醫生。若知道化學物名稱可帶上。",
+  sameDayH: "盡快（最好當日）散瞳眼科評估（儘快睇眼科醫生）",
   sameDayP:
-    "沒有上述紅旗時，新閃光或飛蚊增多仍應盡快（最好當日）接受散瞳眼底檢查。不必先打 999。請盡快前往可作散瞳眼底的急症室眼科或當日應診的眼科專科醫生。",
-  urgentFollow: "急症室分流後，或會轉介公立醫院眼科，或由你自行約見任何眼科專科醫生跟進。本站不作轉介。",
+    "沒有上述紅旗時，新閃光或飛蚊增多仍應盡快（最好當日）接受散瞳眼底檢查。請儘快睇眼科醫生，前往可作散瞳眼底的急症室眼科或當日應診的眼科專科醫生。",
+  urgentFollow:
+    "急症室分流後，或會轉介公立醫院眼科，或由你自行約見任何眼科專科醫生跟進。本站不作轉介。內容不能代替與註冊眼科專科醫生的面診，亦不能作為診斷。詳見法律與專業守則。",
   searchPh: "眼疾名稱、徵狀、檢查、工具……",
   searchFound: "找到 {n} 項",
   searchIdle: "專題 {a} · 工具 {b}",
@@ -75,7 +76,8 @@ const zhHant = {
   savedEmpty: "尚未收藏任何專題",
   savedGo: "去首頁瀏覽",
   toolsTitle: "教育工具",
-  toolsLead: "示意同步驟練習。唔包括診金、預約或商品。本站不連至任何執業網站。",
+  toolsLead:
+    "示意同步驟練習。唔包括診金、預約或商品。示意同練習不能代替面診、散瞳眼底或任何檢查，亦不能作為診斷。本站不提供預約、處方、購買或轉介，亦不連至任何執業網站。",
   details: "詳情",
   lang: "語言",
   simFooter:
@@ -167,7 +169,7 @@ const en: Record<Key, string> = {
     "Learn symptoms and when to seek care, grouped by anatomy. This is not a diagnosis and does not replace an in-person consultation with a registered ophthalmologist. It is not an advertisement for medicines or surgery.",
   homeUrgentTitle: "Emergency · go to A&E",
   homeUrgentBody:
-    "Sudden vision loss, a curtain, severe pain with vomiting, penetrating injury or chemical splash: go to A&E now; call 999 if you cannot get there. For chemicals, irrigate first with plenty of water.",
+    "Sudden vision loss, a curtain, severe pain with vomiting, penetrating injury or chemical splash: go to A&E now. If you cannot get there, see an ophthalmologist as soon as possible. For chemicals, irrigate first with plenty of water.",
   allTools: "All education tools",
   byAnatomy: "By anatomy",
   top10: "Ten common eye conditions",
@@ -177,7 +179,7 @@ const en: Record<Key, string> = {
   legalLink: "Law and professional code",
   legalTitle: "Law and professional code",
   legalIntro:
-    "This app is written for use in Hong Kong in the spirit of the ordinances and code below. It is not legal advice.",
+    "This education website is written for use in Hong Kong in the spirit of the ordinances and code below. It is not legal advice.",
   copyH: "Copyright",
   copyP:
     "© 2026 護眼學堂 (eyesinfo.org). Public education. All rights reserved. Reproduce only with the credit “護眼學堂 · eyesinfo.org”. Do not strip the source or reuse the text as a medical advertisement, clinic promotion, booking page or to sell medicines or surgery. This site does not book or refer.",
@@ -200,23 +202,23 @@ const en: Record<Key, string> = {
   clinicP1:
     "This is a public education site. It does not list clinic addresses, phone numbers, fees, bookings or messaging, and has no link to any practice website.",
   clinicP2:
-    "For emergencies call 999 or go to a public hospital A&E. For non-emergencies see a registered ophthalmologist yourself. This site does not refer.",
+    "For emergencies go to A&E now. If you cannot get there, see an ophthalmologist as soon as possible. For non-emergencies see a registered ophthalmologist yourself. This site does not refer.",
   backHome: "Back to education home",
   urgentTitle: "Emergencies and same-day care",
   urgentLead:
-    "A private clinic is not an A&E. Below: go to A&E / call 999 versus same-day dilated eye assessment.",
-  urgent999: "Go to A&E now; call 999 if you cannot get there, or for chemical injury",
+    "A private clinic is not an A&E. Below: go to A&E now versus same-day dilated eye assessment.",
+  urgent999: "Go to A&E now; if you cannot get there, or for chemical injury, see an ophthalmologist as soon as possible",
   chemH: "Chemical splash in the eye",
   chem1:
     "Irrigate at once with plenty of clean water or saline for at least 20–30 minutes, holding the lids open. Continue during transport if you can. Do not wait for a special irrigating fluid.",
   chem2: "Remove contact lenses if they come out easily; do not stop irrigation for long just to remove them.",
   chem3: "Do not use neutralizing agents, oil or eye drops “to try first”. Do not wait for a private clinic.",
-  chem4: "Go to A&E while irrigating, or call 999. Bring the chemical name if known.",
-  sameDayH: "Prompt dilated eye assessment (same day if possible; no need to call 999 first)",
+  chem4: "Go to A&E while irrigating. If you cannot get there, see an ophthalmologist as soon as possible. Bring the chemical name if known.",
+  sameDayH: "Prompt dilated eye assessment (same day if possible — see an ophthalmologist as soon as possible)",
   sameDayP:
-    "New flashes or a shower of floaters without the red flags above still need a dilated fundus exam as soon as possible, ideally the same day. You do not need to call 999 first. Go to an A&E eye service or a registered ophthalmologist who can dilate that day.",
+    "New flashes or a shower of floaters without the red flags above still need a dilated fundus exam as soon as possible, ideally the same day. See an ophthalmologist as soon as possible. Go to an A&E eye service or a registered ophthalmologist who can dilate that day.",
   urgentFollow:
-    "After A&E triage you may be referred to public hospital ophthalmology, or you may see any registered ophthalmologist. This site does not refer.",
+    "After A&E triage you may be referred to public hospital ophthalmology, or you may see any registered ophthalmologist. This site does not refer. This content cannot replace an in-person consultation with a registered ophthalmologist and is not a diagnosis. See Law and professional code.",
   searchPh: "Condition, symptom, test, tool…",
   searchFound: "{n} matches",
   searchIdle: "{a} topics · {b} tools",
@@ -226,7 +228,7 @@ const en: Record<Key, string> = {
   savedGo: "Browse the home page",
   toolsTitle: "Education tools",
   toolsLead:
-    "Diagrams and practice steps. No fees, bookings or products. This site does not link to any practice website.",
+    "Diagrams and practice steps. No fees, bookings or products. Diagrams and practice cannot replace an in-person visit, a dilated fundus exam or any test, and are not a diagnosis. This site does not offer booking, prescriptions, sales or referrals, and does not link to any practice website.",
   details: "Details",
   lang: "Language",
   simFooter:
@@ -314,7 +316,7 @@ const ja: Record<Key, string> = {
     "解剖ごとに症状と受診の目安を学べます。診断に代わるものではなく、登録眼科専門医の対面診察の代わりにはなりません。医薬品や手術の広告ではありません。",
   homeUrgentTitle: "救急 · 救急外来へ",
   homeUrgentBody:
-    "突然の視力低下、カーテン状の欠損、嘔吐を伴う激しい痛み、穿孔外傷、薬品の飛入：直ちに救急外来へ。行けない場合は999。薬品はまず大量の水で洗浄。",
+    "突然の視力低下、カーテン状の欠損、嘔吐を伴う激しい痛み、穿孔外傷、薬品の飛入：直ちに救急外来へ。行けない場合はできるだけ早く眼科専門医を受診。薬品はまず大量の水で洗浄。",
   allTools: "教育ツール一覧",
   byAnatomy: "解剖で探す",
   top10: "よくある10の目の病気",
@@ -323,7 +325,7 @@ const ja: Record<Key, string> = {
   related: "関連する図を開く",
   legalLink: "法令と職業倫理",
   legalTitle: "法令と職業倫理",
-  legalIntro: "本アプリは香港での利用を想定し、下記の法令・規範の趣旨で書いています。法律相談ではありません。",
+  legalIntro: "本教育サイトは香港での利用を想定し、下記の法令・規範の趣旨で書いています。法律相談ではありません。",
   copyH: "著作権",
   copyP:
     "© 2026 護眼學堂（eyesinfo.org）。市民教育です。無断転載して医療広告・診療所宣伝・予約・医薬品や手術の販売に使うことはできません。出典は「護眼學堂 · eyesinfo.org」と明記してください。本サイトは予約や紹介をしません。",
@@ -346,23 +348,23 @@ const ja: Record<Key, string> = {
   clinicP1:
     "市民教育サイトです。住所・電話・料金・予約・メッセージ連絡は掲載せず、診療所サイトへのリンクもありません。",
   clinicP2:
-    "救急は999または公立病院の救急外来へ。救急でない場合はご自身で登録眼科専門医を受診してください。紹介はしません。",
+    "救急は直ちに救急外来へ。行けない場合はできるだけ早く眼科専門医を受診してください。救急でない場合はご自身で登録眼科専門医を受診してください。紹介はしません。",
   backHome: "教育ホームへ戻る",
   urgentTitle: "救急と同じ日の受診",
   urgentLead:
-    "私設クリニックは救急外来ではありません。「直ちに救急／999」と「同日の散瞳眼底検査」を分けています。",
-  urgent999: "直ちに救急外来へ。行けない場合や薬品損傷では999",
+    "私設クリニックは救急外来ではありません。「直ちに救急外来」と「同日の散瞳眼底検査」を分けています。",
+  urgent999: "直ちに救急外来へ。行けない場合や薬品損傷ではできるだけ早く眼科専門医を受診",
   chemH: "薬品が目に入ったとき",
   chem1:
     "すぐに大量の水道水または生理食塩水で20～30分以上洗い続け、まぶたを開いて流します。搬送中も続けられるだけ続けます。特別な洗浄液を待つ必要はありません。",
   chem2: "コンタクトレンズは簡単に取れるなら外します。外すために洗浄を長く止めないでください。",
   chem3: "中和剤、油、点眼薬で「様子を見る」ことはしない。私設クリニックを待たない。",
-  chem4: "洗いながら救急外来へ。または999。薬品名が分かれば持参。",
-  sameDayH: "できるだけ早く（できれば当日）の散瞳眼科評価（まず999は不要）",
+  chem4: "洗いながら救急外来へ。行けない場合はできるだけ早く眼科専門医を受診。薬品名が分かれば持参。",
+  sameDayH: "できるだけ早く（できれば当日）の散瞳眼科評価（眼科専門医を受診）",
   sameDayP:
-    "上記の危険徴候がなければ、新しい光視症や飛蚊の急増でも、できるだけ早く（できれば当日）散瞳眼底検査を。先に999へ電話する必要はありません。散瞳できる救急眼科か、当日診察できる眼科専門医を受診してください。",
+    "上記の危険徴候がなければ、新しい光視症や飛蚊の急増でも、できるだけ早く（できれば当日）散瞳眼底検査を。散瞳できる救急眼科か、当日診察できる眼科専門医を受診してください。",
   urgentFollow:
-    "救急のトリアージ後、公立病院眼科へ紹介されることも、ご自身で眼科専門医を受診することもあります。本サイトは紹介しません。",
+    "救急のトリアージ後、公立病院眼科へ紹介されることも、ご自身で眼科専門医を受診することもあります。本サイトは紹介しません。内容は登録眼科専門医の対面診察の代わりにはならず、診断でもありません。法令と職業倫理の頁を参照。",
   searchPh: "病名、症状、検査、ツール…",
   searchFound: "{n} 件",
   searchIdle: "解説 {a} · ツール {b}",
@@ -372,7 +374,7 @@ const ja: Record<Key, string> = {
   savedGo: "ホームを見る",
   toolsTitle: "教育ツール",
   toolsLead:
-    "図示と手順の練習です。料金・予約・商品は含みません。診療所サイトへはリンクしません。",
+    "図示と手順の練習です。料金・予約・商品は含みません。図示と練習は対面診察・散瞳眼底・いかなる検査の代わりにもならず、診断でもありません。予約・処方・販売・紹介は行わず、診療所サイトへはリンクしません。",
   details: "詳細",
   lang: "言語",
   simFooter:
