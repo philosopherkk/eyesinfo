@@ -11,7 +11,7 @@ body{margin:0;font-family:"Noto Sans TC",sans-serif;line-height:1.75;color:#1420
 a{color:var(--navy)}
 .bar,.hero,footer{background:var(--navy);color:#fff}
 .wrap{max-width:900px;margin:0 auto;padding:0 1rem}
-.bar{position:sticky;top:0}
+.bar{position:sticky;top:0;z-index:20}
 .bar-inner{padding:.8rem 0}
 button{min-height:40px;margin:2px;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;border-radius:8px}
 button.active{background:#fff;color:var(--navy)}
@@ -22,7 +22,14 @@ th,td{border:1px solid #cfd8df;padding:.45rem .6rem;text-align:left}
 th{background:var(--navy);color:#fff}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 @media(max-width:800px){.grid{grid-template-columns:1fr}}
-.yt{display:block;margin:.5rem 0;background:var(--navy);color:#fff;text-decoration:none;padding:.6rem .9rem;border-radius:8px;max-width:16rem}
+.vid{background:#fff;border:1px solid #cfd8df;margin:0 0 1rem;overflow:hidden}
+.thumb{position:relative;display:block;background:#111}
+.thumb img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.play b{background:#c00;color:#fff;border-radius:12px;padding:.35rem .8rem;font-size:1.1rem}
+.vid-body{padding:.8rem 1rem 1rem}
+.yt{display:inline-block;margin-top:.4rem;background:var(--navy);color:#fff;text-decoration:none;padding:.55rem .9rem;border-radius:8px}
+.ver{opacity:.85;font-size:.88rem;margin:.6rem 0 0}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -39,10 +46,17 @@ th{background:var(--navy);color:#fff}
 <button data-lang="en" onclick="setLang('en')">EN</button>
 <button data-lang="ja" onclick="setLang('ja')">日本語</button>
 </div></div></header>
-<div class="hero"><div class="wrap"><h1 id="h1">潘家健醫生</h1><p id="h1s"></p></div></div>
+<div class="hero"><div class="wrap">
+<h1 id="h1">潘家健醫生</h1>
+<p id="h1s"></p>
+<p class="ver" id="ver">版本 1.2 · 更新日期 2026年8月31日</p>
+</div></div>
 <main class="wrap">
-<section><h2 id="sec_part"></h2><p><strong>潘家健醫生 Dr. Poon Ka Kin</strong></p><p id="spec"></p>
-<ul><li>MB ChB (CUHK)</li><li>MRCS(Ed)</li><li>FCOphth HK</li><li>FHKAM (Ophthalmology)</li></ul></section>
+<section><h2 id="sec_part"></h2>
+<p><strong>潘家健醫生 Dr. Poon Ka Kin</strong></p>
+<p id="spec"></p>
+<ul><li>MB ChB (CUHK)</li><li>MRCS(Ed)</li><li>FCOphth HK</li><li>FHKAM (Ophthalmology)</li></ul>
+</section>
 <section><h2 id="sec_svc"></h2><p id="svc_note"></p>
 <ul><li id="s1"></li><li id="s2"></li><li id="s3"></li><li id="s4"></li><li id="s5"></li><li id="s6"></li></ul></section>
 <section><h2 id="sec_loc"></h2>
@@ -81,22 +95,43 @@ Fax 2363 4618<br>
 LinkedIn <a href="https://www.linkedin.com/in/poon-kk-a67915a6/" target="_blank" rel="noopener">linkedin.com/in/poon-kk-a67915a6</a></p>
 </section>
 <section><h2 id="sec_vid"></h2><p id="vid_note"></p>
-<a class="yt" href="https://www.youtube.com/watch?v=os76aaq0bmo" target="_blank" rel="noopener">YouTube: os76aaq0bmo</a>
-<a class="yt" href="https://www.youtube.com/watch?v=pG56Gd5arHg" target="_blank" rel="noopener">YouTube: pG56Gd5arHg</a>
-<a class="yt" href="https://www.youtube.com/watch?v=ibDCPvhVd3c&t=2s" target="_blank" rel="noopener">YouTube: ibDCPvhVd3c</a>
+<article class="vid">
+<a class="thumb" href="https://www.youtube.com/watch?v=os76aaq0bmo" target="_blank" rel="noopener">
+<img src="https://i.ytimg.com/vi/os76aaq0bmo/hqdefault.jpg" alt="" width="480" height="360">
+<span class="play"><b>▶</b></span></a>
+<div class="vid-body"><h3 id="v1"></h3>
+<a class="yt" href="https://www.youtube.com/watch?v=os76aaq0bmo" target="_blank" rel="noopener" id="open1">在 YouTube 開啟</a></div>
+</article>
+<article class="vid">
+<a class="thumb" href="https://www.youtube.com/watch?v=pG56Gd5arHg" target="_blank" rel="noopener">
+<img src="https://i.ytimg.com/vi/pG56Gd5arHg/hqdefault.jpg" alt="" width="480" height="360">
+<span class="play"><b>▶</b></span></a>
+<div class="vid-body"><h3 id="v2"></h3>
+<a class="yt" href="https://www.youtube.com/watch?v=pG56Gd5arHg" target="_blank" rel="noopener" id="open2">在 YouTube 開啟</a></div>
+</article>
+<article class="vid">
+<a class="thumb" href="https://www.youtube.com/watch?v=ibDCPvhVd3c&t=2s" target="_blank" rel="noopener">
+<img src="https://i.ytimg.com/vi/ibDCPvhVd3c/hqdefault.jpg" alt="" width="480" height="360">
+<span class="play"><b>▶</b></span></a>
+<div class="vid-body"><h3 id="v3"></h3>
+<a class="yt" href="https://www.youtube.com/watch?v=ibDCPvhVd3c&t=2s" target="_blank" rel="noopener" id="open3">在 YouTube 開啟</a></div>
+</article>
 </section>
 </main>
-<footer><div class="wrap"><p id="disc"></p><p>© 2026 Dr. Poon Ka Kin</p></div></footer>
+<footer><div class="wrap"><p id="disc"></p>
+<p id="copy">© 2026 潘家健醫生</p>
+<p class="ver" id="ver2">版本 1.2 · 更新日期 2026年8月31日</p>
+</div></footer>
 <script>
 const T={
-"zh-HK":{h1:"潘家健醫生",h1s:"香港醫務委員會註冊醫生 · 眼科專科醫生",sec_part:"執業資料",spec:"專科名衔：眼科專科醫生",sec_svc:"專業服務範圍",svc_note:"供查閱用，並非推廣或招攬。",s1:"眼科診症及檢查",s2:"白內障手術及人工晶體植入",s3:"青光眼",s4:"視網膜及黃斑疾病",s5:"兒童近視",s6:"乾眼症",sec_loc:"診所位置",tw_h:"荃灣診所",mk_h:"旺角診所",tw_addr:"新界荃灣青山公路189號百萬行一樓",mk_addr:"九龍旺角彌敦道688號旺角中心第一期17樓1708室",sec_hours:"診症時間",hours_note:"須預約。",sec_contact:"聯絡",sec_vid:"公開教育節目",vid_note:"請於 YouTube 開啟。",disc:"執業資料網頁，並非招攬或廣告。"},
-"zh-CN":{h1:"潘家健医生",h1s:"香港医务委员会注册医生",sec_part:"执业资料",spec:"眼科专科医生",sec_svc:"服务范围",svc_note:"供查阅用。",s1:"眼科诊症",s2:"白内障手术",s3:"青光眼",s4:"视网膜及黄斑",s5:"儿童近视",s6:"干眼症",sec_loc:"诊所",tw_h:"荃湾诊所",mk_h:"旺角诊所",tw_addr:"荃湾青山公路189号百万行一楼",mk_addr:"旺角弥敦道688号旺角中心一期1708室",sec_hours:"时间",hours_note:"须预约。",sec_contact:"联络",sec_vid:"教育节目",vid_note:"请在 YouTube 打开。",disc:"执业资料，非广告。"},
-en:{h1:"Dr. Poon Ka Kin",h1s:"Registered medical practitioner, Medical Council of Hong Kong",sec_part:"Particulars",spec:"Specialist in Ophthalmology",sec_svc:"Services",svc_note:"Factual list. Not an advertisement.",s1:"Consultation",s2:"Cataract surgery and IOL",s3:"Glaucoma",s4:"Retina and macula",s5:"Childhood myopia",s6:"Dry eye",sec_loc:"Locations",tw_h:"Tsuen Wan",mk_h:"Mong Kok",tw_addr:"1/F, Park Tsuen Commercial Building, 189 Castle Peak Road, Tsuen Wan",mk_addr:"Suite 1708, 17/F, Phase 1, Argyle Centre, 688 Nathan Road, Mong Kok",sec_hours:"Hours",hours_note:"By appointment.",sec_contact:"Contact",sec_vid:"Programmes",vid_note:"Open on YouTube.",disc:"MCHK Code s.5.2 / Appendix H. Not canvassing."},
-ja:{h1:"潘家健 医師",h1s:"香港医務委員会登録医師",sec_part:"開業情報",spec:"眼科専門医",sec_svc:"診療範囲",svc_note:"宣伝ではありません。",s1:"診察",s2:"白内障手術",s3:"緑内障",s4:"網膜・黄斑",s5:"小児近視",s6:"ドライアイ",sec_loc:"所在地",tw_h:"荃湾",mk_h:"旺角",tw_addr:"荃湾青山公路189号 百萬行1階",mk_addr:"旺角彌敦道688号 旺角中心1708",sec_hours:"時間",hours_note:"予約制。",sec_contact:"連絡先",sec_vid:"教育番組",vid_note:"YouTubeで開く。",disc:"開業情報であり宣伝ではありません。"}
+"zh-HK":{h1:"潘家健醫生",h1s:"香港醫務委員會註冊醫生 · 眼科專科醫生",sec_part:"執業資料",spec:"專科名衔：眼科專科醫生",sec_svc:"專業服務範圍",svc_note:"供查閱用，並非推廣或招攬。",s1:"眼科診症及檢查",s2:"白內障手術及人工晶體植入",s3:"青光眼",s4:"視網膜及黃斑疾病",s5:"兒童近視",s6:"乾眼症",sec_loc:"診所位置",tw_h:"荃灣診所",mk_h:"旺角診所",tw_addr:"新界荃灣青山公路189號百萬行一樓",mk_addr:"九龍旺角彌敦道688號旺角中心第一期17樓1708室",sec_hours:"診症時間",hours_note:"須預約。",sec_contact:"聯絡",sec_vid:"公開教育節目",vid_note:"請按縮圖於 YouTube 開啟。",v1:"老年黃斑病變對眼睛有甚麼影響？（潘家健醫生）",v2:"認識黃斑區內眼疾（潘家健醫生）",v3:"老花的迷思（潘家健醫生）",open1:"在 YouTube 開啟",open2:"在 YouTube 開啟",open3:"在 YouTube 開啟",disc:"執業資料網頁，並非招攬或廣告。",copy:"© 2026 潘家健醫生",ver:"版本 1.2 · 更新日期 2026年8月31日"},
+"zh-CN":{h1:"潘家健医生",h1s:"香港医务委员会注册医生",sec_part:"执业资料",spec:"眼科专科医生",sec_svc:"服务范围",svc_note:"供查阅用。",s1:"眼科诊症",s2:"白内障手术",s3:"青光眼",s4:"视网膜及黄斑",s5:"儿童近视",s6:"干眼症",sec_loc:"诊所",tw_h:"荃湾诊所",mk_h:"旺角诊所",tw_addr:"荃湾青山公路189号百万行一楼",mk_addr:"旺角弥敦道688号旺角中心一期1708室",sec_hours:"时间",hours_note:"须预约。",sec_contact:"联络",sec_vid:"教育节目",vid_note:"请按缩略图在 YouTube 打开。",v1:"老年黄斑变性（潘家健医生）",v2:"认识黄斑区疾病（潘家健医生）",v3:"老花的迷思（潘家健医生）",open1:"在 YouTube 打开",open2:"在 YouTube 打开",open3:"在 YouTube 打开",disc:"执业资料，非广告。",copy:"© 2026 潘家健医生",ver:"版本 1.2 · 更新日期 2026年8月31日"},
+en:{h1:"Dr. Poon Ka Kin",h1s:"Registered medical practitioner, Medical Council of Hong Kong",sec_part:"Particulars",spec:"Specialist in Ophthalmology",sec_svc:"Services",svc_note:"Factual list. Not an advertisement.",s1:"Consultation",s2:"Cataract surgery and IOL",s3:"Glaucoma",s4:"Retina and macula",s5:"Childhood myopia",s6:"Dry eye",sec_loc:"Locations",tw_h:"Tsuen Wan",mk_h:"Mong Kok",tw_addr:"1/F, Park Tsuen Commercial Building, 189 Castle Peak Road, Tsuen Wan",mk_addr:"Suite 1708, 17/F, Phase 1, Argyle Centre, 688 Nathan Road, Mong Kok",sec_hours:"Hours",hours_note:"By appointment.",sec_contact:"Contact",sec_vid:"Programmes",vid_note:"Tap a thumbnail to open YouTube.",v1:"Age-related macular degeneration (Dr. Poon Ka Kin)",v2:"Macular diseases (Dr. Poon Ka Kin)",v3:"Questions about presbyopia (Dr. Poon Ka Kin)",open1:"Open on YouTube",open2:"Open on YouTube",open3:"Open on YouTube",disc:"MCHK Code s.5.2 / Appendix H. Not canvassing.",copy:"© 2026 Dr. Poon Ka Kin",ver:"Version 1.2 · Updated 31 August 2026"},
+ja:{h1:"潘家健 医師",h1s:"香港医務委員会登録医師",sec_part:"開業情報",spec:"眼科専門医",sec_svc:"診療範囲",svc_note:"宣伝ではありません。",s1:"診察",s2:"白内障手術",s3:"緑内障",s4:"網膜・黄斑",s5:"小児近視",s6:"ドライアイ",sec_loc:"所在地",tw_h:"荃湾",mk_h:"旺角",tw_addr:"荃湾青山公路189号 百萬行1階",mk_addr:"旺角彌敦道688号 旺角中心1708",sec_hours:"時間",hours_note:"予約制。",sec_contact:"連絡先",sec_vid:"教育番組",vid_note:"サムネイルを押すとYouTubeが開きます。",v1:"加齢黄斑変性（潘家健医師）",v2:"黄斑部疾患（潘家健医師）",v3:"老眼の疑問（潘家健医師）",open1:"YouTubeで開く",open2:"YouTubeで開く",open3:"YouTubeで開く",disc:"開業情報であり宣伝ではありません。",copy:"© 2026 潘家健医師",ver:"バージョン 1.2 · 更新日 2026年8月31日"}
 };
-function apply(lang){const p=T[lang]||T["zh-HK"];for(const k of Object.keys(p)){const el=document.getElementById(k);if(el)el.textContent=p[k];}document.getElementById("tw_h2").textContent=p.tw_h;document.getElementById("mk_h2").textContent=p.mk_h;document.getElementById("closed2").textContent=document.getElementById("closed").textContent;document.getElementById("closed3").textContent=document.getElementById("closed").textContent;document.querySelectorAll("[data-lang]").forEach(b=>b.classList.toggle("active",b.getAttribute("data-lang")===lang));}
+function apply(lang){const p=T[lang]||T["zh-HK"];for(const k of Object.keys(p)){const el=document.getElementById(k);if(el)el.textContent=p[k];}const v2=document.getElementById("ver2");if(v2)v2.textContent=p.ver;document.getElementById("tw_h2").textContent=p.tw_h;document.getElementById("mk_h2").textContent=p.mk_h;document.getElementById("closed2").textContent=document.getElementById("closed").textContent;document.getElementById("closed3").textContent=document.getElementById("closed").textContent;document.querySelectorAll("[data-lang]").forEach(b=>b.classList.toggle("active",b.getAttribute("data-lang")===lang));}
 function setLang(l){apply(l);}
-function setFont(s,btn){document.documentElement.style.setProperty("--fs",s);}
+function setFont(s){document.documentElement.style.setProperty("--fs",s);}
 apply("zh-HK");
 </script>
 </body></html>
