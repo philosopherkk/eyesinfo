@@ -21,6 +21,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     visit: { title: "一次眼科檢查", blurb: "散瞳後唔好自己開車", canto: "去診所會做咩" },
     outdoor: { title: "兒童戶外時間", blurb: "今日夠唔夠兩小時日光", canto: "出街睇日光" },
     rx: { title: "眼鏡度數解讀", blurb: "球鏡、柱鏡、軸、老花加度", canto: "張紙寫緊咩" },
+    qr: { title: "Lattice 二維碼", blurb: "網址或文字即時產生，可下載 PNG", canto: "印張 QR 出街" },
   },
   "zh-Hans": {
     amsler: { title: "阿姆斯勒方格", blurb: "自我监察中央视力", canto: "遮一眼，望正中间" },
@@ -36,6 +37,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     visit: { title: "一次眼科检查", blurb: "散瞳后不要自己开车", canto: "去诊所会做什么" },
     outdoor: { title: "儿童户外时间", blurb: "今天够不够两小时日光", canto: "出门看日光" },
     rx: { title: "眼镜度数解读", blurb: "球镜、柱镜、轴、老花加光", canto: "那张纸写什么" },
+    qr: { title: "Lattice 二维码", blurb: "网址或文字即时产生，可下载 PNG", canto: "印张 QR 出门" },
   },
   en: {
     amsler: { title: "Amsler grid", blurb: "Self-monitor central vision", canto: "Cover one eye, look at the centre" },
@@ -51,6 +53,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     visit: { title: "A clinic visit", blurb: "Do not drive yourself after dilation", canto: "What happens at the visit" },
     outdoor: { title: "Children’s outdoor time", blurb: "Two hours of daylight today?", canto: "Go out in daylight" },
     rx: { title: "Reading a glasses prescription", blurb: "Sph, Cyl, Axis, Add", canto: "What the slip means" },
+    qr: { title: "Lattice QR", blurb: "Live QR from a URL or any text, PNG download", canto: "Print a mark" },
   },
   ja: {
     amsler: { title: "アムスラーチャート", blurb: "中心視力の自己観察", canto: "片眼を隠し、中央を見る" },
@@ -66,6 +69,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     visit: { title: "眼科受診の流れ", blurb: "散瞳後は自分で運転しない", canto: "診察で何をするか" },
     outdoor: { title: "子どもの屋外時間", blurb: "今日、日光は2時間あるか", canto: "外の光を" },
     rx: { title: "眼鏡処方箋の読み方", blurb: "Sph・Cyl・Axis・Add", canto: "用紙の意味" },
+    qr: { title: "Lattice 二次元コード", blurb: "URLや文字から即時作成、PNG保存", canto: "QRを印刷" },
   },
 };
 

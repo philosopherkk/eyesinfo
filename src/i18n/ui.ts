@@ -139,6 +139,25 @@ const zhHant = {
   cat_retina_sub: "黃斑病變 · 糖尿病視網膜病變 · 脫離",
   cat_surface: "角膜與眼表",
   cat_surface_sub: "結膜炎 · 過敏 · PTK",
+  qrSub: "二維碼產生器",
+  qrLead: "輸入網址或任何文字，圖樣即時更新。可改顏色、尺寸、容錯後下載 PNG。本頁不是診療、預約或轉介。",
+  qrContent: "內容",
+  qrChars: "字",
+  qrHint: "網址、Wi-Fi 字串或普通文字都可以。預設是本教育網站。不是預約、不是診療。",
+  qrFill: "填入本站網址",
+  qrEmpty: "輸入內容後即時產生二維碼。",
+  qrDownload: "下載 PNG",
+  qrLook: "外觀",
+  qrFg: "前景",
+  qrBg: "背景",
+  qrPresets: "預設配色",
+  qrSize: "尺寸",
+  qrSizeHint: "下載解像度。預覽會縮放以配合畫面。",
+  qrEcc: "容錯等級",
+  qrLow: "低",
+  qrMid: "中",
+  qrHigh: "高",
+  qrFoot: "二維碼只是把你輸入的字編成可掃描圖。內容對不對、連去哪裡，由你負責。不要把病歷或個人資料放進去。",
 };
 
 type Key = keyof typeof zhHant;
@@ -290,6 +309,27 @@ const en: Record<Key, string> = {
   cat_retina_sub: "Macular degeneration · diabetic retinopathy · detachment",
   cat_surface: "Cornea and ocular surface",
   cat_surface_sub: "Conjunctivitis · allergy · PTK",
+  qrSub: "QR code generator",
+  qrLead:
+    "Type a URL or any text. The mark updates as you go. Colours, size and error correction, then download a PNG. This page is not a consultation, booking or referral.",
+  qrContent: "Content",
+  qrChars: "characters",
+  qrHint: "URLs, Wi-Fi payloads or plain text all work. Default is this education site. Not a booking, not care.",
+  qrFill: "Fill with this site’s address",
+  qrEmpty: "Type something to generate a mark.",
+  qrDownload: "Download PNG",
+  qrLook: "Appearance",
+  qrFg: "Foreground",
+  qrBg: "Background",
+  qrPresets: "Presets",
+  qrSize: "Size",
+  qrSizeHint: "Download resolution. Preview scales to fit.",
+  qrEcc: "Error correction",
+  qrLow: "Low",
+  qrMid: "Medium",
+  qrHigh: "High",
+  qrFoot:
+    "A QR mark only encodes the text you type. You are responsible for whether that text is correct and where it leads. Do not put medical records or personal data in it.",
 };
 
 const ja: Record<Key, string> = {
@@ -436,6 +476,27 @@ const ja: Record<Key, string> = {
   cat_retina_sub: "黄斑変性 · 糖尿病網膜症 · 剥離",
   cat_surface: "角膜と眼表面",
   cat_surface_sub: "結膜炎 · アレルギー · PTK",
+  qrSub: "二次元コード作成",
+  qrLead:
+    "URLや任意の文字を入れると図がすぐ更新されます。色・サイズ・誤り訂正を選んでPNGを保存。診療・予約・紹介ではありません。",
+  qrContent: "内容",
+  qrChars: "文字",
+  qrHint: "URL、Wi-Fi文字列、普通の文章が使えます。初期値はこの教育サイトです。予約でも診療でもありません。",
+  qrFill: "このサイトのアドレスを入れる",
+  qrEmpty: "入力すると二次元コードができます。",
+  qrDownload: "PNGを保存",
+  qrLook: "見た目",
+  qrFg: "前景",
+  qrBg: "背景",
+  qrPresets: "プリセット",
+  qrSize: "サイズ",
+  qrSizeHint: "保存する解像度です。プレビューは画面に合わせて縮小します。",
+  qrEcc: "誤り訂正",
+  qrLow: "低",
+  qrMid: "中",
+  qrHigh: "高",
+  qrFoot:
+    "二次元コードは入力した文字を図にしたものです。内容の正否とリンク先は利用者の責任です。病歴や個人情報は入れないでください。",
 };
 
 export type UiKey = Key;

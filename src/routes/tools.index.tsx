@@ -55,6 +55,13 @@ function ToolRow({
       </Link>
     );
   }
+  if (tool.id === "qr") {
+    return (
+      <Link to="/qr" className={cls}>
+        {inner}
+      </Link>
+    );
+  }
   return (
     <Link to="/tools/$toolId" params={{ toolId: tool.id }} className={cls}>
       {inner}

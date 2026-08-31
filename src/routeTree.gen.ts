@@ -16,6 +16,7 @@ import { Route as InstallRouteImport } from './routes/install'
 import { Route as IolRouteImport } from './routes/iol'
 import { Route as LegalRouteImport } from './routes/legal'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as QrRouteImport } from './routes/qr'
 import { Route as SavedRouteImport } from './routes/saved'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as ToolsRouteImport } from './routes/tools'
@@ -58,6 +59,11 @@ const LegalRoute = LegalRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QrRoute = QrRouteImport.update({
+  id: '/qr',
+  path: '/qr',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SavedRoute = SavedRouteImport.update({
@@ -109,6 +115,7 @@ export interface FileRoutesByFullPath {
   '/iol': typeof IolRoute
   '/legal': typeof LegalRoute
   '/privacy': typeof PrivacyRoute
+  '/qr': typeof QrRoute
   '/saved': typeof SavedRoute
   '/search': typeof SearchRoute
   '/tools': typeof ToolsRouteWithChildren
@@ -126,6 +133,7 @@ export interface FileRoutesByTo {
   '/iol': typeof IolRoute
   '/legal': typeof LegalRoute
   '/privacy': typeof PrivacyRoute
+  '/qr': typeof QrRoute
   '/saved': typeof SavedRoute
   '/search': typeof SearchRoute
   '/urgent': typeof UrgentRoute
@@ -143,6 +151,7 @@ export interface FileRoutesById {
   '/iol': typeof IolRoute
   '/legal': typeof LegalRoute
   '/privacy': typeof PrivacyRoute
+  '/qr': typeof QrRoute
   '/saved': typeof SavedRoute
   '/search': typeof SearchRoute
   '/tools': typeof ToolsRouteWithChildren
@@ -162,6 +171,7 @@ export interface FileRouteTypes {
     | '/iol'
     | '/legal'
     | '/privacy'
+    | '/qr'
     | '/saved'
     | '/search'
     | '/tools'
@@ -179,6 +189,7 @@ export interface FileRouteTypes {
     | '/iol'
     | '/legal'
     | '/privacy'
+    | '/qr'
     | '/saved'
     | '/search'
     | '/urgent'
@@ -195,6 +206,7 @@ export interface FileRouteTypes {
     | '/iol'
     | '/legal'
     | '/privacy'
+    | '/qr'
     | '/saved'
     | '/search'
     | '/tools'
@@ -213,6 +225,7 @@ export interface RootRouteChildren {
   IolRoute: typeof IolRoute
   LegalRoute: typeof LegalRoute
   PrivacyRoute: typeof PrivacyRoute
+  QrRoute: typeof QrRoute
   SavedRoute: typeof SavedRoute
   SearchRoute: typeof SearchRoute
   ToolsRoute: typeof ToolsRouteWithChildren
@@ -270,6 +283,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/qr': {
+      id: '/qr'
+      path: '/qr'
+      fullPath: '/qr'
+      preLoaderRoute: typeof QrRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/saved': {
@@ -351,6 +371,7 @@ const rootRouteChildren: RootRouteChildren = {
   IolRoute: IolRoute,
   LegalRoute: LegalRoute,
   PrivacyRoute: PrivacyRoute,
+  QrRoute: QrRoute,
   SavedRoute: SavedRoute,
   SearchRoute: SearchRoute,
   ToolsRoute: ToolsRouteWithChildren,
