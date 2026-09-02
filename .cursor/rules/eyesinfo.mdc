@@ -1,0 +1,16 @@
+---
+description: 護眼學堂 education-site rules for Cursor
+globs: src/**,public/**
+alwaysApply: true
+---
+
+This is a Hong Kong public ophthalmology **education** site (eyesinfo.org), not a clinic shopfront.
+
+- Traditional Chinese is the source language. Keep EN / JA / SC in sync when you change copy.
+- No clinic address, phone, fees, booking, WhatsApp, or hyperlinks to a practice website.
+- No drug, drop, IOL, or device brand names. Use classes / INN only.
+- No testimonials, before/after photos, success rates, 根治, 保證, or canvassing.
+- Simulators (Amsler, IOL, tunnel, floaters, halo) are illustrations, not tests. Keep the per-tool caveat.
+- Emergency copy: 立即急症室 vs 應盡快（最好當日）散瞳眼底. Do not write 打999 except where the strabismus A&E heading already says 無法自行前往請打 999.
+- Bump `CONTENT_VERSION` in `src/lib/site.ts` when publishing education changes.
+- Lattice QR lives at `/qr` only. Do not list it on the home or patient tools list.
