@@ -81,7 +81,15 @@ export const CITE: Record<string, Citation> = {
     title: "TFOS DEWS II definition and classification report",
     source: "Ocul Surf. 2017;15(3):276-283",
     pmid: "28736335",
-    note: "國際乾眼定義與分類。潤滑劑減輕症狀，不是根治。",
+    note: "國際乾眼定義與分類。",
+  },
+  dews2mgmt: {
+    id: "dews2mgmt",
+    authors: "Jones L, Downie LE, Korb D, et al.",
+    title: "TFOS DEWS II Management and Therapy Report",
+    source: "Ocul Surf. 2017;15(3):575-628",
+    pmid: "28736343",
+    note: "潤滑劑減輕症狀，不是根治。",
   },
   ohts2002: {
     id: "ohts2002",
