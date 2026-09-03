@@ -58,6 +58,10 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   ],
   d5: [{ href: "/amsler", label: "阿姆斯勒方格" }, { href: "/t/t-rvo", label: "視網膜血管阻塞" }, { href: "/t/t-migraine", label: "偏頭痛與眼科" }],
   d6: [{ href: "/t/t-reports", label: "OCT／視野示意" }, { href: "/t/t-rvo", label: "視網膜血管阻塞" }],
+  d7: [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-scleritis", label: "表層鞏膜炎與鞏膜炎" },
+  ],
   d8: [{ href: "/tools/floaters", label: "飛蚊與簾幕" }, { href: "/t/t-rd", label: "脫離手術與風險" }, { href: "/t/t-uveitis", label: "葡萄膜炎" }],
   d9: [
     { href: "/tools/warm", label: "熱敷計時" },
