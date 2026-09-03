@@ -42,7 +42,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   d2: [
     { href: "/tools/drops", label: "點藥步驟" },
     { href: "/tools/warm", label: "熱敷計時" },
-    { href: "/t/t-lube", label: "眼表潤滑劑" },
+    { href: "/t/t-lube", label: "潤眼液與潤滑劑" },
   ],
   d3: [
     { href: "/tools/haze", label: "白內障日夜示意" },
@@ -53,11 +53,12 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   d4: [
     { href: "/tools/tunnel", label: "隧道視野示意" },
     { href: "/t/t-glaucoma", label: "目標眼壓與監察" },
+    { href: "/t/t-gldrops", label: "青光眼眼藥水" },
     { href: "/t/t-early", label: "遠視、淺前房與閉角" },
   ],
-  d5: [{ href: "/amsler", label: "阿姆斯勒方格" }, { href: "/t/t-rvo", label: "視網膜血管阻塞" }],
+  d5: [{ href: "/amsler", label: "阿姆斯勒方格" }, { href: "/t/t-rvo", label: "視網膜血管阻塞" }, { href: "/t/t-migraine", label: "偏頭痛與眼科" }],
   d6: [{ href: "/t/t-reports", label: "OCT／視野示意" }, { href: "/t/t-rvo", label: "視網膜血管阻塞" }],
-  d8: [{ href: "/tools/floaters", label: "飛蚊與簾幕" }, { href: "/t/t-rd", label: "脫離手術與風險" }],
+  d8: [{ href: "/tools/floaters", label: "飛蚊與簾幕" }, { href: "/t/t-rd", label: "脫離手術與風險" }, { href: "/t/t-uveitis", label: "葡萄膜炎" }],
   d9: [
     { href: "/tools/warm", label: "熱敷計時" },
     { href: "/t/t-chalazion", label: "霰粒腫切開刮除" },
@@ -69,9 +70,18 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   ],
   "t-iol": [{ href: "/iol", label: "晶體視力示意" }, { href: "/tools/halo", label: "夜間光暈比較" }],
   "t-mfiol": [{ href: "/tools/halo", label: "夜間光暈比較" }, { href: "/iol", label: "晶體視力示意" }],
-  "t-dry": [{ href: "/tools/drops", label: "點藥步驟" }, { href: "/t/t-lube", label: "眼表潤滑劑" }, { href: "/tools/warm", label: "熱敷計時" }],
-  "t-lube": [{ href: "/tools/drops", label: "點藥步驟" }, { href: "/t/t-dry", label: "乾眼處理梯階" }],
-  "t-drops": [{ href: "/tools/drops", label: "點藥步驟" }, { href: "/t/t-lube", label: "眼表潤滑劑" }],
+  "t-dry": [{ href: "/tools/drops", label: "點藥步驟" }, { href: "/t/t-lube", label: "潤眼液與潤滑劑" }, { href: "/tools/warm", label: "熱敷計時" }],
+  "t-lube": [
+    { href: "/tools/drops", label: "點藥步驟" },
+    { href: "/t/d2", label: "乾眼症" },
+    { href: "/t/t-dry", label: "乾眼處理梯階" },
+    { href: "/t/t-cl", label: "隱形眼鏡" },
+  ],
+  "t-drops": [
+    { href: "/tools/drops", label: "點藥步驟" },
+    { href: "/t/t-lube", label: "潤眼液與潤滑劑" },
+    { href: "/t/t-gldrops", label: "青光眼眼藥水" },
+  ],
   "t-warm": [{ href: "/tools/warm", label: "熱敷計時" }],
   "t-myopia": [{ href: "/tools/outdoor", label: "兒童戶外時間" }],
   d1: [
@@ -84,12 +94,31 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   "t-yag": [{ href: "/t/t-yag", label: "後囊混濁（不是白內障復發）" }],
   "t-glaucoma": [
     { href: "/tools/tunnel", label: "隧道視野示意" },
+    { href: "/t/t-gldrops", label: "青光眼眼藥水" },
     { href: "/t/t-early", label: "遠視、淺前房與閉角" },
+  ],
+  "t-gldrops": [
+    { href: "/t/d4", label: "青光眼總論" },
+    { href: "/t/t-glaucoma", label: "目標眼壓與監察" },
+    { href: "/t/t-drops", label: "正確使用眼藥水" },
+    { href: "/tools/drops", label: "點藥步驟" },
+    { href: "/tools/tunnel", label: "隧道視野示意" },
+  ],
+  "t-uveitis": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/d8", label: "飛蚊與視網膜風險" },
+    { href: "/t/t-steroid", label: "類固醇眼藥水" },
+  ],
+  "t-migraine": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-rvo", label: "視網膜血管阻塞" },
+    { href: "/t/t-strab", label: "斜視與複視" },
   ],
   "t-rvo": [
     { href: "/urgent", label: "急症與同日評估" },
     { href: "/amsler", label: "阿姆斯勒方格" },
     { href: "/t/t-vegf", label: "玻璃體內注射" },
+    { href: "/t/t-migraine", label: "偏頭痛與眼科" },
   ],
   "t-rd": [{ href: "/tools/floaters", label: "飛蚊與簾幕" }],
   "t-vegf": [{ href: "/t/t-octm", label: "黃斑 OCT" }],
@@ -105,17 +134,22 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-cl", label: "隱形眼鏡併發症" },
     { href: "/iol", label: "晶體視力示意" },
   ],
-  "t-cl": [{ href: "/t/t-lasik", label: "激光矯視" }, { href: "/t/t-lube", label: "眼表潤滑劑" }],
+  "t-cl": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-lube", label: "潤眼液與潤滑劑" },
+    { href: "/t/t-lasik", label: "激光矯視" },
+  ],
   "t-chalazion": [{ href: "/tools/warm", label: "熱敷計時" }],
   "t-strab": [
     { href: "/urgent", label: "急症與同日評估" },
     { href: "/t/t-child", label: "兒童視力里程碑" },
     { href: "/t/t-ted", label: "甲狀腺眼疾" },
     { href: "/t/t-ptosis", label: "上瞼下垂" },
+    { href: "/t/t-migraine", label: "偏頭痛與眼科" },
   ],
   "t-child": [{ href: "/t/t-strab", label: "斜視類型與急症" }],
   "t-ted": [{ href: "/t/t-strab", label: "斜視與複視" }],
-  "t-ptosis": [{ href: "/t/t-strab", label: "斜視與複視" }],
+  "t-ptosis": [{ href: "/t/t-strab", label: "斜視與複視" }, { href: "/t/t-migraine", label: "偏頭痛與眼科" }],
 };
 
 export const SIM_FOOTER =
