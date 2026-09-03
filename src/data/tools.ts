@@ -108,6 +108,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/urgent", label: "急症與同日評估" },
     { href: "/t/d8", label: "飛蚊與視網膜風險" },
     { href: "/t/t-steroid", label: "類固醇眼藥水" },
+    { href: "/t/t-scleritis", label: "表層鞏膜炎與鞏膜炎" },
   ],
   "t-migraine": [
     { href: "/urgent", label: "急症與同日評估" },
@@ -142,13 +143,31 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   "t-chalazion": [{ href: "/tools/warm", label: "熱敷計時" }],
   "t-strab": [
     { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-strabsx", label: "斜視手術" },
     { href: "/t/t-child", label: "兒童視力里程碑" },
     { href: "/t/t-ted", label: "甲狀腺眼疾" },
     { href: "/t/t-ptosis", label: "上瞼下垂" },
     { href: "/t/t-migraine", label: "偏頭痛與眼科" },
   ],
+  "t-strabsx": [
+    { href: "/t/t-strab", label: "斜視與弱視" },
+    { href: "/t/t-ted", label: "甲狀腺眼疾" },
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-child", label: "兒童視力里程碑" },
+  ],
   "t-child": [{ href: "/t/t-strab", label: "斜視類型與急症" }],
-  "t-ted": [{ href: "/t/t-strab", label: "斜視與複視" }],
+  "t-ted": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-strabsx", label: "斜視手術" },
+    { href: "/t/t-strab", label: "斜視與複視" },
+    { href: "/t/t-lube", label: "潤眼液與潤滑劑" },
+  ],
+  "t-scleritis": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-uveitis", label: "葡萄膜炎" },
+    { href: "/t/t-steroid", label: "類固醇眼藥水" },
+    { href: "/c/surface", label: "角膜與眼表" },
+  ],
   "t-ptosis": [{ href: "/t/t-strab", label: "斜視與複視" }, { href: "/t/t-migraine", label: "偏頭痛與眼科" }],
 };
 
