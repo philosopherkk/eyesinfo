@@ -170,7 +170,6 @@ export function OutdoorCard() {
   useEffect(() => {
     reset();
   }, [reset]);
-  const enough = min >= 120;
 
   return (
     <div>
@@ -187,11 +186,10 @@ export function OutdoorCard() {
           <p className="mt-2 text-[0.9rem] leading-relaxed text-ink">課室、補習社、手機屏幕，都唔計入這兩小時。</p>
         </div>
       </div>
-      <p className="mt-5 text-center text-[0.8rem] text-muted">今日已記錄（只存在此裝置）</p>
-      <p className="text-center text-[2.4rem] font-semibold tabular-nums text-navy">{min} 分</p>
-      <p className="text-center text-[0.9rem] font-semibold text-steel">
-        {enough ? "今日戶外時間已達兩小時參考" : "今日戶外夠唔夠兩小時？"}
+      <p className="mt-5 text-center text-[0.8rem] text-muted">
+        今日已記錄的戶外日光時間（公共衞生約數，不是你孩子的處方）
       </p>
+      <p className="text-center text-[2.4rem] font-semibold tabular-nums text-navy">{min} 分</p>
       <div className="mt-3 grid grid-cols-3 gap-2">
         {[15, 30, 60].map((n) => (
           <button

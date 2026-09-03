@@ -11,7 +11,7 @@ const ol = (items: string[]): Block => ({ type: "ol", items });
 export const EN_PACKS: Record<string, TopicPack> = {
   d1: {
     title: "Refractive error",
-    tag: "Most common",
+    tag: "Common in Hong Kong",
     meta: "Myopia · hyperopia · astigmatism · presbyopia",
     blocks: [
       h("What it is"),
@@ -133,7 +133,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       h("What it is"),
       p("Blepharitis is chronic lash-line inflammation, often with meibomian dysfunction, Demodex or seborrhoea. A stye is an acute painful infection. A chalazion is a blocked meibomian granuloma, usually less painful. Incision is considered only if home care fails, and only after a doctor decides."),
       h("What a doctor may discuss"),
-      ul(["A doctor may suggest warm compress, massage and lid cleaning as home-care direction; time and method follow the consultation. Do not squeeze.", "A stye may need prescribed antibiotics. Repeated attacks: refraction or medical tests are considered by risk, not automatically every time", "Chalazion incision is usually from the conjunctival side. Recurrence in the literature is about 10–20%", "Atypical, non-resolving or recurrent lumps with lash loss, ulcer or thickening — especially in older patients — may need pathology; not every recurrent chalazion is automatically sent"]),
+      ul(["A doctor may suggest warm compress, massage and lid cleaning as home-care direction; time and method follow the consultation. Do not squeeze.", "A stye may need prescribed antibiotics. Repeated attacks: refraction or medical tests are considered by risk, not automatically every time", "Chalazion incision and curettage is usually from the conjunctival side to reduce skin scarring; recurrence varies with technique and the patient, and is not your personal prognosis", "Atypical, non-resolving or recurrent lumps with lash loss, ulcer or thickening — especially in older patients — may need pathology; not every recurrent chalazion is automatically sent"]),
     ],
   },
   d10: {

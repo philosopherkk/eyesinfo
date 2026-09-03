@@ -8,7 +8,7 @@ const ul = (items: string[]): Block => ({ type: "ul", items });
 const ol = (items: string[]): Block => ({ type: "ol", items });
 
 export const JA_PACKS: Record<string, TopicPack> = {
-  d1: { title: "屈折異常", tag: "最も多い", meta: "近視 · 遠視 · 乱視 · 老視", blocks: [
+  d1: { title: "屈折異常", tag: "香港でよくある", meta: "近視 · 遠視 · 乱視 · 老視", blocks: [
     h("どんな状態か"),
     p("光が網膜に正しく結像しません。近視は遠くがぼけ、遠視は近くがつらく、乱視は像がゆがみます。老視（老眼）は年齢とともに調節力が落ちることで、厳密には古典的な屈折異常ではありませんが、対応が近いためここにまとめています。香港では100度＝1.00 D、強度近視は通常600度以上（−6.00 D）。眼軸が約1 mm伸びるとおよそ2.5～3.00 Dです。"),
     h("医師が話し合う方向"),
