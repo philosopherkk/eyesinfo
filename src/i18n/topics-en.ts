@@ -1076,7 +1076,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
     meta: "New headache · jaw claudication · sudden blindness · go to A&E now",
     blocks: [
       h("What it is"),
-      p("Giant-cell arteritis (GCA, also called temporal arteritis) is a large-vessel vasculitis of older adults. Inflammation can hit arteries that feed the optic nerve and retina and cause irreversible vision loss within a short time — for example arteritic anterior ischaemic optic neuropathy (A-AION) or central retinal artery occlusion. Education often links inflammatory mediators (including interleukin-6 pathways). This page is public education, not a rheumatology or ophthalmology diagnostic tool, and it does not handle booking."),
+      p("Giant-cell arteritis (GCA, also called temporal arteritis) is seen almost exclusively in adults about 50 years of age or older; it is a large-vessel vasculitis. Inflammation can hit arteries that feed the optic nerve and retina and cause irreversible vision loss within a short time — for example arteritic anterior ischaemic optic neuropathy (A-AION) or central retinal artery occlusion. Education often links inflammatory mediators (including interleukin-6 pathways). This page is public education, not a rheumatology or ophthalmology diagnostic tool, and it does not handle booking."),
       h("Possible systemic clues (education list, not a home scorecard)"),
       ul([
         "New or changed headache (often temple or scalp)",
@@ -1128,7 +1128,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       ol([
         "Irrigate at once with plenty of clean water or saline for at least 20–30 minutes, lids open. Keep irrigating on the way if you can. You do not need a special irrigating solution first.",
         "Remove contact lenses if easy; do not interrupt irrigation for long just to remove a lens.",
-        "Do not use neutralising agents, oils, vinegar/baking soda “to try first”, or leftover eye drops as first aid.",
+        "Do not use neutralising agents, oils, vinegar/baking soda “to try first”, or leftover eye drops as first aid. Do not wait for a private clinic.",
         "Go to A&E while irrigating. If you cannot get there, see an ophthalmologist as soon as possible. Bring the chemical name if known.",
       ]),
       w("Irrigation comes before any home testing. Do not treat pH strips as a gate that must be checked before flushing — acid–base monitoring belongs in the clinical setting. Lime, cement and solid particles that remain can keep injuring the eye; removing debris is clinical care — do not scrape the cornea hard yourself."),
