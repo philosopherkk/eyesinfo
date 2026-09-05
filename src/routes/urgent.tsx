@@ -4,7 +4,7 @@ import { localizedUrgent, useI18n } from "@/i18n";
 export const Route = createFileRoute("/urgent")({ component: UrgentPage });
 
 function UrgentPage() {
-  const { t, locale } = useI18n();
+  const { t, tx, locale } = useI18n();
   const { flags, same } = localizedUrgent(locale);
   return (
     <div className="px-4 pt-5 pb-8">
@@ -40,6 +40,33 @@ function UrgentPage() {
             </li>
           ))}
         </ul>
+      </section>
+
+      <section className="mt-6">
+        <p className="mb-2 text-[0.8rem] font-semibold text-muted">{t("related")}</p>
+        <div className="flex flex-wrap gap-2">
+          <Link
+            to="/t/$topicId"
+            params={{ topicId: "t-chem" }}
+            className="inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy no-underline"
+          >
+            {tx("化學性眼損傷")}
+          </Link>
+          <Link
+            to="/t/$topicId"
+            params={{ topicId: "t-gca" }}
+            className="inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy no-underline"
+          >
+            {tx("巨細胞動脈炎")}
+          </Link>
+          <Link
+            to="/c/$catId"
+            params={{ catId: "surface" }}
+            className="inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy no-underline"
+          >
+            {t("cat_surface")}
+          </Link>
+        </div>
       </section>
 
       <p className="mt-6 text-[0.88rem] leading-relaxed text-muted">{t("urgentFollow")}</p>
