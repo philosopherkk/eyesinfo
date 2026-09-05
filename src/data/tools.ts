@@ -61,6 +61,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   d7: [
     { href: "/urgent", label: "急症與同日評估" },
     { href: "/t/t-scleritis", label: "表層鞏膜炎與鞏膜炎" },
+    { href: "/t/t-chem", label: "化學性眼損傷" },
   ],
   d8: [{ href: "/tools/floaters", label: "飛蚊與簾幕" }, { href: "/t/t-rd", label: "脫離手術與風險" }, { href: "/t/t-uveitis", label: "葡萄膜炎" }],
   d9: [
@@ -116,6 +117,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   ],
   "t-migraine": [
     { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-gca", label: "巨細胞動脈炎" },
     { href: "/t/t-rvo", label: "視網膜血管阻塞" },
     { href: "/t/t-strab", label: "斜視與複視" },
   ],
@@ -123,6 +125,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/urgent", label: "急症與同日評估" },
     { href: "/amsler", label: "阿姆斯勒方格" },
     { href: "/t/t-vegf", label: "玻璃體內注射" },
+    { href: "/t/t-gca", label: "巨細胞動脈炎" },
     { href: "/t/t-migraine", label: "偏頭痛與眼科" },
   ],
   "t-rd": [{ href: "/tools/floaters", label: "飛蚊與簾幕" }],
@@ -171,6 +174,17 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-uveitis", label: "葡萄膜炎" },
     { href: "/t/t-steroid", label: "類固醇眼藥水" },
     { href: "/c/surface", label: "角膜與眼表" },
+  ],
+  "t-gca": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-migraine", label: "偏頭痛與眼科" },
+    { href: "/t/t-rvo", label: "視網膜血管阻塞" },
+  ],
+  "t-chem": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/c/surface", label: "角膜與眼表" },
+    { href: "/t/t-lube", label: "潤眼液與潤滑劑" },
+    { href: "/t/d4", label: "青光眼總論" },
   ],
   "t-ptosis": [{ href: "/t/t-strab", label: "斜視與複視" }, { href: "/t/t-migraine", label: "偏頭痛與眼科" }],
 };
