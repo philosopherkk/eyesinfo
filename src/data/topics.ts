@@ -1,4 +1,8 @@
 import { EXTRA_TOPICS } from "./extra-topics";
+import {
+  DEFAULT_LAST_REVIEWED,
+  DEFAULT_TOPIC_REVIEWER,
+} from "./editorial";
 
 export type Block =
   | { type: "p" | "h" | "warn"; text: string }
@@ -6,6 +10,14 @@ export type Block =
   | { type: "table"; rows: string[][] };
 
 export type CategoryId = "lens" | "lid" | "glaucoma" | "retina" | "surface";
+
+/** Keys in src/data/citations.ts. Only PMID-verified papers — do not invent PMIDs. */
+export type CitationId = string;
+
+export type TopicReviewer = {
+  name: string;
+  role: string;
+};
 
 export type Topic = {
   id: string;
@@ -15,10 +27,35 @@ export type Topic = {
   meta: string;
   category: CategoryId;
   featured: boolean;
-  /** Keys in src/data/citations.ts. Only PMID-verified papers. */
-  refs?: string[];
+  /**
+   * Citation keys in src/data/citations.ts.
+   * Prefer setting refs whenever blocks quote literature rates / trial numbers.
+   * Short educational pages without literature figures may omit refs — the
+   * compliance scanner emits a soft warning when rate language appears without refs.
+   */
+  refs?: CitationId[];
+  /** ISO date (YYYY-MM-DD). Defaults to site-wide stamp when omitted. */
+  lastReviewed?: string;
+  /** Structured reviewer; defaults to 潘家健醫生 / 眼科專科醫生. */
+  reviewer?: TopicReviewer;
+  /**
+   * When true, topic UI surfaces the same A&E alert pattern and links to /urgent.
+   * Set only for clearly emergency-oriented factsheets — be conservative.
+   */
+  isAcuteEmergency?: boolean;
   blocks: Block[];
 };
+
+/** Resolved reviewer + last-reviewed for footer chrome. */
+export function topicEditorial(topic: Topic): {
+  lastReviewed: string;
+  reviewer: TopicReviewer;
+} {
+  return {
+    lastReviewed: topic.lastReviewed ?? DEFAULT_LAST_REVIEWED,
+    reviewer: topic.reviewer ?? { ...DEFAULT_TOPIC_REVIEWER },
+  };
+}
 
 export const CATEGORIES: {
   id: CategoryId;
@@ -342,6 +379,7 @@ export const CORE_TOPICS: Topic[] = [
     category: "retina",
     featured: true,
     refs: ["hollands2009"],
+    isAcuteEmergency: true,
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -1036,6 +1074,7 @@ export const CORE_TOPICS: Topic[] = [
     category: "lens",
     featured: false,
     refs: ["eagle2016"],
+    isAcuteEmergency: true,
     blocks: [
       {
         type: "p",
@@ -1329,6 +1368,7 @@ export const CORE_TOPICS: Topic[] = [
     category: "retina",
     featured: false,
     refs: ["hollands2009"],
+    isAcuteEmergency: true,
     blocks: [
       {
         type: "table",

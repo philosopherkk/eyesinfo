@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, Bookmark, BookmarkCheck } from "lucide-react";
-import { getTopic, TOPICS } from "@/data/topics";
+import { ArrowLeft, Bookmark, BookmarkCheck, ShieldAlert } from "lucide-react";
+import { getTopic, topicEditorial, TOPICS } from "@/data/topics";
 import { TOPIC_TOOLS } from "@/data/tools";
 import { TopicBody } from "@/components/topic-body";
 import { TopicRefs } from "@/components/topic-refs";
@@ -31,6 +31,7 @@ function TopicPage() {
   const tools = TOPIC_TOOLS[raw?.id ?? ""] ?? [];
   const { t, tx } = useI18n();
   if (!raw) throw notFound();
+  const { lastReviewed, reviewer } = topicEditorial(raw);
 
   return (
     <article>
@@ -67,6 +68,22 @@ function TopicPage() {
           <p className="mt-1 text-[0.85rem] text-muted">{topic.meta}</p>
         ) : null}
       </header>
+      {raw.isAcuteEmergency ? (
+        <Link
+          to="/urgent"
+          className="mx-4 mb-4 flex items-start gap-3 rounded-xl bg-danger px-3.5 py-3 text-paper no-underline"
+        >
+          <ShieldAlert className="mt-0.5 size-5 shrink-0" aria-hidden />
+          <span>
+            <span className="block text-[0.9rem] font-semibold">
+              {t("homeUrgentTitle")}
+            </span>
+            <span className="mt-0.5 block text-[0.8rem] leading-snug text-paper/90">
+              {t("homeUrgentBody")}
+            </span>
+          </span>
+        </Link>
+      ) : null}
       <div className="px-4 pb-6">
         <TopicBody blocks={topic.blocks} />
         <TopicRefs ids={raw.refs} />
@@ -83,7 +100,7 @@ function TopicPage() {
           </div>
         ) : null}
         <LegalBanner compact />
-        <EditorialFooter />
+        <EditorialFooter lastReviewed={lastReviewed} reviewer={reviewer} />
       </div>
     </article>
   );

@@ -2,6 +2,8 @@
 
 export const EDITORIAL = {
   reviewed: "2026年8月31日",
+  /** ISO date matching the site-wide stamp used when a topic omits lastReviewed. */
+  reviewedIso: "2026-08-31",
   name: "潘家健醫生",
   title: "眼科專科醫生",
   registerNote: "香港醫務委員會註冊醫生；名列專科名冊（眼科）",
@@ -20,6 +22,14 @@ export const EDITORIAL = {
   correction:
     "若發現錯誤，請以法律頁所列更正政策為準；本站不經此頁接收病歷或預約。",
 };
+
+/** Structured reviewer stamp — same person as EDITORIAL; do not invent new reviewers. */
+export const DEFAULT_TOPIC_REVIEWER = {
+  name: EDITORIAL.name,
+  role: EDITORIAL.title,
+} as const;
+
+export const DEFAULT_LAST_REVIEWED = EDITORIAL.reviewedIso;
 
 export const KEY_REFS = [
   "Yam JC et al. Low-Concentration Atropine for Myopia Progression (LAMP). Ophthalmology. 2019.（第一年）",

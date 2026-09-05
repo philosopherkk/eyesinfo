@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "node scripts/with-app-env.mjs vite dev --host 0.0.0.0 --port 8080",
+    "prebuild": "npm run check:compliance",
     "build": "node scripts/with-app-env.mjs vite build && npm run db:migrate",
     "db:migrate": "node scripts/migrate.mjs",
     "build:dev": "node scripts/with-app-env.mjs vite build --mode development",
@@ -15,6 +16,7 @@
     "preview:restart": "node scripts/preview.mjs restart",
     "preview:stop": "node scripts/preview.mjs stop",
     "typecheck": "tsc --noEmit",
+    "check:compliance": "node scripts/check-mchk-compliance.mjs",
     "check:auth": "node scripts/check-auth-invariant.mjs",
     "test": "node --test 'scripts/**/*.test.mjs' && node --experimental-strip-types --test src/lib/app-data/app-data.test.ts src/lib/auth/gate-identity.test.ts",
     "lint": "eslint .",
