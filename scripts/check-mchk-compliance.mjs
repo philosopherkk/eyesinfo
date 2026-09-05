@@ -1,35 +1,44 @@
 #!/usr/bin/env node
 /**
- * Build-time MCHK / Cap. 231 publicity-language gate for eyesinfo.org.
+ * Site-policy lint gate for eyesinfo.org education copy.
  *
- * Scans education content that ships to the public SPA:
- *   - src/data/**   (topics, legal, tools, urgent, editorial, citations notes)
- *   - src/i18n/**   (UI packs, EN/JA topic packs, catalog)
+ * This is a **build-time publicity / contact lint**, not Cap. 231 legal
+ * certification and not Medical Council advice. It fails closed when
+ * promotional guarantee language or clinic-contact patterns appear in
+ * content that ships to the public SPA.
+ *
+ * Scans:
+ *   - src/data/**
+ *   - src/i18n/**
+ *   - src/components/**
+ *   - src/routes/**
+ *   - index.html (if present)
  *   - any *.md under src/ or content/
  *
  * Skips node_modules, dist, build artefacts.
  *
- * Fail closed (exit 1) on banned publicity / guarantee / clinic-contact
- * patterns in TC or EN. Latin matches are case-insensitive.
+ * Matching:
+ *   - Lines are normalised (NFKC, strip zero-width, collapse whitespace)
+ *     before pattern match; reports still cite the original file:line.
+ *   - Latin matches are case-insensitive.
+ *   - Negated educational phrasing is allowed for rules marked
+ *     skipNegated when a tight negation cue precedes the match
+ *     (e.g. 「不能保證痊癒」「本站沒有 WhatsApp」「no testimonials」).
  *
- * Negated educational phrasing is allowed when the banned token is clearly
- * denied in a short preceding window, e.g. 「不是根治」「不能保證」「no
- * testimonials」「不作效果保證」. Prefer promotional multi-word phrases
- * over bare tokens when possible.
- *
- * Inline allowlist (use sparingly). Place on the same line or the line above:
+ * Inline allowlist (use sparingly). Same line or the line above:
  *   // compliance-allow: phrase
- *   Or a block comment containing: compliance-allow: phrase
- * Multiple phrases may be comma-separated.
+ * Allowlist entries must **exactly** equal the matched text (case-folded).
+ * `compliance-allow: 保證` does NOT exempt `保證痊癒` / `保證治癒` /
+ * `根治保證` (no substring punch-through).
  *
- * Soft warnings (exit 0 still): topic objects that cite literature-style rates
- * in blocks but omit `refs` — printed as WARN, not a hard failure.
+ * Soft warnings (exit 0 still): topic objects that cite literature-style
+ * rates in blocks but omit `refs`.
  *
  * Usage:
  *   npm run check:compliance
  *   node scripts/check-mchk-compliance.mjs [--root <dir>]
  */
-import { readdirSync, readFileSync, statSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
@@ -38,14 +47,19 @@ const DEFAULT_ROOT = join(__dirname, "..");
 
 /** @typedef {{ id: string, pattern: RegExp, label: string, skipNegated?: boolean }} BanRule */
 
-/** Promotional / guarantee phrases. */
+/** Promotional / guarantee phrases (TC + SC variants). */
 const BAN_RULES = /** @type {BanRule[]} */ ([
   // English
   { id: "best-doctor", pattern: /\bbest\s+doctor\b/i, label: "best doctor" },
   { id: "no1-doctor", pattern: /\bno\.?\s*1\s+doctor\b/i, label: "no.1 doctor" },
   { id: "hash1-doctor", pattern: /#\s*1\s+doctor\b/i, label: "#1 doctor" },
   { id: "number-one-doctor", pattern: /\bnumber\s+one\s+doctor\b/i, label: "number one doctor" },
-  { id: "guaranteed-cure", pattern: /\bguaranteed\s+cure\b/i, label: "guaranteed cure" },
+  {
+    id: "guaranteed-cure",
+    pattern: /\bguaranteed\s+cure\b/i,
+    label: "guaranteed cure",
+    skipNegated: true,
+  },
   { id: "100-success", pattern: /\b100\s*%\s*success\b/i, label: "100% success" },
   { id: "100-cure", pattern: /\b100\s*%\s*cure\b/i, label: "100% cure" },
   {
@@ -64,27 +78,48 @@ const BAN_RULES = /** @type {BanRule[]} */ ([
   { id: "discount", pattern: /\bdiscounts?\b/i, label: "discount", skipNegated: true },
   { id: "cheapest", pattern: /\bcheapest\b/i, label: "cheapest" },
   { id: "miracle-cure", pattern: /\bmiracle\s+cure\b/i, label: "miracle cure" },
-  // Traditional / Simplified Chinese publicity
+
+  // Multi-word TC/SC publicity — longer phrases first; skipNegated for honest disclaimers
+  {
+    id: "保證痊癒",
+    pattern: /保證痊癒|保证痊愈|保證痊愈|保证痊癒/,
+    label: "保證痊癒",
+    skipNegated: true,
+  },
+  {
+    id: "保證治癒",
+    pattern: /保證治癒|保证治愈|保證治愈|保证治癒/,
+    label: "保證治癒",
+    skipNegated: true,
+  },
+  {
+    id: "根治保證",
+    pattern: /根治保證|根治保证/,
+    label: "根治保證",
+    skipNegated: true,
+  },
   { id: "最好醫生", pattern: /最好醫生|最好医生/, label: "最好醫生" },
-  { id: "保證痊癒", pattern: /保證痊癒|保证痊愈/, label: "保證痊癒" },
-  { id: "保證治癒", pattern: /保證治癒|保证治愈/, label: "保證治癒" },
-  { id: "根治保證", pattern: /根治保證|根治保证/, label: "根治保證" },
-  { id: "百分百", pattern: /百分百/, label: "百分百" },
+  { id: "百分百", pattern: /百分百|百分之百/, label: "百分百" },
   { id: "100%成功", pattern: /100\s*%\s*成功/, label: "100%成功" },
-  { id: "病人見證", pattern: /病人見證|病人见证|病人證言|病人证言/, label: "病人見證／證言", skipNegated: true },
+  {
+    id: "病人見證",
+    pattern: /病人見證|病人见证|病人證言|病人证言/,
+    label: "病人見證／證言",
+    skipNegated: true,
+  },
   { id: "見證", pattern: /見證|见证/, label: "見證", skipNegated: true },
-  { id: "折扣", pattern: /折扣/, label: "折扣" },
-  { id: "特價", pattern: /特價|特价/, label: "特價" },
+  { id: "折扣", pattern: /折扣/, label: "折扣", skipNegated: true },
+  { id: "特價", pattern: /特價|特价/, label: "特價", skipNegated: true },
   {
     id: "優惠",
-    pattern: /(?:限時)?優惠(?:價|碼|套餐)?|(?:特别|特別)优惠|优惠价/,
+    pattern: /(?:限時|限时)?優惠(?:價|码|碼|套餐)?|(?:特别|特別)优惠|优惠价|優惠價|特惠/,
     label: "優惠（招徠）",
+    skipNegated: true,
   },
   { id: "一定好", pattern: /一定好/, label: "一定好" },
   { id: "包靚", pattern: /包靚|包靓/, label: "包靚" },
-  // Bare 「保證」when not clearly negated (「不能保證」「不作…保證」OK).
-  // Bare 「根治」is NOT banned — educational 「不是根治」/「根治通道」are common;
-  // promotional cure claims are covered by 根治保證 / 保證痊癒 / 保證治癒.
+
+  // Bare 「保證」when not clearly negated. Bare 「根治」is NOT banned.
   {
     id: "保證-bare",
     pattern: /保證|保证/,
@@ -93,25 +128,58 @@ const BAN_RULES = /** @type {BanRule[]} */ ([
   },
 ]);
 
-/** Clinic contact / booking pitches that education copy must not carry. */
+/** Clinic contact / booking pitches. */
 const CONTACT_RULES = /** @type {BanRule[]} */ ([
   {
     id: "whatsapp",
-    pattern: /\bwhats\s*app\b|WhatsApp|撳.*WhatsApp|WhatsApp.*預約|預約.*WhatsApp/i,
+    pattern: /\bwhats\s*app\b|WhatsApp|whatsapp/i,
     label: "WhatsApp",
+    skipNegated: true,
+  },
+  {
+    id: "wechat",
+    pattern: /\bwe\s*chat\b|WeChat|微信/i,
+    label: "WeChat／微信",
+    skipNegated: true,
+  },
+  {
+    id: "telegram",
+    pattern: /\btelegram\b|t\.me\//i,
+    label: "Telegram",
+    skipNegated: true,
+  },
+  {
+    id: "wa-me",
+    pattern: /(?:https?:\/\/)?(?:wa\.me|api\.whatsapp\.com)\b/i,
+    label: "wa.me / api.whatsapp.com",
+  },
+  {
+    id: "tel-href",
+    pattern: /\btel:\s*[+\d]/i,
+    label: "tel: href",
+  },
+  {
+    id: "mailto-href",
+    pattern: /\bmailto:\s*\S+/i,
+    label: "mailto: href",
+  },
+  {
+    id: "plus-852",
+    pattern: /\+852[\s-]?\d{4}[\s-]?\d{4}\b/,
+    label: "+852 phone",
   },
   {
     id: "booking-pitch",
-    pattern: /WhatsApp\s*booking|book\s+via\s+whatsapp|即時預約|立刻預約|網上預約診所/i,
+    pattern:
+      /WhatsApp\s*booking|book\s+via\s+whatsapp|即時預約|即时预约|立刻預約|立刻预约|網上預約診所|网上预约诊所/i,
     label: "booking pitch",
   },
   {
     id: "tel-label",
-    pattern: /(?:電話|致電|查詢熱線|聯絡電話|Tel\.?|Phone)[:：\s]*[+\d][\d\s\-]{7,}/i,
+    pattern: /(?:電話|电话|致電|致电|查詢熱線|查询热线|聯絡電話|联络电话|Tel\.?|Phone)[:：\s]*[+\d][\d\s\-]{7,}/i,
     label: "phone contact",
   },
   {
-    // Raw HK mobile (8 digits, common leading 5/6/9). Not applied inside pmid: fields.
     id: "hk-mobile",
     pattern: /(?<!pmid:\s*")(?<!pmid:\s*')\b[569]\d{7}\b/,
     label: "HK mobile number",
@@ -120,12 +188,45 @@ const CONTACT_RULES = /** @type {BanRule[]} */ ([
 
 const ALLOW_RE = /compliance-allow:\s*([^\n*]+)/i;
 
-/** Negation / disclaimer cues in a short window before a match. */
-const NEGATION_WINDOW_RE =
-  /不(?:能|是|會|会|作|以|屬|属|等於|等于)?|並非|并非|非|無|无|沒有|没有|唔係|唔系|無需|无需|勿|莫|\bnever\b|\bno\b|\bnot\b|\bwithout\b|\bneither\b|\bnor\b/i;
+const EN_NEGATION_RE =
+  /\b(?:there\s+are\s+)?(?:no|not|never|without|neither|nor)\b/i;
 
-const SCAN_ROOTS = ["src/data", "src/i18n"];
-const SCAN_EXTS = new Set([".ts", ".tsx", ".js", ".jsx", ".mjs", ".mts", ".md", ".json"]);
+/**
+ * Tight negation: a denial cue must appear in a short window immediately
+ * before the match (covers 「不能保證痊癒」「不是術後保證」「不作效果保證」
+ * 「本站沒有 WhatsApp」). English uses a modestly longer window so
+ * “There are no … testimonials” still works.
+ * @param {string} line  (preferably already normalised)
+ * @param {number} matchIndex
+ */
+export function isNegatedAt(line, matchIndex) {
+  const before = line.slice(Math.max(0, matchIndex - 14), matchIndex);
+  if (
+    /(?:不(?:能|是|足|作|以|會|会|屬|属)?|並非|并非|沒有|没有|唔係|唔系|無需|无需|非|無|无|勿|莫)/.test(
+      before,
+    )
+  ) {
+    return true;
+  }
+
+  const beforeEn = line.slice(Math.max(0, matchIndex - 80), matchIndex);
+  if (EN_NEGATION_RE.test(beforeEn)) return true;
+
+  return false;
+}
+
+const SCAN_ROOTS = ["src/data", "src/i18n", "src/components", "src/routes"];
+const SCAN_EXTS = new Set([".ts", ".tsx", ".js", ".jsx", ".mjs", ".mts", ".md", ".json", ".html"]);
+
+/**
+ * @param {string} s
+ */
+export function normalizeForMatch(s) {
+  return s
+    .normalize("NFKC")
+    .replace(/[\u200B-\u200D\uFEFF\u2060]/g, "")
+    .replace(/\s+/g, " ");
+}
 
 /**
  * @param {string} root
@@ -137,6 +238,8 @@ export function listContentFiles(root) {
   for (const rel of SCAN_ROOTS) {
     walk(join(root, rel), out);
   }
+  const indexHtml = join(root, "index.html");
+  if (existsSync(indexHtml)) out.push(indexHtml);
   for (const extra of ["content", "src"]) {
     const base = join(root, extra);
     try {
@@ -188,7 +291,7 @@ function allowlistForLine(line, lineIndex, allLines) {
     const m = s.match(ALLOW_RE);
     if (!m) return;
     for (const part of m[1].split(",")) {
-      const t = part.trim().toLowerCase();
+      const t = normalizeForMatch(part).trim().toLowerCase();
       if (t) phrases.push(t);
     }
   };
@@ -198,17 +301,13 @@ function allowlistForLine(line, lineIndex, allLines) {
 }
 
 /**
- * @param {string} line
- * @param {number} matchIndex
+ * Exact allowlist only — no substring punch-through.
+ * @param {string} matched
+ * @param {string[]} allows
  */
-export function isNegatedAt(line, matchIndex) {
-  const before = line.slice(Math.max(0, matchIndex - 100), matchIndex);
-  if (NEGATION_WINDOW_RE.test(before)) return true;
-  // English disclaimer sentences often put "no / does not" early on the line.
-  if (/\b(?:there\s+are\s+)?no\b|\bdoes\s+not\b|\bdo\s+not\b|\bwithout\b|\bnever\b/i.test(before)) {
-    return true;
-  }
-  return false;
+export function isExactAllowlisted(matched, allows) {
+  const m = normalizeForMatch(matched).toLowerCase();
+  return allows.some((a) => m === a);
 }
 
 /**
@@ -221,26 +320,27 @@ export function findViolationsInText(filePath, text, rules = [...BAN_RULES, ...C
   /** @type {{ file: string, line: number, phrase: string, snippet: string }[]} */
   const hits = [];
   for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
-    const allows = allowlistForLine(line, i, lines);
+    const original = lines[i];
+    const line = normalizeForMatch(original);
+    const allows = allowlistForLine(original, i, lines).concat(
+      allowlistForLine(line, i, lines.map(normalizeForMatch)),
+    );
     for (const rule of rules) {
-      rule.pattern.lastIndex = 0;
       let m;
-      const re = new RegExp(rule.pattern.source, rule.pattern.flags.includes("g") ? rule.pattern.flags : `${rule.pattern.flags}g`);
+      const re = new RegExp(
+        rule.pattern.source,
+        rule.pattern.flags.includes("g") ? rule.pattern.flags : `${rule.pattern.flags}g`,
+      );
       while ((m = re.exec(line)) !== null) {
         const matched = m[0];
-        if (allows.some((a) => matched.toLowerCase().includes(a) || a.includes(matched.toLowerCase()) || rule.label.toLowerCase().includes(a))) {
-          continue;
-        }
+        if (isExactAllowlisted(matched, allows)) continue;
         if (rule.skipNegated && isNegatedAt(line, m.index)) continue;
-        // Skip PMID field assignments for the mobile rule.
-        if (rule.id === "hk-mobile" && /pmid\s*:/.test(line)) continue;
-        const snippet = line.trim().slice(0, 120);
+        if (rule.id === "hk-mobile" && /pmid\s*:/i.test(line)) continue;
         hits.push({
           file: filePath,
           line: i + 1,
           phrase: rule.label,
-          snippet,
+          snippet: original.trim().slice(0, 120),
         });
       }
     }
@@ -249,8 +349,6 @@ export function findViolationsInText(filePath, text, rules = [...BAN_RULES, ...C
 }
 
 /**
- * Soft warn: Topic-like objects with rate language in nearby blocks but no refs.
- * Heuristic on source text — not a full TS parse.
  * @param {string} filePath
  * @param {string} text
  */
@@ -258,7 +356,6 @@ export function findMissingRefsWarnings(filePath, text) {
   if (!/topics\.ts$|extra-topics\.ts$/.test(filePath)) return [];
   /** @type {{ file: string, line: number, message: string }[]} */
   const warnings = [];
-  // Split on topic object starts: `id: "..."`
   const topicBlocks = text.split(/(?=^\s*\{\s*$)/m);
   let offsetLines = 0;
   for (const block of topicBlocks) {

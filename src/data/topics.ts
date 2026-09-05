@@ -207,6 +207,7 @@ export const CORE_TOPICS: Topic[] = [
     category: "glaucoma",
     featured: true,
     refs: ["cntgs1998", "ohts2002", "emgt2002", "eagle2016", "light2019"],
+    isAcuteEmergency: true,
     blocks: [
       { type: "h", text: "是甚麼" },
       {

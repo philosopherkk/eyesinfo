@@ -39,7 +39,9 @@ function ToolPage() {
       <div className="px-4 pt-3">
         <Panel id={tool.id} />
         <SimDisclaimer />
-        <EditorialFooter />
+        <EditorialFooter
+          lastReviewed={tool.id === "map" ? "2026-09-05" : undefined}
+        />
       </div>
     </div>
   );
