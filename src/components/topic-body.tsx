@@ -31,6 +31,16 @@ export function TopicBody({ blocks }: { blocks: Block[] }) {
             </div>
           );
         }
+        if (block.type === "note") {
+          return (
+            <div
+              key={i}
+              className="rounded-lg border border-line bg-line/25 px-3.5 py-3 text-[0.88rem] leading-relaxed text-muted"
+            >
+              {block.text}
+            </div>
+          );
+        }
         if (block.type === "ul" || block.type === "ol") {
           const Tag = block.type;
           return (

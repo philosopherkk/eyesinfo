@@ -11,6 +11,6 @@ This is a Hong Kong public ophthalmology **education** site (eyesinfo.org), not 
 - No drug, drop, IOL, or device brand names. Use classes / INN only.
 - No testimonials, before/after photos, success rates, 根治, 保證, or canvassing.
 - Simulators (Amsler, IOL, tunnel, floaters, halo) are illustrations, not tests. Keep the per-tool caveat.
-- Emergency copy: 立即急症室 vs 應盡快（最好當日）散瞳眼底. Do not write 打999 except where the strabismus A&E heading already says 無法自行前往請打 999.
+- Emergency copy: 立即急症室 vs 應盡快（最好當日）散瞳眼底. For true A&E cannot-travel, use 致電 999 / call 999 (not「儘快睇眼科醫生」). Same-day dilated paths keep 儘快睇眼科醫生.
 - Bump `CONTENT_VERSION` in `src/lib/site.ts` when publishing education changes.
 - Lattice QR lives at `/qr` only. Do not list it on the home or patient tools list.
