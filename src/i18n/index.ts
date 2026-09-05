@@ -93,6 +93,8 @@ export function localizedUrgent(locale: Locale): { flags: string[]; same: string
       flags: [
         "Sudden drop in vision or sudden blindness",
         "A curtain, a large field cut, or a cloth-like shadow",
+        "Brief monocular blackout (one eye goes dark or blank, then recovers)",
+        "New double vision",
         "Severe eye pain with headache and vomiting (rule out acute angle-closure glaucoma)",
         "Chemical splash (irrigate first, go to A&E while irrigating)",
         "Penetrating injury, suspected ruptured globe, or other severe trauma",
@@ -111,6 +113,8 @@ export function localizedUrgent(locale: Locale): { flags: string[]; same: string
       flags: [
         "突然の視力低下または突然の失明",
         "カーテン状の欠損、大きな視野欠損、布で覆われたような影",
+        "一過性の片眼暗黒（片眼の視力が短く黒く／消えて、その後戻る）",
+        "新たに出た複視",
         "頭痛・嘔吐を伴う強い眼痛（急性閉塞隅角緑内障の除外）",
         "薬品の飛入（まず洗浄し、洗いながら救急へ）",
         "穿孔外傷、眼球破裂の疑い、その他の重い外傷",
@@ -120,7 +124,7 @@ export function localizedUrgent(locale: Locale): { flags: string[]; same: string
       same: [
         "カーテンや突然の失明・激痛はないが、新しい光視や飛蚊の明らかな増加 — 同日の散瞳眼底。できるだけ早く眼科専門医を受診してください。",
         "嘔吐や突然の失明のない片眼の充血疼痛 — 同日の眼科評価",
-        "Contact-lens-related pain and light sensitivity — same-day assessment; do not delay if pain continues after lens removal",
+        "コンタクトレンズ関連の充血疼痛・羞明 — はずしたあとも痛ければ同日の評価；遅らせない",
       ],
     };
   }
