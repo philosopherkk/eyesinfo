@@ -1,10 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { localizedUrgent, useI18n } from "@/i18n";
+import { TOPICS } from "@/data/topics";
+import { localizeTopic, localizedUrgent, useI18n } from "@/i18n";
 
 export const Route = createFileRoute("/urgent")({ component: UrgentPage });
 
+/** Existing chem / GCA first; then symptoms already listed on this page. */
+const RELATED_TOPIC_IDS = ["t-chem", "t-gca", "t-rvo", "d8", "d4"] as const;
+
 function UrgentPage() {
-  const { t, tx, locale } = useI18n();
+  const { t, locale } = useI18n();
   const { flags, same } = localizedUrgent(locale);
   return (
     <div className="px-4 pt-5 pb-8">
@@ -45,20 +49,9 @@ function UrgentPage() {
       <section className="mt-6">
         <p className="mb-2 text-[0.8rem] font-semibold text-muted">{t("related")}</p>
         <div className="flex flex-wrap gap-2">
-          <Link
-            to="/t/$topicId"
-            params={{ topicId: "t-chem" }}
-            className="inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy no-underline"
-          >
-            {tx("化學性眼損傷")}
-          </Link>
-          <Link
-            to="/t/$topicId"
-            params={{ topicId: "t-gca" }}
-            className="inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy no-underline"
-          >
-            {tx("巨細胞動脈炎")}
-          </Link>
+          {RELATED_TOPIC_IDS.slice(0, 2).map((id) => (
+            <RelatedTopicLink key={id} topicId={id} locale={locale} />
+          ))}
           <Link
             to="/c/$catId"
             params={{ catId: "surface" }}
@@ -66,6 +59,9 @@ function UrgentPage() {
           >
             {t("cat_surface")}
           </Link>
+          {RELATED_TOPIC_IDS.slice(2).map((id) => (
+            <RelatedTopicLink key={id} topicId={id} locale={locale} />
+          ))}
         </div>
       </section>
 
@@ -76,5 +72,26 @@ function UrgentPage() {
         </Link>
       </p>
     </div>
+  );
+}
+
+function RelatedTopicLink({
+  topicId,
+  locale,
+}: {
+  topicId: (typeof RELATED_TOPIC_IDS)[number];
+  locale: Parameters<typeof localizeTopic>[1];
+}) {
+  const topic = TOPICS.find((x) => x.id === topicId);
+  if (!topic) return null;
+  const loc = localizeTopic(topic, locale);
+  return (
+    <Link
+      to="/t/$topicId"
+      params={{ topicId }}
+      className="inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy no-underline"
+    >
+      {loc.title}
+    </Link>
   );
 }
