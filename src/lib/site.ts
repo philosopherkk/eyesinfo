@@ -8,8 +8,8 @@ export const PUBLIC_HOSTS = ["eyesinfo.org", "www.eyesinfo.org"] as const;
  * pushed to GitHub / eyesinfo.org (minor for new or rewritten pages, patch for
  * wording/typos). Shown at the bottom of every page.
  */
-export const CONTENT_VERSION = "1.20";
-export const CONTENT_UPDATED = "2026-09-03";
+export const CONTENT_VERSION = "1.21";
+export const CONTENT_UPDATED = "2026-09-05";
 
 /** Copyright identity for watermark, copy-attribution and metadata. Education site only. */
 export const COPYRIGHT_YEAR = "2026";

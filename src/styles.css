@@ -82,10 +82,32 @@
   pointer-events: none;
 }
 
+.anatomy-region-btn {
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+.anatomy-region-btn:focus-visible {
+  outline: 2px solid var(--color-navy);
+  outline-offset: 2px;
+}
+.anatomy-region {
+  transition: fill 160ms ease, stroke 160ms ease, stroke-width 160ms ease, opacity 160ms ease;
+}
+.anatomy-hit {
+  cursor: pointer;
+  pointer-events: stroke;
+}
+.anatomy-svg .anatomy-hit[fill="transparent"] {
+  pointer-events: all;
+}
+
 @media (prefers-reduced-motion: reduce) {
   button,
   a {
     transition-duration: 0.01ms !important;
+  }
+  .anatomy-region-btn,
+  .anatomy-region {
+    transition: none !important;
   }
 }
 

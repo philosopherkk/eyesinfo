@@ -4,6 +4,7 @@ import { TOOLS, type ToolId } from "@/data/tools";
 import { SimDisclaimer } from "@/components/sim-disclaimer";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { EyeMap } from "@/components/eye-map";
+import { EyeAnatomyViewer } from "@/components/eye-anatomy-viewer";
 import { FloaterDemo, HaloDemo, HazeDemo, TunnelDemo } from "@/components/tool-demos";
 import { DropTrainer, OutdoorCard, WarmTimer } from "@/components/care-tools";
 import { AskDoctor, RxDecoder, VisitWalk } from "@/components/ask-visit-rx";
@@ -38,16 +39,29 @@ function ToolPage() {
       <div className="px-4 pt-3">
         <Panel id={tool.id} />
         <SimDisclaimer />
-        <EditorialFooter />
+        <EditorialFooter
+          lastReviewed={tool.id === "map" ? "2026-09-05" : undefined}
+        />
       </div>
     </div>
   );
 }
 
 function Panel({ id }: { id: ToolId }) {
+  const { tx } = useI18n();
   switch (id) {
     case "map":
-      return <EyeMap />;
+      return (
+        <div className="space-y-8">
+          <EyeAnatomyViewer />
+          <div>
+            <h2 className="mb-2 text-[0.85rem] font-semibold text-muted">
+              {tx("正面／側面簡圖")}
+            </h2>
+            <EyeMap />
+          </div>
+        </div>
+      );
     case "tunnel":
       return <TunnelDemo />;
     case "haze":

@@ -669,6 +669,7 @@ export const EXTRA_TOPICS: Topic[] = [
     category: "retina",
     featured: false,
     refs: ["hayreh2005"],
+    isAcuteEmergency: true,
     blocks: [
       { type: "h", text: "是甚麼" },
       {
