@@ -64,9 +64,9 @@ export const CATEGORIES: {
 }[] = [
   { id: "lens", title: "晶體與屈光", subtitle: "近視遠視 · 白內障 · 斜視" },
   { id: "lid", title: "眼瞼與淚膜", subtitle: "乾眼 · 瞼炎 · 內翻 · 溢淚" },
-  { id: "glaucoma", title: "青光眼與視神經", subtitle: "目標眼壓 · OCT · 視野" },
-  { id: "retina", title: "視網膜與黃斑", subtitle: "黃斑病變 · 糖尿病視網膜病變 · 脫離" },
-  { id: "surface", title: "角膜與眼表", subtitle: "結膜炎 · 過敏 · PTK" },
+  { id: "glaucoma", title: "青光眼與視神經", subtitle: "眼壓 · 視神經掃描（OCT）· 視野檢查" },
+  { id: "retina", title: "視網膜與黃斑", subtitle: "黃斑病變 · 糖尿上眼 · 視網膜脫離" },
+  { id: "surface", title: "角膜與眼表", subtitle: "結膜炎 · 過敏 · 激光治療角膜表面（PTK）" },
 ];
 
 export const CORE_TOPICS: Topic[] = [
@@ -123,7 +123,7 @@ export const CORE_TOPICS: Topic[] = [
     num: "02",
     title: "乾眼症",
     tag: "都市病",
-    meta: "淚水不足或油脂層不穩",
+    meta: "乾澀沙礫 · 重者勿當普通乾眼",
     category: "lid",
     featured: true,
     refs: ["dews2"],
@@ -164,7 +164,7 @@ export const CORE_TOPICS: Topic[] = [
     num: "03",
     title: "白內障",
     tag: "晶狀體混濁",
-    meta: "晶狀體蛋白質變性",
+    meta: "視力漸矇、眩光 · 影響生活才考慮手術",
     category: "lens",
     featured: true,
     blocks: [
@@ -262,7 +262,7 @@ export const CORE_TOPICS: Topic[] = [
     num: "05",
     title: "年齡相關性黃斑病變",
     tag: "中心視力",
-    meta: "俗稱老年黃斑病變；乾性與濕性",
+    meta: "直線變彎或中央暗點：盡快散瞳",
     category: "retina",
     featured: true,
     refs: ["areds2", "catt2011"],
@@ -301,7 +301,7 @@ export const CORE_TOPICS: Topic[] = [
     num: "06",
     title: "糖尿病視網膜病變",
     tag: "須定期檢查",
-    meta: "俗稱糖尿上眼",
+    meta: "早期無徵狀 · 須定期散瞳眼底",
     category: "retina",
     featured: true,
     refs: ["ukpds33"],
@@ -341,7 +341,7 @@ export const CORE_TOPICS: Topic[] = [
     num: "07",
     title: "結膜炎",
     tag: "紅眼",
-    meta: "感染、過敏、春季卡他性、異位性",
+    meta: "紅眼痕癢 · 較重過敏勿自買類固醇",
     category: "surface",
     featured: true,
     blocks: [
@@ -376,7 +376,7 @@ export const CORE_TOPICS: Topic[] = [
     num: "08",
     title: "飛蚊症與視網膜脫離風險",
     tag: "勿忽視閃光",
-    meta: "玻璃體退化",
+    meta: "新閃光或飛蚊增多：盡快散瞳",
     category: "retina",
     featured: true,
     refs: ["hollands2009"],
@@ -431,7 +431,7 @@ export const CORE_TOPICS: Topic[] = [
     num: "09",
     title: "瞼緣炎、麥粒腫與霰粒腫",
     tag: "眼瞼問題",
-    meta: "油脂腺阻塞與感染",
+    meta: "眼瞼紅腫硬粒 · 勿自行擠壓",
     category: "lid",
     featured: true,
     blocks: [
@@ -465,7 +465,7 @@ export const CORE_TOPICS: Topic[] = [
     num: "10",
     title: "翼狀胬肉",
     tag: "陽光相關",
-    meta: "結膜纖維血管增生",
+    meta: "眼白三角形肉膜 · 防紫外線",
     category: "surface",
     featured: true,
     blocks: [
@@ -498,7 +498,7 @@ export const CORE_TOPICS: Topic[] = [
     num: "A",
     title: "過敏性結膜炎的處理原則",
     tag: "須醫生評估",
-    meta: "季節性 · 春季卡他性 · 異位性角結膜炎",
+    meta: "季節性 · 較重過敏（春季卡他／異位性角結膜炎）",
     category: "surface",
     featured: false,
     blocks: [

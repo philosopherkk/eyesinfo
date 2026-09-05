@@ -131,7 +131,10 @@ function Home() {
       </section>
 
       <p className="mx-4 mt-6 mb-4 text-[0.75rem] leading-relaxed text-faint">
-        {t("homeFoot")}
+        {t("homeFoot")}{" "}
+        <Link to="/legal" className="text-navy underline">
+          {t("legalLink")}
+        </Link>
       </p>
     </div>
   );

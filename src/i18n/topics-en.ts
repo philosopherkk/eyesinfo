@@ -26,7 +26,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
   d2: {
     title: "Dry eye",
     tag: "Very common",
-    meta: "Tear film · meibomian glands",
+    meta: "Gritty dryness · do not dismiss severe cases as “just dry eye”",
     blocks: [
       h("What it is"),
       p("The tear film (oil, water, mucus) is unstable or insufficient. Evaporative dry eye from meibomian gland dysfunction is common in Hong Kong. It can coexist with blepharitis and Demodex."),
@@ -39,7 +39,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
   d3: {
     title: "Cataract",
     tag: "Age-related",
-    meta: "Lens opacity",
+    meta: "Gradual blur and glare · surgery when daily life is affected",
     blocks: [
       h("What it is"),
       p("The lens clouds with age, steroids, trauma or diabetes. It is not a film on the surface that can be peeled off with drops."),
@@ -71,7 +71,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
   d5: {
     title: "Age-related macular degeneration",
     tag: "Central vision",
-    meta: "Often called 老年黃斑病變 in Hong Kong",
+    meta: "Bent lines or a central dark patch: prompt dilated exam",
     blocks: [
       h("What it is"),
       p("The macula serves fine central vision. Dry AMD is more common (drusen, geographic atrophy). Wet AMD is driven by choroidal neovascular leakage and can steal vision quickly. Polypoidal choroidal vasculopathy is not rare in Chinese patients. VEGF is one important pathway."),
@@ -85,7 +85,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
   d6: {
     title: "Diabetic retinopathy",
     tag: "Needs regular checks",
-    meta: "Often called 糖尿上眼 in Hong Kong",
+    meta: "Often silent early · needs regular dilated fundus exams",
     blocks: [
       h("What it is"),
       p("Long-term high blood sugar damages retinal capillaries: leakage, macular oedema, ischaemia and new vessels, which can bleed or pull the retina off. Early disease can be silent. This is an ocular complication of endocrine disease and needs a registered doctor coordinating medical and eye care."),
@@ -99,7 +99,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
   d7: {
     title: "Conjunctivitis",
     tag: "Red eye",
-    meta: "Infection · allergy · irritation",
+    meta: "Red itchy eye · do not self-buy steroids for heavier allergy",
     blocks: [
       h("What it is"),
       p("Inflammation of the conjunctiva. Causes include virus, bacteria, allergy and irritants. Not every red eye is “pink eye” that you treat with leftover drops."),
@@ -112,7 +112,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
   d8: {
     title: "Floaters and retinal detachment risk",
     tag: "Do not ignore flashes",
-    meta: "Vitreous ageing",
+    meta: "New flashes or more floaters: prompt dilated exam",
     blocks: [
       h("What it is"),
       p("The vitreous liquefies and collagen clumps cast shadows (floaters). Most are posterior vitreous detachment. A few warn of a retinal tear or bleed. High myopia (≥ 600 degrees) can bring this on in the 20s–30s, with higher tear/detachment risk."),
@@ -129,7 +129,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
   d9: {
     title: "Blepharitis, stye and chalazion",
     tag: "Eyelid problems",
-    meta: "Blocked oil glands and infection",
+    meta: "Red lid lumps · do not squeeze yourself",
     blocks: [
       h("What it is"),
       p("Blepharitis is chronic lash-line inflammation, often with meibomian dysfunction, Demodex or seborrhoea. A stye is an acute painful infection. A chalazion is a blocked meibomian granuloma, usually less painful. Incision is considered only if home care fails, and only after a doctor decides."),
@@ -140,7 +140,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
   d10: {
     title: "Pterygium",
     tag: "Sun and wind",
-    meta: "A wing of tissue on the conjunctiva",
+    meta: "A triangular growth on the white · protect from UV",
     blocks: [
       h("What it is"),
       p("A fibrovascular growth onto the cornea, linked to UV. Hats and sunglasses are lifestyle measures, not a shop."),
@@ -151,7 +151,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
   "t-allergy": {
     title: "Allergic conjunctivitis — principles",
     tag: "Ocular surface",
-    meta: "Itch · seasonal or perennial",
+    meta: "Seasonal · heavier allergy (vernal / atopic keratoconjunctivitis)",
     blocks: [
       h("What it is"),
       p("Allergic inflammation of the ocular surface. Mild seasonal itch is common; severe vernal or atopic disease can scar the cornea."),
