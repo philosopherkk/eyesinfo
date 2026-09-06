@@ -39,7 +39,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
   d3: {
     title: "Cataract",
     tag: "Age-related",
-    meta: "Gradual blur and glare · discuss with an ophthalmologist whether surgery when daily life is affected",
+    meta: "Gradual blur and glare · discuss surgery with an ophthalmologist when daily life is affected",
     blocks: [
       h("What it is"),
       p("The lens clouds with age, steroids, trauma or diabetes. It is not a film on the surface that can be peeled off with drops."),
@@ -1098,7 +1098,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       p("These are education prompts for describing history at assessment — not a self-score and not a way to “rule out” GCA at home. With or without these clues, any new visual symptom still follows the emergency path."),
       h("Suspicious systemic clues without new visual symptoms"),
       p("Age 50 or over with the suspicious systemic clues above (for example new headache, jaw claudication, scalp tenderness, shoulder-girdle stiffness) but no new visual symptoms yet: aim for same-day assessment by rheumatology or ophthalmology. If same-day specialty access is not possible, or any new visual symptom appears: go to A&E now. Do not start oral or topical steroids yourself."),
-      note("Specialty-guidance concept: without new visual symptoms, aim for same-day specialty assessment; if any visual symptom appears or same-day specialty care is not available, still take the immediate A&E path. This page is not a home steroid protocol."),
+      note("Specialty-guidance concept (British Society for Rheumatology GCA guideline, 2020): without new visual symptoms, aim for same-day specialty assessment; if any visual symptom appears or same-day specialty care is not available, still take the immediate A&E path. This page is not a home steroid protocol."),
       h("Tests a doctor may arrange (concepts, not a DIY lab panel)"),
       ul([
         "Blood inflammation markers such as ESR and CRP — interpreted by a doctor; normal values do not fully exclude disease, and abnormal values alone are not a diagnosis",
@@ -1110,7 +1110,6 @@ export const EN_PACKS: Record<string, TopicPack> = {
         "High-dose corticosteroids: intravenous versus oral is a specialty decision for vision-threatening versus other disease; this page lists no milligrams or times-daily",
         "To reduce long-term steroid use, a specialist may discuss other drug classes (for example IL-6–targeted biologics). Whether they apply and whether they are registered locally is a specialty judgement",
         "Infection, glucose and bone risks: specialists explain monitoring and prevention; this page is not a shopping list",
-        "A doctor may discuss low-dose antiplatelet therapy as an accompanying consideration — again not a public milligram schedule. Do not take any antiplatelet or blood-thinning medicine on your own",
       ]),
       p("Overlap with retinal artery occlusion is on the retinal vascular occlusion page."),
       h("Common questions"),
@@ -1157,7 +1156,6 @@ export const EN_PACKS: Record<string, TopicPack> = {
         "Steroid class: whether and when depends on how the corneal surface is healing — specialty decision",
         "Preservative-free lubricants: protect the surface and ease dryness",
         "Cycloplegic / mydriatic class: ease spasm and synechia risk — form and dose by the doctor",
-        "Ascorbate (vitamin C) / citrate as adjunct concepts in selected severe cases — specialty decisions, not supermarket supplements instead of A&E. Do not take or drop vitamin C yourself as treatment",
       ]),
       p("For severe cases, specialists may discuss amniotic membrane placement/graft and later reconstruction for limbal stem-cell deficiency (LSCD). Follow specialty instructions."),
       h("Longer-term issues that may follow"),
