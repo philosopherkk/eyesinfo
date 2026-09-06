@@ -164,7 +164,7 @@ export const CORE_TOPICS: Topic[] = [
     num: "03",
     title: "白內障",
     tag: "晶狀體混濁",
-    meta: "視力漸矇、眩光 · 影響生活才考慮手術",
+    meta: "視力漸矇、眩光 · 影響生活時與眼科專科醫生討論是否手術",
     category: "lens",
     featured: true,
     blocks: [
@@ -341,7 +341,7 @@ export const CORE_TOPICS: Topic[] = [
     num: "07",
     title: "結膜炎",
     tag: "紅眼",
-    meta: "紅眼痕癢 · 較重過敏勿自買類固醇",
+    meta: "紅眼痕癢 · 較重過敏勿自買類固醇，須醫生評估",
     category: "surface",
     featured: true,
     blocks: [

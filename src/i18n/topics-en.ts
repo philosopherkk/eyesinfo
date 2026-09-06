@@ -39,7 +39,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
   d3: {
     title: "Cataract",
     tag: "Age-related",
-    meta: "Gradual blur and glare · surgery when daily life is affected",
+    meta: "Gradual blur and glare · discuss with an ophthalmologist whether surgery when daily life is affected",
     blocks: [
       h("What it is"),
       p("The lens clouds with age, steroids, trauma or diabetes. It is not a film on the surface that can be peeled off with drops."),
@@ -99,7 +99,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
   d7: {
     title: "Conjunctivitis",
     tag: "Red eye",
-    meta: "Red itchy eye · do not self-buy steroids for heavier allergy",
+    meta: "Red itchy eye · do not self-buy steroids for heavier allergy; needs a doctor's assessment",
     blocks: [
       h("What it is"),
       p("Inflammation of the conjunctiva. Causes include virus, bacteria, allergy and irritants. Not every red eye is “pink eye” that you treat with leftover drops."),
