@@ -1096,6 +1096,9 @@ export const EN_PACKS: Record<string, TopicPack> = {
         "Unexplained fatigue, feverishness, poor appetite or weight loss (non-specific)",
       ]),
       p("These are education prompts for describing history at assessment — not a self-score and not a way to “rule out” GCA at home. With or without these clues, any new visual symptom still follows the emergency path."),
+      h("Suspicious systemic clues without new visual symptoms"),
+      p("Age 50 or over with the suspicious systemic clues above (for example new headache, jaw claudication, scalp tenderness, shoulder-girdle stiffness) but no new visual symptoms yet: aim for same-day assessment by rheumatology or ophthalmology. If same-day specialty access is not possible, or any new visual symptom appears: go to A&E now. Do not start oral or topical steroids yourself."),
+      note("Specialty-guidance concept: without new visual symptoms, aim for same-day specialty assessment; if any visual symptom appears or same-day specialty care is not available, still take the immediate A&E path. This page is not a home steroid protocol."),
       h("Tests a doctor may arrange (concepts, not a DIY lab panel)"),
       ul([
         "Blood inflammation markers such as ESR and CRP — interpreted by a doctor; normal values do not fully exclude disease, and abnormal values alone are not a diagnosis",
@@ -1112,6 +1115,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       p("Overlap with retinal artery occlusion is on the retinal vascular occlusion page."),
       h("Common questions"),
       p("I have always had migraine — how is this different? Age 50 or over, a new or changed headache, jaw or scalp clues, or any new visual symptom: do not self-label it as your usual migraine; treat it as new. See the migraine and the eye page."),
+      p("Systemic clues only, no new visual symptoms — still A&E? Age 50 or over with suspicious systemic clues and no new visual symptoms: same-day rheumatology or ophthalmology. If you cannot get same-day specialty care, or any visual symptom appears: go to A&E now. Do not start steroids yourself."),
       p("Brief monocular blackout that then recovers — still A&E? Yes. Even after recovery, go to A&E now."),
       p("What to say / bring to A&E? Say sudden vision drop or suspected giant-cell arteritis; when symptoms started; a list of medicines (especially steroids and anticoagulants / antiplatelets); glasses; ideally someone with you."),
       p("Carers can watch for the systemic clues above (new headache, jaw or scalp discomfort, shoulder-girdle stiffness) and help describe the history; any new visual symptom still means go to A&E now."),
