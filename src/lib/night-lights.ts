@@ -24,8 +24,13 @@ export const NIGHT_LIGHTS: { x: number; y: number; r: number; warm: number }[] =
 
 export type HaloKind = "mono" | "edof" | "mf";
 
+/** Intensity ladder only — not separate LASIK-only looks. Caps avoid white-out / catastrophic MF. */
 export function haloScale(kind: HaloKind) {
-  if (kind === "mono") return { size: 0.72, ring: 0.18, burst: 0, opacity: 0.55 };
-  if (kind === "edof") return { size: 1.05, ring: 0.5, burst: 0.15, opacity: 0.78 };
-  return { size: 1.35, ring: 0.82, burst: 1, opacity: 0.92 };
+  if (kind === "mono") {
+    return { size: 0.82, ring: 0.32, rings: 1 as const, burst: 0.1, opacity: 0.48 };
+  }
+  if (kind === "edof") {
+    return { size: 1.02, ring: 0.5, rings: 1 as const, burst: 0.42, opacity: 0.62 };
+  }
+  return { size: 1.22, ring: 0.68, rings: 2 as const, burst: 0.82, opacity: 0.74 };
 }
