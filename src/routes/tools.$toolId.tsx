@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import { TOOLS, type ToolId } from "@/data/tools";
 import { SimDisclaimer } from "@/components/sim-disclaimer";
+import { EduToolCaveat } from "@/components/edu-tool-caveat";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { EyeMap } from "@/components/eye-map";
 import { EyeAnatomyViewer } from "@/components/eye-anatomy-viewer";
@@ -14,22 +15,25 @@ export const Route = createFileRoute("/tools/$toolId")({
   component: ToolPage,
 });
 
+const EDU_CAVEAT_TOOLS = new Set<ToolId>(["map", "drops", "ask"]);
+
 function ToolPage() {
   const { toolId } = Route.useParams();
   const tool = TOOLS.find((item) => item.id === toolId && item.href.startsWith("/tools/"));
   const { t, locale } = useI18n();
   if (!tool) throw notFound();
   const text = TOOL_TEXT[locale][tool.id];
+  const showEduCaveat = EDU_CAVEAT_TOOLS.has(tool.id);
 
   return (
     <div className="pb-8">
       <div className="flex items-center gap-1 px-2 pt-3">
         <Link
           to="/tools"
-          className="grid size-10 place-items-center rounded-md text-navy no-underline"
+          className="grid size-11 place-items-center rounded-md text-navy no-underline"
           aria-label={t("backTools")}
         >
-          <ArrowLeft className="size-5" />
+          <ArrowLeft className="size-5" aria-hidden />
         </Link>
         <div>
           <h1 className="text-[1.2rem] font-semibold text-navy">{text.title}</h1>
@@ -37,6 +41,7 @@ function ToolPage() {
         </div>
       </div>
       <div className="px-4 pt-3">
+        {showEduCaveat ? <EduToolCaveat /> : null}
         <Panel id={tool.id} />
         <SimDisclaimer />
         <EditorialFooter

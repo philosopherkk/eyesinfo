@@ -16,6 +16,7 @@ import { Route as InstallRouteImport } from './routes/install'
 import { Route as IolRouteImport } from './routes/iol'
 import { Route as LegalRouteImport } from './routes/legal'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as AccessibilityRouteImport } from './routes/accessibility'
 import { Route as QrRouteImport } from './routes/qr'
 import { Route as SavedRouteImport } from './routes/saved'
 import { Route as SearchRouteImport } from './routes/search'
@@ -59,6 +60,11 @@ const LegalRoute = LegalRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccessibilityRoute = AccessibilityRouteImport.update({
+  id: '/accessibility',
+  path: '/accessibility',
   getParentRoute: () => rootRouteImport,
 } as any)
 const QrRoute = QrRouteImport.update({
@@ -115,6 +121,7 @@ export interface FileRoutesByFullPath {
   '/iol': typeof IolRoute
   '/legal': typeof LegalRoute
   '/privacy': typeof PrivacyRoute
+  '/accessibility': typeof AccessibilityRoute
   '/qr': typeof QrRoute
   '/saved': typeof SavedRoute
   '/search': typeof SearchRoute
@@ -133,6 +140,7 @@ export interface FileRoutesByTo {
   '/iol': typeof IolRoute
   '/legal': typeof LegalRoute
   '/privacy': typeof PrivacyRoute
+  '/accessibility': typeof AccessibilityRoute
   '/qr': typeof QrRoute
   '/saved': typeof SavedRoute
   '/search': typeof SearchRoute
@@ -151,6 +159,7 @@ export interface FileRoutesById {
   '/iol': typeof IolRoute
   '/legal': typeof LegalRoute
   '/privacy': typeof PrivacyRoute
+  '/accessibility': typeof AccessibilityRoute
   '/qr': typeof QrRoute
   '/saved': typeof SavedRoute
   '/search': typeof SearchRoute
@@ -171,6 +180,7 @@ export interface FileRouteTypes {
     | '/iol'
     | '/legal'
     | '/privacy'
+    | '/accessibility'
     | '/qr'
     | '/saved'
     | '/search'
@@ -189,6 +199,7 @@ export interface FileRouteTypes {
     | '/iol'
     | '/legal'
     | '/privacy'
+    | '/accessibility'
     | '/qr'
     | '/saved'
     | '/search'
@@ -206,6 +217,7 @@ export interface FileRouteTypes {
     | '/iol'
     | '/legal'
     | '/privacy'
+    | '/accessibility'
     | '/qr'
     | '/saved'
     | '/search'
@@ -225,6 +237,7 @@ export interface RootRouteChildren {
   IolRoute: typeof IolRoute
   LegalRoute: typeof LegalRoute
   PrivacyRoute: typeof PrivacyRoute
+  AccessibilityRoute: typeof AccessibilityRoute
   QrRoute: typeof QrRoute
   SavedRoute: typeof SavedRoute
   SearchRoute: typeof SearchRoute
@@ -283,6 +296,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/accessibility': {
+      id: '/accessibility'
+      path: '/accessibility'
+      fullPath: '/accessibility'
+      preLoaderRoute: typeof AccessibilityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/qr': {
@@ -371,6 +391,7 @@ const rootRouteChildren: RootRouteChildren = {
   IolRoute: IolRoute,
   LegalRoute: LegalRoute,
   PrivacyRoute: PrivacyRoute,
+  AccessibilityRoute: AccessibilityRoute,
   QrRoute: QrRoute,
   SavedRoute: SavedRoute,
   SearchRoute: SearchRoute,

@@ -30,6 +30,31 @@ const zhHant = {
   top10: "十大常見眼疾",
   homeFoot: "僅供公眾教育。",
   related: "打開相關示意",
+  skipToContent: "跳至主要內容",
+  navMain: "主要導覽",
+  legalShortLine:
+    "公眾教育資訊，不能代替註冊眼科專科醫生面診；本站不提供預約、購買或轉介。",
+  eduToolBadge: "教育工具 · 自我察覺",
+  eduToolCaveat:
+    "本工具並非診斷工具。結果無論正常或異常，均不能代替眼科檢查。如有新出現的視力變化，請盡快求醫。",
+  a11yLink: "無障礙聲明",
+  a11yTitle: "無障礙聲明",
+  a11yIntro:
+    "護眼學堂致力讓公眾教育內容盡量人人可用。本頁說明我們的無障礙目標、已知限制，以及如何反映問題。",
+  a11yTargetH: "符合目標",
+  a11yTarget:
+    "我們以《Web Content Accessibility Guidelines》（WCAG）2.1 Level AA 為目標，持續改善。本聲明不是認證報告。",
+  a11yMethodH: "評估方法",
+  a11yMethod:
+    "以人手檢查為主，包括鍵盤操作、焦點可見性、標題層級、語系標記，以及主要互動元件的觸控目標。尚未完成完整自動化掃描或第三方審計。",
+  a11yGapsH: "已知限制（待跟進）",
+  a11yGaps:
+    "部分示意動畫與複雜圖示（例如眼圖熱區）在輔助技術下的體驗仍可再改善；高對比主題與深色模式尚未提供。詳細清單會隨版本更新。",
+  a11yDateH: "聲明日期",
+  a11yDate: "2026年9月6日（內容版本 1.29）",
+  a11yFeedbackH: "意見與更正",
+  a11yFeedback:
+    "若發現無障礙或內容錯誤，請參閱法律與專業守則頁的覆核與更正說明。本站不提供診所電話、預約或即時通訊，亦不經此頁接收病歷。",
   legalLink: "法律與專業守則說明",
   legalTitle: "法律與專業守則",
   legalIntro: "本教育網站在香港使用，內容按下列法例及守則的精神撰寫，並非法律意見。",
@@ -49,8 +74,11 @@ const zhHant = {
     "以下為本頁所據的公開研究，PMID 可在美國國家醫學圖書館 PubMed 核對。數字是該研究的結果，不是你的預後，亦不是任何診所的效果。連結不是售賣。",
   privacyLink: "私隱與本機資料",
   privacyTitle: "私隱與本機資料",
+  privacyCap486H: "個人資料（私隱）條例（第486章）",
+  privacyCap486:
+    "本教育網站不經此頁收集姓名、身份證號碼、病歷、聯絡電話或付款資料，亦沒有會員帳戶或伺服器端病歷／問診紀錄。偏好設定與收藏只存於你裝置上的本機儲存（localStorage）。本站目前沒有第三方分析追蹤腳本。清除瀏覽器網站資料即可刪除本機紀錄。",
   privacyP2:
-    "本站沒有會員帳戶，不經此網站收集身份證、病歷或付款資料。請勿在任何表格上傳送敏感個人資料——本站亦沒有此類表格。",
+    "本站沒有會員帳戶，不經此網站收集身份證、病歷或付款資料。請勿在任何表格上傳送敏感個人資料——本站亦沒有此類表格。問醫生清單等工具只在你裝置上顯示，不會上載問答內容。",
   clinicTitle: "本站不提供執業資料",
   clinicP1:
     "這是公眾教育網站，不提供診所地址、電話、收費、預約或即時通訊聯絡，亦沒有超連結通往任何執業網站。",
@@ -84,7 +112,7 @@ const zhHant = {
   simFooter:
     "示意／自我監察不能代替散瞳眼底、視野或光學相干斷層掃描（OCT）。此工具結果正常不能排除眼疾。新出現異常須盡快由眼科專科醫生檢查；突然視力下降請到急症室。本站不提供預約或轉介。",
   toolCaveat:
-    "此工具結果正常不能排除眼疾。示意／自我監察不能代替散瞳眼底、視野或光學相干斷層掃描（OCT）。新出現異常須盡快由眼科專科醫生檢查；突然視力下降請到急症室。",
+    "本工具並非診斷工具。結果無論正常或異常，均不能代替眼科檢查。如有新出現的視力變化，請盡快求醫。",
   reviewed: "最近覆核",
   contentVer: "內容版本",
   contentUpdated: "更新日期",
@@ -103,7 +131,7 @@ const zhHant = {
     "資料儲存在你的裝置（字體、收藏、語言）。這不是 App Store / Google Play 上架的原生安裝包，而是同一套眼科教育內容的手機版。",
   amslerTitle: "阿姆斯勒方格",
   amslerLead:
-    "用於自我監察中央視力（黃斑）。螢幕版只供參考，不能代替散瞳眼底檢查。突然直線變彎、中央暗點或視力急降，請到急症室。",
+    "教育工具 · 自我察覺中央視力（黃斑）。螢幕版只供參考，不能代替散瞳眼底檢查。突然直線變彎、中央暗點或視力急降，請到急症室。",
   amslerDist: "建議觀看距離約 {n} 厘米",
   amslerCal: "（已用卡片對準尺寸）",
   amslerUncal: "（尚未對準尺寸，請先校準）",
@@ -195,6 +223,31 @@ const en: Record<Key, string> = {
   top10: "Ten common eye conditions",
   homeFoot: "Public education only.",
   related: "Open related diagrams",
+  skipToContent: "Skip to main content",
+  navMain: "Main navigation",
+  legalShortLine:
+    "Public education only. Not a substitute for consultation with a registered ophthalmologist. This site offers no appointments, purchases or referrals.",
+  eduToolBadge: "Education tool · self-awareness",
+  eduToolCaveat:
+    "This tool is not a diagnostic tool. Whether results appear normal or abnormal, they cannot replace an eye examination. If you notice new vision changes, seek care promptly.",
+  a11yLink: "Accessibility statement",
+  a11yTitle: "Accessibility statement",
+  a11yIntro:
+    "Eye School aims to make public education content usable by as many people as possible. This page describes our accessibility goal, known limits, and how to report problems.",
+  a11yTargetH: "Conformance target",
+  a11yTarget:
+    "We aim for Web Content Accessibility Guidelines (WCAG) 2.1 Level AA and keep improving. This statement is not a certification report.",
+  a11yMethodH: "Evaluation method",
+  a11yMethod:
+    "Mainly manual checks: keyboard use, visible focus, heading structure, language markup, and touch targets on primary controls. Full automated scans and third-party audits are not complete yet.",
+  a11yGapsH: "Known gaps (to follow up)",
+  a11yGaps:
+    "Some demos and complex diagrams (for example eye-map hotspots) can still improve with assistive technologies. A high-contrast theme and dark mode are not offered yet. The list will update with later versions.",
+  a11yDateH: "Statement date",
+  a11yDate: "6 September 2026 (content version 1.29)",
+  a11yFeedbackH: "Feedback and corrections",
+  a11yFeedback:
+    "For accessibility or content errors, see the review and corrections note on the Law and professional code page. This site does not list clinic phones, bookings or messaging, and does not take medical records here.",
   legalLink: "Law and professional code",
   legalTitle: "Law and professional code",
   legalIntro:
@@ -215,8 +268,11 @@ const en: Record<Key, string> = {
     "These are the public studies this page draws on. PMID links go to PubMed (US National Library of Medicine) so you can check them. Figures are from those studies — not your prognosis and not a clinic success rate. Links are not a shop.",
   privacyLink: "Privacy and on-device data",
   privacyTitle: "Privacy and on-device data",
+  privacyCap486H: "Personal Data (Privacy) Ordinance (Cap. 486)",
+  privacyCap486:
+    "This education site does not collect names, ID numbers, medical records, phone numbers or payment data through this page. There is no account and no server-side medical Q&A log. Preferences and bookmarks stay in on-device localStorage only. There is currently no third-party analytics script. Clearing site data in the browser deletes local records.",
   privacyP2:
-    "There is no account. This site does not collect ID numbers, medical records or payment data. Do not send sensitive personal data — there is no form for that.",
+    "There is no account. This site does not collect ID numbers, medical records or payment data. Do not send sensitive personal data — there is no form for that. Tools such as the questions checklist stay on your device and are not uploaded.",
   clinicTitle: "No practice information on this site",
   clinicP1:
     "This is a public education site. It does not list clinic addresses, phone numbers, fees, bookings or messaging, and has no link to any practice website.",
@@ -253,7 +309,7 @@ const en: Record<Key, string> = {
   simFooter:
     "A demonstration is not an examination and cannot replace dilated fundus exam, visual field or OCT. A normal result here does not rule out disease. New changes need prompt review by a registered ophthalmologist; sudden vision loss — go to A&E. This site does not book or refer.",
   toolCaveat:
-    "A normal result here does not rule out disease. Demonstration / self-checks cannot replace dilated fundus exam, visual field or OCT. New changes need prompt review by a registered ophthalmologist; sudden vision loss — go to A&E.",
+    "This tool is not a diagnostic tool. Whether results appear normal or abnormal, they cannot replace an eye examination. If you notice new vision changes, seek care promptly.",
   reviewed: "Last reviewed",
   contentVer: "Content version",
   contentUpdated: "Updated",
@@ -272,7 +328,7 @@ const en: Record<Key, string> = {
     "Data stay on your device (type size, saved topics, language). This is not a native App Store / Google Play package; it is the same education content on your phone.",
   amslerTitle: "Amsler grid",
   amslerLead:
-    "For self-monitoring of central vision (macula). A screen version is only a guide and cannot replace a dilated fundus exam. Sudden distortion, a central dark patch or a sharp drop in vision: go to A&E.",
+    "Education tool · self-awareness of central vision (macula). A screen version is only a guide and cannot replace a dilated fundus exam. Sudden distortion, a central dark patch or a sharp drop in vision: go to A&E.",
   amslerDist: "Suggested viewing distance about {n} cm",
   amslerCal: " (size matched with a card)",
   amslerUncal: " (not yet calibrated — please calibrate first)",
@@ -362,6 +418,31 @@ const ja: Record<Key, string> = {
   top10: "よくある10の目の病気",
   homeFoot: "市民教育のみ。",
   related: "関連する図を開く",
+  skipToContent: "メインコンテンツへスキップ",
+  navMain: "メインナビゲーション",
+  legalShortLine:
+    "一般向け健康教育情報です。登録眼科専門医の診察に代わるものではありません。当サイトは予約・購入・紹介を提供しません。",
+  eduToolBadge: "教育ツール · 自己観察",
+  eduToolCaveat:
+    "本ツールは診断ツールではありません。結果が正常でも異常でも、眼科検査の代わりにはなりません。新たに視力の変化があれば、できるだけ早く受診してください。",
+  a11yLink: "アクセシビリティ声明",
+  a11yTitle: "アクセシビリティ声明",
+  a11yIntro:
+    "眼の学堂は、市民教育の内容をできるだけ多くの人が使えるようにすることを目指します。目標、既知の制限、問題の伝え方をここに記します。",
+  a11yTargetH: "適合目標",
+  a11yTarget:
+    "Web Content Accessibility Guidelines（WCAG）2.1 Level AA を目標とし、継続的に改善します。本声明は認証報告書ではありません。",
+  a11yMethodH: "評価方法",
+  a11yMethod:
+    "主に人手確認です。キーボード操作、フォーカスの可視性、見出し構造、言語マーク、主要操作のタッチ目標を見ます。完全な自動スキャンや第三者監査はまだ完了していません。",
+  a11yGapsH: "既知の制限（今後の課題）",
+  a11yGaps:
+    "一部の図示や複雑な図（眼の図のホットスポットなど）は支援技術での体験をさらに改善できます。高コントラストテーマとダークモードはまだありません。一覧は版に応じて更新します。",
+  a11yDateH: "声明日",
+  a11yDate: "2026年9月6日（コンテンツ版 1.29）",
+  a11yFeedbackH: "意見と訂正",
+  a11yFeedback:
+    "アクセシビリティや内容の誤りは、法令と職業倫理の頁の確認・訂正の説明を参照してください。診療所電話・予約・メッセージ連絡は掲載せず、病歴も受け取りません。",
   legalLink: "法令と職業倫理",
   legalTitle: "法令と職業倫理",
   legalIntro: "本教育サイトは香港での利用を想定し、下記の法令・規範の趣旨で書いています。法律相談ではありません。",
@@ -381,8 +462,11 @@ const ja: Record<Key, string> = {
     "この頁が依拠する公開研究です。PMIDは米国国立医学図書館PubMedで確認できます。数字はその研究の結果であり、あなたの予後でも診療所の成功率でもありません。",
   privacyLink: "プライバシーと端末内データ",
   privacyTitle: "プライバシーと端末内データ",
+  privacyCap486H: "個人資料（私隱）条例（第486章）",
+  privacyCap486:
+    "本教育サイトでは、氏名・身分証番号・病歴・電話・決済情報をこの頁で集めません。会員登録も、サーバー側の病歴／問診記録もありません。設定と保存は端末のlocalStorageのみです。現時点で第三者分析スクリプトはありません。ブラウザのサイトデータを消すと端末内記録が削除されます。",
   privacyP2:
-    "会員登録はありません。身分証番号・病歴・決済情報は集めません。機密情報を送らないでください。その種のフォームもありません。",
+    "会員登録はありません。身分証番号・病歴・決済情報は集めません。機密情報を送らないでください。その種のフォームもありません。医師に聞くリストなどのツールは端末上のみで、内容はアップロードしません。",
   clinicTitle: "診療所情報は掲載しません",
   clinicP1:
     "市民教育サイトです。住所・電話・料金・予約・メッセージ連絡は掲載せず、診療所サイトへのリンクもありません。",
@@ -419,7 +503,7 @@ const ja: Record<Key, string> = {
   simFooter:
     "図示は検査ではありません。散瞳眼底・視野・OCTの代わりにはなりません。ここで異常がなくても病気を否定できません。新しい変化は眼科専門医の早めの診察を。突然の視力低下は救急外来へ。予約・紹介はしません。",
   toolCaveat:
-    "ここで異常がなくても病気を否定できません。図示／自己観察は散瞳眼底・視野・OCTの代わりにはなりません。新しい変化は眼科専門医の早めの診察を。突然の視力低下は救急外来へ。",
+    "本ツールは診断ツールではありません。結果が正常でも異常でも、眼科検査の代わりにはなりません。新たに視力の変化があれば、できるだけ早く受診してください。",
   reviewed: "最終確認",
   contentVer: "コンテンツ版",
   contentUpdated: "更新日",
@@ -438,7 +522,7 @@ const ja: Record<Key, string> = {
     "データはこの端末に残ります（文字サイズ、保存、言語）。App Store / Google Playのネイティブアプリではなく、同じ教育内容の携帯版です。",
   amslerTitle: "アムスラーチャート",
   amslerLead:
-    "中心視力（黄斑）の自己観察用です。画面版は参考であり、散瞳眼底検査の代わりにはなりません。突然のゆがみ、中心暗点、急な視力低下は救急外来へ。",
+    "教育ツール · 中心視力（黄斑）の自己観察用です。画面版は参考であり、散瞳眼底検査の代わりにはなりません。突然のゆがみ、中心暗点、急な視力低下は救急外来へ。",
   amslerDist: "観察距離の目安 約 {n} cm",
   amslerCal: "（カードでサイズ合わせ済み）",
   amslerUncal: "（未校正です。先にサイズを合わせてください）",

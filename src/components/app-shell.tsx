@@ -9,6 +9,7 @@ import { LOCALES } from "@/i18n/locale";
 import { LangSwitch } from "@/components/lang-switch";
 import { CONTENT_UPDATED, CONTENT_VERSION, COPYRIGHT_LINE, PUBLIC_ORIGIN } from "@/lib/site";
 import { LegalBanner } from "@/components/legal-banner";
+import { LegalShortLine } from "@/components/legal-short-line";
 
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -48,13 +49,17 @@ export function AppShell({ children }: { children: ReactNode }) {
       data-site="eyesinfo.org"
       data-copyright={COPYRIGHT_LINE}
     >
+      <a href="#main-content" className="skip-link">
+        {t("skipToContent")}
+      </a>
+
       <header
         className="sticky top-0 z-30 border-b border-line/80 bg-navy text-paper"
         data-locale={locale}
         style={{ paddingTop: "max(0.75rem, env(safe-area-inset-top))" }}
       >
-        <div className="flex items-center justify-between px-4 pb-2">
-          <Link to="/" className="flex items-center gap-2.5 no-underline">
+        <div className="flex items-center justify-between gap-2 px-4 pb-2">
+          <Link to="/" className="flex min-h-11 items-center gap-2.5 no-underline">
             <img
               src="/logo.png"
               alt=""
@@ -66,16 +71,16 @@ export function AppShell({ children }: { children: ReactNode }) {
               <span className="block text-[0.95rem] font-semibold tracking-tight">
                 {t("brand")}
               </span>
-              <span className="block text-[0.68rem] text-paper/70">
+              <span className="block text-[0.68rem] text-paper/80">
                 {t("brandSub")}
               </span>
             </span>
           </Link>
           <Link
             to="/urgent"
-            className="inline-flex h-9 items-center gap-1 rounded-full bg-danger px-3 text-[0.75rem] font-semibold text-paper no-underline"
+            className="inline-flex min-h-11 items-center gap-1 rounded-full bg-danger px-3.5 text-[0.75rem] font-semibold text-paper no-underline"
           >
-            <Phone className="size-3.5" strokeWidth={2.2} />
+            <Phone className="size-3.5" strokeWidth={2.2} aria-hidden />
             {t("urgent")}
           </Link>
         </div>
@@ -84,27 +89,42 @@ export function AppShell({ children }: { children: ReactNode }) {
         </div>
       </header>
 
-      <main className="flex-1 pb-24">
+      <main id="main-content" className="flex-1 pb-24" tabIndex={-1}>
+        <LegalShortLine />
         {children}
         <div className="mt-8">
           <LegalBanner />
         </div>
-        <p className="px-4 pb-5 pt-4 text-center text-[0.7rem] leading-relaxed text-faint">
-          {t("contentVer")} {CONTENT_VERSION}
-          <span aria-hidden="true"> · </span>
-          {t("contentUpdated")} {CONTENT_UPDATED}
-          <span className="mt-1 block">
+        <footer className="px-4 pb-5 pt-4 text-center text-[0.7rem] leading-relaxed text-muted">
+          <p>
+            {t("contentVer")} {CONTENT_VERSION}
+            <span aria-hidden="true"> · </span>
+            {t("contentUpdated")} {CONTENT_UPDATED}
+          </p>
+          <p className="mt-1">
             {t("copyFoot")}
             <span aria-hidden="true"> · </span>
-            <a href={PUBLIC_ORIGIN} className="text-faint no-underline">
+            <a href={PUBLIC_ORIGIN} className="text-muted underline-offset-2 hover:underline">
               eyesinfo.org
             </a>
-          </span>
-        </p>
+          </p>
+          <p className="mt-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+            <Link to="/legal" className="text-navy underline">
+              {t("legalLink")}
+            </Link>
+            <Link to="/privacy" className="text-navy underline">
+              {t("privacyLink")}
+            </Link>
+            <Link to="/accessibility" className="text-navy underline">
+              {t("a11yLink")}
+            </Link>
+          </p>
+        </footer>
       </main>
 
       <nav
         className="fixed inset-x-0 bottom-0 z-30 mx-auto max-w-lg border-t border-line bg-card/95 backdrop-blur-md"
+        aria-label={t("navMain")}
         style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       >
         <ul className="grid grid-cols-4">
@@ -116,11 +136,11 @@ export function AppShell({ children }: { children: ReactNode }) {
                 <Link
                   to={tab.to}
                   className={cn(
-                    "flex h-14 flex-col items-center justify-center gap-0.5 text-[0.7rem] no-underline",
+                    "flex min-h-14 flex-col items-center justify-center gap-0.5 text-[0.7rem] no-underline",
                     active ? "font-semibold text-navy" : "text-muted",
                   )}
                 >
-                  <Icon className="size-5" strokeWidth={active ? 2.4 : 1.8} />
+                  <Icon className="size-5" strokeWidth={active ? 2.4 : 1.8} aria-hidden />
                   {tab.label}
                 </Link>
               </li>

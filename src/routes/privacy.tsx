@@ -9,10 +9,19 @@ function PrivacyPage() {
     <div className="px-4 pt-5 pb-8">
       <h1 className="text-[1.35rem] font-semibold text-navy">{t("privacyTitle")}</h1>
       <p className="mt-3 text-[0.92rem] leading-relaxed">{legal.privacy}</p>
-      <p className="mt-3 text-[0.92rem] leading-relaxed text-muted">{t("privacyP2")}</p>
-      <p className="mt-6 text-[0.8rem]">
+      <section className="mt-5 space-y-3 text-[0.92rem] leading-relaxed">
+        <div>
+          <h2 className="font-semibold text-navy">{t("privacyCap486H")}</h2>
+          <p className="mt-1 text-muted">{t("privacyCap486")}</p>
+        </div>
+        <p className="text-muted">{t("privacyP2")}</p>
+      </section>
+      <p className="mt-6 flex flex-wrap gap-x-3 gap-y-1 text-[0.8rem]">
         <Link to="/legal" className="text-navy underline">
           {t("legalLink")}
+        </Link>
+        <Link to="/accessibility" className="text-navy underline">
+          {t("a11yLink")}
         </Link>
       </p>
     </div>

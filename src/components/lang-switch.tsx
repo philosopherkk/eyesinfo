@@ -16,10 +16,10 @@ export function LangSwitch({ compact }: { compact?: boolean }) {
           type="button"
           onClick={() => setLocale(l.id)}
           className={cn(
-            "h-8 min-w-8 rounded-full px-2 text-[0.72rem] font-semibold",
+            "inline-flex min-h-11 min-w-11 items-center justify-center rounded-full px-2.5 text-[0.72rem] font-semibold",
             locale === l.id
               ? "bg-paper text-navy"
-              : "bg-navy-2/40 text-paper/85",
+              : "bg-navy-2/40 text-paper/90",
           )}
           aria-pressed={locale === l.id}
         >

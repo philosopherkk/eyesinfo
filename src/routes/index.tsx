@@ -52,7 +52,7 @@ function Home() {
           <FontControl />
           <Link
             to="/install"
-            className="inline-flex h-10 items-center gap-1.5 rounded-full bg-navy px-3.5 text-[0.8rem] font-semibold text-paper no-underline"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-navy px-3.5 text-[0.8rem] font-semibold text-paper no-underline"
           >
             <Download className="size-4" />
             {t("install")}
@@ -136,10 +136,17 @@ function Home() {
         </div>
       </section>
 
-      <p className="mx-4 mt-6 mb-4 text-[0.75rem] leading-relaxed text-faint">
-        {t("homeFoot")}{" "}
+      <p className="mx-4 mt-6 mb-4 text-[0.75rem] leading-relaxed text-muted">
         <Link to="/legal" className="text-navy underline">
           {t("legalLink")}
+        </Link>
+        <span aria-hidden="true"> · </span>
+        <Link to="/privacy" className="text-navy underline">
+          {t("privacyLink")}
+        </Link>
+        <span aria-hidden="true"> · </span>
+        <Link to="/accessibility" className="text-navy underline">
+          {t("a11yLink")}
         </Link>
       </p>
     </div>
