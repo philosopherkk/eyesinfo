@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/i18n";
 
-const SITS = [
+const SITS_TC = [
   {
     id: "cat",
     title: "白內障諮詢",
@@ -27,14 +27,14 @@ const SITS = [
     ],
   },
   {
-    id: "inj",
-    title: "玻璃體內注射",
+    id: "mac",
+    title: "黃斑病",
     qs: [
-      "今次注射係邊一類已註冊藥物？（不用在網上對商品名）",
-      "之後幾耐覆 OCT？",
-      "如果打針後眼痛加劇要去邊？",
-      "治療目標是維持定改善視力？",
-      "有無眼內炎的警號要記？",
+      "今次眼底／OCT 同上次比，黃斑有冇新滲漏、出血或萎縮？",
+      "之後幾耐覆 OCT 或散瞳眼底？",
+      "新出現視物變形、中央暗點或視力急降，要點處理？",
+      "治療目標是維持定改善視力？有邊啲處理類別醫生或會討論？",
+      "戒煙、血壓血脂同日常自查（例如阿姆斯勒方格）要點做？",
     ],
   },
   {
@@ -50,20 +50,127 @@ const SITS = [
   },
 ] as const;
 
+const SITS_EN = [
+  {
+    id: "cat",
+    title: "Cataract consultation",
+    qs: [
+      "Is cataract affecting driving or reading now?",
+      "Is the target focus distance for distance, near, or something else?",
+      "Is corneal astigmatism enough to discuss a toric lens?",
+      "Are the macula and optic nerve suitable for multifocal or EDOF designs?",
+      "Is overnight stay needed after surgery? Which hospital setting?",
+      "How is posterior capsule opacification different from a “returning cataract”?",
+    ],
+  },
+  {
+    id: "gl",
+    title: "Glaucoma follow-up",
+    qs: [
+      "What is my target eye pressure?",
+      "Compared with last time, is the field / OCT worse?",
+      "Any missed drops or side effects?",
+      "When should laser or surgery be discussed?",
+      "Could dilation or steroids affect my pressure?",
+    ],
+  },
+  {
+    id: "mac",
+    title: "Macular disease",
+    qs: [
+      "Compared with last time, does the fundus / OCT show new leakage, bleeding or atrophy at the macula?",
+      "How soon is the next OCT or dilated fundus exam?",
+      "What should I do if new distortion, a central dark patch or a sudden vision drop appears?",
+      "Is the treatment goal to maintain or improve vision? Which classes of options might be discussed?",
+      "What about stopping smoking, blood pressure and lipids, and home checks (for example an Amsler grid)?",
+    ],
+  },
+  {
+    id: "kid",
+    title: "Childhood myopia",
+    qs: [
+      "How much did axial length and refractive error change in six months?",
+      "Is cycloplegic refraction needed?",
+      "How can outdoor time and near-work habits improve?",
+      "If atropine or optical myopia control is discussed, is it prescribed and what side effects need monitoring?",
+      "How often should high myopia have a dilated fundus exam?",
+    ],
+  },
+] as const;
+
+const SITS_JA = [
+  {
+    id: "cat",
+    title: "白内障の相談",
+    qs: [
+      "今の白内障は運転や読書に影響していますか？",
+      "目標の焦点は遠方・近方・その他のどれですか？",
+      "角膜乱視はトーリックレンズを検討する程度ですか？",
+      "黄斑と視神経は多焦点やEDOFに適していますか？",
+      "術後の一晩入院は必要ですか？どの病院設定ですか？",
+      "後嚢混濁と「白内障の再発」はどう違いますか？",
+    ],
+  },
+  {
+    id: "gl",
+    title: "緑内障の再診",
+    qs: [
+      "私の目標眼圧はどのくらいですか？",
+      "前回と比べて視野／OCTは悪化していますか？",
+      "点眼の飲み忘れや副作用はありますか？",
+      "レーザーや手術はいつ議論すべきですか？",
+      "散瞳やステロイドは眼圧に影響しますか？",
+    ],
+  },
+  {
+    id: "mac",
+    title: "黄斑疾患",
+    qs: [
+      "前回と比べて眼底／OCTで黄斑に新しい滲出・出血・萎縮はありますか？",
+      "次のOCTまたは散瞳眼底はいつですか？",
+      "新たにゆがみ・中心暗点・急な視力低下が出たらどうすればよいですか？",
+      "治療目標は維持ですか改善ですか？医師が話し合うことのある選択肢の種類は？",
+      "禁煙、血圧・脂質、日常の自己観察（例：アムスラーチャート）はどうすればよいですか？",
+    ],
+  },
+  {
+    id: "kid",
+    title: "子どもの近視",
+    qs: [
+      "半年で眼軸と度数はどれくらい変わりましたか？",
+      "散瞳検眼は必要ですか？",
+      "屋外時間と近見習慣はどう改善できますか？",
+      "アトロピンや光学的近視抑制を話す場合、処方ですか、監視すべき副作用は？",
+      "強度近視はどれくらいの間隔で散瞳眼底が必要ですか？",
+    ],
+  },
+] as const;
+
 export function AskDoctor() {
+  const { locale, tx } = useI18n();
   const [on, setOn] = useState<string[]>(["cat"]);
-  const list = useMemo(
-    () => SITS.filter((s) => on.includes(s.id)),
-    [on],
-  );
+  const sits = useMemo(() => {
+    if (locale === "en") return SITS_EN;
+    if (locale === "ja") return SITS_JA;
+    return SITS_TC.map((s) => ({
+      id: s.id,
+      title: tx(s.title),
+      qs: s.qs.map((q) => tx(q)),
+    }));
+  }, [locale, tx]);
+  const list = useMemo(() => sits.filter((s) => on.includes(s.id)), [on, sits]);
 
   return (
     <div>
       <p className="text-[0.88rem] leading-relaxed text-muted">
-        勾選情況，列印或抄低帶去你自己的醫生。這不是掛號表，本站亦不作轉介。
+        {locale === "en"
+          ? "Tick the situations that apply, then print or copy the list for your own doctor. This is not a booking form and this site does not refer."
+          : locale === "ja"
+            ? "当てはまる状況にチェックし、印刷するか控えてご自身の医師へ。予約表ではなく、紹介も行いません。"
+            : tx("勾選情況，列印或抄低帶去你自己的醫生。這不是掛號表，本站亦不作轉介。")}
       </p>
       <div className="mt-3 grid gap-2">
-        {SITS.map((s) => (
+        {sits.map((s) => (
           <button
             key={s.id}
             type="button"
@@ -83,7 +190,13 @@ export function AskDoctor() {
       </div>
       <div id="ask-print" className="mt-5 space-y-4">
         {list.length === 0 ? (
-          <p className="text-muted">請至少選一項。</p>
+          <p className="text-muted">
+            {locale === "en"
+              ? "Please choose at least one."
+              : locale === "ja"
+                ? "少なくとも1つ選んでください。"
+                : tx("請至少選一項。")}
+          </p>
         ) : (
           list.map((s) => (
             <section key={s.id}>
@@ -102,7 +215,7 @@ export function AskDoctor() {
         onClick={() => window.print()}
         className="mt-4 inline-flex h-12 w-full items-center justify-center rounded-xl bg-navy font-semibold text-paper"
       >
-        列印清單
+        {locale === "en" ? "Print list" : locale === "ja" ? "リストを印刷" : tx("列印清單")}
       </button>
     </div>
   );
