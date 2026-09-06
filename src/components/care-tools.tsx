@@ -34,7 +34,7 @@ export function DropTrainer() {
   return (
     <div>
       <p className="text-[0.88rem] leading-relaxed text-muted">
-        青光眼同乾眼最常「點錯」。呢度無品牌、無藥名。步驟只係示意，實際跟該支藥說明書同醫生示範。此工具結果正常不能排除眼疾。
+        青光眼同乾眼最常「滴得唔好」。呢度無品牌、無藥名。步驟只係示意，實際跟該支藥說明書同醫生示範。此工具結果正常不能排除眼疾。
       </p>
       <p className="mt-4 text-[0.75rem] font-semibold text-steel">
         步驟 {i + 1} / {DROP_STEPS.length}
@@ -81,7 +81,7 @@ export function DropTrainer() {
         params={{ topicId: "t-drops" }}
         className="mt-4 inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy no-underline"
       >
-        點藥專題
+        滴藥水專題
       </Link>
     </div>
   );
