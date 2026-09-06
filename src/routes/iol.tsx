@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { ArrowLeft, Moon, Sun } from "lucide-react";
 import { IolScene } from "@/components/iol-scene";
-import { LegalBanner } from "@/components/legal-banner";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { useI18n } from "@/i18n";
 import { cn } from "@/lib/utils";
@@ -339,7 +338,6 @@ function IolPage() {
           示意／自我監察不能代替散瞳眼底、視野或光學相干斷層掃描（OCT）。此工具結果正常不能排除眼疾。不是術後保證。本站不提供預約或轉介。
         </p>
         <EditorialFooter />
-        <LegalBanner compact />
       </div>
     </div>
   );

@@ -4,7 +4,6 @@ import { CATEGORIES, TOPICS } from "@/data/topics";
 import { TOOLS } from "@/data/tools";
 import { FontControl } from "@/components/font-control";
 import { TopicRow } from "@/components/topic-row";
-import { LegalBanner } from "@/components/legal-banner";
 import { EyeAnatomyViewer } from "@/components/eye-anatomy-viewer";
 import { useI18n, TOOL_TEXT } from "@/i18n";
 import type { UiKey } from "@/i18n/ui";
@@ -93,8 +92,6 @@ function Home() {
           {t("allTools")}
         </Link>
       </section>
-
-      <LegalBanner />
 
       <section className="px-4 pb-2">
         <h2 className="mb-2 text-[0.8rem] font-semibold text-muted">

@@ -9,7 +9,6 @@ import {
   Monitor,
 } from "lucide-react";
 import { AmslerGrid, type AmslerFinding } from "@/components/amsler-grid";
-import { LegalBanner } from "@/components/legal-banner";
 import { SimDisclaimer } from "@/components/sim-disclaimer";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { usePrefs, type AmslerResult } from "@/lib/prefs";
@@ -338,7 +337,6 @@ function AmslerPage() {
       <div className="px-4">
         <SimDisclaimer />
         <EditorialFooter />
-        <LegalBanner compact />
       </div>
     </div>
   );
