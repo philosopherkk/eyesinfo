@@ -7,7 +7,6 @@ import { usePrefs } from "@/lib/prefs";
 import { useI18n } from "@/i18n";
 import { LOCALES } from "@/i18n/locale";
 import { LangSwitch } from "@/components/lang-switch";
-import { HeaderSearch } from "@/components/header-search";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CONTENT_UPDATED, CONTENT_VERSION, COPYRIGHT_LINE, PUBLIC_ORIGIN } from "@/lib/site";
 import { LegalBanner } from "@/components/legal-banner";
@@ -86,7 +85,6 @@ export function AppShell({ children }: { children: ReactNode }) {
             {t("urgent")}
           </Link>
         </div>
-        <HeaderSearch />
         <div className="flex justify-end px-4 pb-2">
           <LangSwitch compact />
         </div>
