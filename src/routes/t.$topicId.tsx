@@ -4,7 +4,6 @@ import { getTopic, topicEditorial, TOPICS } from "@/data/topics";
 import { TOPIC_TOOLS } from "@/data/tools";
 import { TopicBody } from "@/components/topic-body";
 import { TopicRefs } from "@/components/topic-refs";
-import { LegalBanner } from "@/components/legal-banner";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { usePrefs } from "@/lib/prefs";
 import { useI18n, useLocalizedTopic } from "@/i18n";
@@ -99,7 +98,6 @@ function TopicPage() {
             </div>
           </div>
         ) : null}
-        <LegalBanner compact />
         <EditorialFooter lastReviewed={lastReviewed} reviewer={reviewer} />
       </div>
     </article>

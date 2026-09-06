@@ -2,6 +2,11 @@ import { useId } from "react";
 
 const CELLS = 20;
 
+/** Stroke in viewBox units (scales with chart size). Was 0.045 / 0.08. */
+const STROKE_THIN = 0.12;
+const STROKE_THICK = 0.2;
+const FIXATION_R = 0.34;
+
 export type AmslerFinding = "normal" | "meta" | "central" | "para";
 
 type Props = {
@@ -20,7 +25,9 @@ export function AmslerGrid({ sizePx, inverted, label, finding = "normal" }: Prop
   const sc = finding === "central" ? { cx: 10, cy: 10, r: 3.15 } : { cx: 13.35, cy: 7.55, r: 2.45 };
   const maskId = `amsler-mask-${uid}`;
   const gradId = `amsler-sc-${uid}`;
-  const veil = inverted ? "16,18,22" : "70,76,84";
+  // Soft background-coloured veil: missing/blank region, not a painted black blob.
+  // White chart → off-white hole; black chart → near-black hole.
+  const veil = inverted ? "12,12,12" : "246,244,238";
 
   return (
     <div className="flex flex-col items-center">
@@ -39,13 +46,13 @@ export function AmslerGrid({ sizePx, inverted, label, finding = "normal" }: Prop
         {scotoma ? (
           <defs>
             <radialGradient id={gradId}>
-              <stop offset="0%" stopColor={`rgb(${veil})`} stopOpacity={inverted ? 0.55 : 0.88} />
-              <stop offset="62%" stopColor={`rgb(${veil})`} stopOpacity={inverted ? 0.42 : 0.7} />
+              <stop offset="0%" stopColor={`rgb(${veil})`} stopOpacity={inverted ? 0.98 : 1} />
+              <stop offset="55%" stopColor={`rgb(${veil})`} stopOpacity={inverted ? 0.85 : 0.92} />
               <stop offset="100%" stopColor={`rgb(${veil})`} stopOpacity="0" />
             </radialGradient>
             <mask id={maskId}>
               <rect width={CELLS} height={CELLS} fill="white" />
-              <circle cx={sc.cx} cy={sc.cy} r={sc.r * 0.92} fill="black" />
+              <circle cx={sc.cx} cy={sc.cy} r={sc.r * 0.95} fill="black" />
             </mask>
           </defs>
         ) : null}
@@ -59,8 +66,7 @@ export function AmslerGrid({ sizePx, inverted, label, finding = "normal" }: Prop
                   d={hPath(i)}
                   fill="none"
                   stroke={fg}
-                  strokeWidth={i === 0 || i === CELLS || i === 10 ? 0.08 : 0.045}
-                  vectorEffect="non-scaling-stroke"
+                  strokeWidth={i === 0 || i === CELLS || i === 10 ? STROKE_THICK : STROKE_THIN}
                 />
               ))}
               {lines.map((i) => (
@@ -69,8 +75,7 @@ export function AmslerGrid({ sizePx, inverted, label, finding = "normal" }: Prop
                   d={vPath(i)}
                   fill="none"
                   stroke={fg}
-                  strokeWidth={i === 0 || i === CELLS || i === 10 ? 0.08 : 0.045}
-                  vectorEffect="non-scaling-stroke"
+                  strokeWidth={i === 0 || i === CELLS || i === 10 ? STROKE_THICK : STROKE_THIN}
                 />
               ))}
             </>
@@ -84,8 +89,7 @@ export function AmslerGrid({ sizePx, inverted, label, finding = "normal" }: Prop
                   x2={i}
                   y2={CELLS}
                   stroke={fg}
-                  strokeWidth={i === 0 || i === CELLS || i === 10 ? 0.08 : 0.045}
-                  vectorEffect="non-scaling-stroke"
+                  strokeWidth={i === 0 || i === CELLS || i === 10 ? STROKE_THICK : STROKE_THIN}
                 />
               ))}
               {lines.map((i) => (
@@ -96,16 +100,15 @@ export function AmslerGrid({ sizePx, inverted, label, finding = "normal" }: Prop
                   x2={CELLS}
                   y2={i}
                   stroke={fg}
-                  strokeWidth={i === 0 || i === CELLS || i === 10 ? 0.08 : 0.045}
-                  vectorEffect="non-scaling-stroke"
+                  strokeWidth={i === 0 || i === CELLS || i === 10 ? STROKE_THICK : STROKE_THIN}
                 />
               ))}
             </>
           )}
-          {finding !== "central" ? <circle cx={10} cy={10} r={0.28} fill={fg} /> : null}
+          {finding !== "central" ? <circle cx={10} cy={10} r={FIXATION_R} fill={fg} /> : null}
         </g>
 
-        {scotoma ? <circle cx={sc.cx} cy={sc.cy} r={sc.r * 1.15} fill={`url(#${gradId})`} /> : null}
+        {scotoma ? <circle cx={sc.cx} cy={sc.cy} r={sc.r * 1.12} fill={`url(#${gradId})`} /> : null}
       </svg>
     </div>
   );
@@ -142,8 +145,8 @@ function vPath(x: number) {
 function ariaFor(finding: AmslerFinding) {
   if (finding === "meta") return "阿姆斯勒方格示意：視物變形，直線變彎";
   if (finding === "central") return "阿姆斯勒方格示意：中央暗點，正中間缺了一塊";
-  if (finding === "para") return "阿姆斯勒方格示意：旁中央暗點，中央圓點仍在、旁邊有暗區";
+  if (finding === "para") return "阿姆斯勒方格示意：旁中央暗點，中央圓點仍在、旁邊缺格";
   return "阿姆斯勒方格：二十乘二十直線格，中央有注視圓點";
 }
 
-export { CELLS };
+export { CELLS, STROKE_THIN, STROKE_THICK };

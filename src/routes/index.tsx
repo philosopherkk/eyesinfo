@@ -4,7 +4,7 @@ import { CATEGORIES, TOPICS } from "@/data/topics";
 import { TOOLS } from "@/data/tools";
 import { FontControl } from "@/components/font-control";
 import { TopicRow } from "@/components/topic-row";
-import { LegalBanner } from "@/components/legal-banner";
+import { EyeAnatomyViewer } from "@/components/eye-anatomy-viewer";
 import { useI18n, TOOL_TEXT } from "@/i18n";
 import type { UiKey } from "@/i18n/ui";
 import { CONTENT_UPDATED, CONTENT_VERSION } from "@/lib/site";
@@ -93,13 +93,19 @@ function Home() {
         </Link>
       </section>
 
-      <LegalBanner />
-
       <section className="px-4 pb-2">
         <h2 className="mb-2 text-[0.8rem] font-semibold text-muted">
           {t("byAnatomy")}
         </h2>
-        <div className="grid gap-2">
+        <EyeAnatomyViewer />
+        <Link
+          to="/tools/$toolId"
+          params={{ toolId: "map" }}
+          className="mt-3 inline-flex h-11 w-full items-center justify-center rounded-xl border border-line bg-card text-[0.85rem] font-semibold text-navy no-underline"
+        >
+          {t("homeAnatomyCta")}
+        </Link>
+        <div className="mt-3 grid gap-2">
           {CATEGORIES.map((cat) => (
             <Link
               key={cat.id}

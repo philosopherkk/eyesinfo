@@ -9,7 +9,6 @@ import {
   Monitor,
 } from "lucide-react";
 import { AmslerGrid, type AmslerFinding } from "@/components/amsler-grid";
-import { LegalBanner } from "@/components/legal-banner";
 import { SimDisclaimer } from "@/components/sim-disclaimer";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { usePrefs, type AmslerResult } from "@/lib/prefs";
@@ -29,8 +28,9 @@ function distanceCm(gridMm: number) {
 
 function AmslerPage() {
   const boxRef = useRef<HTMLDivElement>(null);
-  const { t, tx } = useI18n();
+  const { t } = useI18n();
   const [boxW, setBoxW] = useState(320);
+  const [vp, setVp] = useState({ w: 360, h: 640 });
   const [inverted, setInverted] = useState(true);
   const [eye, setEye] = useState<"left" | "right">("right");
   const [testing, setTesting] = useState(false);
@@ -40,18 +40,54 @@ function AmslerPage() {
 
   useEffect(() => {
     const el = boxRef.current;
-    if (!el) return;
+    if (!el || testing) return;
     const apply = () => setBoxW(el.clientWidth);
     apply();
     const ro = new ResizeObserver(apply);
     ro.observe(el);
     return () => ro.disconnect();
+  }, [testing]);
+
+  useEffect(() => {
+    const apply = () => {
+      const vv = window.visualViewport;
+      setVp({
+        w: Math.round(vv?.width ?? window.innerWidth),
+        h: Math.round(vv?.height ?? window.innerHeight),
+      });
+    };
+    apply();
+    window.addEventListener("resize", apply);
+    window.visualViewport?.addEventListener("resize", apply);
+    window.visualViewport?.addEventListener("scroll", apply);
+    return () => {
+      window.removeEventListener("resize", apply);
+      window.visualViewport?.removeEventListener("resize", apply);
+      window.visualViewport?.removeEventListener("scroll", apply);
+    };
   }, []);
 
+  useEffect(() => {
+    if (!testing) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [testing]);
+
   const calibrated = pxPerMm != null && pxPerMm > 0;
-  const idealPx = calibrated ? GRID_MM * pxPerMm : Math.min(boxW, 360);
-  const gridPx = Math.max(180, Math.min(boxW, idealPx));
-  const shownMm = calibrated ? gridPx / pxPerMm : GRID_MM * (gridPx / idealPx);
+  const browseCap = Math.min(boxW, 360);
+  const idealPx = calibrated ? GRID_MM * pxPerMm : browseCap;
+  // Focus mode: size from the real viewport and cover shell chrome so the
+  // grid stays on-screen and large enough to use (old layout kept grid under
+  // sticky header / fixed tab bar, often scrolled away or tiny).
+  const testFit = Math.max(200, Math.min(vp.w - 32, vp.h - 210));
+  const browseGridPx = Math.max(180, Math.min(boxW, idealPx));
+  const testGridPx = Math.max(220, Math.min(testFit, calibrated ? idealPx : testFit));
+  const gridPx = testing ? testGridPx : browseGridPx;
+  const sizeRef = testing ? testFit : Math.max(idealPx, 1);
+  const shownMm = calibrated ? gridPx / pxPerMm : GRID_MM * (gridPx / sizeRef);
   const holdCm = distanceCm(shownMm);
 
   function saveCalibration() {
@@ -59,44 +95,55 @@ function AmslerPage() {
   }
 
   if (testing) {
+    const onDark = inverted;
+    const fg = onDark ? "text-paper" : "text-navy";
+    const muted = onDark ? "text-paper/80" : "text-navy/75";
+    const ghostBtn = onDark
+      ? "border border-paper/35 text-paper"
+      : "border border-navy/30 text-navy";
     return (
-      <div className="flex min-h-[70vh] flex-col bg-navy px-3 pb-8 pt-3">
-        <div className="flex items-center justify-between gap-2">
+      <div
+        className="fixed inset-0 z-50 flex flex-col px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-[max(0.75rem,env(safe-area-inset-top))]"
+        style={{
+          background: inverted ? "var(--color-amsler-dark)" : "var(--color-amsler-light)",
+        }}
+        role="dialog"
+        aria-modal="true"
+        aria-label="單眼阿姆斯勒檢查"
+      >
+        <div className="flex shrink-0 items-center justify-between gap-2">
           <button
             type="button"
             onClick={() => setTesting(false)}
-            className="inline-flex h-11 items-center rounded-full bg-paper px-4 text-[0.85rem] font-semibold text-navy"
+            className="inline-flex h-11 items-center rounded-full bg-navy px-4 text-[0.85rem] font-semibold text-paper"
           >
             結束檢查
           </button>
           <button
             type="button"
             onClick={() => setInverted((v) => !v)}
-            className="inline-flex h-11 items-center gap-1 rounded-full border border-paper/30 px-3 text-[0.8rem] font-semibold text-paper"
+            className={`inline-flex h-11 items-center gap-1 rounded-full px-3 text-[0.8rem] font-semibold ${ghostBtn}`}
           >
             <Contrast className="size-4" />
             黑白對調
           </button>
         </div>
-        <p className="mt-4 text-center text-[1.05rem] font-semibold text-paper">
+        <p className={`mt-3 shrink-0 text-center text-[1.05rem] font-semibold ${fg}`}>
           用手掌遮蓋
           {eye === "right" ? "左眼" : "右眼"}
           ，注視中央圓點
         </p>
-        <p className="mt-1 text-center text-[0.8rem] text-paper/80">
+        <p className={`mt-1 shrink-0 text-center text-[0.8rem] ${muted}`}>
           螢幕置於眼前約 {holdCm} 厘米 · 戴閱讀眼鏡
         </p>
-        <div className="mt-4 flex flex-1 flex-col items-center justify-center">
-          <AmslerGrid
-            sizePx={Math.min(gridPx, boxW)}
-            inverted={inverted}
-          />
+        <div className="flex min-h-0 flex-1 flex-col items-center justify-center py-2">
+          <AmslerGrid sizePx={testGridPx} inverted={inverted} />
         </div>
-        <div className="mx-auto mt-4 grid w-full max-w-sm grid-cols-2 gap-2">
+        <div className="mx-auto grid w-full max-w-sm shrink-0 grid-cols-2 gap-2">
           <button
             type="button"
             onClick={() => setEye((e) => (e === "right" ? "left" : "right"))}
-            className="inline-flex h-12 items-center justify-center rounded-xl bg-paper text-[0.9rem] font-semibold text-navy"
+            className="inline-flex h-12 items-center justify-center rounded-xl bg-navy text-[0.9rem] font-semibold text-paper"
           >
             換另一眼
           </button>
@@ -266,7 +313,7 @@ function AmslerPage() {
         <ul className="mt-2 list-disc space-y-1.5 pl-5 text-[0.9rem] leading-relaxed">
           <li>直線變彎、扭曲（視物變形，metamorphopsia）</li>
           <li>正中間缺一塊或圓點消失（中央暗點，central scotoma）</li>
-          <li>圓點仍在、旁邊有暗區或缺格（旁中央暗點，paracentral scotoma）</li>
+          <li>圓點仍在、旁邊缺格或看不見一塊（旁中央暗點，paracentral scotoma）</li>
           <li>與昨天相比，新出現的變形（建議固定每週同一時間自查）</li>
         </ul>
         <p className="mt-3 flex items-start gap-2 rounded-xl bg-danger-bg px-3 py-3 text-[0.88rem] leading-relaxed text-danger">
@@ -290,7 +337,6 @@ function AmslerPage() {
       <div className="px-4">
         <SimDisclaimer />
         <EditorialFooter />
-        <LegalBanner compact />
       </div>
     </div>
   );

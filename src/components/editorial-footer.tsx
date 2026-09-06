@@ -41,7 +41,7 @@ export function EditorialFooter({
   lastReviewed?: string;
   reviewer?: TopicReviewer;
 }) {
-  const { t, legal, locale } = useI18n();
+  const { t, locale } = useI18n();
   const ed = editorialBits(locale);
   const reviewed = formatReviewed(lastReviewed, locale, ed.reviewed);
   const isDefault =
@@ -54,9 +54,6 @@ export function EditorialFooter({
   return (
     <aside className="mt-6 space-y-2 text-[0.75rem] leading-relaxed text-faint">
       {toolCaveat ? <p>{t("toolCaveat")}</p> : null}
-      <p>{legal.noServices}</p>
-      <p>{legal.independent}</p>
-      <p>{legal.notSubstitute}</p>
       <p>
         {t("reviewed")}：{reviewed} · {name} · {title}（{ed.register}）
       </p>

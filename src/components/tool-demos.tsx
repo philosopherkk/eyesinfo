@@ -280,16 +280,65 @@ export function HaloDemo() {
     { id: "mf" as const, title: locale === "en" ? "Trifocal / MF" : locale === "ja" ? "3焦点／多焦点" : tx("三焦點／多焦") },
   ];
   const [k, setK] = useState<(typeof kinds)[number]["id"]>("mono");
+  const [showHalo, setShowHalo] = useState(true);
+  const [showStarburst, setShowStarburst] = useState(true);
+  const intro =
+    locale === "en"
+      ? "Halo = soft ring(s) around lamps. Starburst = spikes from the same lights. Intensity rises monofocal → EDOF → trifocal/MF as a teaching ladder only — pupil and design matter. Not a post-op promise."
+      : locale === "ja"
+        ? "ハロー＝光源まわりのやわらかい環。スターバースト＝同じ光源からの放射状の筋。単焦点→EDOF→3焦点／多焦点で強さだけ示します。瞳孔と光学設計で変わり、術後保証ではありません。"
+        : tx("光暈＝燈外一圈／多圈柔邊；星芒＝同一光源向外的放射線。單焦→延伸景深→三焦／多焦只調強度示意，實際因瞳孔與光學設計而異，唔係術後保證。");
+  const haloLabel = locale === "en" ? "Halo" : locale === "ja" ? "ハロー" : tx("光暈");
+  const starLabel = locale === "en" ? "Starburst" : locale === "ja" ? "スターバースト" : tx("星芒");
+
   return (
     <div>
-      <p className="text-[0.88rem] leading-relaxed text-muted">
-        {tx("光暈畫在照片裡真正的車燈與街燈上。因晶體種類及瞳孔而異，不是術後保證。")}
-      </p>
+      <p className="text-[0.88rem] leading-relaxed text-muted">{intro}</p>
       <div className="relative mt-4 overflow-hidden rounded-xl">
         <img src="/iol/night.jpg" alt="" className="aspect-video w-full object-cover" />
-        <HaloOverlay kind={k} />
+        <HaloOverlay kind={k} showHalo={showHalo} showStarburst={showStarburst} />
+        <div className="pointer-events-none absolute left-2 top-2 flex flex-col gap-1">
+          {showHalo ? (
+            <span className="rounded bg-navy/75 px-2 py-0.5 text-[0.68rem] font-semibold text-paper">
+              {haloLabel}
+            </span>
+          ) : null}
+          {showStarburst ? (
+            <span className="rounded bg-navy/75 px-2 py-0.5 text-[0.68rem] font-semibold text-paper">
+              {starLabel}
+            </span>
+          ) : null}
+        </div>
       </div>
-      <div className="mt-3 grid grid-cols-3 gap-2">
+      <p className="mt-3 text-[0.75rem] font-semibold text-steel">
+        {locale === "en" ? "Show on this night scene" : locale === "ja" ? "この夜景で表示" : tx("呢個夜景顯示")}
+      </p>
+      <div className="mt-1.5 grid grid-cols-2 gap-2">
+        <button
+          type="button"
+          onClick={() => setShowHalo((v) => !v)}
+          className={cn(
+            "min-h-11 rounded-xl border px-2 text-[0.78rem] font-semibold",
+            showHalo ? "border-navy bg-navy text-paper" : "border-line bg-card text-navy",
+          )}
+        >
+          {haloLabel}
+        </button>
+        <button
+          type="button"
+          onClick={() => setShowStarburst((v) => !v)}
+          className={cn(
+            "min-h-11 rounded-xl border px-2 text-[0.78rem] font-semibold",
+            showStarburst ? "border-navy bg-navy text-paper" : "border-line bg-card text-navy",
+          )}
+        >
+          {starLabel}
+        </button>
+      </div>
+      <p className="mt-3 text-[0.75rem] font-semibold text-steel">
+        {locale === "en" ? "Intensity ladder (illustration)" : locale === "ja" ? "強さの段階（図示）" : tx("強度示意（唔係術後保證）")}
+      </p>
+      <div className="mt-1.5 grid grid-cols-3 gap-2">
         {kinds.map((item) => (
           <button
             key={item.id}

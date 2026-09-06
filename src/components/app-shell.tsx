@@ -8,6 +8,7 @@ import { useI18n } from "@/i18n";
 import { LOCALES } from "@/i18n/locale";
 import { LangSwitch } from "@/components/lang-switch";
 import { CONTENT_UPDATED, CONTENT_VERSION, COPYRIGHT_LINE, PUBLIC_ORIGIN } from "@/lib/site";
+import { LegalBanner } from "@/components/legal-banner";
 
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -85,7 +86,10 @@ export function AppShell({ children }: { children: ReactNode }) {
 
       <main className="flex-1 pb-24">
         {children}
-        <p className="px-4 pb-5 pt-6 text-center text-[0.7rem] leading-relaxed text-faint">
+        <div className="mt-8">
+          <LegalBanner />
+        </div>
+        <p className="px-4 pb-5 pt-4 text-center text-[0.7rem] leading-relaxed text-faint">
           {t("contentVer")} {CONTENT_VERSION}
           <span aria-hidden="true"> · </span>
           {t("contentUpdated")} {CONTENT_UPDATED}
