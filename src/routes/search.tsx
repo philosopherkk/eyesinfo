@@ -1,55 +1,76 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ChevronRight, Search as SearchIcon } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { TOPICS } from "@/data/topics";
 import { TOOLS } from "@/data/tools";
 import { TopicRow } from "@/components/topic-row";
+import { EduLink } from "@/components/edu-link";
+import { searchSite } from "@/lib/site-search";
 import { useI18n, TOOL_TEXT, localizeTopic } from "@/i18n";
+import { z } from "zod";
 
-export const Route = createFileRoute("/search")({ component: SearchPage });
+const searchSchema = z.object({
+  q: z.string().optional().catch(undefined),
+});
+
+export const Route = createFileRoute("/search")({
+  validateSearch: searchSchema,
+  component: SearchPage,
+});
 
 function SearchPage() {
-  const [q, setQ] = useState("");
+  const { q: qParam } = Route.useSearch();
+  const [q, setQ] = useState(qParam ?? "");
   const { t, locale } = useI18n();
+
+  useEffect(() => {
+    if (qParam != null) setQ(qParam);
+  }, [qParam]);
+
   const localized = useMemo(
     () => TOPICS.map((topic) => localizeTopic(topic, locale)),
     [locale],
   );
+
+  const indexed = useMemo(
+    () => (q.trim() ? searchSite(q, locale, t, 40) : []),
+    [q, locale, t],
+  );
+
   const results = useMemo(() => {
     const needle = q.trim().toLowerCase();
     if (!needle) return localized;
+    const fromIndex = new Set(
+      indexed.filter((h) => h.kind === "topic").map((h) => h.href.replace(/^\/t\//, "")),
+    );
     return localized.filter((topic) => {
-      const hay = [
-        topic.title,
-        topic.tag,
-        topic.meta,
-        topic.num,
-        ...topic.blocks.flatMap((b): string[] => {
-          switch (b.type) {
-            case "ul":
-            case "ol":
-              return b.items;
-            case "table":
-              return b.rows.flat();
-            default:
-              return [b.text];
-          }
-        }),
-      ]
+      if (fromIndex.has(topic.id)) return true;
+      const hay = [topic.title, topic.tag, topic.meta, topic.num]
         .join(" ")
         .toLowerCase();
       return hay.includes(needle);
     });
-  }, [q, localized]);
+  }, [q, localized, indexed]);
+
   const toolText = TOOL_TEXT[locale];
   const tools = useMemo(() => {
     const needle = q.trim().toLowerCase();
     if (!needle) return TOOLS;
+    const fromIndex = new Set(
+      indexed
+        .filter((h) => h.kind === "tool")
+        .map((h) => {
+          if (h.href === "/amsler") return "amsler";
+          if (h.href === "/iol") return "iol";
+          return h.href.split("/").pop() ?? "";
+        }),
+    );
     return TOOLS.filter((x) => {
+      if (fromIndex.has(x.id)) return true;
       const loc = toolText[x.id];
       return `${loc.title}${loc.blurb}${loc.canto}${x.id}`.toLowerCase().includes(needle);
     });
-  }, [q, toolText]);
+  }, [q, toolText, indexed]);
 
   return (
     <div className="px-4 pt-5">
@@ -115,10 +136,9 @@ function ToolHit({
   );
   if (href === "/amsler") return <Link to="/amsler" className={cls}>{body}</Link>;
   if (href === "/iol") return <Link to="/iol" className={cls}>{body}</Link>;
-  const id = href.split("/").pop() ?? "map";
   return (
-    <Link to="/tools/$toolId" params={{ toolId: id }} className={cls}>
+    <EduLink href={href} className={cls}>
       {body}
-    </Link>
+    </EduLink>
   );
 }

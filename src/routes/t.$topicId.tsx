@@ -8,6 +8,7 @@ import { EditorialFooter } from "@/components/editorial-footer";
 import { usePrefs } from "@/lib/prefs";
 import { useI18n, useLocalizedTopic } from "@/i18n";
 import type { UiKey } from "@/i18n/ui";
+import { CONTENT_UPDATED, CONTENT_VERSION } from "@/lib/site";
 
 export const Route = createFileRoute("/t/$topicId")({
   component: TopicPage,
@@ -66,6 +67,11 @@ function TopicPage() {
         {topic.meta ? (
           <p className="mt-1 text-[0.85rem] text-muted">{topic.meta}</p>
         ) : null}
+        <p className="mt-2 text-[0.75rem] text-faint">
+          {t("lastUpdated")}：{CONTENT_UPDATED}
+          <span aria-hidden="true"> · </span>
+          {t("contentVer")} {CONTENT_VERSION}
+        </p>
       </header>
       {raw.isAcuteEmergency ? (
         <Link

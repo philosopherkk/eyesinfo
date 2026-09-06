@@ -7,6 +7,8 @@ import { usePrefs } from "@/lib/prefs";
 import { useI18n } from "@/i18n";
 import { LOCALES } from "@/i18n/locale";
 import { LangSwitch } from "@/components/lang-switch";
+import { HeaderSearch } from "@/components/header-search";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CONTENT_UPDATED, CONTENT_VERSION, COPYRIGHT_LINE, PUBLIC_ORIGIN } from "@/lib/site";
 import { LegalBanner } from "@/components/legal-banner";
 import { LegalShortLine } from "@/components/legal-short-line";
@@ -54,7 +56,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       </a>
 
       <header
-        className="sticky top-0 z-30 border-b border-line/80 bg-navy text-paper"
+        className="sticky top-0 z-30 border-b border-line/80 bg-navy text-paper no-print"
         data-locale={locale}
         style={{ paddingTop: "max(0.75rem, env(safe-area-inset-top))" }}
       >
@@ -84,6 +86,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             {t("urgent")}
           </Link>
         </div>
+        <HeaderSearch />
         <div className="flex justify-end px-4 pb-2">
           <LangSwitch compact />
         </div>
@@ -91,11 +94,12 @@ export function AppShell({ children }: { children: ReactNode }) {
 
       <main id="main-content" className="flex-1 pb-24" tabIndex={-1}>
         <LegalShortLine />
+        <Breadcrumbs />
         {children}
-        <div className="mt-8">
+        <div className="mt-8 no-print">
           <LegalBanner />
         </div>
-        <footer className="px-4 pb-5 pt-4 text-center text-[0.7rem] leading-relaxed text-muted">
+        <footer className="px-4 pb-5 pt-4 text-center text-[0.7rem] leading-relaxed text-muted no-print">
           <p>
             {t("contentVer")} {CONTENT_VERSION}
             <span aria-hidden="true"> · </span>
@@ -123,7 +127,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       </main>
 
       <nav
-        className="fixed inset-x-0 bottom-0 z-30 mx-auto max-w-lg border-t border-line bg-card/95 backdrop-blur-md"
+        className="fixed inset-x-0 bottom-0 z-30 mx-auto max-w-lg border-t border-line bg-card/95 backdrop-blur-md no-print"
         aria-label={t("navMain")}
         style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       >

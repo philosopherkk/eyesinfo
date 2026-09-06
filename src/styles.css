@@ -28,6 +28,18 @@
     cursor: pointer;
   }
 
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
   html,
   body,
   #app {
@@ -157,8 +169,12 @@
 @media print {
   header,
   nav,
-  .no-print {
+  .no-print,
+  .skip-link {
     display: none !important;
+  }
+  .print-only {
+    display: block !important;
   }
   main {
     padding: 0 !important;
@@ -173,4 +189,21 @@
     font-size: 9pt;
     color: #003153;
   }
+  /* Amsler: keep grid, instructions, caveats; hide interactive chrome */
+  .amsler-page .amsler-print-keep {
+    break-inside: avoid;
+  }
+  .amsler-page canvas,
+  .amsler-page svg {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  /* Ask-doctor list: focus on questions */
+  .ask-print-area {
+    break-inside: avoid;
+  }
+}
+
+.print-only {
+  display: none;
 }
