@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/i18n";
 
 const SITS = [
   {
@@ -107,25 +108,63 @@ export function AskDoctor() {
   );
 }
 
-const VISIT = [
+const VISIT_BASE = [
   { t: "問症", d: "病歷、藥物、過敏、家族眼疾、糖尿病。" },
   { t: "視力", d: "看遠、看近；有時加針孔。" },
   { t: "眼壓", d: "氣動或滴麻醉後接觸式。一次高不一定是青光眼。" },
   { t: "裂隙燈", d: "看眼瞼、角膜、前房、晶體。" },
   { t: "散瞳等待", d: "藥水放大瞳孔，約 20–40 分鐘。近距離暫時矇、怕光。" },
-  { t: "眼底／OCT", d: "看視神經、黃斑、周邊視網膜。OCT 係光學切片，唔係 X 光。" },
-];
+] as const;
+
+const OCT_TC =
+  "OCT（光學相干斷層掃描）：用近紅外光做「光學切片」，睇視網膜／視神經層層結構——唔係 X 光，亦無電離輻射。醫生用嚟檢查同追蹤黃斑、青光眼視神經等變化，有助睇到早期結構改變。";
+const OCT_EN =
+  "OCT (Optical Coherence Tomography): near-infrared light makes “optical cross-sections” of the retina and optic-nerve layers — not an X-ray, and with no ionizing radiation. Doctors use it to check and monitor macular and glaucomatous optic-nerve structural changes, including early ones.";
+const OCT_JA =
+  "OCT（光干渉断層計）：近赤外光で網膜／視神経の層構造の「光学切片」を撮ります。X線ではなく、電離放射線も使いません。黄斑や緑内障の視神経などの構造変化の確認・経過観察に用い、早期の構造変化の把握に役立ちます。";
 
 export function VisitWalk() {
+  const { locale, tx } = useI18n();
   const [i, setI] = useState(0);
-  const step = VISIT[i];
+  const steps = useMemo(() => {
+    if (locale === "en") {
+      return [
+        { t: "History", d: "Medical history, medicines, allergies, family eye disease, diabetes." },
+        { t: "Vision", d: "Distance and near; sometimes a pinhole." },
+        { t: "Eye pressure", d: "Air-puff or contact after anaesthetic drops. One high reading is not glaucoma." },
+        { t: "Slit lamp", d: "Eyelids, cornea, anterior chamber, lens." },
+        { t: "Dilation wait", d: "Drops enlarge the pupil, about 20–40 minutes. Near work is blurry; light feels harsh." },
+        { t: "Fundus / OCT", d: OCT_EN },
+      ];
+    }
+    if (locale === "ja") {
+      return [
+        { t: "問診", d: "病歴、薬、アレルギー、家族の目の病気、糖尿病。" },
+        { t: "視力", d: "遠く・近く。ピンホールを使うことも。" },
+        { t: "眼圧", d: "非接触または点眼麻酔後の接触式。1回高いだけでは緑内障ではありません。" },
+        { t: "細隙灯", d: "眼瞼、角膜、前房、水晶体。" },
+        { t: "散瞳の待ち時間", d: "点眼で瞳孔が開き、約20～40分。近くがぼやけ、まぶしく感じます。" },
+        { t: "眼底／OCT", d: OCT_JA },
+      ];
+    }
+    return [
+      ...VISIT_BASE.map((s) => ({ t: tx(s.t), d: tx(s.d) })),
+      { t: tx("眼底／OCT"), d: tx(OCT_TC) },
+    ];
+  }, [locale, tx]);
+
+  const step = steps[i];
   return (
     <div>
       <p className="text-[0.88rem] leading-relaxed text-muted">
-        減輕「唔知會做咩」的焦慮。每間診所流程可以略有不同。
+        {locale === "en"
+          ? "To ease “I don’t know what will happen”. Each clinic’s flow can differ slightly."
+          : locale === "ja"
+            ? "「何をするか分からない」不安を少し減らすための流れです。クリニックごとに多少異なります。"
+            : tx("減輕「唔知會做咩」的焦慮。每間診所流程可以略有不同。")}
       </p>
       <p className="mt-4 text-[0.75rem] font-semibold text-steel">
-        {i + 1} / {VISIT.length}
+        {i + 1} / {steps.length}
       </p>
       <h2 className="text-[1.25rem] font-semibold text-navy">{step.t}</h2>
       <p className="mt-2 text-[0.95rem] leading-relaxed">{step.d}</p>
@@ -136,19 +175,23 @@ export function VisitWalk() {
           onClick={() => setI((n) => n - 1)}
           className="h-12 flex-1 rounded-xl border border-line bg-card font-semibold text-navy disabled:opacity-40"
         >
-          上一步
+          {locale === "en" ? "Back" : locale === "ja" ? "前へ" : tx("上一步")}
         </button>
         <button
           type="button"
-          disabled={i === VISIT.length - 1}
+          disabled={i === steps.length - 1}
           onClick={() => setI((n) => n + 1)}
           className="h-12 flex-1 rounded-xl bg-navy font-semibold text-paper disabled:opacity-40"
         >
-          下一步
+          {locale === "en" ? "Next" : locale === "ja" ? "次へ" : tx("下一步")}
         </button>
       </div>
       <p className="mt-5 rounded-xl bg-danger-bg px-3 py-3 text-[0.88rem] leading-relaxed text-danger">
-        散瞳後數小時唔好自己開車，預先安排接送或公共交通。
+        {locale === "en"
+          ? "Do not drive yourself for several hours after dilation — arrange a lift or public transport."
+          : locale === "ja"
+            ? "散瞳後数時間は自分で運転しないでください。送迎または公共交通を手配してください。"
+            : tx("散瞳後數小時唔好自己開車，預先安排接送或公共交通。")}
       </p>
     </div>
   );
