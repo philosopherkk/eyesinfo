@@ -147,8 +147,9 @@ const SITS_JA = [
 ] as const;
 
 export function AskDoctor() {
-  const { locale, tx } = useI18n();
+  const { locale, tx, t } = useI18n();
   const [on, setOn] = useState<string[]>(["cat"]);
+  const [copied, setCopied] = useState(false);
   const sits = useMemo(() => {
     if (locale === "en") return SITS_EN;
     if (locale === "ja") return SITS_JA;
@@ -160,16 +161,52 @@ export function AskDoctor() {
   }, [locale, tx]);
   const list = useMemo(() => sits.filter((s) => on.includes(s.id)), [on, sits]);
 
+  function buildPlainText(): string {
+    const caveat =
+      locale === "en"
+        ? "Education checklist only — not a booking form; this site does not refer."
+        : locale === "ja"
+          ? "教育用チェックリストです。予約表ではなく、紹介もしません。"
+          : "教育用問題清單，不是掛號表；本站不作轉介。";
+    const lines: string[] = [
+      locale === "en"
+        ? "Questions for my ophthalmologist"
+        : locale === "ja"
+          ? "眼科医に聞くこと"
+          : "問醫生清單",
+      caveat,
+      "",
+    ];
+    for (const s of list) {
+      lines.push(s.title);
+      for (const q of s.qs) lines.push(`- ${q}`);
+      lines.push("");
+    }
+    lines.push("— 護眼學堂 公眾教育 https://eyesinfo.org");
+    return lines.join("\n");
+  }
+
+  async function copyNotes() {
+    if (list.length === 0) return;
+    try {
+      await navigator.clipboard.writeText(buildPlainText());
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.alert(t("copyNotesFail"));
+    }
+  }
+
   return (
-    <div>
-      <p className="text-[0.88rem] leading-relaxed text-muted">
+    <div className="ask-tool">
+      <p className="text-[0.88rem] leading-relaxed text-muted no-print">
         {locale === "en"
           ? "Tick the situations that apply, then print or copy the list for your own doctor. This is not a booking form and this site does not refer."
           : locale === "ja"
             ? "当てはまる状況にチェックし、印刷するか控えてご自身の医師へ。予約表ではなく、紹介も行いません。"
             : tx("勾選情況，列印或抄低帶去你自己的醫生。這不是掛號表，本站亦不作轉介。")}
       </p>
-      <div className="mt-3 grid gap-2">
+      <div className="mt-3 grid gap-2 no-print">
         {sits.map((s) => (
           <button
             key={s.id}
@@ -188,7 +225,10 @@ export function AskDoctor() {
           </button>
         ))}
       </div>
-      <div id="ask-print" className="mt-5 space-y-4">
+      <div id="ask-print" className="ask-print-area mt-5 space-y-4">
+        <p className="print-only text-[0.85rem] leading-relaxed text-muted">
+          {t("eduToolCaveat")}
+        </p>
         {list.length === 0 ? (
           <p className="text-muted">
             {locale === "en"
@@ -210,13 +250,24 @@ export function AskDoctor() {
           ))
         )}
       </div>
-      <button
-        type="button"
-        onClick={() => window.print()}
-        className="mt-4 inline-flex h-12 w-full items-center justify-center rounded-xl bg-navy font-semibold text-paper"
-      >
-        {locale === "en" ? "Print list" : locale === "ja" ? "リストを印刷" : tx("列印清單")}
-      </button>
+      <div className="mt-4 grid gap-2 no-print sm:grid-cols-2">
+        <button
+          type="button"
+          onClick={() => void copyNotes()}
+          disabled={list.length === 0}
+          className="inline-flex h-12 w-full items-center justify-center rounded-xl border border-line bg-card font-semibold text-navy disabled:opacity-40"
+        >
+          {copied ? t("copiedNotes") : t("copyNotes")}
+        </button>
+        <button
+          type="button"
+          onClick={() => window.print()}
+          disabled={list.length === 0}
+          className="inline-flex h-12 w-full items-center justify-center rounded-xl bg-navy font-semibold text-paper disabled:opacity-40"
+        >
+          {t("printPage")}
+        </button>
+      </div>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import {
   Contrast,
   EyeOff,
   Maximize2,
+  Printer,
   Smartphone,
   Monitor,
 } from "lucide-react";
@@ -160,8 +161,8 @@ function AmslerPage() {
   }
 
   return (
-    <div className="pb-8">
-      <div className="flex items-center gap-1 px-2 pt-3">
+    <div className="amsler-page pb-8">
+      <div className="flex items-center gap-1 px-2 pt-3 no-print">
         <Link
           to="/"
           className="grid size-11 place-items-center rounded-md text-navy no-underline"
@@ -169,28 +170,40 @@ function AmslerPage() {
         >
           <ArrowLeft className="size-5" aria-hidden />
         </Link>
-        <h1 className="text-[1.25rem] font-semibold text-navy">
+        <h1 className="flex-1 text-[1.25rem] font-semibold text-navy">
           {t("amslerTitle")}
         </h1>
+        <button
+          type="button"
+          onClick={() => window.print()}
+          className="mr-2 inline-flex h-10 items-center gap-1.5 rounded-full border border-line bg-card px-3 text-[0.8rem] font-semibold text-navy"
+        >
+          <Printer className="size-3.5" aria-hidden />
+          {t("printPage")}
+        </button>
       </div>
 
-      <div className="px-4 pt-2">
+      <h1 className="print-only px-4 pt-2 text-[1.25rem] font-semibold text-navy">
+        {t("amslerTitle")}
+      </h1>
+
+      <div className="amsler-print-keep px-4 pt-2">
         <EduToolCaveat />
       </div>
 
-      <p className="px-4 pt-1 text-[0.88rem] leading-relaxed text-muted">
+      <p className="amsler-print-keep px-4 pt-1 text-[0.88rem] leading-relaxed text-muted">
         {t("amslerLead")}
       </p>
 
-      <div ref={boxRef} className="px-4 pt-4">
-        <div className="rounded-xl bg-navy p-3">
+      <div ref={boxRef} className="amsler-print-keep px-4 pt-4">
+        <div className="rounded-xl bg-navy p-3 print:bg-transparent print:p-0">
           <AmslerGrid sizePx={gridPx} inverted={inverted} />
-          <p className="mt-3 text-center text-[0.78rem] text-paper/85">
+          <p className="mt-3 text-center text-[0.78rem] text-paper/85 print:text-ink">
             {t("amslerDist", { n: holdCm })}
             {calibrated ? t("amslerCal") : t("amslerUncal")}
           </p>
         </div>
-        <div className="mt-3 flex flex-wrap gap-2">
+        <div className="mt-3 flex flex-wrap gap-2 no-print">
           <button
             type="button"
             onClick={() => setInverted((v) => !v)}
@@ -210,9 +223,11 @@ function AmslerPage() {
         </div>
       </div>
 
-      <AmslerFindingDemo sizePx={Math.max(200, Math.min(gridPx, 320))} inverted={inverted} />
+      <div className="no-print">
+        <AmslerFindingDemo sizePx={Math.max(200, Math.min(gridPx, 320))} inverted={inverted} />
+      </div>
 
-      <section className="mt-6 px-4">
+      <section className="mt-6 px-4 no-print">
         <h2 className="text-[1.05rem] font-semibold text-navy">
           {t("amslerCalH")}
         </h2>
@@ -257,7 +272,7 @@ function AmslerPage() {
         </div>
       </section>
 
-      <section className="mt-6 px-4">
+      <section className="amsler-print-keep mt-6 px-4">
         <h2 className="text-[1.05rem] font-semibold text-navy">2. 檢查步驟</h2>
         <ol className="mt-2 list-decimal space-y-2 pl-5 text-[0.9rem] leading-relaxed">
           <li>戴你平日看報、看手機的閱讀眼鏡。不要戴太陽眼鏡。</li>
@@ -273,7 +288,7 @@ function AmslerPage() {
         </ol>
       </section>
 
-      <section className="mt-6 grid gap-3 px-4">
+      <section className="mt-6 grid gap-3 px-4 no-print">
         <div className="rounded-xl border border-line bg-card p-4">
           <p className="flex items-center gap-2 font-semibold text-navy">
             <Smartphone className="size-4" />
@@ -308,7 +323,7 @@ function AmslerPage() {
         </div>
       </section>
 
-      <section className="mt-6 px-4">
+      <section className="amsler-print-keep mt-6 px-4">
         <h2 className="text-[1.05rem] font-semibold text-navy">
           3. 甚麼算異常
         </h2>
@@ -327,9 +342,11 @@ function AmslerPage() {
         </p>
       </section>
 
-      <AmslerNotebook />
+      <div className="no-print">
+        <AmslerNotebook />
+      </div>
 
-      <div className="mt-5 flex flex-wrap gap-2 px-4">
+      <div className="mt-5 flex flex-wrap gap-2 px-4 no-print">
         <Link
           to="/t/$topicId"
           params={{ topicId: "d5" }}
@@ -339,7 +356,7 @@ function AmslerPage() {
         </Link>
       </div>
 
-      <div className="px-4">
+      <div className="amsler-print-keep px-4">
         <SimDisclaimer />
         <EditorialFooter />
       </div>

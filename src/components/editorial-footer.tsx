@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { editorialBits, useI18n } from "@/i18n";
 import { DEFAULT_TOPIC_REVIEWER } from "@/data/editorial";
 import type { TopicReviewer } from "@/data/topics";
+import { CONTENT_UPDATED, CONTENT_VERSION } from "@/lib/site";
 
 function formatReviewed(
   isoOrDisplay: string | undefined,
@@ -35,11 +36,14 @@ export function EditorialFooter({
   toolCaveat,
   lastReviewed,
   reviewer,
+  showEdition = true,
 }: {
   toolCaveat?: boolean;
   /** ISO YYYY-MM-DD or pre-localized display string. */
   lastReviewed?: string;
   reviewer?: TopicReviewer;
+  /** Show site-wide 最後更新 / 內容版本 (topic + tool pages). */
+  showEdition?: boolean;
 }) {
   const { t, locale } = useI18n();
   const ed = editorialBits(locale);
@@ -50,14 +54,22 @@ export function EditorialFooter({
       reviewer.role === DEFAULT_TOPIC_REVIEWER.role);
   const name = isDefault ? ed.name : reviewer.name;
   const title = isDefault ? ed.title : reviewer.role;
+  const updatedDisplay = formatReviewed(CONTENT_UPDATED, locale, CONTENT_UPDATED);
 
   return (
     <aside className="mt-6 space-y-2 text-[0.75rem] leading-relaxed text-faint">
       {toolCaveat ? <p>{t("toolCaveat")}</p> : null}
+      {showEdition ? (
+        <p>
+          {t("lastUpdated")}：{updatedDisplay}
+          <span aria-hidden="true"> · </span>
+          {t("contentVer")} {CONTENT_VERSION}
+        </p>
+      ) : null}
       <p>
         {t("reviewed")}：{reviewed} · {name} · {title}（{ed.register}）
       </p>
-      <p>
+      <p className="no-print">
         <Link to="/legal" className="text-navy underline">
           {t("legalLink")}
         </Link>
