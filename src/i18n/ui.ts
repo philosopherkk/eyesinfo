@@ -121,11 +121,11 @@ const zhHant = {
   amslerFindCentral: "中央暗點",
   amslerFindCentralEn: "central scotoma",
   amslerFindCentralP:
-    "正中間缺了一塊，連中央圓點都看不清或像被遮住。中央視力受損的示意，不是你的視野報告。",
+    "正中間缺了一塊（方格線消失的空白區），連中央圓點都看不清。示意中央視力缺損，不是你的視野報告。",
   amslerFindPara: "旁中央暗點",
   amslerFindParaEn: "paracentral scotoma",
   amslerFindParaP:
-    "中央圓點仍在，旁邊有一塊看不見或發灰。不要轉動眼球去「找」那塊——檢查時應一直盯着圓點。",
+    "中央圓點仍在，旁邊有一塊看不見或缺格。不要轉動眼球去「找」那塊——檢查時應一直盯着圓點。",
   amslerFindNote: "此示意不能排除眼疾，亦不能為黃斑病變分級。",
   iolTitle: "人工晶體視力示意",
   iolNotGuarantee: "不是術後保證。本站不提供預約或轉介。",
@@ -286,14 +286,14 @@ const en: Record<Key, string> = {
   amslerFindMetaEn: "metamorphopsia",
   amslerFindMetaP:
     "Lines look bent, wavy, or the squares uneven. Often discussed with macular oedema or wet AMD. New distortion needs a prompt dilated exam.",
-  amslerFindCentral: "Central dark patch",
+  amslerFindCentral: "Central blank patch",
   amslerFindCentralEn: "central scotoma",
   amslerFindCentralP:
-    "A missing area in the very centre — the fixation spot may vanish or look covered. This is not your visual-field report.",
+    "A blank/missing patch of the grid in the very centre — the fixation spot may vanish. Illustration only; not your visual-field report.",
   amslerFindPara: "Patch beside centre",
   amslerFindParaEn: "paracentral scotoma",
   amslerFindParaP:
-    "The centre dot is still there, but a grey or missing patch sits next to it. Do not look around to hunt for it — keep staring at the dot.",
+    "The centre dot is still there, but a blank or missing patch of the grid sits next to it. Do not look around to hunt for it — keep staring at the dot.",
   amslerFindNote: "A normal demo cannot rule out disease and cannot grade macular degeneration.",
   iolTitle: "Intraocular lens vision demo",
   iolNotGuarantee: "Not a post-operative guarantee. This site does not book or refer.",
@@ -454,11 +454,11 @@ const ja: Record<Key, string> = {
   amslerFindCentral: "中心暗点",
   amslerFindCentralEn: "central scotoma",
   amslerFindCentralP:
-    "ど真ん中が欠け、固視点も見えない／覆われたように感じます。あなたの視野検査ではありません。",
+    "ど真ん中のマス目が欠けた空白で、固視点も見えにくい示意です。あなたの視野検査ではありません。",
   amslerFindPara: "傍中心暗点",
   amslerFindParaEn: "paracentral scotoma",
   amslerFindParaP:
-    "中央の点は残るが、すぐ横に見えない／灰色の塊があります。探そうと眼球を動かさず、点を見続けてください。",
+    "中央の点は残るが、すぐ横にマス目が欠けた空白があります。探そうと眼球を動かさず、点を見続けてください。",
   amslerFindNote: "この図示で病気は除外できず、黄斑変性の病期も判定できません。",
   iolTitle: "眼内レンズの見え方の図示",
   iolNotGuarantee: "術後の保証ではありません。予約・紹介はしません。",
