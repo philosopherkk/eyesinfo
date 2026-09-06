@@ -2,8 +2,8 @@ import { Link } from "@tanstack/react-router";
 import { useI18n } from "@/i18n";
 
 /**
- * Full Cap. 231 / education disclaimer — bottom of page only.
- * Do not mount mid-page or as a short top line; AppShell owns placement.
+ * Full Cap. 231 / education disclaimer — bottom of page only (AppShell).
+ * Short top one-liner is LegalShortLine; do not mount this block mid-page.
  */
 export function LegalBanner() {
   const { t, legal } = useI18n();

@@ -65,6 +65,10 @@ export function EditorialFooter({
         <Link to="/privacy" className="text-navy underline">
           {t("privacyLink")}
         </Link>
+        {" · "}
+        <Link to="/accessibility" className="text-navy underline">
+          {t("a11yLink")}
+        </Link>
       </p>
     </aside>
   );

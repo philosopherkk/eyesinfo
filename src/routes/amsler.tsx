@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { AmslerGrid, type AmslerFinding } from "@/components/amsler-grid";
 import { SimDisclaimer } from "@/components/sim-disclaimer";
+import { EduToolCaveat } from "@/components/edu-tool-caveat";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { usePrefs, type AmslerResult } from "@/lib/prefs";
 import { useI18n } from "@/i18n";
@@ -163,14 +164,18 @@ function AmslerPage() {
       <div className="flex items-center gap-1 px-2 pt-3">
         <Link
           to="/"
-          className="grid size-10 place-items-center rounded-md text-navy no-underline"
+          className="grid size-11 place-items-center rounded-md text-navy no-underline"
           aria-label={t("back")}
         >
-          <ArrowLeft className="size-5" />
+          <ArrowLeft className="size-5" aria-hidden />
         </Link>
         <h1 className="text-[1.25rem] font-semibold text-navy">
           {t("amslerTitle")}
         </h1>
+      </div>
+
+      <div className="px-4 pt-2">
+        <EduToolCaveat />
       </div>
 
       <p className="px-4 pt-1 text-[0.88rem] leading-relaxed text-muted">

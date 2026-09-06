@@ -59,6 +59,10 @@ function LegalPage() {
           <Link to="/privacy" className="font-semibold text-navy">
             {t("privacyLink")}
           </Link>
+          {" · "}
+          <Link to="/accessibility" className="font-semibold text-navy">
+            {t("a11yLink")}
+          </Link>
         </p>
       </section>
     </div>
