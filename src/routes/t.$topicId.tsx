@@ -1,19 +1,35 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, Bookmark, BookmarkCheck, ShieldAlert } from "lucide-react";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
+import { ArrowLeft, ShieldAlert } from "lucide-react";
 import { getTopic, topicEditorial, TOPICS } from "@/data/topics";
 import { TOPIC_TOOLS } from "@/data/tools";
 import { TopicBody } from "@/components/topic-body";
 import { TopicRefs } from "@/components/topic-refs";
 import { EditorialFooter } from "@/components/editorial-footer";
-import { usePrefs } from "@/lib/prefs";
+import { SaveButton } from "@/components/save-button";
+import { topicSaveKey } from "@/lib/saved";
 import { useI18n, useLocalizedTopic } from "@/i18n";
 import type { UiKey } from "@/i18n/ui";
-import { CONTENT_UPDATED, CONTENT_VERSION } from "@/lib/site";
 import { pageHead } from "@/lib/page-seo";
 
+/** Retired stub IA: former 「屏幕與眼睛」hub → filled blue-light topic. */
+const TOPIC_ALIASES: Record<string, string> = {
+  "t-screen": "t-bluelight",
+};
+
 export const Route = createFileRoute("/t/$topicId")({
+  beforeLoad: ({ params }) => {
+    const alias = TOPIC_ALIASES[params.topicId];
+    if (alias) {
+      throw redirect({
+        to: "/t/$topicId",
+        params: { topicId: alias },
+        replace: true,
+      });
+    }
+  },
   head: ({ params }) => {
-    const topic = getTopic(params.topicId);
+    const resolved = TOPIC_ALIASES[params.topicId] ?? params.topicId;
+    const topic = getTopic(resolved);
     const title = topic?.title ?? "專題";
     const description =
       topic?.meta ||
@@ -22,7 +38,7 @@ export const Route = createFileRoute("/t/$topicId")({
     return pageHead({
       title,
       description,
-      path: `/t/${params.topicId}`,
+      path: `/t/${resolved}`,
     });
   },
   component: TopicPage,
@@ -40,8 +56,6 @@ function TopicPage() {
   const { topicId } = Route.useParams();
   const raw = getTopic(topicId);
   const topic = useLocalizedTopic(raw ?? TOPICS[0]);
-  const saved = usePrefs((s) => s.saved.includes(raw?.id ?? ""));
-  const toggleSaved = usePrefs((s) => s.toggleSaved);
   const tools = TOPIC_TOOLS[raw?.id ?? ""] ?? [];
   const { t, tx } = useI18n();
   if (!raw) throw notFound();
@@ -49,43 +63,29 @@ function TopicPage() {
 
   return (
     <article>
-      <div className="flex items-center justify-between px-2 pt-3">
+      <div className="flex items-center px-2 pt-3">
         <Link
           to="/c/$catId"
           params={{ catId: raw.category }}
-          className="grid size-10 place-items-center rounded-md text-navy no-underline"
+          className="grid size-11 place-items-center rounded-md text-navy no-underline"
           aria-label={t("backCat")}
         >
           <ArrowLeft className="size-5" />
         </Link>
-        <button
-          type="button"
-          onClick={() => toggleSaved(raw.id)}
-          className="mr-2 inline-flex h-10 items-center gap-1.5 rounded-full border border-line bg-card px-3 text-[0.8rem] font-semibold text-navy"
-        >
-          {saved ? (
-            <BookmarkCheck className="size-4" />
-          ) : (
-            <Bookmark className="size-4" />
-          )}
-          {saved ? t("bookmarked") : t("bookmark")}
-        </button>
       </div>
       <header className="px-4 pb-3 pt-1">
         <p className="text-[0.75rem] text-steel">
           {t(CAT_TITLE[raw.category])} · {topic.num}
         </p>
-        <h1 className="mt-1 text-[1.35rem] font-semibold leading-snug text-navy">
-          {topic.title}
-        </h1>
+        <div className="mt-1 flex items-start justify-between gap-3">
+          <h1 className="min-w-0 flex-1 text-[1.35rem] font-semibold leading-snug text-navy">
+            {topic.title}
+          </h1>
+          <SaveButton saveId={topicSaveKey(raw.id)} className="mt-0.5" />
+        </div>
         {topic.meta ? (
           <p className="mt-1 text-[0.85rem] text-muted">{topic.meta}</p>
         ) : null}
-        <p className="mt-2 text-[0.75rem] text-faint">
-          {t("lastUpdated")}：{CONTENT_UPDATED}
-          <span aria-hidden="true"> · </span>
-          {t("contentVer")} {CONTENT_VERSION}
-        </p>
       </header>
       {raw.isAcuteEmergency ? (
         <Link

@@ -1640,16 +1640,6 @@ export const EN_PACKS: Record<string, TopicPack> = {
     ],
   },
 
-  "t-screen": {
-    title: "Screens and the eyes",
-    tag: "See blue-light topic",
-    meta: "Body lives on the blue-light myth-bust page",
-    blocks: [
-      p("Screen use, digital eye strain and “blue-blocking” product myths are collected on “Blue light and screens: common myths” so two pages do not drift apart. Open that topic for the full text; this page has no second body."),
-      note("Public education; no blue-blocking brands or films; no booking or purchase."),
-    ],
-  },
-
   "t-colour-vision": {
     title: "Colour vision deficiency: congenital vs acquired",
     tag: "Colour vision education",

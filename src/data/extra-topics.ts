@@ -2058,28 +2058,8 @@ export const EXTRA_TOPICS: Topic[] = [
     ],
   },
   {
-    id: "t-screen",
-    num: "AV",
-    title: "屏幕與眼睛",
-    tag: "見藍光專題",
-    meta: "內容併入藍光與屏幕迷思破解",
-    category: "surface",
-    featured: false,
-    lastReviewed: "2026-09-07",
-    blocks: [
-      {
-        type: "p",
-        text: "屏幕、數碼視疲勞與「防藍光」產品迷思，已集中在專題「藍光與屏幕：常見誤解」，避免兩頁內容分叉。請打開該專題閱讀；本頁不作第二套正文。",
-      },
-      {
-        type: "note",
-        text: "公眾教育；不推介防藍光品牌或貼膜；不提供預約或購買。",
-      },
-    ],
-  },
-  {
     id: "t-colour-vision",
-    num: "AW",
+    num: "AV",
     title: "色覺異常：先天與後天；檢查與日常／職業須知",
     tag: "色弱／色盲教育",
     meta: "先天穩定 vs 後天警號 · 不作職業裁決",

@@ -87,11 +87,6 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-lube", label: "潤眼液與潤滑劑" },
     { href: "/t/d5", label: "年齡相關性黃斑病變" },
   ],
-  "t-screen": [
-    { href: "/t/t-bluelight", label: "藍光與屏幕：常見誤解（完整正文）" },
-    { href: "/tools/outdoor", label: "兒童戶外時間" },
-    { href: "/t/t-myopia", label: "兒童近視：醫生或會討論的方向" },
-  ],
   "t-colour-vision": [
     { href: "/urgent", label: "急症與同日評估" },
     { href: "/t/t-child", label: "兒童視力里程碑" },

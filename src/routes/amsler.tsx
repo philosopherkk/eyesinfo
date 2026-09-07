@@ -13,7 +13,9 @@ import { AmslerGrid, type AmslerFinding } from "@/components/amsler-grid";
 import { SimDisclaimer } from "@/components/sim-disclaimer";
 import { EduToolCaveat } from "@/components/edu-tool-caveat";
 import { EditorialFooter } from "@/components/editorial-footer";
+import { SaveButton } from "@/components/save-button";
 import { usePrefs, type AmslerResult } from "@/lib/prefs";
+import { toolSaveKey } from "@/lib/saved";
 import { useI18n } from "@/i18n";
 import { pageHead } from "@/lib/page-seo";
 
@@ -181,13 +183,14 @@ function AmslerPage() {
         >
           <ArrowLeft className="size-5" aria-hidden />
         </Link>
-        <h1 className="flex-1 text-[1.25rem] font-semibold text-navy">
+        <h1 className="min-w-0 flex-1 text-[1.25rem] font-semibold text-navy">
           {t("amslerTitle")}
         </h1>
+        <SaveButton saveId={toolSaveKey("amsler")} />
         <button
           type="button"
           onClick={() => window.print()}
-          className="mr-2 inline-flex h-10 items-center gap-1.5 rounded-full border border-line bg-card px-3 text-[0.8rem] font-semibold text-navy no-print"
+          className="mr-2 inline-flex min-h-11 items-center gap-1.5 rounded-full border border-line bg-card px-3 text-[0.8rem] font-semibold text-navy no-print"
         >
           <Printer className="size-3.5" aria-hidden />
           {t("printPage")}
