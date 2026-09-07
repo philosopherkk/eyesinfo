@@ -5,7 +5,8 @@ import {
 } from "./editorial";
 
 export type Block =
-  | { type: "p" | "h" | "warn" | "note"; text: string }
+  | { type: "p" | "warn" | "note"; text: string }
+  | { type: "h"; text: string; id?: string }
   | { type: "ul" | "ol"; items: string[] }
   | { type: "table"; rows: string[][] };
 

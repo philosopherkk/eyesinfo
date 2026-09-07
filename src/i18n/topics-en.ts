@@ -4,7 +4,8 @@ export type TopicPack = { title: string; tag: string; meta: string; blocks: Bloc
 
 const w = (text: string): Block => ({ type: "warn", text });
 const note = (text: string): Block => ({ type: "note", text });
-const h = (text: string): Block => ({ type: "h", text });
+const h = (text: string, id?: string): Block =>
+  id ? { type: "h", text, id } : { type: "h", text };
 const p = (text: string): Block => ({ type: "p", text });
 const ul = (items: string[]): Block => ({ type: "ul", items });
 const ol = (items: string[]): Block => ({ type: "ol", items });
@@ -693,6 +694,78 @@ export const EN_PACKS: Record<string, TopicPack> = {
         "Daily disposables are single-use; no overnight wear unless a doctor has written otherwise with regular review",
         "Make-up after lenses in; remove lenses before make-up removal",
       ]),
+      h("Water and Acanthamoeba: why even a drop matters", "water-acanthamoeba"),
+      p("Acanthamoeba is widespread in environmental water (including tap-water systems). With a contact lens on, water can trap organisms between lens and cornea and raise Acanthamoeba keratitis (AK) risk. AK is uncommon but can be severely painful, hard to treat and sight-threatening — typical features are in the serious-complications table. This section is care education; it does not rank which solution “kills amoeba best”, and it does not promise zero AK with daily disposables."),
+      {
+        type: "table",
+        rows: [
+          ["Do not", "Do"],
+          [
+            "Rinse lenses or cases with tap, distilled or bottled water, or saliva",
+            "Use only the disinfection / care system your fitter directs; follow Hong Kong-registered labelling",
+          ],
+          ["Handle lenses with wet, undried hands", "Wash then dry hands thoroughly before touching lenses"],
+          [
+            "Shower, bathe, use hot tubs, swim in pools, sea or lakes in lenses",
+            "Remove lenses before water contact; after swimming do not treat a water-soaked lens as clean for next-day wear",
+          ],
+          [
+            "Top up old solution; leave the case where bathroom splash hits it",
+            "Fresh solution each time; rinse the case with solution (not water) and air-dry; keep care away from bathroom spray",
+          ],
+          [
+            "Assume “chlorinated pools make swimming in lenses safe”",
+            "Chlorine does not make swimming in lenses safe",
+          ],
+        ],
+      },
+      p("If a lens or case may have touched water: follow your fitter — often discard a daily disposable, or fully disinfect a reusable lens and decide whether to replace case/lens; if red, painful or light-sensitive, remove the lens and get same-day eye care — do not “wear one more night to see”."),
+      h("Orthokeratology (OK / ortho-K): overnight hygiene education", "ok-hygiene"),
+      p("OK is a rigid gas-permeable design worn at night to temporarily change daytime refraction. Overnight wear is linked with corneal infection risk; scarring after infection in children can affect visual development. This is hygiene and alert education — not efficacy, myopia-control magnitude or product comparison. Refractive rebound after stopping is expected; this page does not describe the eye axis as “shortened” by OK. Whether OK is used for myopia management is a prescribing / consent decision — this insert does not discuss or cite efficacy trial conclusions."),
+      ol([
+        "Before wear: wash and dry hands → inspect for cracks, deposits or damage → process with the directed system before inserting → after insertion, do not stay up long reading or on screens before sleep (routine follows the fitter)",
+        "Before sleep: confirm the lens is comfortable; sharp pain, severe foreign-body feel or abnormal blur — do not force sleep; remove and contact care",
+        "Morning removal: wash and dry hands → lubricate / mobilise as directed before removal (do not force a dry removal) → clean and disinfect at once; do not leave the lens on the sink “for later”",
+        "Cleaning: digital rub to clear deposits (even if a label says no-rub, many regimens still emphasise mechanical cleaning — follow written care) → discard old solution → soak in fresh solution for the full time → no tap water at any step",
+        "Case: empty daily; rinse with care solution (not water); air-dry face-down; replace if damaged; replace on schedule (about every three months is a common class of advice — follow your fitter)",
+        "Follow-up: keep reviews; discomfort, red, pain, photophobia or sudden vision drop → stop wear and same-day ophthalmology; do not “wear one more night to reshape”",
+        "Parent role: primary-school children often cannot judge contamination alone; supervise until the routine is stable",
+      ]),
+      ul([
+        "OK-specific do-nots: “rinse” a rigid lens under tap water; share lenses; wear a lost-and-found lens without full disinfection",
+        "Do not read temporary daytime blur reduction as “infection risk gone”; do not treat this site as “guaranteed-safe myopia treatment”",
+      ]),
+      h("Common myths (hygiene)"),
+      {
+        type: "table",
+        rows: [
+          ["Myth", "Closer to the evidence"],
+          [
+            "“Distilled / boiled-and-cooled water is clean enough”",
+            "Still not a contact-lens disinfection system; AK links to water exposure.",
+          ],
+          [
+            "“Wring out a daily disposable after swimming and reuse”",
+            "After water contact, discard it.",
+          ],
+          [
+            "“OK rigid lenses rarely get infected like soft lenses”",
+            "Rigid lenses can still cause MK / AK; overnight wear and hygiene still matter.",
+          ],
+          [
+            "“Top up solution to save money”",
+            "Avoid topping up.",
+          ],
+          [
+            "“A bit of redness will be fine after sleeping in them”",
+            "Red, pain, photophobia or vision change → remove and seek care.",
+          ],
+          [
+            "“Buy a steroid drop to clear the red”",
+            "Steroids can worsen infection.",
+          ],
+        ],
+      },
       h("Serious complications"),
       {
         type: "table",
@@ -718,7 +791,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
         "Contact-lens–related red painful photophobic eye without sudden blindness: same-day ophthalmic assessment; do not delay if pain continues after removal",
         "Do not self-start antibiotic or steroid drops",
       ]),
-      w("This page cannot judge infection from a photo. “Not very red” does not rule out keratitis. Care products follow Hong Kong registration — no brand pitch."),
+      w("This page cannot judge infection from a photo. “Not very red” does not rule out keratitis. Care products follow Hong Kong registration — no brand pitch. It does not claim to cure keratitis, and following every step does not promise zero infection."),
     ],
   },
   "t-steroid": {
