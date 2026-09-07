@@ -8,6 +8,7 @@ export function TopicBody({ blocks }: { blocks: Block[] }) {
           return (
             <h3
               key={i}
+              id={block.id}
               className="pt-1 text-[0.95rem] font-semibold tracking-tight text-navy"
             >
               {block.text}

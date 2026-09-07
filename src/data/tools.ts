@@ -34,7 +34,7 @@ export const TOOLS: ToolDef[] = [
   { id: "halo", title: "夜間光暈比較", blurb: "單焦、延伸景深、三焦點示意", canto: "唔係術後保證", href: "/tools/halo" },
   { id: "warm", title: "熱敷計時", blurb: "示意計時，跟醫生指示", canto: "熱敷跟時間", href: "/tools/warm" },
   { id: "visit", title: "一次眼科檢查", blurb: "散瞳後唔好自己開車", canto: "去診所會做咩", href: "/tools/visit" },
-  { id: "outdoor", title: "兒童戶外時間", blurb: "今日夠唔夠兩小時日光", canto: "出街睇日光", href: "/tools/outdoor" },
+  { id: "outdoor", title: "兒童戶外時間", blurb: "戶外日光時間記錄（公共衞生約數）", canto: "出街睇日光", href: "/tools/outdoor" },
   { id: "rx", title: "眼鏡度數解讀", blurb: "球鏡、柱鏡、軸、老花加度", canto: "張紙寫緊咩", href: "/tools/rx" },
 ];
 
@@ -60,8 +60,44 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   d6: [{ href: "/t/t-reports", label: "OCT／視野示意" }, { href: "/t/t-rvo", label: "視網膜血管阻塞" }],
   d7: [
     { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-allergy-hk", label: "眼部過敏與香港環境" },
+    { href: "/t/t-allergy", label: "過敏性結膜炎原則" },
     { href: "/t/t-scleritis", label: "表層鞏膜炎與鞏膜炎" },
     { href: "/t/t-chem", label: "化學性眼損傷" },
+  ],
+  "t-allergy": [
+    { href: "/t/t-allergy-hk", label: "眼部過敏與香港環境" },
+    { href: "/t/d7", label: "結膜炎總論" },
+    { href: "/t/t-cl", label: "隱形眼鏡" },
+    { href: "/urgent", label: "急症與同日評估" },
+  ],
+  "t-allergy-hk": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/d7", label: "結膜炎總論" },
+    { href: "/t/t-allergy", label: "過敏藥物原則（勿自買類固醇）" },
+    { href: "/t/t-cl", label: "隱形眼鏡" },
+    { href: "/t/t-keratoconus", label: "圓錐角膜（揉眼相關）" },
+    { href: "/c/surface", label: "角膜與眼表" },
+  ],
+  "t-bluelight": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-myopia", label: "兒童近視：醫生或會討論的方向" },
+    { href: "/tools/outdoor", label: "兒童戶外時間" },
+    { href: "/t/d2", label: "乾眼症" },
+    { href: "/t/t-lube", label: "潤眼液與潤滑劑" },
+    { href: "/t/d5", label: "年齡相關性黃斑病變" },
+  ],
+  "t-screen": [
+    { href: "/t/t-bluelight", label: "藍光與屏幕：常見誤解（完整正文）" },
+    { href: "/tools/outdoor", label: "兒童戶外時間" },
+    { href: "/t/t-myopia", label: "兒童近視：醫生或會討論的方向" },
+  ],
+  "t-colour-vision": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-child", label: "兒童視力里程碑" },
+    { href: "/t/d5", label: "年齡相關性黃斑病變" },
+    { href: "/t/t-gca", label: "巨細胞動脈炎" },
+    { href: "/c/lens", label: "晶體與屈光" },
   ],
   d8: [{ href: "/tools/floaters", label: "飛蚊與簾幕" }, { href: "/t/t-rd", label: "脫離手術與風險" }, { href: "/t/t-uveitis", label: "葡萄膜炎" }],
   d9: [
@@ -92,9 +128,40 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   d1: [
     { href: "/tools/rx", label: "眼鏡度數解讀" },
     { href: "/tools/outdoor", label: "兒童戶外時間" },
+    { href: "/t/t-high-myopia-pathology", label: "高度近視長遠風險（病理近視）" },
     { href: "/t/t-presbyopia", label: "老花五類選擇" },
     { href: "/t/t-lasik", label: "LASIK 與 SMILE" },
     { href: "/t/t-cl", label: "隱形眼鏡併發症" },
+  ],
+  "t-high-myopia-pathology": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/amsler", label: "阿姆斯勒方格" },
+    { href: "/t/d1", label: "屈光不正總覽" },
+    { href: "/t/d8", label: "飛蚊與視網膜脫離風險" },
+    { href: "/tools/floaters", label: "飛蚊與簾幕" },
+    { href: "/t/t-myopia", label: "兒童近視：醫生或會討論的方向" },
+    { href: "/t/d5", label: "年齡相關性黃斑病變" },
+  ],
+  "t-keratoconus": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-lasik", label: "激光矯視與術前篩查" },
+    { href: "/t/t-cl", label: "隱形眼鏡衛生與併發症" },
+    { href: "/t/t-allergy", label: "過敏性結膜炎原則" },
+    { href: "/t/t-allergy-hk", label: "眼部過敏與香港環境" },
+    { href: "/t/d7", label: "結膜炎" },
+    { href: "/c/surface", label: "角膜與眼表" },
+  ],
+  "t-lasik": [
+    { href: "/t/t-presbyopia", label: "老花五類選擇" },
+    { href: "/t/t-cl", label: "隱形眼鏡併發症" },
+    { href: "/t/t-keratoconus", label: "圓錐角膜" },
+    { href: "/iol", label: "晶體視力示意" },
+  ],
+  "t-cl": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-lube", label: "潤眼液與潤滑劑" },
+    { href: "/t/t-lasik", label: "激光矯視" },
+    { href: "/t/t-keratoconus", label: "圓錐角膜" },
   ],
   "t-yag": [{ href: "/t/t-yag", label: "後囊混濁（不是白內障復發）" }],
   "t-glaucoma": [
@@ -136,16 +203,6 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-cl", label: "隱形眼鏡併發症" },
     { href: "/t/t-lasik", label: "LASIK 與 SMILE" },
     { href: "/t/t-cataract", label: "超聲波乳化與晶體" },
-  ],
-  "t-lasik": [
-    { href: "/t/t-presbyopia", label: "老花五類選擇" },
-    { href: "/t/t-cl", label: "隱形眼鏡併發症" },
-    { href: "/iol", label: "晶體視力示意" },
-  ],
-  "t-cl": [
-    { href: "/urgent", label: "急症與同日評估" },
-    { href: "/t/t-lube", label: "潤眼液與潤滑劑" },
-    { href: "/t/t-lasik", label: "激光矯視" },
   ],
   "t-chalazion": [{ href: "/tools/warm", label: "熱敷計時" }],
   "t-strab": [

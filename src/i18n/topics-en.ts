@@ -4,7 +4,8 @@ export type TopicPack = { title: string; tag: string; meta: string; blocks: Bloc
 
 const w = (text: string): Block => ({ type: "warn", text });
 const note = (text: string): Block => ({ type: "note", text });
-const h = (text: string): Block => ({ type: "h", text });
+const h = (text: string, id?: string): Block =>
+  id ? { type: "h", text, id } : { type: "h", text };
 const p = (text: string): Block => ({ type: "p", text });
 const ul = (items: string[]): Block => ({ type: "ul", items });
 const ol = (items: string[]): Block => ({ type: "ol", items });
@@ -19,8 +20,10 @@ export const EN_PACKS: Record<string, TopicPack> = {
       p("Light does not focus on the retina. Myopia blurs distance; hyperopia makes near work effortful; astigmatism distorts. Presbyopia is loss of lens focusing with age — strictly a decline in accommodation, not a classic refractive error, grouped here because the optical approaches overlap. In Hong Kong, 100 degrees = 1.00 D; high myopia is usually ≥ 600 degrees (−6.00 D). Myopia is often axial. About 1 mm of extra axial length is roughly 2.5–3.00 D. Myopia is very common in local schoolchildren. Earlier school screening reports could exceed 80% in secondary school; more recent larger questionnaire surveys are about 60–70%. Figures depend on the method."),
       h("Long-term risks of high myopia (≥ 600 degrees)"),
       ul(["Retinal tear or detachment", "Myopic maculopathy", "Glaucoma and early cataract"]),
+      p("If you have high myopia and new flashes or a clear increase in floaters: same-day dilated fundus exam. A curtain or sudden vision drop: go to A&E now. For a deeper explanation of pathologic myopia, myopic maculopathy and retinal breaks, see the dedicated high-myopia risks page."),
+      w("The eye axis cannot be shortened. Childhood myopia management aims to slow progression and lower the chance of ending with high myopia — it is not a “cure” for the degree. Laser refractive or lens surgery changes focus; it does not remove the fundus risks of high myopia."),
       h("What a doctor may discuss"),
-      ul(["Spectacles or contact lenses after refraction; high myopia needs regular dilated fundus exams by an ophthalmologist", "If you have high myopia and new flashes or a clear increase in floaters: same-day dilated fundus exam. A curtain or sudden vision drop: go to A&E now.", "Childhood myopia: outdoor daylight is associated with slower onset (shade and corridors count). How long per day is a public-health suggestion, not a personal prescription and not the “most important / most effective” treatment. See the childhood-myopia page.", "Myopia-control options for children are discussed on the dedicated page — not a product pitch", "Presbyopia: reading glasses, progressive lenses, or, after cataract assessment, lens options"]),
+      ul(["Spectacles or contact lenses after refraction; high myopia needs regular dilated fundus exams by an ophthalmologist", "If you have high myopia and new flashes or a clear increase in floaters: same-day dilated fundus exam. A curtain or sudden vision drop: go to A&E now.", "Childhood myopia: outdoor daylight is associated with slower onset (shade and corridors count). How long per day is a public-health suggestion, not a personal prescription and not the “most important / most effective” treatment. See the childhood-myopia page.", "Classes a doctor may discuss for slowing childhood progression are on the childhood-myopia education page — not a product pitch", "Presbyopia: reading glasses, progressive lenses, or, after cataract assessment, lens options"]),
     ],
   },
   d2: {
@@ -243,25 +246,30 @@ export const EN_PACKS: Record<string, TopicPack> = {
     tag: "Children and teens",
     meta: "Outdoors · atropine · optical defocus",
     blocks: [
-      p("This summarises published research and classes of options often discussed in Hong Kong. It is not a pitch to buy drops, lenses or devices, and it cannot promise slower progression. Any medicine needs a prescription. Orthokeratology and contact lenses must be fitted by a qualified person."),
+      p("This summarises published research and classes of options often discussed in Hong Kong. It is not a pitch to buy drops, lenses or devices, and it cannot promise slower progression — nor is it a cure for myopia. Any medicine needs a prescription. Orthokeratology and contact lenses must be fitted by a qualified person."),
       h("Outdoor time (public-health measure)"),
-      p("Outdoor natural light is linked with a lower chance of myopia appearing. Shade, corridors and walking to school count. You do not need to chase harsh sun. How long each day is for school or a doctor to discuss by age and lifestyle — this is not a light-dose prescription."),
+      p("Outdoor natural light is linked with a lower chance of myopia appearing. Shade, corridors and walking to school count. You do not need to chase harsh sun. How long each day is for school or a doctor to discuss by age and lifestyle — this is not a light-dose prescription. The outdoor-time tool is a public-health round-number log, not a personal progress report."),
       h("Low-concentration atropine (prescription)"),
       p("A muscarinic antagonist. Concentration, use and stopping must be a doctor’s decision. Do not dilute or buy unofficial preparations. The CUHK LAMP study compared 0.05%, 0.025%, 0.01% and placebo. It is important local literature, not a personal prescription."),
       {
         type: "table",
         rows: [
-          ["LAMP year-1 mean change (literature), not a prediction for one child", "Spherical equivalent", "Axial length", "Approx. reduction vs placebo"],
+          ["LAMP year-1 mean change (literature), not a prediction for one child", "Spherical equivalent", "Axial length", "Approx. vs placebo (year-1 literature)"],
           ["0.05%", "−0.27 D", "+0.20 mm", "SE ~67% / AL ~51%"],
           ["0.025%", "−0.46 D", "+0.29 mm", "SE ~43% / AL ~29%"],
           ["0.01%", "−0.59 D", "+0.36 mm", "SE ~27% / AL ~12%"],
           ["Placebo", "−0.81 D", "+0.41 mm", "—"],
         ],
       },
-      p("Possible effects include light sensitivity, mild near blur, rebound after stopping (more at higher concentration). LAMP years 2–5 are reported separately; this table is year 1 only. Rebound can occur. Continuing is a doctor’s decision. This is not a ranking of which concentration is “best”."),
+      p("Possible effects include light sensitivity, mild near blur, rebound after stopping (more at higher concentration), and occasional allergic conjunctivitis. Daytime photochromic / UV-blocking lenses may be needed. This table cites year-1 published figures only; later years are reported separately; whether to continue is a doctor’s decision. Rebound can occur. This is not a ranking of which concentration is “best”, and not a cross-brand / cross-therapy efficacy league table."),
       h("Optical defocus methods"),
-      ul(["Orthokeratology: overnight rigid lenses. Infectious keratitis risk (including Acanthamoeba). Hygiene is strict; not for everyone.", "Defocus spectacles or daily myopia-control contacts need enough wearing time.", "Repeated low-level red-light devices: long-term macular safety is debated. Do not buy a home machine on your own."]),
-      w("Myopia control does not remove existing fundus risk. Highly myopic children still need regular dilated exams. New flashes or many new floaters: same-day dilation. A curtain or sudden vision loss: A&E."),
+      p("Ordinary single-vision lenses can leave peripheral rays focused behind the retina (hyperopic defocus). Some defocus spectacles, daily-disposable contacts and orthokeratology aim to create peripheral myopic defocus. Registration, fitting qualifications and published data differ by design — a doctor or optometrist must explain under Hong Kong rules. This page does not compare brands, and does not quote unchecked “X% effective” figures, shops or prices."),
+      ul([
+        "Orthokeratology: overnight rigid gas-permeable lenses. Infectious keratitis risk (including Acanthamoeba). Hygiene is strict; not for everyone.",
+        "Defocus spectacles or defocus-design daily disposables: wear time must follow the fitter; not a “no follow-up needed” product, and not a promise of slower progression.",
+        "Repeated low-level red-light devices: long-term macular safety is debated. Do not buy a home machine on your own. This site does not present them as an “emerging effective therapy”. Whether to use them is only a doctor’s assessment.",
+      ]),
+      w("Myopia control does not remove existing fundus risk, and it is not a cure for myopia or fundus disease. Highly myopic children still need regular dilated exams. New flashes or many new floaters: same-day dilation. A curtain or sudden vision loss: A&E."),
       p("Key paper: Yam JC et al. LAMP year 1, Ophthalmology 2019. Later years reported separately."),
     ],
   },
@@ -653,7 +661,99 @@ export const EN_PACKS: Record<string, TopicPack> = {
         "Surgery is one way to align the eyes; amblyopia therapy still continues. This page does not compare success rates",
         "Adult paralytic squint: find the cause first (nerve, thyroid, myasthenia). Prism or botulinum toxin are classes a doctor may discuss; this page does not promote a product",
       ]),
-      w("This page cannot tell true squint from pseudo-esotropia or a neurological emergency. “It does not look turned” does not exclude amblyopia. Sudden double vision with headache, a dilated pupil or weakness: A&E."),
+      h("Parent gaps: pseudo-esotropia, screening timing, patching adherence", "parent-gaps"),
+      p("The sections below deepen parent education without rewriting the definitions and urgency ladder above. Parents cannot rule out true squint or amblyopia at home; patching hours and pharmacological blur are prescriptions — this site gives no personal dose."),
+      h("Pseudo-esotropia: it looks like a turn, but still needs an exam"),
+      p("Many Asian toddlers have a flatter nasal bridge and epicanthic folds that hide nasal sclera, so the eyes look turned in. That is pseudo-esotropia (pseudostrabismus); the visual axes may still be aligned."),
+      ol([
+        "Corneal light reflex: a clinician checks whether the light spots are centred and symmetric. Pseudo often is; true esotropia is not. Cover testing and related exams still matter — a phone selfie is not a substitute",
+        "Facial features change with growth: a “look of squint” may ease as the bridge rises; that does not mean an exam was never needed",
+        "“Just pseudo” once still needs vigilance: some children later show true squint or amblyopia. New intermittent turns, a head tilt, covering one eye to look, or an abnormal vision screen → reassess; do not wait indefinitely on an old impression",
+        "Cycloplegic refraction may still be needed: even when pseudo is suspected, a doctor may dilate to look for hyperopia and exclude accommodative esotropia",
+      ]),
+      p("Do not teach parents to clear squint with a torch at home; “it does not look turned” also does not exclude amblyopia."),
+      h("Children’s vision / alignment: qualitative milestones (not a Hong Kong statute timetable)"),
+      p("International paediatric / paediatric-ophthalmology consensus in qualitative form; follow local paediatrics, maternal–child health or ophthalmology advice in practice. This page does not invent month-by-month local percentages or guarantees."),
+      {
+        type: "table",
+        rows: [
+          ["Stage", "Parents should watch for", "Why not to delay"],
+          [
+            "Newborn to early months",
+            "Red reflex, lid/pupil appearance, a clear constant turn",
+            "White pupil, nystagmus, or a sudden marked turn while unwell → A&E / same-day dilation",
+          ],
+          [
+            "Later infancy",
+            "Alignment still unsteady or persistently turned; poor tracking; frequent head tilt",
+            "Persistent turn after about 3–4 months needs planned assessment — usually not same-day emergency, but do not wait until school",
+          ],
+          [
+            "Preschool (can match pictures / symbols)",
+            "Kindergarten / school vision screen, unequal acuity, intermittent exotropia, photophobia with head tilt",
+            "Amblyopia plasticity is generally better earlier; abnormal screens need follow-up — do not “leave it another year”",
+          ],
+          [
+            "Around school entry and after",
+            "Losing place when reading, copying the board is hard, one eye stays weaker",
+            "Older children may still gain (see PEDIG literature), but do not decide at home that an age has closed the door",
+          ],
+        ],
+      },
+      ul([
+        "Do not wait: white pupil, nystagmus, post-trauma double vision / a stuck eye, or new adult double vision with neurological red flags → A&E / 999",
+        "A child’s squint that worsens over days, a constant head tilt, or covering one eye to look → same-day / see an ophthalmologist as soon as possible",
+        "Abnormal screen, more frequent intermittent exotropia, or repeated turns noticed by teachers / parents → book specialty care; do not wait indefinitely for the child to “grow out of it”",
+      ]),
+      h("Patching: adherence matters more than “having heard of a patch”"),
+      p("Amblyopia patching makes the brain use the weaker eye. PEDIG and related work show that, at suitable ages and severities, daily patching as prescribed can improve acuity in the amblyopic eye; poor adherence wastes that chance. Hours, whether to add near activity, and whether to use pharmacological blur are decided only by the prescribing doctor — this site gives no personal dose."),
+      ol([
+        "Follow written hours and days; do not lengthen to all-day sealing or stop on your own",
+        "During patching, use near activities the doctor suggests to “work the weak eye”",
+        "Log adherence (calendar / diary) and bring it to review",
+        "Skin and mood: ask the doctor about alternatives if tape allergy; talking with school is safer than secretly cutting hours",
+        "Full-time glasses still matter; “patch only, never glasses” or “glasses only, never review” drifts from common trial designs",
+        "Pause and seek care for red flags: a sudden clear worsening of squint after patching, a red painful photophobic patched eye, or a sudden drop in the good eye — contact the prescribing doctor at once; do not “add hours to catch up” yourself",
+      ]),
+      ul([
+        "Do not: buy unverified patch products online as treatment; copy doses from parent groups; claim “X weeks of patching will definitely fix it”",
+      ]),
+      h("Common myths (for parents)"),
+      {
+        type: "table",
+        rows: [
+          ["Myth", "Closer to the evidence"],
+          [
+            "“Flat nose bridge means pseudo — no exam needed”",
+            "Only an exam separates true from pseudo; true squint can still appear later.",
+          ],
+          [
+            "“It will straighten when they grow”",
+            "Spontaneous cure is not promised; the amblyopia window can narrow.",
+          ],
+          [
+            "“Longer patching is always better / shorter is always harmless”",
+            "Hours are set by the doctor from evidence.",
+          ],
+          [
+            "“Glasses alone equal cured amblyopia”",
+            "Refractive correction is one step; amblyopia often still needs patching or pharmacological blur and reviews.",
+          ],
+          [
+            "“Surgery that aligns the eyes means amblyopia is fixed”",
+            "Surgery mainly addresses alignment; amblyopia therapy may still run in parallel.",
+          ],
+          [
+            "“One ‘pseudo’ verdict lasts for life”",
+            "New symptoms or an abnormal screen need reassessment.",
+          ],
+          [
+            "“Online stereo apps are enough”",
+            "They do not replace cycloplegic refraction and specialty alignment exams.",
+          ],
+        ],
+      },
+      w("This page cannot tell true squint from pseudo-esotropia or a neurological emergency. “It does not look turned” does not exclude amblyopia. Sudden double vision with headache, a dilated pupil or weakness: A&E. No cure claims, success-rate comparisons, booking or clinic ads."),
     ],
   },
   "t-child": {
@@ -691,6 +791,78 @@ export const EN_PACKS: Record<string, TopicPack> = {
         "Daily disposables are single-use; no overnight wear unless a doctor has written otherwise with regular review",
         "Make-up after lenses in; remove lenses before make-up removal",
       ]),
+      h("Water and Acanthamoeba: why even a drop matters", "water-acanthamoeba"),
+      p("Acanthamoeba is widespread in environmental water (including tap-water systems). With a contact lens on, water can trap organisms between lens and cornea and raise Acanthamoeba keratitis (AK) risk. AK is uncommon but can be severely painful, hard to treat and sight-threatening — typical features are in the serious-complications table. This section is care education; it does not rank which solution “kills amoeba best”, and it does not promise zero AK with daily disposables."),
+      {
+        type: "table",
+        rows: [
+          ["Do not", "Do"],
+          [
+            "Rinse lenses or cases with tap, distilled or bottled water, or saliva",
+            "Use only the disinfection / care system your fitter directs; follow Hong Kong-registered labelling",
+          ],
+          ["Handle lenses with wet, undried hands", "Wash then dry hands thoroughly before touching lenses"],
+          [
+            "Shower, bathe, use hot tubs, swim in pools, sea or lakes in lenses",
+            "Remove lenses before water contact; after swimming do not treat a water-soaked lens as clean for next-day wear",
+          ],
+          [
+            "Top up old solution; leave the case where bathroom splash hits it",
+            "Fresh solution each time; rinse the case with solution (not water) and air-dry; keep care away from bathroom spray",
+          ],
+          [
+            "Assume “chlorinated pools make swimming in lenses safe”",
+            "Chlorine does not make swimming in lenses safe",
+          ],
+        ],
+      },
+      p("If a lens or case may have touched water: follow your fitter — often discard a daily disposable, or fully disinfect a reusable lens and decide whether to replace case/lens; if red, painful or light-sensitive, remove the lens and get same-day eye care — do not “wear one more night to see”."),
+      h("Orthokeratology (OK / ortho-K): overnight hygiene education", "ok-hygiene"),
+      p("OK is a rigid gas-permeable design worn at night to temporarily change daytime refraction. Overnight wear is linked with corneal infection risk; scarring after infection in children can affect visual development. This is hygiene and alert education — not efficacy, myopia-control magnitude or product comparison. Refractive rebound after stopping is expected; this page does not describe the eye axis as “shortened” by OK. Whether OK is used for myopia management is a prescribing / consent decision — this insert does not discuss or cite efficacy trial conclusions."),
+      ol([
+        "Before wear: wash and dry hands → inspect for cracks, deposits or damage → process with the directed system before inserting → after insertion, do not stay up long reading or on screens before sleep (routine follows the fitter)",
+        "Before sleep: confirm the lens is comfortable; sharp pain, severe foreign-body feel or abnormal blur — do not force sleep; remove and contact care",
+        "Morning removal: wash and dry hands → lubricate / mobilise as directed before removal (do not force a dry removal) → clean and disinfect at once; do not leave the lens on the sink “for later”",
+        "Cleaning: digital rub to clear deposits (even if a label says no-rub, many regimens still emphasise mechanical cleaning — follow written care) → discard old solution → soak in fresh solution for the full time → no tap water at any step",
+        "Case: empty daily; rinse with care solution (not water); air-dry face-down; replace if damaged; replace on schedule (about every three months is a common class of advice — follow your fitter)",
+        "Follow-up: keep reviews; discomfort, red, pain, photophobia or sudden vision drop → stop wear and same-day ophthalmology; do not “wear one more night to reshape”",
+        "Parent role: primary-school children often cannot judge contamination alone; supervise until the routine is stable",
+      ]),
+      ul([
+        "OK-specific do-nots: “rinse” a rigid lens under tap water; share lenses; wear a lost-and-found lens without full disinfection",
+        "Do not read temporary daytime blur reduction as “infection risk gone”; do not treat this site as “guaranteed-safe myopia treatment”",
+      ]),
+      h("Common myths (hygiene)"),
+      {
+        type: "table",
+        rows: [
+          ["Myth", "Closer to the evidence"],
+          [
+            "“Distilled / boiled-and-cooled water is clean enough”",
+            "Still not a contact-lens disinfection system; AK links to water exposure.",
+          ],
+          [
+            "“Wring out a daily disposable after swimming and reuse”",
+            "After water contact, discard it.",
+          ],
+          [
+            "“OK rigid lenses rarely get infected like soft lenses”",
+            "Rigid lenses can still cause MK / AK; overnight wear and hygiene still matter.",
+          ],
+          [
+            "“Top up solution to save money”",
+            "Avoid topping up.",
+          ],
+          [
+            "“A bit of redness will be fine after sleeping in them”",
+            "Red, pain, photophobia or vision change → remove and seek care.",
+          ],
+          [
+            "“Buy a steroid drop to clear the red”",
+            "Steroids can worsen infection.",
+          ],
+        ],
+      },
       h("Serious complications"),
       {
         type: "table",
@@ -716,7 +888,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
         "Contact-lens–related red painful photophobic eye without sudden blindness: same-day ophthalmic assessment; do not delay if pain continues after removal",
         "Do not self-start antibiotic or steroid drops",
       ]),
-      w("This page cannot judge infection from a photo. “Not very red” does not rule out keratitis. Care products follow Hong Kong registration — no brand pitch."),
+      w("This page cannot judge infection from a photo. “Not very red” does not rule out keratitis. Care products follow Hong Kong registration — no brand pitch. It does not claim to cure keratitis, and following every step does not promise zero infection."),
     ],
   },
   "t-steroid": {
@@ -1171,6 +1343,398 @@ export const EN_PACKS: Record<string, TopicPack> = {
       p("What to bring to A&E? A photo of the container or label; an MSDS/SDS if available; when the splash happened and how long you have irrigated; for workplace injury, notify a supervisor if you can."),
       p("Why not wait for a private clinic? A&E / emergency eye care can keep irrigating and remove residue; waiting for a clinic to open delays flushing."),
       note("Chemical splash: irrigate with lots of water for 20–30 minutes first, go to A&E while irrigating. Sudden vision drop or sudden blindness, or severe pain with headache and vomiting: go to A&E now. This page lists no clinic phones, does not compare clinics, and is not a surgery booking menu; this site does not refer."),
+    ],
+  },
+
+  "t-high-myopia-pathology": {
+    title:
+      "Long-term risks of high myopia: pathologic myopia, myopic maculopathy & retinal breaks",
+    tag: "Structural risks in depth",
+    meta: "Pathologic myopia · myopic maculopathy · tear / detachment",
+    blocks: [
+      h("What it is"),
+      p("High myopia usually means a deeper refractive error or a clearly longer eye (axial length). Most people with high myopia see well with spectacles or contact lenses day to day, but some eyes develop structural change over time. International literature calls the state with associated structural complications pathologic myopia; the cluster of degenerative changes at the macula is myopic maculopathy."),
+      p("Key concepts (public education only — not a diagnosis):"),
+      ul([
+        "Axial elongation: the eye lengthens front-to-back; the posterior retina, choroid and sclera are stretched and thinned.",
+        "Posterior staphyloma: local outward bulging of the posterior sclera, changing retinal forces and shape, and linked with some tractional macular disease.",
+        "Myopic maculopathy (a conceptual pathway — do not self-stage): from earlier tessellated fundus and diffuse/patchy chorioretinal atrophy toward macular atrophy; “plus” lesions include lacquer cracks, myopic choroidal neovascularisation (myopic CNV) and Fuchs spots, which more readily affect central vision.",
+        "Lacquer cracks: linear breaks in Bruch’s membrane and related complex, seen as fine yellowish-white lines; not immediate blindness by themselves, but an important harbinger of CNV.",
+        "Myopic CNV: abnormal vessels under the macula that may bleed or leak suddenly — often sudden central vision drop and distortion.",
+        "Myopic traction maculopathy (MTM): vitreoretinal traction plus staphyloma forces may cause foveoschisis / maculoschisis, lamellar or full-thickness macular hole, and in severe cases macular retinal detachment.",
+        "Peripheral retinal tear / retinal detachment: peripheral degeneration is more common in high myopia; a tear can lead to detachment — a different place and mechanism from maculopathy, but still a long-term high-myopia risk.",
+      ]),
+      p("This page deepens the high-myopia risk overview on the refractive-error topic, focusing on macular and peripheral structural change. It does not replace regular dilated fundus exams. Childhood / adolescent options a doctor may discuss for slowing progression are on another education page — a different layer from “structural risk already present”."),
+      h("Common symptoms"),
+      p("Early on, many people have no clear symptoms and changes are found only on routine checks. When structure changes, there may be: gradual or sudden central vision drop; metamorphopsia (straight lines bend, grids warp) — Amsler grid can help you notice; a central grey/black patch or “something covering” vision; a sudden surge of floaters and flashes; a curtain or shadow spreading across part of the field (high concern for retinal detachment); lower contrast and reading difficulty."),
+      note("Amsler grid (home monitoring concept): in good light, cover one eye and look at the centre spot. New warp, gaps or a dark patch: seek care promptly. It is only an alert aid and cannot replace an eye exam."),
+      h("Go to A&E now (if you cannot get there: call 999)"),
+      ul([
+        "Sudden many floaters plus flashes, or a curtain / spreading shadow (suspect retinal detachment)",
+        "Sudden clear drop in central vision with distortion or a central black spot (suspect macular bleed / myopic CNV)",
+        "Sudden monocular vision drop with severe eye pain, headache and nausea (rule out other emergencies such as acute glaucoma)",
+      ]),
+      h("Same-day dilated fundus exam when possible"),
+      ul([
+        "New warp or defect on Amsler",
+        "Central vision steadily worse over a few days",
+        "Known high myopia with new ongoing flashes or a clear increase in floaters — see an ophthalmologist as soon as possible",
+      ]),
+      h("Routine clinic follow-up"),
+      ul([
+        "Stable high myopia without new red flags: dilated fundus / OCT on the schedule your ophthalmologist sets",
+        "Known lacquer cracks, atrophy, staphyloma or tractional macular change: review interval adjusted to the eye",
+        "Children / teens still progressing: discussion of slowing progression belongs on the childhood-myopia education page — different from structural risk on this page",
+      ]),
+      h("What a doctor may do"),
+      p("Vision, refraction, pressure; visual field if needed; dilated fundus (posterior pole and periphery); OCT; fundus imaging; fluorescein angiography (FFA) when CNV is suspected; axial length / staphyloma assessment; optic-nerve evaluation if glaucoma is a concern. Individual — not a guaranteed checklist. Anti-VEGF injection or surgery are specialty-level class discussions only; this page lists no brand names and makes no outcome promises."),
+      h("Common myths"),
+      {
+        type: "table",
+        rows: [
+          ["Myth", "Closer to the evidence"],
+          [
+            "“Stable degree means no fundus problem”",
+            "After adult refraction is relatively stable, pathologic-myopia changes can still evolve with age and axial length.",
+          ],
+          [
+            "“Floaters always mean detachment”",
+            "Floaters are common; sudden increase plus flashes or a curtain is the red flag.",
+          ],
+          [
+            "“Distortion is only presbyopia / wrong glasses”",
+            "Central distortion warrants macular concern (including myopic CNV); use Amsler and get checked promptly.",
+          ],
+          [
+            "“Lacquer cracks mean I am already blind”",
+            "They are a structural warning needing follow-up — not the same as immediate blindness.",
+          ],
+          [
+            "“After refractive surgery there is no high-myopia risk”",
+            "Corneal refractive surgery mainly changes corneal power; axial length and fundus risk remain. Keep fundus follow-up as for high myopia.",
+          ],
+          [
+            "“A normal OCT means I never need another check”",
+            "Structure can change over time; interval is set by the doctor by risk.",
+          ],
+        ],
+      },
+      note("Public education only; not a consultation, booking or brand page; no cure or guarantee claims; anti-VEGF / surgery at concept level only; does not replace a face-to-face visit. Glaucoma and cataract are mentioned only briefly — see related topics."),
+    ],
+  },
+
+  "t-keratoconus": {
+    title: "Keratoconus: progression, acute hydrops, and care concepts",
+    tag: "Corneal ectasia",
+    meta: "Progression monitoring · acute hydrops · optics / CXL classes",
+    blocks: [
+      h("What it is"),
+      p("Keratoconus is a corneal ectatic disease: the central or paracentral cornea gradually thins and bulges forward in a cone shape, causing irregular astigmatism and deepening myopia. Vision blurs and spectacles often cannot fully correct it."),
+      p("Public-education points:"),
+      ul([
+        "Often found from adolescence to young adulthood; both eyes may be involved, but asymmetry is common.",
+        "Causes are multifactorial: genetic tendency, environment and behaviour (especially forceful eye rubbing and severe allergic eye disease).",
+        "Progression means ongoing steepening, thinning, or clear worsening of vision / refraction — whether it is “still progressing” needs serial topography / tomography comparison, not feeling alone.",
+        "Acute corneal hydrops: sudden break in Descemet’s membrane (and related structure), aqueous entering the stroma, rapid corneal clouding, sudden vision drop, irritation and pain — a known but relatively uncommon acute complication.",
+        "Two care layers (concepts): (1) slow or stop biomechanical worsening — corneal collagen cross-linking (CXL) class; (2) improve optical quality — spectacles, rigid gas-permeable lenses, scleral lenses and similar classes; transplantation is considered later.",
+      ]),
+      p("This page discusses classes and principles only — no brand comparison and no success rates. See related pages for refractive-surgery screening, allergy and rubbing, and contact-lens infection red flags."),
+      h("Common symptoms"),
+      ul([
+        "Gradual blur; astigmatism / myopia increasing clearly over a short period",
+        "Many pairs of glasses still unsatisfactory; ghosting, glare, poor night vision; one eye clearly worse",
+        "Young people who itch and rub often from allergy need particular attention",
+        "In acute hydrops: sudden worse blur in one eye, white cloudy cornea, light sensitivity, tearing, discomfort",
+        "Early disease can resemble “ordinary myopia and astigmatism”, so topography / tomography matters in screening (including before refractive surgery)",
+      ]),
+      h("Go to A&E now (if you cannot get there: call 999)"),
+      ul([
+        "Suspected acute hydrops: sudden vision drop, clearly cloudy/white cornea, severe pain or marked light sensitivity",
+        "Contact-lens-related severe red painful eye with heavy discharge — rule out infectious keratitis; do not delay if pain continues after lens removal",
+      ]),
+      h("Same-day / prompt ophthalmology when possible"),
+      ul([
+        "Large refraction change over a short time, or spectacles cannot bring one eye to a reasonable acuity — see an ophthalmologist as soon as possible",
+        "Known keratoconus with new pain or sudden worse blur",
+        "Newly diagnosed children / teens who need assessment of whether progression continues",
+      ]),
+      h("Routine clinic follow-up"),
+      ul([
+        "After diagnosis: repeat topography / tomography, refraction and contact-lens review on the schedule your doctor sets",
+        "Discussion of whether CXL assessment criteria are met (usually emphasises documented progression)",
+        "Allergy control and stop-rubbing education, plus prescription medicines when needed",
+      ]),
+      h("Tests, optics and CXL (classes)"),
+      ul([
+        "Tests: vision, refraction, slit lamp; corneal topography / tomography; thickness. Individual — not a guaranteed checklist",
+        "Optics: spectacles / soft lenses; RGP improves optics and does not by itself stop progression; scleral / mini-scleral; hybrid / piggyback classes — no brand names",
+        "CXL: riboflavin plus UVA aiming to strengthen biomechanics and slow or halt progression; epi-off has more public evidence; important to consider when progression is documented",
+        "Oral riboflavin does not replace a clinical CXL procedure; CXL does not guarantee return to “normal” vision",
+        "Late or severe scarring / extreme thinning: a specialist may discuss corneal transplant classes — individual judgement, no success-rate comparison",
+      ]),
+      h("Common myths"),
+      {
+        type: "table",
+        rows: [
+          ["Myth", "Closer to the evidence"],
+          [
+            "“Keratoconus is only a laser-surgery complication”",
+            "Keratoconus can exist on its own; pre-op screening is meant to find high-risk or unsuitable corneas.",
+          ],
+          [
+            "“Hard lenses stop the disease”",
+            "RGP mainly improves optics; it does not replace progression monitoring and CXL assessment.",
+          ],
+          [
+            "“CXL means vision will be normal”",
+            "CXL is mainly about biomechanical stability and slowing progression — not a vision guarantee.",
+          ],
+          [
+            "“Rubbing a bit is fine”",
+            "Forceful rubbing is linked with progression; treat allergy itch medically rather than as a habit.",
+          ],
+          [
+            "“Hydrops always means immediate transplant”",
+            "Hydrops is usually managed first; transplant timing is a specialty decision.",
+          ],
+          [
+            "“Children never get keratoconus”",
+            "Young people also need vigilance; after a new diagnosis, progression is often reassessed.",
+          ],
+        ],
+      },
+      note("Public education only; not a consultation, booking or brand page; no cure or guarantee claims; no device or lens trade names; does not replace a face-to-face visit."),
+    ],
+  },
+
+  "t-allergy-hk": {
+    title:
+      "Eye allergy and the Hong Kong environment: triggers, infection red flags, and when not to self-buy steroids",
+    tag: "Hong Kong environment triggers",
+    meta: "Dust mites · air-con indoors · do not self-buy steroids",
+    blocks: [
+      h("What it is"),
+      p("Ocular allergy (including allergic conjunctivitis) is conjunctival inflammation to allergens, often alongside nasal allergy. Versus viral/bacterial “red eye”, allergy highlights intense itch, usually watery discharge, often both eyes together or in sequence, and may recur with the environment. Milder seasonal/perennial disease is not the same severity as VKC/AKC (which can injure the cornea) — the latter must not be treated as ordinary red eye with self-bought drops (see the conjunctivitis overview; drug-class risks on the allergy treatment-principles page). This page does not replace the conjunctivitis overview; it covers Hong Kong environment triggers and when not to treat everything as ordinary eye allergy."),
+      h("Hong Kong environment: common triggers (qualitative)"),
+      p("In a subtropical city with sealed homes, humidity and long air-conditioning, indoor allergens are often discussed more than “one week of pollen spikes”. This is trigger education — not a prediction of what you are sensitised to. This page does not invent unverified city-wide eye-allergy prevalence percentages."),
+      h("1. House dust mites (year-round, mainly indoors)"),
+      p("Across much of Asia (including Hong Kong nasal-allergy research), house dust mites are an important — often the most common identifiable — inhalant allergen. They favour mattresses, soft toys, carpets and dampness. Itchy eyes worse on waking or after long time at home → think year-round indoor triggers. Environment steps (not a treatment promise): wash bedding at a suitable temperature and dry thoroughly; reduce excess humidity; cut down dust-trapping soft toys / heavy curtains; mite covers only if a doctor/allergy assessment suggests them. These steps do not replace seeking care for red flags."),
+      h("2. Air-conditioning and sealed indoors"),
+      p("Long air-conditioning can dry the ocular surface; people also stay in spaces with higher indoor allergen load. Dryness plus itch leads to rubbing and worse inflammation. Do not aim vents at the eyes; clean filters (reduce dust/mould irritation — not a promise to eliminate allergy)."),
+      h("3. Season and weather (qualitative)"),
+      p("Hong Kong may not have a single dominant pollen season; seasonal change, humid “returning damp”, pollution or dust events can worsen nose and eye symptoms. Asia reviews note combustion pollutants and environmental tobacco smoke can aggravate allergic rhinoconjunctivitis. Do not label every red eye viral/bacterial — and do not label every red eye allergy."),
+      h("4. Pollen and outdoors (qualitative)"),
+      p("Relative to indoor mites, pollen positives were less common in a Hong Kong chronic-rhinitis clinic skin-prick sample, but some people are still grass-sensitive. Itchy watery eyes after grass cutting or countryside time can be a history clue — this page does not quote a city-wide pollen-sensitisation population %."),
+      h("5. Other"),
+      ul([
+        "Pet dander and cockroach-related allergy",
+        "Contact lenses can trigger or worsen papillary conjunctivitis (see the contact-lens page); stop wear as advised when symptomatic",
+        "Misusing “get-the-red-out” drops (steroids or vasoconstrictors) can mask disease",
+      ]),
+      h("Common symptoms"),
+      ul([
+        "More like allergy: intense itch, tearing, mild–moderate redness, watery discharge, often both eyes, may have nasal symptoms, linked to environment",
+        "Raise concern: severe pain, marked light sensitivity, vision drop, thick purulent discharge, one eye rapidly worse, a white corneal spot, contact-lens-related red pain — rule out keratitis / infectious conjunctivitis",
+        "Children/teens with long intense itch plus giant papillae on the upper lid and corneal involvement: think VKC and similar — do not self-buy steroids as “ordinary pollen eye”",
+      ]),
+      h("Go to A&E now (if you cannot get there: call 999)"),
+      ul([
+        "Severe eye pain with headache and vomiting — rule out acute angle-closure glaucoma and similar",
+        "Sudden vision drop or sudden blindness",
+      ]),
+      h("Same-day ophthalmic assessment when possible"),
+      ul([
+        "Severe light sensitivity / severe pain — see an ophthalmologist as soon as possible",
+        "Contact-lens-related red pain and light sensitivity: remove lenses at once; if pain continues after removal, do not delay",
+        "Suspected corneal involvement, blur, purulent discharge with acute one-eye worsening",
+        "Worsening after using unknown “strong” eye drops",
+      ]),
+      h("Clinic (still do not wait indefinitely)"),
+      ul([
+        "Recurrent itch affecting sleep, school or work",
+        "Clear nasal allergy, asthma or atopic dermatitis as well",
+        "Need to decide on allergen testing or whether further self-medication is unsuitable",
+      ]),
+      h("Tests (education level)"),
+      p("Slit lamp ± fluorescein to exclude keratitis; history of contact lenses, recent infection, contagious contacts, medicines (especially steroids); allergen assessment (skin-prick / specific IgE) only if a doctor decides it is needed. Photos cannot diagnose."),
+      h("When not to self-buy or continue steroid eye drops"),
+      p("Behaviour red lines; pharmacology and class risks sit on the allergic-conjunctivitis treatment-principles page (this page does not rewrite that monograph)."),
+      ol([
+        "Without a prescription, do not buy “strong / steroid” drops to clear redness — infection can worsen",
+        "If you were prescribed steroids before, do not extend, double or share with family; pressure / cataract / infection risks are on the drug-principles page",
+        "Itch alone is not a licence for steroids; milder cases start with trigger avoidance, cool compresses, and discussion of antihistamine / mast-cell stabiliser classes",
+        "VKC/AKC or corneal involvement: specialty care — do not order overseas preparations online",
+        "Contact-lens red pain: remove lenses and seek care; do not keep wearing while putting in steroids",
+      ]),
+      p("Even non-steroid over-the-counter drops need registered ingredients locally; this page does not promote brands."),
+      h("Common myths"),
+      {
+        type: "table",
+        rows: [
+          ["Myth", "Closer to the evidence"],
+          [
+            "“No pollen in Hong Kong means no eye allergy”",
+            "Year-round indoor mites and similar triggers are discussed more often.",
+          ],
+          [
+            "“Air-con means no allergy”",
+            "Air-con keeps people in indoor allergen spaces and can worsen dryness.",
+          ],
+          [
+            "“If it itches, buy a steroid”",
+            "Other diseases must be excluded; steroids are not a DIY OTC plan.",
+          ],
+          [
+            "“Both eyes = infection; one eye = allergy”",
+            "Both eyes can be allergy or infection; acute one-eye severe pain and light sensitivity needs keratitis ruled out.",
+          ],
+          [
+            "“Share eye-drop bottles”",
+            "Contamination and cross-infection risk — do not share.",
+          ],
+          [
+            "“Blast a fan at the eyes”",
+            "Worsens dryness; do not aim airflow at the eyes.",
+          ],
+        ],
+      },
+      note("Public education only; not consultation, booking, purchase or referral; no cure or guarantee claims; no unverified city-wide prevalence figures; do not teach self-buying or extending steroid eye drops. Drug monograph on a separate page."),
+    ],
+  },
+
+  "t-bluelight": {
+    title: "Blue light and screens: common myths",
+    tag: "Myth-bust",
+    meta: "Digital eye strain · not a product pitch · AAO / Cochrane",
+    blocks: [
+      p("Public education; does not replace a visit; no booking, purchase or referral. Not a medical advertisement; no spectacle, film, supplement or device brands."),
+      h("Separate two things first"),
+      ol([
+        "Sunlight includes UV and a large amount of visible light (including blue). Long excess UV relates to some surface and intraocular risks; outdoors, shade / hat / proper sunglasses make sense — that is not the same issue as a phone “blue-filter” sticker.",
+        "Phone / tablet / computer screens are mainly visible light (with some blue), at far lower energy than daylight. American Academy of Ophthalmology (AAO): there is currently no scientific evidence that digital-device light damages the eyes; special “blue-blocking” glasses for computer use are not recommended.",
+      ]),
+      h("Myth 1: “Screen blue light ruins the retina / causes macular degeneration”"),
+      p("At ordinary daily use levels, there is no clinical evidence adequate to support “screen blue light causes human retinal toxicity / AMD”. AAO: cell and animal blue-light experiments do not mimic a human eye with a computer screen; there is no meaningful link between screen blue light and human retinal damage or AMD."),
+      w("Sudden vision drop, a field defect, many new floaters or flashes: go to A&E now (if you cannot get there: call 999) — unrelated to whether you buy a blue-blocking product."),
+      h("Myth 2: “Dry, aching eyes and headache mean blue-light injury, so buy blue blockers”"),
+      p("More often this is digital eye strain: long near work, fewer blinks, unstable tear film → dryness, ache, temporary blur; posture, distance, glare and room lighting also matter. AAO: discomfort comes from how you use the device, not from the screen “emitting a toxin”."),
+      ul([
+        "Comfort habits (comfort advice, not a treatment promise): look into the distance on a schedule (“20-20-20” is a memory aid, not a prescription)",
+        "Screen about an arm’s length, gaze slightly downward; cut glare; reduce harsh brightness contrast",
+        "For dryness, lubricating drops may ease symptoms locally — ongoing problems need an eye assessment",
+        "Contact-lens wearers may alternate with spectacles to ease dryness (comfort tip, not a treatment promise)",
+      ]),
+      h("Myth 3: “Blue-blocking glasses / films are proven to protect the macula and cure eye strain”"),
+      p("Cochrane 2023 (CD013244): versus non-filtering lenses, blue-filtering spectacles probably give little or no short-term relief of computer eye strain; little or no effect on best-corrected acuity; sleep evidence is unclear; included trials did not report macular-health outcomes that could support such claims. Author team: current evidence does not support routinely prescribing blue-filtering lenses to the general public."),
+      p("This site: does not sell, recommend or rank any blue-blocking brand; does not publish homemade safe wavelength / illuminance cut-off tables; marketing that claims “prevent eye disease / protect the macula / treat eye strain” warrants caution about improper medical advertising."),
+      h("Sleep and evening screens"),
+      p("Blue light can affect circadian rhythm. AAO: reduce screens about two to three hours before bed; night / dark mode may help — you do not need to buy separate blue-blocking glasses for this. Ongoing sleep problems belong with a family doctor and similar — this page does not diagnose insomnia."),
+      h("Children and screens"),
+      p("AAO: no evidence that screens harm children’s eyes or the developing visual system; limits may still be set for learning, sleep, outdoor time and other reasons. Childhood myopia and outdoor time are on the childhood-myopia page and the outdoor tool — those cover daylight / outdoor epidemiology, not “blue-blocking glasses instead of outdoors”."),
+      h("What this page is not"),
+      ul([
+        "Not a substitute for diagnosis; not a product manual",
+        "Not a slogan war of “blue light harmful vs harmless” — it follows checked AAO and Cochrane public positions to reduce panic buying",
+      ]),
+      note("Literature links are public education sources, not sales. Figures and conclusions stay in the source context — not a personal prognosis. No booking, purchase or referral."),
+    ],
+  },
+
+  "t-screen": {
+    title: "Screens and the eyes",
+    tag: "See blue-light topic",
+    meta: "Body lives on the blue-light myth-bust page",
+    blocks: [
+      p("Screen use, digital eye strain and “blue-blocking” product myths are collected on “Blue light and screens: common myths” so two pages do not drift apart. Open that topic for the full text; this page has no second body."),
+      note("Public education; no blue-blocking brands or films; no booking or purchase."),
+    ],
+  },
+
+  "t-colour-vision": {
+    title: "Colour vision deficiency: congenital vs acquired",
+    tag: "Colour vision education",
+    meta: "Stable congenital vs acquired warning · no fitness-to-drive ruling",
+    blocks: [
+      h("What it is"),
+      p("Colour vision is the ability of the eyes and brain to tell colours apart. Colour vision deficiency (CVD; often called colour weakness / colour blindness) is broadly congenital or acquired. This page does not quote “X% of males” prevalence figures."),
+      h("1. Congenital colour vision deficiency"),
+      ul([
+        "Usually cone photopigment gene variants; red–green (protan / deutan) is common",
+        "Often X-linked, so males are found more often; typically both eyes, from childhood, relatively stable — not an inflammatory disease",
+        "Congenital blue–yellow (tritan) types are less common",
+        "Key point: most congenital CVD cannot be “cured” with medicines; early recognition, compensation, and understanding school / work needs matter",
+      ]),
+      h("2. Acquired colour vision deficiency"),
+      ul([
+        "Appears later from eye disease, optic neuropathy, brain visual pathways, systemic disease, or some drug / chemical toxicities",
+        "May be more obvious in one eye; may fluctuate or worsen; may accompany acuity or field change",
+        "Köllner’s rule (rough, not absolute): early acquired blue–yellow more often linked with retina / outer layers or optical media; red–green more often with optic nerve / inner layers — late disease or some toxicities may not fit",
+        "Acquired CVD can be a signal to find a cause — not simply “born colour weak”",
+      ]),
+      h("Test names (classes, not products)"),
+      ul([
+        "Pseudoisochromatic plate screening (Ishihara-class): common red–green screen; pass/fail alone does not set severity or an occupational decision",
+        "Arrangement / sorting tests (Farnsworth D-15, HRR and similar classes): help type and rough severity",
+        "Anomaloscope: one specialty reference standard; not stocked in every clinic",
+        "Online self-test charts are unreliable and are not formal reports",
+      ]),
+      h("Common symptoms"),
+      ul([
+        "Congenital: lifelong trouble with some red/green objects, wires, map legends, medicine labels; worse in dim light / low contrast; daily life often manageable, but exams / design / some jobs are affected",
+        "Acquired (higher concern): colours that used to be normal now look washed, yellowed, bluer or harder to tell apart; with vision drop, field loss, pupil change, eye pain or neurological symptoms; colour change after a medicine (tell the prescribing doctor and an ophthalmologist)",
+      ]),
+      h("Go to A&E now (if you cannot get there: call 999)"),
+      ul([
+        "Sudden colour-vision change plus sudden vision drop, field loss, double vision, severe headache, or eye pain with nausea — rule out optic-nerve / retinal / neurological emergencies",
+      ]),
+      h("Same-day / prompt assessment"),
+      ul([
+        "New colour-vision change (especially one eye) — see an ophthalmologist as soon as possible",
+        "Difficulty telling colours while on medicines that may affect optic nerve / retina",
+        "A child needing a formal colour-vision report before school entry or subject choice",
+      ]),
+      h("Clinic"),
+      ul([
+        "Suspected congenital CVD: type and daily-living advice",
+        "Work or driving questions (qualitative; Hong Kong law / employers / Transport Department govern)",
+        "Colour assessment as part of follow-up for chronic eye disease",
+      ]),
+      h("Work / driving (qualitative — no local score cut-offs)"),
+      p("Whether private-car driving requires colour-vision pass varies by place; some guidance notes private and commercial standards may differ, and people with marked deficiency should still learn traffic-light position and adaptation. Aviation, maritime, rail, electrical, chemical, dyeing, some disciplined services / healthcare roles may have separate employer or regulator rules, often needing named tests beyond plates alone. For Hong Kong specifics, check the Transport Department, the relevant regulator, or occupational health at the employer — this site does not decide individual fitness."),
+      h("What a doctor may do"),
+      p("History (lifelong / family / one or both eyes / medicines / systemic disease / toxins); acuity, pupils, anterior segment and fundus; for acquired CVD, closer optic-nerve and macular review; a colour-test battery; field, OCT, electrophysiology, neuroimaging or toxicity work-up when needed. Congenital: genetics and adaptation — generally no “cure course” to sell. Acquired: find and manage reversible causes (registered doctor decides)."),
+      h("Common myths"),
+      {
+        type: "table",
+        rows: [
+          ["Myth", "Closer to the evidence"],
+          [
+            "“Colour blind means seeing no colour at all”",
+            "Most people confuse some colours; the world is not simply black and white.",
+          ],
+          [
+            "“Failing a plate test means you can never drive”",
+            "Rules vary by place and vehicle class; check official Transport Department requirements.",
+          ],
+          [
+            "“Eye supplements cure colour weakness”",
+            "Congenital photopigment anomalies are not generally corrected by supplements.",
+          ],
+          [
+            "“One childhood test lasts for life”",
+            "Congenital CVD is relatively stable; later change raises acquired concern.",
+          ],
+          [
+            "“Acquired colour change is always minor”",
+            "It can be an early clue to optic-nerve or macular disease.",
+          ],
+          [
+            "“Special glasses mean you will pass occupational colour standards”",
+            "Filter aids are personal assists; formal occupational tests follow the regulator — this site makes no pass promise.",
+          ],
+        ],
+      },
+      note("Public education only; no clinic, brand filters, supplements or “correction courses”; Ishihara and similar are method-class names only; no driving / occupational fitness ruling; does not replace a face-to-face visit."),
     ],
   },
 
