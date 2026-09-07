@@ -316,6 +316,39 @@ export const CITE: Record<string, Citation> = {
     source: "Am J Rhinol Allergy. 2011;25(6):e185-e190",
     note: "亞太過敏調查。燃料燃燒污染物、環境煙草煙霧等可加劇過敏性鼻結膜炎的公開討論依據之一。",
   },
+  aaoBlueGlasses: {
+    id: "aaoBlueGlasses",
+    authors: "American Academy of Ophthalmology (AAO)",
+    title: "Are Blue Light-Blocking Glasses Worth It?",
+    source:
+      "AAO Eye Health. https://www.aao.org/eye-health/tips-prevention/are-computer-glasses-worth-it",
+    note: "公開患者教育：目前沒有科學證據顯示電腦屏幕光損害眼睛；學會不建議為用電腦購買特別眼鏡；不適多與使用方式（眨眼減少等）有關。連結非售賣。",
+  },
+  aaoBlueWorry: {
+    id: "aaoBlueWorry",
+    authors: "American Academy of Ophthalmology (AAO)",
+    title: "Should You Be Worried About Blue Light?",
+    source:
+      "AAO Eye Health. https://www.aao.org/eye-health/tips-prevention/should-you-be-worried-about-blue-light",
+    note: "公開患者教育：沒有證據顯示數碼裝置藍光傷害眼睛；陽光是最大藍光源；屏幕遠低於日照。連結非售賣。",
+  },
+  aaoDigitalDevices: {
+    id: "aaoDigitalDevices",
+    authors: "American Academy of Ophthalmology (AAO)",
+    title: "Digital Devices and Your Eyes",
+    source:
+      "AAO Eye Health. https://www.aao.org/eye-health/tips-prevention/digital-devices-your-eyes",
+    note: "公開患者教育：細胞／動物藍光實驗並未模擬真人眼＋屏幕；與人類視網膜損害／AMD 沒有有意義關聯；數碼不適與藍光無必然關係。連結非售賣。",
+  },
+  singh2023cochrane: {
+    id: "singh2023cochrane",
+    authors: "Singh S, et al.",
+    title:
+      "Blue-light filtering spectacle lenses for visual performance, sleep, and macular health in adults",
+    source:
+      "Cochrane Database Syst Rev. 2023;(8):CD013244. DOI 10.1002/14651858.CD013244.pub2",
+    note: "相對非過濾鏡片：短期內大概很少或不能減輕電腦相關視疲勞；對最佳矯正視力大概很少或無影響；睡眠證據不清；納入試驗沒有可據以下結論的黃斑健康結果。本站不自製 nm／lux 截止表。",
+  },
 };
 
 export function citationsFor(ids: string[]): Citation[] {

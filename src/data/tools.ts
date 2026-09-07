@@ -79,6 +79,19 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-keratoconus", label: "圓錐角膜（揉眼相關）" },
     { href: "/c/surface", label: "角膜與眼表" },
   ],
+  "t-bluelight": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-myopia", label: "兒童近視控制" },
+    { href: "/tools/outdoor", label: "兒童戶外時間" },
+    { href: "/t/d2", label: "乾眼症" },
+    { href: "/t/t-lube", label: "潤眼液與潤滑劑" },
+    { href: "/t/d5", label: "年齡相關性黃斑病變" },
+  ],
+  "t-screen": [
+    { href: "/t/t-bluelight", label: "藍光與屏幕：常見誤解（完整正文）" },
+    { href: "/tools/outdoor", label: "兒童戶外時間" },
+    { href: "/t/t-myopia", label: "兒童近視控制" },
+  ],
   d8: [{ href: "/tools/floaters", label: "飛蚊與簾幕" }, { href: "/t/t-rd", label: "脫離手術與風險" }, { href: "/t/t-uveitis", label: "葡萄膜炎" }],
   d9: [
     { href: "/tools/warm", label: "熱敷計時" },

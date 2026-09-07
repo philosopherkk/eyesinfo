@@ -1432,4 +1432,52 @@ export const EN_PACKS: Record<string, TopicPack> = {
     ],
   },
 
+  "t-bluelight": {
+    title: "Blue light and screens: common myths",
+    tag: "Myth-bust",
+    meta: "Digital eye strain · not a product pitch · AAO / Cochrane",
+    blocks: [
+      p("Public education; does not replace a visit; no booking, purchase or referral. Not a medical advertisement; no spectacle, film, supplement or device brands."),
+      h("Separate two things first"),
+      ol([
+        "Sunlight includes UV and a large amount of visible light (including blue). Long excess UV relates to some surface and intraocular risks; outdoors, shade / hat / proper sunglasses make sense — that is not the same issue as a phone “blue-filter” sticker.",
+        "Phone / tablet / computer screens are mainly visible light (with some blue), at far lower energy than daylight. American Academy of Ophthalmology (AAO): there is currently no scientific evidence that digital-device light damages the eyes; special “blue-blocking” glasses for computer use are not recommended.",
+      ]),
+      h("Myth 1: “Screen blue light ruins the retina / causes macular degeneration”"),
+      p("At ordinary daily use levels, there is no clinical evidence adequate to support “screen blue light causes human retinal toxicity / AMD”. AAO: cell and animal blue-light experiments do not mimic a human eye with a computer screen; there is no meaningful link between screen blue light and human retinal damage or AMD."),
+      w("Sudden vision drop, a field defect, many new floaters or flashes: go to A&E now (if you cannot get there: call 999) — unrelated to whether you buy a blue-blocking product."),
+      h("Myth 2: “Dry, aching eyes and headache mean blue-light injury, so buy blue blockers”"),
+      p("More often this is digital eye strain: long near work, fewer blinks, unstable tear film → dryness, ache, temporary blur; posture, distance, glare and room lighting also matter. AAO: discomfort comes from how you use the device, not from the screen “emitting a toxin”."),
+      ul([
+        "Comfort habits (comfort advice, not a treatment promise): look into the distance on a schedule (“20-20-20” is a memory aid, not a prescription)",
+        "Screen about an arm’s length, gaze slightly downward; cut glare; reduce harsh brightness contrast",
+        "For dryness, lubricating drops may ease symptoms locally — ongoing problems need an eye assessment",
+        "Contact-lens wearers may alternate with spectacles to ease dryness (comfort tip, not a treatment promise)",
+      ]),
+      h("Myth 3: “Blue-blocking glasses / films are proven to protect the macula and cure eye strain”"),
+      p("Cochrane 2023 (CD013244): versus non-filtering lenses, blue-filtering spectacles probably give little or no short-term relief of computer eye strain; little or no effect on best-corrected acuity; sleep evidence is unclear; included trials did not report macular-health outcomes that could support such claims. Author team: current evidence does not support routinely prescribing blue-filtering lenses to the general public."),
+      p("This site: does not sell, recommend or rank any blue-blocking brand; does not publish homemade safe wavelength / illuminance cut-off tables; marketing that claims “prevent eye disease / protect the macula / treat eye strain” warrants caution about improper medical advertising."),
+      h("Sleep and evening screens"),
+      p("Blue light can affect circadian rhythm. AAO: reduce screens about two to three hours before bed; night / dark mode may help — you do not need to buy separate blue-blocking glasses for this. Ongoing sleep problems belong with a family doctor and similar — this page does not diagnose insomnia."),
+      h("Children and screens"),
+      p("AAO: no evidence that screens harm children’s eyes or the developing visual system; limits may still be set for learning, sleep, outdoor time and other reasons. Childhood myopia and outdoor time are on the childhood-myopia page and the outdoor tool — those cover daylight / outdoor epidemiology, not “blue-blocking glasses instead of outdoors”."),
+      h("What this page is not"),
+      ul([
+        "Not a substitute for diagnosis; not a product manual",
+        "Not a slogan war of “blue light harmful vs harmless” — it follows checked AAO and Cochrane public positions to reduce panic buying",
+      ]),
+      note("Literature links are public education sources, not sales. Figures and conclusions stay in the source context — not a personal prognosis. No booking, purchase or referral."),
+    ],
+  },
+
+  "t-screen": {
+    title: "Screens and the eyes",
+    tag: "See blue-light topic",
+    meta: "Body lives on the blue-light myth-bust page",
+    blocks: [
+      p("Screen use, digital eye strain and “blue-blocking” product myths are collected on “Blue light and screens: common myths” so two pages do not drift apart. Open that topic for the full text; this page has no second body."),
+      note("Public education; no blue-blocking brands or films; no booking or purchase."),
+    ],
+  },
+
 };
