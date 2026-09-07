@@ -19,6 +19,8 @@ export const EN_PACKS: Record<string, TopicPack> = {
       p("Light does not focus on the retina. Myopia blurs distance; hyperopia makes near work effortful; astigmatism distorts. Presbyopia is loss of lens focusing with age — strictly a decline in accommodation, not a classic refractive error, grouped here because the optical approaches overlap. In Hong Kong, 100 degrees = 1.00 D; high myopia is usually ≥ 600 degrees (−6.00 D). Myopia is often axial. About 1 mm of extra axial length is roughly 2.5–3.00 D. Myopia is very common in local schoolchildren. Earlier school screening reports could exceed 80% in secondary school; more recent larger questionnaire surveys are about 60–70%. Figures depend on the method."),
       h("Long-term risks of high myopia (≥ 600 degrees)"),
       ul(["Retinal tear or detachment", "Myopic maculopathy", "Glaucoma and early cataract"]),
+      p("If you have high myopia and new flashes or a clear increase in floaters: same-day dilated fundus exam. A curtain or sudden vision drop: go to A&E now. For a deeper explanation of pathologic myopia, myopic maculopathy and retinal breaks, see the dedicated high-myopia risks page."),
+      w("The eye axis cannot be shortened. Childhood myopia control aims to slow progression and lower the chance of ending with high myopia — it is not a “cure” for the degree. Laser refractive or lens surgery changes focus; it does not remove the fundus risks of high myopia."),
       h("What a doctor may discuss"),
       ul(["Spectacles or contact lenses after refraction; high myopia needs regular dilated fundus exams by an ophthalmologist", "If you have high myopia and new flashes or a clear increase in floaters: same-day dilated fundus exam. A curtain or sudden vision drop: go to A&E now.", "Childhood myopia: outdoor daylight is associated with slower onset (shade and corridors count). How long per day is a public-health suggestion, not a personal prescription and not the “most important / most effective” treatment. See the childhood-myopia page.", "Myopia-control options for children are discussed on the dedicated page — not a product pitch", "Presbyopia: reading glasses, progressive lenses, or, after cataract assessment, lens options"]),
     ],
@@ -1171,6 +1173,83 @@ export const EN_PACKS: Record<string, TopicPack> = {
       p("What to bring to A&E? A photo of the container or label; an MSDS/SDS if available; when the splash happened and how long you have irrigated; for workplace injury, notify a supervisor if you can."),
       p("Why not wait for a private clinic? A&E / emergency eye care can keep irrigating and remove residue; waiting for a clinic to open delays flushing."),
       note("Chemical splash: irrigate with lots of water for 20–30 minutes first, go to A&E while irrigating. Sudden vision drop or sudden blindness, or severe pain with headache and vomiting: go to A&E now. This page lists no clinic phones, does not compare clinics, and is not a surgery booking menu; this site does not refer."),
+    ],
+  },
+
+  "t-high-myopia-pathology": {
+    title:
+      "Long-term risks of high myopia: pathologic myopia, myopic maculopathy & retinal breaks",
+    tag: "Structural risks in depth",
+    meta: "Pathologic myopia · myopic maculopathy · tear / detachment",
+    blocks: [
+      h("What it is"),
+      p("High myopia usually means a deeper refractive error or a clearly longer eye (axial length). Most people with high myopia see well with spectacles or contact lenses day to day, but some eyes develop structural change over time. International literature calls the state with associated structural complications pathologic myopia; the cluster of degenerative changes at the macula is myopic maculopathy."),
+      p("Key concepts (public education only — not a diagnosis):"),
+      ul([
+        "Axial elongation: the eye lengthens front-to-back; the posterior retina, choroid and sclera are stretched and thinned.",
+        "Posterior staphyloma: local outward bulging of the posterior sclera, changing retinal forces and shape, and linked with some tractional macular disease.",
+        "Myopic maculopathy (a conceptual pathway — do not self-stage): from earlier tessellated fundus and diffuse/patchy chorioretinal atrophy toward macular atrophy; “plus” lesions include lacquer cracks, myopic choroidal neovascularisation (myopic CNV) and Fuchs spots, which more readily affect central vision.",
+        "Lacquer cracks: linear breaks in Bruch’s membrane and related complex, seen as fine yellowish-white lines; not immediate blindness by themselves, but an important harbinger of CNV.",
+        "Myopic CNV: abnormal vessels under the macula that may bleed or leak suddenly — often sudden central vision drop and distortion.",
+        "Myopic traction maculopathy (MTM): vitreoretinal traction plus staphyloma forces may cause foveoschisis / maculoschisis, lamellar or full-thickness macular hole, and in severe cases macular retinal detachment.",
+        "Peripheral retinal tear / retinal detachment: peripheral degeneration is more common in high myopia; a tear can lead to detachment — a different place and mechanism from maculopathy, but still a long-term high-myopia risk.",
+      ]),
+      p("This page deepens the high-myopia risk overview on the refractive-error topic, focusing on macular and peripheral structural change. It does not replace regular dilated fundus exams. Childhood / adolescent myopia control is on another page — a different layer from “structural risk already present”."),
+      h("Common symptoms"),
+      p("Early on, many people have no clear symptoms and changes are found only on routine checks. When structure changes, there may be: gradual or sudden central vision drop; metamorphopsia (straight lines bend, grids warp) — Amsler grid can help you notice; a central grey/black patch or “something covering” vision; a sudden surge of floaters and flashes; a curtain or shadow spreading across part of the field (high concern for retinal detachment); lower contrast and reading difficulty."),
+      note("Amsler grid (home monitoring concept): in good light, cover one eye and look at the centre spot. New warp, gaps or a dark patch: seek care promptly. It is only an alert aid and cannot replace an eye exam."),
+      h("Go to A&E now (if you cannot get there: call 999)"),
+      ul([
+        "Sudden many floaters plus flashes, or a curtain / spreading shadow (suspect retinal detachment)",
+        "Sudden clear drop in central vision with distortion or a central black spot (suspect macular bleed / myopic CNV)",
+        "Sudden monocular vision drop with severe eye pain, headache and nausea (rule out other emergencies such as acute glaucoma)",
+      ]),
+      h("Same-day dilated fundus exam when possible"),
+      ul([
+        "New warp or defect on Amsler",
+        "Central vision steadily worse over a few days",
+        "Known high myopia with new ongoing flashes or a clear increase in floaters — see an ophthalmologist as soon as possible",
+      ]),
+      h("Routine clinic follow-up"),
+      ul([
+        "Stable high myopia without new red flags: dilated fundus / OCT on the schedule your ophthalmologist sets",
+        "Known lacquer cracks, atrophy, staphyloma or tractional macular change: review interval adjusted to the eye",
+        "Children / teens still progressing: myopia-control discussion belongs on the childhood-myopia page — different from structural risk on this page",
+      ]),
+      h("What a doctor may do"),
+      p("Vision, refraction, pressure; visual field if needed; dilated fundus (posterior pole and periphery); OCT; fundus imaging; fluorescein angiography (FFA) when CNV is suspected; axial length / staphyloma assessment; optic-nerve evaluation if glaucoma is a concern. Individual — not a guaranteed checklist. Anti-VEGF injection or surgery are specialty-level class discussions only; this page lists no brand names and makes no outcome promises."),
+      h("Common myths"),
+      {
+        type: "table",
+        rows: [
+          ["Myth", "Closer to the evidence"],
+          [
+            "“Stable degree means no fundus problem”",
+            "After adult refraction is relatively stable, pathologic-myopia changes can still evolve with age and axial length.",
+          ],
+          [
+            "“Floaters always mean detachment”",
+            "Floaters are common; sudden increase plus flashes or a curtain is the red flag.",
+          ],
+          [
+            "“Distortion is only presbyopia / wrong glasses”",
+            "Central distortion warrants macular concern (including myopic CNV); use Amsler and get checked promptly.",
+          ],
+          [
+            "“Lacquer cracks mean I am already blind”",
+            "They are a structural warning needing follow-up — not the same as immediate blindness.",
+          ],
+          [
+            "“After refractive surgery there is no high-myopia risk”",
+            "Corneal refractive surgery mainly changes corneal power; axial length and fundus risk remain. Keep fundus follow-up as for high myopia.",
+          ],
+          [
+            "“A normal OCT means I never need another check”",
+            "Structure can change over time; interval is set by the doctor by risk.",
+          ],
+        ],
+      },
+      note("Public education only; not a consultation, booking or brand page; no cure or guarantee claims; anti-VEGF / surgery at concept level only; does not replace a face-to-face visit. Glaucoma and cataract are mentioned only briefly — see related topics."),
     ],
   },
 

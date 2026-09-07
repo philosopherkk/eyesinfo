@@ -92,9 +92,19 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   d1: [
     { href: "/tools/rx", label: "眼鏡度數解讀" },
     { href: "/tools/outdoor", label: "兒童戶外時間" },
+    { href: "/t/t-high-myopia-pathology", label: "高度近視長遠風險（病理近視）" },
     { href: "/t/t-presbyopia", label: "老花五類選擇" },
     { href: "/t/t-lasik", label: "LASIK 與 SMILE" },
     { href: "/t/t-cl", label: "隱形眼鏡併發症" },
+  ],
+  "t-high-myopia-pathology": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/amsler", label: "阿姆斯勒方格" },
+    { href: "/t/d1", label: "屈光不正總覽" },
+    { href: "/t/d8", label: "飛蚊與視網膜脫離風險" },
+    { href: "/tools/floaters", label: "飛蚊與簾幕" },
+    { href: "/t/t-myopia", label: "兒童近視控制" },
+    { href: "/t/d5", label: "年齡相關性黃斑病變" },
   ],
   "t-yag": [{ href: "/t/t-yag", label: "後囊混濁（不是白內障復發）" }],
   "t-glaucoma": [

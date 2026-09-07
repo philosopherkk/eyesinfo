@@ -201,6 +201,55 @@ export const CITE: Record<string, Citation> = {
     pmid: "9742976",
     note: "血糖控制與微血管併發症（包括視網膜病變）有關。內科跟進血糖；眼科做眼底。",
   },
+  flitcroft2019: {
+    id: "flitcroft2019",
+    authors: "Flitcroft DI, He M, Jonas JB, et al.",
+    title: "IMI – Defining and Classifying Myopia: A Proposed Set of Standards for Clinical and Epidemiologic Studies",
+    source: "Invest Ophthalmol Vis Sci. 2019;60(3):M20-M30",
+    pmid: "30817826",
+    note: "國際近視研究所（IMI）對近視／高度近視／病理近視等定義與分類的公開標準。教育用；不作個人診斷。",
+  },
+  ohnoMatsui2015: {
+    id: "ohnoMatsui2015",
+    authors: "Ohno-Matsui K, Kawasaki R, Jonas JB, et al.",
+    title:
+      "International photographic classification and grading system for myopic maculopathy",
+    source: "Am J Ophthalmol. 2015;159(5):877-883.e7",
+    pmid: "25634530",
+    note: "META-PM 近視性黃斑病變影像分級。概念進程教育；不可自行對號入座。",
+  },
+  cheung2017: {
+    id: "cheung2017",
+    authors: "Cheung CMG, Arnold JJ, Holz FG, et al.",
+    title: "Myopic Choroidal Neovascularization: Review, Guidance, and Consensus Statement on Management",
+    source: "Ophthalmology. 2017;124(11):1690-1711",
+    pmid: "28655539",
+    note: "近視性脈絡膜新生血管（myopic CNV）共識。抗 VEGF 等屬專科類別討論，本站不列商品名。",
+  },
+  haarman2020: {
+    id: "haarman2020",
+    authors: "Haarman AEG, Enthoven CA, Tideman JWL, et al.",
+    title: "The Complications of Myopia: A Review and Meta-Analysis",
+    source: "Invest Ophthalmol Vis Sci. 2020;61(4):49",
+    pmid: "32347918",
+    note: "近視併發症綜述與統合分析。本頁正文採定性表述，不羅列個人終生風險百分比。",
+  },
+  ueta2020: {
+    id: "ueta2020",
+    authors: "Ueta T",
+    title: "Pathologic myopia: an overview of the current understanding and challenges",
+    source: "Glob Health Med. 2020;2(3):151-155",
+    pmid: "33330799",
+    note: "病理近視概覽。公開教育層次。",
+  },
+  akduman2023: {
+    id: "akduman2023",
+    authors: "Akduman L",
+    title: "Management of Myopic Maculopathy: Review of Evidence",
+    source: "Turk J Ophthalmol. 2023;53(5):307-314",
+    pmid: "37870043",
+    note: "近視性黃斑病變處理綜述。治療屬專科個別評估；本頁不作療效保證。",
+  },
 };
 
 export function citationsFor(ids: string[]): Citation[] {
