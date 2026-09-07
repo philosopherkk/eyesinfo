@@ -106,6 +106,26 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-myopia", label: "兒童近視控制" },
     { href: "/t/d5", label: "年齡相關性黃斑病變" },
   ],
+  "t-keratoconus": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-lasik", label: "激光矯視與術前篩查" },
+    { href: "/t/t-cl", label: "隱形眼鏡衛生與併發症" },
+    { href: "/t/t-allergy", label: "過敏性結膜炎原則" },
+    { href: "/t/d7", label: "結膜炎" },
+    { href: "/c/surface", label: "角膜與眼表" },
+  ],
+  "t-lasik": [
+    { href: "/t/t-presbyopia", label: "老花五類選擇" },
+    { href: "/t/t-cl", label: "隱形眼鏡併發症" },
+    { href: "/t/t-keratoconus", label: "圓錐角膜" },
+    { href: "/iol", label: "晶體視力示意" },
+  ],
+  "t-cl": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-lube", label: "潤眼液與潤滑劑" },
+    { href: "/t/t-lasik", label: "激光矯視" },
+    { href: "/t/t-keratoconus", label: "圓錐角膜" },
+  ],
   "t-yag": [{ href: "/t/t-yag", label: "後囊混濁（不是白內障復發）" }],
   "t-glaucoma": [
     { href: "/tools/tunnel", label: "隧道視野示意" },
@@ -146,16 +166,6 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-cl", label: "隱形眼鏡併發症" },
     { href: "/t/t-lasik", label: "LASIK 與 SMILE" },
     { href: "/t/t-cataract", label: "超聲波乳化與晶體" },
-  ],
-  "t-lasik": [
-    { href: "/t/t-presbyopia", label: "老花五類選擇" },
-    { href: "/t/t-cl", label: "隱形眼鏡併發症" },
-    { href: "/iol", label: "晶體視力示意" },
-  ],
-  "t-cl": [
-    { href: "/urgent", label: "急症與同日評估" },
-    { href: "/t/t-lube", label: "潤眼液與潤滑劑" },
-    { href: "/t/t-lasik", label: "激光矯視" },
   ],
   "t-chalazion": [{ href: "/tools/warm", label: "熱敷計時" }],
   "t-strab": [

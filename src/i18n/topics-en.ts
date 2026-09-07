@@ -1253,4 +1253,88 @@ export const EN_PACKS: Record<string, TopicPack> = {
     ],
   },
 
+  "t-keratoconus": {
+    title: "Keratoconus: progression, acute hydrops, and care concepts",
+    tag: "Corneal ectasia",
+    meta: "Progression monitoring · acute hydrops · optics / CXL classes",
+    blocks: [
+      h("What it is"),
+      p("Keratoconus is a corneal ectatic disease: the central or paracentral cornea gradually thins and bulges forward in a cone shape, causing irregular astigmatism and deepening myopia. Vision blurs and spectacles often cannot fully correct it."),
+      p("Public-education points:"),
+      ul([
+        "Often found from adolescence to young adulthood; both eyes may be involved, but asymmetry is common.",
+        "Causes are multifactorial: genetic tendency, environment and behaviour (especially forceful eye rubbing and severe allergic eye disease).",
+        "Progression means ongoing steepening, thinning, or clear worsening of vision / refraction — whether it is “still progressing” needs serial topography / tomography comparison, not feeling alone.",
+        "Acute corneal hydrops: sudden break in Descemet’s membrane (and related structure), aqueous entering the stroma, rapid corneal clouding, sudden vision drop, irritation and pain — a known but relatively uncommon acute complication.",
+        "Two care layers (concepts): (1) slow or stop biomechanical worsening — corneal collagen cross-linking (CXL) class; (2) improve optical quality — spectacles, rigid gas-permeable lenses, scleral lenses and similar classes; transplantation is considered later.",
+      ]),
+      p("This page discusses classes and principles only — no brand comparison and no success rates. See related pages for refractive-surgery screening, allergy and rubbing, and contact-lens infection red flags."),
+      h("Common symptoms"),
+      ul([
+        "Gradual blur; astigmatism / myopia increasing clearly over a short period",
+        "Many pairs of glasses still unsatisfactory; ghosting, glare, poor night vision; one eye clearly worse",
+        "Young people who itch and rub often from allergy need particular attention",
+        "In acute hydrops: sudden worse blur in one eye, white cloudy cornea, light sensitivity, tearing, discomfort",
+        "Early disease can resemble “ordinary myopia and astigmatism”, so topography / tomography matters in screening (including before refractive surgery)",
+      ]),
+      h("Go to A&E now (if you cannot get there: call 999)"),
+      ul([
+        "Suspected acute hydrops: sudden vision drop, clearly cloudy/white cornea, severe pain or marked light sensitivity",
+        "Contact-lens-related severe red painful eye with heavy discharge — rule out infectious keratitis; do not delay if pain continues after lens removal",
+      ]),
+      h("Same-day / prompt ophthalmology when possible"),
+      ul([
+        "Large refraction change over a short time, or spectacles cannot bring one eye to a reasonable acuity — see an ophthalmologist as soon as possible",
+        "Known keratoconus with new pain or sudden worse blur",
+        "Newly diagnosed children / teens who need assessment of whether progression continues",
+      ]),
+      h("Routine clinic follow-up"),
+      ul([
+        "After diagnosis: repeat topography / tomography, refraction and contact-lens review on the schedule your doctor sets",
+        "Discussion of whether CXL assessment criteria are met (usually emphasises documented progression)",
+        "Allergy control and stop-rubbing education, plus prescription medicines when needed",
+      ]),
+      h("Tests, optics and CXL (classes)"),
+      ul([
+        "Tests: vision, refraction, slit lamp; corneal topography / tomography; thickness. Individual — not a guaranteed checklist",
+        "Optics: spectacles / soft lenses; RGP improves optics and does not by itself stop progression; scleral / mini-scleral; hybrid / piggyback classes — no brand names",
+        "CXL: riboflavin plus UVA aiming to strengthen biomechanics and slow or halt progression; epi-off has more public evidence; important to consider when progression is documented",
+        "Oral riboflavin does not replace a clinical CXL procedure; CXL does not guarantee return to “normal” vision",
+        "Late or severe scarring / extreme thinning: a specialist may discuss corneal transplant classes — individual judgement, no success-rate comparison",
+      ]),
+      h("Common myths"),
+      {
+        type: "table",
+        rows: [
+          ["Myth", "Closer to the evidence"],
+          [
+            "“Keratoconus is only a laser-surgery complication”",
+            "Keratoconus can exist on its own; pre-op screening is meant to find high-risk or unsuitable corneas.",
+          ],
+          [
+            "“Hard lenses stop the disease”",
+            "RGP mainly improves optics; it does not replace progression monitoring and CXL assessment.",
+          ],
+          [
+            "“CXL means vision will be normal”",
+            "CXL is mainly about biomechanical stability and slowing progression — not a vision guarantee.",
+          ],
+          [
+            "“Rubbing a bit is fine”",
+            "Forceful rubbing is linked with progression; treat allergy itch medically rather than as a habit.",
+          ],
+          [
+            "“Hydrops always means immediate transplant”",
+            "Hydrops is usually managed first; transplant timing is a specialty decision.",
+          ],
+          [
+            "“Children never get keratoconus”",
+            "Young people also need vigilance; after a new diagnosis, progression is often reassessed.",
+          ],
+        ],
+      },
+      note("Public education only; not a consultation, booking or brand page; no cure or guarantee claims; no device or lens trade names; does not replace a face-to-face visit."),
+    ],
+  },
+
 };

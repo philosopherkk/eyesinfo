@@ -250,6 +250,40 @@ export const CITE: Record<string, Citation> = {
     pmid: "37870043",
     note: "近視性黃斑病變處理綜述。治療屬專科個別評估；本頁不作療效保證。",
   },
+  gomes2015: {
+    id: "gomes2015",
+    authors: "Gomes JAP, Tan D, Rapuano CJ, et al.",
+    title:
+      "Global Consensus on Keratoconus and Ectatic Diseases",
+    source: "Cornea. 2015;34(4):359-369",
+    pmid: "25738235",
+    note: "圓錐角膜／擴張性疾病全球共識。定義、進展與管理原則屬教育層次；其後亦有第二輪共識材料（Gomes／Hafezi／Ambrósio 等），本站不另造條目。",
+  },
+  deshmukh2023: {
+    id: "deshmukh2023",
+    authors: "Deshmukh R, et al.",
+    title: "Management of keratoconus: an updated review",
+    source: "Front Med (Lausanne). 2023;10:1212314. DOI 10.3389/fmed.2023.1212314",
+    note: "圓錐角膜處理更新綜述。光學矯正與交聯為類別討論；不比較品牌或報成功率。",
+  },
+  wollensak2003: {
+    id: "wollensak2003",
+    authors: "Wollensak G, Spoerl E, Seiler T",
+    title:
+      "Riboflavin/ultraviolet-a-induced collagen crosslinking for the treatment of keratoconus",
+    source: "Am J Ophthalmol. 2003;135(5):620-627",
+    pmid: "12719068",
+    note: "核黃素＋UVA 角膜膠原交聯早期臨床報告。目標為強化生物力學、減慢進展；不保證視力回復。",
+  },
+  wittigSilva2014: {
+    id: "wittigSilva2014",
+    authors: "Wittig-Silva C, Chan E, Islam FM, et al.",
+    title:
+      "A randomized, controlled trial of corneal collagen cross-linking in progressive keratoconus: three-year results",
+    source: "Ophthalmology. 2014;121(4):812-821",
+    pmid: "24393351",
+    note: "進展性圓錐角膜交聯隨機對照三年結果。epi-off 證據較多的公開依據之一；個別是否適合須醫生評估。",
+  },
 };
 
 export function citationsFor(ids: string[]): Citation[] {
