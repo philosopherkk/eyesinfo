@@ -1,10 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { ChevronRight } from "lucide-react";
 import type { Topic } from "@/data/topics";
+import { topicCardTitle } from "@/data/topics";
 import { useLocalizedTopic } from "@/i18n";
 
 export function TopicRow({ topic }: { topic: Topic }) {
   const loc = useLocalizedTopic(topic);
+  const cardTitle = topicCardTitle(loc.title);
+  const sub = loc.meta || loc.tag;
   return (
     <Link
       to="/t/$topicId"
@@ -15,12 +18,14 @@ export function TopicRow({ topic }: { topic: Topic }) {
         {loc.num}
       </span>
       <span className="min-w-0 flex-1">
-        <span className="block truncate font-semibold text-ink">
-          {loc.title}
+        <span className="block font-semibold leading-snug text-ink">
+          {cardTitle}
         </span>
-        <span className="mt-0.5 block truncate text-[0.78rem] text-muted">
-          {loc.meta || loc.tag}
-        </span>
+        {sub ? (
+          <span className="mt-0.5 block text-[0.78rem] leading-snug text-muted">
+            {sub}
+          </span>
+        ) : null}
       </span>
       {loc.tag ? (
         <span className="hidden max-w-24 truncate rounded-full bg-paper px-2 py-0.5 text-[0.68rem] text-steel sm:inline">

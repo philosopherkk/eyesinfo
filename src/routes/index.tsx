@@ -3,6 +3,7 @@ import { ChevronRight, Download, ShieldAlert } from "lucide-react";
 import { CATEGORIES, TOPICS } from "@/data/topics";
 import { TOOLS } from "@/data/tools";
 import { FontControl } from "@/components/font-control";
+import { LangSwitch } from "@/components/lang-switch";
 import { TopicRow } from "@/components/topic-row";
 import { EyeAnatomyViewer } from "@/components/eye-anatomy-viewer";
 import { useI18n, TOOL_TEXT } from "@/i18n";
@@ -45,34 +46,45 @@ function Home() {
 
   return (
     <div>
-      <section className="px-4 pb-4 pt-5">
+      <section className="px-4 pb-3 pt-4 sm:pb-4 sm:pt-5">
         <p className="text-[0.75rem] font-semibold tracking-[0.14em] text-steel">
           {t("homeKicker")}
         </p>
         <p className="mt-1 text-[0.78rem] text-muted">
           {t("contentVer")} {CONTENT_VERSION} · {t("contentUpdated")} {CONTENT_UPDATED}
         </p>
-        <h1 className="mt-1 text-[1.55rem] font-semibold leading-tight tracking-tight text-navy">
+        <h1 className="mt-1 text-[1.45rem] font-semibold leading-tight tracking-tight text-navy sm:text-[1.55rem]">
           {t("homeTitle")}
         </h1>
-        <p className="mt-2 text-[0.9rem] leading-relaxed text-muted">
+        <p className="mt-1.5 text-[0.88rem] leading-relaxed text-muted sm:mt-2 sm:text-[0.9rem]">
           {t("homeLead")}
         </p>
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-          <FontControl />
-          <Link
-            to="/install"
-            className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-navy px-3.5 text-[0.8rem] font-semibold text-paper no-underline"
-          >
-            <Download className="size-4" />
-            {t("install")}
-          </Link>
-        </div>
+        <details className="mt-3 rounded-xl border border-line bg-card open:pb-3">
+          <summary className="cursor-pointer list-none px-3.5 py-2.5 text-[0.8rem] font-semibold text-navy marker:content-none [&::-webkit-details-marker]:hidden">
+            <span className="inline-flex w-full items-center justify-between gap-2">
+              {t("displayOpts")}
+              <span className="text-[0.7rem] font-normal text-muted" aria-hidden>
+                ▾
+              </span>
+            </span>
+          </summary>
+          <div className="space-y-3 border-t border-line/70 px-3.5 pt-3">
+            <LangSwitch surface="paper" />
+            <FontControl />
+            <Link
+              to="/install"
+              className="inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-full bg-navy px-3.5 text-[0.8rem] font-semibold text-paper no-underline sm:w-auto"
+            >
+              <Download className="size-4" />
+              {t("install")}
+            </Link>
+          </div>
+        </details>
       </section>
 
       <Link
         to="/urgent"
-        className="mx-4 mb-4 flex items-start gap-3 rounded-xl bg-danger px-3.5 py-3 text-paper no-underline"
+        className="mx-4 mb-3 flex items-start gap-3 rounded-xl bg-danger px-3.5 py-3 text-paper no-underline sm:mb-4"
       >
         <ShieldAlert className="mt-0.5 size-5 shrink-0" />
         <span>
@@ -173,36 +185,38 @@ function HomeTool({
   blurb: string;
 }) {
   const cls =
-    "flex min-h-16 flex-col justify-center rounded-xl border border-line bg-card px-3 py-2.5 no-underline";
+    "flex min-h-14 flex-col justify-center rounded-xl border border-line bg-card px-3 py-2 no-underline";
+  const inner = (
+    <>
+      <span className="font-semibold leading-snug text-navy">{title}</span>
+      <span className="truncate text-[0.72rem] text-muted">{blurb}</span>
+    </>
+  );
   if (href === "/amsler") {
     return (
       <Link to="/amsler" className={cls}>
-        <span className="font-semibold text-navy">{title}</span>
-        <span className="text-[0.72rem] text-muted">{blurb}</span>
+        {inner}
       </Link>
     );
   }
   if (href === "/iol") {
     return (
       <Link to="/iol" className={cls}>
-        <span className="font-semibold text-navy">{title}</span>
-        <span className="text-[0.72rem] text-muted">{blurb}</span>
+        {inner}
       </Link>
     );
   }
   if (href === "/urgent") {
     return (
       <Link to="/urgent" className={cls}>
-        <span className="font-semibold text-navy">{title}</span>
-        <span className="text-[0.72rem] text-muted">{blurb}</span>
+        {inner}
       </Link>
     );
   }
   const id = href.split("/").pop() ?? "map";
   return (
     <Link to="/tools/$toolId" params={{ toolId: id }} className={cls}>
-      <span className="font-semibold text-navy">{title}</span>
-      <span className="text-[0.72rem] text-muted">{blurb}</span>
+      {inner}
     </Link>
   );
 }

@@ -67,7 +67,8 @@ function TopicPage() {
 
   return (
     <article>
-      <div className="flex items-center px-2 pt-3">
+      {/* Desktop: keep icon back; mobile uses collapsed breadcrumb 「返回分類」. */}
+      <div className="hidden items-center px-2 pt-3 sm:flex">
         <Link
           to="/c/$catId"
           params={{ catId: raw.category }}
@@ -77,15 +78,15 @@ function TopicPage() {
           <ArrowLeft className="size-5" />
         </Link>
       </div>
-      <header className="px-4 pb-3 pt-1">
+      <header className="px-4 pb-3 pt-3 sm:pt-1">
         <p className="text-[0.75rem] text-steel">
           {t(CAT_TITLE[raw.category])} · {topic.num}
         </p>
-        <div className="mt-1 flex items-start justify-between gap-3">
-          <h1 className="min-w-0 flex-1 text-[1.35rem] font-semibold leading-snug text-navy">
+        <div className="mt-1 flex items-start gap-3">
+          <h1 className="min-w-0 flex-1 text-[1.2rem] font-semibold leading-snug text-navy sm:text-[1.35rem]">
             {topic.title}
           </h1>
-          <SaveButton saveId={topicSaveKey(raw.id)} className="mt-0.5" />
+          <SaveButton saveId={topicSaveKey(raw.id)} className="mt-0.5 shrink-0" />
         </div>
         {topic.meta ? (
           <p className="mt-1 text-[0.85rem] text-muted">{topic.meta}</p>
