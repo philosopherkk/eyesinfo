@@ -9,8 +9,22 @@ import { usePrefs } from "@/lib/prefs";
 import { useI18n, useLocalizedTopic } from "@/i18n";
 import type { UiKey } from "@/i18n/ui";
 import { CONTENT_UPDATED, CONTENT_VERSION } from "@/lib/site";
+import { pageHead } from "@/lib/page-seo";
 
 export const Route = createFileRoute("/t/$topicId")({
+  head: ({ params }) => {
+    const topic = getTopic(params.topicId);
+    const title = topic?.title ?? "專題";
+    const description =
+      topic?.meta ||
+      topic?.tag ||
+      `眼科教育專題：${title}。公眾教育，不能代替面診。`;
+    return pageHead({
+      title,
+      description,
+      path: `/t/${params.topicId}`,
+    });
+  },
   component: TopicPage,
 });
 

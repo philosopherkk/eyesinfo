@@ -1,8 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Smartphone } from "lucide-react";
 import { useI18n } from "@/i18n";
+import { pageHead } from "@/lib/page-seo";
 
-export const Route = createFileRoute("/install")({ component: InstallPage });
+export const Route = createFileRoute("/install")({
+  head: () =>
+    pageHead({
+      title: "加到主畫面",
+      description: "把護眼學堂加到 iPhone 或 Android 主畫面，方便閱讀眼科教育內容。",
+      path: "/install",
+    }),
+  component: InstallPage,
+});
 
 function InstallPage() {
   const { t } = useI18n();

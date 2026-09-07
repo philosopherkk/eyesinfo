@@ -7,6 +7,7 @@ import { TopicRow } from "@/components/topic-row";
 import { EduLink } from "@/components/edu-link";
 import { searchSite } from "@/lib/site-search";
 import { useI18n, TOOL_TEXT, localizeTopic } from "@/i18n";
+import { pageHead } from "@/lib/page-seo";
 import { z } from "zod";
 
 const searchSchema = z.object({
@@ -15,17 +16,37 @@ const searchSchema = z.object({
 
 export const Route = createFileRoute("/search")({
   validateSearch: searchSchema,
+  head: () =>
+    pageHead({
+      title: "搜尋",
+      description: "搜尋眼科教育專題、徵狀與自我監察工具。公眾教育，不作預約或轉介。",
+      path: "/search",
+    }),
   component: SearchPage,
 });
 
 function SearchPage() {
   const { q: qParam } = Route.useSearch();
+  const navigate = Route.useNavigate();
   const [q, setQ] = useState(qParam ?? "");
   const { t, locale } = useI18n();
 
   useEffect(() => {
-    if (qParam != null) setQ(qParam);
+    setQ(qParam ?? "");
   }, [qParam]);
+
+  useEffect(() => {
+    const next = q.trim() || undefined;
+    const current = qParam?.trim() || undefined;
+    if (next === current) return;
+    const id = window.setTimeout(() => {
+      void navigate({
+        search: (prev) => ({ ...prev, q: next }),
+        replace: true,
+      });
+    }, 200);
+    return () => window.clearTimeout(id);
+  }, [q, qParam, navigate]);
 
   const localized = useMemo(
     () => TOPICS.map((topic) => localizeTopic(topic, locale)),
@@ -75,15 +96,18 @@ function SearchPage() {
   return (
     <div className="px-4 pt-5">
       <h1 className="text-[1.35rem] font-semibold text-navy">{t("search")}</h1>
-      <label className="relative mt-3 block">
-        <SearchIcon className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-faint" />
+      <label htmlFor="site-search-q" className="relative mt-3 block">
+        <span className="sr-only">{t("searchLabel")}</span>
+        <SearchIcon className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-faint" aria-hidden />
         <input
+          id="site-search-q"
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder={t("searchPh")}
           className="h-12 w-full rounded-xl border border-line bg-card pl-10 pr-3 text-[0.95rem] outline-none"
           autoComplete="off"
           type="search"
+          name="q"
         />
       </label>
       <p className="mt-3 text-[0.78rem] text-muted">

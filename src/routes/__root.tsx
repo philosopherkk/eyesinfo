@@ -9,8 +9,9 @@ import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { AppShell } from "@/components/app-shell";
 import appCss from "../styles.css?url";
 import { PUBLIC_ORIGIN, COPYRIGHT_LINE, COPYRIGHT_YEAR, COPYRIGHT_HOLDER } from "@/lib/site";
+import { SEO_SITE_NAME } from "@/lib/page-seo";
 
-const APP_NAME = "護眼學堂";
+const APP_NAME = SEO_SITE_NAME;
 const APP_DESC =
   "香港眼科公眾教育：常見眼疾、專題單張與自我監察工具。不能代替與註冊眼科專科醫生的面診。可加到 iPhone 與 Android 主畫面。";
 
@@ -32,13 +33,13 @@ export const Route = createRootRoute({
       { name: "mobile-web-app-capable", content: "yes" },
       { name: "copyright", content: COPYRIGHT_LINE },
       { name: "application-name", content: APP_NAME },
-      { property: "og:url", content: PUBLIC_ORIGIN },
       { property: "og:title", content: APP_NAME },
       { property: "og:description", content: APP_DESC },
       { property: "og:site_name", content: APP_NAME },
     ],
+    // Canonical is set per-route via pageHead() — root must not emit one
+    // (TanStack concatenates links without deduping rel=canonical).
     links: [
-      { rel: "canonical", href: PUBLIC_ORIGIN },
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32.png" },
       { rel: "icon", type: "image/png", sizes: "192x192", href: "/icon-192.png" },

@@ -5,8 +5,21 @@ import { TopicRow } from "@/components/topic-row";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { useI18n } from "@/i18n";
 import type { UiKey } from "@/i18n/ui";
+import { pageHead } from "@/lib/page-seo";
 
 export const Route = createFileRoute("/c/$catId")({
+  head: ({ params }) => {
+    const cat = CATEGORIES.find((c) => c.id === params.catId);
+    const title = cat?.title ?? "分類";
+    const description = cat
+      ? `${cat.title}：${cat.subtitle}。香港眼科公眾教育專題。`
+      : "眼科教育專題分類。";
+    return pageHead({
+      title,
+      description,
+      path: `/c/${params.catId}`,
+    });
+  },
   component: CategoryPage,
 });
 

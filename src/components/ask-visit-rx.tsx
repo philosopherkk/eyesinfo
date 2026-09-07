@@ -206,24 +206,34 @@ export function AskDoctor() {
             ? "当てはまる状況にチェックし、印刷するか控えてご自身の医師へ。予約表ではなく、紹介も行いません。"
             : tx("勾選情況，列印或抄低帶去你自己的醫生。這不是掛號表，本站亦不作轉介。")}
       </p>
-      <div className="mt-3 grid gap-2 no-print">
-        {sits.map((s) => (
-          <button
-            key={s.id}
-            type="button"
-            onClick={() =>
-              setOn((cur) =>
-                cur.includes(s.id) ? cur.filter((x) => x !== s.id) : [...cur, s.id],
-              )
-            }
-            className={cn(
-              "min-h-12 rounded-xl border px-3 text-left text-[0.9rem] font-semibold",
-              on.includes(s.id) ? "border-navy bg-navy text-paper" : "border-line bg-card text-navy",
-            )}
-          >
-            {s.title}
-          </button>
-        ))}
+      <div className="mt-3 grid gap-2 no-print" role="group" aria-label={locale === "en" ? "Situations" : locale === "ja" ? "状況" : "情況"}>
+        {sits.map((s) => {
+          const checked = on.includes(s.id);
+          return (
+            <label
+              key={s.id}
+              className={cn(
+                "flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border px-3 text-left text-[0.9rem] font-semibold",
+                checked ? "border-navy bg-navy text-paper" : "border-line bg-card text-navy",
+              )}
+            >
+              <input
+                type="checkbox"
+                checked={checked}
+                onChange={() =>
+                  setOn((cur) =>
+                    cur.includes(s.id) ? cur.filter((x) => x !== s.id) : [...cur, s.id],
+                  )
+                }
+                className={cn(
+                  "size-4 shrink-0",
+                  checked ? "accent-[var(--color-paper)]" : "accent-[var(--color-navy)]",
+                )}
+              />
+              <span>{s.title}</span>
+            </label>
+          );
+        })}
       </div>
       <div id="ask-print" className="ask-print-area mt-5 space-y-4">
         <p className="print-only text-[0.85rem] leading-relaxed text-muted">
