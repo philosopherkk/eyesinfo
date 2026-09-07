@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { ArrowLeft, Bookmark, BookmarkCheck, ShieldAlert } from "lucide-react";
 import { getTopic, topicEditorial, TOPICS } from "@/data/topics";
 import { TOPIC_TOOLS } from "@/data/tools";
@@ -8,12 +8,27 @@ import { EditorialFooter } from "@/components/editorial-footer";
 import { usePrefs } from "@/lib/prefs";
 import { useI18n, useLocalizedTopic } from "@/i18n";
 import type { UiKey } from "@/i18n/ui";
-import { CONTENT_UPDATED, CONTENT_VERSION } from "@/lib/site";
 import { pageHead } from "@/lib/page-seo";
 
+/** Retired stub IA: former 「屏幕與眼睛」hub → filled blue-light topic. */
+const TOPIC_ALIASES: Record<string, string> = {
+  "t-screen": "t-bluelight",
+};
+
 export const Route = createFileRoute("/t/$topicId")({
+  beforeLoad: ({ params }) => {
+    const alias = TOPIC_ALIASES[params.topicId];
+    if (alias) {
+      throw redirect({
+        to: "/t/$topicId",
+        params: { topicId: alias },
+        replace: true,
+      });
+    }
+  },
   head: ({ params }) => {
-    const topic = getTopic(params.topicId);
+    const resolved = TOPIC_ALIASES[params.topicId] ?? params.topicId;
+    const topic = getTopic(resolved);
     const title = topic?.title ?? "專題";
     const description =
       topic?.meta ||
@@ -22,7 +37,7 @@ export const Route = createFileRoute("/t/$topicId")({
     return pageHead({
       title,
       description,
-      path: `/t/${params.topicId}`,
+      path: `/t/${resolved}`,
     });
   },
   component: TopicPage,
@@ -81,11 +96,6 @@ function TopicPage() {
         {topic.meta ? (
           <p className="mt-1 text-[0.85rem] text-muted">{topic.meta}</p>
         ) : null}
-        <p className="mt-2 text-[0.75rem] text-faint">
-          {t("lastUpdated")}：{CONTENT_UPDATED}
-          <span aria-hidden="true"> · </span>
-          {t("contentVer")} {CONTENT_VERSION}
-        </p>
       </header>
       {raw.isAcuteEmergency ? (
         <Link
