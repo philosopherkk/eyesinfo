@@ -11,9 +11,13 @@ import { useI18n, useLocalizedTopic } from "@/i18n";
 import type { UiKey } from "@/i18n/ui";
 import { pageHead } from "@/lib/page-seo";
 
-/** Retired stub IA: former 「屏幕與眼睛」hub → filled blue-light topic. */
+/** Retired stub IA: former hubs → merged / filled topics. */
 const TOPIC_ALIASES: Record<string, string> = {
   "t-screen": "t-bluelight",
+  /** Former I / P / AF tiles → glaucoma monitoring hub. */
+  "t-glaucoma": "t-glaucoma-monitor",
+  "t-octrnfl": "t-glaucoma-monitor",
+  "t-reports": "t-glaucoma-monitor",
 };
 
 export const Route = createFileRoute("/t/$topicId")({

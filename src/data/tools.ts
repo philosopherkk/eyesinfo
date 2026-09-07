@@ -52,12 +52,12 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   ],
   d4: [
     { href: "/tools/tunnel", label: "隧道視野示意" },
-    { href: "/t/t-glaucoma", label: "目標眼壓與監察" },
+    { href: "/t/t-glaucoma-monitor", label: "青光眼監察：目標眼壓、OCT／視野與報告解讀" },
     { href: "/t/t-gldrops", label: "青光眼眼藥水" },
     { href: "/t/t-early", label: "遠視、淺前房與閉角" },
   ],
   d5: [{ href: "/amsler", label: "阿姆斯勒方格" }, { href: "/t/t-rvo", label: "視網膜血管阻塞" }, { href: "/t/t-migraine", label: "偏頭痛與眼科" }],
-  d6: [{ href: "/t/t-reports", label: "OCT／視野示意" }, { href: "/t/t-rvo", label: "視網膜血管阻塞" }],
+  d6: [{ href: "/t/t-glaucoma-monitor", label: "青光眼監察：OCT／視野報告解讀" }, { href: "/t/t-rvo", label: "視網膜血管阻塞" }],
   d7: [
     { href: "/urgent", label: "急症與同日評估" },
     { href: "/t/t-allergy-hk", label: "眼部過敏與香港環境" },
@@ -165,14 +165,15 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-keratoconus", label: "圓錐角膜" },
   ],
   "t-yag": [{ href: "/t/t-yag", label: "後囊混濁（不是白內障復發）" }],
-  "t-glaucoma": [
-    { href: "/tools/tunnel", label: "隧道視野示意" },
+  "t-glaucoma-monitor": [
+    { href: "/t/d4", label: "青光眼總論" },
     { href: "/t/t-gldrops", label: "青光眼眼藥水" },
     { href: "/t/t-early", label: "遠視、淺前房與閉角" },
+    { href: "/urgent", label: "急症與同日評估" },
   ],
   "t-gldrops": [
     { href: "/t/d4", label: "青光眼總論" },
-    { href: "/t/t-glaucoma", label: "目標眼壓與監察" },
+    { href: "/t/t-glaucoma-monitor", label: "青光眼監察：目標眼壓、OCT／視野與報告解讀" },
     { href: "/t/t-drops", label: "正確使用眼藥水" },
     { href: "/tools/drops", label: "滴藥水步驟" },
     { href: "/tools/tunnel", label: "隧道視野示意" },

@@ -69,6 +69,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
       p("The iris blocks access to the trabecular meshwork. Hyperopia, a shallow chamber, an ageing lens and Chinese ancestry are associated. Chronic closure can be painless."),
       w("Acute angle-closure attack: pressure can rise to tens of mmHg — red painful eye, headache, vomiting, rainbows around lights, steamy cornea, a mid-dilated fixed pupil. Untreated hours can permanently damage the nerve. Go to A&E now. If you cannot get there: call 999. Do not put in dilating drops or wait for a private clinic. The other eye may be narrow too."),
       ul(["Dark rooms, some cold remedies or dilating drops can precipitate an attack if the angle is already narrow", "A&E may use several pressure-lowering routes (topical, oral or intravenous carbonic-anhydrase inhibitors, hyperosmotic agents) chosen for the kidneys and allergy history", "Laser iridotomy when the cornea clears; later lens extraction only in selected people — EAGLE had strict entry criteria"]),
+      h("Seeking care and what a doctor may discuss"),
+      ul([
+        "Personalised target pressure, OCT / visual field and how reports look: see the glaucoma-monitoring hub; lost field does not return",
+        "Pressure-lowering drops must be used on schedule; missed doses are a preventable reason for worsening — five classes on the glaucoma drops page",
+        "Laser (iridotomy, trabeculoplasty) and surgery classes need individual assessment; this page does not quote clinic success rates",
+      ]),
     ],
   },
   d5: {
@@ -389,13 +395,59 @@ export const EN_PACKS: Record<string, TopicPack> = {
       p("Doctors often follow a stepwise approach: environment and lids first, then lubricants, then prescription anti-inflammatory drops if needed, then procedures. Steroid drops are not for unsupervised long-term use. This is a class of discussion, not a product list."),
     ],
   },
-  "t-glaucoma": {
-    title: "Glaucoma target pressure and monitoring",
-    tag: "Follow-up",
-    meta: "IOP · OCT · visual field",
+  "t-glaucoma-monitor": {
+    title: "Glaucoma monitoring: target IOP, OCT / visual field and reports",
+    tag: "Long-term monitoring education",
+    meta: "Target IOP · OCT RNFL / GCL · Humphrey-class field · colour maps are not a verdict",
     blocks: [
-      p("Lost vision does not return. Target pressure is set by the doctor from the nerve, the field and how fast it is changing — not one line for everyone. Teaching millimetre ranges in the Chinese table are teaching figures only; do not self-match. Types (open-angle, normal-tension, ocular hypertension, angle closure) are on the main glaucoma page. Timing of drops follows the label and the doctor."),
-      w("The tunnel demo is an illustration, not your field report. Field already lost does not return."),
+      h("What it is"),
+      p("Public education on long-term glaucoma monitoring: teaching figures for target pressure, how structure (OCT) and function (visual field) are read together, and what colour maps on reports mean. This page does not score your report and does not teach DIY dose changes or stopping drops. Disease types (open-angle, normal-tension, ocular hypertension, angle closure) are on the glaucoma overview; five pressure-lowering drop classes are on the glaucoma drops page."),
+      h("Why monitor"),
+      p("Lost nerve fibres and field usually do not return. In the spirit of the Early Manifest Glaucoma Trial (EMGT), lowering IOP may slow progression in some people — not a cure and not a personal guarantee. Monitoring usually includes IOP, structure (OCT RNFL / ganglion-cell–related measures) and function (Humphrey-class automated perimetry). Follow-up density follows risk and speed of change — not one timetable for everyone."),
+      h("Target IOP teaching table"),
+      note("Teaching ballparks only — do not self-match to your own eye. Millimetre targets and percentage drops are set by the treating ophthalmologist after examination."),
+      {
+        type: "table",
+        rows: [
+          ["Stage / setting", "Teaching target", "Teaching % drop"],
+          ["Early", "<18 mmHg", "≥20–25%"],
+          ["Moderate", "<15–18 mmHg", "≥25–30%"],
+          ["Advanced", "<12–15 mmHg", "≥30–40%"],
+          ["Normal-tension (CNTGS spirit)", "Often lower", "Often ≥30% further; guided by progression"],
+          ["Ocular hypertension (OHTS discussion)", "Individual", "Literature often discusses ~20%"],
+        ],
+      },
+      p("Educational factors that may shape a target (a list, not a DIY score): optic-nerve damage, field, speed of change, age, thin cornea, disc haemorrhage, family history. The doctor integrates these; this page is not a visit."),
+      h("Structure and function: OCT / visual field"),
+      p("OCT colour maps are usually compared with that machine’s age norms: green often within a common statistical range, yellow borderline, red uncommon — statistical hints, not a verdict and not “already blind”. Macular / ganglion-cell complex (GCC and similar) is more sensitive to central-pattern loss. Humphrey-class field: mean deviation (MD) more negative usually means lower overall sensitivity; pattern standard deviation (PSD) reflects focal loss; glaucoma hemifield test (GHT) compares upper and lower halves. First tests often show a learning effect — repeat to build a baseline."),
+      p("If OCT already shows clear thinning while the field is still relatively preserved, that is a time to discuss stronger IOP lowering to slow worsening — not a vision-preservation guarantee."),
+      h("Worsening clues (education only — not self-diagnosis)"),
+      ul([
+        "Structure: larger cup–disc ratio, rim notches, disc haemorrhage, progressive RNFL / ganglion-cell–related thinning",
+        "Function: clear MD worsening, new scotomas or central encroachment, progression analysis suggesting change (doctor interprets)",
+        "IOP: persistently above target, or large swings — still combine with structure and function; one reading is not enough",
+      ]),
+      h("What reports look like"),
+      ul([
+        "Green / yellow / red are often statistical colours vs that machine’s norms — not a court verdict",
+        "Thickness numbers from different brands are usually not directly cross-comparable",
+        "Red ≠ blind; false positives, poor fixation, cataract and small pupils all matter",
+        "One bad field often needs a repeat before it means much",
+        "Do not send report photos to non-treating clinicians as a formal reading",
+        "This site will not score your report — bring the printout to follow-up",
+      ]),
+      h("Go to A&E now (if you cannot get there: call 999)"),
+      ul([
+        "Acute angle-closure attack: severe red painful eye, headache and vomiting, rainbows, sudden vision drop — A&E now; if you cannot travel: call 999 (see urgent, glaucoma overview, hyperopia / shallow-chamber page)",
+        "Sudden vision drop or sudden blindness",
+      ]),
+      h("Same-day / scheduled follow-up"),
+      ul([
+        "If already diagnosed: keep the pressure / OCT / field schedule the doctor set — do not invent your own denser or looser plan",
+        "New sense of field loss or tunnel vision without A&E red flags: see an ophthalmologist as soon as possible",
+        "Do not stop, change doses or lend leftover drops yourself — see the glaucoma drops page",
+      ]),
+      note("Public education only; no booking, referral or report scoring; no cure or guarantee claims; no brand-vs-brand machine efficacy ranking. Related: glaucoma overview, glaucoma drops, hyperopia / shallow chamber and angle closure, urgent page."),
     ],
   },
   "t-drops": {
@@ -464,14 +516,6 @@ export const EN_PACKS: Record<string, TopicPack> = {
     meta: "Central thickness · fluid",
     blocks: [
       p("OCT quantifies macular thickness and fluid. Machines are not directly interchangeable. It does not replace a dilated fundus exam. This page explains what a report looks like; it does not interpret your scan."),
-    ],
-  },
-  "t-octrnfl": {
-    title: "Glaucoma OCT and visual field",
-    tag: "Imaging",
-    meta: "RNFL · GCC",
-    blocks: [
-      p("Retinal nerve-fibre and ganglion-cell maps help monitoring. They are not a diagnosis by themselves and not your personal field score. Combine with IOP, discs and symptoms."),
     ],
   },
   "t-presbyopia": {
@@ -972,14 +1016,6 @@ export const EN_PACKS: Record<string, TopicPack> = {
       p("Dilating drops enlarge the pupil and reduce focusing so the lens periphery, vitreous and retina can be seen. Do not drive yourself afterwards. Near work is blurry and light is harsh for hours. If the angle is narrow, a doctor may check it is safe to dilate."),
     ],
   },
-  "t-reports": {
-    title: "What OCT and visual-field reports look like",
-    tag: "Education",
-    meta: "A sketch, not a reading of your scan",
-    blocks: [
-      p("Colour maps and numbers vary by machine. This page shows the idea of thickness and field grey-scale. It cannot interpret your own report. Ask the doctor who ordered it."),
-    ],
-  },
   "t-pterygium": {
     title: "Pterygium — lifestyle notes",
     tag: "UV",
@@ -1119,7 +1155,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
     meta: "Five mechanisms · adherence · drop technique · no brand names",
     blocks: [
       h("What they are"),
-      p("Long-term care for most open-angle glaucoma and ocular hypertension relies on lowering eye pressure to slow optic-nerve damage. Aqueous humour is made by the ciliary body and leaves via the trabecular meshwork and uveoscleral pathway. Pressure-lowering drops are prescription medicines chosen by an ophthalmologist. This page explains classes only — no product names. See also target-pressure monitoring and the glaucoma overview."),
+      p("Long-term care for most open-angle glaucoma and ocular hypertension relies on lowering eye pressure to slow optic-nerve damage. Aqueous humour is made by the ciliary body and leaves via the trabecular meshwork and uveoscleral pathway. Pressure-lowering drops are prescription medicines chosen by an ophthalmologist. This page explains classes only — no product names. See also the glaucoma-monitoring hub (target IOP, OCT / visual field and reports) and the glaucoma overview."),
       h("Five topical classes (mechanism and education ballparks)"),
       {
         type: "table",
