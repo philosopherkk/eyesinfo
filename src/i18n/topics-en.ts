@@ -656,7 +656,99 @@ export const EN_PACKS: Record<string, TopicPack> = {
         "Surgery is one way to align the eyes; amblyopia therapy still continues. This page does not compare success rates",
         "Adult paralytic squint: find the cause first (nerve, thyroid, myasthenia). Prism or botulinum toxin are classes a doctor may discuss; this page does not promote a product",
       ]),
-      w("This page cannot tell true squint from pseudo-esotropia or a neurological emergency. “It does not look turned” does not exclude amblyopia. Sudden double vision with headache, a dilated pupil or weakness: A&E."),
+      h("Parent gaps: pseudo-esotropia, screening timing, patching adherence", "parent-gaps"),
+      p("The sections below deepen parent education without rewriting the definitions and urgency ladder above. Parents cannot rule out true squint or amblyopia at home; patching hours and pharmacological blur are prescriptions — this site gives no personal dose."),
+      h("Pseudo-esotropia: it looks like a turn, but still needs an exam"),
+      p("Many Asian toddlers have a flatter nasal bridge and epicanthic folds that hide nasal sclera, so the eyes look turned in. That is pseudo-esotropia (pseudostrabismus); the visual axes may still be aligned."),
+      ol([
+        "Corneal light reflex: a clinician checks whether the light spots are centred and symmetric. Pseudo often is; true esotropia is not. Cover testing and related exams still matter — a phone selfie is not a substitute",
+        "Facial features change with growth: a “look of squint” may ease as the bridge rises; that does not mean an exam was never needed",
+        "“Just pseudo” once still needs vigilance: some children later show true squint or amblyopia. New intermittent turns, a head tilt, covering one eye to look, or an abnormal vision screen → reassess; do not wait indefinitely on an old impression",
+        "Cycloplegic refraction may still be needed: even when pseudo is suspected, a doctor may dilate to look for hyperopia and exclude accommodative esotropia",
+      ]),
+      p("Do not teach parents to clear squint with a torch at home; “it does not look turned” also does not exclude amblyopia."),
+      h("Children’s vision / alignment: qualitative milestones (not a Hong Kong statute timetable)"),
+      p("International paediatric / paediatric-ophthalmology consensus in qualitative form; follow local paediatrics, maternal–child health or ophthalmology advice in practice. This page does not invent month-by-month local percentages or guarantees."),
+      {
+        type: "table",
+        rows: [
+          ["Stage", "Parents should watch for", "Why not to delay"],
+          [
+            "Newborn to early months",
+            "Red reflex, lid/pupil appearance, a clear constant turn",
+            "White pupil, nystagmus, or a sudden marked turn while unwell → A&E / same-day dilation",
+          ],
+          [
+            "Later infancy",
+            "Alignment still unsteady or persistently turned; poor tracking; frequent head tilt",
+            "Persistent turn after about 3–4 months needs planned assessment — usually not same-day emergency, but do not wait until school",
+          ],
+          [
+            "Preschool (can match pictures / symbols)",
+            "Kindergarten / school vision screen, unequal acuity, intermittent exotropia, photophobia with head tilt",
+            "Amblyopia plasticity is generally better earlier; abnormal screens need follow-up — do not “leave it another year”",
+          ],
+          [
+            "Around school entry and after",
+            "Losing place when reading, copying the board is hard, one eye stays weaker",
+            "Older children may still gain (see PEDIG literature), but do not decide at home that an age has closed the door",
+          ],
+        ],
+      },
+      ul([
+        "Do not wait: white pupil, nystagmus, post-trauma double vision / a stuck eye, or new adult double vision with neurological red flags → A&E / 999",
+        "A child’s squint that worsens over days, a constant head tilt, or covering one eye to look → same-day / see an ophthalmologist as soon as possible",
+        "Abnormal screen, more frequent intermittent exotropia, or repeated turns noticed by teachers / parents → book specialty care; do not wait indefinitely for the child to “grow out of it”",
+      ]),
+      h("Patching: adherence matters more than “having heard of a patch”"),
+      p("Amblyopia patching makes the brain use the weaker eye. PEDIG and related work show that, at suitable ages and severities, daily patching as prescribed can improve acuity in the amblyopic eye; poor adherence wastes that chance. Hours, whether to add near activity, and whether to use pharmacological blur are decided only by the prescribing doctor — this site gives no personal dose."),
+      ol([
+        "Follow written hours and days; do not lengthen to all-day sealing or stop on your own",
+        "During patching, use near activities the doctor suggests to “work the weak eye”",
+        "Log adherence (calendar / diary) and bring it to review",
+        "Skin and mood: ask the doctor about alternatives if tape allergy; talking with school is safer than secretly cutting hours",
+        "Full-time glasses still matter; “patch only, never glasses” or “glasses only, never review” drifts from common trial designs",
+        "Pause and seek care for red flags: a sudden clear worsening of squint after patching, a red painful photophobic patched eye, or a sudden drop in the good eye — contact the prescribing doctor at once; do not “add hours to catch up” yourself",
+      ]),
+      ul([
+        "Do not: buy unverified patch products online as treatment; copy doses from parent groups; claim “X weeks of patching will definitely fix it”",
+      ]),
+      h("Common myths (for parents)"),
+      {
+        type: "table",
+        rows: [
+          ["Myth", "Closer to the evidence"],
+          [
+            "“Flat nose bridge means pseudo — no exam needed”",
+            "Only an exam separates true from pseudo; true squint can still appear later.",
+          ],
+          [
+            "“It will straighten when they grow”",
+            "Spontaneous cure is not promised; the amblyopia window can narrow.",
+          ],
+          [
+            "“Longer patching is always better / shorter is always harmless”",
+            "Hours are set by the doctor from evidence.",
+          ],
+          [
+            "“Glasses alone equal cured amblyopia”",
+            "Refractive correction is one step; amblyopia often still needs patching or pharmacological blur and reviews.",
+          ],
+          [
+            "“Surgery that aligns the eyes means amblyopia is fixed”",
+            "Surgery mainly addresses alignment; amblyopia therapy may still run in parallel.",
+          ],
+          [
+            "“One ‘pseudo’ verdict lasts for life”",
+            "New symptoms or an abnormal screen need reassessment.",
+          ],
+          [
+            "“Online stereo apps are enough”",
+            "They do not replace cycloplegic refraction and specialty alignment exams.",
+          ],
+        ],
+      },
+      w("This page cannot tell true squint from pseudo-esotropia or a neurological emergency. “It does not look turned” does not exclude amblyopia. Sudden double vision with headache, a dilated pupil or weakness: A&E. No cure claims, success-rate comparisons, booking or clinic ads."),
     ],
   },
   "t-child": {
