@@ -457,6 +457,46 @@ export const CITE: Record<string, Citation> = {
       "Lancet Reg Health Southeast Asia. 2023. DOI 10.1016/j.lansea.2023.100171",
     note: "東盟地區駕駛色覺限制比較。各地規管不一；本站不寫死本地分數線。",
   },
+  leonardi2016sansika: {
+    id: "leonardi2016sansika",
+    authors: "Leonardi A, Van Setten G, Amrane M, et al.",
+    title:
+      "Efficacy and safety of 0.1% cyclosporine A cationic emulsion in the treatment of severe dry eye disease: a multicenter randomized trial (SANSIKA)",
+    source: "Eur J Ophthalmol. 2016;26(4):287-296",
+    pmid: "27055414",
+    note: "SANSIKA 第三期試驗；歐盟同名乳劑嚴重乾眼角膜炎脈絡。數字屬試驗脈絡，不是個人療效保證，亦非本港購買推介。",
+  },
+  emaIkervisEpar: {
+    id: "emaIkervisEpar",
+    authors: "European Medicines Agency (EMA)",
+    title: "IKERVIS — EPAR product information",
+    source: "EMA medicines EPAR / product information (ciclosporin 1 mg/mL emulsion)",
+    note: "歐盟公開產品資訊：成人乾眼病合併嚴重角膜炎且淚液替代品未改善之適應症描述。本港以本地說明書為準；非推介購買。",
+  },
+  hk65076Ikervis: {
+    id: "hk65076Ikervis",
+    authors: "Hong Kong Drug Office",
+    title: "Ikervis Eye Drops, Emulsion 1 mg/mL (HK-65076)",
+    source: "Drug Office registered pharmaceutical product listing HK-65076",
+    note: "本港註冊例子（處方藥）。本站僅作教育舉例，非推介購買、代購或門市資訊。",
+  },
+  nivenius2007: {
+    id: "nivenius2007",
+    authors: "Nivenius E, van der Ploeg I, Jung K, et al.",
+    title:
+      "Tacrolimus ointment vs steroid ointment for eyelid dermatitis in patients with atopic keratoconjunctivitis",
+    source: "Eye (Lond). 2007;21(7):968-975",
+    pmid: "16680103",
+    note: "小型交叉研究：眼瞼他克莫司軟膏 vs 類固醇軟膏於 AKC 相關眼瞼濕疹。不作個人保證；本頁不寫劑量。",
+  },
+  freeman2004: {
+    id: "freeman2004",
+    authors: "Freeman AK, Serle J, VanVeldhuisen P, et al.",
+    title: "Tacrolimus ointment in the treatment of eyelid dermatitis",
+    source: "Cutis. 2004;73(4):267-271",
+    pmid: "15134327",
+    note: "眼瞼皮炎外用他克莫司之小型開放研究。不作個人療效保證；本頁不寫濃度／次數。",
+  },
 };
 
 export function citationsFor(ids: string[]): Citation[] {
