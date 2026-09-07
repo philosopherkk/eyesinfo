@@ -315,7 +315,7 @@ export const CITE: Record<string, Citation> = {
   ueta2020: {
     id: "ueta2020",
     authors: "Ueta T",
-    title: "Pathologic myopia: an overview of the current understanding and challenges",
+    title: "Pathologic myopia: an overview of the current understanding and interventions",
     source: "Glob Health Med. 2020;2(3):151-155",
     pmid: "33330799",
     note: "病理近視概覽。公開教育層次。",
