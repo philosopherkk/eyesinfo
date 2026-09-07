@@ -5,6 +5,7 @@ import { IolScene } from "@/components/iol-scene";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { useI18n } from "@/i18n";
 import { cn } from "@/lib/utils";
+import { pageHead } from "@/lib/page-seo";
 import {
   DISTANCES,
   OPTICS,
@@ -18,7 +19,16 @@ import {
   type Optic,
 } from "@/lib/iol-optics";
 
-export const Route = createFileRoute("/iol")({ component: IolPage });
+export const Route = createFileRoute("/iol")({
+  head: () =>
+    pageHead({
+      title: "人工晶體視力示意",
+      description:
+        "單焦目標度數與多焦光暈的教育示意。不是手術建議，亦不能代替面診。",
+      path: "/iol",
+    }),
+  component: IolPage,
+});
 
 const TARGETS = Array.from({ length: 25 }, (_, i) =>
   Number((3 - i * 0.25).toFixed(2)),

@@ -2,8 +2,18 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { editorialBits, useI18n } from "@/i18n";
 import { KEY_REFS } from "@/data/editorial";
 import { toHans } from "@/i18n/hans";
+import { pageHead } from "@/lib/page-seo";
 
-export const Route = createFileRoute("/legal")({ component: LegalPage });
+export const Route = createFileRoute("/legal")({
+  head: () =>
+    pageHead({
+      title: "法律與專業守則",
+      description:
+        "護眼學堂法律與專業守則說明：不良廣告條例、藥劑業及毒藥條例與醫務委員會守則精神的教育說明。",
+      path: "/legal",
+    }),
+  component: LegalPage,
+});
 
 function LegalPage() {
   const { t, legal, locale } = useI18n();

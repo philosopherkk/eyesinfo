@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { usePrefs } from "@/lib/prefs";
+import { useI18n } from "@/i18n";
 
 const DROP_STEPS = [
   { t: "洗手", c: "洗好手", d: "用皂液洗淨，抹乾。唔好用未洗過的毛巾抹眼。" },
@@ -164,6 +165,7 @@ export function WarmTimer() {
 }
 
 export function OutdoorCard() {
+  const { locale, tx } = useI18n();
   const min = usePrefs((s) => s.outdoorMin);
   const add = usePrefs((s) => s.addOutdoor);
   const reset = usePrefs((s) => s.resetOutdoorIfNewDay);
@@ -171,25 +173,78 @@ export function OutdoorCard() {
     reset();
   }, [reset]);
 
+  const copy =
+    locale === "en"
+      ? {
+          lead:
+            "Not a medical device, and not a myopia-progress report. Mainly public-health evidence for primary-school-age children: about two hours or more of outdoor natural light a day is linked with lower myopia incidence / delayed onset (population-level evidence, not a personal guarantee). Indoor lighting does not replace daylight.",
+          alreadyMyopic:
+            "If a child already has myopia, outdoor daylight may help slow progression, but it cannot replace an ophthalmologist’s myopia-control plan.",
+          evidence:
+            "Based on school-based outdoor-activity randomised trials and recent meta-analyses (population level).",
+          dayLabel: "Daylight (outdoors)",
+          dayBody: "Shade, playgrounds and walking to school count. Sunglasses still admit daylight.",
+          indoorLabel: "Indoor light",
+          indoorBody: "Classrooms, tutorial centres and phone screens do not count toward these two hours.",
+          recorded: "Outdoor daylight logged today (a public-health round number, not your child’s prescription)",
+          unit: "min",
+          add: (n: number) => `+${n} min`,
+          topic: "Childhood myopia topic",
+        }
+      : locale === "ja"
+        ? {
+            lead:
+              "医療機器ではなく、近視進行の報告でもありません。主に小学校年代の児童向けの公衆衛生エビデンス：屋外の自然光を一日およそ2時間以上とることが、近視発症率の低下／出現の遅延と関連します（人口レベルの証拠であり、個人への保証ではありません）。室内照明は日光の代わりになりません。",
+            alreadyMyopic:
+              "すでに近視がある場合、屋外の日光は進行を緩やかにする助けになり得ますが、眼科専門医による近視抑制計画の代わりにはなりません。",
+            evidence:
+              "学校を基盤とした屋外活動のランダム化試験および近年のメタ解析（人口レベル）に基づきます。",
+            dayLabel: "日光（屋外）",
+            dayBody: "木陰、校庭、徒歩通学も含まれます。サングラスでも日光は入ります。",
+            indoorLabel: "室内灯",
+            indoorBody: "教室、塾、スマホ画面は、この2時間には数えません。",
+            recorded: "本日記録した屋外日光時間（公衆衛生の目安であり、お子さんの処方ではありません）",
+            unit: "分",
+            add: (n: number) => `+${n} 分`,
+            topic: "小児近視の頁",
+          }
+        : {
+            lead: tx(
+              "唔係醫療器材，亦唔係近視進度報告。主要針對小學階段學童的公共衞生證據：每日戶外自然光約兩小時或以上，與較低近視發病率／延遲出現有關（人口層面證據，不是個人保證）。室內燈光代替唔到日光。",
+            ),
+            alreadyMyopic: tx(
+              "若孩子已有近視，戶外日光或有助減慢進度，但不能代替眼科專科醫生的近視控制計劃。",
+            ),
+            evidence: tx("依據學校為本戶外活動隨機試驗及近期統合分析（人口層面）。"),
+            dayLabel: tx("日光（戶外）"),
+            dayBody: tx("樹蔭、操場、行路返學都算。太陽眼鏡仍有日光。"),
+            indoorLabel: tx("室內燈"),
+            indoorBody: tx("課室、補習社、手機屏幕，都唔計入這兩小時。"),
+            recorded: tx("今日已記錄的戶外日光時間（公共衞生約數，不是你孩子的處方）"),
+            unit: tx("分"),
+            add: (n: number) => `+${n} ${tx("分")}`,
+            topic: tx("兒童近視專題"),
+          };
+
   return (
     <div>
-      <p className="text-[0.88rem] leading-relaxed text-muted">
-        唔係醫療器材，亦唔係近視進度報告。公共衞生上，學童每日戶外自然光約兩小時或以上，與減慢近視出現有關。室內燈光代替唔到日光。
-      </p>
+      <p className="text-[0.88rem] leading-relaxed text-muted">{copy.lead}</p>
+      <p className="mt-2 text-[0.88rem] leading-relaxed text-muted">{copy.alreadyMyopic}</p>
+      <p className="mt-2 text-[0.78rem] leading-relaxed text-faint">{copy.evidence}</p>
       <div className="mt-4 grid grid-cols-2 gap-2">
         <div className="rounded-xl bg-navy p-4 text-paper">
-          <p className="text-[0.75rem] text-paper/70">日光（戶外）</p>
-          <p className="mt-2 text-[0.9rem] leading-relaxed">樹蔭、操場、行路返學都算。太陽眼鏡仍有日光。</p>
+          <p className="text-[0.75rem] text-paper/70">{copy.dayLabel}</p>
+          <p className="mt-2 text-[0.9rem] leading-relaxed">{copy.dayBody}</p>
         </div>
         <div className="rounded-xl border border-line bg-card p-4">
-          <p className="text-[0.75rem] text-muted">室內燈</p>
-          <p className="mt-2 text-[0.9rem] leading-relaxed text-ink">課室、補習社、手機屏幕，都唔計入這兩小時。</p>
+          <p className="text-[0.75rem] text-muted">{copy.indoorLabel}</p>
+          <p className="mt-2 text-[0.9rem] leading-relaxed text-ink">{copy.indoorBody}</p>
         </div>
       </div>
-      <p className="mt-5 text-center text-[0.8rem] text-muted">
-        今日已記錄的戶外日光時間（公共衞生約數，不是你孩子的處方）
+      <p className="mt-5 text-center text-[0.8rem] text-muted">{copy.recorded}</p>
+      <p className="text-center text-[2.4rem] font-semibold tabular-nums text-navy">
+        {min} {copy.unit}
       </p>
-      <p className="text-center text-[2.4rem] font-semibold tabular-nums text-navy">{min} 分</p>
       <div className="mt-3 grid grid-cols-3 gap-2">
         {[15, 30, 60].map((n) => (
           <button
@@ -198,7 +253,7 @@ export function OutdoorCard() {
             onClick={() => add(n)}
             className="h-12 rounded-xl border border-line bg-card text-[0.8rem] font-semibold text-navy"
           >
-            +{n} 分
+            {copy.add(n)}
           </button>
         ))}
       </div>
@@ -207,7 +262,7 @@ export function OutdoorCard() {
         params={{ topicId: "t-myopia" }}
         className="mt-4 inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy no-underline"
       >
-        兒童近視專題
+        {copy.topic}
       </Link>
     </div>
   );

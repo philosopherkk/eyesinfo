@@ -1,0 +1,5 @@
+# 護眼學堂 · 公眾教育（eyesinfo.org）
+User-agent: *
+Allow: /
+
+Sitemap: https://eyesinfo.org/sitemap.xml

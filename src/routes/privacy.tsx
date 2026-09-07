@@ -1,7 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useI18n } from "@/i18n";
+import { pageHead } from "@/lib/page-seo";
 
-export const Route = createFileRoute("/privacy")({ component: PrivacyPage });
+export const Route = createFileRoute("/privacy")({
+  head: () =>
+    pageHead({
+      title: "私隱與本機資料",
+      description:
+        "本教育網站如何處理本機資料：不經此站收集病歷或聯絡電話，偏好設定只存於裝置。",
+      path: "/privacy",
+    }),
+  component: PrivacyPage,
+});
 
 function PrivacyPage() {
   const { t, legal } = useI18n();

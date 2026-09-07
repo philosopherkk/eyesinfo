@@ -3,8 +3,17 @@ import { TOPICS } from "@/data/topics";
 import { usePrefs } from "@/lib/prefs";
 import { TopicRow } from "@/components/topic-row";
 import { useI18n } from "@/i18n";
+import { pageHead } from "@/lib/page-seo";
 
-export const Route = createFileRoute("/saved")({ component: SavedPage });
+export const Route = createFileRoute("/saved")({
+  head: () =>
+    pageHead({
+      title: "收藏",
+      description: "本機收藏的眼科教育專題。資料只存在此裝置，不上載。",
+      path: "/saved",
+    }),
+  component: SavedPage,
+});
 
 function SavedPage() {
   const saved = usePrefs((s) => s.saved);

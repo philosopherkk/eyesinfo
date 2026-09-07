@@ -51,7 +51,7 @@ const zhHant = {
   a11yGaps:
     "部分示意動畫與複雜圖示（例如眼圖熱區）在輔助技術下的體驗仍可再改善；高對比主題與深色模式尚未提供。詳細清單會隨版本更新。",
   a11yDateH: "聲明日期",
-  a11yDate: "2026年9月6日（內容版本 1.31）",
+  a11yDate: "2026年9月7日（內容版本 1.32）",
   a11yFeedbackH: "意見與更正",
   a11yFeedback:
     "若發現無障礙或內容錯誤，請參閱法律與專業守則頁的覆核與更正說明。本站不提供診所電話、預約或即時通訊，亦不經此頁接收病歷。",
@@ -87,6 +87,7 @@ const zhHant = {
   urgentTitle: "急症與盡快求醫",
   urgentLead: "私家診所不是急症室。以下分開「立即急症室」與「盡快（最好當日）散瞳眼科評估」。化學濺入另列：邊沖邊去急症室。",
   urgent999: "立即到急症室；無法自行前往：致電 999",
+  call999: "致電 999",
   chemH: "化學濺入眼睛",
   chem1: "立刻用大量清水或生理鹽水持續沖洗至少 20–30 分鐘，張開眼瞼沖。運送途中盡量繼續沖。不必等特定沖洗液。",
   chem2: "隱形眼鏡若容易除就除，不要為除鏡而中斷沖洗太久。",
@@ -98,6 +99,7 @@ const zhHant = {
   urgentFollow:
     "急症室分流後，或會轉介公立醫院眼科，或由你自行約見任何眼科專科醫生跟進。本站不作轉介。內容不能代替與註冊眼科專科醫生的面診，亦不能作為診斷。詳見法律與專業守則。",
   searchPh: "眼疾名稱、徵狀、檢查、工具……",
+  searchLabel: "搜尋專題與工具",
   searchFound: "找到 {n} 項",
   searchIdle: "專題 {a} · 工具 {b}",
   searchEmpty: "沒有符合的專題",
@@ -255,7 +257,7 @@ const en: Record<Key, string> = {
   a11yGaps:
     "Some demos and complex diagrams (for example eye-map hotspots) can still improve with assistive technologies. A high-contrast theme and dark mode are not offered yet. The list will update with later versions.",
   a11yDateH: "Statement date",
-  a11yDate: "6 September 2026 (content version 1.31)",
+  a11yDate: "7 September 2026 (content version 1.32)",
   a11yFeedbackH: "Feedback and corrections",
   a11yFeedback:
     "For accessibility or content errors, see the review and corrections note on the Law and professional code page. This site does not list clinic phones, bookings or messaging, and does not take medical records here.",
@@ -294,6 +296,7 @@ const en: Record<Key, string> = {
   urgentLead:
     "A private clinic is not an A&E. Below: go to A&E now versus same-day dilated eye assessment. Chemical splash is listed separately: irrigate while going to A&E.",
   urgent999: "Go to A&E now; if you cannot get there: call 999",
+  call999: "Call 999",
   chemH: "Chemical splash in the eye",
   chem1:
     "Irrigate at once with plenty of clean water or saline for at least 20–30 minutes, holding the lids open. Continue during transport if you can. Do not wait for a special irrigating fluid.",
@@ -306,6 +309,7 @@ const en: Record<Key, string> = {
   urgentFollow:
     "After A&E triage you may be referred to public hospital ophthalmology, or you may see any registered ophthalmologist. This site does not refer. This content cannot replace an in-person consultation with a registered ophthalmologist and is not a diagnosis. See Law and professional code.",
   searchPh: "Condition, symptom, test, tool…",
+  searchLabel: "Search topics and tools",
   searchFound: "{n} matches",
   searchIdle: "{a} topics · {b} tools",
   searchEmpty: "No matching topics",
@@ -461,7 +465,7 @@ const ja: Record<Key, string> = {
   a11yGaps:
     "一部の図示や複雑な図（眼の図のホットスポットなど）は支援技術での体験をさらに改善できます。高コントラストテーマとダークモードはまだありません。一覧は版に応じて更新します。",
   a11yDateH: "声明日",
-  a11yDate: "2026年9月6日（コンテンツ版 1.31）",
+  a11yDate: "2026年9月7日（コンテンツ版 1.32）",
   a11yFeedbackH: "意見と訂正",
   a11yFeedback:
     "アクセシビリティや内容の誤りは、法令と職業倫理の頁の確認・訂正の説明を参照してください。診療所電話・予約・メッセージ連絡は掲載せず、病歴も受け取りません。",
@@ -499,6 +503,7 @@ const ja: Record<Key, string> = {
   urgentLead:
     "私設クリニックは救急外来ではありません。「直ちに救急外来」と「同日の散瞳眼底検査」を分けています。薬品飛入は別枠：洗いながら救急へ。",
   urgent999: "直ちに救急外来へ。行けない場合は999番に電話",
+  call999: "999番に電話",
   chemH: "薬品が目に入ったとき",
   chem1:
     "すぐに大量の水道水または生理食塩水で20～30分以上洗い続け、まぶたを開いて流します。搬送中も続けられるだけ続けます。特別な洗浄液を待つ必要はありません。",
@@ -511,6 +516,7 @@ const ja: Record<Key, string> = {
   urgentFollow:
     "救急のトリアージ後、公立病院眼科へ紹介されることも、ご自身で眼科専門医を受診することもあります。本サイトは紹介しません。内容は登録眼科専門医の対面診察の代わりにはならず、診断でもありません。法令と職業倫理の頁を参照。",
   searchPh: "病名、症状、検査、ツール…",
+  searchLabel: "解説とツールを検索",
   searchFound: "{n} 件",
   searchIdle: "解説 {a} · ツール {b}",
   searchEmpty: "該当する解説がありません",

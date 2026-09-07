@@ -1,7 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useI18n } from "@/i18n";
+import { pageHead } from "@/lib/page-seo";
 
-export const Route = createFileRoute("/clinic")({ component: NoPracticePage });
+export const Route = createFileRoute("/clinic")({
+  head: () =>
+    pageHead({
+      title: "本站不提供執業資料",
+      description:
+        "這是公眾教育網站，不提供診所地址、電話、收費或預約。急症請到急症室；無法自行前往：致電 999。",
+      path: "/clinic",
+    }),
+  component: NoPracticePage,
+});
 
 function NoPracticePage() {
   const { t } = useI18n();

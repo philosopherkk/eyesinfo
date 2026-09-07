@@ -8,8 +8,18 @@ import { EyeAnatomyViewer } from "@/components/eye-anatomy-viewer";
 import { useI18n, TOOL_TEXT } from "@/i18n";
 import type { UiKey } from "@/i18n/ui";
 import { CONTENT_UPDATED, CONTENT_VERSION } from "@/lib/site";
+import { pageHead, SEO_SITE_NAME } from "@/lib/page-seo";
 
-export const Route = createFileRoute("/")({ component: Home });
+export const Route = createFileRoute("/")({
+  head: () =>
+    pageHead({
+      title: SEO_SITE_NAME,
+      description:
+        "香港眼科公眾教育：常見眼疾、專題單張與自我監察工具。不能代替與註冊眼科專科醫生的面診。",
+      path: "/",
+    }),
+  component: Home,
+});
 
 const HOME_TOOLS = TOOLS.filter((t) => t.home);
 

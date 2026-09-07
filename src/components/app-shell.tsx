@@ -90,7 +90,11 @@ export function AppShell({ children }: { children: ReactNode }) {
         </div>
       </header>
 
-      <main id="main-content" className="flex-1 pb-24" tabIndex={-1}>
+      <main
+        id="main-content"
+        className="flex-1 pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))]"
+        tabIndex={-1}
+      >
         <LegalShortLine />
         <Breadcrumbs />
         {children}

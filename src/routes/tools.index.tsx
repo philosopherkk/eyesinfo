@@ -2,8 +2,18 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ChevronRight } from "lucide-react";
 import { TOOLS, type ToolDef } from "@/data/tools";
 import { useI18n, TOOL_TEXT } from "@/i18n";
+import { pageHead } from "@/lib/page-seo";
 
-export const Route = createFileRoute("/tools/")({ component: ToolsHub });
+export const Route = createFileRoute("/tools/")({
+  head: () =>
+    pageHead({
+      title: "教育工具",
+      description:
+        "阿姆斯勒方格、眼圖、問醫生清單等自我監察與教育示意。不能代替眼科檢查。",
+      path: "/tools",
+    }),
+  component: ToolsHub,
+});
 
 function ToolsHub() {
   const { t, locale } = useI18n();

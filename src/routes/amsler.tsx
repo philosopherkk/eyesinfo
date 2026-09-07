@@ -15,8 +15,18 @@ import { EduToolCaveat } from "@/components/edu-tool-caveat";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { usePrefs, type AmslerResult } from "@/lib/prefs";
 import { useI18n } from "@/i18n";
+import { pageHead } from "@/lib/page-seo";
 
-export const Route = createFileRoute("/amsler")({ component: AmslerPage });
+export const Route = createFileRoute("/amsler")({
+  head: () =>
+    pageHead({
+      title: "阿姆斯勒方格",
+      description:
+        "阿姆斯勒方格自我監察中央視力示意。不是診斷工具；新出現變形或暗點須盡快散瞳眼底檢查。",
+      path: "/amsler",
+    }),
+  component: AmslerPage,
+});
 
 const CARD_W_MM = 85.6;
 const GRID_MM = 100;
@@ -125,8 +135,9 @@ function AmslerPage() {
             type="button"
             onClick={() => setInverted((v) => !v)}
             className={`inline-flex h-11 items-center gap-1 rounded-full px-3 text-[0.8rem] font-semibold ${ghostBtn}`}
+            aria-pressed={inverted}
           >
-            <Contrast className="size-4" />
+            <Contrast className="size-4" aria-hidden />
             黑白對調
           </button>
         </div>
@@ -161,11 +172,11 @@ function AmslerPage() {
   }
 
   return (
-    <div className="amsler-page pb-8">
-      <div className="flex items-center gap-1 px-2 pt-3 no-print">
+    <div className="amsler-page pb-[max(2rem,env(safe-area-inset-bottom))]">
+      <div className="flex items-center gap-1 px-2 pt-3">
         <Link
           to="/"
-          className="grid size-11 place-items-center rounded-md text-navy no-underline"
+          className="grid size-11 place-items-center rounded-md text-navy no-underline no-print"
           aria-label={t("back")}
         >
           <ArrowLeft className="size-5" aria-hidden />
@@ -176,16 +187,12 @@ function AmslerPage() {
         <button
           type="button"
           onClick={() => window.print()}
-          className="mr-2 inline-flex h-10 items-center gap-1.5 rounded-full border border-line bg-card px-3 text-[0.8rem] font-semibold text-navy"
+          className="mr-2 inline-flex h-10 items-center gap-1.5 rounded-full border border-line bg-card px-3 text-[0.8rem] font-semibold text-navy no-print"
         >
           <Printer className="size-3.5" aria-hidden />
           {t("printPage")}
         </button>
       </div>
-
-      <h1 className="print-only px-4 pt-2 text-[1.25rem] font-semibold text-navy">
-        {t("amslerTitle")}
-      </h1>
 
       <div className="amsler-print-keep px-4 pt-2">
         <EduToolCaveat />
@@ -208,8 +215,9 @@ function AmslerPage() {
             type="button"
             onClick={() => setInverted((v) => !v)}
             className="inline-flex h-11 flex-1 items-center justify-center gap-1.5 rounded-xl border border-line bg-card text-[0.82rem] font-semibold text-navy"
+            aria-pressed={inverted}
           >
-            <Contrast className="size-4" />
+            <Contrast className="size-4" aria-hidden />
             {inverted ? t("amslerWhite") : t("amslerBlack")}
           </button>
           <button

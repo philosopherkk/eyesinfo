@@ -10,12 +10,28 @@ import { FloaterDemo, HaloDemo, HazeDemo, TunnelDemo } from "@/components/tool-d
 import { DropTrainer, OutdoorCard, WarmTimer } from "@/components/care-tools";
 import { AskDoctor, RxDecoder, VisitWalk } from "@/components/ask-visit-rx";
 import { useI18n, TOOL_TEXT } from "@/i18n";
+import { pageHead } from "@/lib/page-seo";
 
 export const Route = createFileRoute("/tools/$toolId")({
+  head: ({ params }) => {
+    const tool = TOOLS.find(
+      (item) => item.id === params.toolId && item.href.startsWith("/tools/"),
+    );
+    const title = tool?.title ?? "教育工具";
+    const description =
+      tool?.blurb
+        ? `${tool.blurb}。公眾教育工具，不能代替檢查或面診。`
+        : "眼科公眾教育工具。不能代替檢查或面診。";
+    return pageHead({
+      title,
+      description,
+      path: `/tools/${params.toolId}`,
+    });
+  },
   component: ToolPage,
 });
 
-const EDU_CAVEAT_TOOLS = new Set<ToolId>(["map", "drops", "ask"]);
+const EDU_CAVEAT_TOOLS = new Set<ToolId>(["map", "drops", "ask", "outdoor"]);
 
 function ToolPage() {
   const { toolId } = Route.useParams();
