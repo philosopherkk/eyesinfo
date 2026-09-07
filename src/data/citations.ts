@@ -277,7 +277,7 @@ export const CITE: Record<string, Citation> = {
       "Intensive blood-glucose control with sulphonylureas or insulin compared with conventional treatment and risk of complications in patients with type 2 diabetes (UKPDS 33)",
     source: "Lancet. 1998;352(9131):837-853",
     pmid: "9742976",
-    note: "血糖控制與微血管併發症（包括視網膜病變）有關。內科跟進血糖；眼科做眼底。",
+    note: "較積極血糖控制與較低微血管併發症（含視網膜病變）風險有關；公開摘要常強調相對風險下降，絕對下降視基線。內科跟進血糖；眼科做眼底。數字不是你的個人預後。",
   },
   flitcroft2019: {
     id: "flitcroft2019",

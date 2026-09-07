@@ -17,9 +17,34 @@ export const EN_PACKS: Record<string, TopicPack> = {
     meta: "Myopia · hyperopia · astigmatism · presbyopia",
     blocks: [
       h("What it is"),
-      p("Light does not focus on the retina. Myopia blurs distance; hyperopia makes near work effortful; astigmatism distorts. Presbyopia is loss of lens focusing with age — strictly a decline in accommodation, not a classic refractive error, grouped here because the optical approaches overlap. In Hong Kong, 100 degrees = 1.00 D; high myopia is usually ≥ 600 degrees (−6.00 D). Myopia is often axial. About 1 mm of extra axial length is roughly 2.5–3.00 D. Myopia is very common in local schoolchildren. Earlier school screening reports could exceed 80% in secondary school; more recent larger questionnaire surveys are about 60–70%. Figures depend on the method."),
+      p("Light does not focus on the retina. Myopia blurs distance; hyperopia makes near work effortful; astigmatism distorts. Presbyopia is loss of lens focusing with age — strictly a decline in accommodation, not a classic refractive error, grouped here because the optical approaches overlap. In Hong Kong, 100 degrees = 1.00 D; high myopia is usually ≥ 600 degrees (−6.00 D). Myopia is often axial. About 1 mm of extra axial length is roughly 2.5–3.00 D. Myopia is very common in local schoolchildren. Earlier school screening reports could exceed 80% in secondary school; more recent larger questionnaire surveys are about 60–70%. Figures differ by method (dilated refraction screening ≠ self-report questionnaire); the two sets cannot be compared directly, and neither is your child’s personal prognosis."),
       h("Long-term risks of high myopia (≥ 600 degrees)"),
-      ul(["Retinal tear or detachment", "Myopic maculopathy", "Glaucoma and early cataract"]),
+      note(
+        "“Fold” figures are relative-risk ballparks vs emmetropia/low myopia. Baseline risk in emmetropes is usually low, so absolute risk still varies — not your personal lifetime odds, and not “10–20× means 1 in 10–20 people.” Deeper explanation: the dedicated page on long-term high-myopia risks (pathologic myopia…).",
+      ),
+      {
+        type: "table",
+        rows: [
+          ["Related eye disease", "Literature report (education ballpark)"],
+          [
+            "Retinal detachment",
+            "About 10–20× vs emmetropia (relative risk; not personal absolute probability)",
+          ],
+          ["Open-angle glaucoma", "About 2–3× (relative risk)"],
+          [
+            "Nuclear cataract",
+            "About 2–5×; may start earlier (relative risk)",
+          ],
+          [
+            "Myopic maculopathy",
+            "Structural / degenerative change; can permanently damage central vision (not a fold comparison)",
+          ],
+          [
+            "Posterior staphyloma",
+            "Posterior-segment structural expansion (structural change, not a relative-risk multiple)",
+          ],
+        ],
+      },
       p("If you have high myopia and new flashes or a clear increase in floaters: same-day dilated fundus exam. A curtain or sudden vision drop: go to A&E now. For a deeper explanation of pathologic myopia, myopic maculopathy and retinal breaks, see the dedicated high-myopia risks page."),
       w("The eye axis cannot be shortened. Childhood myopia management aims to slow progression and lower the chance of ending with high myopia — it is not a “cure” for the degree. Laser refractive or lens surgery changes focus; it does not remove the fundus risks of high myopia."),
       h("What a doctor may discuss"),
@@ -102,7 +127,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
       ul(["Early disease can be silent", "Later: blur, a shower of floaters, a shadow, drop in central vision"]),
       p("A sudden increase in floaters without a curtain or sudden blindness: dilated fundus exam the same day if possible. A curtain, a dark shadow or a sudden vision drop: go to A&E now. Early disease can be silent — do not wait until you cannot see."),
       h("What a doctor may discuss"),
-      ul(["Sugar, blood pressure and lipids are followed by the medical team; ophthalmology does the fundus exams and treats eye complications", "Dilated fundus exams at intervals the ophthalmologist sets — not a fixed “see you next year on this date” for every person", "Intravitreal anti-VEGF, laser or surgery as classes of options when indicated"]),
+      ul([
+        "Sugar, blood pressure and lipids are followed by the medical team; ophthalmology does the fundus exams and treats eye complications",
+        "Trials such as UKPDS show more intensive glucose control is linked with lower risk of microvascular complications (including retinopathy). Literature often reports relative risk reduction; absolute risk reduction depends on baseline risk and is not a percentage you can paste onto yourself. Glucose targets are set by the medical team; ophthalmology does the fundus exams.",
+        "Dilated fundus exams at intervals the ophthalmologist sets — not a fixed “see you next year on this date” for every person",
+        "Intravitreal anti-VEGF, laser or surgery as classes of options when indicated",
+      ]),
     ],
   },
   d7: {
