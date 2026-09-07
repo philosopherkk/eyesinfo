@@ -266,7 +266,7 @@ export const SEARCH_SYNONYMS: SearchEntry[] = [
     id: "t-myopia",
     kind: "topic",
     href: "/t/t-myopia",
-    titleFallback: "兒童近視控制",
+    titleFallback: "兒童近視：醫生或會討論的方向",
     keywords: ["兒童近視", "近視控制", "戶外", "眼軸", "childhood myopia", "atropine class"],
   },
   {

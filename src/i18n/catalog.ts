@@ -19,7 +19,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     halo: { title: "夜間光暈比較", blurb: "單焦、延伸景深、三焦點示意", canto: "唔係術後保證" },
     warm: { title: "熱敷計時", blurb: "示意計時，跟醫生指示", canto: "熱敷跟時間" },
     visit: { title: "一次眼科檢查", blurb: "散瞳後唔好自己開車", canto: "去診所會做咩" },
-    outdoor: { title: "兒童戶外時間", blurb: "今日夠唔夠兩小時日光", canto: "出街睇日光" },
+    outdoor: { title: "兒童戶外時間", blurb: "戶外日光時間記錄（公共衞生約數）", canto: "出街睇日光" },
     rx: { title: "眼鏡度數解讀", blurb: "球鏡、柱鏡、軸、老花加度", canto: "張紙寫緊咩" },
   },
   "zh-Hans": {
@@ -34,7 +34,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     halo: { title: "夜间光晕比较", blurb: "单焦、延伸景深、三焦点示意", canto: "不是术后保证" },
     warm: { title: "热敷计时", blurb: "示意计时，跟医生指示", canto: "热敷跟时间" },
     visit: { title: "一次眼科检查", blurb: "散瞳后不要自己开车", canto: "去诊所会做什么" },
-    outdoor: { title: "儿童户外时间", blurb: "今天够不够两小时日光", canto: "出门看日光" },
+    outdoor: { title: "儿童户外时间", blurb: "户外日光时间记录（公共卫生约数）", canto: "出门看日光" },
     rx: { title: "眼镜度数解读", blurb: "球镜、柱镜、轴、老花加光", canto: "那张纸写什么" },
   },
   en: {
@@ -49,7 +49,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     halo: { title: "Night halo comparison", blurb: "Monofocal, EDOF, trifocal demo", canto: "Not a surgical promise" },
     warm: { title: "Warm compress timer", blurb: "A timer for illustration — follow your doctor", canto: "Time the compress" },
     visit: { title: "A clinic visit", blurb: "Do not drive yourself after dilation", canto: "What happens at the visit" },
-    outdoor: { title: "Children’s outdoor time", blurb: "Two hours of daylight today?", canto: "Go out in daylight" },
+    outdoor: { title: "Children’s outdoor time", blurb: "Outdoor daylight log (public-health round number)", canto: "Go out in daylight" },
     rx: { title: "Reading a glasses prescription", blurb: "Sph, Cyl, Axis, Add", canto: "What the slip means" },
   },
   ja: {
@@ -64,7 +64,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     halo: { title: "夜間ハロー比較", blurb: "単焦点・EDOF・3焦点の図示", canto: "術後保証ではない" },
     warm: { title: "温罨法タイマー", blurb: "8～10分、温かく熱すぎない", canto: "時間を計る" },
     visit: { title: "眼科受診の流れ", blurb: "散瞳後は自分で運転しない", canto: "診察で何をするか" },
-    outdoor: { title: "子どもの屋外時間", blurb: "今日、日光は2時間あるか", canto: "外の光を" },
+    outdoor: { title: "子どもの屋外時間", blurb: "屋外日光の記録（公衆衛生の目安）", canto: "外の光を" },
     rx: { title: "眼鏡処方箋の読み方", blurb: "Sph・Cyl・Axis・Add", canto: "用紙の意味" },
   },
 };

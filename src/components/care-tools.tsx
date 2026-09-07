@@ -179,7 +179,7 @@ export function OutdoorCard() {
           lead:
             "Not a medical device, and not a myopia-progress report. Mainly public-health evidence for primary-school-age children: about two hours or more of outdoor natural light a day is linked with lower myopia incidence / delayed onset (population-level evidence, not a personal guarantee). Indoor lighting does not replace daylight.",
           alreadyMyopic:
-            "If a child already has myopia, outdoor daylight may help slow progression, but it cannot replace an ophthalmologist’s myopia-control plan.",
+            "If a child already has myopia, outdoor daylight may help slow progression, but it cannot replace options an ophthalmologist may discuss after examination — and this tool is not a personal progress report.",
           evidence:
             "Based on school-based outdoor-activity randomised trials and recent meta-analyses (population level).",
           dayLabel: "Daylight (outdoors)",
@@ -189,14 +189,14 @@ export function OutdoorCard() {
           recorded: "Outdoor daylight logged today (a public-health round number, not your child’s prescription)",
           unit: "min",
           add: (n: number) => `+${n} min`,
-          topic: "Childhood myopia topic",
+          topic: "Childhood myopia: options a doctor may discuss",
         }
       : locale === "ja"
         ? {
             lead:
               "医療機器ではなく、近視進行の報告でもありません。主に小学校年代の児童向けの公衆衛生エビデンス：屋外の自然光を一日およそ2時間以上とることが、近視発症率の低下／出現の遅延と関連します（人口レベルの証拠であり、個人への保証ではありません）。室内照明は日光の代わりになりません。",
             alreadyMyopic:
-              "すでに近視がある場合、屋外の日光は進行を緩やかにする助けになり得ますが、眼科専門医による近視抑制計画の代わりにはなりません。",
+              "すでに近視がある場合、屋外の日光は進行を緩やかにする助けになり得ますが、眼科専門医が診察後に話し合う方向の代わりにはなりません。個人の減度進捗報告でもありません。",
             evidence:
               "学校を基盤とした屋外活動のランダム化試験および近年のメタ解析（人口レベル）に基づきます。",
             dayLabel: "日光（屋外）",
@@ -206,14 +206,14 @@ export function OutdoorCard() {
             recorded: "本日記録した屋外日光時間（公衆衛生の目安であり、お子さんの処方ではありません）",
             unit: "分",
             add: (n: number) => `+${n} 分`,
-            topic: "小児近視の頁",
+            topic: "小児近視：医師が話し合う方向",
           }
         : {
             lead: tx(
               "唔係醫療器材，亦唔係近視進度報告。主要針對小學階段學童的公共衞生證據：每日戶外自然光約兩小時或以上，與較低近視發病率／延遲出現有關（人口層面證據，不是個人保證）。室內燈光代替唔到日光。",
             ),
             alreadyMyopic: tx(
-              "若孩子已有近視，戶外日光或有助減慢進度，但不能代替眼科專科醫生的近視控制計劃。",
+              "若孩子已有近視，戶外日光或有助減慢進度，但不能代替眼科專科醫生面診後或會討論的方向，亦不是個人減度進度報告。",
             ),
             evidence: tx("依據學校為本戶外活動隨機試驗及近期統合分析（人口層面）。"),
             dayLabel: tx("日光（戶外）"),
@@ -223,7 +223,7 @@ export function OutdoorCard() {
             recorded: tx("今日已記錄的戶外日光時間（公共衞生約數，不是你孩子的處方）"),
             unit: tx("分"),
             add: (n: number) => `+${n} ${tx("分")}`,
-            topic: tx("兒童近視專題"),
+            topic: tx("兒童近視：醫生或會討論的方向"),
           };
 
   return (

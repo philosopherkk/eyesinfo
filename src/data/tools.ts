@@ -34,7 +34,7 @@ export const TOOLS: ToolDef[] = [
   { id: "halo", title: "夜間光暈比較", blurb: "單焦、延伸景深、三焦點示意", canto: "唔係術後保證", href: "/tools/halo" },
   { id: "warm", title: "熱敷計時", blurb: "示意計時，跟醫生指示", canto: "熱敷跟時間", href: "/tools/warm" },
   { id: "visit", title: "一次眼科檢查", blurb: "散瞳後唔好自己開車", canto: "去診所會做咩", href: "/tools/visit" },
-  { id: "outdoor", title: "兒童戶外時間", blurb: "今日夠唔夠兩小時日光", canto: "出街睇日光", href: "/tools/outdoor" },
+  { id: "outdoor", title: "兒童戶外時間", blurb: "戶外日光時間記錄（公共衞生約數）", canto: "出街睇日光", href: "/tools/outdoor" },
   { id: "rx", title: "眼鏡度數解讀", blurb: "球鏡、柱鏡、軸、老花加度", canto: "張紙寫緊咩", href: "/tools/rx" },
 ];
 
@@ -81,7 +81,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   ],
   "t-bluelight": [
     { href: "/urgent", label: "急症與同日評估" },
-    { href: "/t/t-myopia", label: "兒童近視控制" },
+    { href: "/t/t-myopia", label: "兒童近視：醫生或會討論的方向" },
     { href: "/tools/outdoor", label: "兒童戶外時間" },
     { href: "/t/d2", label: "乾眼症" },
     { href: "/t/t-lube", label: "潤眼液與潤滑劑" },
@@ -90,7 +90,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   "t-screen": [
     { href: "/t/t-bluelight", label: "藍光與屏幕：常見誤解（完整正文）" },
     { href: "/tools/outdoor", label: "兒童戶外時間" },
-    { href: "/t/t-myopia", label: "兒童近視控制" },
+    { href: "/t/t-myopia", label: "兒童近視：醫生或會討論的方向" },
   ],
   "t-colour-vision": [
     { href: "/urgent", label: "急症與同日評估" },
@@ -139,7 +139,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/d1", label: "屈光不正總覽" },
     { href: "/t/d8", label: "飛蚊與視網膜脫離風險" },
     { href: "/tools/floaters", label: "飛蚊與簾幕" },
-    { href: "/t/t-myopia", label: "兒童近視控制" },
+    { href: "/t/t-myopia", label: "兒童近視：醫生或會討論的方向" },
     { href: "/t/d5", label: "年齡相關性黃斑病變" },
   ],
   "t-keratoconus": [
