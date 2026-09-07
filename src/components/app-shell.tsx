@@ -141,6 +141,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               <li key={tab.to}>
                 <Link
                   to={tab.to}
+                  aria-current={active ? "page" : undefined}
                   className={cn(
                     "flex min-h-14 flex-col items-center justify-center gap-0.5 text-[0.7rem] no-underline",
                     active ? "font-semibold text-navy" : "text-muted",
