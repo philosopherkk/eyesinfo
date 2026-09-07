@@ -1337,4 +1337,99 @@ export const EN_PACKS: Record<string, TopicPack> = {
     ],
   },
 
+  "t-allergy-hk": {
+    title:
+      "Eye allergy and the Hong Kong environment: triggers, infection red flags, and when not to self-buy steroids",
+    tag: "Hong Kong environment triggers",
+    meta: "Dust mites · air-con indoors · do not self-buy steroids",
+    blocks: [
+      h("What it is"),
+      p("Ocular allergy (including allergic conjunctivitis) is conjunctival inflammation to allergens, often alongside nasal allergy. Versus viral/bacterial “red eye”, allergy highlights intense itch, usually watery discharge, often both eyes together or in sequence, and may recur with the environment. Milder seasonal/perennial disease is not the same severity as VKC/AKC (which can injure the cornea) — the latter must not be treated as ordinary red eye with self-bought drops (see the conjunctivitis overview; drug-class risks on the allergy treatment-principles page). This page does not replace the conjunctivitis overview; it covers Hong Kong environment triggers and when not to treat everything as ordinary eye allergy."),
+      h("Hong Kong environment: common triggers (qualitative)"),
+      p("In a subtropical city with sealed homes, humidity and long air-conditioning, indoor allergens are often discussed more than “one week of pollen spikes”. This is trigger education — not a prediction of what you are sensitised to. This page does not invent unverified city-wide eye-allergy prevalence percentages."),
+      h("1. House dust mites (year-round, mainly indoors)"),
+      p("Across much of Asia (including Hong Kong nasal-allergy research), house dust mites are an important — often the most common identifiable — inhalant allergen. They favour mattresses, soft toys, carpets and dampness. Itchy eyes worse on waking or after long time at home → think year-round indoor triggers. Environment steps (not a treatment promise): wash bedding at a suitable temperature and dry thoroughly; reduce excess humidity; cut down dust-trapping soft toys / heavy curtains; mite covers only if a doctor/allergy assessment suggests them. These steps do not replace seeking care for red flags."),
+      h("2. Air-conditioning and sealed indoors"),
+      p("Long air-conditioning can dry the ocular surface; people also stay in spaces with higher indoor allergen load. Dryness plus itch leads to rubbing and worse inflammation. Do not aim vents at the eyes; clean filters (reduce dust/mould irritation — not a promise to eliminate allergy)."),
+      h("3. Season and weather (qualitative)"),
+      p("Hong Kong may not have a single dominant pollen season; seasonal change, humid “returning damp”, pollution or dust events can worsen nose and eye symptoms. Asia reviews note combustion pollutants and environmental tobacco smoke can aggravate allergic rhinoconjunctivitis. Do not label every red eye viral/bacterial — and do not label every red eye allergy."),
+      h("4. Pollen and outdoors (qualitative)"),
+      p("Relative to indoor mites, pollen positives were less common in a Hong Kong chronic-rhinitis clinic skin-prick sample, but some people are still grass-sensitive. Itchy watery eyes after grass cutting or countryside time can be a history clue — this page does not quote a city-wide pollen-sensitisation population %."),
+      h("5. Other"),
+      ul([
+        "Pet dander and cockroach-related allergy",
+        "Contact lenses can trigger or worsen papillary conjunctivitis (see the contact-lens page); stop wear as advised when symptomatic",
+        "Misusing “get-the-red-out” drops (steroids or vasoconstrictors) can mask disease",
+      ]),
+      h("Common symptoms"),
+      ul([
+        "More like allergy: intense itch, tearing, mild–moderate redness, watery discharge, often both eyes, may have nasal symptoms, linked to environment",
+        "Raise concern: severe pain, marked light sensitivity, vision drop, thick purulent discharge, one eye rapidly worse, a white corneal spot, contact-lens-related red pain — rule out keratitis / infectious conjunctivitis",
+        "Children/teens with long intense itch plus giant papillae on the upper lid and corneal involvement: think VKC and similar — do not self-buy steroids as “ordinary pollen eye”",
+      ]),
+      h("Go to A&E now (if you cannot get there: call 999)"),
+      ul([
+        "Severe eye pain with headache and vomiting — rule out acute angle-closure glaucoma and similar",
+        "Sudden vision drop or sudden blindness",
+      ]),
+      h("Same-day ophthalmic assessment when possible"),
+      ul([
+        "Severe light sensitivity / severe pain — see an ophthalmologist as soon as possible",
+        "Contact-lens-related red pain and light sensitivity: remove lenses at once; if pain continues after removal, do not delay",
+        "Suspected corneal involvement, blur, purulent discharge with acute one-eye worsening",
+        "Worsening after using unknown “strong” eye drops",
+      ]),
+      h("Clinic (still do not wait indefinitely)"),
+      ul([
+        "Recurrent itch affecting sleep, school or work",
+        "Clear nasal allergy, asthma or atopic dermatitis as well",
+        "Need to decide on allergen testing or whether further self-medication is unsuitable",
+      ]),
+      h("Tests (education level)"),
+      p("Slit lamp ± fluorescein to exclude keratitis; history of contact lenses, recent infection, contagious contacts, medicines (especially steroids); allergen assessment (skin-prick / specific IgE) only if a doctor decides it is needed. Photos cannot diagnose."),
+      h("When not to self-buy or continue steroid eye drops"),
+      p("Behaviour red lines; pharmacology and class risks sit on the allergic-conjunctivitis treatment-principles page (this page does not rewrite that monograph)."),
+      ol([
+        "Without a prescription, do not buy “strong / steroid” drops to clear redness — infection can worsen",
+        "If you were prescribed steroids before, do not extend, double or share with family; pressure / cataract / infection risks are on the drug-principles page",
+        "Itch alone is not a licence for steroids; milder cases start with trigger avoidance, cool compresses, and discussion of antihistamine / mast-cell stabiliser classes",
+        "VKC/AKC or corneal involvement: specialty care — do not order overseas preparations online",
+        "Contact-lens red pain: remove lenses and seek care; do not keep wearing while putting in steroids",
+      ]),
+      p("Even non-steroid over-the-counter drops need registered ingredients locally; this page does not promote brands."),
+      h("Common myths"),
+      {
+        type: "table",
+        rows: [
+          ["Myth", "Closer to the evidence"],
+          [
+            "“No pollen in Hong Kong means no eye allergy”",
+            "Year-round indoor mites and similar triggers are discussed more often.",
+          ],
+          [
+            "“Air-con means no allergy”",
+            "Air-con keeps people in indoor allergen spaces and can worsen dryness.",
+          ],
+          [
+            "“If it itches, buy a steroid”",
+            "Other diseases must be excluded; steroids are not a DIY OTC plan.",
+          ],
+          [
+            "“Both eyes = infection; one eye = allergy”",
+            "Both eyes can be allergy or infection; acute one-eye severe pain and light sensitivity needs keratitis ruled out.",
+          ],
+          [
+            "“Share eye-drop bottles”",
+            "Contamination and cross-infection risk — do not share.",
+          ],
+          [
+            "“Blast a fan at the eyes”",
+            "Worsens dryness; do not aim airflow at the eyes.",
+          ],
+        ],
+      },
+      note("Public education only; not consultation, booking, purchase or referral; no cure or guarantee claims; no unverified city-wide prevalence figures; do not teach self-buying or extending steroid eye drops. Drug monograph on a separate page."),
+    ],
+  },
+
 };

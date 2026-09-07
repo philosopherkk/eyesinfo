@@ -284,6 +284,38 @@ export const CITE: Record<string, Citation> = {
     pmid: "24393351",
     note: "進展性圓錐角膜交聯隨機對照三年結果。epi-off 證據較多的公開依據之一；個別是否適合須醫生評估。",
   },
+  thong2017: {
+    id: "thong2017",
+    authors: "Thong BYH",
+    title: "Allergic conjunctivitis in Asia",
+    source: "Asia Pac Allergy. 2017;7(2):57-64",
+    pmid: "28487836",
+    note: "亞洲過敏性結膜炎綜述。環境與誘因屬定性教育；不作個人診斷或全港盛行率推斷。",
+  },
+  yuen2007: {
+    id: "yuen2007",
+    authors: "Yuen APW, et al.",
+    title:
+      "Skin prick testing and serum specific IgE in chronic rhinitis in Hong Kong",
+    source: "Hong Kong Med J. 2007;13(2):103-108",
+    pmid: "17406040",
+    note: "本港慢性鼻炎門診皮膚點刺試驗樣本結果；不能解讀為全港人口眼過敏率或花粉感敏人口百分比。",
+  },
+  leung1998: {
+    id: "leung1998",
+    authors: "Leung R, et al.",
+    title: "Indoor environment and respiratory health in Hong Kong residences",
+    source:
+      "Clin Exp Allergy. 1998;28(8):1020-1026. DOI 10.1046/j.1365-2222.1998.00281.x",
+    note: "本港住屋室內環境與呼吸道健康相關討論。誘因教育；非療效承諾。",
+  },
+  katelaris2011: {
+    id: "katelaris2011",
+    authors: "Katelaris CH, et al.",
+    title: "Allergies in Asia-Pacific Survey",
+    source: "Am J Rhinol Allergy. 2011;25(6):e185-e190",
+    note: "亞太過敏調查。燃料燃燒污染物、環境煙草煙霧等可加劇過敏性鼻結膜炎的公開討論依據之一。",
+  },
 };
 
 export function citationsFor(ids: string[]): Citation[] {

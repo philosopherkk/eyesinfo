@@ -60,8 +60,24 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   d6: [{ href: "/t/t-reports", label: "OCT／視野示意" }, { href: "/t/t-rvo", label: "視網膜血管阻塞" }],
   d7: [
     { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-allergy-hk", label: "眼部過敏與香港環境" },
+    { href: "/t/t-allergy", label: "過敏性結膜炎原則" },
     { href: "/t/t-scleritis", label: "表層鞏膜炎與鞏膜炎" },
     { href: "/t/t-chem", label: "化學性眼損傷" },
+  ],
+  "t-allergy": [
+    { href: "/t/t-allergy-hk", label: "眼部過敏與香港環境" },
+    { href: "/t/d7", label: "結膜炎總論" },
+    { href: "/t/t-cl", label: "隱形眼鏡" },
+    { href: "/urgent", label: "急症與同日評估" },
+  ],
+  "t-allergy-hk": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/d7", label: "結膜炎總論" },
+    { href: "/t/t-allergy", label: "過敏藥物原則（勿自買類固醇）" },
+    { href: "/t/t-cl", label: "隱形眼鏡" },
+    { href: "/t/t-keratoconus", label: "圓錐角膜（揉眼相關）" },
+    { href: "/c/surface", label: "角膜與眼表" },
   ],
   d8: [{ href: "/tools/floaters", label: "飛蚊與簾幕" }, { href: "/t/t-rd", label: "脫離手術與風險" }, { href: "/t/t-uveitis", label: "葡萄膜炎" }],
   d9: [
@@ -111,6 +127,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-lasik", label: "激光矯視與術前篩查" },
     { href: "/t/t-cl", label: "隱形眼鏡衛生與併發症" },
     { href: "/t/t-allergy", label: "過敏性結膜炎原則" },
+    { href: "/t/t-allergy-hk", label: "眼部過敏與香港環境" },
     { href: "/t/d7", label: "結膜炎" },
     { href: "/c/surface", label: "角膜與眼表" },
   ],
