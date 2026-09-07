@@ -92,6 +92,13 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/tools/outdoor", label: "兒童戶外時間" },
     { href: "/t/t-myopia", label: "兒童近視控制" },
   ],
+  "t-colour-vision": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-child", label: "兒童視力里程碑" },
+    { href: "/t/d5", label: "年齡相關性黃斑病變" },
+    { href: "/t/t-gca", label: "巨細胞動脈炎" },
+    { href: "/c/lens", label: "晶體與屈光" },
+  ],
   d8: [{ href: "/tools/floaters", label: "飛蚊與簾幕" }, { href: "/t/t-rd", label: "脫離手術與風險" }, { href: "/t/t-uveitis", label: "葡萄膜炎" }],
   d9: [
     { href: "/tools/warm", label: "熱敷計時" },

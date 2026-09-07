@@ -349,6 +349,36 @@ export const CITE: Record<string, Citation> = {
       "Cochrane Database Syst Rev. 2023;(8):CD013244. DOI 10.1002/14651858.CD013244.pub2",
     note: "相對非過濾鏡片：短期內大概很少或不能減輕電腦相關視疲勞；對最佳矯正視力大概很少或無影響；睡眠證據不清；納入試驗沒有可據以下結論的黃斑健康結果。本站不自製 nm／lux 截止表。",
   },
+  simunovic2016: {
+    id: "simunovic2016",
+    authors: "Simunovic MP",
+    title: "Acquired color vision deficiency",
+    source: "Surv Ophthalmol. 2016;61(2):132-155",
+    pmid: "26656928",
+    note: "後天色覺異常綜述。後天型可為視神經／黃斑等疾病訊號；不作個人診斷。",
+  },
+  hasrod2016: {
+    id: "hasrod2016",
+    authors: "Hasrod N, Rubin A",
+    title: "Congenital and acquired colour vision deficiencies",
+    source: "Afr Vis Eye Health. 2016;75(1):a365. DOI 10.4102/aveh.v75i1.365",
+    note: "先天與後天色覺異常教育綜述。檢查方法屬類別名；不推介商品。",
+  },
+  austroadsColour: {
+    id: "austroadsColour",
+    authors: "Austroads",
+    title: "Assessing Fitness to Drive — Colour vision",
+    source: "Austroads assessing fitness to drive guidance (colour vision section)",
+    note: "部分地區私家／商用車輛色覺標準未必統一；勸喻顯著異常者留意交通燈位置與適應。香港要求以運輸署及相關規管為準；本站不作資格裁決。",
+  },
+  ng2023asean: {
+    id: "ng2023asean",
+    authors: "Ng JY, et al.",
+    title: "Colour vision restrictions for driving in ASEAN countries",
+    source:
+      "Lancet Reg Health Southeast Asia. 2023. DOI 10.1016/j.lansea.2023.100171",
+    note: "東盟地區駕駛色覺限制比較。各地規管不一；本站不寫死本地分數線。",
+  },
 };
 
 export function citationsFor(ids: string[]): Citation[] {

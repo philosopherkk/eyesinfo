@@ -1480,4 +1480,92 @@ export const EN_PACKS: Record<string, TopicPack> = {
     ],
   },
 
+  "t-colour-vision": {
+    title: "Colour vision deficiency: congenital vs acquired",
+    tag: "Colour vision education",
+    meta: "Stable congenital vs acquired warning · no fitness-to-drive ruling",
+    blocks: [
+      h("What it is"),
+      p("Colour vision is the ability of the eyes and brain to tell colours apart. Colour vision deficiency (CVD; often called colour weakness / colour blindness) is broadly congenital or acquired. This page does not quote “X% of males” prevalence figures."),
+      h("1. Congenital colour vision deficiency"),
+      ul([
+        "Usually cone photopigment gene variants; red–green (protan / deutan) is common",
+        "Often X-linked, so males are found more often; typically both eyes, from childhood, relatively stable — not an inflammatory disease",
+        "Congenital blue–yellow (tritan) types are less common",
+        "Key point: most congenital CVD cannot be “cured” with medicines; early recognition, compensation, and understanding school / work needs matter",
+      ]),
+      h("2. Acquired colour vision deficiency"),
+      ul([
+        "Appears later from eye disease, optic neuropathy, brain visual pathways, systemic disease, or some drug / chemical toxicities",
+        "May be more obvious in one eye; may fluctuate or worsen; may accompany acuity or field change",
+        "Köllner’s rule (rough, not absolute): early acquired blue–yellow more often linked with retina / outer layers or optical media; red–green more often with optic nerve / inner layers — late disease or some toxicities may not fit",
+        "Acquired CVD can be a signal to find a cause — not simply “born colour weak”",
+      ]),
+      h("Test names (classes, not products)"),
+      ul([
+        "Pseudoisochromatic plate screening (Ishihara-class): common red–green screen; pass/fail alone does not set severity or an occupational decision",
+        "Arrangement / sorting tests (Farnsworth D-15, HRR and similar classes): help type and rough severity",
+        "Anomaloscope: one specialty reference standard; not stocked in every clinic",
+        "Online self-test charts are unreliable and are not formal reports",
+      ]),
+      h("Common symptoms"),
+      ul([
+        "Congenital: lifelong trouble with some red/green objects, wires, map legends, medicine labels; worse in dim light / low contrast; daily life often manageable, but exams / design / some jobs are affected",
+        "Acquired (higher concern): colours that used to be normal now look washed, yellowed, bluer or harder to tell apart; with vision drop, field loss, pupil change, eye pain or neurological symptoms; colour change after a medicine (tell the prescribing doctor and an ophthalmologist)",
+      ]),
+      h("Go to A&E now (if you cannot get there: call 999)"),
+      ul([
+        "Sudden colour-vision change plus sudden vision drop, field loss, double vision, severe headache, or eye pain with nausea — rule out optic-nerve / retinal / neurological emergencies",
+      ]),
+      h("Same-day / prompt assessment"),
+      ul([
+        "New colour-vision change (especially one eye) — see an ophthalmologist as soon as possible",
+        "Difficulty telling colours while on medicines that may affect optic nerve / retina",
+        "A child needing a formal colour-vision report before school entry or subject choice",
+      ]),
+      h("Clinic"),
+      ul([
+        "Suspected congenital CVD: type and daily-living advice",
+        "Work or driving questions (qualitative; Hong Kong law / employers / Transport Department govern)",
+        "Colour assessment as part of follow-up for chronic eye disease",
+      ]),
+      h("Work / driving (qualitative — no local score cut-offs)"),
+      p("Whether private-car driving requires colour-vision pass varies by place; some guidance notes private and commercial standards may differ, and people with marked deficiency should still learn traffic-light position and adaptation. Aviation, maritime, rail, electrical, chemical, dyeing, some disciplined services / healthcare roles may have separate employer or regulator rules, often needing named tests beyond plates alone. For Hong Kong specifics, check the Transport Department, the relevant regulator, or occupational health at the employer — this site does not decide individual fitness."),
+      h("What a doctor may do"),
+      p("History (lifelong / family / one or both eyes / medicines / systemic disease / toxins); acuity, pupils, anterior segment and fundus; for acquired CVD, closer optic-nerve and macular review; a colour-test battery; field, OCT, electrophysiology, neuroimaging or toxicity work-up when needed. Congenital: genetics and adaptation — generally no “cure course” to sell. Acquired: find and manage reversible causes (registered doctor decides)."),
+      h("Common myths"),
+      {
+        type: "table",
+        rows: [
+          ["Myth", "Closer to the evidence"],
+          [
+            "“Colour blind means seeing no colour at all”",
+            "Most people confuse some colours; the world is not simply black and white.",
+          ],
+          [
+            "“Failing a plate test means you can never drive”",
+            "Rules vary by place and vehicle class; check official Transport Department requirements.",
+          ],
+          [
+            "“Eye supplements cure colour weakness”",
+            "Congenital photopigment anomalies are not generally corrected by supplements.",
+          ],
+          [
+            "“One childhood test lasts for life”",
+            "Congenital CVD is relatively stable; later change raises acquired concern.",
+          ],
+          [
+            "“Acquired colour change is always minor”",
+            "It can be an early clue to optic-nerve or macular disease.",
+          ],
+          [
+            "“Special glasses mean you will pass occupational colour standards”",
+            "Filter aids are personal assists; formal occupational tests follow the regulator — this site makes no pass promise.",
+          ],
+        ],
+      },
+      note("Public education only; no clinic, brand filters, supplements or “correction courses”; Ishihara and similar are method-class names only; no driving / occupational fitness ruling; does not replace a face-to-face visit."),
+    ],
+  },
+
 };
