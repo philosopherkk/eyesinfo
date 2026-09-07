@@ -1,7 +1,8 @@
 /**
  * Curated education search index: condition / topic names, symptoms, lay synonyms.
  * Links educational pages only. Do NOT add drug brands, device brands, doctor names,
- * or clinic names.
+ * or clinic names — except Cap 231 registered-example tokens that route ONLY to
+ * education pages with explicit 非推介購買 framing (never purchase / shop intents).
  */
 
 export type SearchTargetKind = "topic" | "tool" | "page";
@@ -384,6 +385,28 @@ export const SEARCH_SYNONYMS: SearchEntry[] = [
       "protan",
       "deutan",
       "tritan",
+    ],
+  },
+  {
+    id: "t-steroid-sparing",
+    kind: "topic",
+    href: "/t/t-steroid-sparing",
+    titleFallback: "類固醇節約用藥：環孢素滴眼液與他克莫司",
+    keywords: [
+      "類固醇節約",
+      "類固醇節約用藥",
+      "steroid-sparing",
+      "steroid sparing",
+      "環孢素",
+      "環孢黴素",
+      "ciclosporin",
+      "cyclosporine",
+      "他克莫司",
+      "tacrolimus",
+      "Ikervis",
+      "眼瞼軟膏",
+      "標籤外",
+      "免疫調節",
     ],
   },
 ];

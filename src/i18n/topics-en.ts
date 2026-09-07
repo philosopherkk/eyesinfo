@@ -153,14 +153,33 @@ export const EN_PACKS: Record<string, TopicPack> = {
   },
   "t-allergy": {
     title: "Allergic conjunctivitis — principles",
-    tag: "Ocular surface",
+    tag: "Needs medical assessment",
     meta: "Seasonal · heavier allergy (vernal / atopic keratoconjunctivitis)",
     blocks: [
-      h("What it is"),
-      p("Allergic inflammation of the ocular surface. Mild seasonal itch is common; severe vernal or atopic disease can scar the cornea."),
-      w("Severe allergy or corneal involvement must be assessed by an ophthalmologist."),
-      h("What a doctor may discuss"),
-      ul(["Avoid rubbing; cool compresses; prescribed antihistamine/mast-cell drops", "Short courses of topical steroid if needed — not for self-long-term use", "Ciclosporin drops or eyelid tacrolimus (off-label) only on a doctor’s advice", "Do not buy prescription drops yourself"]),
+      p(
+        "Allergic conjunctivitis includes seasonal/perennial disease, vernal keratoconjunctivitis (VKC) and atopic keratoconjunctivitis (AKC). This page outlines drug classes and known risks a doctor may discuss — it does not recommend buying any product. Prescription medicines need a registered doctor; off-label use needs informed consent.",
+      ),
+      h("Topical corticosteroid drops / ointments"),
+      p(
+        "Prescription only. Literature reports acute inflammation may ease within one to two days. Hong Kong doctors choose strength by severity and monitor pressure and the lens. Do not self-extend or buy “strong” leftover drops.",
+      ),
+      ul([
+        "Raised IOP (steroid glaucoma); some people are steroid responders",
+        "Posterior subcapsular cataract",
+        "Higher risk of bacterial, herpes simplex and fungal infection",
+        "Delayed corneal wound healing",
+      ]),
+      w(
+        "Do not lengthen steroid drops yourself. Long-term use raises pressure and cataract risk — follow-up is required.",
+      ),
+      h("Ciclosporin eye drops"),
+      p(
+        "Prescription immunomodulator; onset often takes weeks. Hong Kong registration examples, EU public information and VKC/AKC label distinctions are on the steroid-sparing medicines page.",
+      ),
+      h("Tacrolimus ointment (eyelids)"),
+      p(
+        "Mainly dermatology-registered in Hong Kong; eyelid use is usually off-label — not as eye drops. Warnings and red flags: see the steroid-sparing hub and the eyelid-tacrolimus short page.",
+      ),
     ],
   },
   "t-vegf": {
@@ -479,10 +498,14 @@ export const EN_PACKS: Record<string, TopicPack> = {
   "t-protopic": {
     title: "Tacrolimus on the eyelids (off-label)",
     tag: "Off-label",
-    meta: "Atopic keratoconjunctivitis · doctor’s guidance",
+    meta: "Atopic keratoconjunctivitis · see steroid-sparing hub",
     blocks: [
-      p("Tacrolimus ointment is registered in Hong Kong mainly for dermatology. Use on eyelids for atopic keratoconjunctivitis is off-label. Do not buy it to put in the eye as a drop. A doctor must assess, decide and demonstrate. This page does not teach how to apply it, and does not state a dose or course."),
-      w("Worse pain, sudden vision drop, clustered blisters (rule out herpes) or yellow-green pus: stop and seek care. The label carries malignancy-related warnings. Dose and duration are only for the prescribing doctor."),
+      p(
+        "Tacrolimus ointment is registered in Hong Kong mainly for dermatology. Use on eyelids for atopic keratoconjunctivitis is off-label. Do not buy it to put in the eye as a drop. An ophthalmologist must assess suitability. Full mechanism, red flags, myths and references are on the steroid-sparing medicines page — this page is only a short pointer.",
+      ),
+      w(
+        "Off-label: not as eye drops; generally not used under age two; this page states no strength, frequency or course. Worse pain, sudden vision drop, clustered blisters (rule out herpes) or yellow-green pus: stop and seek care. The label carries malignancy-related warnings (causality not fully established). Do not self-buy or self-use.",
+      ),
     ],
   },
   "t-ptk": {
@@ -897,6 +920,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
     meta: "Pressure · cataract · infection",
     blocks: [
       p("Steroid drops can raise eye pressure, speed cataract and worsen infection. They are not for unsupervised long-term use from a leftover bottle. A doctor must prescribe, taper and check pressure when needed."),
+      p("When longer ocular-surface control is needed, a doctor may discuss steroid-sparing options (ciclosporin / tacrolimus) — see the dedicated steroid-sparing medicines page."),
     ],
   },
   "t-ted": {
@@ -1725,6 +1749,116 @@ export const EN_PACKS: Record<string, TopicPack> = {
         ],
       },
       note("Public education only; no clinic, brand filters, supplements or “correction courses”; Ishihara and similar are method-class names only; no driving / occupational fitness ruling; does not replace a face-to-face visit."),
+    ],
+  },
+
+  "t-steroid-sparing": {
+    title: "Steroid-sparing medicines: ciclosporin drops and tacrolimus",
+    tag: "Prescription / off-label education",
+    meta: "Ocular-surface immunomodulation · Cap 231 registration example · not a purchase pitch",
+    blocks: [
+      h("What it is"),
+      p(
+        "“Steroid-sparing”: when ocular-surface or eyelid inflammation needs longer control, a doctor may add non-steroid topical immunomodulators to lower the risks of long-term glucocorticoids (raised pressure, cataract, infection — see the steroid eye-drops page). Two classes: (1) ciclosporin eye drops / ophthalmic emulsion; (2) tacrolimus ointment on the eyelids (mostly dermatology-registered in Hong Kong; eyelid use is usually off-label). Not over-the-counter self-care; during active infection, do not add immunosuppression yourself.",
+      ),
+      h("Ciclosporin"),
+      p(
+        "Education on mechanism: dampens some T-lymphocyte–related inflammation. Onset often takes weeks. Stinging or burning on instillation is common. Active infection usually means stop — the doctor decides.",
+      ),
+      p(
+        // compliance-allow: Ikervis
+        "Hong Kong registration example (not a purchase recommendation): Ikervis Eye Drops, Emulsion 1 mg/mL (ciclosporin A; HK-65076; prescription-only; Santen Pharmaceutical (Hong Kong) Limited). Suitability follows the doctor and the current label. No prices, shops or sourcing help.",
+      ),
+      p(
+        "EU public information: the same-named preparation is described for adults with dry eye disease and severe keratitis not improved by tear substitutes — Hong Kong follows the local label.",
+      ),
+      p(
+        // compliance-allow: Ikervis
+        // compliance-allow: Verkazia
+        "Important distinction: overseas Verkazia is a similar-strength emulsion registered for severe VKC and related uses — do not write Ikervis as a Hong Kong–approved VKC medicine. Ciclosporin-class use in VKC/AKC may be off-label or a different product. No brand efficacy ranking.",
+      ),
+      h("Tacrolimus on the eyelids"),
+      p(
+        "Mainly dermatology-registered in Hong Kong; controlling AKC-related eyelid inflammation is usually off-label. Do not put it in the eye as drops; do not self-buy for the eyes; generally not used under age two. This page states no strength, frequency or course. Early burning is common; severe pain, sudden vision drop, herpes-like blisters or purulent discharge → stop and seek care. Label malignancy-risk concerns (causality not fully established). Small studies compared eyelid tacrolimus vs steroid ointment for AKC-related eyelid eczema — not a personal guarantee.",
+      ),
+      h("Use categories (education, not your prescription)"),
+      {
+        type: "table",
+        rows: [
+          ["Direction", "Education note"],
+          [
+            "Ciclosporin drops / emulsion",
+            "Prescription immunomodulator; onset often weeks. HK registration example above (not a purchase pitch); indication follows the local label.",
+          ],
+          [
+            "VKC / AKC ocular surface",
+            "May be off-label or a different overseas product; do not treat the HK dry-eye registration example as VKC approval.",
+          ],
+          [
+            "Tacrolimus ointment on lids",
+            "Mostly dermatology-registered; eyelid use usually off-label. Not as eye drops; no dosing here.",
+          ],
+          [
+            "Long-term steroids",
+            "Pressure, cataract and infection risks: see the steroid eye-drops page; steroid-sparing is arranged by a doctor.",
+          ],
+        ],
+      },
+      h("Go to A&E now (if you cannot travel, call 999)"),
+      ul([
+        "Sudden vision drop or sudden blindness",
+        "Severe eye pain with headache and vomiting — rule out acute angle closure and similar",
+        "Much worse pain after use, sudden vision drop, heavy purulent discharge, or suspected severe infection / endophthalmitis",
+      ]),
+      h("Same-day ophthalmology assessment when possible"),
+      ul([
+        "New herpes-like blisters, severe photophobia or a white corneal spot — see an ophthalmologist as soon as possible",
+        "Ongoing severe stinging after drops with clear vision worsening",
+        "Suspected active infection while still on immunosuppressive drops/ointment — the doctor decides whether to stop",
+        "Child / adolescent VKC or corneal involvement — do not treat as ordinary red eye and self-buy medicine",
+      ]),
+      h("Main risks and cautions (education)"),
+      ul([
+        "Ciclosporin: stinging/burning common; usually stop in active infection",
+        "Eyelid tacrolimus: early burning; off-label; label malignancy-risk concern (causality not fully established)",
+        "Neither is OTC self-care; dose, course and suitability are only for the prescribing doctor — not stated here",
+        "Does not erase all long-term steroid risk discussion — see the steroid eye-drops page",
+      ]),
+      h("Common myths"),
+      {
+        type: "table",
+        rows: [
+          ["Myth", "Closer to the evidence"],
+          [
+            "“I can just switch my steroid to ciclosporin / tacrolimus myself”",
+            "Needs a doctor; adding immunosuppression during active infection can worsen disease.",
+          ],
+          [
+            "“Ikervis is OTC and cures dry eye / allergy”",
+            "HK registration example is prescription-only; not OTC self-care and not a cure promise. Not a purchase pitch.",
+          ],
+          [
+            "“Ikervis = Verkazia, so severe VKC is approved in Hong Kong under that name”",
+            "Overseas labels differ; do not write Ikervis as Hong Kong–approved VKC therapy.",
+          ],
+          [
+            "“Tacrolimus ointment can be used as eye drops”",
+            "No. Eyelid use is usually off-label; only a doctor decides.",
+          ],
+          [
+            "“These medicines have no side effects”",
+            "Burning is common; infection and sudden vision-drop red flags mean stop and seek care.",
+          ],
+          [
+            "“Under-twos can self-buy and use it”",
+            "Generally not used under age two; do not self-buy for the eyes.",
+          ],
+        ],
+      },
+      note(
+        // compliance-allow: Ikervis
+        "Public education only (Cap 231 education level): Ikervis / HK-65076 is a Hong Kong–registered prescription example, not a purchase, sourcing, price or shop pitch. No brand efficacy ranking; no personal dosing; no cure or guarantee claims; no booking or referral. Related pages: allergic conjunctivitis principles, eyelid tacrolimus, steroid eye drops, allergy and the Hong Kong environment.",
+      ),
     ],
   },
 
