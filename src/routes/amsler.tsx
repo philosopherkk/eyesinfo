@@ -244,8 +244,8 @@ function AmslerPage() {
         </h2>
         <p className="mt-1 text-[0.88rem] leading-relaxed text-muted">
           螢幕像素與真實厘米不同。把八達通或信用卡（短邊 85.6
-          毫米）貼在下面的長方形上，拖動滑桿直至兩邊一樣闊。對準後，方格會接近標準 10
-          厘米。
+          毫米）貼在下面的長方形上，拖動滑桿直至兩邊一樣闊。對準後，方格會接近常用教學尺寸約 10
+          厘米（螢幕仍有誤差，不能當正式檢查）。
         </p>
         <div className="mt-3 rounded-xl border border-line bg-card p-3">
           <div
@@ -336,16 +336,16 @@ function AmslerPage() {
 
       <section className="amsler-print-keep mt-6 px-4">
         <h2 className="text-[1.05rem] font-semibold text-navy">
-          3. 甚麼算異常
+          3. 可能異常的示意（不是診斷）
         </h2>
         <p className="mt-1 text-[0.88rem] leading-relaxed text-muted">
-          上面的示意可對照：視物變形、中央暗點、旁中央暗點。另須留意與昨日相比的新變化。
+          上面的示意可對照常見樣子（教育名稱）：視物變形、中央暗點、旁中央暗點。對照不是自行診斷或黃斑病分級；另須留意與昨日相比的新變化。
         </p>
         <ul className="mt-2 list-disc space-y-1.5 pl-5 text-[0.9rem] leading-relaxed">
           <li>直線變彎、扭曲（視物變形，metamorphopsia）</li>
           <li>正中間缺一塊或圓點消失（中央暗點，central scotoma）</li>
           <li>圓點仍在、旁邊缺格或看不見一塊（旁中央暗點，paracentral scotoma）</li>
-          <li>與昨天相比，新出現的變形（建議固定每週同一時間自查）</li>
+          <li>與昨天相比，新出現的變形（可固定每週同一時間自查；自查唔取代醫生安排的散瞳／OCT 覆診）</li>
         </ul>
         <p className="mt-3 flex items-start gap-2 rounded-xl bg-danger-bg px-3 py-3 text-[0.88rem] leading-relaxed text-danger">
           <EyeOff className="mt-0.5 size-4 shrink-0" />
@@ -389,7 +389,7 @@ function AmslerNotebook() {
     <section className="mt-6 px-4">
       <h2 className="text-[1.05rem] font-semibold text-navy">4. 今日記錄（只在此裝置）</h2>
       <p className="mt-1 text-[0.82rem] leading-relaxed text-muted">
-        不記姓名、不上載。用來同自己昨日比，不是診斷。
+        不記姓名、不上載。用來同自己昨日比。點選只係本機備忘，不是黃斑病分級或診斷。
       </p>
       <div className="mt-3 grid gap-2">
         <button
