@@ -23,7 +23,7 @@ export type ToolDef = {
 };
 
 export const TOOLS: ToolDef[] = [
-  { id: "amsler", title: "阿姆斯勒方格", blurb: "自我監察中央視力", canto: "遮一眼，望正中間", href: "/amsler", home: true },
+  { id: "amsler", title: "阿姆斯勒方格", blurb: "自我監察中央視力", canto: "遮一眼望中央", href: "/amsler", home: true },
   { id: "iol", title: "晶體視力示意", blurb: "單焦目標度數與多焦光暈", canto: "睇遠睇近差幾多", href: "/iol", home: true },
   { id: "map", title: "眼圖", blurb: "撳部位打開相關專題", canto: "撳眼圖就明", href: "/tools/map", home: true },
   { id: "drops", title: "滴藥水步驟", blurb: "洗手、唔好掂睫毛；跟說明書", canto: "跟住步驟滴", href: "/tools/drops", home: true },

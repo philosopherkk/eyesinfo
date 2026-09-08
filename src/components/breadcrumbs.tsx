@@ -114,11 +114,15 @@ function absoluteUrl(href: string): string {
 
 /**
  * Visible breadcrumb trail for every non-home page + BreadcrumbList JSON-LD.
+ * On narrow viewports for topic pages, collapse the trail to a single
+ * 「返回分類」control so the title row is not squeezed.
  */
 export function Breadcrumbs() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const { t, locale } = useI18n();
   const crumbs = useMemo(() => buildCrumbs(pathname, t, locale), [pathname, t, locale]);
+  const isTopic = /^\/t\/[^/]+\/?$/.test(pathname);
+  const catCrumb = isTopic ? crumbs?.find((c) => c.href?.startsWith("/c/")) : undefined;
 
   if (!crumbs || crumbs.length < 2) return null;
 
@@ -140,36 +144,76 @@ export function Breadcrumbs() {
   return (
     <>
       <nav
-        className="border-b border-line/60 bg-paper px-4 py-2 no-print"
+        className="border-b border-line/60 bg-paper px-4 py-1.5 no-print sm:py-2"
         aria-label={t("breadcrumbNav")}
       >
-        <ol className="flex flex-wrap items-center gap-x-1 gap-y-1 text-[0.75rem] leading-snug text-muted">
-          {crumbs.map((crumb, i) => {
-            const last = i === crumbs.length - 1;
-            return (
-              <li key={`${crumb.label}-${i}`} className="inline-flex min-w-0 items-center gap-1">
-                {i > 0 ? (
-                  <ChevronRight className="size-3 shrink-0 text-faint" aria-hidden />
-                ) : null}
-                {last || !crumb.href ? (
-                  <span
-                    className="truncate font-medium text-navy"
-                    aria-current={last ? "page" : undefined}
-                  >
-                    {crumb.label}
-                  </span>
-                ) : (
-                  <EduLink
-                    href={crumb.href}
-                    className="truncate text-muted no-underline underline-offset-2 hover:text-navy hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
-                  >
-                    {crumb.label}
-                  </EduLink>
-                )}
-              </li>
-            );
-          })}
-        </ol>
+        {isTopic && catCrumb?.href ? (
+          <>
+            <div className="sm:hidden">
+              <EduLink
+                href={catCrumb.href}
+                className="inline-flex min-h-10 items-center text-[0.8rem] font-semibold text-navy no-underline underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
+              >
+                ← {t("backCat")}
+              </EduLink>
+            </div>
+            <ol className="hidden flex-wrap items-center gap-x-1 gap-y-1 text-[0.75rem] leading-snug text-muted sm:flex">
+              {crumbs.map((crumb, i) => {
+                const last = i === crumbs.length - 1;
+                return (
+                  <li key={`${crumb.label}-${i}`} className="inline-flex min-w-0 items-center gap-1">
+                    {i > 0 ? (
+                      <ChevronRight className="size-3 shrink-0 text-faint" aria-hidden />
+                    ) : null}
+                    {last || !crumb.href ? (
+                      <span
+                        className="truncate font-medium text-navy"
+                        aria-current={last ? "page" : undefined}
+                      >
+                        {crumb.label}
+                      </span>
+                    ) : (
+                      <EduLink
+                        href={crumb.href}
+                        className="truncate text-muted no-underline underline-offset-2 hover:text-navy hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
+                      >
+                        {crumb.label}
+                      </EduLink>
+                    )}
+                  </li>
+                );
+              })}
+            </ol>
+          </>
+        ) : (
+          <ol className="flex flex-wrap items-center gap-x-1 gap-y-1 text-[0.75rem] leading-snug text-muted">
+            {crumbs.map((crumb, i) => {
+              const last = i === crumbs.length - 1;
+              return (
+                <li key={`${crumb.label}-${i}`} className="inline-flex min-w-0 items-center gap-1">
+                  {i > 0 ? (
+                    <ChevronRight className="size-3 shrink-0 text-faint" aria-hidden />
+                  ) : null}
+                  {last || !crumb.href ? (
+                    <span
+                      className="truncate font-medium text-navy"
+                      aria-current={last ? "page" : undefined}
+                    >
+                      {crumb.label}
+                    </span>
+                  ) : (
+                    <EduLink
+                      href={crumb.href}
+                      className="truncate text-muted no-underline underline-offset-2 hover:text-navy hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
+                    >
+                      {crumb.label}
+                    </EduLink>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
+        )}
       </nav>
       <script
         type="application/ld+json"

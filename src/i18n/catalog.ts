@@ -8,7 +8,7 @@ export const CAT_ORDER: CategoryId[] = ["lens", "lid", "glaucoma", "retina", "su
 
 export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: string }>> = {
   "zh-Hant": {
-    amsler: { title: "阿姆斯勒方格", blurb: "教育工具 · 自我察覺中央視力", canto: "遮一眼，望正中間" },
+    amsler: { title: "阿姆斯勒方格", blurb: "教育工具 · 自我察覺中央視力", canto: "遮一眼望中央" },
     iol: { title: "晶體視力示意", blurb: "單焦目標度數與多焦光暈", canto: "睇遠睇近差幾多" },
     map: { title: "眼圖", blurb: "教育工具 · 自我察覺解剖部位", canto: "撳眼圖就明" },
     drops: { title: "滴藥水步驟", blurb: "教育工具 · 步驟練習（非診斷）", canto: "跟住步驟滴" },
@@ -23,7 +23,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     rx: { title: "眼鏡度數解讀", blurb: "球鏡、柱鏡、軸、老花加度", canto: "張紙寫緊咩" },
   },
   "zh-Hans": {
-    amsler: { title: "阿姆斯勒方格", blurb: "教育工具 · 自我察觉中央视力", canto: "遮一眼，望正中间" },
+    amsler: { title: "阿姆斯勒方格", blurb: "教育工具 · 自我察觉中央视力", canto: "遮一眼望中央" },
     iol: { title: "晶体视力示意", blurb: "单焦目标度数与多焦光晕", canto: "看远看近差多少" },
     map: { title: "眼图", blurb: "教育工具 · 自我察觉解剖部位", canto: "点眼图就明白" },
     drops: { title: "滴药水步骤", blurb: "教育工具 · 步骤练习（非诊断）", canto: "跟着步骤滴" },
@@ -38,7 +38,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     rx: { title: "眼镜度数解读", blurb: "球镜、柱镜、轴、老花加光", canto: "那张纸写什么" },
   },
   en: {
-    amsler: { title: "Amsler grid", blurb: "Education tool · self-awareness of central vision", canto: "Cover one eye, look at the centre" },
+    amsler: { title: "Amsler grid", blurb: "Education tool · self-awareness of central vision", canto: "Cover one eye · centre" },
     iol: { title: "Lens vision demo", blurb: "Monofocal target and multifocal halos", canto: "Far vs near" },
     map: { title: "Eye map", blurb: "Education tool · self-awareness of eye parts", canto: "Tap the diagram" },
     drops: { title: "Drop technique", blurb: "Education tool · practice steps (not diagnosis)", canto: "Follow the steps" },
@@ -53,7 +53,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     rx: { title: "Reading a glasses prescription", blurb: "Sph, Cyl, Axis, Add", canto: "What the slip means" },
   },
   ja: {
-    amsler: { title: "アムスラーチャート", blurb: "教育ツール · 中心視力の自己観察", canto: "片眼を隠し、中央を見る" },
+    amsler: { title: "アムスラーチャート", blurb: "教育ツール · 中心視力の自己観察", canto: "片眼隠し中央を見る" },
     iol: { title: "眼内レンズの見え方", blurb: "単焦点の目標度数と多焦点ハロー", canto: "遠くと近く" },
     map: { title: "眼の図", blurb: "教育ツール · 部位の自己理解", canto: "図をタップ" },
     drops: { title: "点眼の手順", blurb: "教育ツール · 手順練習（診断ではない）", canto: "手順どおりに" },

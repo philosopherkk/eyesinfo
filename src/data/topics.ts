@@ -58,6 +58,18 @@ export function topicEditorial(topic: Topic): {
   };
 }
 
+/**
+ * Short primary label for category / home list cards.
+ * Prefer the clause before a full-width or ASCII colon so long hub titles
+ * (e.g. 青光眼監察：…) do not truncate mid-phrase on narrow viewports.
+ * Full `title` remains for the topic H1 and SEO.
+ */
+export function topicCardTitle(title: string): string {
+  const idx = title.search(/[：:]/);
+  if (idx > 0) return title.slice(0, idx).trim();
+  return title;
+}
+
 export const CATEGORIES: {
   id: CategoryId;
   title: string;

@@ -27,7 +27,7 @@ export function SaveButton({
       aria-pressed={saved}
       aria-label={label}
       className={cn(
-        "inline-flex min-h-11 shrink-0 items-center gap-1.5 rounded-full px-3.5 text-[0.85rem] font-semibold no-print transition-colors",
+        "inline-flex min-h-11 shrink-0 items-center gap-1.5 rounded-full px-2.5 text-[0.85rem] font-semibold no-print transition-colors sm:px-3.5",
         saved
           ? "bg-navy text-paper"
           : "border-2 border-navy bg-card text-navy",
@@ -39,7 +39,10 @@ export function SaveButton({
       ) : (
         <Bookmark className="size-4" aria-hidden />
       )}
-      <span aria-hidden="true">{label}</span>
+      {/* Icon-only on narrow viewports so long topic titles are not squeezed. */}
+      <span aria-hidden="true" className="hidden sm:inline">
+        {label}
+      </span>
     </button>
   );
 }

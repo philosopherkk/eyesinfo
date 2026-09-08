@@ -16,6 +16,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const fontPx = usePrefs((s) => s.fontPx);
   const { t, locale } = useI18n();
+  const isHome = pathname === "/" || pathname === "";
 
   const tabs = [
     { to: "/", label: t("home"), icon: Home, match: (p: string) => p === "/" || p.startsWith("/c/") || p.startsWith("/t/") },
@@ -57,42 +58,43 @@ export function AppShell({ children }: { children: ReactNode }) {
       <header
         className="sticky top-0 z-30 border-b border-line/80 bg-navy text-paper no-print"
         data-locale={locale}
-        style={{ paddingTop: "max(0.75rem, env(safe-area-inset-top))" }}
+        style={{ paddingTop: "max(0.35rem, env(safe-area-inset-top))" }}
       >
-        <div className="flex items-center justify-between gap-2 px-4 pb-2">
-          <Link to="/" className="flex min-h-11 items-center gap-2.5 no-underline">
+        <div className="flex items-center justify-between gap-2 px-3 pb-1.5 pt-0.5 sm:px-4 sm:pb-2 sm:pt-1">
+          <Link to="/" className="flex min-h-10 items-center gap-2 no-underline sm:min-h-11 sm:gap-2.5">
             <img
               src="/logo.png"
               alt=""
-              width={32}
-              height={32}
-              className="size-8 rounded-md"
+              width={28}
+              height={28}
+              className="size-7 rounded-md sm:size-8"
             />
             <span className="leading-tight">
-              <span className="block text-[0.95rem] font-semibold tracking-tight">
+              <span className="block text-[0.88rem] font-semibold tracking-tight sm:text-[0.95rem]">
                 {t("brand")}
               </span>
-              <span className="block text-[0.68rem] text-paper/80">
+              <span className="hidden text-[0.68rem] text-paper/80 sm:block">
                 {t("brandSub")}
               </span>
             </span>
           </Link>
-          <Link
-            to="/urgent"
-            className="inline-flex min-h-11 items-center gap-1 rounded-full bg-danger px-3.5 text-[0.75rem] font-semibold text-paper no-underline"
-          >
-            <Phone className="size-3.5" strokeWidth={2.2} aria-hidden />
-            {t("urgent")}
-          </Link>
-        </div>
-        <div className="flex justify-end px-4 pb-2">
-          <LangSwitch compact />
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
+            {/* On home, language lives in 「顯示選項」; keep it here on other pages. */}
+            {!isHome ? <LangSwitch compact /> : null}
+            <Link
+              to="/urgent"
+              className="inline-flex min-h-10 items-center gap-1 rounded-full bg-danger px-2.5 text-[0.72rem] font-semibold text-paper no-underline sm:min-h-11 sm:px-3.5 sm:text-[0.75rem]"
+            >
+              <Phone className="size-3.5" strokeWidth={2.2} aria-hidden />
+              {t("urgent")}
+            </Link>
+          </div>
         </div>
       </header>
 
       <main
         id="main-content"
-        className="flex-1 pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))]"
+        className="flex-1 pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))]"
         tabIndex={-1}
       >
         <LegalShortLine />
@@ -129,7 +131,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       </main>
 
       <nav
-        className="fixed inset-x-0 bottom-0 z-30 mx-auto max-w-lg border-t border-line bg-card/95 backdrop-blur-md no-print"
+        className="fixed inset-x-0 bottom-0 z-30 mx-auto max-w-lg border-t border-line bg-card no-print"
         aria-label={t("navMain")}
         style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       >
@@ -143,7 +145,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                   to={tab.to}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "flex min-h-14 flex-col items-center justify-center gap-0.5 text-[0.7rem] no-underline",
+                    "flex min-h-[3.65rem] flex-col items-center justify-center gap-0.5 text-[0.7rem] no-underline",
                     active ? "font-semibold text-navy" : "text-muted",
                   )}
                 >
