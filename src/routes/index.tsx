@@ -185,11 +185,11 @@ function HomeTool({
   blurb: string;
 }) {
   const cls =
-    "flex min-h-14 flex-col justify-center rounded-xl border border-line bg-card px-3 py-2 no-underline";
+    "flex min-h-14 min-w-0 flex-col justify-center overflow-hidden rounded-xl border border-line bg-card px-3 py-2 no-underline";
   const inner = (
     <>
       <span className="font-semibold leading-snug text-navy">{title}</span>
-      <span className="truncate text-[0.72rem] text-muted">{blurb}</span>
+      <span className="block w-full truncate text-[0.72rem] text-muted">{blurb}</span>
     </>
   );
   if (href === "/amsler") {

@@ -82,11 +82,11 @@ function TopicPage() {
         <p className="text-[0.75rem] text-steel">
           {t(CAT_TITLE[raw.category])} · {topic.num}
         </p>
-        <div className="mt-1 flex items-start gap-3">
+        <div className="mt-1 flex items-start gap-2 sm:gap-3">
           <h1 className="min-w-0 flex-1 text-[1.2rem] font-semibold leading-snug text-navy sm:text-[1.35rem]">
             {topic.title}
           </h1>
-          <SaveButton saveId={topicSaveKey(raw.id)} className="mt-0.5 shrink-0" />
+          <SaveButton saveId={topicSaveKey(raw.id)} className="mt-0.5" />
         </div>
         {topic.meta ? (
           <p className="mt-1 text-[0.85rem] text-muted">{topic.meta}</p>

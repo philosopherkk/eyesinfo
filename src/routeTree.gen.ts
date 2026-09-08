@@ -10,13 +10,13 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AccessibilityRouteImport } from './routes/accessibility'
 import { Route as AmslerRouteImport } from './routes/amsler'
 import { Route as ClinicRouteImport } from './routes/clinic'
 import { Route as InstallRouteImport } from './routes/install'
 import { Route as IolRouteImport } from './routes/iol'
 import { Route as LegalRouteImport } from './routes/legal'
 import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as AccessibilityRouteImport } from './routes/accessibility'
 import { Route as QrRouteImport } from './routes/qr'
 import { Route as SavedRouteImport } from './routes/saved'
 import { Route as SearchRouteImport } from './routes/search'
@@ -30,6 +30,11 @@ import { Route as ToolsToolIdRouteImport } from './routes/tools.$toolId'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccessibilityRoute = AccessibilityRouteImport.update({
+  id: '/accessibility',
+  path: '/accessibility',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AmslerRoute = AmslerRouteImport.update({
@@ -60,11 +65,6 @@ const LegalRoute = LegalRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AccessibilityRoute = AccessibilityRouteImport.update({
-  id: '/accessibility',
-  path: '/accessibility',
   getParentRoute: () => rootRouteImport,
 } as any)
 const QrRoute = QrRouteImport.update({
@@ -115,13 +115,13 @@ const ToolsToolIdRoute = ToolsToolIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/accessibility': typeof AccessibilityRoute
   '/amsler': typeof AmslerRoute
   '/clinic': typeof ClinicRoute
   '/install': typeof InstallRoute
   '/iol': typeof IolRoute
   '/legal': typeof LegalRoute
   '/privacy': typeof PrivacyRoute
-  '/accessibility': typeof AccessibilityRoute
   '/qr': typeof QrRoute
   '/saved': typeof SavedRoute
   '/search': typeof SearchRoute
@@ -134,13 +134,13 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/accessibility': typeof AccessibilityRoute
   '/amsler': typeof AmslerRoute
   '/clinic': typeof ClinicRoute
   '/install': typeof InstallRoute
   '/iol': typeof IolRoute
   '/legal': typeof LegalRoute
   '/privacy': typeof PrivacyRoute
-  '/accessibility': typeof AccessibilityRoute
   '/qr': typeof QrRoute
   '/saved': typeof SavedRoute
   '/search': typeof SearchRoute
@@ -153,13 +153,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/accessibility': typeof AccessibilityRoute
   '/amsler': typeof AmslerRoute
   '/clinic': typeof ClinicRoute
   '/install': typeof InstallRoute
   '/iol': typeof IolRoute
   '/legal': typeof LegalRoute
   '/privacy': typeof PrivacyRoute
-  '/accessibility': typeof AccessibilityRoute
   '/qr': typeof QrRoute
   '/saved': typeof SavedRoute
   '/search': typeof SearchRoute
@@ -174,13 +174,13 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/accessibility'
     | '/amsler'
     | '/clinic'
     | '/install'
     | '/iol'
     | '/legal'
     | '/privacy'
-    | '/accessibility'
     | '/qr'
     | '/saved'
     | '/search'
@@ -193,13 +193,13 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/accessibility'
     | '/amsler'
     | '/clinic'
     | '/install'
     | '/iol'
     | '/legal'
     | '/privacy'
-    | '/accessibility'
     | '/qr'
     | '/saved'
     | '/search'
@@ -211,13 +211,13 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/accessibility'
     | '/amsler'
     | '/clinic'
     | '/install'
     | '/iol'
     | '/legal'
     | '/privacy'
-    | '/accessibility'
     | '/qr'
     | '/saved'
     | '/search'
@@ -231,13 +231,13 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccessibilityRoute: typeof AccessibilityRoute
   AmslerRoute: typeof AmslerRoute
   ClinicRoute: typeof ClinicRoute
   InstallRoute: typeof InstallRoute
   IolRoute: typeof IolRoute
   LegalRoute: typeof LegalRoute
   PrivacyRoute: typeof PrivacyRoute
-  AccessibilityRoute: typeof AccessibilityRoute
   QrRoute: typeof QrRoute
   SavedRoute: typeof SavedRoute
   SearchRoute: typeof SearchRoute
@@ -254,6 +254,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/accessibility': {
+      id: '/accessibility'
+      path: '/accessibility'
+      fullPath: '/accessibility'
+      preLoaderRoute: typeof AccessibilityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/amsler': {
@@ -296,13 +303,6 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/accessibility': {
-      id: '/accessibility'
-      path: '/accessibility'
-      fullPath: '/accessibility'
-      preLoaderRoute: typeof AccessibilityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/qr': {
@@ -385,13 +385,13 @@ const ToolsRouteWithChildren = ToolsRoute._addFileChildren(ToolsRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AccessibilityRoute: AccessibilityRoute,
   AmslerRoute: AmslerRoute,
   ClinicRoute: ClinicRoute,
   InstallRoute: InstallRoute,
   IolRoute: IolRoute,
   LegalRoute: LegalRoute,
   PrivacyRoute: PrivacyRoute,
-  AccessibilityRoute: AccessibilityRoute,
   QrRoute: QrRoute,
   SavedRoute: SavedRoute,
   SearchRoute: SearchRoute,
