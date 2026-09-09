@@ -4,9 +4,12 @@ import { getTopic, topicEditorial, TOPICS } from "@/data/topics";
 import { TOPIC_TOOLS } from "@/data/tools";
 import { TopicBody } from "@/components/topic-body";
 import { TopicRefs } from "@/components/topic-refs";
+import { TopicRelated } from "@/components/topic-related";
+import { TopicToc } from "@/components/topic-toc";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { SaveButton } from "@/components/save-button";
 import { topicSaveKey } from "@/lib/saved";
+import { collectTocEntries } from "@/lib/topic-anchors";
 import { useI18n, useLocalizedTopic } from "@/i18n";
 import type { UiKey } from "@/i18n/ui";
 import { pageHead } from "@/lib/page-seo";
@@ -61,9 +64,11 @@ function TopicPage() {
   const raw = getTopic(topicId);
   const topic = useLocalizedTopic(raw ?? TOPICS[0]);
   const tools = TOPIC_TOOLS[raw?.id ?? ""] ?? [];
-  const { t, tx } = useI18n();
+  const { t } = useI18n();
   if (!raw) throw notFound();
   const { lastReviewed, reviewer } = topicEditorial(raw);
+  const tocEntries = collectTocEntries(topic.blocks);
+  const hasRefs = (raw.refs?.length ?? 0) > 0;
 
   return (
     <article>
@@ -91,6 +96,7 @@ function TopicPage() {
         {topic.meta ? (
           <p className="mt-1 text-[0.85rem] text-muted">{topic.meta}</p>
         ) : null}
+        <TopicToc entries={tocEntries} includeRefs={hasRefs} />
       </header>
       {raw.isAcuteEmergency ? (
         <Link
@@ -109,55 +115,12 @@ function TopicPage() {
         </Link>
       ) : null}
       <div className="px-4 pb-6">
-        <TopicBody blocks={topic.blocks} />
+        <TopicBody blocks={topic.blocks} topicId={raw.id} />
+        {/* Related chips before bibliography so siblings are reachable without scrolling past refs. */}
+        <TopicRelated items={tools} />
         <TopicRefs ids={raw.refs} />
-        {tools.length > 0 ? (
-          <div className="mt-4">
-            <p className="mb-2 text-[0.8rem] font-semibold text-muted">
-              {t("related")}
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {tools.map((item) => (
-                <RelatedLink key={item.href} href={item.href} label={tx(item.label)} />
-              ))}
-            </div>
-          </div>
-        ) : null}
         <EditorialFooter lastReviewed={lastReviewed} reviewer={reviewer} />
       </div>
     </article>
   );
-}
-
-function RelatedLink({ href, label }: { href: string; label: string }) {
-  const cls =
-    "inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy no-underline";
-  if (href === "/amsler") return <Link to="/amsler" className={cls}>{label}</Link>;
-  if (href === "/iol") return <Link to="/iol" className={cls}>{label}</Link>;
-  if (href === "/urgent") return <Link to="/urgent" className={cls}>{label}</Link>;
-  if (href.startsWith("/tools/")) {
-    const id = href.split("/").pop() ?? "map";
-    return (
-      <Link to="/tools/$toolId" params={{ toolId: id }} className={cls}>
-        {label}
-      </Link>
-    );
-  }
-  if (href.startsWith("/t/")) {
-    const id = href.split("/").pop() ?? "";
-    return (
-      <Link to="/t/$topicId" params={{ topicId: id }} className={cls}>
-        {label}
-      </Link>
-    );
-  }
-  if (href.startsWith("/c/")) {
-    const id = href.split("/").pop() ?? "lid";
-    return (
-      <Link to="/c/$catId" params={{ catId: id }} className={cls}>
-        {label}
-      </Link>
-    );
-  }
-  return null;
 }
