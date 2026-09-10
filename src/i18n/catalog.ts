@@ -94,7 +94,7 @@ export const LEGAL_I18N: L<{ short: string; topicFooter: string; umao: string; p
   },
   en: {
     short:
-      "This page is public education and is not a medical advertisement under the Undesirable Medical Advertisements Ordinance (Cap. 231). It does not offer booking, sales or referral. It cannot replace an in-person consultation with a registered ophthalmologist and is not a diagnosis. Organic conditions affecting sight and endocrine disease (including diabetes) must be assessed by a registered doctor; an ophthalmologist when needed. Prescription medicines require a doctor’s prescription.",
+      "This page is public education. It does not offer booking, sales or referral. It cannot replace an in-person consultation with a registered ophthalmologist and is not a diagnosis. Organic conditions affecting sight and endocrine disease (including diabetes) must be assessed by a registered doctor; an ophthalmologist when needed. Prescription medicines require a doctor’s prescription.",
     topicFooter:
       "This is general medical information, not a diagnosis, and cannot replace an in-person consultation with a registered ophthalmologist, refraction, or a dilated fundus exam. It is not advice to use any medicine or undergo any procedure. Medicines (including off-label use), laser or surgery must be decided by a registered doctor after examination, according to indications and Hong Kong registration. Figures from the literature are published averages, not any clinic’s results. This site does not book, prescribe or refer. Do not change treatment on your own.",
     umao:
@@ -114,7 +114,7 @@ export const LEGAL_I18N: L<{ short: string; topicFooter: string; umao: string; p
   },
   ja: {
     short:
-      "本ページは市民教育であり、《不良広告（医薬）条例》（第231章）の医療広告ではありません。予約・販売・紹介は行いません。登録眼科専門医の対面診察の代わりにはならず、診断でもありません。視力に影響する器質的疾患および内分泌疾患（糖尿病を含む）は登録医師が個別に評価し、必要に応じて眼科専門医が扱います。処方薬は医師の処方箋が必要です。",
+      "本ページは市民教育です。予約・販売・紹介は行いません。登録眼科専門医の対面診察の代わりにはならず、診断でもありません。視力に影響する器質的疾患および内分泌疾患（糖尿病を含む）は登録医師が個別に評価し、必要に応じて眼科専門医が扱います。処方薬は医師の処方箋が必要です。",
     topicFooter:
       "一般的な医学情報であり診断ではありません。登録眼科専門医の対面診察、検眼、散瞳眼底検査の代わりにはなりません。薬の使用や処置を勧めるものでもありません。薬剤（適応外使用を含む）、レーザー、手術は、検査・適応・香港での登録状況に基づき登録医師が決めます。文献の数字は公開研究の概数であり、診療所の成績ではありません。予約・処方・紹介はしません。自己判断で治療を変えないでください。",
     umao:
