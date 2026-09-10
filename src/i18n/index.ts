@@ -30,6 +30,7 @@ const LEGAL_HANT = {
   notSubstitute: EDITORIAL.notSubstitute,
   noServices: EDITORIAL.noServices,
   independent: EDITORIAL.independent,
+  funding: EDITORIAL.funding,
 };
 
 LEGAL_I18N["zh-Hant"] = LEGAL_HANT;
@@ -151,9 +152,9 @@ export function editorialBits(locale: Locale) {
           : EDITORIAL.registerNote;
   const reviewed =
     locale === "en"
-      ? "31 August 2026"
+      ? "10 September 2026"
       : locale === "ja"
-        ? "2026年8月30日"
+        ? "2026年9月10日"
         : EDITORIAL.reviewed;
   const quals =
     locale === "zh-Hans" ? EDITORIAL.quals.map(toHans) : EDITORIAL.quals;

@@ -464,21 +464,7 @@ export const CITE: Record<string, Citation> = {
       "Efficacy and safety of 0.1% cyclosporine A cationic emulsion in the treatment of severe dry eye disease: a multicenter randomized trial (SANSIKA)",
     source: "Eur J Ophthalmol. 2016;26(4):287-296",
     pmid: "27055414",
-    note: "SANSIKA 第三期試驗；歐盟同名乳劑嚴重乾眼角膜炎脈絡。數字屬試驗脈絡，不是個人療效保證，亦非本港購買推介。",
-  },
-  emaIkervisEpar: {
-    id: "emaIkervisEpar",
-    authors: "European Medicines Agency (EMA)",
-    title: "IKERVIS — EPAR product information",
-    source: "EMA medicines EPAR / product information (ciclosporin 1 mg/mL emulsion)",
-    note: "歐盟公開產品資訊：成人乾眼病合併嚴重角膜炎且淚液替代品未改善之適應症描述。本港以本地說明書為準；非推介購買。",
-  },
-  hk65076Ikervis: {
-    id: "hk65076Ikervis",
-    authors: "Hong Kong Drug Office",
-    title: "Ikervis Eye Drops, Emulsion 1 mg/mL (HK-65076)",
-    source: "Drug Office registered pharmaceutical product listing HK-65076",
-    note: "本港註冊例子（處方藥）。本站僅作教育舉例，非推介購買、代購或門市資訊。",
+    note: "SANSIKA 第三期試驗；環孢素眼用乳劑於嚴重乾眼角膜炎之公開試驗脈絡。數字屬試驗脈絡，不是個人療效保證，亦非本港購買推介。",
   },
   nivenius2007: {
     id: "nivenius2007",

@@ -69,7 +69,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
   },
 };
 
-export const LEGAL_I18N: L<{ short: string; topicFooter: string; umao: string; ppo: string; mchk: string; privacy: string; notSubstitute: string; noServices: string; independent: string }> = {
+export const LEGAL_I18N: L<{ short: string; topicFooter: string; umao: string; ppo: string; mchk: string; privacy: string; notSubstitute: string; noServices: string; independent: string; funding: string }> = {
   "zh-Hant": {
     short: "",
     topicFooter: "",
@@ -80,6 +80,7 @@ export const LEGAL_I18N: L<{ short: string; topicFooter: string; umao: string; p
     notSubstitute: "",
     noServices: "",
     independent: "",
+    funding: "",
   },
   "zh-Hans": {
     short: "",
@@ -91,6 +92,7 @@ export const LEGAL_I18N: L<{ short: string; topicFooter: string; umao: string; p
     notSubstitute: "",
     noServices: "",
     independent: "",
+    funding: "",
   },
   en: {
     short:
@@ -111,6 +113,8 @@ export const LEGAL_I18N: L<{ short: string; topicFooter: string; umao: string; p
       "This site does not offer booking, prescriptions, sales or referrals, and has no link to any practice website.",
     independent:
       "This educational content is fully independent of any practitioner’s identity and clinic promotion, and is not a referral to or promotion of any particular doctor or clinic.",
+    funding:
+      "This education site has no commercial funding and no pharmaceutical or device-industry sponsorship. No conflicts of interest to declare for this educational content.",
   },
   ja: {
     short:
@@ -130,5 +134,7 @@ export const LEGAL_I18N: L<{ short: string; topicFooter: string; umao: string; p
     noServices: "予約・処方・販売・紹介は行わず、診療所サイトへもリンクしません。",
     independent:
       "この教育内容は開業医の身元や診療所宣伝から完全に独立しており、特定の医師や診療所への紹介・宣伝ではありません。",
+    funding:
+      "本教育サイトに商業的な資金提供はなく、製薬・機器メーカーのスポンサーもありません。本教育内容について開示すべき利益相反はありません。",
   },
 };

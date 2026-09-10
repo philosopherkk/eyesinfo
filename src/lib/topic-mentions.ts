@@ -29,7 +29,7 @@ const MENTION_ALIASES: MentionLink[] = [
   { phrase: "類固醇節約用藥", href: "/t/t-steroid-sparing" },
   { phrase: "類固醇節約專題", href: "/t/t-steroid-sparing" },
   { phrase: "類固醇眼藥水", href: "/t/t-steroid" },
-  { phrase: "他克莫司用於眼瞼", href: "/t/t-protopic" },
+  { phrase: "他克莫司用於眼瞼", href: "/t/t-tacrolimus" },
   { phrase: "眼部過敏與香港環境", href: "/t/t-allergy-hk" },
   { phrase: "過敏性結膜炎原則", href: "/t/t-allergy" },
   { phrase: "過敏性結膜炎的處理原則", href: "/t/t-allergy" },

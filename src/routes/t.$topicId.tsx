@@ -21,6 +21,8 @@ const TOPIC_ALIASES: Record<string, string> = {
   "t-glaucoma": "t-glaucoma-monitor",
   "t-octrnfl": "t-glaucoma-monitor",
   "t-reports": "t-glaucoma-monitor",
+  /** Brand slug → INN (tacrolimus eyelid off-label). */
+  "t-protopic": "t-tacrolimus",
 };
 
 export const Route = createFileRoute("/t/$topicId")({
@@ -64,7 +66,7 @@ function TopicPage() {
   const raw = getTopic(topicId);
   const topic = useLocalizedTopic(raw ?? TOPICS[0]);
   const tools = TOPIC_TOOLS[raw?.id ?? ""] ?? [];
-  const { t } = useI18n();
+  const { t, legal } = useI18n();
   if (!raw) throw notFound();
   const { lastReviewed, reviewer } = topicEditorial(raw);
   const tocEntries = collectTocEntries(topic.blocks);
@@ -119,6 +121,9 @@ function TopicPage() {
         {/* Related chips before bibliography so siblings are reachable without scrolling past refs. */}
         <TopicRelated items={tools} />
         <TopicRefs ids={raw.refs} />
+        <p className="mt-5 text-[0.82rem] leading-relaxed text-muted">
+          {legal.topicFooter}
+        </p>
         <EditorialFooter lastReviewed={lastReviewed} reviewer={reviewer} />
       </div>
     </article>

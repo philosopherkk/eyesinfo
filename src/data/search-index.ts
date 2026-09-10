@@ -427,7 +427,6 @@ export const SEARCH_SYNONYMS: SearchEntry[] = [
       "cyclosporine",
       "他克莫司",
       "tacrolimus",
-      "Ikervis",
       "眼瞼軟膏",
       "標籤外",
       "免疫調節",

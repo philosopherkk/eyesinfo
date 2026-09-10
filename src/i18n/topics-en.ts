@@ -510,7 +510,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
           ["Enhanced monofocal", "Good at target", "Often a bit better than standard monofocal", "Usually still needs glasses", "Generally less than diffractive multifocal; not a guarantee", "Often still considered"],
           ["Toric", "Added to any of the above", "As base design", "As base design", "As base design", "As base design"],
           ["EDOF", "Good", "Good", "Fine print often still needs glasses", "Mild to moderate; product-dependent", "Use with caution"],
-          ["Multifocal / trifocal", "Good", "Good", "Higher chance of less reading glasses", "More noticeable", "Usually not advised"],
+          ["Multifocal / trifocal", "Good", "Good", "Some people may rely less on glasses for some distances (individual; no guarantee)", "More noticeable", "Usually not advised"],
         ],
       },
       p("For regular corneal astigmatism of about ≥0.75–1.00 D a toric lens may be discussed. Brand choice is individual. This page lists no product names."),
@@ -577,7 +577,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       w("No option fits everyone and none “cures” presbyopia. This page does not compare clinics or quote prices. A curtain or sudden vision drop: go to A&E now. New flashes or a clear increase in floaters without a curtain or sudden blindness: dilated fundus exam the same day if possible. See the urgent page."),
     ],
   },
-  "t-protopic": {
+  "t-tacrolimus": {
     title: "Tacrolimus on the eyelids (off-label)",
     tag: "Off-label",
     meta: "Atopic keratoconjunctivitis · see steroid-sparing hub",
@@ -1829,7 +1829,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
   "t-steroid-sparing": {
     title: "Steroid-sparing medicines: ciclosporin drops and tacrolimus",
     tag: "Prescription / off-label education",
-    meta: "Ocular-surface immunomodulation · Cap 231 registration example · not a purchase pitch",
+    meta: "Ocular-surface immunomodulation · prescription-class education · not a purchase pitch",
     blocks: [
       h("What it is"),
       p(
@@ -1840,16 +1840,13 @@ export const EN_PACKS: Record<string, TopicPack> = {
         "Education on mechanism: dampens some T-lymphocyte–related inflammation. Onset often takes weeks. Stinging or burning on instillation is common. Active infection usually means stop — the doctor decides.",
       ),
       p(
-        // compliance-allow: Ikervis
-        "Hong Kong registration example (not a purchase recommendation): Ikervis Eye Drops, Emulsion 1 mg/mL (ciclosporin A; HK-65076; prescription-only; Santen Pharmaceutical (Hong Kong) Limited). Suitability follows the doctor and the current label. No prices, shops or sourcing help.",
+        "Prescription ciclosporin eye drops / ophthalmic emulsion are pharmaceutical products (prescription-only). Suitability, strength and use follow the doctor and the current Hong Kong-registered label. This page discusses the drug class only (INN: ciclosporin / cyclosporine) — no brand names, manufacturers or registration numbers as a pitch. Not a purchase recommendation; no prices, shops or sourcing help.",
       ),
       p(
-        "EU public information: the same-named preparation is described for adults with dry eye disease and severe keratitis not improved by tear substitutes — Hong Kong follows the local label.",
+        "In EU and similar public information, some ciclosporin ophthalmic emulsions are described for adults with dry eye disease and severe keratitis not improved by tear substitutes — Hong Kong follows the local label.",
       ),
       p(
-        // compliance-allow: Ikervis
-        // compliance-allow: Verkazia
-        "Important distinction: overseas Verkazia is a similar-strength emulsion registered for severe VKC and related uses — do not write Ikervis as a Hong Kong–approved VKC medicine. Ciclosporin-class use in VKC/AKC may be off-label or a different product. No brand efficacy ranking.",
+        "Important distinction: overseas, other ciclosporin emulsions may be labelled for severe vernal keratoconjunctivitis (VKC) and related uses — do not treat a Hong Kong dry-eye–related ciclosporin drop/emulsion as Hong Kong–approved VKC therapy. Ciclosporin-class use in VKC/AKC may be off-label or a different product. No brand efficacy ranking.",
       ),
       h("Tacrolimus on the eyelids"),
       p(
@@ -1862,11 +1859,11 @@ export const EN_PACKS: Record<string, TopicPack> = {
           ["Direction", "Education note"],
           [
             "Ciclosporin drops / emulsion",
-            "Prescription immunomodulator; onset often weeks. HK registration example above (not a purchase pitch); indication follows the local label.",
+            "Prescription immunomodulator; onset often weeks. Indication and suitability follow the local label and the doctor (not a purchase pitch).",
           ],
           [
             "VKC / AKC ocular surface",
-            "May be off-label or a different overseas product; do not treat the HK dry-eye registration example as VKC approval.",
+            "May be off-label or a different overseas product; do not treat a HK dry-eye–related ciclosporin class as VKC approval.",
           ],
           [
             "Tacrolimus ointment on lids",
@@ -1908,12 +1905,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
             "Needs a doctor; adding immunosuppression during active infection can worsen disease.",
           ],
           [
-            "“Ikervis is OTC and cures dry eye / allergy”",
-            "HK registration example is prescription-only; not OTC self-care and not a cure promise. Not a purchase pitch.",
+            "“Ciclosporin eye drops are OTC and cure dry eye / allergy”",
+            "Prescription-class education only; not OTC self-care and not a cure promise. Not a purchase pitch.",
           ],
           [
-            "“Ikervis = Verkazia, so severe VKC is approved in Hong Kong under that name”",
-            "Overseas labels differ; do not write Ikervis as Hong Kong–approved VKC therapy.",
+            "“An overseas VKC ciclosporin emulsion means severe VKC is approved in Hong Kong under that class”",
+            "Overseas labels differ; do not write a HK dry-eye–related ciclosporin product as Hong Kong–approved VKC therapy.",
           ],
           [
             "“Tacrolimus ointment can be used as eye drops”",
@@ -1930,8 +1927,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
         ],
       },
       note(
-        // compliance-allow: Ikervis
-        "Public education only (Cap 231 education level): Ikervis / HK-65076 is a Hong Kong–registered prescription example, not a purchase, sourcing, price or shop pitch. No brand efficacy ranking; no personal dosing; no cure or guarantee claims; no booking or referral. Related pages: allergic conjunctivitis principles, eyelid tacrolimus, steroid eye drops, allergy and the Hong Kong environment.",
+        "Public education only (Cap 231 education level): ciclosporin eye drops / ophthalmic emulsion are discussed as a prescription drug class (INN) only — not a purchase, sourcing, price or shop pitch. No brand efficacy ranking; no personal dosing; no cure or guarantee claims; no booking or referral. Related pages: allergic conjunctivitis principles, eyelid tacrolimus, steroid eye drops, allergy and the Hong Kong environment.",
       ),
     ],
   },
