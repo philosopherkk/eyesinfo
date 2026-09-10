@@ -69,7 +69,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   "t-allergy": [
     { href: "/t/t-steroid-sparing", label: "類固醇節約用藥（環孢素／他克莫司）" },
     { href: "/t/t-allergy-hk", label: "眼部過敏與香港環境" },
-    { href: "/t/t-tacrolimus", label: "他克莫司用於眼瞼" },
+    { href: "/t/t-tacrolimus-eyelid", label: "他克莫司用於眼瞼" },
     { href: "/t/t-steroid", label: "類固醇眼藥水" },
     { href: "/t/d7", label: "結膜炎總論" },
     { href: "/t/t-cl", label: "隱形眼鏡" },
@@ -196,12 +196,12 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/urgent", label: "急症與同日評估" },
     { href: "/t/t-steroid", label: "類固醇眼藥水" },
     { href: "/t/t-allergy", label: "過敏性結膜炎原則" },
-    { href: "/t/t-tacrolimus", label: "他克莫司用於眼瞼" },
+    { href: "/t/t-tacrolimus-eyelid", label: "他克莫司用於眼瞼" },
     { href: "/t/t-allergy-hk", label: "眼部過敏與香港環境" },
     { href: "/t/t-lube", label: "潤眼液與潤滑劑" },
     { href: "/t/d7", label: "結膜炎總論" },
   ],
-  "t-tacrolimus": [
+  "t-tacrolimus-eyelid": [
     { href: "/t/t-steroid-sparing", label: "類固醇節約用藥（完整正文）" },
     { href: "/t/t-allergy", label: "過敏性結膜炎原則" },
     { href: "/t/t-steroid", label: "類固醇眼藥水" },

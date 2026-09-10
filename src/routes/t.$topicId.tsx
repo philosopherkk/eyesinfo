@@ -21,8 +21,10 @@ const TOPIC_ALIASES: Record<string, string> = {
   "t-glaucoma": "t-glaucoma-monitor",
   "t-octrnfl": "t-glaucoma-monitor",
   "t-reports": "t-glaucoma-monitor",
-  /** Brand slug → INN (tacrolimus eyelid off-label). */
-  "t-protopic": "t-tacrolimus",
+  /** Brand slug → INN eyelid tacrolimus (off-label). */
+  "t-protopic": "t-tacrolimus-eyelid",
+  /** Intermediate INN guess from earlier draft → Evidence lock. */
+  "t-tacrolimus": "t-tacrolimus-eyelid",
 };
 
 export const Route = createFileRoute("/t/$topicId")({

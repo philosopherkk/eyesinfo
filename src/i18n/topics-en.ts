@@ -510,7 +510,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
           ["Enhanced monofocal", "Good at target", "Often a bit better than standard monofocal", "Usually still needs glasses", "Generally less than diffractive multifocal; not a guarantee", "Often still considered"],
           ["Toric", "Added to any of the above", "As base design", "As base design", "As base design", "As base design"],
           ["EDOF", "Good", "Good", "Fine print often still needs glasses", "Mild to moderate; product-dependent", "Use with caution"],
-          ["Multifocal / trifocal", "Good", "Good", "Some people may rely less on glasses for some distances (individual; no guarantee)", "More noticeable", "Usually not advised"],
+          ["Multifocal / trifocal", "Good", "Good", "Near often needs fewer readers; not guaranteed spectacle-free", "More noticeable", "Usually not advised"],
         ],
       },
       p("For regular corneal astigmatism of about ≥0.75–1.00 D a toric lens may be discussed. Brand choice is individual. This page lists no product names."),
@@ -577,7 +577,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       w("No option fits everyone and none “cures” presbyopia. This page does not compare clinics or quote prices. A curtain or sudden vision drop: go to A&E now. New flashes or a clear increase in floaters without a curtain or sudden blindness: dilated fundus exam the same day if possible. See the urgent page."),
     ],
   },
-  "t-tacrolimus": {
+  "t-tacrolimus-eyelid": {
     title: "Tacrolimus on the eyelids (off-label)",
     tag: "Off-label",
     meta: "Atopic keratoconjunctivitis · see steroid-sparing hub",
@@ -1002,7 +1002,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
     meta: "Pressure · cataract · infection",
     blocks: [
       p("Steroid drops can raise eye pressure, speed cataract and worsen infection. They are not for unsupervised long-term use from a leftover bottle. A doctor must prescribe, taper and check pressure when needed."),
-      p("When longer ocular-surface control is needed, a doctor may discuss steroid-sparing options (ciclosporin / tacrolimus) — see the dedicated steroid-sparing medicines page."),
+      p("When longer ocular-surface control is needed, a doctor may discuss steroid-sparing options (cyclosporine / tacrolimus) — see the dedicated steroid-sparing medicines page."),
     ],
   },
   "t-ted": {
@@ -1174,7 +1174,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
         "Anterior uveitis: after excluding infection, topical steroid plus a cycloplegic is often first-line",
         "Periocular or intravitreal steroids in selected cases — pressure and cataract trade-offs",
         "Systemic steroids for heavier or bilateral / posterior disease, with monitoring",
-        "Steroid-sparing immunosuppressants as classes (e.g. methotrexate, mycophenolate, azathioprine, ciclosporin) with monitoring",
+        "Steroid-sparing immunosuppressants as classes (e.g. methotrexate, mycophenolate, azathioprine, cyclosporine) with monitoring",
         "Biologics as classes (e.g. anti-TNF); product names are not listed",
       ]),
       w("Steroids or immunosuppression before untreated infection is excluded can worsen infection. Do not self-use leftover “whitening” drops or put skin/rheumatology medicines in the eye."),
@@ -1827,26 +1827,26 @@ export const EN_PACKS: Record<string, TopicPack> = {
   },
 
   "t-steroid-sparing": {
-    title: "Steroid-sparing medicines: ciclosporin drops and tacrolimus",
+    title: "Steroid-sparing medicines: cyclosporine drops and tacrolimus",
     tag: "Prescription / off-label education",
     meta: "Ocular-surface immunomodulation · prescription-class education · not a purchase pitch",
     blocks: [
       h("What it is"),
       p(
-        "“Steroid-sparing”: when ocular-surface or eyelid inflammation needs longer control, a doctor may add non-steroid topical immunomodulators to lower the risks of long-term glucocorticoids (raised pressure, cataract, infection — see the steroid eye-drops page). Two classes: (1) ciclosporin eye drops / ophthalmic emulsion; (2) tacrolimus ointment on the eyelids (mostly dermatology-registered in Hong Kong; eyelid use is usually off-label). Not over-the-counter self-care; during active infection, do not add immunosuppression yourself.",
+        "“Steroid-sparing”: when ocular-surface or eyelid inflammation needs longer control, a doctor may add non-steroid topical immunomodulators to lower the risks of long-term glucocorticoids (raised pressure, cataract, infection — see the steroid eye-drops page). Two classes: (1) cyclosporine eye drops / ophthalmic emulsion; (2) tacrolimus ointment on the eyelids (mostly dermatology-registered in Hong Kong; eyelid use is usually off-label). Not over-the-counter self-care; during active infection, do not add immunosuppression yourself.",
       ),
-      h("Ciclosporin"),
+      h("Cyclosporine"),
       p(
         "Education on mechanism: dampens some T-lymphocyte–related inflammation. Onset often takes weeks. Stinging or burning on instillation is common. Active infection usually means stop — the doctor decides.",
       ),
       p(
-        "Prescription ciclosporin eye drops / ophthalmic emulsion are pharmaceutical products (prescription-only). Suitability, strength and use follow the doctor and the current Hong Kong-registered label. This page discusses the drug class only (INN: ciclosporin / cyclosporine) — no brand names, manufacturers or registration numbers as a pitch. Not a purchase recommendation; no prices, shops or sourcing help.",
+        "Hong Kong has registered cyclosporine ophthalmic emulsion / eye drops (prescription-only). Suitability and which registered product to use follow the doctor and the current label. This page lists no brand names, registration numbers, prices, shops or sourcing help.",
       ),
       p(
-        "In EU and similar public information, some ciclosporin ophthalmic emulsions are described for adults with dry eye disease and severe keratitis not improved by tear substitutes — Hong Kong follows the local label.",
+        "In EU and similar public information, some cyclosporine ophthalmic emulsions are described for adults with dry eye disease and severe keratitis not improved by tear substitutes — Hong Kong follows the local label.",
       ),
       p(
-        "Important distinction: overseas, other ciclosporin emulsions may be labelled for severe vernal keratoconjunctivitis (VKC) and related uses — do not treat a Hong Kong dry-eye–related ciclosporin drop/emulsion as Hong Kong–approved VKC therapy. Ciclosporin-class use in VKC/AKC may be off-label or a different product. No brand efficacy ranking.",
+        "Important distinction: overseas, other same-strength cyclosporine emulsions may be registered for severe VKC and related uses — do not write a Hong Kong dry-eye cyclosporine emulsion / drop as Hong Kong–approved therapy for severe VKC. Cyclosporine-class use in VKC/AKC may be off-label or a different product. No brand efficacy ranking.",
       ),
       h("Tacrolimus on the eyelids"),
       p(
@@ -1858,12 +1858,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
         rows: [
           ["Direction", "Education note"],
           [
-            "Ciclosporin drops / emulsion",
+            "Cyclosporine drops / emulsion",
             "Prescription immunomodulator; onset often weeks. Indication and suitability follow the local label and the doctor (not a purchase pitch).",
           ],
           [
             "VKC / AKC ocular surface",
-            "May be off-label or a different overseas product; do not treat a HK dry-eye–related ciclosporin class as VKC approval.",
+            "May be off-label or a different overseas product; do not treat a HK dry-eye cyclosporine emulsion / drop as VKC approval.",
           ],
           [
             "Tacrolimus ointment on lids",
@@ -1890,7 +1890,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       ]),
       h("Main risks and cautions (education)"),
       ul([
-        "Ciclosporin: stinging/burning common; usually stop in active infection",
+        "Cyclosporine: stinging/burning common; usually stop in active infection",
         "Eyelid tacrolimus: early burning; off-label; label malignancy-risk concern (causality not fully established)",
         "Neither is OTC self-care; dose, course and suitability are only for the prescribing doctor — not stated here",
         "Does not erase all long-term steroid risk discussion — see the steroid eye-drops page",
@@ -1901,16 +1901,16 @@ export const EN_PACKS: Record<string, TopicPack> = {
         rows: [
           ["Myth", "Closer to the evidence"],
           [
-            "“I can just switch my steroid to ciclosporin / tacrolimus myself”",
+            "“I can just switch my steroid to cyclosporine / tacrolimus myself”",
             "Needs a doctor; adding immunosuppression during active infection can worsen disease.",
           ],
           [
-            "“Ciclosporin eye drops are OTC and cure dry eye / allergy”",
-            "Prescription-class education only; not OTC self-care and not a cure promise. Not a purchase pitch.",
+            "“Cyclosporine eye drops are OTC and cure dry eye / allergy”",
+            "Prescription-only in Hong Kong; not OTC self-care and not a cure promise. Not a purchase pitch.",
           ],
           [
-            "“An overseas VKC ciclosporin emulsion means severe VKC is approved in Hong Kong under that class”",
-            "Overseas labels differ; do not write a HK dry-eye–related ciclosporin product as Hong Kong–approved VKC therapy.",
+            "“An overseas same-strength VKC cyclosporine emulsion means severe VKC is approved in Hong Kong”",
+            "Overseas and Hong Kong labelled indications can differ; do not write a HK dry-eye use as VKC approval.",
           ],
           [
             "“Tacrolimus ointment can be used as eye drops”",
@@ -1927,7 +1927,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
         ],
       },
       note(
-        "Public education only (Cap 231 education level): ciclosporin eye drops / ophthalmic emulsion are discussed as a prescription drug class (INN) only — not a purchase, sourcing, price or shop pitch. No brand efficacy ranking; no personal dosing; no cure or guarantee claims; no booking or referral. Related pages: allergic conjunctivitis principles, eyelid tacrolimus, steroid eye drops, allergy and the Hong Kong environment.",
+        "Public education only (Cap 231 education level): cyclosporine ophthalmic preparations are discussed only as a Hong Kong–registered prescription class example — not a purchase, sourcing, price or shop pitch. No brand names; no brand efficacy ranking; no personal dosing; no cure or guarantee claims; no booking or referral. Related pages: allergic conjunctivitis principles, eyelid tacrolimus, steroid eye drops, allergy and the Hong Kong environment.",
       ),
     ],
   },

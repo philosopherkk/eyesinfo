@@ -19,7 +19,7 @@ export const EDITORIAL = {
     "此教育內容與執業者身份及診所推廣完全獨立，不構成對任何特定醫生或診所之轉介或推廣。",
   /** Honest education-site funding / COI one-liner — no invented sponsors. */
   funding:
-    "本教育網站無商業資助，亦無藥廠或儀器商贊助；就本站教育內容無利益衝突須披露。",
+    "本教育網站目前無商業贊助；若日後有資助或利益關係將於法律頁披露。",
   notSubstitute:
     "內容不能代替與註冊眼科專科醫生的面診，亦不能作為診斷。本頁不是診斷、處方或手術建議。只有列於醫務委員會眼科專科名冊者可稱「眼科專科醫生」。",
   correction:
