@@ -1705,7 +1705,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
     tag: "Myth-bust",
     meta: "Digital eye strain · not a product pitch · AAO / Cochrane",
     blocks: [
-      p("Public education; does not replace a visit; no booking, purchase or referral. Not a medical advertisement; no spectacle, film, supplement or device brands."),
+      p("Public education; does not replace a visit; no booking, purchase or referral. No spectacle, film, supplement or device brands."),
       h("Separate two things first"),
       ol([
         "Sunlight includes UV and a large amount of visible light (including blue). Long excess UV relates to some surface and intraocular risks; outdoors, shade / hat / proper sunglasses make sense — that is not the same issue as a phone “blue-filter” sticker.",

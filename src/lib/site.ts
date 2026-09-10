@@ -15,5 +15,5 @@ export const CONTENT_UPDATED = "2026-09-10";
 export const COPYRIGHT_YEAR = "2026";
 export const COPYRIGHT_HOLDER = "護眼學堂";
 export const COPYRIGHT_LINE =
-  "© 2026 護眼學堂 · 公眾教育 https://eyesinfo.org （保留版權，不得作為醫療廣告或診所推廣）";
+  "© 2026 護眼學堂 · 公眾教育 https://eyesinfo.org （保留版權；不得改作後作診所推廣）";
 export const WATERMARK_TEXT = "護眼學堂 · 公眾教育 · eyesinfo.org";
