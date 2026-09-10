@@ -7,7 +7,10 @@ export function TopicRefs({ ids }: { ids?: string[] }) {
   if (list.length === 0) return null;
   return (
     <section className="mt-8 border-t border-line pt-4" aria-labelledby="topic-refs">
-      <h2 id="topic-refs" className="text-[0.95rem] font-semibold text-navy">
+      <h2
+        id="topic-refs"
+        className="scroll-mt-20 text-[0.95rem] font-semibold tracking-tight text-navy"
+      >
         {t("refsH")}
       </h2>
       <p className="mt-1 text-[0.8rem] leading-relaxed text-muted">{t("refsLead")}</p>
