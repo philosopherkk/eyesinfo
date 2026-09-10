@@ -1,1 +1,0 @@
-window.DRPOON_PHOTOS=window.DRPOON_PHOTOS||{};

@@ -99,11 +99,11 @@ export function localizedUrgent(locale: Locale): { flags: string[]; same: string
         "Chemical splash (irrigate first, go to A&E while irrigating)",
         "Penetrating injury, suspected ruptured globe, or other severe trauma",
         "Stroke signs (face droop, limb weakness, slurred speech) plus vision change",
-        "After an injection: worse pain, worse redness, or a sharp vision drop (rule out endophthalmitis)",
+        "After an intravitreal (into-the-eye) injection: worse pain, worse redness, or a sharp vision drop (rule out endophthalmitis)",
       ],
       same: [
         "New flashes or a clear increase in floaters, without a curtain, sudden blindness or severe pain — same-day dilated fundus exam. See an ophthalmologist as soon as possible.",
-        "A red, painful eye without vomiting or sudden blindness — same-day ophthalmic assessment",
+        "A red, painful eye without severe pain with vomiting or sudden blindness — same-day ophthalmic assessment",
         "Contact-lens-related pain and light sensitivity — same-day assessment; do not delay if pain continues after lens removal",
       ],
     };
@@ -119,11 +119,11 @@ export function localizedUrgent(locale: Locale): { flags: string[]; same: string
         "薬品の飛入（まず洗浄し、洗いながら救急へ）",
         "穿孔外傷、眼球破裂の疑い、その他の重い外傷",
         "脳卒中の徴候（顔のゆがみ、手足の力低下、呂律不良）と視力変化",
-        "注射後の痛み増悪・充血悪化・急な視力低下（眼内炎の除外）",
+        "硝子体内注射後の痛み増悪・充血悪化・急な視力低下（眼内炎の除外）",
       ],
       same: [
         "カーテンや突然の失明・激痛はないが、新しい光視や飛蚊の明らかな増加 — 同日の散瞳眼底。できるだけ早く眼科専門医を受診してください。",
-        "嘔吐や突然の失明のない片眼の充血疼痛 — 同日の眼科評価",
+        "激しい眼痛と嘔吐や突然の失明のない片眼の充血疼痛 — 同日の眼科評価",
         "コンタクトレンズ関連の充血疼痛・羞明 — はずしたあとも痛ければ同日の評価；遅らせない",
       ],
     };

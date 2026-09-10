@@ -82,7 +82,7 @@ const zhHant = {
   privacyTitle: "私隱與本機資料",
   privacyCap486H: "個人資料（私隱）條例（第486章）",
   privacyCap486:
-    "本教育網站不經此頁收集姓名、身份證號碼、病歷、聯絡電話或付款資料，亦沒有會員帳戶或伺服器端病歷／問診紀錄。偏好設定與收藏只存於你裝置上的本機儲存（localStorage）。本站目前沒有第三方分析追蹤腳本。清除瀏覽器網站資料即可刪除本機紀錄。",
+    "本教育網站不經此頁收集姓名、身份證號碼、病歷、聯絡電話或付款資料，亦沒有會員帳戶或伺服器端病歷／問診紀錄。偏好設定與收藏只存於你裝置上的本機儲存（localStorage）。本站沒有用以分析訪客行為的第三方分析追蹤腳本。為顯示字型，頁面會向 Google Fonts 載入字型檔；建置／預覽環境亦可能載入 grok.com 的擴充腳本（extensions.js）。上述載入不是分析追蹤。清除瀏覽器網站資料即可刪除本機紀錄。",
   privacyP2:
     "本站沒有會員帳戶，不經此網站收集身份證、病歷或付款資料。請勿在任何表格上傳送敏感個人資料——本站亦沒有此類表格。問醫生清單等工具只在你裝置上顯示，不會上載問答內容。",
   clinicTitle: "本站不提供執業資料",
@@ -280,7 +280,7 @@ const en: Record<Key, string> = {
   copyH: "Copyright",
   copyP:
     "© 2026 護眼學堂 (eyesinfo.org). Public education. All rights reserved. Reproduce only with the credit “護眼學堂 · eyesinfo.org”. Do not strip the source or reuse the text as a medical advertisement, clinic promotion, booking page or to sell medicines or surgery. This site does not book or refer.",
-  copyClip: "— 護眼學堂 public education https://eyesinfo.org (copyright; not a medical advertisement)",
+  copyClip: "— 護眼學堂 public education https://eyesinfo.org (copyright; must not be reused as a medical advertisement)",
   copyFoot: "© 2026 護眼學堂 · eyesinfo.org · All rights reserved",
   umaoH: "Undesirable Medical Advertisements Ordinance (Cap. 231)",
   ppoH: "Pharmacy and Poisons Ordinance (Cap. 138)",
@@ -295,7 +295,7 @@ const en: Record<Key, string> = {
   privacyTitle: "Privacy and on-device data",
   privacyCap486H: "Personal Data (Privacy) Ordinance (Cap. 486)",
   privacyCap486:
-    "This education site does not collect names, ID numbers, medical records, phone numbers or payment data through this page. There is no account and no server-side medical Q&A log. Preferences and bookmarks stay in on-device localStorage only. There is currently no third-party analytics script. Clearing site data in the browser deletes local records.",
+    "This education site does not collect names, ID numbers, medical records, phone numbers or payment data through this page. There is no account and no server-side medical Q&A log. Preferences and bookmarks stay in on-device localStorage only. There is no third-party analytics script used to track visitor behaviour. The page loads fonts from Google Fonts; build/preview environments may also load a grok.com extensions script. Those loads are not analytics tracking. Clearing site data in the browser deletes local records.",
   privacyP2:
     "There is no account. This site does not collect ID numbers, medical records or payment data. Do not send sensitive personal data — there is no form for that. Tools such as the questions checklist stay on your device and are not uploaded.",
   clinicTitle: "No practice information on this site",
@@ -493,7 +493,7 @@ const ja: Record<Key, string> = {
   copyH: "著作権",
   copyP:
     "© 2026 護眼學堂（eyesinfo.org）。市民教育です。無断転載して医療広告・診療所宣伝・予約・医薬品や手術の販売に使うことはできません。出典は「護眼學堂 · eyesinfo.org」と明記してください。本サイトは予約や紹介をしません。",
-  copyClip: "— 護眼學堂 市民教育 https://eyesinfo.org （著作権。医療広告ではありません）",
+  copyClip: "— 護眼學堂 市民教育 https://eyesinfo.org （著作権。医療広告として転用してはなりません）",
   copyFoot: "© 2026 護眼學堂 · eyesinfo.org · 無断転載禁止",
   umaoH: "不良広告（医薬）条例（第231章）",
   ppoH: "薬剤業及び毒物条例（第138章）",
@@ -508,7 +508,7 @@ const ja: Record<Key, string> = {
   privacyTitle: "プライバシーと端末内データ",
   privacyCap486H: "個人資料（私隱）条例（第486章）",
   privacyCap486:
-    "本教育サイトでは、氏名・身分証番号・病歴・電話・決済情報をこの頁で集めません。会員登録も、サーバー側の病歴／問診記録もありません。設定と保存は端末のlocalStorageのみです。現時点で第三者分析スクリプトはありません。ブラウザのサイトデータを消すと端末内記録が削除されます。",
+    "本教育サイトでは、氏名・身分証番号・病歴・電話・決済情報をこの頁で集めません。会員登録も、サーバー側の病歴／問診記録もありません。設定と保存は端末のlocalStorageのみです。訪問者行動を分析する第三者分析スクリプトはありません。表示用に Google Fonts からフォントを読み込み、構築／プレビュー環境では grok.com の拡張スクリプト（extensions.js）も読み込むことがあります。これらは分析トラッキングではありません。ブラウザのサイトデータを消すと端末内記録が削除されます。",
   privacyP2:
     "会員登録はありません。身分証番号・病歴・決済情報は集めません。機密情報を送らないでください。その種のフォームもありません。医師に聞くリストなどのツールは端末上のみで、内容はアップロードしません。",
   clinicTitle: "診療所情報は掲載しません",
