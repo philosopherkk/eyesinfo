@@ -269,16 +269,21 @@ export const EN_PACKS: Record<string, TopicPack> = {
     meta: "Conjunctival-side incision",
     blocks: [
       p("If a doctor recommends incision, consent may cover the steps below. Many chalazia shrink with weeks of warm compress and lid hygiene — not every lump needs surgery."),
+      note(
+        "These steps are what a doctor may explain for informed consent — not instructions to cut or squeeze the lump yourself. Whether to operate, and how, can only be decided in person.",
+      ),
       h("Steps"),
       ol([
         "Clean the lids; topical then subcutaneous local anaesthetic (often a lidocaine-class agent — mention allergy)",
         "A chalazion clamp holds the lump, reduces bleeding and keeps the curette away from the globe",
-        "Usually a small vertical cut on the conjunctival side to reduce skin scar; a skin cut if the lump is anterior",
-        "Curette the granuloma and the wall to lower recurrence",
+        "Usually a small vertical cut on the conjunctival (inner lid) side; one aim of a conjunctival incision is to lower skin-scar risk — not a cosmetic guarantee. A skin cut may be used if the lump is more anterior",
+        "Curette out the granuloma contents; the doctor may try to clear contents and wall as far as practical. Recurrence can still happen — not a guarantee",
         "Pressure for a few minutes; the conjunctival cut is usually left unsutured",
         "Antibiotic ointment ± a pad for a few hours",
       ]),
-      p("Use ointment as directed. Swelling and a little oozing for a day or two are common. Avoid rubbing, swimming and make-up for about a week. Restart warm compress after the wound is quiet."),
+      p(
+        "Aftercare always follows the treating doctor’s written instructions; the lines below are common education ballparks only: use ointment as directed; swelling and a little oozing for a day or two are common, and intermittent cold compress may be suggested. Avoid rubbing, swimming and eye make-up for about a week (follow your doctor). Whether to restart warm compress and massage once the wound is quiet — follow instructions. Children need a parent’s help; do not squeeze the lump yourself.",
+      ),
       h("Other options a doctor may discuss"),
       ul(["Warm compress and lid hygiene first, especially with meibomian dysfunction", "Intralesional steroid in selected cases (IOP rise, skin thinning or pigment change)", "Oral or topical antibiotic is not automatic — a chalazion is usually a sterile granuloma"]),
       h("Published risks"),
@@ -293,6 +298,9 @@ export const EN_PACKS: Record<string, TopicPack> = {
         "Globe perforation: extremely rare — hence the clamp",
         "Anaesthetic allergy or a vasovagal faint",
       ]),
+      w(
+        "Lid redness with severe pain, fever, affected vision, or a lump that enlarges quickly: do not rely on warm compress or squeezing alone — see a doctor promptly; if you cannot get there yourself or it is severe: call 999 / go to A&E.",
+      ),
       w("A recurrent or atypical lump with ulcer, lash loss or thickening — especially in older people — may need pathology. Not every recurrence is automatically sent."),
     ],
   },
