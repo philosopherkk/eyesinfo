@@ -183,7 +183,7 @@
     opacity: 0.08;
   }
   body::after {
-    content: "© 護眼學堂 公眾教育 https://eyesinfo.org  保留版權，不得作為醫療廣告或診所推廣";
+    content: "© 護眼學堂 公眾教育 https://eyesinfo.org  保留版權；不得改作後作診所推廣";
     display: block;
     margin-top: 1.5rem;
     font-size: 9pt;

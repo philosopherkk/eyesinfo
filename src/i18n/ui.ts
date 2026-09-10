@@ -66,8 +66,8 @@ const zhHant = {
   legalIntro: "本教育網站在香港使用，內容按下列法例及守則的精神撰寫，並非法律意見。",
   copyH: "版權",
   copyP:
-    "© 2026 護眼學堂（eyesinfo.org）。公眾教育內容，保留所有權利。轉載或節錄須標明出處「護眼學堂 · eyesinfo.org」。不得刪除來源、不得改作後作為醫療廣告、診所推廣、預約或售賣藥物／手術。本站不提供預約或轉介。",
-  copyClip: "— 護眼學堂 公眾教育 https://eyesinfo.org （保留版權，不得作為醫療廣告）",
+    "© 2026 護眼學堂（eyesinfo.org）。公眾教育內容，保留所有權利。轉載或節錄須標明出處「護眼學堂 · eyesinfo.org」。不得刪除來源、不得改作後作診所推廣、預約或售賣藥物／手術。本站不提供預約或轉介。",
+  copyClip: "— 護眼學堂 公眾教育 https://eyesinfo.org （保留版權；不得改作後作診所推廣）",
   copyFoot: "© 2026 護眼學堂 · eyesinfo.org · 保留版權",
   umaoH: "不良廣告（醫藥）條例（第231章）",
   ppoH: "藥劑業及毒藥條例（第138章）",
@@ -82,7 +82,7 @@ const zhHant = {
   privacyTitle: "私隱與本機資料",
   privacyCap486H: "個人資料（私隱）條例（第486章）",
   privacyCap486:
-    "本教育網站不經此頁收集姓名、身份證號碼、病歷、聯絡電話或付款資料，亦沒有會員帳戶或伺服器端病歷／問診紀錄。偏好設定與收藏只存於你裝置上的本機儲存（localStorage）。本站沒有用以分析訪客行為的第三方分析追蹤腳本。為顯示字型，頁面會向 Google Fonts 載入字型檔；建置／預覽環境亦可能載入 grok.com 的擴充腳本（extensions.js）。上述載入不是分析追蹤。清除瀏覽器網站資料即可刪除本機紀錄。",
+    "本教育網站不經此頁收集姓名、身份證號碼、病歷、聯絡電話或付款資料，亦沒有會員帳戶或伺服器端病歷／問診紀錄。本站目前沒有 Google Analytics／同類第三方分析追蹤。頁面可能載入 Google Fonts 字型，以及建置環境相關腳本（若存在）。字型大小、收藏、阿姆斯勒自記及戶外時間僅存於本機 localStorage，不上載伺服器。清除瀏覽器網站資料即可刪除本機紀錄。",
   privacyP2:
     "本站沒有會員帳戶，不經此網站收集身份證、病歷或付款資料。請勿在任何表格上傳送敏感個人資料——本站亦沒有此類表格。問醫生清單等工具只在你裝置上顯示，不會上載問答內容。",
   clinicTitle: "本站不提供執業資料",
@@ -279,8 +279,8 @@ const en: Record<Key, string> = {
     "This education website is written for use in Hong Kong in the spirit of the ordinances and code below. It is not legal advice.",
   copyH: "Copyright",
   copyP:
-    "© 2026 護眼學堂 (eyesinfo.org). Public education. All rights reserved. Reproduce only with the credit “護眼學堂 · eyesinfo.org”. Do not strip the source or reuse the text as a medical advertisement, clinic promotion, booking page or to sell medicines or surgery. This site does not book or refer.",
-  copyClip: "— 護眼學堂 public education https://eyesinfo.org (copyright; must not be reused as a medical advertisement)",
+    "© 2026 護眼學堂 (eyesinfo.org). Public education. All rights reserved. Reproduce only with the credit “護眼學堂 · eyesinfo.org”. Do not strip the source or reuse or adapt the text as clinic promotion, a booking page, or to sell medicines or surgery. This site does not book or refer.",
+  copyClip: "— 護眼學堂 public education https://eyesinfo.org (copyright; do not adapt as clinic promotion)",
   copyFoot: "© 2026 護眼學堂 · eyesinfo.org · All rights reserved",
   umaoH: "Undesirable Medical Advertisements Ordinance (Cap. 231)",
   ppoH: "Pharmacy and Poisons Ordinance (Cap. 138)",
@@ -295,7 +295,7 @@ const en: Record<Key, string> = {
   privacyTitle: "Privacy and on-device data",
   privacyCap486H: "Personal Data (Privacy) Ordinance (Cap. 486)",
   privacyCap486:
-    "This education site does not collect names, ID numbers, medical records, phone numbers or payment data through this page. There is no account and no server-side medical Q&A log. Preferences and bookmarks stay in on-device localStorage only. There is no third-party analytics script used to track visitor behaviour. The page loads fonts from Google Fonts; build/preview environments may also load a grok.com extensions script. Those loads are not analytics tracking. Clearing site data in the browser deletes local records.",
+    "This education site does not collect names, ID numbers, medical records, phone numbers or payment data through this page. There is no account and no server-side medical Q&A log. There is currently no Google Analytics or similar third-party analytics tracking. The page may load Google Fonts, and build-environment scripts if present. Type size, bookmarks, Amsler notes and outdoor time stay in on-device localStorage only and are not uploaded. Clearing site data in the browser deletes local records.",
   privacyP2:
     "There is no account. This site does not collect ID numbers, medical records or payment data. Do not send sensitive personal data — there is no form for that. Tools such as the questions checklist stay on your device and are not uploaded.",
   clinicTitle: "No practice information on this site",
@@ -492,8 +492,8 @@ const ja: Record<Key, string> = {
   legalIntro: "本教育サイトは香港での利用を想定し、下記の法令・規範の趣旨で書いています。法律相談ではありません。",
   copyH: "著作権",
   copyP:
-    "© 2026 護眼學堂（eyesinfo.org）。市民教育です。無断転載して医療広告・診療所宣伝・予約・医薬品や手術の販売に使うことはできません。出典は「護眼學堂 · eyesinfo.org」と明記してください。本サイトは予約や紹介をしません。",
-  copyClip: "— 護眼學堂 市民教育 https://eyesinfo.org （著作権。医療広告として転用してはなりません）",
+    "© 2026 護眼學堂（eyesinfo.org）。市民教育です。無断転載して診療所宣伝・予約・医薬品や手術の販売に使うことはできません。出典は「護眼學堂 · eyesinfo.org」と明記してください。本サイトは予約や紹介をしません。",
+  copyClip: "— 護眼學堂 市民教育 https://eyesinfo.org （著作権。診療所宣伝に転用してはなりません）",
   copyFoot: "© 2026 護眼學堂 · eyesinfo.org · 無断転載禁止",
   umaoH: "不良広告（医薬）条例（第231章）",
   ppoH: "薬剤業及び毒物条例（第138章）",
@@ -508,7 +508,7 @@ const ja: Record<Key, string> = {
   privacyTitle: "プライバシーと端末内データ",
   privacyCap486H: "個人資料（私隱）条例（第486章）",
   privacyCap486:
-    "本教育サイトでは、氏名・身分証番号・病歴・電話・決済情報をこの頁で集めません。会員登録も、サーバー側の病歴／問診記録もありません。設定と保存は端末のlocalStorageのみです。訪問者行動を分析する第三者分析スクリプトはありません。表示用に Google Fonts からフォントを読み込み、構築／プレビュー環境では grok.com の拡張スクリプト（extensions.js）も読み込むことがあります。これらは分析トラッキングではありません。ブラウザのサイトデータを消すと端末内記録が削除されます。",
+    "本教育サイトでは、氏名・身分証番号・病歴・電話・決済情報をこの頁で集めません。会員登録も、サーバー側の病歴／問診記録もありません。現時点で Google Analytics や同種の第三者分析トラッキングはありません。ページは Google Fonts を読み込むことがあり、構築環境の関連スクリプトがある場合も読み込みます。文字サイズ、保存、アムスラー自己記録、屋外時間は端末の localStorage のみで、サーバーへは上げません。ブラウザのサイトデータを消すと端末内記録が削除されます。",
   privacyP2:
     "会員登録はありません。身分証番号・病歴・決済情報は集めません。機密情報を送らないでください。その種のフォームもありません。医師に聞くリストなどのツールは端末上のみで、内容はアップロードしません。",
   clinicTitle: "診療所情報は掲載しません",
