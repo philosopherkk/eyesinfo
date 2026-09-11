@@ -59,13 +59,32 @@ test("sitemap.xml is a valid urlset covering edu tools including outdoor", () =>
     );
   }
 
-  for (const core of ["/urgent", "/tools", "/legal", "/privacy", "/accessibility", "/t/d1", "/t/d10"]) {
+  for (const core of [
+    "/urgent",
+    "/tools",
+    "/legal",
+    "/privacy",
+    "/accessibility",
+    "/search",
+    "/install",
+    "/saved",
+    "/clinic",
+    "/c/lens",
+    "/t/d1",
+    "/t/d10",
+    "/t/t-tacrolimus-eyelid",
+  ]) {
     assert.match(
       xml,
       new RegExp(`<loc>https://eyesinfo\\.org${core.replaceAll("/", "\\/")}</loc>`),
       `sitemap missing ${core}`,
     );
   }
+
+  // Canonical INN slug only — old Protopic alias must not be listed.
+  assert.doesNotMatch(xml, /\/t\/t-protopic[<\s]/);
+  const urlCount = (xml.match(/<url>/g) || []).length;
+  assert.ok(urlCount > 50, `sitemap too thin (${urlCount} urls); expected full topic+tools map`);
 });
 
 test("PWA middleware treats .xml and .txt as non-document paths", () => {
