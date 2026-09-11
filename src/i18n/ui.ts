@@ -24,7 +24,10 @@ const zhHant = {
   homeLead: "按解剖分組認識徵狀與求醫時機。",
   homeUrgentTitle: "急症 · 去急症室",
   homeUrgentBody:
-    "突然失明、簾幕、劇痛兼嘔吐、穿通傷或化學濺入：立即急症室；無法自行前往：致電 999。化學物先大量沖水。",
+    "突然失明、簾幕、劇痛兼嘔吐、穿通傷或化學濺入：立即急症室；無法自行前往：致電 999。化學物先大量沖水。穿通傷／眼球破裂勿按壓、勿自行沖洗（見急症頁）。",
+  emergencyDoNotDrive:
+    "突然視力下降、簾幕或突然失明：不要自行駕駛前往急症室；請由他人接送或致電 999。",
+  emergencyCannotTravel: "無法自行前往：致電 999",
   allTools: "全部教育工具",
   byAnatomy: "按解剖分類",
   homeAnatomyCta: "打開完整眼圖工具",
@@ -39,7 +42,7 @@ const zhHant = {
   skipToContent: "跳至主要內容",
   navMain: "主要導覽",
   legalShortLine:
-    "公眾教育資訊，不能代替註冊眼科專科醫生面診；本站不提供預約、購買或轉介。",
+    "本站提供一般眼健康教育，不能代替註冊醫生的個別評估，不提供個別診斷、處方、預約、購買或轉介服務。",
   eduToolBadge: "教育工具 · 自我察覺",
   eduToolCaveat:
     "本工具並非診斷工具。結果無論正常或異常，均不能代替眼科檢查。如有新出現的視力變化，請盡快求醫。",
@@ -82,16 +85,22 @@ const zhHant = {
   privacyTitle: "私隱與本機資料",
   privacyCap486H: "個人資料（私隱）條例（第486章）",
   privacyCap486:
-    "本教育網站不經此頁收集姓名、身份證號碼、病歷、聯絡電話或付款資料，亦沒有會員帳戶或伺服器端病歷／問診紀錄。本站目前沒有 Google Analytics／同類第三方分析追蹤。頁面可能載入 Google Fonts 字型，以及建置環境相關腳本（若存在）。字型大小、收藏、阿姆斯勒自記及戶外時間僅存於本機 localStorage，不上載伺服器。清除瀏覽器網站資料即可刪除本機紀錄。",
+    "本教育網站不經此頁收集姓名、身份證號碼、病歷、聯絡電話或付款資料，亦沒有會員帳戶或伺服器端病歷／問診紀錄。本站目前沒有 Google Analytics／同類第三方分析追蹤。頁面可能載入 Google Fonts 字型，以及建置環境相關腳本（若存在）。字型大小、收藏、阿姆斯勒自記及戶外時間僅存於本機 localStorage，不上載伺服器。可用下方「清除本機資料」或瀏覽器網站資料刪除本機紀錄。",
   privacyP2:
     "本站沒有會員帳戶，不經此網站收集身份證、病歷或付款資料。請勿在任何表格上傳送敏感個人資料——本站亦沒有此類表格。問醫生清單等工具只在你裝置上顯示，不會上載問答內容。",
+  privacyClearH: "清除本機資料",
+  privacyClearP:
+    "清除字型大小、語言、收藏、阿姆斯勒自記及戶外時間等本機偏好（localStorage）。不上載伺服器。更正或營運查詢請見法律頁所列更正政策；本站不經此頁接收病歷或預約，亦未公開營運者電郵。",
+  privacyClearBtn: "清除本機資料",
+  privacyClearDone: "已清除本機偏好。",
   clinicTitle: "本站不提供執業資料",
   clinicP1:
     "這是公眾教育網站，不提供診所地址、電話、收費、預約或即時通訊聯絡，亦沒有超連結通往任何執業網站。",
   clinicP2: "急症請立即到急症室；無法自行前往：致電 999。非急症請自行向眼科專科醫生求診，本站不作轉介。",
   backHome: "返回教育首頁",
   urgentTitle: "急症與盡快求醫",
-  urgentLead: "私家診所不是急症室。以下分開「立即急症室」與「盡快（最好當日）散瞳眼科評估」。化學濺入另列：邊沖邊去急症室。",
+  urgentLead:
+    "私家診所不是急症室。以下分開「立即急症室」與「盡快（最好當日）眼科評估」。化學濺入另列（邊沖邊去急症室）；可疑穿通傷／眼球破裂另列（勿當化學傷沖洗）。",
   urgent999: "立即到急症室；無法自行前往：致電 999",
   call999: "致電 999",
   chemH: "化學濺入眼睛",
@@ -99,9 +108,10 @@ const zhHant = {
   chem2: "隱形眼鏡若容易除就除，不要為除鏡而中斷沖洗太久。",
   chem3: "不要用中和劑、油或眼藥水「先睇下」。不要等私家診所開門才沖。",
   chem4: "邊沖邊去急症室；無法自行前往：致電 999。若知道化學物名稱可帶上。",
-  sameDayH: "盡快（最好當日）散瞳眼科評估（儘快睇眼科醫生）",
+  globeH: "可疑穿通傷或眼球破裂",
+  sameDayH: "盡快（最好當日）眼科評估（儘快睇眼科醫生）",
   sameDayP:
-    "沒有上述紅旗時，新閃光或飛蚊增多仍應盡快（最好當日）接受散瞳眼底檢查。請儘快睇眼科醫生，前往可作散瞳眼底的急症室眼科或當日應診的眼科專科醫生。",
+    "閃光／飛蚊等情況須緊急眼科評估；散瞳眼底是常用步驟之一，但評估內容由當值醫生決定，不是「只散瞳」便足夠。沒有簾幕、沒有突然失明時：當日儘快由可作散瞳眼底的眼科專科醫生或急症室眼科評估。",
   urgentFollow:
     "急症室分流後，或會轉介公立醫院眼科，或由你自行約見任何眼科專科醫生跟進。本站不作轉介。內容不能代替與註冊眼科專科醫生的面診，亦不能作為診斷。詳見法律與專業守則。",
   searchPh: "眼疾名稱、徵狀、檢查、工具……",
@@ -130,10 +140,14 @@ const zhHant = {
   lang: "語言",
   simFooter:
     "示意／自我監察不能代替散瞳眼底、視野或光學相干斷層掃描（OCT）。此工具結果正常不能排除眼疾。新出現異常須盡快由眼科專科醫生檢查；突然視力下降請到急症室。本站不提供預約或轉介。",
+  simBesideCaveat:
+    "旁側示意不是診斷；結果正常不能排除眼疾，亦不能代替散瞳眼底或 OCT。",
   toolCaveat:
     "本工具並非診斷工具。結果無論正常或異常，均不能代替眼科檢查。如有新出現的視力變化，請盡快求醫。",
   reviewed: "最近覆核",
+  clinicalReviewLabel: "臨床覆核",
   contentVer: "內容版本",
+  siteVersionLabel: "網站版本",
   contentUpdated: "更新日期",
   installTitle: "加到手機主畫面",
   installLead:
@@ -151,6 +165,10 @@ const zhHant = {
   amslerTitle: "阿姆斯勒方格",
   amslerLead:
     "教育工具 · 自我察覺中央視力（黃斑）。螢幕版只供參考，不能代替散瞳眼底檢查。突然直線變彎、中央暗點或視力急降，請到急症室。",
+  amslerMidFlowCaveat:
+    "示意／自查不是診斷；結果正常不能排除黃斑或視網膜疾病，亦不能代替散瞳眼底或 OCT。",
+  distortionUrgent:
+    "新出現或突然加重的直線變形、中央或旁中央暗點：須緊急眼科評估（通常當日）；若同時視力急降、簾幕或劇痛嘔吐：立即急症室，不要自行駕駛；無法自行前往：致電 999。螢幕阿姆斯勒正常不能排除眼疾。",
   amslerDist: "建議觀看距離約 {n} 厘米",
   amslerCal: "（已用卡片對準尺寸）",
   amslerUncal: "（尚未對準尺寸，請先校準）",
@@ -236,7 +254,10 @@ const en: Record<Key, string> = {
   homeLead: "Learn symptoms and when to seek care, grouped by anatomy.",
   homeUrgentTitle: "Emergency · go to A&E",
   homeUrgentBody:
-    "Sudden vision loss, a curtain, severe pain with vomiting, penetrating injury or chemical splash: go to A&E now. If you cannot get there: call 999. For chemicals, irrigate first with plenty of water.",
+    "Sudden vision loss, a curtain, severe pain with vomiting, penetrating injury or chemical splash: go to A&E now. If you cannot get there: call 999. For chemicals, irrigate first with plenty of water. For penetrating injury / ruptured globe: do not press or self-irrigate (see urgent page).",
+  emergencyDoNotDrive:
+    "Sudden vision loss, a curtain, or sudden blindness: do not drive yourself to A&E — arrange a lift or call 999.",
+  emergencyCannotTravel: "If you cannot get there: call 999",
   allTools: "All education tools",
   byAnatomy: "By anatomy",
   homeAnatomyCta: "Open the full eye-map tool",
@@ -251,7 +272,7 @@ const en: Record<Key, string> = {
   skipToContent: "Skip to main content",
   navMain: "Main navigation",
   legalShortLine:
-    "Public education only. Not a substitute for consultation with a registered ophthalmologist. This site offers no appointments, purchases or referrals.",
+    "This site provides general eye-health education. It cannot replace individual assessment by a registered doctor, and does not offer personal diagnosis, prescriptions, bookings, sales or referrals.",
   eduToolBadge: "Education tool · self-awareness",
   eduToolCaveat:
     "This tool is not a diagnostic tool. Whether results appear normal or abnormal, they cannot replace an eye examination. If you notice new vision changes, seek care promptly.",
@@ -295,9 +316,14 @@ const en: Record<Key, string> = {
   privacyTitle: "Privacy and on-device data",
   privacyCap486H: "Personal Data (Privacy) Ordinance (Cap. 486)",
   privacyCap486:
-    "This education site does not collect names, ID numbers, medical records, phone numbers or payment data through this page. There is no account and no server-side medical Q&A log. There is currently no Google Analytics or similar third-party analytics tracking. The page may load Google Fonts, and build-environment scripts if present. Type size, bookmarks, Amsler notes and outdoor time stay in on-device localStorage only and are not uploaded. Clearing site data in the browser deletes local records.",
+    "This education site does not collect names, ID numbers, medical records, phone numbers or payment data through this page. There is no account and no server-side medical Q&A log. There is currently no Google Analytics or similar third-party analytics tracking. The page may load Google Fonts, and build-environment scripts if present. Type size, bookmarks, Amsler notes and outdoor time stay in on-device localStorage only and are not uploaded. Use “Clear local data” below or clear site data in the browser to delete local records.",
   privacyP2:
     "There is no account. This site does not collect ID numbers, medical records or payment data. Do not send sensitive personal data — there is no form for that. Tools such as the questions checklist stay on your device and are not uploaded.",
+  privacyClearH: "Clear local data",
+  privacyClearP:
+    "Clears on-device preferences in localStorage (type size, language, bookmarks, Amsler notes, outdoor time). Nothing is uploaded. For corrections, see the corrections policy on the legal page; this site does not take medical records or bookings here, and no operator email is published.",
+  privacyClearBtn: "Clear local data",
+  privacyClearDone: "Local preferences cleared.",
   clinicTitle: "No practice information on this site",
   clinicP1:
     "This is a public education site. It does not list clinic addresses, phone numbers, fees, bookings or messaging, and has no link to any practice website.",
@@ -306,7 +332,7 @@ const en: Record<Key, string> = {
   backHome: "Back to education home",
   urgentTitle: "Emergencies and same-day care",
   urgentLead:
-    "A private clinic is not an A&E. Below: go to A&E now versus same-day dilated eye assessment. Chemical splash is listed separately: irrigate while going to A&E.",
+    "A private clinic is not an A&E. Below: go to A&E now versus same-day ophthalmic assessment. Chemical splash is listed separately (irrigate while going to A&E). Suspected penetrating injury / ruptured globe is also separate (do not irrigate as for chemical injury).",
   urgent999: "Go to A&E now; if you cannot get there: call 999",
   call999: "Call 999",
   chemH: "Chemical splash in the eye",
@@ -315,9 +341,10 @@ const en: Record<Key, string> = {
   chem2: "Remove contact lenses if they come out easily; do not stop irrigation for long just to remove them.",
   chem3: "Do not use neutralizing agents, oil or eye drops “to try first”. Do not wait for a private clinic to open before irrigating.",
   chem4: "Go to A&E while irrigating. If you cannot get there: call 999. Bring the chemical name if known.",
-  sameDayH: "Prompt dilated eye assessment (same day if possible — see an ophthalmologist as soon as possible)",
+  globeH: "Suspected penetrating injury or ruptured globe",
+  sameDayH: "Prompt ophthalmic assessment (same day if possible — see an ophthalmologist as soon as possible)",
   sameDayP:
-    "New flashes or a shower of floaters without the red flags above still need a dilated fundus exam as soon as possible, ideally the same day. See an ophthalmologist as soon as possible. Go to an A&E eye service or a registered ophthalmologist who can dilate that day.",
+    "Flashes / floaters need urgent ophthalmic assessment; dilated fundus exam is a common step, but what is done is decided by the duty doctor — dilation alone is not enough. Without a curtain and without sudden blindness: same-day assessment as soon as possible by an ophthalmologist who can dilate, or by A&E eye care.",
   urgentFollow:
     "After A&E triage you may be referred to public hospital ophthalmology, or you may see any registered ophthalmologist. This site does not refer. This content cannot replace an in-person consultation with a registered ophthalmologist and is not a diagnosis. See Law and professional code.",
   searchPh: "Condition, symptom, test, tool…",
@@ -346,10 +373,14 @@ const en: Record<Key, string> = {
   lang: "Language",
   simFooter:
     "A demonstration is not an examination and cannot replace dilated fundus exam, visual field or OCT. A normal result here does not rule out disease. New changes need prompt review by a registered ophthalmologist; sudden vision loss — go to A&E. This site does not book or refer.",
+  simBesideCaveat:
+    "The demo beside you is not a diagnosis; a normal result does not rule out eye disease and does not replace dilated fundus exam or OCT.",
   toolCaveat:
     "This tool is not a diagnostic tool. Whether results appear normal or abnormal, they cannot replace an eye examination. If you notice new vision changes, seek care promptly.",
   reviewed: "Last reviewed",
+  clinicalReviewLabel: "Clinical review",
   contentVer: "Content version",
+  siteVersionLabel: "Site version",
   contentUpdated: "Updated",
   installTitle: "Add to your phone’s Home Screen",
   installLead:
@@ -367,6 +398,10 @@ const en: Record<Key, string> = {
   amslerTitle: "Amsler grid",
   amslerLead:
     "Education tool · self-awareness of central vision (macula). A screen version is only a guide and cannot replace a dilated fundus exam. Sudden distortion, a central dark patch or a sharp drop in vision: go to A&E.",
+  amslerMidFlowCaveat:
+    "Illustration / self-check is not a diagnosis; a normal result does not rule out macular or retinal disease, and does not replace dilated fundus exam or OCT.",
+  distortionUrgent:
+    "New or suddenly worse straight-line distortion, or a central or paracentral dark spot: urgent ophthalmic assessment is needed (usually same day). If vision also drops sharply, there is a curtain, or severe pain with vomiting: go to A&E now; do not drive yourself; if you cannot get there: call 999. A normal on-screen Amsler grid does not rule out eye disease.",
   amslerDist: "Suggested viewing distance about {n} cm",
   amslerCal: " (size matched with a card)",
   amslerUncal: " (not yet calibrated — please calibrate first)",
@@ -450,7 +485,10 @@ const ja: Record<Key, string> = {
   homeLead: "解剖ごとに症状と受診の目安を学べます。",
   homeUrgentTitle: "救急 · 救急外来へ",
   homeUrgentBody:
-    "突然の視力低下、カーテン状の欠損、嘔吐を伴う激しい痛み、穿孔外傷、薬品の飛入：直ちに救急外来へ。行けない場合は999番に電話。薬品はまず大量の水で洗浄。",
+    "突然の視力低下、カーテン状の欠損、嘔吐を伴う激しい痛み、穿孔外傷、薬品の飛入：直ちに救急外来へ。行けない場合は999番に電話。薬品はまず大量の水で洗浄。穿孔／眼球破裂は圧迫せず、自分で強く洗わない（救急頁参照）。",
+  emergencyDoNotDrive:
+    "突然の視力低下、カーテン、または突然の失明：自分で運転して救急へ行かないでください — 送迎を手配するか999番に電話。",
+  emergencyCannotTravel: "行けない場合は999番に電話",
   allTools: "教育ツール一覧",
   byAnatomy: "解剖で探す",
   homeAnatomyCta: "眼の図ツールを開く",
@@ -465,7 +503,7 @@ const ja: Record<Key, string> = {
   skipToContent: "メインコンテンツへスキップ",
   navMain: "メインナビゲーション",
   legalShortLine:
-    "一般向け健康教育情報です。登録眼科専門医の診察に代わるものではありません。当サイトは予約・購入・紹介を提供しません。",
+    "本サイトは一般的な眼の健康教育を提供します。登録医師の個別評価の代わりにはならず、個別の診断・処方・予約・購入・紹介は行いません。",
   eduToolBadge: "教育ツール · 自己観察",
   eduToolCaveat:
     "本ツールは診断ツールではありません。結果が正常でも異常でも、眼科検査の代わりにはなりません。新たに視力の変化があれば、できるだけ早く受診してください。",
@@ -508,9 +546,14 @@ const ja: Record<Key, string> = {
   privacyTitle: "プライバシーと端末内データ",
   privacyCap486H: "個人資料（私隱）条例（第486章）",
   privacyCap486:
-    "本教育サイトでは、氏名・身分証番号・病歴・電話・決済情報をこの頁で集めません。会員登録も、サーバー側の病歴／問診記録もありません。現時点で Google Analytics や同種の第三者分析トラッキングはありません。ページは Google Fonts を読み込むことがあり、構築環境の関連スクリプトがある場合も読み込みます。文字サイズ、保存、アムスラー自己記録、屋外時間は端末の localStorage のみで、サーバーへは上げません。ブラウザのサイトデータを消すと端末内記録が削除されます。",
+    "本教育サイトでは、氏名・身分証番号・病歴・電話・決済情報をこの頁で集めません。会員登録も、サーバー側の病歴／問診記録もありません。現時点で Google Analytics や同種の第三者分析トラッキングはありません。ページは Google Fonts を読み込むことがあり、構築環境の関連スクリプトがある場合も読み込みます。文字サイズ、保存、アムスラー自己記録、屋外時間は端末の localStorage のみで、サーバーへは上げません。下の「端末内データを消す」またはブラウザのサイトデータ削除で端末内記録を消せます。",
   privacyP2:
     "会員登録はありません。身分証番号・病歴・決済情報は集めません。機密情報を送らないでください。その種のフォームもありません。医師に聞くリストなどのツールは端末上のみで、内容はアップロードしません。",
+  privacyClearH: "端末内データを消す",
+  privacyClearP:
+    "文字サイズ・言語・保存・アムスラー記録・屋外時間など localStorage の端末内設定を消します。アップロードはありません。訂正は法令頁の訂正方針を参照；病歴や予約は受け付けず、運営者メールも公開していません。",
+  privacyClearBtn: "端末内データを消す",
+  privacyClearDone: "端末内の設定を消しました。",
   clinicTitle: "診療所情報は掲載しません",
   clinicP1:
     "市民教育サイトです。住所・電話・料金・予約・メッセージ連絡は掲載せず、診療所サイトへのリンクもありません。",
@@ -519,7 +562,7 @@ const ja: Record<Key, string> = {
   backHome: "教育ホームへ戻る",
   urgentTitle: "救急と同じ日の受診",
   urgentLead:
-    "私設クリニックは救急外来ではありません。「直ちに救急外来」と「同日の散瞳眼底検査」を分けています。薬品飛入は別枠：洗いながら救急へ。",
+    "私設クリニックは救急外来ではありません。「直ちに救急外来」と「できるだけ早く（できれば当日）の眼科評価」を分けています。薬品飛入は別枠（洗いながら救急へ）。穿孔／眼球破裂も別枠（薬品のように強く洗わない）。",
   urgent999: "直ちに救急外来へ。行けない場合は999番に電話",
   call999: "999番に電話",
   chemH: "薬品が目に入ったとき",
@@ -528,9 +571,10 @@ const ja: Record<Key, string> = {
   chem2: "コンタクトレンズは簡単に取れるなら外します。外すために洗浄を長く止めないでください。",
   chem3: "中和剤、油、点眼薬で「様子を見る」ことはしない。私設クリニックの開店を待ってから洗わない。",
   chem4: "洗いながら救急外来へ。行けない場合は999番に電話。薬品名が分かれば持参。",
-  sameDayH: "できるだけ早く（できれば当日）の散瞳眼科評価（眼科専門医を受診）",
+  globeH: "穿孔外傷または眼球破裂の疑い",
+  sameDayH: "できるだけ早く（できれば当日）の眼科評価（眼科専門医を受診）",
   sameDayP:
-    "上記の危険徴候がなければ、新しい光視症や飛蚊の急増でも、できるだけ早く（できれば当日）散瞳眼底検査を。散瞳できる救急眼科か、当日診察できる眼科専門医を受診してください。",
+    "光視／飛蚊などは緊急の眼科評価が必要。散瞳眼底はよく行う一歩だが、内容は当直医が決め、「散瞳だけ」では足りない。カーテンも突然の失明もない場合：散瞳眼底ができる眼科専門医または救急眼科で当日できるだけ早く評価。",
   urgentFollow:
     "救急のトリアージ後、公立病院眼科へ紹介されることも、ご自身で眼科専門医を受診することもあります。本サイトは紹介しません。内容は登録眼科専門医の対面診察の代わりにはならず、診断でもありません。法令と職業倫理の頁を参照。",
   searchPh: "病名、症状、検査、ツール…",
@@ -559,10 +603,14 @@ const ja: Record<Key, string> = {
   lang: "言語",
   simFooter:
     "図示は検査ではありません。散瞳眼底・視野・OCTの代わりにはなりません。ここで異常がなくても病気を否定できません。新しい変化は眼科専門医の早めの診察を。突然の視力低下は救急外来へ。予約・紹介はしません。",
+  simBesideCaveat:
+    "横の図示は診断ではありません。正常でも病気を否定できず、散瞳眼底やOCTの代わりにもなりません。",
   toolCaveat:
     "本ツールは診断ツールではありません。結果が正常でも異常でも、眼科検査の代わりにはなりません。新たに視力の変化があれば、できるだけ早く受診してください。",
   reviewed: "最終確認",
+  clinicalReviewLabel: "臨床確認",
   contentVer: "コンテンツ版",
+  siteVersionLabel: "サイト版",
   contentUpdated: "更新日",
   installTitle: "スマホのホーム画面に追加",
   installLead:
@@ -580,6 +628,10 @@ const ja: Record<Key, string> = {
   amslerTitle: "アムスラーチャート",
   amslerLead:
     "教育ツール · 中心視力（黄斑）の自己観察用です。画面版は参考であり、散瞳眼底検査の代わりにはなりません。突然のゆがみ、中心暗点、急な視力低下は救急外来へ。",
+  amslerMidFlowCaveat:
+    "図示／自己チェックは診断ではありません。正常でも黄斑や網膜の病気を否定できず、散瞳眼底やOCTの代わりにもなりません。",
+  distortionUrgent:
+    "新たに出た、または急に悪化した直線の歪み、中心または傍中心の暗点：緊急の眼科評価が必要（通常は当日）。同時に視力急低下・カーテン・激痛嘔吐がある場合は直ちに救急へ。自分で運転しない。行けない場合は999番。画面のアムスラーが正常でも眼疾患を否定できません。",
   amslerDist: "観察距離の目安 約 {n} cm",
   amslerCal: "（カードでサイズ合わせ済み）",
   amslerUncal: "（未校正です。先にサイズを合わせてください）",

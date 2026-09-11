@@ -288,7 +288,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       ul(["Warm compress and lid hygiene first, especially with meibomian dysfunction", "Intralesional steroid in selected cases (IOP rise, skin thinning or pigment change)", "Oral or topical antibiotic is not automatic — a chalazion is usually a sterile granuloma"]),
       h("Published risks"),
       ul([
-        "Recurrence about 10–25%, higher if meibomian dysfunction is untreated",
+        "Recurrence varies with technique and meibomian status; higher if meibomian dysfunction is untreated",
         "Bruise and swelling: usually 1–2 weeks",
         "Bleeding: pressure usually suffices",
         "Infection: uncommon",
@@ -533,7 +533,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
     meta: "PCO · sealing a tear",
     blocks: [
       h("YAG posterior capsulotomy"),
-      p("Not a “returning cataract”. Lens epithelial cells cloud the posterior capsule. Literature: about 20–40% over years. Outpatient laser, no incision. Not every blur needs YAG; a doctor judges whether it affects function. Short pressure rise and extra floaters can occur; retinal tear is uncommon. A shower of new floaters, flashes, a curtain or severe pain after laser: A&E."),
+      p("Not a “returning cataract”. Lens epithelial cells cloud the posterior capsule. Literature rates over years vary and may reach a substantial minority. Outpatient laser, no incision. Not every blur needs YAG; a doctor judges whether it affects function. Short pressure rise and extra floaters can occur; retinal tear is uncommon. A shower of new floaters, flashes, a curtain or severe pain after laser: A&E."),
       h("Retinal barrier laser"),
       p("Scars around a tear to reduce fluid going under the retina. Activity limits depend on the tear and the doctor’s instructions — not a blanket two-week sports ban. Laser cannot fix a retina that is already detached. An expanding curtain is an emergency."),
     ],
@@ -1199,7 +1199,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
         type: "table",
         rows: [
           ["Class", "Main mechanism", "Education points"],
-          ["Prostaglandin analogues (PGA)", "Increase uveoscleral outflow", "Literature single-agent pressure drop often ~25–33%; usually once at night; lashes, iris/periocular pigment; caution in active uveitis or CME"],
+          ["Prostaglandin analogues (PGA)", "Increase uveoscleral outflow", "Literature: single-agent pressure drop is often clinically meaningful; usually once at night; lashes, iris/periocular pigment; caution in active uveitis or CME"],
           ["Beta-blockers", "Reduce aqueous production", "Discuss asthma/COPD and some heart-rhythm issues; systemic absorption can affect heart rate"],
           ["Carbonic-anhydrase inhibitors (topical CAI)", "Reduce aqueous production", "Tell the doctor about sulphonamide allergy; stinging or taste change possible"],
           ["Alpha-2 agonists (e.g. brimonidine class)", "Reduce production and aid outflow", "Avoid / extreme caution in infants (CNS depression); dry mouth, fatigue, allergic conjunctivitis"],
@@ -1208,7 +1208,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       },
       p("Fixed combinations put two classes in one bottle to cut drop count — a concept only; no branded combos are compared here. Switching or adding is a doctor’s decision."),
       h("Adherence"),
-      p("Studies report poor adherence in roughly 40–60% of people on glaucoma drops. Missed doses and silent stopping are preventable reasons for worsening — if side effects are hard, return for a change rather than stopping alone."),
+      p("Studies often report imperfect adherence among people on glaucoma drops. Missed doses and silent stopping are preventable reasons for worsening — if side effects are hard, return for a change rather than stopping alone."),
       h("Drop technique and punctal occlusion (education)"),
       ol([
         "Wash hands; shake if the label says so",

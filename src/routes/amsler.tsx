@@ -151,6 +151,9 @@ function AmslerPage() {
         <p className={`mt-1 shrink-0 text-center text-[0.8rem] ${muted}`}>
           螢幕置於眼前約 {holdCm} 厘米 · 戴閱讀眼鏡
         </p>
+        <p className={`mt-1 shrink-0 text-center text-[0.72rem] leading-snug ${muted}`}>
+          示意／自查不是診斷；結果正常不能排除黃斑或視網膜疾病，亦不能代替散瞳眼底或 OCT。
+        </p>
         <div className="flex min-h-0 flex-1 flex-col items-center justify-center py-2">
           <AmslerGrid sizePx={testGridPx} inverted={inverted} />
         </div>
@@ -203,6 +206,9 @@ function AmslerPage() {
 
       <p className="amsler-print-keep px-4 pt-1 text-[0.88rem] leading-relaxed text-muted">
         {t("amslerLead")}
+      </p>
+      <p className="amsler-print-keep px-4 pt-2 text-[0.85rem] leading-relaxed text-muted">
+        {t("amslerMidFlowCaveat")}
       </p>
 
       <div ref={boxRef} className="amsler-print-keep px-4 pt-4">
@@ -349,7 +355,10 @@ function AmslerPage() {
         </ul>
         <p className="mt-3 flex items-start gap-2 rounded-xl bg-danger-bg px-3 py-3 text-[0.88rem] leading-relaxed text-danger">
           <EyeOff className="mt-0.5 size-4 shrink-0" />
-          新出現或突然加重的變形、中央或旁中央暗點，須盡快由眼科專科醫生作散瞳眼底檢查。突然視力急降請立即到急症室；無法自行前往：致電 999。
+          {t("distortionUrgent")}
+        </p>
+        <p className="mt-2 text-[0.82rem] leading-relaxed text-muted">
+          {t("amslerMidFlowCaveat")}
         </p>
       </section>
 
@@ -376,6 +385,7 @@ function AmslerPage() {
 }
 
 function AmslerNotebook() {
+  const { t } = useI18n();
   const notes = usePrefs((s) => s.amslerNotes);
   const add = usePrefs((s) => s.addAmslerNote);
   const clear = usePrefs((s) => s.clearAmslerNotes);
@@ -416,7 +426,7 @@ function AmslerNotebook() {
       </div>
       {last?.result === "warp" || last?.result === "spot" ? (
         <p className="mt-3 rounded-xl bg-danger-bg px-3 py-3 text-[0.88rem] leading-relaxed text-danger">
-          盡快散瞳眼底檢查。突然視力急降請立即到急症室，不要只等普通門診。無法自行前往：致電 999。
+          {t("distortionUrgent")}
         </p>
       ) : null}
       {notes.length > 0 ? (

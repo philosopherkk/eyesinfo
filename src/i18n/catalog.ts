@@ -69,7 +69,19 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
   },
 };
 
-export const LEGAL_I18N: L<{ short: string; topicFooter: string; umao: string; ppo: string; mchk: string; privacy: string; notSubstitute: string; noServices: string; independent: string; funding: string }> = {
+export const LEGAL_I18N: L<{
+  short: string;
+  topicFooter: string;
+  umao: string;
+  ppo: string;
+  mchk: string;
+  privacy: string;
+  notSubstitute: string;
+  noServices: string;
+  disclosure: string;
+  funding: string;
+  correction: string;
+}> = {
   "zh-Hant": {
     short: "",
     topicFooter: "",
@@ -79,8 +91,9 @@ export const LEGAL_I18N: L<{ short: string; topicFooter: string; umao: string; p
     privacy: "",
     notSubstitute: "",
     noServices: "",
-    independent: "",
+    disclosure: "",
     funding: "",
+    correction: "",
   },
   "zh-Hans": {
     short: "",
@@ -91,8 +104,9 @@ export const LEGAL_I18N: L<{ short: string; topicFooter: string; umao: string; p
     privacy: "",
     notSubstitute: "",
     noServices: "",
-    independent: "",
+    disclosure: "",
     funding: "",
+    correction: "",
   },
   en: {
     short:
@@ -111,10 +125,12 @@ export const LEGAL_I18N: L<{ short: string; topicFooter: string; umao: string; p
       "This content cannot replace an in-person consultation with a registered ophthalmologist and is not a diagnosis. This page is not diagnostic, prescribing or surgical advice. Only doctors listed on the Medical Council specialist register in ophthalmology may use the title “ophthalmologist” (眼科專科醫生).",
     noServices:
       "This site does not offer booking, prescriptions, sales or referrals, and has no link to any practice website.",
-    independent:
-      "This educational content is fully independent of any practitioner’s identity and clinic promotion, and is not a referral to or promotion of any particular doctor or clinic.",
+    disclosure:
+      "Publisher / operator: 護眼學堂 (eyesinfo.org). Clinical review: Dr Poon Ka Kin (registered doctor, Medical Council of Hong Kong; Specialist Register (Ophthalmology)). This education site does not provide clinic contact, booking or referral, and does not link to a practice website. This education site currently has no commercial sponsorship; if funding or conflicts of interest arise later, they will be disclosed on the legal page. Education content is shown separately from any clinic promotion; the reviewer may also practise clinically — this site does not refer.",
     funding:
       "This education site currently has no commercial sponsorship. If funding or conflicts of interest arise later, they will be disclosed on the legal page.",
+    correction:
+      "If you find an error in the content, notify the operator using the corrections contact listed on the legal page. This site does not receive medical records, bookings or individual care queries through that channel.",
   },
   ja: {
     short:
@@ -132,9 +148,11 @@ export const LEGAL_I18N: L<{ short: string; topicFooter: string; umao: string; p
     notSubstitute:
       "内容は登録眼科専門医の対面診察の代わりにはならず、診断でもありません。診断・処方・手術の助言ではありません。医師委員会の眼科専門医名簿に載る者だけが「眼科専科医」を名乗れます。",
     noServices: "予約・処方・販売・紹介は行わず、診療所サイトへもリンクしません。",
-    independent:
-      "この教育内容は開業医の身元や診療所宣伝から完全に独立しており、特定の医師や診療所への紹介・宣伝ではありません。",
+    disclosure:
+      "発行／運営：護眼學堂（eyesinfo.org）。臨床確認：潘家健医師（香港医師委員会登録医師；専門医名簿（眼科））。本教育サイトは診療所の連絡・予約・紹介を行わず、診療所サイトにもリンクしません。現時点で商業スポンサーはありません；今後の資金提供や利益関係があれば法令頁で開示します。教育内容は診療所宣伝と分けて示します；確認者は臨床も行うことがあり、紹介はしません。",
     funding:
       "本教育サイトに現時点で商業スポンサーはありません。今後の資金提供や利益関係があれば、法令頁で開示します。",
+    correction:
+      "内容の誤りを見つけた場合は、法令頁に記載の訂正連絡の方法で運営者に知らせてください。この経路では病歴・予約・個別の診療照会は受け付けません。",
   },
 };

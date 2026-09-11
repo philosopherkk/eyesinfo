@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
-import { ArrowLeft, ShieldAlert } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { getTopic, topicEditorial, TOPICS } from "@/data/topics";
 import { TOPIC_TOOLS } from "@/data/tools";
 import { TopicBody } from "@/components/topic-body";
@@ -7,6 +7,7 @@ import { TopicRefs } from "@/components/topic-refs";
 import { TopicRelated } from "@/components/topic-related";
 import { TopicToc } from "@/components/topic-toc";
 import { EditorialFooter } from "@/components/editorial-footer";
+import { EmergencyShell } from "@/components/emergency-shell";
 import { SaveButton } from "@/components/save-button";
 import { topicSaveKey } from "@/lib/saved";
 import { collectTocEntries } from "@/lib/topic-anchors";
@@ -103,20 +104,9 @@ function TopicPage() {
         <TopicToc entries={tocEntries} includeRefs={hasRefs} />
       </header>
       {raw.isAcuteEmergency ? (
-        <Link
-          to="/urgent"
-          className="mx-4 mb-4 flex items-start gap-3 rounded-xl bg-danger px-3.5 py-3 text-paper no-underline"
-        >
-          <ShieldAlert className="mt-0.5 size-5 shrink-0" aria-hidden />
-          <span>
-            <span className="block text-[0.9rem] font-semibold">
-              {t("homeUrgentTitle")}
-            </span>
-            <span className="mt-0.5 block text-[0.8rem] leading-snug text-paper/90">
-              {t("homeUrgentBody")}
-            </span>
-          </span>
-        </Link>
+        <div className="mx-4 mb-4">
+          <EmergencyShell />
+        </div>
       ) : null}
       <div className="px-4 pb-6">
         <TopicBody blocks={topic.blocks} topicId={raw.id} />

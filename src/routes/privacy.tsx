@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import { useI18n } from "@/i18n";
+import { usePrefs } from "@/lib/prefs";
 import { pageHead } from "@/lib/page-seo";
 
 export const Route = createFileRoute("/privacy")({
@@ -15,6 +17,9 @@ export const Route = createFileRoute("/privacy")({
 
 function PrivacyPage() {
   const { t, legal } = useI18n();
+  const clearLocalData = usePrefs((s) => s.clearLocalData);
+  const [cleared, setCleared] = useState(false);
+
   return (
     <div className="px-4 pt-5 pb-8">
       <h1 className="text-[1.35rem] font-semibold text-navy">{t("privacyTitle")}</h1>
@@ -25,6 +30,25 @@ function PrivacyPage() {
           <p className="mt-1 text-muted">{t("privacyCap486")}</p>
         </div>
         <p className="text-muted">{t("privacyP2")}</p>
+        <div>
+          <h2 className="font-semibold text-navy">{t("privacyClearH")}</h2>
+          <p className="mt-1 text-muted">{t("privacyClearP")}</p>
+          <button
+            type="button"
+            className="mt-3 inline-flex min-h-11 items-center justify-center rounded-xl border border-navy bg-card px-4 text-[0.88rem] font-semibold text-navy"
+            onClick={() => {
+              clearLocalData();
+              setCleared(true);
+            }}
+          >
+            {t("privacyClearBtn")}
+          </button>
+          {cleared ? (
+            <p className="mt-2 text-[0.85rem] text-muted" role="status">
+              {t("privacyClearDone")}
+            </p>
+          ) : null}
+        </div>
       </section>
       <p className="mt-6 flex flex-wrap gap-x-3 gap-y-1 text-[0.8rem]">
         <Link to="/legal" className="text-navy underline">

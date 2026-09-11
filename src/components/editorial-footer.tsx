@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { editorialBits, useI18n } from "@/i18n";
 import { DEFAULT_TOPIC_REVIEWER } from "@/data/editorial";
 import type { TopicReviewer } from "@/data/topics";
-import { CONTENT_VERSION } from "@/lib/site";
+import { CONTENT_UPDATED, CONTENT_VERSION } from "@/lib/site";
 
 function formatReviewed(
   isoOrDisplay: string | undefined,
@@ -45,7 +45,7 @@ export function EditorialFooter({
   /** Show site-wide 內容版本 (topic + tool pages). Calendar stamp lives under 最近覆核. */
   showEdition?: boolean;
 }) {
-  const { t, locale } = useI18n();
+  const { t, locale, legal } = useI18n();
   const ed = editorialBits(locale);
   const reviewed = formatReviewed(lastReviewed, locale, ed.reviewed);
   const isDefault =
@@ -62,10 +62,17 @@ export function EditorialFooter({
         {t("reviewed")}：{reviewed} · {name} · {title}（{ed.register}）
       </p>
       {showEdition ? (
-        <p>
-          {t("contentVer")} {CONTENT_VERSION}
-        </p>
+        <>
+          <p>
+            {t("clinicalReviewLabel")}：{ed.reviewed}
+          </p>
+          <p>
+            {t("siteVersionLabel")}：{CONTENT_VERSION} · {t("contentUpdated")}{" "}
+            {CONTENT_UPDATED}
+          </p>
+        </>
       ) : null}
+      <p>{legal.disclosure}</p>
       <p className="no-print">
         <Link to="/legal" className="text-navy underline">
           {t("legalLink")}
