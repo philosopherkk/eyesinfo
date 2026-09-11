@@ -43,6 +43,8 @@ const zhHant = {
   navMain: "主要導覽",
   legalShortLine:
     "本站提供一般眼健康教育，不能代替註冊醫生的個別評估，不提供個別診斷、處方、預約、購買或轉介服務。",
+  langAuthority:
+    "各語言版本如有歧義或不完整，以本站繁體中文版為準。",
   eduToolBadge: "教育工具 · 自我察覺",
   eduToolCaveat:
     "本工具並非診斷工具。結果無論正常或異常，均不能代替眼科檢查。如有新出現的視力變化，請盡快求醫。",
@@ -60,7 +62,7 @@ const zhHant = {
   a11yGaps:
     "部分示意動畫與複雜圖示（例如眼圖熱區）在輔助技術下的體驗仍可再改善；高對比主題與深色模式尚未提供。詳細清單會隨版本更新。",
   a11yDateH: "聲明日期",
-  a11yDate: "2026年9月7日（內容版本 1.32）",
+  a11yDate: "2026年9月11日（內容版本 1.47）",
   a11yFeedbackH: "意見與更正",
   a11yFeedback:
     "若發現無障礙或內容錯誤，請參閱法律與專業守則頁的覆核與更正說明。本站不提供診所電話、預約或即時通訊，亦不經此頁接收病歷。",
@@ -193,8 +195,83 @@ const zhHant = {
   amslerFindParaP:
     "中央圓點仍在，旁邊有一塊看不見或缺格。不要轉動眼球去「找」那塊——檢查時應一直盯着圓點。",
   amslerFindNote: "此示意不能排除眼疾，亦不能為黃斑病變分級。",
+  amslerTestAria: "單眼阿姆斯勒檢查",
+  amslerTestEnd: "結束檢查",
+  amslerTestInvert: "黑白對調",
+  amslerTestCover: "用手掌遮蓋{eye}，注視中央圓點",
+  amslerEyeLeft: "左眼",
+  amslerEyeRight: "右眼",
+  amslerTestHold: "螢幕置於眼前約 {n} 厘米 · 戴閱讀眼鏡",
+  amslerTestSwitch: "換另一眼",
+  amslerTestAbnormal: "發覺異常",
   iolTitle: "人工晶體視力示意",
   iolNotGuarantee: "不是術後保證。本站不提供預約或轉介。",
+  iolLead:
+    "拖動目標度數，比較遠、中、近看起來差多少。只是光學示意，不能預測你手術後的視力，亦不是推介任何晶體品牌。",
+  iolOpticsH: "光學設計",
+  iolTargetH: "單焦／預留目標度數",
+  iolTargetHint:
+    "由遠視 +3.00（晶體度數明顯不夠）拖到近視 −3.00（預留更近）。每格 0.25 D（25 度）。多焦通常以正視為目標；偏離會令各個焦點一齊移位。",
+  iolTargetAria: "目標球面度數",
+  iolHyper: "+3.00 遠視",
+  iolEmme: "0 正視",
+  iolMyope: "−3.00 近視",
+  iolTickShort: "+3.00 不夠度",
+  iolTickZero: "0 正視看遠",
+  iolTickNear: "−3.00 預留近用",
+  iolCylH: "角膜散光（環曲面／Toric）",
+  iolCylAria: "未矯正角膜散光",
+  iolCylNone: "0 無散光",
+  iolToricOn: "已選擇散光矯正晶體",
+  iolToricOff: "未用散光矯正晶體",
+  iolToricHint:
+    "散光是某一方向拉長模糊，與「遠或近」不是同一件事。規則角膜散光大約 ≥0.75–1.00 D 時，醫生或會討論環曲面晶體，可加在單焦、增強單焦、延伸景深或多焦之上。晶體旋轉會減少矯正量。",
+  iolNightOn: "夜間光暈",
+  iolNightOff: "日間街景",
+  iolGlassesOn: "已戴眼鏡矯正",
+  iolGlassesOff: "不戴眼鏡",
+  iolGlassesHint: "眼鏡可補球面及散光殘餘，但多焦／延伸景深的光暈不會因戴鏡而消失。",
+  iolRangeH: "清晰範圍示意",
+  iolHowH: "如何閱讀這個示意",
+  iolHow1:
+    "單焦預留正視 0：看街、開車通常最清楚；中距離賽事新聞及近距離賽程多數要近用鏡。",
+  iolHow2:
+    "單焦預留近視 −3.00：約 33 厘米閱讀較易，遠處路牌會很糊。−2.00 則約 50 厘米。有人一眼正視、一眼輕微近視（迷你單眼視），須個別討論。",
+  iolHow3:
+    "單焦預留遠視 +3.00：遠近都不夠焦，是「晶體度數偏少」的示範，不是常用目標。+2.00 同樣遠近都偏糊，只是幅度較小。",
+  iolHow4: "增強型單焦：中距離往往比普通單焦好一點，細字多數仍需鏡。",
+  iolHow5: "延伸景深：遠到中距離較連貫，細字仍常需鏡，夜間光暈因產品而異。",
+  iolHow6: "多焦／三焦：遠中近都嘗試兼顧，對比可略降，夜間光暈較明顯。不是人人適合，不是術後保證。",
+  iolLinkDetail: "晶體選擇細節",
+  iolLinkMf: "多焦篩選原則",
+  iolLinkHalo: "夜間光暈比較",
+  iolFoot:
+    "示意／自我監察不能代替散瞳眼底、視野或光學相干斷層掃描（OCT）。此工具結果正常不能排除眼疾。不是術後保證。本站不提供預約或轉介。",
+  iolSampleFar: "巴士 112",
+  iolSampleMid: "羽毛球公開賽",
+  iolSampleNear: "週日賽程",
+  iolOpticMono: "單焦點",
+  iolOpticMonoShort: "一個焦點",
+  iolOpticMonoNote:
+    "只在預留的那個距離最清晰。預留正視則看遠清楚、看近多數要老花眼鏡；預留近視則相反。夜間光暈一般少於繞射多焦，仍因瞳孔及眼表而異。",
+  iolOpticEmono: "增強型單焦點",
+  iolOpticEmonoShort: "輕微延伸景深",
+  iolOpticEmonoNote:
+    "以單焦為底，輕微拉長清晰範圍，中距離（電腦／賽程）通常較普通單焦好，細字閱讀多數仍需眼鏡。夜間光學干擾因產品及瞳孔而異，一般少於繞射多焦，不是保證「少光暈」。",
+  iolOpticEdof: "延伸景深（EDOF）",
+  iolOpticEdofShort: "遠至中距離",
+  iolOpticEdofNote:
+    "遠至約 60 厘米較連貫。報紙細字多數仍需近用鏡。光暈通常少於多焦、多於單焦，實際因產品及病人而異。",
+  iolOpticMf: "多焦／三焦點",
+  iolOpticMfShort: "遠中近幾個焦點",
+  iolOpticMfNote:
+    "嘗試同時照顧遠、中、近。對比度可略降，夜間光暈／眩光較明顯。黃斑病變或明顯視野缺損者通常不宜。不能保證脫鏡。",
+  iolDistFar: "遠距離",
+  iolDistFarSub: "約 6 米 · 駕駛／街景",
+  iolDistMid: "中距離",
+  iolDistMidSub: "約 60–70 厘米 · 賽事新聞",
+  iolDistNear: "近距離",
+  iolDistNearSub: "約 40 厘米 · 賽程表",
   cat_lens: "晶體與屈光",
   cat_lens_sub: "近視遠視 · 白內障 · 斜視",
   cat_lid: "眼瞼與淚膜",
@@ -273,6 +350,8 @@ const en: Record<Key, string> = {
   navMain: "Main navigation",
   legalShortLine:
     "This site provides general eye-health education. It cannot replace individual assessment by a registered doctor, and does not offer personal diagnosis, prescriptions, bookings, sales or referrals.",
+  langAuthority:
+    "If translations differ or are incomplete, the Traditional Chinese (zh-Hant) text on this site prevails.",
   eduToolBadge: "Education tool · self-awareness",
   eduToolCaveat:
     "This tool is not a diagnostic tool. Whether results appear normal or abnormal, they cannot replace an eye examination. If you notice new vision changes, seek care promptly.",
@@ -290,7 +369,7 @@ const en: Record<Key, string> = {
   a11yGaps:
     "Some demos and complex diagrams (for example eye-map hotspots) can still improve with assistive technologies. A high-contrast theme and dark mode are not offered yet. The list will update with later versions.",
   a11yDateH: "Statement date",
-  a11yDate: "7 September 2026 (content version 1.32)",
+  a11yDate: "11 September 2026 (content version 1.47)",
   a11yFeedbackH: "Feedback and corrections",
   a11yFeedback:
     "For accessibility or content errors, see the review and corrections note on the Law and professional code page. This site does not list clinic phones, bookings or messaging, and does not take medical records here.",
@@ -426,8 +505,85 @@ const en: Record<Key, string> = {
   amslerFindParaP:
     "The centre dot is still there, but a blank or missing patch of the grid sits next to it. Do not look around to hunt for it — keep staring at the dot.",
   amslerFindNote: "A normal demo cannot rule out disease and cannot grade macular degeneration.",
+  amslerTestAria: "One-eye Amsler check",
+  amslerTestEnd: "End check",
+  amslerTestInvert: "Invert black/white",
+  amslerTestCover: "Cover {eye} with your palm and look at the centre dot",
+  amslerEyeLeft: "the left eye",
+  amslerEyeRight: "the right eye",
+  amslerTestHold: "Hold the screen about {n} cm from your eye · wear reading glasses",
+  amslerTestSwitch: "Switch eye",
+  amslerTestAbnormal: "Something looks wrong",
   iolTitle: "Intraocular lens vision demo",
   iolNotGuarantee: "Not a post-operative guarantee. This site does not book or refer.",
+  iolLead:
+    "Drag the target power to compare far, intermediate and near. Optical illustration only — it cannot predict your post-operative vision and does not recommend any lens brand.",
+  iolOpticsH: "Optical design",
+  iolTargetH: "Monofocal / target power",
+  iolTargetHint:
+    "From hyperopia +3.00 (under-powered lens) to myopia −3.00 (near bias). Steps of 0.25 D (25 degrees). Multifocals usually aim for emmetropia; offset shifts every focus together.",
+  iolTargetAria: "Target spherical power",
+  iolHyper: "+3.00 hyperopia",
+  iolEmme: "0 emmetropia",
+  iolMyope: "−3.00 myopia",
+  iolTickShort: "+3.00 under-powered",
+  iolTickZero: "0 distance emmetropia",
+  iolTickNear: "−3.00 near bias",
+  iolCylH: "Corneal astigmatism (toric)",
+  iolCylAria: "Uncorrected corneal astigmatism",
+  iolCylNone: "0 no astigmatism",
+  iolToricOn: "Toric correction selected",
+  iolToricOff: "No toric correction",
+  iolToricHint:
+    "Astigmatism stretches blur in one meridian — not the same as far vs near. For regular corneal astigmatism of about ≥0.75–1.00 D, a doctor may discuss a toric lens on monofocal, enhanced monofocal, EDOF or multifocal platforms. Lens rotation reduces the correction.",
+  iolNightOn: "Night halos",
+  iolNightOff: "Daytime street",
+  iolGlassesOn: "Spectacles on",
+  iolGlassesOff: "No spectacles",
+  iolGlassesHint:
+    "Spectacles can correct residual sphere and cylinder, but multifocal / EDOF halos do not go away with glasses.",
+  iolRangeH: "Depth-of-focus sketch",
+  iolHowH: "How to read this demo",
+  iolHow1:
+    "Monofocal target emmetropia 0: street and driving are usually clearest; mid-distance news and near schedules often need readers.",
+  iolHow2:
+    "Monofocal target myopia −3.00: reading at about 33 cm is easier; distant signs are very blurry. −2.00 is about 50 cm. Some people use mini-monovision (one eye distance, one mildly near) — individual discussion.",
+  iolHow3:
+    "Monofocal target hyperopia +3.00: neither far nor near is in focus — an under-powered demo, not a usual target. +2.00 is similarly soft both ways, milder.",
+  iolHow4: "Enhanced monofocal: intermediate often a bit better than standard monofocal; fine print usually still needs glasses.",
+  iolHow5: "EDOF: far-to-intermediate more continuous; fine print often still needs glasses; night halos vary by product.",
+  iolHow6:
+    "Multifocal / trifocal: tries far, intermediate and near; contrast may drop a little; night halos more noticeable. Not for everyone and not a surgical promise.",
+  iolLinkDetail: "Lens choice detail",
+  iolLinkMf: "Multifocal screening principles",
+  iolLinkHalo: "Night halo comparison",
+  iolFoot:
+    "Illustration / self-check cannot replace dilated fundus exam, visual field or OCT. A normal tool result cannot rule out disease. Not a post-operative guarantee. This site does not book or refer.",
+  iolSampleFar: "Bus 112",
+  iolSampleMid: "Badminton Open",
+  iolSampleNear: "Sunday fixtures",
+  iolOpticMono: "Monofocal",
+  iolOpticMonoShort: "One focus",
+  iolOpticMonoNote:
+    "Clearest at the targeted distance. Emmetropia: distance clear, near usually needs readers; myopic target reverses that. Night halos usually fewer than diffractive multifocals, still pupil- and surface-dependent.",
+  iolOpticEmono: "Enhanced monofocal",
+  iolOpticEmonoShort: "Slightly longer depth of focus",
+  iolOpticEmonoNote:
+    "Monofocal base with a slightly longer clear range; intermediate (computer / fixtures) often better than standard monofocal; fine print usually still needs glasses. Night optical effects vary by product and pupil — generally less than diffractive multifocal, not a “few halos” promise.",
+  iolOpticEdof: "Extended depth of focus (EDOF)",
+  iolOpticEdofShort: "Far to intermediate",
+  iolOpticEdofNote:
+    "More continuous far to about 60 cm. Newspaper fine print usually still needs readers. Halos usually between monofocal and multifocal; product- and patient-dependent.",
+  iolOpticMf: "Multifocal / trifocal",
+  iolOpticMfShort: "Far, mid and near foci",
+  iolOpticMfNote:
+    "Tries far, intermediate and near together. Contrast may drop; night halos/glare more noticeable. Usually unsuitable with macular disease or a clear field defect. Spectacle independence is not guaranteed.",
+  iolDistFar: "Distance",
+  iolDistFarSub: "About 6 m · driving / street",
+  iolDistMid: "Intermediate",
+  iolDistMidSub: "About 60–70 cm · match reports",
+  iolDistNear: "Near",
+  iolDistNearSub: "About 40 cm · fixture list",
   cat_lens: "Lens and refraction",
   cat_lens_sub: "Myopia, hyperopia · cataract · squint",
   cat_lid: "Eyelids and tear film",
@@ -504,6 +660,8 @@ const ja: Record<Key, string> = {
   navMain: "メインナビゲーション",
   legalShortLine:
     "本サイトは一般的な眼の健康教育を提供します。登録医師の個別評価の代わりにはならず、個別の診断・処方・予約・購入・紹介は行いません。",
+  langAuthority:
+    "翻訳に相違または不足がある場合は、本サイトの繁体字中国語（zh-Hant）版を基準とします。",
   eduToolBadge: "教育ツール · 自己観察",
   eduToolCaveat:
     "本ツールは診断ツールではありません。結果が正常でも異常でも、眼科検査の代わりにはなりません。新たに視力の変化があれば、できるだけ早く受診してください。",
@@ -521,7 +679,7 @@ const ja: Record<Key, string> = {
   a11yGaps:
     "一部の図示や複雑な図（眼の図のホットスポットなど）は支援技術での体験をさらに改善できます。高コントラストテーマとダークモードはまだありません。一覧は版に応じて更新します。",
   a11yDateH: "声明日",
-  a11yDate: "2026年9月7日（コンテンツ版 1.32）",
+  a11yDate: "2026年9月11日（コンテンツ版 1.47）",
   a11yFeedbackH: "意見と訂正",
   a11yFeedback:
     "アクセシビリティや内容の誤りは、法令と職業倫理の頁の確認・訂正の説明を参照してください。診療所電話・予約・メッセージ連絡は掲載せず、病歴も受け取りません。",
@@ -656,8 +814,85 @@ const ja: Record<Key, string> = {
   amslerFindParaP:
     "中央の点は残るが、すぐ横にマス目が欠けた空白があります。探そうと眼球を動かさず、点を見続けてください。",
   amslerFindNote: "この図示で病気は除外できず、黄斑変性の病期も判定できません。",
+  amslerTestAria: "片眼アムスラー検査",
+  amslerTestEnd: "検査を終了",
+  amslerTestInvert: "白黒反転",
+  amslerTestCover: "手のひらで{eye}を隠し、中央の点を見る",
+  amslerEyeLeft: "左眼",
+  amslerEyeRight: "右眼",
+  amslerTestHold: "画面を眼前約 {n} cm · 近用眼鏡を着用",
+  amslerTestSwitch: "もう一方の眼へ",
+  amslerTestAbnormal: "異常に気づいた",
   iolTitle: "眼内レンズの見え方の図示",
   iolNotGuarantee: "術後の保証ではありません。予約・紹介はしません。",
+  iolLead:
+    "目標度数を動かして遠・中・近の差を比べます。光学の図示であり、術後視力を予測できず、レンズブランドの推介でもありません。",
+  iolOpticsH: "光学デザイン",
+  iolTargetH: "単焦点／目標度数",
+  iolTargetHint:
+    "遠視 +3.00（度数が明らかに足りない）から近視 −3.00（より近くを狙う）まで。1目盛 0.25 D（25度）。多焦点は多く正視を目標にし、ずれると各焦点が一緒にずれます。",
+  iolTargetAria: "目標球面度数",
+  iolHyper: "+3.00 遠視",
+  iolEmme: "0 正視",
+  iolMyope: "−3.00 近視",
+  iolTickShort: "+3.00 不足",
+  iolTickZero: "0 正視で遠方",
+  iolTickNear: "−3.00 近用寄り",
+  iolCylH: "角膜乱視（トーリック）",
+  iolCylAria: "未矯正の角膜乱視",
+  iolCylNone: "0 乱視なし",
+  iolToricOn: "乱視矯正レンズを選択",
+  iolToricOff: "乱視矯正なし",
+  iolToricHint:
+    "乱視はある方向に伸びたぼけで、「遠いか近いか」とは別です。規則的な角膜乱視がおよそ ≥0.75–1.00 D のとき、医師がトーリックを単焦点・強化単焦点・EDOF・多焦点の上に載せる話をすることがあります。レンズの回転で矯正量は減ります。",
+  iolNightOn: "夜間ハロー",
+  iolNightOff: "昼間の街並み",
+  iolGlassesOn: "眼鏡で矯正済み",
+  iolGlassesOff: "眼鏡なし",
+  iolGlassesHint:
+    "眼鏡は球面と乱視の残りを補えますが、多焦点／EDOFのハローは眼鏡では消えません。",
+  iolRangeH: "清晰範囲の図示",
+  iolHowH: "この図示の読み方",
+  iolHow1:
+    "単焦点で正視0：街や運転は多くの場合いちばんはっきり；中距離の試合ニュースや近距離の日程は近用眼鏡が必要なことが多い。",
+  iolHow2:
+    "単焦点で近視 −3.00：約33 cmの読書はしやすいが遠方の看板は大きくぼける。−2.00は約50 cm。一眼正視・一眼軽近視（ミニ単眼視）は個別相談。",
+  iolHow3:
+    "単焦点で遠視 +3.00：遠近とも焦点不足。「度数が足りない」示意であり常用目標ではない。+2.00も遠近ともややぼけ、程度は小さい。",
+  iolHow4: "強化単焦点：中距離は普通の単焦点より少し良いことが多く、細字はなお眼鏡が必要なことが多い。",
+  iolHow5: "EDOF：遠〜中がより連続；細字はなお眼鏡が多い；夜間ハローは製品次第。",
+  iolHow6:
+    "多焦点／3焦点：遠中近を試み、コントラストは少し下がることがあり、夜間ハローはより目立つ。万人向きでも術後保証でもない。",
+  iolLinkDetail: "レンズ選択の詳細",
+  iolLinkMf: "多焦点の術前の考え方",
+  iolLinkHalo: "夜間ハロー比較",
+  iolFoot:
+    "図示／自己観察は散瞳眼底・視野・OCTの代わりになりません。正常でも眼疾患を否定できません。術後保証ではありません。予約・紹介はしません。",
+  iolSampleFar: "バス 112",
+  iolSampleMid: "バドミントン公開",
+  iolSampleNear: "日曜の試合日程",
+  iolOpticMono: "単焦点",
+  iolOpticMonoShort: "一つの焦点",
+  iolOpticMonoNote:
+    "狙った距離がいちばんはっきり。正視なら遠方が見えやすく近くは老眼鏡が多い；近視寄りはその逆。夜間ハローは回折多焦点より少ないことが多いが、瞳孔と眼表面次第。",
+  iolOpticEmono: "強化単焦点",
+  iolOpticEmonoShort: "わずかに長い焦点深度",
+  iolOpticEmonoNote:
+    "単焦点を底に清晰範囲を少し延ばす。中距離（パソコン／日程）は普通の単焦点より良いことが多く、細字はなお眼鏡。夜間の光学効果は製品と瞳孔次第で、一般に回折多焦点より少ないが「ハローが少ない」保証ではない。",
+  iolOpticEdof: "焦点深度拡張（EDOF）",
+  iolOpticEdofShort: "遠〜中距離",
+  iolOpticEdofNote:
+    "遠〜約60 cmがより連続。新聞の細字は近用眼鏡が必要なことが多い。ハローは単焦点と多焦点の間が多く、製品・個人差あり。",
+  iolOpticMf: "多焦点／3焦点",
+  iolOpticMfShort: "遠中近の複数焦点",
+  iolOpticMfNote:
+    "遠・中・近を同時に試みる。コントラスト低下や夜間ハロー／眩しさが目立ちやすい。黄斑疾患や明らかな視野欠損では通常向かない。眼鏡なしは保証されない。",
+  iolDistFar: "遠距離",
+  iolDistFarSub: "約6 m · 運転／街並み",
+  iolDistMid: "中距離",
+  iolDistMidSub: "約60–70 cm · 試合ニュース",
+  iolDistNear: "近距離",
+  iolDistNearSub: "約40 cm · 日程表",
   cat_lens: "水晶体と屈折",
   cat_lens_sub: "近視遠視 · 白内障 · 斜視",
   cat_lid: "眼瞼と涙液",

@@ -123,7 +123,7 @@ function AmslerPage() {
         }}
         role="dialog"
         aria-modal="true"
-        aria-label="單眼阿姆斯勒檢查"
+        aria-label={t("amslerTestAria")}
       >
         <div className="flex shrink-0 items-center justify-between gap-2">
           <button
@@ -131,7 +131,7 @@ function AmslerPage() {
             onClick={() => setTesting(false)}
             className="inline-flex h-11 items-center rounded-full bg-navy px-4 text-[0.85rem] font-semibold text-paper"
           >
-            結束檢查
+            {t("amslerTestEnd")}
           </button>
           <button
             type="button"
@@ -140,19 +140,19 @@ function AmslerPage() {
             aria-pressed={inverted}
           >
             <Contrast className="size-4" aria-hidden />
-            黑白對調
+            {t("amslerTestInvert")}
           </button>
         </div>
         <p className={`mt-3 shrink-0 text-center text-[1.05rem] font-semibold ${fg}`}>
-          用手掌遮蓋
-          {eye === "right" ? "左眼" : "右眼"}
-          ，注視中央圓點
+          {t("amslerTestCover", {
+            eye: eye === "right" ? t("amslerEyeLeft") : t("amslerEyeRight"),
+          })}
         </p>
         <p className={`mt-1 shrink-0 text-center text-[0.8rem] ${muted}`}>
-          螢幕置於眼前約 {holdCm} 厘米 · 戴閱讀眼鏡
+          {t("amslerTestHold", { n: holdCm })}
         </p>
         <p className={`mt-1 shrink-0 text-center text-[0.72rem] leading-snug ${muted}`}>
-          示意／自查不是診斷；結果正常不能排除黃斑或視網膜疾病，亦不能代替散瞳眼底或 OCT。
+          {t("amslerMidFlowCaveat")}
         </p>
         <div className="flex min-h-0 flex-1 flex-col items-center justify-center py-2">
           <AmslerGrid sizePx={testGridPx} inverted={inverted} />
@@ -163,13 +163,13 @@ function AmslerPage() {
             onClick={() => setEye((e) => (e === "right" ? "left" : "right"))}
             className="inline-flex h-12 items-center justify-center rounded-xl bg-navy text-[0.9rem] font-semibold text-paper"
           >
-            換另一眼
+            {t("amslerTestSwitch")}
           </button>
           <Link
             to="/urgent"
             className="inline-flex h-12 items-center justify-center rounded-xl bg-danger text-[0.9rem] font-semibold text-paper no-underline"
           >
-            發覺異常
+            {t("amslerTestAbnormal")}
           </Link>
         </div>
       </div>

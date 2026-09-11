@@ -30,7 +30,7 @@ export const TOOLS: ToolDef[] = [
   { id: "ask", title: "問醫生清單", blurb: "面診前可帶去的問題", canto: "問清楚先好決定", href: "/tools/ask", home: true },
   { id: "tunnel", title: "隧道視野示意", blurb: "青光眼周邊視野收窄（不是檢查）", canto: "睇下隧道點樣", href: "/tools/tunnel" },
   { id: "haze", title: "白內障日夜示意", blurb: "顏色變淡、霧、車燈眩光", canto: "夜晚開車矇唔矇", href: "/tools/haze" },
-  { id: "floaters", title: "飛蚊與簾幕", blurb: "會飄的飛蚊 vs 唔郁的簾幕", canto: "有簾幕去急症；新飛蚊盡快散瞳", href: "/tools/floaters" },
+  { id: "floaters", title: "飛蚊與簾幕", blurb: "會飄的飛蚊 vs 唔郁的簾幕", canto: "有簾幕去急症；新飛蚊同日散瞳眼底（不是只散瞳便足夠）", href: "/tools/floaters" },
   { id: "halo", title: "夜間光暈比較", blurb: "單焦、延伸景深、三焦點示意", canto: "唔係術後保證", href: "/tools/halo" },
   { id: "warm", title: "熱敷計時", blurb: "示意計時，跟醫生指示", canto: "熱敷跟時間", href: "/tools/warm" },
   { id: "visit", title: "一次眼科檢查", blurb: "散瞳後唔好自己開車", canto: "去診所會做咩", href: "/tools/visit" },
