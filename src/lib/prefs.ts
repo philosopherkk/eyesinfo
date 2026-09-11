@@ -22,6 +22,8 @@ type Prefs = {
   setAmslerPxPerMm: (n: number | null) => void;
   addAmslerNote: (result: AmslerResult) => void;
   clearAmslerNotes: () => void;
+  /** Reset on-device prefs (localStorage via zustand persist). Not uploaded. */
+  clearLocalData: () => void;
   addOutdoor: (min: number) => void;
   resetOutdoorIfNewDay: () => void;
   toggleSaved: (id: string) => void;
@@ -55,7 +57,17 @@ export const usePrefs = create<Prefs>()(
           amslerNotes: [...s.amslerNotes.slice(-29), { t: Date.now(), result }],
         })),
       clearAmslerNotes: () => set({ amslerNotes: [] }),
-      addOutdoor: (min) => {
+      clearLocalData: () =>
+        set({
+          fontPx: DEF,
+          locale: "zh-Hant",
+          saved: [],
+          amslerPxPerMm: null,
+          amslerNotes: [],
+          outdoorDay: "",
+          outdoorMin: 0,
+        }),
+      addOutdoor: (min: number) => {
         const day = todayKey();
         const s = get();
         const cur = s.outdoorDay === day ? s.outdoorMin : 0;

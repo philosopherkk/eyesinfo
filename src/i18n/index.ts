@@ -3,7 +3,7 @@ import { usePrefs } from "@/lib/prefs";
 import type { Topic } from "@/data/topics";
 import { LEGAL } from "@/data/legal";
 import { EDITORIAL } from "@/data/editorial";
-import { RED_FLAGS_999, SAME_DAY_EYE } from "@/data/urgent";
+import { GLOBE_PROTECT, RED_FLAGS_999, SAME_DAY_EYE } from "@/data/urgent";
 import type { Locale } from "./locale";
 import { toHans } from "./hans";
 import { walkStrings } from "./walk";
@@ -29,8 +29,9 @@ const LEGAL_HANT = {
   privacy: LEGAL.privacy,
   notSubstitute: EDITORIAL.notSubstitute,
   noServices: EDITORIAL.noServices,
-  independent: EDITORIAL.independent,
+  disclosure: EDITORIAL.disclosure,
   funding: EDITORIAL.funding,
+  correction: EDITORIAL.correction,
 };
 
 LEGAL_I18N["zh-Hant"] = LEGAL_HANT;
@@ -86,9 +87,21 @@ export function useLocalizedList(topics: Topic[]): Topic[] {
   return useMemo(() => topics.map((t) => localizeTopic(t, locale)), [topics, locale]);
 }
 
-export function localizedUrgent(locale: Locale): { flags: string[]; same: string[] } {
+export function localizedUrgent(locale: Locale): {
+  flags: string[];
+  same: string[];
+  globe: string;
+} {
   const flags = locale === "zh-Hans" ? RED_FLAGS_999.map(toHans) : RED_FLAGS_999;
   const same = locale === "zh-Hans" ? SAME_DAY_EYE.map(toHans) : SAME_DAY_EYE;
+  const globe =
+    locale === "zh-Hans"
+      ? toHans(GLOBE_PROTECT)
+      : locale === "en"
+        ? "Suspected penetrating injury or ruptured globe: do not press on the eye, do not remove a foreign body yourself, and do not irrigate forcefully or apply ointment you have at home. Protect with a clean shield or paper cup (do not press). Go to A&E now. If you cannot get there: call 999."
+        : locale === "ja"
+          ? "穿孔外傷または眼球破裂の疑い：眼球を圧迫しない、異物を自分で抜かない、強く洗い流したり手元の軟膏を塗らない。清潔なシールド／紙コップで覆って保護（圧をかけない）。直ちに救急外来へ。行けない場合は999番に電話。"
+          : GLOBE_PROTECT;
   if (locale === "en") {
     return {
       flags: [
@@ -103,10 +116,11 @@ export function localizedUrgent(locale: Locale): { flags: string[]; same: string
         "After an intravitreal (into-the-eye) injection: worse pain, worse redness, or a sharp vision drop (rule out endophthalmitis)",
       ],
       same: [
-        "New flashes or a clear increase in floaters, without a curtain, sudden blindness or severe pain — same-day dilated fundus exam. See an ophthalmologist as soon as possible.",
+        "New or suddenly increased flashes or floaters: urgent ophthalmic assessment is needed (dilated fundus exam is a common step, but what is done is decided by the duty doctor — dilation alone is not enough). If there is also vision loss or a curtain, go to A&E now; if you cannot get there: call 999. Without a curtain and without sudden blindness: same-day assessment as soon as possible by an ophthalmologist who can dilate, or by A&E eye care.",
         "A red, painful eye without severe pain with vomiting or sudden blindness — same-day ophthalmic assessment",
         "Contact-lens-related pain and light sensitivity — same-day assessment; do not delay if pain continues after lens removal",
       ],
+      globe,
     };
   }
   if (locale === "ja") {
@@ -123,13 +137,14 @@ export function localizedUrgent(locale: Locale): { flags: string[]; same: string
         "硝子体内注射後の痛み増悪・充血悪化・急な視力低下（眼内炎の除外）",
       ],
       same: [
-        "カーテンや突然の失明・激痛はないが、新しい光視や飛蚊の明らかな増加 — 同日の散瞳眼底。できるだけ早く眼科専門医を受診してください。",
+        "新しい／急に増えた光視または飛蚊：緊急の眼科評価が必要（散瞳眼底はよく行う一歩だが、内容は当直医が決め、「散瞳だけ」では足りない）。視力低下やカーテンを伴う場合は直ちに救急へ；行けない場合は999番。カーテンも突然の失明もない場合：散瞳眼底ができる眼科専門医または救急眼科で当日できるだけ早く評価。",
         "激しい眼痛と嘔吐や突然の失明のない片眼の充血疼痛 — 同日の眼科評価",
         "コンタクトレンズ関連の充血疼痛・羞明 — はずしたあとも痛ければ同日の評価；遅らせない",
       ],
+      globe,
     };
   }
-  return { flags, same };
+  return { flags, same, globe };
 }
 
 export function editorialBits(locale: Locale) {
@@ -152,11 +167,27 @@ export function editorialBits(locale: Locale) {
           : EDITORIAL.registerNote;
   const reviewed =
     locale === "en"
-      ? "10 September 2026"
+      ? "11 September 2026"
       : locale === "ja"
-        ? "2026年9月10日"
+        ? "2026年9月11日"
         : EDITORIAL.reviewed;
   const quals =
     locale === "zh-Hans" ? EDITORIAL.quals.map(toHans) : EDITORIAL.quals;
-  return { name, title, register, reviewed, quals };
+  const disclosure =
+    locale === "zh-Hans"
+      ? toHans(EDITORIAL.disclosure)
+      : locale === "en"
+        ? "Publisher / operator: 護眼學堂 (eyesinfo.org). Clinical review: Dr Poon Ka Kin (registered doctor, Medical Council of Hong Kong; Specialist Register (Ophthalmology)). This education site does not provide clinic contact, booking or referral, and does not link to a practice website. This education site currently has no commercial sponsorship; if funding or conflicts of interest arise later, they will be disclosed on the legal page. Education content is shown separately from any clinic promotion; the reviewer may also practise clinically — this site does not refer."
+        : locale === "ja"
+          ? "発行／運営：護眼學堂（eyesinfo.org）。臨床確認：潘家健医師（香港医師委員会登録医師；専門医名簿（眼科））。本教育サイトは診療所の連絡・予約・紹介を行わず、診療所サイトにもリンクしません。現時点で商業スポンサーはありません；今後の資金提供や利益関係があれば法令頁で開示します。教育内容は診療所宣伝と分けて示します；確認者は臨床も行うことがあり、紹介はしません。"
+          : EDITORIAL.disclosure;
+  const correction =
+    locale === "zh-Hans"
+      ? toHans(EDITORIAL.correction)
+      : locale === "en"
+        ? "If you find an error in the content, notify the operator using the corrections contact listed on the legal page. This site does not receive medical records, bookings or individual care queries through that channel."
+        : locale === "ja"
+          ? "内容の誤りを見つけた場合は、法令頁に記載の訂正連絡の方法で運営者に知らせてください。この経路では病歴・予約・個別の診療照会は受け付けません。"
+          : EDITORIAL.correction;
+  return { name, title, register, reviewed, quals, disclosure, correction };
 }

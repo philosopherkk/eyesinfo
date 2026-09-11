@@ -52,6 +52,16 @@ function LegalPage() {
               <li key={q}>{q}</li>
             ))}
           </ul>
+          <p className="mt-3">{ed.disclosure}</p>
+          <p className="mt-2">{legal.funding}</p>
+          <p className="mt-2">{ed.correction}</p>
+          <p className="mt-2 text-muted">
+            {locale === "en"
+              ? "No operator email is published on this site yet. Corrections policy is above; medical records and bookings are not accepted through this channel."
+              : locale === "ja"
+                ? "運営者のメールは現時点で本サイトに掲載していません。訂正方針は上記。この経路では病歴・予約は受け付けません。"
+                : "本站目前未公開營運者電郵。更正政策見上；不經此途徑接收病歷或預約。"}
+          </p>
         </div>
         <div>
           <h2 className="font-semibold text-navy">{t("refsH")}</h2>

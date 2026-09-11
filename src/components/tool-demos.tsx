@@ -229,6 +229,13 @@ export function FloaterDemo() {
           <div className="absolute inset-y-0 left-0 w-2/5 bg-navy/80" />
         )}
       </div>
+      <p className="mt-3 text-[0.8rem] leading-relaxed text-muted">
+        {locale === "en"
+          ? "The demo beside you is not a diagnosis; a normal result does not rule out eye disease and does not replace dilated fundus exam or OCT."
+          : locale === "ja"
+            ? "横の図示は診断ではありません。正常でも病気を否定できず、散瞳眼底やOCTの代わりにもなりません。"
+            : tx("旁側示意不是診斷；結果正常不能排除眼疾，亦不能代替散瞳眼底或 OCT。")}
+      </p>
       {mode === "curtain" ? (
         <Link
           to="/urgent"
@@ -244,20 +251,20 @@ export function FloaterDemo() {
         <>
           <p className="mt-3 text-[0.85rem] leading-relaxed text-muted">
             {locale === "en"
-              ? "A few long-standing floaters should still have been checked with dilation. A sudden increase or new flashes without a curtain: same-day dilated exam — see an ophthalmologist as soon as possible."
+              ? "A few long-standing floaters should still have been checked with dilation. A sudden increase or new flashes without a curtain: urgent ophthalmic assessment (same day if possible) — dilation alone is not enough."
               : locale === "ja"
-                ? "長年変わらない少量の飛蚊でも、散瞳で確認されたことが望ましいです。カーテンがなくても急増や新しい光視は同日散瞳。できるだけ早く眼科専門医を受診してください。"
-                : tx("少量多年不變的飛蚊仍應曾由眼科專科醫生散瞳確認。突然增多或新閃光、但沒有簾幕：須同日散瞳眼科評估，儘快睇眼科醫生。")}
+                ? "長年変わらない少量の飛蚊でも、散瞳で確認されたことが望ましいです。カーテンがなくても急増や新しい光視は緊急の眼科評価（できれば当日）。散瞳だけでは足りません。"
+                : tx("少量多年不變的飛蚊仍應曾由眼科專科醫生散瞳確認。突然增多或新閃光、但沒有簾幕：須緊急眼科評估（當日儘快）；不是「只散瞳」便足夠。")}
           </p>
           <Link
             to="/urgent"
             className="mt-3 flex min-h-12 items-center justify-center rounded-xl border border-navy bg-card px-4 text-center text-[0.88rem] font-semibold text-navy no-underline"
           >
             {locale === "en"
-              ? "New floaters / flashes without a curtain → same-day dilation"
+              ? "New floaters / flashes without a curtain → same-day ophthalmic assessment"
               : locale === "ja"
-                ? "カーテンのない新しい飛蚊／光視 → 同日散瞳"
-                : "無簾幕的新飛蚊／閃光 → 同日散瞳"}
+                ? "カーテンのない新しい飛蚊／光視 → 当日の眼科評価"
+                : "無簾幕的新飛蚊／閃光 → 當日眼科評估"}
           </Link>
         </>
       )}

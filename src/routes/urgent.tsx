@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Phone } from "lucide-react";
 import { TOPICS } from "@/data/topics";
+import { EmergencyShell } from "@/components/emergency-shell";
 import { localizeTopic, localizedUrgent, useI18n } from "@/i18n";
 import { pageHead } from "@/lib/page-seo";
 
@@ -9,7 +10,7 @@ export const Route = createFileRoute("/urgent")({
     pageHead({
       title: "急症與盡快求醫",
       description:
-        "立即急症室與盡快散瞳眼底評估的教育指引。無法自行前往急症室：致電 999。本站不作轉介。",
+        "立即急症室與盡快眼科評估的教育指引。無法自行前往急症室：致電 999。穿通傷勿當化學傷沖洗。本站不作轉介。",
       path: "/urgent",
     }),
   component: UrgentPage,
@@ -34,11 +35,15 @@ function Call999() {
 
 function UrgentPage() {
   const { t, locale } = useI18n();
-  const { flags, same } = localizedUrgent(locale);
+  const { flags, same, globe } = localizedUrgent(locale);
   return (
     <div className="px-4 pt-5 pb-[max(2rem,env(safe-area-inset-bottom))]">
       <h1 className="text-[1.35rem] font-semibold text-danger">{t("urgentTitle")}</h1>
       <p className="mt-2 text-[0.92rem] leading-relaxed">{t("urgentLead")}</p>
+
+      <div className="mt-5">
+        <EmergencyShell variant="block" />
+      </div>
 
       <section className="mt-5 rounded-xl bg-danger px-4 py-4 text-paper">
         <h2 className="text-[1rem] font-semibold">{t("urgent999")}</h2>
@@ -58,6 +63,12 @@ function UrgentPage() {
           <li>{t("chem3")}</li>
           <li>{t("chem4")}</li>
         </ol>
+        <Call999 />
+      </section>
+
+      <section className="mt-5 rounded-xl bg-danger px-4 py-4 text-paper">
+        <h2 className="text-[1rem] font-semibold">{t("globeH")}</h2>
+        <p className="mt-2 text-[0.9rem] leading-relaxed">{globe}</p>
         <Call999 />
       </section>
 
