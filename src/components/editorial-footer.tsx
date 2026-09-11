@@ -70,6 +70,7 @@ export function EditorialFooter({
             {t("siteVersionLabel")}：{CONTENT_VERSION} · {t("contentUpdated")}{" "}
             {CONTENT_UPDATED}
           </p>
+          <p>{t("langAuthority")}</p>
         </>
       ) : null}
       <p>{legal.disclosure}</p>

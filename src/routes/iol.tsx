@@ -6,6 +6,7 @@ import { EditorialFooter } from "@/components/editorial-footer";
 import { SaveButton } from "@/components/save-button";
 import { toolSaveKey } from "@/lib/saved";
 import { useI18n } from "@/i18n";
+import type { UiKey } from "@/i18n/ui";
 import { cn } from "@/lib/utils";
 import { pageHead } from "@/lib/page-seo";
 import {
@@ -36,8 +37,34 @@ const TARGETS = Array.from({ length: 25 }, (_, i) =>
   Number((3 - i * 0.25).toFixed(2)),
 );
 
+const OPTIC_KEYS: Record<
+  Optic,
+  { title: UiKey; short: UiKey; note: UiKey }
+> = {
+  mono: {
+    title: "iolOpticMono",
+    short: "iolOpticMonoShort",
+    note: "iolOpticMonoNote",
+  },
+  emono: {
+    title: "iolOpticEmono",
+    short: "iolOpticEmonoShort",
+    note: "iolOpticEmonoNote",
+  },
+  edof: {
+    title: "iolOpticEdof",
+    short: "iolOpticEdofShort",
+    note: "iolOpticEdofNote",
+  },
+  mf: {
+    title: "iolOpticMf",
+    short: "iolOpticMfShort",
+    note: "iolOpticMfNote",
+  },
+};
+
 function IolPage() {
-  const { t, tx } = useI18n();
+  const { t } = useI18n();
   const [optic, setOptic] = useState<Optic>("mono");
   const [target, setTarget] = useState(0);
   const [cyl, setCyl] = useState(0);
@@ -48,19 +75,34 @@ function IolPage() {
   const astig = glasses ? 0 : astigDefocus(cyl, toric);
   const contrast = glasses ? 0 : contrastLoss(optic);
   const halo = haloStrength(optic, night);
-  const meta = OPTICS.find((o) => o.id === optic)!;
+  const opticKeys = OPTIC_KEYS[optic];
 
   const scenes = useMemo(
     () =>
       DISTANCES.map((d) => {
         const sph = glasses ? 0 : sphereDefocus(optic, target, d.demand);
-        const src =
-          d.id === "far" && night ? "/iol/night.jpg" : d.img;
+        const src = d.id === "far" && night ? "/iol/night.jpg" : d.img;
         const sample =
-          d.id === "far" ? "巴士 112" : d.id === "mid" ? "羽毛球公開賽" : "週日賽程";
-        return { ...d, src, sph, sample };
+          d.id === "far"
+            ? t("iolSampleFar")
+            : d.id === "mid"
+              ? t("iolSampleMid")
+              : t("iolSampleNear");
+        const title =
+          d.id === "far"
+            ? t("iolDistFar")
+            : d.id === "mid"
+              ? t("iolDistMid")
+              : t("iolDistNear");
+        const sub =
+          d.id === "far"
+            ? t("iolDistFarSub")
+            : d.id === "mid"
+              ? t("iolDistMidSub")
+              : t("iolDistNearSub");
+        return { ...d, src, sph, sample, title, sub };
       }),
-    [optic, target, glasses, night],
+    [optic, target, glasses, night, t],
   );
 
   return (
@@ -79,54 +121,55 @@ function IolPage() {
         <SaveButton saveId={toolSaveKey("iol")} className="mr-2" />
       </div>
       <p className="px-4 pt-1 text-[0.88rem] leading-relaxed text-muted">
-        拖動目標度數，比較遠、中、近看起來差多少。只是光學示意，不能預測你手術後的視力，亦不是推介任何晶體品牌。
+        {t("iolLead")}
       </p>
 
       <section className="mt-4 px-4">
-        <h2 className="text-[0.8rem] font-semibold text-muted">光學設計</h2>
+        <h2 className="text-[0.8rem] font-semibold text-muted">{t("iolOpticsH")}</h2>
         <div className="mt-2 grid grid-cols-2 gap-2">
-          {OPTICS.map((o) => (
-            <button
-              key={o.id}
-              type="button"
-              onClick={() => setOptic(o.id)}
-              className={cn(
-                "min-h-12 rounded-xl border px-3 py-2 text-left",
-                optic === o.id
-                  ? "border-navy bg-navy text-paper"
-                  : "border-line bg-card text-ink",
-              )}
-            >
-              <span className="block text-[0.88rem] font-semibold">
-                {o.title}
-              </span>
-              <span
+          {OPTICS.map((o) => {
+            const keys = OPTIC_KEYS[o.id];
+            return (
+              <button
+                key={o.id}
+                type="button"
+                onClick={() => setOptic(o.id)}
                 className={cn(
-                  "block text-[0.7rem]",
-                  optic === o.id ? "text-paper/75" : "text-muted",
+                  "min-h-12 rounded-xl border px-3 py-2 text-left",
+                  optic === o.id
+                    ? "border-navy bg-navy text-paper"
+                    : "border-line bg-card text-ink",
                 )}
               >
-                {o.short}
-              </span>
-            </button>
-          ))}
+                <span className="block text-[0.88rem] font-semibold">
+                  {t(keys.title)}
+                </span>
+                <span
+                  className={cn(
+                    "block text-[0.7rem]",
+                    optic === o.id ? "text-paper/75" : "text-muted",
+                  )}
+                >
+                  {t(keys.short)}
+                </span>
+              </button>
+            );
+          })}
         </div>
         <p className="mt-2 text-[0.82rem] leading-relaxed text-muted">
-          {meta.note}
+          {t(opticKeys.note)}
         </p>
       </section>
 
       <section className="mt-5 px-4">
         <div className="flex items-end justify-between gap-2">
-          <h2 className="text-[0.8rem] font-semibold text-muted">
-            單焦／預留目標度數
-          </h2>
+          <h2 className="text-[0.8rem] font-semibold text-muted">{t("iolTargetH")}</h2>
           <p className="text-[0.85rem] font-semibold text-navy">
             {formatD(target)} · {formatDegrees(target)}
           </p>
         </div>
         <p className="mt-1 text-[0.78rem] leading-relaxed text-muted">
-          由遠視 +3.00（晶體度數明顯不夠）拖到近視 −3.00（預留更近）。每格 0.25 D（25 度）。多焦通常以正視為目標；偏離會令各個焦點一齊移位。
+          {t("iolTargetHint")}
         </p>
         <input
           type="range"
@@ -136,31 +179,31 @@ function IolPage() {
           value={TARGETS.indexOf(target)}
           onChange={(e) => setTarget(TARGETS[Number(e.target.value)] ?? 0)}
           className="mt-3 w-full accent-[var(--color-navy)]"
-          aria-label="目標球面度數"
+          aria-label={t("iolTargetAria")}
         />
         <div className="mt-1 flex justify-between text-[0.7rem] text-faint">
-          <span>+3.00 遠視</span>
-          <span>0 正視</span>
-          <span>−3.00 近視</span>
+          <span>{t("iolHyper")}</span>
+          <span>{t("iolEmme")}</span>
+          <span>{t("iolMyope")}</span>
         </div>
         <div className="mt-3 grid grid-cols-3 gap-2">
           {[
-            { t: 3, l: "+3.00 不夠度" },
-            { t: 0, l: "0 正視看遠" },
-            { t: -3, l: "−3.00 預留近用" },
+            { val: 3, label: t("iolTickShort") },
+            { val: 0, label: t("iolTickZero") },
+            { val: -3, label: t("iolTickNear") },
           ].map((b) => (
             <button
-              key={b.t}
+              key={b.val}
               type="button"
-              onClick={() => setTarget(b.t)}
+              onClick={() => setTarget(b.val)}
               className={cn(
                 "h-11 rounded-xl border text-[0.72rem] font-semibold",
-                target === b.t
+                target === b.val
                   ? "border-navy bg-navy text-paper"
                   : "border-line bg-card text-navy",
               )}
             >
-              {b.l}
+              {b.label}
             </button>
           ))}
         </div>
@@ -168,12 +211,10 @@ function IolPage() {
 
       <section className="mt-5 px-4">
         <div className="flex items-end justify-between">
-          <h2 className="text-[0.8rem] font-semibold text-muted">
-            角膜散光（環曲面／Toric）
-          </h2>
+          <h2 className="text-[0.8rem] font-semibold text-muted">{t("iolCylH")}</h2>
           <p className="text-[0.85rem] font-semibold text-navy">
             {cyl.toFixed(2)} D
-            {cyl > 0 ? `（${Math.round(cyl * 100)} 度）` : ""}
+            {cyl > 0 ? `（${Math.round(cyl * 100)}）` : ""}
           </p>
         </div>
         <input
@@ -184,11 +225,11 @@ function IolPage() {
           value={cyl}
           onChange={(e) => setCyl(Number(e.target.value))}
           className="mt-3 w-full accent-[var(--color-navy)]"
-          aria-label="未矯正角膜散光"
+          aria-label={t("iolCylAria")}
         />
         <div className="mt-3 grid grid-cols-3 gap-2">
           {[
-            { c: 0, l: "0 無散光" },
+            { c: 0, l: t("iolCylNone") },
             { c: 1, l: "1.00 D" },
             { c: 2, l: "2.00 D" },
           ].map((b) => (
@@ -217,11 +258,10 @@ function IolPage() {
               : "border-line bg-card text-navy",
           )}
         >
-          {toric ? "已選擇散光矯正晶體" : "未用散光矯正晶體"}
+          {toric ? t("iolToricOn") : t("iolToricOff")}
         </button>
         <p className="mt-2 text-[0.78rem] leading-relaxed text-muted">
-          散光是某一方向拉長模糊，與「遠或近」不是同一件事。規則角膜散光大約 ≥0.75–1.00
-          D 時，醫生或會討論環曲面晶體，可加在單焦、增強單焦、延伸景深或多焦之上。晶體旋轉會減少矯正量。
+          {t("iolToricHint")}
         </p>
       </section>
 
@@ -237,7 +277,7 @@ function IolPage() {
           )}
         >
           {night ? <Moon className="size-4" /> : <Sun className="size-4" />}
-          {night ? "夜間光暈" : "日間街景"}
+          {night ? t("iolNightOn") : t("iolNightOff")}
         </button>
         <button
           type="button"
@@ -249,19 +289,15 @@ function IolPage() {
               : "border-line bg-card text-navy",
           )}
         >
-          {glasses ? "已戴眼鏡矯正" : "不戴眼鏡"}
+          {glasses ? t("iolGlassesOn") : t("iolGlassesOff")}
         </button>
       </section>
       {glasses ? (
-        <p className="px-4 pt-2 text-[0.78rem] text-muted">
-          眼鏡可補球面及散光殘餘，但多焦／延伸景深的光暈不會因戴鏡而消失。
-        </p>
+        <p className="px-4 pt-2 text-[0.78rem] text-muted">{t("iolGlassesHint")}</p>
       ) : null}
 
       <section className="mt-5 px-4">
-        <h2 className="mb-2 text-[0.8rem] font-semibold text-muted">
-          清晰範圍示意
-        </h2>
+        <h2 className="mb-2 text-[0.8rem] font-semibold text-muted">{t("iolRangeH")}</h2>
         <div className="grid grid-cols-5 gap-1">
           {RANGE_STOPS.map((s) => {
             const d =
@@ -301,25 +337,14 @@ function IolPage() {
       </section>
 
       <section className="mt-6 px-4">
-        <h2 className="text-[1.05rem] font-semibold text-navy">如何閱讀這個示意</h2>
+        <h2 className="text-[1.05rem] font-semibold text-navy">{t("iolHowH")}</h2>
         <ul className="mt-2 list-disc space-y-1.5 pl-5 text-[0.88rem] leading-relaxed">
-          <li>
-            單焦預留 <strong>正視 0</strong>
-            ：看街、開車通常最清楚；中距離賽事新聞及近距離賽程多數要近用鏡。
-          </li>
-          <li>
-            單焦預留 <strong>近視 −3.00</strong>
-            ：約 33 厘米閱讀較易，遠處路牌會很糊。−2.00 則約 50 厘米。有人一眼正視、一眼輕微近視（迷你單眼視），須個別討論。
-          </li>
-          <li>
-            單焦預留 <strong>遠視 +3.00</strong>
-            ：遠近都不夠焦，是「晶體度數偏少」的示範，不是常用目標。+2.00 同樣遠近都偏糊，只是幅度較小。
-          </li>
-          <li>增強型單焦：中距離往往比普通單焦好一點，細字多數仍需鏡。</li>
-          <li>延伸景深：遠到中距離較連貫，細字仍常需鏡，夜間光暈因產品而異。</li>
-          <li>
-            多焦／三焦：遠中近都嘗試兼顧，對比可略降，夜間光暈較明顯。不是人人適合，不是術後保證。
-          </li>
+          <li>{t("iolHow1")}</li>
+          <li>{t("iolHow2")}</li>
+          <li>{t("iolHow3")}</li>
+          <li>{t("iolHow4")}</li>
+          <li>{t("iolHow5")}</li>
+          <li>{t("iolHow6")}</li>
         </ul>
       </section>
 
@@ -329,27 +354,25 @@ function IolPage() {
           params={{ topicId: "t-iol" }}
           className="inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy no-underline"
         >
-          晶體選擇細節
+          {t("iolLinkDetail")}
         </Link>
         <Link
           to="/t/$topicId"
           params={{ topicId: "t-mfiol" }}
           className="inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy no-underline"
         >
-          多焦篩選原則
+          {t("iolLinkMf")}
         </Link>
         <Link
           to="/tools/$toolId"
           params={{ toolId: "halo" }}
           className="inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy no-underline"
         >
-          夜間光暈比較
+          {t("iolLinkHalo")}
         </Link>
       </div>
       <div className="px-4">
-        <p className="mt-6 text-[0.78rem] leading-relaxed text-faint">
-          示意／自我監察不能代替散瞳眼底、視野或光學相干斷層掃描（OCT）。此工具結果正常不能排除眼疾。不是術後保證。本站不提供預約或轉介。
-        </p>
+        <p className="mt-6 text-[0.78rem] leading-relaxed text-faint">{t("iolFoot")}</p>
         <EditorialFooter />
       </div>
     </div>

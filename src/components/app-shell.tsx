@@ -112,6 +112,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             {t("siteVersionLabel")}：{CONTENT_VERSION} · {t("contentUpdated")}{" "}
             {CONTENT_UPDATED}
           </p>
+          <p className="mt-1">{t("langAuthority")}</p>
           <p className="mt-1">
             {t("copyFoot")}
             <span aria-hidden="true"> · </span>

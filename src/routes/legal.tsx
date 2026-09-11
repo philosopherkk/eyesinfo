@@ -24,6 +24,7 @@ function LegalPage() {
     <div className="px-4 pt-5 pb-8">
       <h1 className="text-[1.35rem] font-semibold text-navy">{t("legalTitle")}</h1>
       <p className="mt-2 text-[0.85rem] text-muted">{t("legalIntro")}</p>
+      <p className="mt-2 text-[0.85rem] text-muted">{t("langAuthority")}</p>
 
       <section className="mt-5 space-y-4 text-[0.9rem] leading-relaxed">
         <div>

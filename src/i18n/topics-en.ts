@@ -401,7 +401,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
         "Negative dysphotopsia (a temporal shadow): literature can exceed 10% early on; most ease over weeks to months",
         "Toxic anterior segment syndrome: rare sterile inflammation, must be distinguished from infection",
       ]),
-      w("Worse pain, a sudden vision drop, pus-like discharge or marked redness: go to A&E. New flashes or many new floaters need same-day dilation; a curtain or sudden loss of vision is A&E."),
+      w("Worse pain, a sudden vision drop, pus-like discharge or marked redness: go to A&E. New flashes or many new floaters need same-day dilated fundus exam; a curtain or sudden loss of vision is A&E."),
       h("Years later: posterior capsule opacification (not a returning cataract)"),
       p("The implant stays in the original bag. Lens epithelial cells can cloud the posterior capsule over years (PCO, sometimes called an after-cataract). Literature: about 10–40%. This is not a new lens growing back, and it is not a failed operation."),
       p("Blur years after cataract surgery is usually PCO, not a “returning cataract”. Not every blur needs YAG capsulotomy. A doctor must judge whether it affects function and exclude macular, corneal or other causes. The laser is outpatient, with no incision. See the YAG fact sheet."),
@@ -427,10 +427,34 @@ export const EN_PACKS: Record<string, TopicPack> = {
   },
   "t-dry": {
     title: "Dry-eye types and a care ladder",
-    tag: "DEWS II education",
-    meta: "Evaporative · aqueous-deficient",
+    tag: "International consensus summary",
+    meta: "Evaporative · aqueous-deficient · mixed",
     blocks: [
-      p("Doctors often follow a stepwise approach: environment and lids first, then lubricants, then prescription anti-inflammatory drops if needed, then procedures. Steroid drops are not for unsupervised long-term use. This is a class of discussion, not a product list."),
+      p(
+        "Per TFOS DEWS II, evaporative dry eye is the majority and is driven mainly by meibomian gland dysfunction; aqueous-deficient disease is less common (including Sjögren syndrome); mixed disease is what clinics see most often. Vicious cycle: hyperosmolarity → inflammatory mediators and matrix metalloproteinases → goblet-cell and epithelial injury → a less stable tear film. This ladder is an international consensus framework, not a shopping list.",
+      ),
+      {
+        type: "table",
+        rows: [
+          ["Test", "Common reference ranges (doctor interprets)"],
+          ["Tear break-up time TBUT / NITBUT", "≥10 s often acceptable; ≤5 s suggests marked instability"],
+          ["Schirmer I (no anaesthetic)", "≥10 mm / 5 min; <5 mm suggests marked aqueous deficiency"],
+          ["Osmolarity", "About ≤308 mOsm/L is often treated as acceptable; a clear rise supports a dry-eye diagnosis"],
+          ["MMP-9 rapid test", "Positive suggests ocular-surface inflammation; whether to medicate is still the doctor’s decision"],
+        ],
+      },
+      h("Categories a doctor may discuss by severity"),
+      ul([
+        "Lubrication: preservative-free artificial tears (hyaluronic acid, carboxymethylcellulose, HP-Guar and similar classes); warm compresses; less screen time; humidify. Forms and frequency: lubricant topic",
+        "Night gel or ointment; dietary omega-3 may or may not help for a given person — not a medicine advertisement for treating eye disease",
+        "Prescription anti-inflammatory drops (e.g. cyclosporine class) need a doctor’s prescription and take time to work; short-course steroids only under intraocular-pressure monitoring",
+        "Punctal plugs are usually considered after inflammation is controlled; IPL, thermal pulsation and similar devices are clinic procedures — benefit and need vary",
+        "Severe Sjögren, graft-versus-host disease, or persistent epithelial defect: a doctor may discuss autologous serum and similar options, subject to infection-control and prescribing rules",
+        "Scleral and other specialty contact lenses that keep a tear reservoir need a fitting",
+      ]),
+      w(
+        "Sudden vision drop, severe pain with light sensitivity, one-sided red swollen eye with heavy discharge, or dry mouth with joint pain and rash — this is not “ordinary dry eye.”",
+      ),
     ],
   },
   "t-glaucoma-monitor": {
@@ -513,7 +537,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
           ["Multifocal / trifocal", "Good", "Good", "Near often needs fewer readers; not guaranteed spectacle-free", "More noticeable", "Usually not advised"],
         ],
       },
-      p("For regular corneal astigmatism of about ≥0.75–1.00 D a toric lens may be discussed. Brand choice is individual. This page lists no product names."),
+      p("For regular corneal astigmatism of about ≥0.75–1.00 D a toric lens may be discussed; about 1° of rotation loses roughly 3.3% of the cylinder correction. The newest model or a higher fee is not automatically the best fit. Macular disease, severe dry eye, or clear glaucoma visual-field loss usually means avoiding multifocal and most EDOF designs. Brand choice is an individual preoperative discussion. This page lists no product names."),
     ],
   },
   "t-early": {
@@ -549,11 +573,20 @@ export const EN_PACKS: Record<string, TopicPack> = {
     ],
   },
   "t-octm": {
-    title: "Macular OCT",
+    title: "Macular OCT: wet AMD / diabetic macular oedema / retinal vein occlusion",
     tag: "Imaging",
-    meta: "Central thickness · fluid",
+    meta: "Central retinal thickness · fluid",
     blocks: [
-      p("OCT quantifies macular thickness and fluid. Machines are not directly interchangeable. It does not replace a dilated fundus exam. This page explains what a report looks like; it does not interpret your scan."),
+      p("The macula governs fine vision. Optical coherence tomography is used for quantitative comparison and does not replace a dilated fundus exam. Central retinal thickness is often about 250–300 μm in health; machines cannot be compared directly with each other."),
+      ul([
+        "Intraretinal fluid (IRF): persistence often means a poorer prognosis",
+        "Subretinal fluid (SRF): needs serial follow-up; whether it is “acceptable” is decided by the doctor for that disease",
+        "Pigment epithelial detachment (PED): large height or shape change suggests active neovascularisation",
+        "Hyperreflective foci: those near the fovea may relate to inflammatory activity",
+      ]),
+      p("Wet age-related macular degeneration: new distortion needs prompt review. Smoking markedly raises risk. Whether to give an intravitreal injection, and which registered medicine to use, can only be decided by an ophthalmologist under Hong Kong labelled indications. Large-trial averages do not guarantee personal vision."),
+      p("Diabetic macular oedema: systemic HbA1c and blood-pressure control matter as much as ocular treatment and need medical follow-up. Drug choice is a prescribing decision."),
+      p("Retinal vein occlusion: systemic factors such as blood pressure must be checked. Central retinal thickness can be very high. Severe pain or a sharp vision drop after injection — rule out endophthalmitis and go to A&E now."),
     ],
   },
   "t-presbyopia": {
