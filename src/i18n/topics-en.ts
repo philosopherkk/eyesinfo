@@ -485,8 +485,8 @@ export const EN_PACKS: Record<string, TopicPack> = {
       p("If OCT already shows clear thinning while the field is still relatively preserved, that is a time to discuss stronger IOP lowering to slow worsening — not a vision-preservation guarantee."),
       h("Worsening clues (education only — not self-diagnosis)"),
       ul([
-        "Structure: larger cup–disc ratio, rim notches, disc haemorrhage, progressive RNFL / ganglion-cell–related thinning",
-        "Function: clear MD worsening, new scotomas or central encroachment, progression analysis suggesting change (doctor interprets)",
+        "Structure (OCT): larger cup–disc ratio, rim notches, disc haemorrhage, progressive RNFL / ganglion-cell–related thinning",
+        "Function (visual field): clear MD worsening, new scotomas or central encroachment, progression analysis suggesting change (doctor interprets)",
         "IOP: persistently above target, or large swings — still combine with structure and function; one reading is not enough",
       ]),
       h("What reports look like"),
