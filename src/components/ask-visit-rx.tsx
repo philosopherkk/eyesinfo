@@ -298,7 +298,7 @@ const OCT_JA =
   "OCT（光干渉断層計）：近赤外光で網膜／視神経の層構造の「光学切片」を撮ります。X線ではなく、電離放射線も使いません。黄斑や緑内障の視神経などの構造変化の確認・経過観察に用い、早期の構造変化の把握に役立ちます。";
 
 export function VisitWalk() {
-  const { locale, tx } = useI18n();
+  const { locale, tx, t } = useI18n();
   const [i, setI] = useState(0);
   const steps = useMemo(() => {
     if (locale === "en") {
@@ -330,6 +330,9 @@ export function VisitWalk() {
   const step = steps[i];
   return (
     <div>
+      <p className="mb-3 rounded-lg border border-line bg-line/25 px-3.5 py-2.5 text-[0.82rem] leading-relaxed text-muted">
+        {t("visitNearCaveat")}
+      </p>
       <p className="text-[0.88rem] leading-relaxed text-muted">
         {locale === "en"
           ? "To ease “I don’t know what will happen”. Each clinic’s flow can differ slightly."
@@ -372,25 +375,36 @@ export function VisitWalk() {
 }
 
 export function RxDecoder() {
+  const { t, locale, tx } = useI18n();
   const [sph, setSph] = useState("-2.00");
   const [cyl, setCyl] = useState("-1.00");
   const [axis, setAxis] = useState("180");
   const [add, setAdd] = useState("+2.00");
 
   const sphN = Number(sph);
-  const cylN = Number(cyl);
   const sphDeg = Number.isFinite(sphN) ? Math.round(Math.abs(sphN) * 100) : null;
 
   return (
     <div>
       <p className="text-[0.88rem] leading-relaxed text-muted">
-        解釋處方上的英文字。可以填你張紙的數字，只在此畫面顯示，唔會上傳。本頁不售賣眼鏡。
+        {locale === "en"
+          ? "Explains the English abbreviations on a spectacle prescription. You may type the numbers from your paper — they stay on this screen and are not uploaded. This page does not sell glasses."
+          : locale === "ja"
+            ? "眼鏡処方の英字略語を説明します。紙の数字を入力してもこの画面のみで、アップロードしません。眼鏡の販売はしません。"
+            : tx("解釋處方上的英文字。可以填你張紙的數字，只在此畫面顯示，唔會上傳。本頁不售賣眼鏡。")}
       </p>
       <dl className="mt-4 space-y-3 text-[0.9rem] leading-relaxed">
         <div className="rounded-xl border border-line bg-card px-3 py-3">
-          <dt className="font-semibold text-navy">Sph（球鏡）</dt>
+          <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+            <dt className="font-semibold text-navy">Sph（球鏡）</dt>
+            <p className="text-[0.72rem] font-medium leading-snug text-muted">{t("rxNonVerify")}</p>
+          </div>
           <dd className="mt-1 text-muted">近視用負號，遠視用正號。香港口語 100 度 = 1.00 D。</dd>
-          <input value={sph} onChange={(e) => setSph(e.target.value)} className="mt-2 h-11 w-full rounded-lg border border-line px-3" />
+          <input
+            value={sph}
+            onChange={(e) => setSph(e.target.value)}
+            className="mt-2 h-11 w-full rounded-lg border border-line px-3"
+          />
           {sphDeg != null ? (
             <p className="mt-1 text-[0.82rem] text-steel">
               {sphN < 0 ? "近視" : sphN > 0 ? "遠視" : "正視"}約 {sphDeg} 度
@@ -398,7 +412,10 @@ export function RxDecoder() {
           ) : null}
         </div>
         <div className="rounded-xl border border-line bg-card px-3 py-3">
-          <dt className="font-semibold text-navy">Cyl（柱鏡）＋ Axis（軸）</dt>
+          <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+            <dt className="font-semibold text-navy">Cyl（柱鏡）＋ Axis（軸）</dt>
+            <p className="text-[0.72rem] font-medium leading-snug text-muted">{t("rxNonVerify")}</p>
+          </div>
           <dd className="mt-1 text-muted">散光的度數與方向（0–180°）。軸不是「斜視」。未矯正散光會令某一方向拉長模糊。</dd>
           <div className="mt-2 grid grid-cols-2 gap-2">
             <input value={cyl} onChange={(e) => setCyl(e.target.value)} className="h-11 rounded-lg border border-line px-3" />
@@ -406,7 +423,10 @@ export function RxDecoder() {
           </div>
         </div>
         <div className="rounded-xl border border-line bg-card px-3 py-3">
-          <dt className="font-semibold text-navy">Add（近用加度）</dt>
+          <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+            <dt className="font-semibold text-navy">Add（近用加度）</dt>
+            <p className="text-[0.72rem] font-medium leading-snug text-muted">{t("rxNonVerify")}</p>
+          </div>
           <dd className="mt-1 text-muted">老花加在遠用處方之上，常見 +1.00 至 +2.75。兒童處方通常無 Add。</dd>
           <input value={add} onChange={(e) => setAdd(e.target.value)} className="mt-2 h-11 w-full rounded-lg border border-line px-3" />
         </div>

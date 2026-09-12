@@ -1,4 +1,6 @@
 import { useId } from "react";
+import { useI18n } from "@/i18n";
+import type { UiKey } from "@/i18n/ui";
 
 const CELLS = 20;
 
@@ -17,6 +19,7 @@ type Props = {
 };
 
 export function AmslerGrid({ sizePx, inverted, label, finding = "normal" }: Props) {
+  const { t } = useI18n();
   const uid = useId().replace(/:/g, "");
   const bg = inverted ? "var(--color-amsler-dark)" : "var(--color-amsler-light)";
   const fg = inverted ? "var(--color-amsler-light)" : "var(--color-amsler-dark)";
@@ -39,7 +42,7 @@ export function AmslerGrid({ sizePx, inverted, label, finding = "normal" }: Prop
         height={sizePx}
         viewBox={`0 0 ${CELLS} ${CELLS}`}
         role="img"
-        aria-label={ariaFor(finding)}
+        aria-label={t(ariaKeyFor(finding))}
         className="max-w-full touch-none select-none rounded-sm shadow-sm"
         style={{ background: bg }}
       >
@@ -142,11 +145,11 @@ function vPath(x: number) {
   return d;
 }
 
-function ariaFor(finding: AmslerFinding) {
-  if (finding === "meta") return "阿姆斯勒方格示意：視物變形，直線變彎";
-  if (finding === "central") return "阿姆斯勒方格示意：中央暗點，正中間缺了一塊";
-  if (finding === "para") return "阿姆斯勒方格示意：旁中央暗點，中央圓點仍在、旁邊缺格";
-  return "阿姆斯勒方格：二十乘二十直線格，中央有注視圓點";
+function ariaKeyFor(finding: AmslerFinding): UiKey {
+  if (finding === "meta") return "amslerAriaMeta";
+  if (finding === "central") return "amslerAriaCentral";
+  if (finding === "para") return "amslerAriaPara";
+  return "amslerAriaNormal";
 }
 
 export { CELLS, STROKE_THIN, STROKE_THICK };

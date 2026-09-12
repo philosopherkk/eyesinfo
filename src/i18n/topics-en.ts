@@ -388,7 +388,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
           ["Clinically significant macular oedema", "May reach a few percent; higher with diabetes or capsule rupture; often peaks at 4–6 weeks"],
           ["Retinal detachment after surgery", "Uncommon; higher with high myopia, younger age, male sex, or after capsule rupture"],
           ["Endothelial failure / bullous keratopathy", "Uncommon; low endothelial counts and high ultrasound energy raise risk"],
-          ["Posterior capsule opacification (years)", "May reach tens of percent over years; not a returning cataract — see below"],
+          ["Posterior capsule opacification (years)", "Common over years; see below — not a returning cataract"],
         ],
       },
       h("Also possible in the first days (most can be managed)"),
@@ -557,7 +557,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
     meta: "PCO · sealing a tear",
     blocks: [
       h("YAG posterior capsulotomy"),
-      p("Not a “returning cataract”. Lens epithelial cells cloud the posterior capsule. Literature rates over years vary and may reach a substantial minority. Outpatient laser, no incision. Not every blur needs YAG; a doctor judges whether it affects function. Short pressure rise and extra floaters can occur; retinal tear is uncommon. A shower of new floaters, flashes, a curtain or severe pain after laser: A&E."),
+      p("Not a “returning cataract”. Lens epithelial cells cloud the posterior capsule. Posterior capsule opacification is common over years; discuss your own risk with your doctor — do not self-estimate from a single percentage. Outpatient laser, no incision. Not every blur needs YAG; a doctor judges whether it affects function. Short pressure rise and extra floaters can occur; retinal tear is uncommon. A shower of new floaters, flashes, a curtain or severe pain after laser: A&E."),
       h("Retinal barrier laser"),
       p("Scars around a tear to reduce fluid going under the retina. Activity limits depend on the tear and the doctor’s instructions — not a blanket two-week sports ban. Laser cannot fix a retina that is already detached. An expanding curtain is an emergency."),
     ],
@@ -1873,7 +1873,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
         "Education on mechanism: dampens some T-lymphocyte–related inflammation. Onset often takes weeks. Stinging or burning on instillation is common. Active infection usually means stop — the doctor decides.",
       ),
       p(
-        "Hong Kong has registered cyclosporine ophthalmic emulsion / eye drops (prescription-only). Suitability and which registered product to use follow the doctor and the current label. This page lists no brand names, registration numbers, prices, shops or sourcing help.",
+        "Cyclosporine (INN) ophthalmic emulsion / eye drops are a prescription-class medicine. Suitability and which preparation to use follow the doctor and the current label. This page lists no brand names, registration numbers, prices, shops or sourcing help.",
       ),
       p(
         "In EU and similar public information, some cyclosporine ophthalmic emulsions are described for adults with dry eye disease and severe keratitis not improved by tear substitutes — Hong Kong follows the local label.",
@@ -1960,7 +1960,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
         ],
       },
       note(
-        "Public education only (Cap 231 education level): cyclosporine ophthalmic preparations are discussed only as a Hong Kong–registered prescription class example — not a purchase, sourcing, price or shop pitch. No brand names; no brand efficacy ranking; no personal dosing; no cure or guarantee claims; no booking or referral. Related pages: allergic conjunctivitis principles, eyelid tacrolimus, steroid eye drops, allergy and the Hong Kong environment.",
+        "Public education only: cyclosporine (INN) ophthalmic preparations are discussed as a prescription-class education topic — not a purchase, sourcing, price or shop pitch. No brand names; no brand efficacy ranking; no personal dosing; no cure or guarantee claims; no booking or referral. Related pages: allergic conjunctivitis principles, eyelid tacrolimus, steroid eye drops, allergy and the Hong Kong environment.",
       ),
     ],
   },
