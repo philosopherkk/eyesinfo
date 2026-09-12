@@ -94,43 +94,66 @@ export function TunnelDemo() {
 }
 
 export function HazeDemo() {
-  const [stage, setStage] = useState(0);
+  const [time, setTime] = useState<"day" | "night">("day");
   const { tx, locale } = useI18n();
-  const labels =
+  const src = time === "night" ? "/iol/night.jpg" : "/iol/far.jpg";
+  const cataractFilter = "blur(2.2px) saturate(0.35) contrast(0.88)";
+  const intro =
     locale === "en"
-      ? ["Early", "Affecting driving"]
+      ? "Side-by-side day and night illustration: normal view versus a cataract-like haze. Educational only — not a cataract grade and not a push for surgery."
       : locale === "ja"
-        ? ["早期", "運転に影響"]
-        : [tx("早期"), tx("影響駕駛")];
-  const blur = [0.4, 2.2][stage];
-  const sat = [0.75, 0.35][stage];
+        ? "昼と夜の並置示意：正常と白内障様のかすみ。教育用であり、白内障の分級でも手術の勧誘でもありません。"
+        : tx("日間與夜間並排示意：正常對比白內障樣霧感。只是教育示意／非診斷，不能為白內障分級，亦不是叫你接受手術。");
+  const timeLabels =
+    locale === "en"
+      ? { day: "Day", night: "Night" }
+      : locale === "ja"
+        ? { day: "昼", night: "夜" }
+        : { day: tx("日間"), night: tx("夜間") };
+  const pairLabels =
+    locale === "en"
+      ? { normal: "Normal", cataract: "Cataract (illustration)" }
+      : locale === "ja"
+        ? { normal: "正常", cataract: "白内障（示意）" }
+        : { normal: tx("正常"), cataract: tx("白內障（示意）") };
+
   return (
     <div>
-      <p className="text-[0.88rem] leading-relaxed text-muted">
-        {tx("同一張相示範顏色變淡、霧感與車燈眩光。不能為你的白內障分級，亦不是叫你接受手術。")}
-      </p>
-      <div className="relative mt-4 overflow-hidden rounded-xl">
-        <img
-          src={stage === 1 ? "/iol/night.jpg" : "/iol/far.jpg"}
-          alt=""
-          className="aspect-video w-full object-cover"
-          style={{ filter: `blur(${blur}px) saturate(${sat}) contrast(${1 - stage * 0.12})` }}
-        />
-      </div>
+      <p className="text-[0.88rem] leading-relaxed text-muted">{intro}</p>
       <div className="mt-3 grid grid-cols-2 gap-2">
-        {labels.map((l, i) => (
+        {(["day", "night"] as const).map((key) => (
           <button
-            key={l}
+            key={key}
             type="button"
-            onClick={() => setStage(i)}
+            onClick={() => setTime(key)}
             className={cn(
               "min-h-11 rounded-xl border px-2 text-[0.8rem] font-semibold",
-              stage === i ? "border-navy bg-navy text-paper" : "border-line bg-card text-navy",
+              time === key ? "border-navy bg-navy text-paper" : "border-line bg-card text-navy",
             )}
           >
-            {l}
+            {timeLabels[key]}
           </button>
         ))}
+      </div>
+      <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <figure className="overflow-hidden rounded-xl">
+          <img src={src} alt="" className="aspect-video w-full object-cover" draggable={false} />
+          <figcaption className="mt-2 text-center text-[0.78rem] font-semibold text-navy">
+            {pairLabels.normal}
+          </figcaption>
+        </figure>
+        <figure className="overflow-hidden rounded-xl">
+          <img
+            src={src}
+            alt=""
+            className="aspect-video w-full object-cover"
+            style={{ filter: cataractFilter }}
+            draggable={false}
+          />
+          <figcaption className="mt-2 text-center text-[0.78rem] font-semibold text-navy">
+            {pairLabels.cataract}
+          </figcaption>
+        </figure>
       </div>
     </div>
   );

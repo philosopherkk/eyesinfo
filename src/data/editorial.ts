@@ -1,9 +1,9 @@
 /** Education-site authorship only: name, specialty, qualifications. No contact. */
 
 export const EDITORIAL = {
-  reviewed: "2026年9月11日",
+  reviewed: "2026年9月12日",
   /** ISO date matching the site-wide stamp used when a topic omits lastReviewed. */
-  reviewedIso: "2026-09-11",
+  reviewedIso: "2026-09-12",
   name: "潘家健醫生",
   title: "眼科專科醫生",
   registerNote: "香港醫務委員會註冊醫生；名列專科名冊（眼科）",

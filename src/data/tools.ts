@@ -230,7 +230,11 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-migraine", label: "偏頭痛與眼科" },
   ],
   "t-rd": [{ href: "/tools/floaters", label: "飛蚊與簾幕" }],
-  "t-octm": [{ href: "/t/t-vegf", label: "玻璃體內注射" }],
+  "t-octm": [
+    { href: "/t/t-vegf", label: "玻璃體內注射" },
+    { href: "/t/d6", label: "糖尿病視網膜病變" },
+    { href: "/t/t-rvo", label: "視網膜血管阻塞" },
+  ],
   "t-vegf": [
     { href: "/t/t-octm", label: "黃斑 OCT" },
     { href: "/t/d5", label: "年齡相關性黃斑病變" },
