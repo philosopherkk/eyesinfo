@@ -56,8 +56,17 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-gldrops", label: "青光眼眼藥水" },
     { href: "/t/t-early", label: "遠視、淺前房與閉角" },
   ],
-  d5: [{ href: "/amsler", label: "阿姆斯勒方格" }, { href: "/t/t-rvo", label: "視網膜血管阻塞" }, { href: "/t/t-migraine", label: "偏頭痛與眼科" }],
-  d6: [{ href: "/t/t-glaucoma-monitor", label: "青光眼監察：OCT／視野報告解讀" }, { href: "/t/t-rvo", label: "視網膜血管阻塞" }],
+  d5: [
+    { href: "/amsler", label: "阿姆斯勒方格" },
+    { href: "/t/t-vegf", label: "玻璃體內注射" },
+    { href: "/t/t-rvo", label: "視網膜血管阻塞" },
+    { href: "/t/t-migraine", label: "偏頭痛與眼科" },
+  ],
+  d6: [
+    { href: "/t/t-vegf", label: "玻璃體內注射" },
+    { href: "/t/t-glaucoma-monitor", label: "青光眼監察：OCT／視野報告解讀" },
+    { href: "/t/t-rvo", label: "視網膜血管阻塞" },
+  ],
   d7: [
     { href: "/urgent", label: "急症與同日評估" },
     { href: "/t/t-allergy-hk", label: "眼部過敏與香港環境" },
@@ -221,7 +230,12 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-migraine", label: "偏頭痛與眼科" },
   ],
   "t-rd": [{ href: "/tools/floaters", label: "飛蚊與簾幕" }],
-  "t-vegf": [{ href: "/t/t-octm", label: "黃斑 OCT" }],
+  "t-octm": [{ href: "/t/t-vegf", label: "玻璃體內注射" }],
+  "t-vegf": [
+    { href: "/t/t-octm", label: "黃斑 OCT" },
+    { href: "/t/d5", label: "年齡相關性黃斑病變" },
+    { href: "/t/d6", label: "糖尿病視網膜病變" },
+  ],
   "t-presbyopia": [
     { href: "/iol", label: "晶體視力示意" },
     { href: "/tools/rx", label: "眼鏡度數解讀" },
