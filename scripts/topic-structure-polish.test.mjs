@@ -129,10 +129,10 @@ describe("topic structure polish", () => {
     assert.match(read("src/lib/topic-related.ts"), /PRIMARY_TOPIC_CAP\s*=\s*5/);
   });
 
-  it("CONTENT_VERSION is 1.46", () => {
+  it("CONTENT_VERSION is 1.52", () => {
     const site = read("src/lib/site.ts");
-    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.46"/);
-    assert.match(site, /CONTENT_UPDATED\s*=\s*"2026-09-11"/);
+    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.52"/);
+    assert.match(site, /CONTENT_UPDATED\s*=\s*"2026-09-12"/);
   });
 
   it("ui keys include TOC and related group labels in all locales", () => {
