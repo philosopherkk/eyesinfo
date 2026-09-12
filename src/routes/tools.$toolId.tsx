@@ -33,7 +33,7 @@ export const Route = createFileRoute("/tools/$toolId")({
   component: ToolPage,
 });
 
-const EDU_CAVEAT_TOOLS = new Set<ToolId>(["map", "drops", "ask", "outdoor"]);
+const EDU_CAVEAT_TOOLS = new Set<ToolId>(["map", "drops", "ask", "outdoor", "visit", "rx"]);
 
 function ToolPage() {
   const { toolId } = Route.useParams();

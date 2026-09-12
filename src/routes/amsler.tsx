@@ -17,14 +17,14 @@ import { SaveButton } from "@/components/save-button";
 import { usePrefs, type AmslerResult } from "@/lib/prefs";
 import { toolSaveKey } from "@/lib/saved";
 import { useI18n } from "@/i18n";
+import { UI } from "@/i18n/ui";
 import { pageHead } from "@/lib/page-seo";
 
 export const Route = createFileRoute("/amsler")({
   head: () =>
     pageHead({
-      title: "阿姆斯勒方格",
-      description:
-        "阿姆斯勒方格自我監察中央視力示意。不是診斷工具；新出現變形或暗點須盡快散瞳眼底檢查。",
+      title: UI["zh-Hant"].amslerTitle,
+      description: UI["zh-Hant"].amslerSeoDesc,
       path: "/amsler",
     }),
   component: AmslerPage,
@@ -249,9 +249,7 @@ function AmslerPage() {
           {t("amslerCalH")}
         </h2>
         <p className="mt-1 text-[0.88rem] leading-relaxed text-muted">
-          螢幕像素與真實厘米不同。把八達通或信用卡（短邊 85.6
-          毫米）貼在下面的長方形上，拖動滑桿直至兩邊一樣闊。對準後，方格會接近常用教學尺寸約 10
-          厘米（螢幕仍有誤差，不能當正式檢查）。
+          {t("amslerCalP")}
         </p>
         <div className="mt-3 rounded-xl border border-line bg-card p-3">
           <div
@@ -263,7 +261,7 @@ function AmslerPage() {
             }}
           />
           <p className="mt-2 text-[0.75rem] text-muted">
-            卡片示意（對準短邊闊度）
+            {t("amslerCalCardHint")}
           </p>
           <input
             type="range"
@@ -272,36 +270,32 @@ function AmslerPage() {
             value={Math.min(cardPx, boxW)}
             onChange={(e) => setCardPx(Number(e.target.value))}
             className="mt-2 w-full accent-[var(--color-navy)]"
-            aria-label="調整卡片闊度以對準實體卡"
+            aria-label={t("amslerCalSliderAria")}
           />
           <button
             type="button"
             onClick={saveCalibration}
             className="mt-2 inline-flex h-11 w-full items-center justify-center rounded-xl bg-navy text-[0.88rem] font-semibold text-paper"
           >
-            儲存尺寸
+            {t("amslerCalSave")}
           </button>
           {calibrated ? (
             <p className="mt-2 text-[0.78rem] text-steel">
-              已儲存在此裝置。換手機或電腦請重新對準。
+              {t("amslerCalSaved")}
             </p>
           ) : null}
         </div>
       </section>
 
       <section className="amsler-print-keep mt-6 px-4">
-        <h2 className="text-[1.05rem] font-semibold text-navy">2. 檢查步驟</h2>
+        <h2 className="text-[1.05rem] font-semibold text-navy">{t("amslerStepsH")}</h2>
         <ol className="mt-2 list-decimal space-y-2 pl-5 text-[0.9rem] leading-relaxed">
-          <li>戴你平日看報、看手機的閱讀眼鏡。不要戴太陽眼鏡。</li>
-          <li>在室內、光線穩定、螢幕無反光。亮度調至舒適、不要過暗。</li>
-          <li>
-            用手掌輕輕遮蓋一眼，不要按壓眼球。先查較佳或慣用眼，再查另一眼。
-          </li>
-          <li>單眼注視中央圓點，不要轉動眼球去「找」線條。</li>
-          <li>
-            問自己：四邊能否看見？直線有無波浪、斷開、缺格？中央有無暗影或圓點消失？
-          </li>
-          <li>換另一眼重做。兩眼不要同時看。</li>
+          <li>{t("amslerStep1")}</li>
+          <li>{t("amslerStep2")}</li>
+          <li>{t("amslerStep3")}</li>
+          <li>{t("amslerStep4")}</li>
+          <li>{t("amslerStep5")}</li>
+          <li>{t("amslerStep6")}</li>
         </ol>
       </section>
 
@@ -309,49 +303,43 @@ function AmslerPage() {
         <div className="rounded-xl border border-line bg-card p-4">
           <p className="flex items-center gap-2 font-semibold text-navy">
             <Smartphone className="size-4" />
-            用手機
+            {t("amslerPhoneH")}
           </p>
           <ul className="mt-2 list-disc space-y-1.5 pl-5 text-[0.88rem] leading-relaxed">
-            <li>直向拿着，螢幕正對面部，不要側傾。</li>
-            <li>
-              對準尺寸後，把手機放在眼前約 {holdCm}{" "}
-              厘米（大約一隻前臂、接近閱讀距離）。
-            </li>
-            <li>螢幕太細時，方格會小於 10 厘米——請依上面顯示的距離拿近一點。</li>
-            <li>關掉自動旋轉、通知，以免檢查中途跳畫面。</li>
-            <li>可按「開始單眼檢查」隱藏其他文字，較易專心。</li>
+            <li>{t("amslerPhone1")}</li>
+            <li>{t("amslerPhone2", { n: holdCm })}</li>
+            <li>{t("amslerPhone3")}</li>
+            <li>{t("amslerPhone4")}</li>
+            <li>{t("amslerPhone5")}</li>
           </ul>
         </div>
         <div className="rounded-xl border border-line bg-card p-4">
           <p className="flex items-center gap-2 font-semibold text-navy">
             <Monitor className="size-4" />
-            用電腦螢幕
+            {t("amslerPcH")}
           </p>
           <ul className="mt-2 list-disc space-y-1.5 pl-5 text-[0.88rem] leading-relaxed">
-            <li>把瀏覽器視窗放大，坐直，螢幕與眼等高。</li>
-            <li>
-              用信用卡對準後，若方格接近 10 厘米，觀看距離約 30
-              厘米（閱讀距離）。
-            </li>
-            <li>筆記型電腦請放在桌上，不要躺着看，以免距離不穩。</li>
-            <li>外置螢幕較手機準；仍須對準卡片，不要假設「電腦一定準確」。</li>
-            <li>檢查時關閉其他視窗。有閱讀眼鏡就戴上。</li>
+            <li>{t("amslerPc1")}</li>
+            <li>{t("amslerPc2")}</li>
+            <li>{t("amslerPc3")}</li>
+            <li>{t("amslerPc4")}</li>
+            <li>{t("amslerPc5")}</li>
           </ul>
         </div>
       </section>
 
       <section className="amsler-print-keep mt-6 px-4">
         <h2 className="text-[1.05rem] font-semibold text-navy">
-          3. 可能異常的示意（不是診斷）
+          {t("amslerAbnormalH")}
         </h2>
         <p className="mt-1 text-[0.88rem] leading-relaxed text-muted">
-          上面的示意可對照常見樣子（教育名稱）：視物變形、中央暗點、旁中央暗點。對照不是自行診斷或黃斑病分級；另須留意與昨日相比的新變化。
+          {t("amslerAbnormalLead")}
         </p>
         <ul className="mt-2 list-disc space-y-1.5 pl-5 text-[0.9rem] leading-relaxed">
-          <li>直線變彎、扭曲（視物變形，metamorphopsia）</li>
-          <li>正中間缺一塊或圓點消失（中央暗點，central scotoma）</li>
-          <li>圓點仍在、旁邊缺格或看不見一塊（旁中央暗點，paracentral scotoma）</li>
-          <li>與昨天相比，新出現的變形（可固定每週同一時間自查；自查唔取代醫生安排的散瞳／OCT 覆診）</li>
+          <li>{t("amslerAbnormal1")}</li>
+          <li>{t("amslerAbnormal2")}</li>
+          <li>{t("amslerAbnormal3")}</li>
+          <li>{t("amslerAbnormal4")}</li>
         </ul>
         <p className="mt-3 flex items-start gap-2 rounded-xl bg-danger-bg px-3 py-3 text-[0.88rem] leading-relaxed text-danger">
           <EyeOff className="mt-0.5 size-4 shrink-0" />
@@ -372,7 +360,7 @@ function AmslerPage() {
           params={{ topicId: "d5" }}
           className="inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy no-underline"
         >
-          年齡相關性黃斑病變
+          {t("amslerAmdLink")}
         </Link>
       </div>
 
@@ -385,21 +373,29 @@ function AmslerPage() {
 }
 
 function AmslerNotebook() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const notes = usePrefs((s) => s.amslerNotes);
   const add = usePrefs((s) => s.addAmslerNote);
   const clear = usePrefs((s) => s.clearAmslerNotes);
   const last = notes[notes.length - 1];
+  const dateLocale =
+    locale === "en" ? "en-HK" : locale === "ja" ? "ja-JP" : "zh-HK";
 
   function save(result: AmslerResult) {
     add(result);
   }
 
+  function resultLabel(result: AmslerResult) {
+    if (result === "same") return t("amslerNoteSameShort");
+    if (result === "warp") return t("amslerNoteWarpShort");
+    return t("amslerNoteSpotShort");
+  }
+
   return (
     <section className="mt-6 px-4">
-      <h2 className="text-[1.05rem] font-semibold text-navy">4. 今日記錄（只在此裝置）</h2>
+      <h2 className="text-[1.05rem] font-semibold text-navy">{t("amslerNoteH")}</h2>
       <p className="mt-1 text-[0.82rem] leading-relaxed text-muted">
-        不記姓名、不上載。用來同自己昨日比。點選只係本機備忘，不是黃斑病分級或診斷。
+        {t("amslerNoteLead")}
       </p>
       <div className="mt-3 grid gap-2">
         <button
@@ -407,21 +403,21 @@ function AmslerNotebook() {
           onClick={() => save("same")}
           className="min-h-12 rounded-xl border border-line bg-card px-3 text-left text-[0.88rem] font-semibold text-navy"
         >
-          今日同昨日差不多
+          {t("amslerNoteSame")}
         </button>
         <button
           type="button"
           onClick={() => save("warp")}
           className="min-h-12 rounded-xl border border-line bg-card px-3 text-left text-[0.88rem] font-semibold text-navy"
         >
-          新出現變形
+          {t("amslerNoteWarp")}
         </button>
         <button
           type="button"
           onClick={() => save("spot")}
           className="min-h-12 rounded-xl border border-line bg-card px-3 text-left text-[0.88rem] font-semibold text-navy"
         >
-          中央暗點
+          {t("amslerNoteSpot")}
         </button>
       </div>
       {last?.result === "warp" || last?.result === "spot" ? (
@@ -431,12 +427,11 @@ function AmslerNotebook() {
       ) : null}
       {notes.length > 0 ? (
         <div className="mt-3">
-          <p className="text-[0.75rem] text-muted">最近紀錄</p>
+          <p className="text-[0.75rem] text-muted">{t("amslerNoteRecent")}</p>
           <ul className="mt-1 space-y-1 text-[0.8rem] text-steel">
             {notes.slice(-5).reverse().map((n) => (
               <li key={n.t}>
-                {new Date(n.t).toLocaleString("zh-HK")} ·{" "}
-                {n.result === "same" ? "差不多" : n.result === "warp" ? "新變形" : "中央暗點"}
+                {new Date(n.t).toLocaleString(dateLocale)} · {resultLabel(n.result)}
               </li>
             ))}
           </ul>
@@ -445,7 +440,7 @@ function AmslerNotebook() {
             onClick={clear}
             className="mt-2 text-[0.75rem] text-faint underline"
           >
-            清除此裝置紀錄
+            {t("amslerNoteClear")}
           </button>
         </div>
       ) : null}
