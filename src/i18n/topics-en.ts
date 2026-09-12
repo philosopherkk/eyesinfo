@@ -403,7 +403,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       ]),
       w("Worse pain, a sudden vision drop, pus-like discharge or marked redness: go to A&E. New flashes or many new floaters need same-day dilated fundus exam; a curtain or sudden loss of vision is A&E."),
       h("Years later: posterior capsule opacification (not a returning cataract)"),
-      p("The implant stays in the original bag. Lens epithelial cells can cloud the posterior capsule over years (PCO, sometimes called an after-cataract). Literature: about 10–40%. This is not a new lens growing back, and it is not a failed operation."),
+      p("The implant stays in the original bag. Lens epithelial cells can cloud the posterior capsule over years (PCO, sometimes called an after-cataract). A systematic overview pooled roughly 12% at 1 year, 21% at 3 years, and 28% at 5 years (Schaumberg et al., Ophthalmology 1998; mostly Nd:YAG / discission definitions); a large modern UK registry shows a similar rise with time (RCOphth NOD Report 9, Eye 2023). These are not your personal odds — rates vary with lens, surgery and how PCO is counted. This is not a new lens growing back, and it is not a failed operation."),
       p("Blur years after cataract surgery is usually PCO, not a “returning cataract”. Not every blur needs YAG capsulotomy. A doctor must judge whether it affects function and exclude macular, corneal or other causes. The laser is outpatient, with no incision. See the YAG fact sheet."),
       w("After YAG: new flashes or many new floaters, without a curtain, sudden blindness or severe pain — dilated fundus exam the same day if possible. A curtain, sudden blindness or severe pain: go to A&E now."),
     ],

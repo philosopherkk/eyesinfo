@@ -262,6 +262,23 @@ export const CITE: Record<string, Citation> = {
     pmid: "17531690",
     note: "白內障術後眼內炎屬少見但嚴重。數字是多中心試驗，不是任何診所成功率。",
   },
+  schaumberg1998: {
+    id: "schaumberg1998",
+    authors: "Schaumberg DA, Dana MR, Christen WG, Glynn RJ",
+    title: "A systematic overview of the incidence of posterior capsule opacification",
+    source: "Ophthalmology. 1998;105(7):1213-1221. DOI 10.1016/S0161-6420(98)97023-3",
+    pmid: "9663224",
+    note: "後囊混濁系統回顧匯總（多為需 Nd:YAG／切開定義）。約數不是個人機率；因晶體、手術與定義而異。",
+  },
+  donachie2023nod9: {
+    id: "donachie2023nod9",
+    authors: "Donachie PHJ, Barnes BL, Olaitan M, Sparrow JM, Buchan JC",
+    title:
+      "The Royal College of Ophthalmologists' National Ophthalmology Database study of cataract surgery: Report 9, Risk factors for posterior capsule opacification",
+    source: "Eye (Lond). 2023;37(8):1633-1639. DOI 10.1038/s41433-022-02204-1",
+    pmid: "36002508",
+    note: "英國 RCOphth NOD 大型登記：後囊混濁風險隨時間上升。公開教育；不作個人預後。",
+  },
   hayreh2005: {
     id: "hayreh2005",
     authors: "Hayreh SS, Zimmerman MB",
