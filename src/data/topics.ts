@@ -758,7 +758,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "白內障手術類別",
     category: "lens",
     featured: false,
-    refs: ["escrs2007"],
+    refs: ["escrs2007", "schaumberg1998", "donachie2023nod9"],
     blocks: [
       { type: "h", text: "何時值得與醫生討論手術" },
       {
@@ -864,7 +864,7 @@ export const CORE_TOPICS: Topic[] = [
       { type: "h", text: "術後數年：後囊混濁（不是白內障復發）" },
       {
         type: "p",
-        text: "人工晶體仍留在原來的囊袋裡。數年後囊袋上皮細胞增生，令後囊變混（後囊混濁，俗稱後發性白內障）。文獻約一至四成。這不是晶體再生，也不是手術「失敗」。",
+        text: "人工晶體仍留在原來的囊袋裡。數年後囊袋上皮細胞增生，令後囊變混（後囊混濁，俗稱後發性白內障）。系統回顧匯總約一年一成、三年約二成、五年約三成（Schaumberg 等，1998；多為需 Nd:YAG／切開的定義）；近年大型登記亦可見類似隨時間上升（RCOphth NOD Report 9）。這不是你的個人機率，因晶體物料、手術與追蹤定義而異。這不是晶體再生，也不是手術「失敗」。",
       },
       {
         type: "p",
