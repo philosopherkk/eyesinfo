@@ -500,6 +500,40 @@ export const CITE: Record<string, Citation> = {
     pmid: "15134327",
     note: "眼瞼皮炎外用他克莫司之小型開放研究。不作個人療效保證；本頁不寫濃度／次數。",
   },
+  goldstein2022bak: {
+    id: "goldstein2022bak",
+    authors: "Goldstein MH, Silva FQ, Blender N, et al.",
+    title: "Ocular benzalkonium chloride exposure: problems and solutions",
+    source: "Eye (Lond). 2022;36(2):361-368. https://doi.org/10.1038/s41433-021-01668-x",
+    pmid: "34262161",
+    note: "BAK 防腐劑對眼表影響的綜述。教育用途；不作商品比較或自行換藥手冊。",
+  },
+  singh2022dicc: {
+    id: "singh2022dicc",
+    authors: "Singh S, Donthineni PR, Shanbhag SS, et al.",
+    title:
+      "Drug induced cicatrizing conjunctivitis: A case series with review of etiopathogenesis, diagnosis and management",
+    source: "Ocul Surf. 2022;24:83-92",
+    pmid: "35247582",
+    note: "藥物誘發瘢痕性／擬類天疱瘡樣結膜炎教育文獻。須專科評估；不是自行停藥或換藥指引。",
+  },
+  dervenis2024namd: {
+    id: "dervenis2024namd",
+    authors: "Dervenis N, Dervenis P, Agorogiannis E",
+    title:
+      "Neovascular age-related macular degeneration: disease pathogenesis and current state of molecular biomarkers predicting treatment response—a scoping review",
+    source: "BMJ Open Ophthalmol. 2024;9(1):e001516. https://doi.org/10.1136/bmjophth-2023-001516",
+    pmid: "38341189",
+    note: "濕性 AMD 發病機制與生物標誌綜述。多路徑訊號屬教育；不作雙路徑藥物優劣比較。",
+  },
+  faricimabFda2022: {
+    id: "faricimabFda2022",
+    authors: "U.S. Food and Drug Administration",
+    title: "Faricimab-svoa injection — Prescribing Information (label)",
+    source:
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/761235s000lbl.pdf",
+    note: "美國 FDA 公開標籤描述 VEGF-A 與 Ang-2 機制。不作商品比較、療效保證或本港適應症推介；本地註冊以香港為準。",
+  },
 };
 
 export function citationsFor(ids: string[]): Citation[] {
