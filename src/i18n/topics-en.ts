@@ -360,7 +360,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
         "Viscoelastic is removed; the wound is hydrated (occasionally one suture)",
         "Some centres give an intracameral antibiotic. Postoperative steroid, NSAID and/or antibiotic drops are prescribed individually",
       ]),
-      p("Uncomplicated cases often take about 15–30 minutes. Most people go home the same day. Vision usually settles over days to weeks — not a promise of 6/6 on leaving theatre."),
+      p("Uncomplicated cases often take about 15–30 minutes. Most people go home the same day. Vision usually settles over days to weeks — not “surgery’s done and vision’s a perfect hundred.”"),
       h("Other operations still discussed"),
       ul(["Extracapsular extraction: a larger wound delivering the whole nucleus — dense nuclei, weak zonules or limited equipment; sutures needed", "Lensectomy via the pars plana when combined with vitreous surgery"]),
       h("Optical classes of lens (not a brand pitch)"),
