@@ -388,7 +388,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
           ["Clinically significant macular oedema", "May reach a few percent; higher with diabetes or capsule rupture; often peaks at 4–6 weeks"],
           ["Retinal detachment after surgery", "Uncommon; higher with high myopia, younger age, male sex, or after capsule rupture"],
           ["Endothelial failure / bullous keratopathy", "Uncommon; low endothelial counts and high ultrasound energy raise risk"],
-          ["Posterior capsule opacification (years)", "Common over years; see below — not a returning cataract"],
+          ["Posterior capsule opacification (years)", "Not uncommon over years; rates vary by person — see below; not a returning cataract"],
         ],
       },
       h("Also possible in the first days (most can be managed)"),
@@ -557,7 +557,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
     meta: "PCO · sealing a tear",
     blocks: [
       h("YAG posterior capsulotomy"),
-      p("Not a “returning cataract”. Lens epithelial cells cloud the posterior capsule. Posterior capsule opacification is common over years; discuss your own risk with your doctor — do not self-estimate from a single percentage. Outpatient laser, no incision. Not every blur needs YAG; a doctor judges whether it affects function. Short pressure rise and extra floaters can occur; retinal tear is uncommon. A shower of new floaters, flashes, a curtain or severe pain after laser: A&E."),
+      p("Not a “returning cataract”. Lens epithelial cells cloud the posterior capsule. Over years this is not uncommon; rates in the literature vary and are not your personal odds. Outpatient laser, no incision. Not every blur needs YAG; a doctor judges whether it affects function. Short pressure rise and extra floaters can occur; retinal tear is uncommon. A shower of new floaters, flashes, a curtain or severe pain after laser: A&E."),
       h("Retinal barrier laser"),
       p("Scars around a tear to reduce fluid going under the retina. Activity limits depend on the tear and the doctor’s instructions — not a blanket two-week sports ban. Laser cannot fix a retina that is already detached. An expanding curtain is an emergency."),
     ],
@@ -1873,7 +1873,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
         "Education on mechanism: dampens some T-lymphocyte–related inflammation. Onset often takes weeks. Stinging or burning on instillation is common. Active infection usually means stop — the doctor decides.",
       ),
       p(
-        "Cyclosporine (INN) ophthalmic emulsion / eye drops are a prescription-class medicine. Suitability and which preparation to use follow the doctor and the current label. This page lists no brand names, registration numbers, prices, shops or sourcing help.",
+        "Cyclosporine eye preparations are a prescription immunomodulator class. Suitability and which product to use are decided by the treating doctor and the current label / Hong Kong registration status. This page lists no trade names, registration numbers, manufacturers, prices, shops or purchasing help, and makes no efficacy comparison or guarantee.",
       ),
       p(
         "In EU and similar public information, some cyclosporine ophthalmic emulsions are described for adults with dry eye disease and severe keratitis not improved by tear substitutes — Hong Kong follows the local label.",

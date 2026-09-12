@@ -185,7 +185,7 @@ const zhHant = {
   amslerFindMeta: "視物變形",
   amslerFindMetaEn: "metamorphopsia",
   amslerFindMetaP:
-    "直線變彎、波浪或格子大小不均。常見於黃斑水腫或濕性年齡相關性黃斑病變。新出現須盡快（最好當日）眼科評估；散瞳眼底是常用步驟之一，但評估內容由醫生決定，不是「只散瞳」便足夠。",
+    "直線變彎、波浪或格子大小不均。常見於黃斑水腫或濕性年齡相關性黃斑病變。新出現須盡快（通常當日）眼科評估；散瞳眼底是常用步驟，但不是「只散瞳」便足夠。螢幕阿姆斯勒正常不能排除眼疾。",
   amslerFindCentral: "中央暗點",
   amslerFindCentralEn: "central scotoma",
   amslerFindCentralP:
@@ -205,7 +205,7 @@ const zhHant = {
   amslerTestSwitch: "換另一眼",
   amslerTestAbnormal: "發覺異常",
   amslerSeoDesc:
-    "阿姆斯勒方格自我監察中央視力示意。不是診斷工具；新出現變形或暗點須盡快（最好當日）眼科評估；散瞳眼底是常用步驟之一，但不是只散瞳便足夠。",
+    "阿姆斯勒方格自我監察中央視力示意。不是診斷工具；新出現變形或暗點須盡快（通常當日）眼科評估（散瞳眼底是常用步驟，但不是「只散瞳」便足夠；同時視力急降、簾幕或劇痛嘔吐：急症室）。",
   amslerCalP:
     "螢幕像素與真實厘米不同。把八達通或信用卡（短邊 85.6 毫米）貼在下面的長方形上，拖動滑桿直至兩邊一樣闊。對準後，方格會接近常用教學尺寸約 10 厘米（螢幕仍有誤差，不能當正式檢查）。",
   amslerCalCardHint: "卡片示意（對準短邊闊度）",
@@ -255,9 +255,9 @@ const zhHant = {
   amslerAriaCentral: "阿姆斯勒方格示意：中央暗點，正中間缺了一塊",
   amslerAriaPara: "阿姆斯勒方格示意：旁中央暗點，中央圓點仍在、旁邊缺格",
   visitNearCaveat:
-    "示意流程，不是診斷或預約指引；結果正常不能排除眼疾，亦不能代替散瞳眼底或 OCT。",
+    "本頁只係診所流程教育示意，不是診斷、預約或轉介，亦不能代替面診或檢查。",
   rxNonVerify:
-    "不能核對處方／非診斷。輸入只在此畫面顯示，不上載；不能驗證度數是否正確。",
+    "本工具只解釋處方常見英文字，不能核對你的處方是否正確，亦不是診斷或驗光建議。數字只在此畫面顯示，不上載。",
   iolTitle: "人工晶體視力示意",
   iolNotGuarantee: "不是術後保證。本站不提供預約或轉介。",
   iolLead:
@@ -549,7 +549,7 @@ const en: Record<Key, string> = {
   amslerFindMeta: "Distortion",
   amslerFindMetaEn: "metamorphopsia",
   amslerFindMetaP:
-    "Lines look bent, wavy, or the squares uneven. Often discussed with macular oedema or wet AMD. New distortion needs prompt ophthalmic assessment (same day if possible); dilated fundus exam is a common step, but what is done is decided by the doctor — dilation alone is not enough.",
+    "Lines look bent, wavy, or the squares uneven. Often discussed with macular oedema or wet AMD. New distortion needs prompt ophthalmic assessment (usually same day); dilated fundus exam is a common step, but dilation alone is not enough. A normal on-screen Amsler does not rule out eye disease.",
   amslerFindCentral: "Central blank patch",
   amslerFindCentralEn: "central scotoma",
   amslerFindCentralP:
@@ -569,7 +569,7 @@ const en: Record<Key, string> = {
   amslerTestSwitch: "Switch eye",
   amslerTestAbnormal: "Something looks wrong",
   amslerSeoDesc:
-    "Amsler grid for self-awareness of central vision. Not a diagnostic tool; new distortion or a dark patch needs prompt ophthalmic assessment (same day if possible). Dilated fundus exam is a common step, but dilation alone is not enough.",
+    "Amsler grid for self-awareness of central vision. Not a diagnostic tool; new distortion or a dark patch needs prompt ophthalmic assessment (usually same day). Dilated fundus exam is a common step, but dilation alone is not enough; if vision also drops sharply, there is a curtain, or severe pain with vomiting: go to A&E.",
   amslerCalP:
     "Screen pixels are not real centimetres. Place an Octopus card or credit card (short edge 85.6 mm) on the rectangle below and drag the slider until the widths match. After matching, the grid is near the usual teaching size of about 10 cm (screen error remains — this is not a formal exam).",
   amslerCalCardHint: "Card guide (match the short-edge width)",
@@ -622,9 +622,9 @@ const en: Record<Key, string> = {
   amslerAriaCentral: "Amsler grid illustration: central blank patch — missing area in the very centre",
   amslerAriaPara: "Amsler grid illustration: paracentral blank — centre spot remains, missing squares beside it",
   visitNearCaveat:
-    "Illustrative visit flow — not a diagnosis or booking guide; a normal result does not rule out eye disease and does not replace dilated fundus exam or OCT.",
+    "This page is an illustrative clinic-visit walkthrough only. It is not a diagnosis, booking or referral, and does not replace an in-person exam.",
   rxNonVerify:
-    "Cannot verify a prescription / not a diagnosis. Inputs stay on this screen and are not uploaded; they cannot confirm that powers are correct.",
+    "This tool only explains common English abbreviations on a written Rx. It cannot verify that your prescription is correct and is not a diagnosis or refraction advice. Numbers stay on this screen only and are not uploaded.",
   iolTitle: "Intraocular lens vision demo",
   iolNotGuarantee: "Not a post-operative guarantee. This site does not book or refer.",
   iolLead:
@@ -915,7 +915,7 @@ const ja: Record<Key, string> = {
   amslerFindMeta: "変視",
   amslerFindMetaEn: "metamorphopsia",
   amslerFindMetaP:
-    "直線が波打ち、マスが不揃いに見えます。黄斑浮腫や滲出型加齢黄斑変性でよく話題になります。新たに出たらできるだけ早く（できれば当日）の眼科評価を。散瞳眼底はよく行う一歩ですが、内容は医師が決め、「散瞳だけ」では足りません。",
+    "直線が波打ち、マスが不揃いに見えます。黄斑浮腫や滲出型加齢黄斑変性でよく話題になります。新たに出たらできるだけ早く（通常は当日）眼科評価を；散瞳眼底はよく行う一歩ですが、「散瞳だけ」では足りません。画面のアムスラーが正常でも眼疾患を否定できません。",
   amslerFindCentral: "中心暗点",
   amslerFindCentralEn: "central scotoma",
   amslerFindCentralP:
@@ -935,7 +935,7 @@ const ja: Record<Key, string> = {
   amslerTestSwitch: "もう一方の眼へ",
   amslerTestAbnormal: "異常に気づいた",
   amslerSeoDesc:
-    "中心視力の自己観察用アムスラーチャートの図示。診断ツールではありません。新たに出た歪みや暗点はできるだけ早く（できれば当日）の眼科評価を。散瞳眼底はよく行う一歩ですが、散瞳だけでは足りません。",
+    "中心視力の自己観察用アムスラーチャートの図示。診断ツールではありません。新たに出た歪みや暗点はできるだけ早く（通常は当日）の眼科評価を。散瞳眼底はよく行う一歩ですが、「散瞳だけ」では足りません。同時に視力急低下・カーテン・激痛嘔吐がある場合は救急へ。",
   amslerCalP:
     "画面のピクセルは実寸のセンチメートルではありません。オクトパスカードまたはクレジットカード（短辺 85.6 mm）を下の長方形に合わせ、スライダーで幅を揃えます。合わせたあと、マス目はよく使う教育サイズ約 10 cm に近くなります（画面誤差は残り、正式検査ではありません）。",
   amslerCalCardHint: "カードの図示（短辺の幅を合わせる）",
@@ -986,9 +986,9 @@ const ja: Record<Key, string> = {
   amslerAriaCentral: "アムスラー図示：中心暗点——ど真ん中が欠けた空白",
   amslerAriaPara: "アムスラー図示：傍中心暗点——中央の点は残り、横のマスが欠ける",
   visitNearCaveat:
-    "受診の流れの図示であり、診断や予約案内ではありません。正常でも病気を否定できず、散瞳眼底やOCTの代わりにもなりません。",
+    "このページは診察の流れの教育用示意です。診断・予約・紹介ではなく、対面診察や検査の代わりにもなりません。",
   rxNonVerify:
-    "処方の照合はできません／診断ではありません。入力はこの画面のみでアップロードされず、度数が正しいかの検証にもなりません。",
+    "このツールは処方箋によくある英語略語の説明のみです。処方内容の正誤確認はできず、診断や検眼の提案でもありません。数字はこの画面のみで、アップロードしません。",
   iolTitle: "眼内レンズの見え方の図示",
   iolNotGuarantee: "術後の保証ではありません。予約・紹介はしません。",
   iolLead:
