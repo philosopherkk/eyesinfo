@@ -58,6 +58,8 @@ const zhHant = {
     "影片說法≠本站Exact。HKOS 影片或談及重複低強度紅光（RLRL）家用用法及較高「有效」約數；本站不以該影片為準。本站立場：重複低強度紅光等儀器——長期安全性（包括黃斑）仍有爭議，不應自行購買家用；本站不把它寫成「新興有效療法」。是否採用只可由眼科專科醫生評估。詳見本頁「光學離焦／其他方法」相關段落。",
   hkosSoftRvo:
     "影片說法≠本站Exact。HKOS 影片或提及及時治療後視力「可以完全恢復」；本站不以該影片為準。本站立場：注射間隔及是否激光按 OCT 及眼底決定，不能保證視力回到阻塞前。詳見本頁治療／預後相關段落。",
+  hkosSoftGlaucoma:
+    "影片說法≠本站Exact。HKOS 影片在急性閉角教育中或提及及時求醫後視力「可以恢復／逆轉」——本站不以該影片為準，亦不採納該說法。本站較保守的立場：已損失的視野及視神經纖維不能還原；青光眼處理目標是減慢惡化，不是治癒、不是保證恢復。若出現急性發作徵象（劇痛、頭痛、嘔吐、虹視、視力急降）→ 立即急症室／999，不要等私家診所開門，亦不要自行用藥。詳見本頁青光眼／急性閉角相關段落。",
   a11yLink: "無障礙聲明",
   a11yTitle: "無障礙聲明",
   a11yIntro:
@@ -439,6 +441,8 @@ const en: Record<Key, string> = {
     "What the video says ≠ this site’s Exact position. The HKOS video may discuss home use of repeated low-level red light (RLRL) and higher “effectiveness” round numbers; this site does not treat that video as authoritative. This site’s position: devices such as repeated low-level red light — long-term safety (including the macula) remains debated; do not buy them for home use on your own; this site does not present them as an “emerging effective therapy”. Whether to use them can only be assessed by an ophthalmology specialist. See this page’s sections on optical defocus / other methods.",
   hkosSoftRvo:
     "What the video says ≠ this site’s Exact position. The HKOS video may mention that vision “can fully recover” after timely treatment; this site does not treat that video as authoritative. This site’s position: injection intervals and whether laser is used depend on OCT and the fundus; return of vision to the pre-occlusion level cannot be guaranteed. See this page’s treatment / prognosis sections.",
+  hkosSoftGlaucoma:
+    "What the video says ≠ this site’s Exact position. In acute angle-closure education, the HKOS video may mention that vision “can recover / reverse” after timely care — this site does not treat that video as authoritative, and does not adopt that claim. This site’s more conservative position: lost visual field and optic-nerve fibres cannot be restored; the goal of glaucoma care is to slow worsening — not to cure, and not to guarantee recovery. If acute-attack signs appear (severe pain, headache, vomiting, rainbow halos, sudden vision drop) → go to A&E / call 999 immediately; do not wait for a private clinic to open, and do not self-medicate. See this page’s glaucoma / acute angle-closure sections.",
   a11yLink: "Accessibility statement",
   a11yTitle: "Accessibility statement",
   a11yIntro:
@@ -826,6 +830,8 @@ const ja: Record<Key, string> = {
     "動画の言い方≠本サイトのExact。HKOS動画は反復低強度赤光（RLRL）の家庭使用や、より高い「有効」の目安に触れることがあります；本サイトはその動画を基準にしません。本サイトの立場：反復低強度赤光などの機器——黄斑を含む長期安全性はなお議論があり、自分で買って家庭使用すべきではありません；「新興の有効療法」としては書きません。採用可否は眼科専門医のみが評価できます。本頁の「光学的デフォーカス／その他の方法」関連段落を参照。",
   hkosSoftRvo:
     "動画の言い方≠本サイトのExact。HKOS動画は、適時治療後に視力が「完全に回復しうる」と述べることがあります；本サイトはその動画を基準にしません。本サイトの立場：注射間隔とレーザーの要否はOCTと眼底で決まり、閉塞前の視力に戻ることは保証できません。本頁の治療／予後関連段落を参照。",
+  hkosSoftGlaucoma:
+    "動画の言い方≠本サイトのExact。HKOS動画は急性閉塞隅角の教育で、適時受診後に視力が「回復／逆転しうる」と述べることがあります——本サイトはその動画を基準にせず、その言い方も採りません。本サイトのより保守的な立場：失われた視野と視神経線維は復元できません；緑内障の治療目標は悪化を遅らせることであり、治癒でも、回復の保証でもありません。急性発作の徴候（激痛、頭痛、嘔吐、虹視、視力急低下）があれば→直ちに救急／999。私的クリニックの開院を待たず、自己判断で薬を使わないでください。本頁の緑内障／急性閉塞隅角関連段落を参照。",
   a11yLink: "アクセシビリティ声明",
   a11yTitle: "アクセシビリティ声明",
   a11yIntro:
