@@ -6,6 +6,7 @@ import { TopicBody } from "@/components/topic-body";
 import { TopicRefs } from "@/components/topic-refs";
 import { TopicRelated } from "@/components/topic-related";
 import { TopicToc } from "@/components/topic-toc";
+import { HkosVideoCard } from "@/components/hkos-video-card";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { EmergencyShell } from "@/components/emergency-shell";
 import { SaveButton } from "@/components/save-button";
@@ -110,6 +111,7 @@ function TopicPage() {
       ) : null}
       <div className="px-4 pb-6">
         <TopicBody blocks={topic.blocks} topicId={raw.id} />
+        <HkosVideoCard topicId={raw.id} />
         {/* Related chips before bibliography so siblings are reachable without scrolling past refs. */}
         <TopicRelated items={tools} />
         <TopicRefs ids={raw.refs} />
