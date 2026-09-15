@@ -60,6 +60,14 @@ const zhHant = {
     "影片說法≠本站Exact。HKOS 影片或提及及時治療後視力「可以完全恢復」；本站不以該影片為準。本站立場：注射間隔及是否激光按 OCT 及眼底決定，不能保證視力回到阻塞前。詳見本頁治療／預後相關段落。",
   hkosSoftGlaucoma:
     "影片說法≠本站Exact。HKOS 影片在急性閉角教育中或提及及時求醫後視力「可以恢復／逆轉」——本站不以該影片為準，亦不採納該說法。本站較保守的立場：已損失的視野及視神經纖維不能還原；青光眼處理目標是減慢惡化，不是治癒、不是保證恢復。若出現急性發作徵象（劇痛、頭痛、嘔吐、虹視、視力急降）→ 立即急症室／999，不要等私家診所開門，亦不要自行用藥。詳見本頁青光眼／急性閉角相關段落。",
+  hkosSoftOpticNeuritis:
+    "影片說法≠本站Exact。HKOS 影片或談及類固醇劑量日程、免疫調節藥、以及「典型視神經炎多數／一半以上其後多發性硬化」等約數；本站不以該影片為準，亦不把影片說法寫成處方或個人風險。本站立場：急性單眼視力驟降、眼球轉動痛、顏色變淡／變灰 → 盡快（通常當日）眼科評估；是否用藥、是否影像／抽血，只可由醫生決定。公開試驗（如 ONTT）數字不是你的個人預後。",
+  hkosSoftCornealTransplant:
+    "影片說法≠本站Exact。HKOS 影片標題／內容或強調「成功與否全靠術後護理」、層狀手術「排斥低很多」、以及「成功率相當高／可翻做十幾次」等口吻；本站不以該影片為準。本站立場：術後護理與依時覆診很重要，但移植物存活亦受原疾病、血管化、曾否排斥、手術類型等多因素影響——公開登記數字不是你的個人預後，亦不是診所成功率。出現 RSVP 警示症狀 → 盡快回診／急症評估。",
+  hkosSoftNystagmus:
+    "影片說法≠本站Exact。HKOS 影片或提及前庭神經炎「食一排藥就會好返」、耳石復位手法、以及眼肌手術後「震動減少／視力有機會升」等；本站不以該影片為準，亦不保證療效時程。本站立場：眼球震顫成因多樣（嬰幼兒型 vs 後天型）；新出現、不對稱、伴隨複視／劇烈眩暈／神經症狀者需盡快評估。是否藥物、復位手法或手術，只可由醫生決定。",
+  hkosSoftOcularTumours:
+    "影片說法≠本站Exact。HKOS 影片標題或強調「症狀難察覺易延誤」、以及「及早發現療效好很多／保命保眼」等強烈對比口吻；本站不以該影片為準，亦不做恐嚇式廣告。本站立場：眼瞼／眼眶／眼內腫物有良性亦有惡性；出現進行性腫塊、睫毛脫失、複視、白瞳反射、兒童新斜視等 → 盡快眼科評估。治療目標與選擇因腫瘤類型與期別而異——公開試驗／登記結果不是你的個人預後，本站不保證治癒。",
   a11yLink: "無障礙聲明",
   a11yTitle: "無障礙聲明",
   a11yIntro:
@@ -443,6 +451,14 @@ const en: Record<Key, string> = {
     "What the video says ≠ this site’s Exact position. The HKOS video may mention that vision “can fully recover” after timely treatment; this site does not treat that video as authoritative. This site’s position: injection intervals and whether laser is used depend on OCT and the fundus; return of vision to the pre-occlusion level cannot be guaranteed. See this page’s treatment / prognosis sections.",
   hkosSoftGlaucoma:
     "What the video says ≠ this site’s Exact position. In acute angle-closure education, the HKOS video may mention that vision “can recover / reverse” after timely care — this site does not treat that video as authoritative, and does not adopt that claim. This site’s more conservative position: lost visual field and optic-nerve fibres cannot be restored; the goal of glaucoma care is to slow worsening — not to cure, and not to guarantee recovery. If acute-attack signs appear (severe pain, headache, vomiting, rainbow halos, sudden vision drop) → go to A&E / call 999 immediately; do not wait for a private clinic to open, and do not self-medicate. See this page’s glaucoma / acute angle-closure sections.",
+  hkosSoftOpticNeuritis:
+    "What the video says ≠ this site’s Exact position. The HKOS video may discuss steroid dose schedules, immunomodulating drugs, and round numbers such as “most / more than half of typical optic neuritis later develop multiple sclerosis”; this site does not treat that video as authoritative, and does not turn video wording into a prescription or personal risk. This site’s position: acute monocular vision drop, pain on eye movement, or colours becoming washed / grey → seek ophthalmic assessment promptly (usually the same day); whether medicine, imaging or blood tests are used can only be decided by a doctor. Published trial figures (e.g. ONTT) are not your personal prognosis.",
+  hkosSoftCornealTransplant:
+    "What the video says ≠ this site’s Exact position. The HKOS video title / content may stress that “success depends entirely on aftercare”, that lamellar surgery has “much lower rejection”, or that “success rates are very high / can be redone a dozen times”; this site does not treat that video as authoritative. This site’s position: aftercare and timely review matter a lot, but graft survival also depends on the original disease, vascularisation, prior rejection, surgery type and other factors — registry figures are not your personal prognosis, and not a clinic success rate. RSVP warning symptoms → return promptly / seek urgent assessment.",
+  hkosSoftNystagmus:
+    "What the video says ≠ this site’s Exact position. The HKOS video may mention vestibular neuritis “getting better after a short course of medicine”, canalith-repositioning manoeuvres, or that after eye-muscle surgery “shaking lessens / vision may improve”; this site does not treat that video as authoritative, and does not guarantee treatment timelines. This site’s position: nystagmus has many causes (infantile vs acquired); new, asymmetric, or nystagmus with diplopia / severe vertigo / neurological signs needs prompt assessment. Whether medicines, repositioning manoeuvres or surgery are used can only be decided by a doctor.",
+  hkosSoftOcularTumours:
+    "What the video says ≠ this site’s Exact position. The HKOS video title may stress that “symptoms are hard to notice and treatment is easily delayed”, or strong contrasts such as “early detection works much better / saves life and sight”; this site does not treat that video as authoritative, and does not use scare advertising. This site’s position: eyelid / orbital / intraocular lumps may be benign or malignant; progressive mass, lash loss, diplopia, leukocoria, or new childhood strabismus → seek ophthalmic assessment promptly. Goals and options depend on tumour type and stage — published trial / registry results are not your personal prognosis, and this site does not guarantee cure.",
   a11yLink: "Accessibility statement",
   a11yTitle: "Accessibility statement",
   a11yIntro:
@@ -832,6 +848,14 @@ const ja: Record<Key, string> = {
     "動画の言い方≠本サイトのExact。HKOS動画は、適時治療後に視力が「完全に回復しうる」と述べることがあります；本サイトはその動画を基準にしません。本サイトの立場：注射間隔とレーザーの要否はOCTと眼底で決まり、閉塞前の視力に戻ることは保証できません。本頁の治療／予後関連段落を参照。",
   hkosSoftGlaucoma:
     "動画の言い方≠本サイトのExact。HKOS動画は急性閉塞隅角の教育で、適時受診後に視力が「回復／逆転しうる」と述べることがあります——本サイトはその動画を基準にせず、その言い方も採りません。本サイトのより保守的な立場：失われた視野と視神経線維は復元できません；緑内障の治療目標は悪化を遅らせることであり、治癒でも、回復の保証でもありません。急性発作の徴候（激痛、頭痛、嘔吐、虹視、視力急低下）があれば→直ちに救急／999。私的クリニックの開院を待たず、自己判断で薬を使わないでください。本頁の緑内障／急性閉塞隅角関連段落を参照。",
+  hkosSoftOpticNeuritis:
+    "動画の言い方≠本サイトのExact。HKOS動画はステロイドの用量日程、免疫調節薬、および「典型的視神経炎の多く／半数以上がその後多発性硬化症になる」などの概数に触れることがあります；本サイトはその動画を基準にせず、動画の言い方を処方や個人リスクにはしません。本サイトの立場：急性の片眼視力急低下、眼球運動時痛、色が薄く／灰色になる → できるだけ早く（通常当日）眼科評価；薬・画像・採血の要否は医師のみが決めます。公開試験（例：ONTT）の数字はあなたの個人予後ではありません。",
+  hkosSoftCornealTransplant:
+    "動画の言い方≠本サイトのExact。HKOS動画のタイトル／内容は「成功は術後ケア次第」、層状手術は「拒絶がかなり低い」、「成功率はかなり高い／十数回やり直せる」などの言い方を強調することがあります；本サイトはその動画を基準にしません。本サイトの立場：術後ケアと定期受診はとても重要ですが、移植片の生着は原疾患、血管化、既往の拒絶、手術の種類など多因子にも左右されます——公開レジストリの数字はあなたの個人予後でも、クリニックの成功率でもありません。RSVP警告症状があれば → 速やかに再診／救急評価。",
+  hkosSoftNystagmus:
+    "動画の言い方≠本サイトのExact。HKOS動画は前庭神経炎が「薬を一通り飲めば治る」、耳石置換手技、眼筋手術後に「振戦が減る／視力が上がりうる」などに触れることがあります；本サイトはその動画を基準にせず、効果の期間も保証しません。本サイトの立場：眼振の原因は多様（乳幼児型 vs 後天型）；新規出現、非対称、複視／激しいめまい／神経症状を伴う場合は速やかな評価が必要です。薬、置換手技、手術の要否は医師のみが決めます。",
+  hkosSoftOcularTumours:
+    "動画の言い方≠本サイトのExact。HKOS動画のタイトルは「症状に気づきにくく治療が遅れやすい」、また「早期発見で効果がかなり良い／命と眼を守る」などの強い対比に触れることがあります；本サイトはその動画を基準にせず、威嚇的な広告もしません。本サイトの立場：眼瞼／眼窩／眼内の腫瘤は良性も悪性もあり得ます；進行性の腫瘤、睫毛脱落、複視、白瞳反射、小児の新しい斜視など → できるだけ早く眼科評価。治療目標と選択は腫瘍の種類と病期により異なります——公開試験／レジストリの結果はあなたの個人予後ではなく、本サイトは治癒を保証しません。",
   a11yLink: "アクセシビリティ声明",
   a11yTitle: "アクセシビリティ声明",
   a11yIntro:

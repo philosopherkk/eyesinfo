@@ -1,5 +1,5 @@
 /**
- * HKOS「眼睛解碼」public-education YouTube cards (CONTENT_VERSION 1.63).
+ * HKOS「眼睛解碼」public-education YouTube cards (CONTENT_VERSION 1.64).
  * Linked thumbnail only — no embed. Soft callouts lead the card for Cap/Lex KEEP.
  * A topic may list multiple cards (rendered in array order).
  */
@@ -7,7 +7,11 @@
 export type HkosSoftCalloutKey =
   | "hkosSoftMyopia"
   | "hkosSoftRvo"
-  | "hkosSoftGlaucoma";
+  | "hkosSoftGlaucoma"
+  | "hkosSoftOpticNeuritis"
+  | "hkosSoftCornealTransplant"
+  | "hkosSoftNystagmus"
+  | "hkosSoftOcularTumours";
 
 export type HkosVideoEntry = {
   videoId: string;
@@ -145,6 +149,38 @@ export const HKOS_VIDEOS: Record<string, HkosVideoEntry[]> = {
     {
       videoId: "yU9bhrNHnFk",
       title: "近視、散光、遠視、老花，到底你同邊個做緊「朋友」？",
+    },
+  ],
+  "t-optic-neuritis": [
+    {
+      videoId: "eyWwLabN5sE",
+      title: "睇嘢變灰變暗以為眼攰？隨時係視神經發炎",
+      soft: true,
+      softCalloutKey: "hkosSoftOpticNeuritis",
+    },
+  ],
+  "t-corneal-transplant": [
+    {
+      videoId: "RtbwTyUjbYY",
+      title: "角膜移植成功與否全靠術後護理！",
+      soft: true,
+      softCalloutKey: "hkosSoftCornealTransplant",
+    },
+  ],
+  "t-nystagmus": [
+    {
+      videoId: "1GEbGcc4tH4",
+      title: "對眼不受控咁震？可能同神經系統有關",
+      soft: true,
+      softCalloutKey: "hkosSoftNystagmus",
+    },
+  ],
+  "t-ocular-tumours": [
+    {
+      videoId: "kmneDw1O4bo",
+      title: "【健康】眼睛都可以生癌！症狀難察覺易延誤醫治",
+      soft: true,
+      softCalloutKey: "hkosSoftOcularTumours",
     },
   ],
 };

@@ -636,6 +636,144 @@ export const CITE: Record<string, Citation> = {
       "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/761235s000lbl.pdf",
     note: "美國 FDA 公開標籤描述 VEGF-A 與 Ang-2 機制。不作商品比較、療效保證或本港適應症推介；本地註冊以香港為準。",
   },
+  ontt1992: {
+    id: "ontt1992",
+    authors: "Beck RW, et al.; Optic Neuritis Study Group",
+    title:
+      "A randomized, controlled trial of corticosteroids in the treatment of acute optic neuritis",
+    source: "N Engl J Med. 1992;326:581-588. DOI 10.1056/NEJM199202273260901",
+    pmid: "1734247",
+    note: "ONTT；加速恢復 vs 最終結果教育。不是個人預後／不是品牌比較。",
+  },
+  ontt1993: {
+    id: "ontt1993",
+    authors: "Optic Neuritis Study Group",
+    title: "Optic neuritis treatment trial. One-year follow-up results",
+    source: "Arch Ophthalmol. 1993;111:773-775. DOI 10.1001/archopht.1993.01090060061023",
+    pmid: "8512477",
+    note: "ONTT 一年隨訪教育。不是個人預後。",
+  },
+  ontt1994: {
+    id: "ontt1994",
+    authors: "Beck RW, Cleary PA, Backlund JC",
+    title:
+      "The course of visual recovery after optic neuritis. Experience of the Optic Neuritis Treatment Trial",
+    source: "Ophthalmology. 1994;101:1771-1778. DOI 10.1016/s0161-6420(94)31103-1",
+    pmid: "7800355",
+    note: "ONTT 視力恢復時程教育。不是個人保證。",
+  },
+  ontt2003ms: {
+    id: "ontt2003ms",
+    authors: "Optic Neuritis Study Group",
+    title:
+      "High- and low-risk profiles for the development of multiple sclerosis within 10 years after optic neuritis",
+    source: "Arch Ophthalmol. 2003;121:944-949. DOI 10.1001/archopht.121.7.944",
+    pmid: "12860795",
+    note: "ONTT MRI 等分層；不是個人風險保證。",
+  },
+  ontt2008ms: {
+    id: "ontt2008ms",
+    authors: "Optic Neuritis Study Group",
+    title:
+      "Multiple sclerosis risk after optic neuritis: final optic neuritis treatment trial follow-up",
+    source: "Arch Neurol. 2008;65:727-732. DOI 10.1001/archneur.65.6.727",
+    pmid: "18541792",
+    note: "ONTT MS 最終隨訪教育。不是個人風險。",
+  },
+  ontt2008vision: {
+    id: "ontt2008vision",
+    authors: "Optic Neuritis Study Group",
+    title:
+      "Visual function 15 years after optic neuritis: a final follow-up report from the Optic Neuritis Treatment Trial",
+    source: "Ophthalmology. 2008;115:1079-1082.e5. DOI 10.1016/j.ophtha.2007.08.004",
+    pmid: "17976727",
+    note: "ONTT 15 年視力功能教育。不是個人預後。",
+  },
+  acgr2008: {
+    id: "acgr2008",
+    authors: "Williams KA, et al.",
+    title:
+      "Risk factors for human corneal graft failure within the Australian corneal graft registry",
+    source: "Transplantation. 2008;86:1720-1724. DOI 10.1097/TP.0b013e3181903b0a",
+    pmid: "19104411",
+    note: "澳洲角膜移植登記存活／失敗原因教育。不是個人風險／不是品牌比較。",
+  },
+  acgr1992: {
+    id: "acgr1992",
+    authors: "Williams KA, et al.",
+    title: "Factors predictive of corneal graft survival. Report from the Australian Corneal Graft Registry",
+    source: "Ophthalmology. 1992;99:403-414. DOI 10.1016/s0161-6420(92)31960-8",
+    pmid: "1565452",
+    note: "澳洲角膜移植登記預測因素教育。不是個人預後。",
+  },
+  ctfs1997: {
+    id: "ctfs1997",
+    authors: "Vail A, et al.; Collaborating Surgeons",
+    title: "Conclusions of the corneal transplant follow up study",
+    source: "Br J Ophthalmol. 1997;81:631-636. DOI 10.1136/bjo.81.8.631",
+    pmid: "9349147",
+    note: "英國 CTFS；受者因素與早期風險等教育。不是個人保證。",
+  },
+  ctfs1996: {
+    id: "ctfs1996",
+    authors: "Vail A, et al.; Corneal Transplant Follow-up Study Collaborators",
+    title:
+      "Clinical and surgical factors influencing corneal graft survival, visual acuity, and astigmatism",
+    source: "Ophthalmology. 1996;103:1843-1852. DOI 10.1016/s0161-6420(96)30734-3",
+    pmid: "8628559",
+    note: "CTFS 臨床與手術因素教育。不是個人預後。",
+  },
+  ehrt2012: {
+    id: "ehrt2012",
+    authors: "Ehrt O",
+    title: "Infantile and acquired nystagmus in childhood",
+    source: "Eur J Paediatr Neurol. 2012;16:567-572. DOI 10.1016/j.ejpn.2012.02.010",
+    pmid: "22459007",
+    note: "嬰幼兒 vs 後天眼球震顫警示徵象教育。",
+  },
+  bertsch2017: {
+    id: "bertsch2017",
+    authors: "Bertsch M, et al.",
+    title:
+      "The clinical evaluation of infantile nystagmus: What to do first and why",
+    source: "Ophthalmic Genet. 2017;38:22-33. DOI 10.1080/13816810.2016.1266667",
+    pmid: "28177849",
+    note: "嬰幼兒眼震評估次序／CEMAS 取向討論。不是自行診斷工具。",
+  },
+  coms18: {
+    id: "coms18",
+    authors: "Collaborative Ocular Melanoma Study Group",
+    title:
+      "The COMS randomized trial of iodine 125 brachytherapy for choroidal melanoma, III: initial mortality findings. COMS report No. 18",
+    source: "Arch Ophthalmol. 2001;119:969-982. DOI 10.1001/archopht.119.7.969",
+    pmid: "11448319",
+    note: "COMS 中等大小脈絡膜黑色素瘤；放射 vs 摘除。不是個人預後。",
+  },
+  coms28: {
+    id: "coms28",
+    authors: "Collaborative Ocular Melanoma Study Group",
+    title:
+      "The COMS randomized trial of iodine 125 brachytherapy for choroidal melanoma: V. Twelve-year mortality rates and prognostic factors: COMS report No. 28",
+    source: "Arch Ophthalmol. 2006;124:1684-1693. DOI 10.1001/archopht.124.12.1684",
+    pmid: "17159027",
+    note: "COMS 12 年死亡率與預後因素教育。不是個人預後。",
+  },
+  dimaras2012: {
+    id: "dimaras2012",
+    authors: "Dimaras H, et al.",
+    title: "Retinoblastoma",
+    source: "Lancet. 2012;379:1436-1446. DOI 10.1016/S0140-6736(11)61137-9",
+    pmid: "22414599",
+    note: "視網膜母細胞瘤兒童教育綜述；基因／臨床概覽。不是個人風險保證。",
+  },
+  murphree2005: {
+    id: "murphree2005",
+    authors: "Linn Murphree A",
+    title: "Intraocular retinoblastoma: the case for a new group classification",
+    source: "Ophthalmol Clin North Am. 2005;18:41-53. DOI 10.1016/j.ohc.2004.11.003",
+    pmid: "15763190",
+    note: "眼內視網膜母細胞瘤分期分類討論；教育用，不是自行分期工具。",
+  },
 };
 
 export function citationsFor(ids: string[]): Citation[] {
