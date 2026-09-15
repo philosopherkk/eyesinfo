@@ -9,7 +9,7 @@ import { EyeAnatomyViewer } from "@/components/eye-anatomy-viewer";
 import { EmergencyShell } from "@/components/emergency-shell";
 import { useI18n, TOOL_TEXT } from "@/i18n";
 import type { UiKey } from "@/i18n/ui";
-import { CONTENT_UPDATED, CONTENT_VERSION } from "@/lib/site";
+import { CONTENT_VERSION } from "@/lib/site";
 import { pageHead, SEO_SITE_NAME } from "@/lib/page-seo";
 import { EDITORIAL } from "@/data/editorial";
 
@@ -53,9 +53,9 @@ function Home() {
           {t("homeKicker")}
         </p>
         <p className="mt-1 text-[0.78rem] text-muted">
-          {t("clinicalReviewLabel")}：{EDITORIAL.reviewedIso}
+          {t("reviewed")}：{EDITORIAL.reviewedIso}
           <span aria-hidden="true"> · </span>
-          {t("siteVersionLabel")}：{CONTENT_VERSION} · {t("contentUpdated")} {CONTENT_UPDATED}
+          {t("siteVersionLabel")}：{CONTENT_VERSION}
         </p>
         <h1 className="mt-1 text-[1.45rem] font-semibold leading-tight tracking-tight text-navy sm:text-[1.55rem]">
           {t("homeTitle")}

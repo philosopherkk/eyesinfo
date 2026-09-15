@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { editorialBits, useI18n } from "@/i18n";
 import { DEFAULT_TOPIC_REVIEWER } from "@/data/editorial";
 import type { TopicReviewer } from "@/data/topics";
-import { CONTENT_UPDATED, CONTENT_VERSION } from "@/lib/site";
+import { CONTENT_VERSION } from "@/lib/site";
 
 function formatReviewed(
   isoOrDisplay: string | undefined,
@@ -64,11 +64,7 @@ export function EditorialFooter({
       {showEdition ? (
         <>
           <p>
-            {t("clinicalReviewLabel")}：{ed.reviewed}
-          </p>
-          <p>
-            {t("siteVersionLabel")}：{CONTENT_VERSION} · {t("contentUpdated")}{" "}
-            {CONTENT_UPDATED}
+            {t("siteVersionLabel")}：{CONTENT_VERSION}
           </p>
           <p>{t("langAuthority")}</p>
         </>
