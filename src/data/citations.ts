@@ -163,9 +163,19 @@ export const CITE: Record<string, Citation> = {
     id: "stapleton2008",
     authors: "Stapleton F, Keay L, Edwards K, et al.",
     title: "The incidence of contact lens-related microbial keratitis in Australia",
-    source: "Ophthalmology. 2008;115(10):1655-1662",
+    source:
+      "Ophthalmology. 2008;115(10):1655-1662. https://doi.org/10.1016/j.ophtha.2008.04.019",
     pmid: "18538404",
-    note: "日戴軟鏡微生物性角膜炎約每萬名戴者每年 2 例量級；過夜明顯較高。",
+    note: "日戴軟鏡約 1.9/萬人年；過夜軟鏡約 19.5、過夜矽水凝膠約 25.4。不是個人風險或品牌比較。",
+  },
+  lam2002mk: {
+    id: "lam2002mk",
+    authors: "Lam DSC, Houang E, Fan DSP, et al.",
+    title: "Incidence and risk factors for microbial keratitis in Hong Kong",
+    source:
+      "Eye (Lond). 2002;16(5):608-618. https://doi.org/10.1038/sj.eye.6700151",
+    pmid: "12194077",
+    note: "本港數列：日戴約 3/萬、延長配戴約 9/萬。教育約數；不是個人風險保證。",
   },
   carnt2016: {
     id: "carnt2016",

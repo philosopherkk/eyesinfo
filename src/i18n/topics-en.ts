@@ -915,7 +915,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
         "Myopia-control optical designs: discussed as a class only — no product names; children need adult help with hygiene and follow-up",
       ]),
       h("Microbial keratitis risk (multi-study ballparks)"),
-      p("Literature rates vary widely and are not your personal risk. Daily-wear soft lenses are often in the order of about 2–4 cases per 10,000 wearers per year; overnight / extended wear is clearly higher (some studies about 10–25 per 10,000; some Hong Kong series about 9 per 10,000). Daily disposables have not consistently lowered overall MK incidence, but severe infection and environmental organisms are less often seen. Figures are not a guarantee and are not a brand comparison."),
+      p("Incidence figures vary widely and are not your personal odds. A large Australian study (Stapleton et al., Ophthalmology 2008) reported about 1.9/10,000/year for daily-wear soft lenses; overnight soft about 19.5/10,000 and overnight silicone hydrogel about 25.4/10,000. A Hong Kong series (Lam et al., Eye 2002) reported about 3/10,000 for daily wear and about 9/10,000 for extended wear. Daily disposables in that Australian study had a similar overall rate to daily soft wear, with fewer severe infections reported. Figures are not a guarantee and not a brand comparison."),
       p("Even lenses labelled for continuous wear still raise infection risk overnight."),
       h("Hygiene and wear steps (education, not your personal prescription)"),
       ol([
