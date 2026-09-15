@@ -27,6 +27,15 @@ export const CITE: Record<string, Citation> = {
     pmid: "32019700",
     note: "LAMP 第二年。濃度、是否繼續須由醫生決定。",
   },
+  lamp22023: {
+    id: "lamp22023",
+    authors: "Yam JC, Zhang XJ, Chu WK, et al.",
+    title:
+      "Effect of Low-Concentration Atropine Eyedrops vs Placebo on Myopia Incidence in Children: The LAMP2 Randomized Clinical Trial",
+    source: "JAMA. 2023;329(6):472-481. DOI 10.1001/jama.2022.24162",
+    pmid: "36786791",
+    note: "LAMP2：尚未近視兒童的發生終點。數字是試驗結果，不是個人處方或濃度「最好」比較。",
+  },
   lam2004: {
     id: "lam2004",
     authors: "Lam CS, Goldschmidt E, Edwards MH",
@@ -54,7 +63,7 @@ export const CITE: Record<string, Citation> = {
     id: "zhang2023",
     authors: "Zhang XJ, Zhang Y, Kam KW, et al.",
     title: "Prevalence of myopia in children before, during, and after COVID-19 restrictions in Hong Kong",
-    source: "JAMA Netw Open. 2023;6(3):e234080",
+    source: "JAMA Netw Open. 2023;6(3):e234080. DOI 10.1001/jamanetworkopen.2023.4080",
     pmid: "36947037",
     note: "本港 6–8 歲散瞳調查：疫情前約 23–25%，2021 年約 36%。與中學篩查數字不可直接比較。",
   },

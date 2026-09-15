@@ -62,7 +62,7 @@ const zhHant = {
   a11yGaps:
     "部分示意動畫與複雜圖示（例如眼圖熱區）在輔助技術下的體驗仍可再改善；高對比主題與深色模式尚未提供。詳細清單會隨版本更新。",
   a11yDateH: "聲明日期",
-  a11yDate: "2026年9月15日（內容版本 1.55）",
+  a11yDate: "2026年9月15日（內容版本 1.56）",
   a11yFeedbackH: "意見與更正",
   a11yFeedback:
     "若發現無障礙或內容錯誤，請參閱法律與專業守則頁的覆核與更正說明。本站不提供診所電話、預約或即時通訊，亦不經此頁接收病歷。",
@@ -328,6 +328,10 @@ const zhHant = {
   iolDistNearSub: "約 40 厘米 · 賽程表",
   cat_lens: "晶體與屈光",
   cat_lens_sub: "近視遠視 · 白內障 · 斜視",
+  cat_lens_research_label: "華人／本港研究",
+  cat_lens_research_text:
+    "本港兒童眼科研究／LAMP2：疫情後近視盛行率上升；低濃度阿托品在特定兒童可降低發生風險（試驗約數）。詳見兒童近視專題。數字不是個人機率或診所效果保證。",
+  cat_lens_research_link: "兒童近視專題",
   cat_lid: "眼瞼與淚膜",
   cat_lid_sub: "乾眼 · 瞼炎 · 內翻 · 溢淚",
   cat_glaucoma: "青光眼與視神經",
@@ -423,7 +427,7 @@ const en: Record<Key, string> = {
   a11yGaps:
     "Some demos and complex diagrams (for example eye-map hotspots) can still improve with assistive technologies. A high-contrast theme and dark mode are not offered yet. The list will update with later versions.",
   a11yDateH: "Statement date",
-  a11yDate: "15 September 2026 (content version 1.55)",
+  a11yDate: "15 September 2026 (content version 1.56)",
   a11yFeedbackH: "Feedback and corrections",
   a11yFeedback:
     "For accessibility or content errors, see the review and corrections note on the Law and professional code page. This site does not list clinic phones, bookings or messaging, and does not take medical records here.",
@@ -697,6 +701,10 @@ const en: Record<Key, string> = {
   iolDistNearSub: "About 40 cm · fixture list",
   cat_lens: "Lens and refraction",
   cat_lens_sub: "Myopia, hyperopia · cataract · squint",
+  cat_lens_research_label: "Chinese / Hong Kong research",
+  cat_lens_research_text:
+    "Hong Kong Children Eye Study / LAMP2: myopia prevalence rose after pandemic restrictions; low-concentration atropine can lower incidence risk in selected children (trial figures). See the childhood myopia topic. Figures are not personal odds or a clinic outcome guarantee.",
+  cat_lens_research_link: "childhood myopia topic",
   cat_lid: "Eyelids and tear film",
   cat_lid_sub: "Dry eye · blepharitis · entropion · watering",
   cat_glaucoma: "Glaucoma and optic nerve",
@@ -790,7 +798,7 @@ const ja: Record<Key, string> = {
   a11yGaps:
     "一部の図示や複雑な図（眼の図のホットスポットなど）は支援技術での体験をさらに改善できます。高コントラストテーマとダークモードはまだありません。一覧は版に応じて更新します。",
   a11yDateH: "声明日",
-  a11yDate: "2026年9月15日（コンテンツ版 1.55）",
+  a11yDate: "2026年9月15日（コンテンツ版 1.56）",
   a11yFeedbackH: "意見と訂正",
   a11yFeedback:
     "アクセシビリティや内容の誤りは、法令と職業倫理の頁の確認・訂正の説明を参照してください。診療所電話・予約・メッセージ連絡は掲載せず、病歴も受け取りません。",
@@ -1061,6 +1069,10 @@ const ja: Record<Key, string> = {
   iolDistNearSub: "約40 cm · 日程表",
   cat_lens: "水晶体と屈折",
   cat_lens_sub: "近視遠視 · 白内障 · 斜視",
+  cat_lens_research_label: "華人／香港の研究",
+  cat_lens_research_text:
+    "香港小児眼科研究／LAMP2：制限後に近視有病率が上昇；低濃度アトロピンは特定の小児で発生リスクを下げうる（試験の概数）。詳しくは小児近視のページへ。数字は個人の確率やクリニック効果の保証ではありません。",
+  cat_lens_research_link: "小児近視のページ",
   cat_lid: "眼瞼と涙液",
   cat_lid_sub: "ドライアイ · 眼瞼炎 · 内反 · 流涙",
   cat_glaucoma: "緑内障と視神経",
