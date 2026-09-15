@@ -134,6 +134,52 @@ export const CITE: Record<string, Citation> = {
     pmid: "30862377",
     note: "選擇性激光小梁成形術作為一線選擇之一的隨機試驗。是否適合由醫生決定。",
   },
+  wang2019liwan: {
+    id: "wang2019liwan",
+    authors: "Wang L, Huang W, Huang S, et al.",
+    title: "Ten-year incidence of primary angle closure in elderly Chinese: the Liwan Eye Study",
+    source:
+      "Br J Ophthalmol. 2019;103(3):355-360. https://doi.org/10.1136/bjophthalmol-2017-311808",
+    pmid: "29777045",
+    note: "荔灣十年累積約數（基線開放角、≥50 歲城市華人）。族群教育約數；不是個人風險或診所保證。",
+  },
+  he2019zap: {
+    id: "he2019zap",
+    authors: "He M, Jiang Y, Huang S, et al.",
+    title:
+      "Laser peripheral iridotomy for the prevention of angle closure: a single-centre, randomised controlled trial",
+    source:
+      "Lancet. 2019;393(10181):1609-1618. https://doi.org/10.1016/S0140-6736(18)32607-2",
+    pmid: "30878226",
+    note: "ZAP：社區雙側 PACS 一眼 LPI。可降低進展風險，但整體進展及急性發作仍相對少見。是否預防性激光由醫生個別決定。",
+  },
+  yuan2023zap: {
+    id: "yuan2023zap",
+    authors: "Yuan Y, Wang W, Xiong R, et al.",
+    title:
+      "Fourteen-Year Outcome of Angle-Closure Prevention with Laser Peripheral Iridotomy in the Zhongshan Angle-Closure Prevention Study",
+    source:
+      "Ophthalmology. 2023. https://doi.org/10.1016/j.ophtha.2023.03.024",
+    pmid: "37030454",
+    note: "ZAP 十四年結局。長期約數屬公開研究；不是人人必須／人人不必的保證。",
+  },
+  lai2001apac: {
+    id: "lai2001apac",
+    authors: "Lai JSM, Liu DTL, Tham CCY, Li RT, Lam DSC",
+    title:
+      "Epidemiology of acute primary angle-closure glaucoma in the Hong Kong Chinese population: prospective study",
+    source: "Hong Kong Med J. 2001;7(2):118-123",
+    pmid: "11514744",
+    note: "本港急性原發閉角發作流行病學前瞻數列。觀察結果；不是感冒必發病或品牌比較。",
+  },
+  lai2012medaac: {
+    id: "lai2012medaac",
+    authors: "Lai JSM, Gangwani RA",
+    title: "Medication-induced acute angle closure attack",
+    source: "Hong Kong Med J. 2012;18(2):139-145",
+    pmid: "22477738",
+    note: "藥物誘發急性閉角綜述（機制教育）。本頁不列商品名；有窄房角史須告知配藥者。",
+  },
   areds2: {
     id: "areds2",
     authors: "Age-Related Eye Disease Study 2 Research Group",
