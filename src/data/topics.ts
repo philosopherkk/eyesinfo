@@ -893,7 +893,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "白內障手術類別",
     category: "lens",
     featured: false,
-    refs: ["escrs2007", "schaumberg1998", "donachie2023nod9", "lin2024ctr", "lin2025ctr"],
+    refs: ["escrs2007", "schaumberg1998", "donachie2023nod9"],
     blocks: [
       { type: "h", text: "何時值得與醫生討論手術" },
       {
@@ -960,11 +960,6 @@ export const CORE_TOPICS: Topic[] = [
           ["延伸景深（EDOF）", "遠至中距離較連貫，細字或仍需鏡"],
           ["多焦點／三焦點", "遠中近都嘗試兼顧，光學干擾（眩光、光暈）較明顯；有黃斑病變或明顯視野缺損者通常不宜"],
         ],
-      },
-      { type: "h", text: "高度近視與囊袋張力環（CTR）（教育，不是人人必須）" },
-      {
-        type: "p",
-        text: "高度近視（眼軸較長）白內障手術後，人工晶體位置較易偏位／傾斜。中山眼科中心隨機試驗（JAMA Ophthalmol 2024）：眼軸 ≥26 mm 個案分層後，部分人植入囊袋張力環（CTR）合併襻型人工晶體；在眼軸 ≥30 mm 一層，CTR 組臨床顯著偏位／傾斜比例較低，視覺質素相關指標較佳——屬該試驗結果，不是人人必須裝 CTR，亦不是診所效果保證。後續二次分析（JAMA Ophthalmol 2025）提示 CTR 不改變目標度數，並可改善部分新一代公式在極長眼軸的預測——仍由手術醫生個別決定。",
       },
       { type: "h", text: "文獻報告的手術相關風險（約數，不是任何診所成功率）" },
       {

@@ -243,24 +243,6 @@ export const CITE: Record<string, Citation> = {
     pmid: "32672800",
     note: "亞洲多中心 EVEREST II：有症狀黃斑 PCV，ranibizumab ± 維替泊芬光動力。試驗約數；不是個人預後或商品比較。",
   },
-  lin2024ctr: {
-    id: "lin2024ctr",
-    authors: "Lin H, Zhang J, Zhang Y, et al.",
-    title:
-      "Capsular Tension Ring Implantation for Intraocular Lens Decentration and Tilt in Highly Myopic Eyes: A Randomized Clinical Trial",
-    source: "JAMA Ophthalmol. 2024;142(8):708-715. DOI 10.1001/jamaophthalmol.2024.2215",
-    pmid: "38935400",
-    note: "中山眼科中心 RCT：眼軸 ≥26 mm 分層後 CTR 合併襻型人工晶體；≥30 mm 層偏位／傾斜比例較低。不是人人必須裝 CTR，亦不是診所效果保證。",
-  },
-  lin2025ctr: {
-    id: "lin2025ctr",
-    authors: "Lin H, Zhang J, Jin A, et al.",
-    title:
-      "Capsular Tension Ring Implantation for Intraocular Lens Power Calculation in Highly Myopic Eyes: Secondary Analysis of a Randomized Clinical Trial",
-    source: "JAMA Ophthalmol. 2025;143(5):373-381. DOI 10.1001/jamaophthalmol.2025.0110",
-    pmid: "40111331",
-    note: "同一試驗二次分析：CTR 不改變目標度數；極長眼軸可改善部分新一代公式預測。仍由手術醫生個別決定。",
-  },
   hollands2009: {
     id: "hollands2009",
     authors: "Hollands H, Johnson D, Brox AC, et al.",

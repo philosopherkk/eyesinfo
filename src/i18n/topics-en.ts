@@ -427,10 +427,6 @@ export const EN_PACKS: Record<string, TopicPack> = {
           ["Multifocal / trifocal", "Tries far, intermediate and near. More glare/halos. Usually unsuitable if there is macular disease or a significant field defect."],
         ],
       },
-      h("High myopia and capsular tension rings (CTR) (education — not everyone needs one)"),
-      p(
-        "After cataract surgery in high myopia (longer axial length), the intraocular lens is more prone to decentration / tilt. A Zhongshan Ophthalmic Center randomised trial (JAMA Ophthalmol 2024): after stratifying eyes with axial length ≥26 mm, some received a capsular tension ring (CTR) with a loop-haptic IOL; in the axial-length ≥30 mm stratum, the CTR group had a lower proportion of clinically significant decentration / tilt and better visual-quality–related measures — trial results, not a requirement that everyone needs a CTR, and not a clinic outcome guarantee. A later secondary analysis (JAMA Ophthalmol 2025) suggests CTR does not change the target refraction and may improve prediction of some newer formulas in extremely long eyes — still an individual surgical decision.",
-      ),
       h("Complication figures from the literature (not any clinic’s success rate)"),
       p("The ranges below are education-only ballparks; this page’s bibliography (the ESCRS endophthalmitis prophylaxis trial) does not map each row to a percentage. A harder nucleus, trauma, pseudoexfoliation, high myopia, a hypermature lens or combined vitreous surgery raise risk. These figures cannot predict one person, and they are not any clinic’s success rate."),
       {
