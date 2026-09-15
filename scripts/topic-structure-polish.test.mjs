@@ -129,9 +129,9 @@ describe("topic structure polish", () => {
     assert.match(read("src/lib/topic-related.ts"), /PRIMARY_TOPIC_CAP\s*=\s*5/);
   });
 
-  it("CONTENT_VERSION is 1.64", () => {
+  it("CONTENT_VERSION is 1.65", () => {
     const site = read("src/lib/site.ts");
-    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.64"/);
+    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.65"/);
     assert.match(site, /CONTENT_UPDATED\s*=\s*"2026-09-15"/);
   });
 
@@ -267,6 +267,56 @@ describe("topic structure polish", () => {
     }
     assert.match(extra, /不是個人預後/);
     assert.match(extra, /不是治癒保證|不保證治癒/);
+  });
+
+  it("PREM Exact 1.65 body deltas on t-cataract / t-dry / d4; no premiere HKOS cards", () => {
+    const topics = read("src/data/topics.ts");
+    const en = read("src/i18n/topics-en.ts");
+    const ja = read("src/i18n/topics-ja.ts");
+    const cites = read("src/data/citations.ts");
+    const hkos = read("src/data/hkos-videos.ts");
+
+    assert.match(topics, /要不要等「熟」了才做？/);
+    assert.match(topics, /FACT（Day 等，Ophthalmology 2020）/);
+    assert.match(topics, /FEMCAT（Schweitzer 等，Lancet 2020）/);
+    assert.match(topics, /為什麼「點了又點」仍不舒服？/);
+    assert.match(topics, /DREAM 隨機試驗/);
+    assert.match(topics, /醫生或會討論的三大處理方向/);
+    assert.match(topics, /不能還原已失去的視野/);
+    assert.match(topics, /LiGHT 試驗支持作為適合個案的一線選擇之一/);
+
+    assert.match(en, /Do you have to wait until it is “ripe”\?/);
+    assert.match(en, /FACT \(Day et al\., Ophthalmology 2020\)/);
+    assert.match(en, /Why drops again and again still feel inadequate/);
+    assert.match(en, /DREAM randomised trial/);
+    assert.match(en, /Three care directions a doctor may discuss/);
+
+    assert.match(ja, /「熟してから」手術？/);
+    assert.match(ja, /FACT（Dayら、Ophthalmology 2020）/);
+    assert.match(ja, /なぜ「点しても点しても」楽にならないのか/);
+    assert.match(ja, /DREAM無作為試験/);
+    assert.match(ja, /医師が話し合う三大の対処方向/);
+
+    for (const id of ["fact2020", "femcat2020", "dream2018"]) {
+      assert.match(cites, new RegExp(`${id}:`));
+    }
+    assert.match(cites, /pmid:\s*"32386810"/);
+    assert.match(cites, /pmid:\s*"31954466"/);
+    assert.match(cites, /pmid:\s*"29652551"/);
+
+    assert.match(
+      topics,
+      /id:\s*"t-cataract"[\s\S]*?refs:\s*\[[^\]]*fact2020[^\]]*femcat2020/,
+    );
+    assert.match(
+      topics,
+      /id:\s*"t-dry"[\s\S]*?refs:\s*\[[^\]]*dews2[^\]]*dews2mgmt[^\]]*dream2018/,
+    );
+
+    for (const id of ["1Fv0tt5RIrY", "WRreYLmCkXI", "2660xOJZ3as", "_zFsVEKbbBI"]) {
+      assert.doesNotMatch(hkos, new RegExp(id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+    }
+    assert.doesNotMatch(topics, /t-three-symptoms|三大症狀專題/);
   });
 });
 
