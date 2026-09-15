@@ -110,11 +110,6 @@ export const CATEGORIES: {
     id: "surface",
     title: "角膜與眼表",
     subtitle: "結膜炎 · 過敏 · 激光治療角膜表面（PTK）",
-    researchNote: {
-      label: "華人／本港研究",
-      text: "中山乾眼結膜微生物群研究支持分型／瞼緣護理教育；不是益生菌有效證明，亦不推介任何益生菌或品牌。詳見乾眼專題。",
-      href: "/t/t-dry",
-    },
   },
 ];
 
@@ -1095,7 +1090,6 @@ export const CORE_TOPICS: Topic[] = [
     meta: "蒸發型 · 水液不足 · 混合型",
     category: "lid",
     featured: false,
-    refs: ["liang2021ded"],
     blocks: [
       {
         type: "p",
@@ -1110,11 +1104,6 @@ export const CORE_TOPICS: Topic[] = [
           ["滲透壓", "約 ≤308 mOsm/L 較常視為可接受；明顯升高支持乾眼診斷"],
           ["MMP-9 快速檢測", "陽性提示眼表炎症，是否用藥仍由醫生決定"],
         ],
-      },
-      { type: "h", text: "結膜微生物群與分型教育（不是益生菌療效）" },
-      {
-        type: "p",
-        text: "乾眼是多因素眼表病。中山團隊 shotgun 宏基因組研究（Front Cell Dev Biol 2021）顯示乾眼結膜微生物群多樣性下降、個體差異增大，不同乾眼亞型（如瞼板腺功能障礙相關）菌種模式可不同——支持「分型／瞼緣護理」教育，不是證明益生菌有效，亦不推介任何益生菌或品牌產品。",
       },
       { type: "h", text: "醫生或會按嚴重程度討論的類別" },
       {

@@ -53,11 +53,6 @@ const CAT_RESEARCH: Partial<
     text: "cat_retina_research_text",
     link: "cat_retina_research_link",
   },
-  surface: {
-    label: "cat_surface_research_label",
-    text: "cat_surface_research_text",
-    link: "cat_surface_research_link",
-  },
 };
 
 function CategoryResearchNote({

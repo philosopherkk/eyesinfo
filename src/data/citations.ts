@@ -261,15 +261,6 @@ export const CITE: Record<string, Citation> = {
     pmid: "40111331",
     note: "同一試驗二次分析：CTR 不改變目標度數；極長眼軸可改善部分新一代公式預測。仍由手術醫生個別決定。",
   },
-  liang2021ded: {
-    id: "liang2021ded",
-    authors: "Liang Q, Li J, Zou Y, et al.",
-    title:
-      "Metagenomic Analysis Reveals the Heterogeneity of Conjunctival Microbiota Dysbiosis in Dry Eye Disease",
-    source: "Front Cell Dev Biol. 2021;9:731867. DOI 10.3389/fcell.2021.731867",
-    pmid: "34900990",
-    note: "中山 shotgun 宏基因組：乾眼結膜微生物群多樣性下降、亞型菌種模式可不同。支持分型／瞼緣護理教育，不是益生菌療效證明。",
-  },
   hollands2009: {
     id: "hollands2009",
     authors: "Hollands H, Johnson D, Brox AC, et al.",

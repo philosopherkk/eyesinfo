@@ -499,10 +499,6 @@ export const EN_PACKS: Record<string, TopicPack> = {
           ["MMP-9 rapid test", "Positive suggests ocular-surface inflammation; whether to medicate is still the doctor’s decision"],
         ],
       },
-      h("Conjunctival microbiota and subtype education (not probiotic efficacy)"),
-      p(
-        "Dry eye is a multifactorial ocular-surface disease. A Zhongshan team shotgun metagenomic study (Front Cell Dev Biol 2021) showed lower conjunctival microbiota diversity in dry eye, greater between-person variation, and different species patterns across dry-eye subtypes (for example those linked to meibomian gland dysfunction) — supporting subtype / lid-margin care education, not proof that probiotics work, and not a recommendation of any probiotic or brand product.",
-      ),
       h("Categories a doctor may discuss by severity"),
       ul([
         "Lubrication: preservative-free artificial tears (hyaluronic acid, carboxymethylcellulose, HP-Guar and similar classes); warm compresses; less screen time; humidify. Forms and frequency: lubricant topic",
