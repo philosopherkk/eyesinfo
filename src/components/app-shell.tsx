@@ -8,7 +8,7 @@ import { useI18n } from "@/i18n";
 import { LOCALES } from "@/i18n/locale";
 import { LangSwitch } from "@/components/lang-switch";
 import { Breadcrumbs } from "@/components/breadcrumbs";
-import { CONTENT_UPDATED, CONTENT_VERSION, COPYRIGHT_LINE, PUBLIC_ORIGIN } from "@/lib/site";
+import { CONTENT_VERSION, COPYRIGHT_LINE, PUBLIC_ORIGIN } from "@/lib/site";
 import { EDITORIAL } from "@/data/editorial";
 import { LegalBanner } from "@/components/legal-banner";
 import { LegalShortLine } from "@/components/legal-short-line";
@@ -106,11 +106,10 @@ export function AppShell({ children }: { children: ReactNode }) {
         </div>
         <footer className="px-4 pb-5 pt-4 text-center text-[0.7rem] leading-relaxed text-muted no-print">
           <p>
-            {t("clinicalReviewLabel")}：{EDITORIAL.reviewedIso}
+            {t("reviewed")}：{EDITORIAL.reviewedIso}
           </p>
           <p className="mt-1">
-            {t("siteVersionLabel")}：{CONTENT_VERSION} · {t("contentUpdated")}{" "}
-            {CONTENT_UPDATED}
+            {t("siteVersionLabel")}：{CONTENT_VERSION}
           </p>
           <p className="mt-1">{t("langAuthority")}</p>
           <p className="mt-1">
