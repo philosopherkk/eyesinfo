@@ -62,7 +62,7 @@ const zhHant = {
   a11yGaps:
     "部分示意動畫與複雜圖示（例如眼圖熱區）在輔助技術下的體驗仍可再改善；高對比主題與深色模式尚未提供。詳細清單會隨版本更新。",
   a11yDateH: "聲明日期",
-  a11yDate: "2026年9月15日（內容版本 1.56）",
+  a11yDate: "2026年9月15日（內容版本 1.57）",
   a11yFeedbackH: "意見與更正",
   a11yFeedback:
     "若發現無障礙或內容錯誤，請參閱法律與專業守則頁的覆核與更正說明。本站不提供診所電話、預約或即時通訊，亦不經此頁接收病歷。",
@@ -338,6 +338,10 @@ const zhHant = {
   cat_glaucoma_sub: "眼壓 · 視神經掃描（OCT）· 視野檢查",
   cat_retina: "視網膜與黃斑",
   cat_retina_sub: "黃斑病變 · 糖尿上眼 · 視網膜脫離",
+  cat_retina_research_label: "華人／本港研究",
+  cat_retina_research_text:
+    "華人／東亞較常見 PCV；中國 RCT（STAR、Sailing）支持抗 VEGF 類別用於 PCV／DME 的視力相關討論。詳見抗 VEGF／黃斑專題。不比較商品。",
+  cat_retina_research_link: "抗 VEGF／黃斑專題",
   cat_surface: "角膜與眼表",
   cat_surface_sub: "結膜炎 · 過敏 · 激光治療角膜表面（PTK）",
   qrSub: "二維碼產生器",
@@ -427,7 +431,7 @@ const en: Record<Key, string> = {
   a11yGaps:
     "Some demos and complex diagrams (for example eye-map hotspots) can still improve with assistive technologies. A high-contrast theme and dark mode are not offered yet. The list will update with later versions.",
   a11yDateH: "Statement date",
-  a11yDate: "15 September 2026 (content version 1.56)",
+  a11yDate: "15 September 2026 (content version 1.57)",
   a11yFeedbackH: "Feedback and corrections",
   a11yFeedback:
     "For accessibility or content errors, see the review and corrections note on the Law and professional code page. This site does not list clinic phones, bookings or messaging, and does not take medical records here.",
@@ -711,6 +715,10 @@ const en: Record<Key, string> = {
   cat_glaucoma_sub: "Eye pressure · optic-nerve scan (OCT) · visual field",
   cat_retina: "Retina and macula",
   cat_retina_sub: "Macular degeneration · diabetic eye disease · detachment",
+  cat_retina_research_label: "Chinese / Hong Kong research",
+  cat_retina_research_text:
+    "PCV is more common in Chinese / East Asian wet disease; Chinese RCTs (STAR, Sailing) support anti-VEGF class discussion for vision-related PCV / DME care. See the anti-VEGF / macula topic. No product comparison.",
+  cat_retina_research_link: "anti-VEGF / macula topic",
   cat_surface: "Cornea and ocular surface",
   cat_surface_sub: "Conjunctivitis · allergy · laser for corneal surface (PTK)",
   qrSub: "QR code generator",
@@ -798,7 +806,7 @@ const ja: Record<Key, string> = {
   a11yGaps:
     "一部の図示や複雑な図（眼の図のホットスポットなど）は支援技術での体験をさらに改善できます。高コントラストテーマとダークモードはまだありません。一覧は版に応じて更新します。",
   a11yDateH: "声明日",
-  a11yDate: "2026年9月15日（コンテンツ版 1.56）",
+  a11yDate: "2026年9月15日（コンテンツ版 1.57）",
   a11yFeedbackH: "意見と訂正",
   a11yFeedback:
     "アクセシビリティや内容の誤りは、法令と職業倫理の頁の確認・訂正の説明を参照してください。診療所電話・予約・メッセージ連絡は掲載せず、病歴も受け取りません。",
@@ -1079,6 +1087,10 @@ const ja: Record<Key, string> = {
   cat_glaucoma_sub: "眼圧 · 視神経スキャン（OCT）· 視野検査",
   cat_retina: "網膜と黄斑",
   cat_retina_sub: "黄斑変性 · 糖尿病の目の合併症 · 網膜剥離",
+  cat_retina_research_label: "華人／香港の研究",
+  cat_retina_research_text:
+    "華人／東アジアではPCVがより多い；中国のRCT（STAR、Sailing）はPCV／DMEの視力関連の議論で抗VEGFクラスを支持する。詳しくは抗VEGF／黄斑のページへ。商品比較はしません。",
+  cat_retina_research_link: "抗VEGF／黄斑のページ",
   cat_surface: "角膜と眼表面",
   cat_surface_sub: "結膜炎 · アレルギー · 角膜表面のレーザー治療（PTK）",
   qrSub: "二次元コード作成",

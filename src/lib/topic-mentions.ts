@@ -45,6 +45,7 @@ const MENTION_ALIASES: MentionLink[] = [
   { phrase: "YAG 後囊切開與視網膜屏障激光", href: "/t/t-yag" },
   { phrase: "正確使用眼藥水", href: "/t/t-drops" },
   { phrase: "兒童近視專題", href: "/t/t-myopia" },
+  { phrase: "玻璃體內注射專題", href: "/t/t-vegf" },
   { phrase: "激光矯視專題", href: "/t/t-lasik" },
   { phrase: "隱形眼鏡專題", href: "/t/t-cl" },
   { phrase: "斜視專題", href: "/t/t-strab" },
