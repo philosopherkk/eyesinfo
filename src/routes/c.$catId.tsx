@@ -48,6 +48,11 @@ const CAT_RESEARCH: Partial<
     text: "cat_lens_research_text",
     link: "cat_lens_research_link",
   },
+  retina: {
+    label: "cat_retina_research_label",
+    text: "cat_retina_research_text",
+    link: "cat_retina_research_link",
+  },
 };
 
 function CategoryResearchNote({

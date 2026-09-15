@@ -206,6 +206,24 @@ export const CITE: Record<string, Citation> = {
     pmid: "21506142",
     note: "比較兩種抗血管內皮生長因子注射的大型試驗。本頁不列商品名、不保證視力。",
   },
+  star2023: {
+    id: "star2023",
+    authors: "Li X, Qu J, Su G, et al.; STAR Study Group",
+    title:
+      "The comparison of two different strategies of intravitreal conbercept for polypoidal choroidal vasculopathy in Chinese patients results from a 48-week randomized phase 4 study: STAR study",
+    source: "Acta Ophthalmol. 2023;101(3):e327-e337. DOI 10.1111/aos.15272",
+    pmid: "36259089",
+    note: "中國多中心 STAR：初治 PCV 固定間隔與 treat-and-extend。說明策略調整，不是商品或診所成功率比較。",
+  },
+  sailing2022: {
+    id: "sailing2022",
+    authors: "Liu K, Wang H, He W, et al.",
+    title:
+      "Intravitreal conbercept for diabetic macular oedema: 2-year results from a randomised controlled trial and open-label extension study",
+    source: "Br J Ophthalmol. 2022;106(10):1436-1443. DOI 10.1136/bjophthalmol-2020-318690",
+    pmid: "34001667",
+    note: "中國多中心 Sailing：中心凹受累 DME 按需抗 VEGF 相對激光／安慰劑注射的一年視力約數。不是個人預後或品牌比較。",
+  },
   hollands2009: {
     id: "hollands2009",
     authors: "Hollands H, Johnson D, Brox AC, et al.",
