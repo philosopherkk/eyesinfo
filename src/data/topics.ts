@@ -70,12 +70,30 @@ export function topicCardTitle(title: string): string {
   return title;
 }
 
+/** Optional education callout on a category hub (e.g. local research chip). TC source. */
+export type CategoryResearchNote = {
+  label: string;
+  text: string;
+  /** Internal path, e.g. /t/t-myopia */
+  href: string;
+};
+
 export const CATEGORIES: {
   id: CategoryId;
   title: string;
   subtitle: string;
+  researchNote?: CategoryResearchNote;
 }[] = [
-  { id: "lens", title: "晶體與屈光", subtitle: "近視遠視 · 白內障 · 斜視" },
+  {
+    id: "lens",
+    title: "晶體與屈光",
+    subtitle: "近視遠視 · 白內障 · 斜視",
+    researchNote: {
+      label: "華人／本港研究",
+      text: "本港兒童眼科研究／LAMP2：疫情後近視盛行率上升；低濃度阿托品在特定兒童可降低發生風險（試驗約數）。詳見兒童近視專題。數字不是個人機率或診所效果保證。",
+      href: "/t/t-myopia",
+    },
+  },
   { id: "lid", title: "眼瞼與淚膜", subtitle: "乾眼 · 瞼炎 · 內翻 · 溢淚" },
   { id: "glaucoma", title: "青光眼與視神經", subtitle: "眼壓 · 視神經掃描（OCT）· 視野檢查" },
   { id: "retina", title: "視網膜與黃斑", subtitle: "黃斑病變 · 糖尿上眼 · 視網膜脫離" },
@@ -744,7 +762,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "戶外 · 阿托品 · 光學離焦",
     category: "lens",
     featured: false,
-    refs: ["lamp2019", "lamp2020", "he2015", "rose2008"],
+    refs: ["lamp2019", "lamp2020", "lamp22023", "zhang2023", "he2015", "rose2008"],
     blocks: [
       {
         type: "p",
@@ -754,6 +772,11 @@ export const CORE_TOPICS: Topic[] = [
       {
         type: "p",
         text: "戶外自然光同減慢近視出現有關；樹蔭、走廊、行路返學都算。唔使追求好猛嘅太陽。每日大約幾耐，由學校或醫生按年齡同生活講，唔好當自己開光度處方。戶外時間工具頁是公共衞生約數記錄，不是個人減度進度報告。",
+      },
+      { type: "h", text: "本港兒童近視：疫情前後約數（教育）" },
+      {
+        type: "p",
+        text: "香港兒童眼科研究（Hong Kong Children Eye Study）重複橫斷面數據（JAMA Network Open 2023）：6–8 歲兒童近視盛行率在 2015–2019 約維持 23.5–24.9%，2020（限制期間）升至約 28.8%，2021（限制放寬後）約 36.2%——不是你的孩子個人機率，亦不是品牌比較。同期戶外時間較疫情前減少，近距離／螢幕時間增加；較年幼及較低收入家庭兒童在疫情期間風險較高（該研究觀察）。限制放寬後生活習慣未完全回到疫情前——支持繼續重視戶外與近距離衛生，不是保證減慢度數。",
       },
       { type: "h", text: "低濃度阿托品（處方藥物）" },
       {
@@ -773,6 +796,11 @@ export const CORE_TOPICS: Topic[] = [
       {
         type: "p",
         text: "可能出現的副作用包括畏光、近距輕微模糊、停藥後反彈（較高濃度較明顯）、偶發過敏性結膜炎。日間或需變色／抗紫外線鏡。本表只引第一年已發表文獻數字；其後年份另有報告；是否續用由醫生決定。停藥後可能反彈。以上不是比較哪一個濃度「最好」，亦不是跨品牌／跨療法抑制率排行榜。",
+      },
+      { type: "h", text: "LAMP2：尚未近視的兒童（發生，不是控制已有度數）" },
+      {
+        type: "p",
+        text: "同一港人團隊的 LAMP2 隨機試驗（JAMA 2023）：4–9 歲、散瞳後尚未達近視標準的兒童，夜間點低濃度阿托品兩年。兩年累積近視發生率：0.05% 組約 28.4%、0.01% 組約 45.9%、安慰劑組約 53.0%；快速近視移位比例亦以 0.05% 組較低。0.01% 與安慰劑在該終點無顯著差異。數字是該試驗結果，不是個人處方、不是比較哪一濃度「最好」、亦不是跨品牌排行。濃度、是否使用、何時停藥只可由註冊醫生按檢查決定；家長不可自行稀釋或購買來路不明製劑。畏光等副作用見上段。",
       },
       { type: "h", text: "光學離焦類方法" },
       {
