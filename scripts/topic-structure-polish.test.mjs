@@ -202,6 +202,9 @@ describe("topic structure polish", () => {
     assert.match(ui, /不能保證視力回到阻塞前/);
     assert.match(ui, /本站不以該影片為準/);
     assert.match(ui, /已損失的視野及視神經纖維不能還原/);
+    assert.match(ui, /亦不採納該說法/);
+    assert.match(ui, /不是治癒、不是保證恢復/);
+    assert.match(ui, /亦不要自行用藥/);
     assert.match(ui, /立即急症室／999/);
     const lasikBlock = data.match(/"t-lasik":\s*\[[\s\S]*?\],\s*\n\s*"t-/);
     assert.ok(lasikBlock, "t-lasik block present");
