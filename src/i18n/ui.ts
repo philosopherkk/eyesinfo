@@ -62,7 +62,7 @@ const zhHant = {
   a11yGaps:
     "部分示意動畫與複雜圖示（例如眼圖熱區）在輔助技術下的體驗仍可再改善；高對比主題與深色模式尚未提供。詳細清單會隨版本更新。",
   a11yDateH: "聲明日期",
-  a11yDate: "2026年9月15日（內容版本 1.57）",
+  a11yDate: "2026年9月15日（內容版本 1.58）",
   a11yFeedbackH: "意見與更正",
   a11yFeedback:
     "若發現無障礙或內容錯誤，請參閱法律與專業守則頁的覆核與更正說明。本站不提供診所電話、預約或即時通訊，亦不經此頁接收病歷。",
@@ -344,6 +344,10 @@ const zhHant = {
   cat_retina_research_link: "抗 VEGF／黃斑專題",
   cat_surface: "角膜與眼表",
   cat_surface_sub: "結膜炎 · 過敏 · 激光治療角膜表面（PTK）",
+  cat_surface_research_label: "華人／本港研究",
+  cat_surface_research_text:
+    "中山乾眼結膜微生物群研究支持分型／瞼緣護理教育；不是益生菌有效證明，亦不推介任何益生菌或品牌。詳見乾眼專題。",
+  cat_surface_research_link: "乾眼專題",
   qrSub: "二維碼產生器",
   qrLead: "輸入網址或任何文字，圖樣即時更新。可改顏色、尺寸、容錯後下載 PNG。本頁不是診療、預約或轉介。",
   qrContent: "內容",
@@ -431,7 +435,7 @@ const en: Record<Key, string> = {
   a11yGaps:
     "Some demos and complex diagrams (for example eye-map hotspots) can still improve with assistive technologies. A high-contrast theme and dark mode are not offered yet. The list will update with later versions.",
   a11yDateH: "Statement date",
-  a11yDate: "15 September 2026 (content version 1.57)",
+  a11yDate: "15 September 2026 (content version 1.58)",
   a11yFeedbackH: "Feedback and corrections",
   a11yFeedback:
     "For accessibility or content errors, see the review and corrections note on the Law and professional code page. This site does not list clinic phones, bookings or messaging, and does not take medical records here.",
@@ -721,6 +725,10 @@ const en: Record<Key, string> = {
   cat_retina_research_link: "anti-VEGF / macula topic",
   cat_surface: "Cornea and ocular surface",
   cat_surface_sub: "Conjunctivitis · allergy · laser for corneal surface (PTK)",
+  cat_surface_research_label: "Chinese / Hong Kong research",
+  cat_surface_research_text:
+    "Zhongshan dry-eye conjunctival microbiota research supports subtype / lid-margin care education; it is not proof that probiotics work, and does not recommend any probiotic or brand. See the dry-eye topic.",
+  cat_surface_research_link: "dry-eye topic",
   qrSub: "QR code generator",
   qrLead:
     "Type a URL or any text. The mark updates as you go. Colours, size and error correction, then download a PNG. This page is not a consultation, booking or referral.",
@@ -806,7 +814,7 @@ const ja: Record<Key, string> = {
   a11yGaps:
     "一部の図示や複雑な図（眼の図のホットスポットなど）は支援技術での体験をさらに改善できます。高コントラストテーマとダークモードはまだありません。一覧は版に応じて更新します。",
   a11yDateH: "声明日",
-  a11yDate: "2026年9月15日（コンテンツ版 1.57）",
+  a11yDate: "2026年9月15日（コンテンツ版 1.58）",
   a11yFeedbackH: "意見と訂正",
   a11yFeedback:
     "アクセシビリティや内容の誤りは、法令と職業倫理の頁の確認・訂正の説明を参照してください。診療所電話・予約・メッセージ連絡は掲載せず、病歴も受け取りません。",
@@ -1093,6 +1101,10 @@ const ja: Record<Key, string> = {
   cat_retina_research_link: "抗VEGF／黄斑のページ",
   cat_surface: "角膜と眼表面",
   cat_surface_sub: "結膜炎 · アレルギー · 角膜表面のレーザー治療（PTK）",
+  cat_surface_research_label: "華人／香港の研究",
+  cat_surface_research_text:
+    "中山のドライアイ結膜微生物叢研究は病型／眼瞼縁ケアの教育を支持する；プロバイオティクス有効の証明ではなく、いかなるプロバイオティクスやブランドも推介しない。詳しくはドライアイのページへ。",
+  cat_surface_research_link: "ドライアイのページ",
   qrSub: "二次元コード作成",
   qrLead:
     "URLや任意の文字を入れると図がすぐ更新されます。色・サイズ・誤り訂正を選んでPNGを保存。診療・予約・紹介ではありません。",

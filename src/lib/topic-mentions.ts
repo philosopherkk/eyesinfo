@@ -40,6 +40,7 @@ const MENTION_ALIASES: MentionLink[] = [
   { phrase: "潤眼液與潤滑劑", href: "/t/t-lube" },
   { phrase: "潤滑劑專題", href: "/t/t-lube" },
   { phrase: "乾眼處理梯階", href: "/t/t-dry" },
+  { phrase: "乾眼專題", href: "/t/t-dry" },
   { phrase: "超聲波乳化與人工晶體", href: "/t/t-cataract" },
   { phrase: "超聲波乳化專題", href: "/t/t-cataract" },
   { phrase: "YAG 後囊切開與視網膜屏障激光", href: "/t/t-yag" },
