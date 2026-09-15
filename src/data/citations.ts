@@ -90,7 +90,7 @@ export const CITE: Record<string, Citation> = {
     title: "TFOS DEWS II definition and classification report",
     source: "Ocul Surf. 2017;15(3):276-283",
     pmid: "28736335",
-    note: "國際乾眼定義與分類。",
+    note: "國際乾眼定義與分類（蒸發／水液／混合）。教育架構；不是個人診斷標籤。",
   },
   dews2mgmt: {
     id: "dews2mgmt",
@@ -98,7 +98,16 @@ export const CITE: Record<string, Citation> = {
     title: "TFOS DEWS II Management and Therapy Report",
     source: "Ocul Surf. 2017;15(3):575-628",
     pmid: "28736343",
-    note: "潤滑劑減輕症狀，不是根治。",
+    note: "分階處理共識。潤滑減輕症狀，不是根治；階梯不是購物清單。",
+  },
+  dream2018: {
+    id: "dream2018",
+    authors:
+      "Dry Eye Assessment and Management Study Research Group; Asbell PA, Maguire MG, et al.",
+    title: "n-3 Fatty Acid Supplementation for the Treatment of Dry Eye Disease",
+    source: "N Engl J Med. 2018;378(18):1681-1690. DOI 10.1056/NEJMoa1709691",
+    pmid: "29652551",
+    note: "DREAM：n-3 補充相對安慰劑未達主要徵狀優效。不是個人預後／不是品牌比較。",
   },
   ohts2002: {
     id: "ohts2002",
@@ -380,6 +389,24 @@ export const CITE: Record<string, Citation> = {
     source: "Eye (Lond). 2023;37(8):1633-1639. DOI 10.1038/s41433-022-02204-1",
     pmid: "36002508",
     note: "英國 RCOphth NOD 大型登記：後囊混濁風險隨時間上升。公開教育；不作個人預後。",
+  },
+  fact2020: {
+    id: "fact2020",
+    authors: "Day AC, Burr JM, Bennett K, et al.",
+    title:
+      "Femtosecond Laser-Assisted Cataract Surgery Versus Phacoemulsification Cataract Surgery (FACT): A Randomized Noninferiority Trial",
+    source: "Ophthalmology. 2020;127(8):1012-1019. DOI 10.1016/j.ophtha.2020.02.028",
+    pmid: "32386810",
+    note: "飛秒相對傳統超乳的隨機非劣效試驗；主要視力結局未支持「人人升級」。不是個人預後／不是品牌比較。",
+  },
+  femcat2020: {
+    id: "femcat2020",
+    authors: "Schweitzer C, Brezin A, Cochener B, et al.",
+    title:
+      "Femtosecond laser-assisted versus phacoemulsification cataract surgery (FEMCAT): a multicentre participant-masked randomised superiority and cost-effectiveness trial",
+    source: "Lancet. 2020;395(10219):212-224. DOI 10.1016/S0140-6736(19)32481-X",
+    pmid: "31954466",
+    note: "飛秒優效／成本效益未達常規全面採用門檻。公開試驗；不是診所保證。",
   },
   hayreh2005: {
     id: "hayreh2005",
