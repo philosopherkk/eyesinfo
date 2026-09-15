@@ -106,7 +106,16 @@ export const CATEGORIES: {
       href: "/t/t-vegf",
     },
   },
-  { id: "surface", title: "角膜與眼表", subtitle: "結膜炎 · 過敏 · 激光治療角膜表面（PTK）" },
+  {
+    id: "surface",
+    title: "角膜與眼表",
+    subtitle: "結膜炎 · 過敏 · 激光治療角膜表面（PTK）",
+    researchNote: {
+      label: "華人／本港研究",
+      text: "中山乾眼結膜微生物群研究支持分型／瞼緣護理教育；不是益生菌有效證明，亦不推介任何益生菌或品牌。詳見乾眼專題。",
+      href: "/t/t-dry",
+    },
+  },
 ];
 
 export const CORE_TOPICS: Topic[] = [
@@ -853,7 +862,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "白內障手術類別",
     category: "lens",
     featured: false,
-    refs: ["escrs2007", "schaumberg1998", "donachie2023nod9"],
+    refs: ["escrs2007", "schaumberg1998", "donachie2023nod9", "lin2024ctr", "lin2025ctr"],
     blocks: [
       { type: "h", text: "何時值得與醫生討論手術" },
       {
@@ -920,6 +929,11 @@ export const CORE_TOPICS: Topic[] = [
           ["延伸景深（EDOF）", "遠至中距離較連貫，細字或仍需鏡"],
           ["多焦點／三焦點", "遠中近都嘗試兼顧，光學干擾（眩光、光暈）較明顯；有黃斑病變或明顯視野缺損者通常不宜"],
         ],
+      },
+      { type: "h", text: "高度近視與囊袋張力環（CTR）（教育，不是人人必須）" },
+      {
+        type: "p",
+        text: "高度近視（眼軸較長）白內障手術後，人工晶體位置較易偏位／傾斜。中山眼科中心隨機試驗（JAMA Ophthalmol 2024）：眼軸 ≥26 mm 個案分層後，部分人植入囊袋張力環（CTR）合併襻型人工晶體；在眼軸 ≥30 mm 一層，CTR 組臨床顯著偏位／傾斜比例較低，視覺質素相關指標較佳——屬該試驗結果，不是人人必須裝 CTR，亦不是診所效果保證。後續二次分析（JAMA Ophthalmol 2025）提示 CTR 不改變目標度數，並可改善部分新一代公式在極長眼軸的預測——仍由手術醫生個別決定。",
       },
       { type: "h", text: "文獻報告的手術相關風險（約數，不是任何診所成功率）" },
       {
@@ -1045,6 +1059,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "蒸發型 · 水液不足 · 混合型",
     category: "lid",
     featured: false,
+    refs: ["liang2021ded"],
     blocks: [
       {
         type: "p",
@@ -1059,6 +1074,11 @@ export const CORE_TOPICS: Topic[] = [
           ["滲透壓", "約 ≤308 mOsm/L 較常視為可接受；明顯升高支持乾眼診斷"],
           ["MMP-9 快速檢測", "陽性提示眼表炎症，是否用藥仍由醫生決定"],
         ],
+      },
+      { type: "h", text: "結膜微生物群與分型教育（不是益生菌療效）" },
+      {
+        type: "p",
+        text: "乾眼是多因素眼表病。中山團隊 shotgun 宏基因組研究（Front Cell Dev Biol 2021）顯示乾眼結膜微生物群多樣性下降、個體差異增大，不同乾眼亞型（如瞼板腺功能障礙相關）菌種模式可不同——支持「分型／瞼緣護理」教育，不是證明益生菌有效，亦不推介任何益生菌或品牌產品。",
       },
       { type: "h", text: "醫生或會按嚴重程度討論的類別" },
       {
