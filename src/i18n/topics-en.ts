@@ -240,12 +240,39 @@ export const EN_PACKS: Record<string, TopicPack> = {
     meta: "Often called 打眼底針 in Hong Kong",
     blocks: [
       p("Anti-VEGF medicine is given into the vitreous for some macular neovascular or oedematous diseases. Whether it is suitable, which Hong Kong-registered product, how often and at what interval, is decided by an ophthalmologist after examination and OCT. This page does not sell or promote any injection and cannot promise better vision."),
-      h("Drug class discussed in Hong Kong"),
-      p("An ophthalmologist may choose an anti-VEGF injection according to registered indications. Products differ in indication, interval and public/private supply. Product names are not listed here so this is not a medicine advertisement. Overseas approval does not mean Hong Kong registration."),
-      h("Polypoidal choroidal vasculopathy (PCV) and dosing strategy (education)"),
-      p("Polypoidal choroidal vasculopathy (PCV) is more common in East Asian / Chinese wet macular disease and often needs tools such as indocyanine green angiography (ICGA) to help distinguish it — not self-labelling. The Chinese multicentre STAR randomised trial (Acta Ophthalmol 2023) compared fixed-interval versus treat-and-extend dosing of the same anti-VEGF agent (conbercept, the study drug) in treatment-naïve PCV: at about 48 weeks, vision and main anatomical endpoints improved in both arms and were overall similar — showing that doctors adjust injection strategy to the disease, not that one product is “best”, and not a clinic success rate on this site. Whether to inject, which registered medicine, and the interval are decided by a specialist against Hong Kong registration and examination."),
-      h("Diabetic macular oedema: anti-VEGF class versus laser (education)"),
-      p("The Chinese multicentre Sailing phase III trial and extension (Br J Ophthalmol 2022): in centre-involved diabetic macular oedema (DME), as-needed anti-VEGF (study drug: conbercept) improved mean vision by about 8 letters at one year, while laser / sham injection showed almost no gain; eyes later switched to anti-VEGF could catch up — trial-order figures, not your personal prognosis or a brand comparison. Education point: for DME, the anti-VEGF class versus traditional laser alone can yield better vision outcomes in suitable cases; the concrete plan can only be decided by a doctor."),
+      h("Anti-VEGF agents discussed in Hong Kong (INN only)"),
+      p("Depending on Hong Kong–registered indications and current supply, a doctor may discuss one or more of the following international nonproprietary names (INNs). Trade names are not listed here, to avoid constituting a medicine advertisement:"),
+      {
+        type: "table",
+        rows: [
+          ["INN", "Education note"],
+          [
+            "ranibizumab",
+            "Anti–VEGF-A fragment; one of the large-trial foundations for wet macular disease (see below)",
+          ],
+          [
+            "aflibercept",
+            "VEGF trap; VIEW and related work show dosing options with vision outcomes comparable to monthly ranibizumab",
+          ],
+          [
+            "brolucizumab",
+            "Single-chain antibody fragment; HAWK/HARRIER noninferior to aflibercept; some people need discussion of intraocular inflammation and other safety points",
+          ],
+          [
+            "faricimab",
+            "Bispecific (Ang-2 + VEGF-A); TENAYA/LUCERNE explore longer injection intervals",
+          ],
+        ],
+      },
+      p("Whether it suits you, which agent, the interval, and public/private supply can only be decided by an ophthalmologist after examination and against Hong Kong registration. Overseas approval ≠ registered or available for you in Hong Kong. This page does not rank which INN is “best”, and it is not a clinic success rate."),
+      {
+        type: "note",
+        text: "Trials elsewhere may use anti-VEGF INNs that are uncommon in Hong Kong practice; those results are class-level reference only and do not mean that medicine should be prescribed here.",
+      },
+      h("Polypoidal choroidal vasculopathy (PCV) (education)"),
+      p("PCV is more common in East Asian / Chinese wet macular disease and often needs tools such as indocyanine green angiography (ICGA) to help distinguish it — not self-labelling. The Asian multicentre EVEREST II randomised trial (JAMA Ophthalmol 2020), in symptomatic macular PCV, compared ranibizumab alone with ranibizumab plus verteporfin photodynamic therapy (vPDT): at 24 months the combination arm had greater vision gain and a higher rate of polyp regression, with a lower median injection count — trial-order figures, not your personal prognosis, and not a product or clinic-success comparison on this site. Whether to inject, which Hong Kong–registered INN, and whether to add PDT are specialist decisions."),
+      h("Diabetic macular oedema: anti-VEGF class (education)"),
+      p("In centre-involved diabetic macular oedema (DME), the anti-VEGF class versus traditional laser alone can yield better vision outcomes in suitable cases. Large-trial examples include aflibercept in VIEW-pathway extensions / DME registration studies, and Protocol T comparing several anti-VEGF agents — published trial figures, not personal prognosis or brand comparison. Which INN and interval can only be decided by a doctor against Hong Kong registration and examination."),
       h("Procedure (for consent education)"),
       p("An outpatient injection, usually a few minutes. Asepsis and conjunctival iodine have the strongest evidence for lowering endophthalmitis. This is a class of care, not a pitch for any product."),
       ol([
