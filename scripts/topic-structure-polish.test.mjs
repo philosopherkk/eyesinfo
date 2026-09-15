@@ -129,9 +129,9 @@ describe("topic structure polish", () => {
     assert.match(read("src/lib/topic-related.ts"), /PRIMARY_TOPIC_CAP\s*=\s*5/);
   });
 
-  it("CONTENT_VERSION is 1.60", () => {
+  it("CONTENT_VERSION is 1.61", () => {
     const site = read("src/lib/site.ts");
-    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.60"/);
+    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.61"/);
     assert.match(site, /CONTENT_UPDATED\s*=\s*"2026-09-15"/);
   });
 
@@ -141,6 +141,47 @@ describe("topic structure polish", () => {
       const hits = [...ui.matchAll(new RegExp(`${key}:`, "g"))];
       assert.equal(hits.length, 3, `${key} should appear in zh/en/ja`);
     }
+  });
+
+  it("HKOS video cards map A–H with soft C/F and Exact chrome keys", () => {
+    const data = read("src/data/hkos-videos.ts");
+    const card = read("src/components/hkos-video-card.tsx");
+    const page = read("src/routes/t.$topicId.tsx");
+    const ui = read("src/i18n/ui.ts");
+    for (const id of [
+      "4WTPnVGTZEA",
+      "p4xkxGxRh-E",
+      "eOgJlel8DGw",
+      "cPKAYEAgjuc",
+      "E1tk-bYGTgY",
+      "T0lAQqReMIY",
+      "VeQ5zOkYIss",
+      "ukB9jv7wHtQ",
+    ]) {
+      assert.match(data, new RegExp(id));
+    }
+    assert.match(data, /"t-myopia"[\s\S]*soft:\s*true[\s\S]*hkosSoftMyopia/);
+    assert.match(data, /"t-rvo"[\s\S]*soft:\s*true[\s\S]*hkosSoftRvo/);
+    assert.match(card, /hkosDisclaimer/);
+    assert.match(card, /target="_blank"/);
+    assert.match(card, /noopener noreferrer/);
+    assert.match(card, /hkosThumbUrl|hkosWatchUrl/);
+    assert.match(data, /i\.ytimg\.com\/vi\/\$\{videoId\}\/hqdefault\.jpg/);
+    assert.match(data, /youtube\.com\/watch\?v=\$\{videoId\}/);
+    assert.match(page, /HkosVideoCard/);
+    for (const key of [
+      "hkosSectionHeading",
+      "hkosCredit",
+      "hkosDisclaimer",
+      "hkosSoftMyopia",
+      "hkosSoftRvo",
+    ]) {
+      const hits = [...ui.matchAll(new RegExp(`${key}:`, "g"))];
+      assert.equal(hits.length, 3, `${key} should appear in zh/en/ja`);
+    }
+    assert.doesNotMatch(ui, /90\s*[–-]\s*95\s*%|好有效/);
+    assert.match(ui, /不能保證視力回到阻塞前/);
+    assert.match(ui, /本站不以該影片為準/);
   });
 });
 

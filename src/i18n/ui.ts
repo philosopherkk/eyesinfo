@@ -48,6 +48,16 @@ const zhHant = {
   eduToolBadge: "教育工具 · 自我察覺",
   eduToolCaveat:
     "本工具並非診斷工具。結果無論正常或異常，均不能代替眼科檢查。如有新出現的視力變化，請盡快求醫。",
+  hkosSectionHeading: "相關公眾教育影片（HKOS）",
+  hkosCredit: "影片來源：香港眼科醫學會（HKOS）「眼睛解碼」YouTube（公眾教育）",
+  hkosDisclaimer: "本站與香港眼科醫學會（HKOS）無關／不屬同一機構。",
+  hkosOpenYoutube: "於 YouTube 開啟（外部連結）",
+  hkosThumbAlt: "影片縮圖：{title}",
+  hkosSoftLabel: "影片說法與本站立場",
+  hkosSoftMyopia:
+    "影片說法≠本站Exact。HKOS 影片或談及重複低強度紅光（RLRL）家用用法及較高「有效」約數；本站不以該影片為準。本站立場：重複低強度紅光等儀器——長期安全性（包括黃斑）仍有爭議，不應自行購買家用；本站不把它寫成「新興有效療法」。是否採用只可由眼科專科醫生評估。詳見本頁「光學離焦／其他方法」相關段落。",
+  hkosSoftRvo:
+    "影片說法≠本站Exact。HKOS 影片或提及及時治療後視力「可以完全恢復」；本站不以該影片為準。本站立場：注射間隔及是否激光按 OCT 及眼底決定，不能保證視力回到阻塞前。詳見本頁治療／預後相關段落。",
   a11yLink: "無障礙聲明",
   a11yTitle: "無障礙聲明",
   a11yIntro:
@@ -62,7 +72,7 @@ const zhHant = {
   a11yGaps:
     "部分示意動畫與複雜圖示（例如眼圖熱區）在輔助技術下的體驗仍可再改善；高對比主題與深色模式尚未提供。詳細清單會隨版本更新。",
   a11yDateH: "聲明日期",
-  a11yDate: "2026年9月15日（內容版本 1.60）",
+  a11yDate: "2026年9月15日（內容版本 1.61）",
   a11yFeedbackH: "意見與更正",
   a11yFeedback:
     "若發現無障礙或內容錯誤，請參閱法律與專業守則頁的覆核與更正說明。本站不提供診所電話、預約或即時通訊，亦不經此頁接收病歷。",
@@ -421,6 +431,18 @@ const en: Record<Key, string> = {
   eduToolBadge: "Education tool · self-awareness",
   eduToolCaveat:
     "This tool is not a diagnostic tool. Whether results appear normal or abnormal, they cannot replace an eye examination. If you notice new vision changes, seek care promptly.",
+  hkosSectionHeading: "Related public education video (HKOS)",
+  hkosCredit:
+    "Video source: Hong Kong Ophthalmological Society (HKOS) “Eyes Decoded” YouTube (public education)",
+  hkosDisclaimer:
+    "This site is not affiliated with, and is not the same organisation as, the Hong Kong Ophthalmological Society (HKOS).",
+  hkosOpenYoutube: "Open on YouTube (external link)",
+  hkosThumbAlt: "Video thumbnail: {title}",
+  hkosSoftLabel: "Video wording vs this site’s position",
+  hkosSoftMyopia:
+    "What the video says ≠ this site’s Exact position. The HKOS video may discuss home use of repeated low-level red light (RLRL) and higher “effectiveness” round numbers; this site does not treat that video as authoritative. This site’s position: devices such as repeated low-level red light — long-term safety (including the macula) remains debated; do not buy them for home use on your own; this site does not present them as an “emerging effective therapy”. Whether to use them can only be assessed by an ophthalmology specialist. See this page’s sections on optical defocus / other methods.",
+  hkosSoftRvo:
+    "What the video says ≠ this site’s Exact position. The HKOS video may mention that vision “can fully recover” after timely treatment; this site does not treat that video as authoritative. This site’s position: injection intervals and whether laser is used depend on OCT and the fundus; return of vision to the pre-occlusion level cannot be guaranteed. See this page’s treatment / prognosis sections.",
   a11yLink: "Accessibility statement",
   a11yTitle: "Accessibility statement",
   a11yIntro:
@@ -435,7 +457,7 @@ const en: Record<Key, string> = {
   a11yGaps:
     "Some demos and complex diagrams (for example eye-map hotspots) can still improve with assistive technologies. A high-contrast theme and dark mode are not offered yet. The list will update with later versions.",
   a11yDateH: "Statement date",
-  a11yDate: "15 September 2026 (content version 1.60)",
+  a11yDate: "15 September 2026 (content version 1.61)",
   a11yFeedbackH: "Feedback and corrections",
   a11yFeedback:
     "For accessibility or content errors, see the review and corrections note on the Law and professional code page. This site does not list clinic phones, bookings or messaging, and does not take medical records here.",
@@ -800,6 +822,18 @@ const ja: Record<Key, string> = {
   eduToolBadge: "教育ツール · 自己観察",
   eduToolCaveat:
     "本ツールは診断ツールではありません。結果が正常でも異常でも、眼科検査の代わりにはなりません。新たに視力の変化があれば、できるだけ早く受診してください。",
+  hkosSectionHeading: "関連する市民教育動画（HKOS）",
+  hkosCredit:
+    "動画出典：香港眼科学会（HKOS）「眼睛解碼」YouTube（市民教育）",
+  hkosDisclaimer:
+    "本サイトは香港眼科学会（HKOS）と無関係であり、同一の組織ではありません。",
+  hkosOpenYoutube: "YouTubeで開く（外部リンク）",
+  hkosThumbAlt: "動画サムネイル：{title}",
+  hkosSoftLabel: "動画の言い方と本サイトの立場",
+  hkosSoftMyopia:
+    "動画の言い方≠本サイトのExact。HKOS動画は反復低強度赤光（RLRL）の家庭使用や、より高い「有効」の目安に触れることがあります；本サイトはその動画を基準にしません。本サイトの立場：反復低強度赤光などの機器——黄斑を含む長期安全性はなお議論があり、自分で買って家庭使用すべきではありません；「新興の有効療法」としては書きません。採用可否は眼科専門医のみが評価できます。本頁の「光学的デフォーカス／その他の方法」関連段落を参照。",
+  hkosSoftRvo:
+    "動画の言い方≠本サイトのExact。HKOS動画は、適時治療後に視力が「完全に回復しうる」と述べることがあります；本サイトはその動画を基準にしません。本サイトの立場：注射間隔とレーザーの要否はOCTと眼底で決まり、閉塞前の視力に戻ることは保証できません。本頁の治療／予後関連段落を参照。",
   a11yLink: "アクセシビリティ声明",
   a11yTitle: "アクセシビリティ声明",
   a11yIntro:
@@ -814,7 +848,7 @@ const ja: Record<Key, string> = {
   a11yGaps:
     "一部の図示や複雑な図（眼の図のホットスポットなど）は支援技術での体験をさらに改善できます。高コントラストテーマとダークモードはまだありません。一覧は版に応じて更新します。",
   a11yDateH: "声明日",
-  a11yDate: "2026年9月15日（コンテンツ版 1.60）",
+  a11yDate: "2026年9月15日（コンテンツ版 1.61）",
   a11yFeedbackH: "意見と訂正",
   a11yFeedback:
     "アクセシビリティや内容の誤りは、法令と職業倫理の頁の確認・訂正の説明を参照してください。診療所電話・予約・メッセージ連絡は掲載せず、病歴も受け取りません。",
