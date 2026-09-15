@@ -129,9 +129,9 @@ describe("topic structure polish", () => {
     assert.match(read("src/lib/topic-related.ts"), /PRIMARY_TOPIC_CAP\s*=\s*5/);
   });
 
-  it("CONTENT_VERSION is 1.63", () => {
+  it("CONTENT_VERSION is 1.64", () => {
     const site = read("src/lib/site.ts");
-    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.63"/);
+    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.64"/);
     assert.match(site, /CONTENT_UPDATED\s*=\s*"2026-09-15"/);
   });
 
@@ -143,7 +143,7 @@ describe("topic structure polish", () => {
     }
   });
 
-  it("HKOS video cards map A–U with soft C/F/O, multi-card cataract/d4, Exact chrome keys", () => {
+  it("HKOS video cards map A–U plus LEAD Exact soft pages; soft C/F/O + four LEAD; multi-card cataract/d4; Exact chrome keys", () => {
     const data = read("src/data/hkos-videos.ts");
     const card = read("src/components/hkos-video-card.tsx");
     const page = read("src/routes/t.$topicId.tsx");
@@ -170,12 +170,30 @@ describe("topic structure polish", () => {
       "EllqSl5B78I",
       "wgFExnBiddA",
       "yU9bhrNHnFk",
+      "eyWwLabN5sE",
+      "RtbwTyUjbYY",
+      "1GEbGcc4tH4",
+      "kmneDw1O4bo",
     ]) {
       assert.match(data, new RegExp(id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
     }
+    assert.doesNotMatch(data, /68oE2IZ-Hf8/);
     assert.match(data, /"t-myopia"[\s\S]*soft:\s*true[\s\S]*hkosSoftMyopia/);
     assert.match(data, /"t-rvo"[\s\S]*soft:\s*true[\s\S]*hkosSoftRvo/);
     assert.match(data, /d4:[\s\S]*soft:\s*true[\s\S]*hkosSoftGlaucoma/);
+    assert.match(
+      data,
+      /"t-optic-neuritis"[\s\S]*soft:\s*true[\s\S]*hkosSoftOpticNeuritis/,
+    );
+    assert.match(
+      data,
+      /"t-corneal-transplant"[\s\S]*soft:\s*true[\s\S]*hkosSoftCornealTransplant/,
+    );
+    assert.match(data, /"t-nystagmus"[\s\S]*soft:\s*true[\s\S]*hkosSoftNystagmus/);
+    assert.match(
+      data,
+      /"t-ocular-tumours"[\s\S]*soft:\s*true[\s\S]*hkosSoftOcularTumours/,
+    );
     assert.match(data, /"t-cataract":\s*\[[\s\S]*p4xkxGxRh-E[\s\S]*EllqSl5B78I/);
     assert.match(data, /d4:\s*\[[\s\S]*p04cr1epB2c[\s\S]*wgFExnBiddA/);
     assert.match(data, /Record<string,\s*HkosVideoEntry\[\]>/);
@@ -194,6 +212,10 @@ describe("topic structure polish", () => {
       "hkosSoftMyopia",
       "hkosSoftRvo",
       "hkosSoftGlaucoma",
+      "hkosSoftOpticNeuritis",
+      "hkosSoftCornealTransplant",
+      "hkosSoftNystagmus",
+      "hkosSoftOcularTumours",
     ]) {
       const hits = [...ui.matchAll(new RegExp(`${key}:`, "g"))];
       assert.equal(hits.length, 3, `${key} should appear in zh/en/ja`);
@@ -206,10 +228,45 @@ describe("topic structure polish", () => {
     assert.match(ui, /不是治癒、不是保證恢復/);
     assert.match(ui, /亦不要自行用藥/);
     assert.match(ui, /立即急症室／999/);
+    assert.match(ui, /不是你的個人預後/);
+    assert.match(ui, /亦不做恐嚇式廣告/);
+    assert.match(ui, /不保證療效時程/);
     const lasikBlock = data.match(/"t-lasik":\s*\[[\s\S]*?\],\s*\n\s*"t-/);
     assert.ok(lasikBlock, "t-lasik block present");
     assert.match(lasikBlock[0], /I469GiYU0Uk/);
     assert.doesNotMatch(lasikBlock[0], /soft:\s*true/);
+  });
+
+  it("LEAD Exact topics 1.64 exist in TC/EN/JA with categories and refs", () => {
+    const extra = read("src/data/extra-topics.ts");
+    const en = read("src/i18n/topics-en.ts");
+    const ja = read("src/i18n/topics-ja.ts");
+    const cites = read("src/data/citations.ts");
+    for (const id of [
+      "t-optic-neuritis",
+      "t-corneal-transplant",
+      "t-nystagmus",
+      "t-ocular-tumours",
+    ]) {
+      assert.match(extra, new RegExp(`id:\\s*"${id}"`));
+      assert.match(en, new RegExp(`"${id}"\\s*:`));
+      assert.match(ja, new RegExp(`"${id}"\\s*:`));
+    }
+    assert.match(extra, /"t-optic-neuritis"[\s\S]*category:\s*"glaucoma"/);
+    assert.match(extra, /"t-corneal-transplant"[\s\S]*category:\s*"surface"/);
+    assert.match(extra, /"t-nystagmus"[\s\S]*category:\s*"lens"/);
+    assert.match(extra, /"t-ocular-tumours"[\s\S]*category:\s*"retina"/);
+    for (const id of [
+      "ontt1992",
+      "acgr2008",
+      "ehrt2012",
+      "coms18",
+      "dimaras2012",
+    ]) {
+      assert.match(cites, new RegExp(`${id}:`));
+    }
+    assert.match(extra, /不是個人預後/);
+    assert.match(extra, /不是治癒保證|不保證治癒/);
   });
 });
 

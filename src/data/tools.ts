@@ -55,6 +55,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-glaucoma-monitor", label: "青光眼監察：目標眼壓、OCT／視野與報告解讀" },
     { href: "/t/t-gldrops", label: "青光眼眼藥水" },
     { href: "/t/t-early", label: "遠視、淺前房與閉角" },
+    { href: "/t/t-optic-neuritis", label: "視神經炎" },
   ],
   d5: [
     { href: "/amsler", label: "阿姆斯勒方格" },
@@ -154,6 +155,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   ],
   "t-keratoconus": [
     { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-corneal-transplant", label: "角膜移植" },
     { href: "/t/t-lasik", label: "激光矯視與術前篩查" },
     { href: "/t/t-cl", label: "隱形眼鏡衛生與併發症" },
     { href: "/t/t-allergy", label: "過敏性結膜炎原則" },
@@ -252,6 +254,8 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/urgent", label: "急症與同日評估" },
     { href: "/t/t-strabsx", label: "斜視手術" },
     { href: "/t/t-child", label: "兒童視力里程碑" },
+    { href: "/t/t-nystagmus", label: "眼球震顫" },
+    { href: "/t/t-ocular-tumours", label: "眼睛腫瘤（白瞳／新斜視警示）" },
     { href: "/t/t-ted", label: "甲狀腺眼疾" },
     { href: "/t/t-ptosis", label: "上瞼下垂" },
     { href: "/t/t-migraine", label: "偏頭痛與眼科" },
@@ -287,6 +291,31 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/d4", label: "青光眼總論" },
   ],
   "t-ptosis": [{ href: "/t/t-strab", label: "斜視與複視" }, { href: "/t/t-migraine", label: "偏頭痛與眼科" }],
+  "t-optic-neuritis": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/d4", label: "青光眼總論" },
+    { href: "/t/t-glaucoma-monitor", label: "青光眼監察：OCT／視野報告解讀" },
+    { href: "/c/glaucoma", label: "青光眼與視神經" },
+  ],
+  "t-corneal-transplant": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-keratoconus", label: "圓錐角膜" },
+    { href: "/t/t-ptk", label: "激光治療角膜表面（PTK）" },
+    { href: "/c/surface", label: "角膜與眼表" },
+  ],
+  "t-nystagmus": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-strab", label: "斜視與複視" },
+    { href: "/t/t-child", label: "兒童視力里程碑" },
+    { href: "/t/t-strabsx", label: "斜視手術" },
+  ],
+  "t-ocular-tumours": [
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/t-strab", label: "斜視與複視" },
+    { href: "/t/t-child", label: "兒童視力里程碑" },
+    { href: "/t/d9", label: "霰粒腫與眼瞼腫物" },
+    { href: "/c/retina", label: "視網膜與黃斑" },
+  ],
 };
 
 export const SIM_FOOTER =

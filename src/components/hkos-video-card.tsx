@@ -13,6 +13,10 @@ const SOFT_KEYS: Record<HkosSoftCalloutKey, UiKey> = {
   hkosSoftMyopia: "hkosSoftMyopia",
   hkosSoftRvo: "hkosSoftRvo",
   hkosSoftGlaucoma: "hkosSoftGlaucoma",
+  hkosSoftOpticNeuritis: "hkosSoftOpticNeuritis",
+  hkosSoftCornealTransplant: "hkosSoftCornealTransplant",
+  hkosSoftNystagmus: "hkosSoftNystagmus",
+  hkosSoftOcularTumours: "hkosSoftOcularTumours",
 };
 
 function HkosVideoItem({
@@ -72,7 +76,7 @@ function HkosVideoItem({
 
 /**
  * HKOS「眼睛解碼」education video card(s) — linked thumbnail + Exact chrome.
- * Soft mode shows Cap/Lex callout before that card’s thumb (myopia / RVO / glaucoma).
+ * Soft mode shows Cap/Lex callout before that card’s thumb (myopia / RVO / glaucoma / LEAD Exact).
  */
 export function HkosVideoCard({ topicId }: { topicId: string }) {
   const { t } = useI18n();
