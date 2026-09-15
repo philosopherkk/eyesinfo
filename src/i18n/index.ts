@@ -185,9 +185,9 @@ export function editorialBits(locale: Locale) {
     locale === "zh-Hans"
       ? toHans(EDITORIAL.correction)
       : locale === "en"
-        ? "If you find an error in the content, notify the operator using the corrections contact listed on the legal page. This site does not receive medical records, bookings or individual care queries through that channel."
+        ? "If you find an error in the content, no operator email is published on this site yet; the corrections policy is this paragraph. At this stage the site does not receive medical records, bookings or individual care queries."
         : locale === "ja"
-          ? "内容の誤りを見つけた場合は、法令頁に記載の訂正連絡の方法で運営者に知らせてください。この経路では病歴・予約・個別の診療照会は受け付けません。"
+          ? "内容の誤りを見つけた場合、運営者のメールは現時点で本サイトに掲載していません；訂正方針はこの段落です。現段階では本サイト経由で病歴・予約・個別の診療照会は受け付けません。"
           : EDITORIAL.correction;
   return { name, title, register, reviewed, quals, disclosure, correction };
 }

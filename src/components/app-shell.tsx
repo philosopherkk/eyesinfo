@@ -20,10 +20,17 @@ export function AppShell({ children }: { children: ReactNode }) {
   const isHome = pathname === "/" || pathname === "";
 
   const tabs = [
-    { to: "/", label: t("home"), icon: Home, match: (p: string) => p === "/" || p.startsWith("/c/") || p.startsWith("/t/") },
-    { to: "/search", label: t("search"), icon: Search, match: (p: string) => p.startsWith("/search") },
-    { to: "/tools", label: t("tools"), icon: LayoutGrid, match: (p: string) => p.startsWith("/tools") || p.startsWith("/amsler") || p.startsWith("/iol") },
-    { to: "/saved", label: t("saved"), icon: Bookmark, match: (p: string) => p.startsWith("/saved") },
+    {
+      to: "/",
+      label: t("home"),
+      icon: Home,
+      // Visual highlight for education browsing (/c /t); aria-current only on true home.
+      match: (p: string) => p === "/" || p.startsWith("/c/") || p.startsWith("/t/"),
+      ariaCurrentPage: (p: string) => p === "/" || p === "",
+    },
+    { to: "/search", label: t("search"), icon: Search, match: (p: string) => p.startsWith("/search"), ariaCurrentPage: (p: string) => p.startsWith("/search") },
+    { to: "/tools", label: t("tools"), icon: LayoutGrid, match: (p: string) => p.startsWith("/tools") || p.startsWith("/amsler") || p.startsWith("/iol"), ariaCurrentPage: (p: string) => p.startsWith("/tools") || p.startsWith("/amsler") || p.startsWith("/iol") },
+    { to: "/saved", label: t("saved"), icon: Bookmark, match: (p: string) => p.startsWith("/saved"), ariaCurrentPage: (p: string) => p.startsWith("/saved") },
   ] as const;
 
   useEffect(() => {
@@ -146,7 +153,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               <li key={tab.to}>
                 <Link
                   to={tab.to}
-                  aria-current={active ? "page" : undefined}
+                  aria-current={tab.ariaCurrentPage(pathname) ? "page" : undefined}
                   className={cn(
                     "flex min-h-[3.65rem] flex-col items-center justify-center gap-0.5 text-[0.7rem] no-underline",
                     active ? "font-semibold text-navy" : "text-muted",

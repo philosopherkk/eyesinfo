@@ -142,7 +142,32 @@ function Home() {
         </div>
       </section>
 
-      <section className="mt-5">
+      <section className="px-4 pb-4">
+        <h2 className="mb-2 text-[0.8rem] font-semibold text-muted">
+          {t("newSheets")}
+        </h2>
+        <div className="grid grid-cols-2 gap-2">
+          {(
+            [
+              ["t-optic-neuritis", "leadOpticNeuritis"],
+              ["t-corneal-transplant", "leadCornealTransplant"],
+              ["t-nystagmus", "leadNystagmus"],
+              ["t-ocular-tumours", "leadOcularTumours"],
+            ] as const
+          ).map(([id, labelKey]) => (
+            <Link
+              key={id}
+              to="/t/$topicId"
+              params={{ topicId: id }}
+              className="flex min-h-11 items-center rounded-xl border border-line bg-card px-3 py-2 text-[0.82rem] font-semibold text-navy no-underline"
+            >
+              {t(labelKey)}
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-1">
         <h2 className="px-4 pb-1 text-[0.8rem] font-semibold text-muted">
           {t("top10")}
         </h2>

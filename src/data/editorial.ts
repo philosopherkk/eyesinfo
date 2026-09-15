@@ -21,17 +21,18 @@ export const EDITORIAL = {
    */
   disclosure:
     "出版／營運：護眼學堂（eyesinfo.org）。臨床覆核：潘家健醫生（香港醫務委員會註冊醫生；名列專科名冊（眼科））。本教育網站不提供診所聯絡、預約或轉介，亦不連至執業網站。本教育網站目前無商業贊助；若日後有資助或利益關係將於法律頁披露。教育內容與任何診所推廣分開展示；覆核者亦可能從事臨床執業，本站不作轉介。",
-  /** Honest education-site funding / COI one-liner — no invented sponsors. */
-  funding:
-    "本教育網站目前無商業贊助；若日後有資助或利益關係將於法律頁披露。",
+  /**
+   * Funding / COI lives inside `disclosure` only (Lex L2) — do not also render
+   * this string on legal/banner, or the no-sponsor line repeats.
+   */
+  funding: "",
   notSubstitute:
     "內容不能代替與註冊眼科專科醫生的面診，亦不能作為診斷。本頁不是診斷、處方或手術建議。只有列於醫務委員會眼科專科名冊者可稱「眼科專科醫生」。",
   /**
-   * Corrections policy only — no operator email in-repo.
-   * Do not invent a mailto; KK may supply one later.
+   * Corrections policy only — no operator email in-repo; do not imply a listed contact.
    */
   correction:
-    "若發現內容錯誤，請透過法律頁所列更正聯絡方式通知營運者。本站不經此途徑接收病歷、預約或個別診治查詢。",
+    "若發現內容錯誤，本站暫未公開營運者電郵；更正政策見本段。現階段不經本站接收病歷、預約或個別診治查詢。",
 };
 
 /** Structured reviewer stamp — same person as EDITORIAL; do not invent new reviewers. */
