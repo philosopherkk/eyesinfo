@@ -152,6 +152,16 @@ export const CITE: Record<string, Citation> = {
     pmid: "30862377",
     note: "選擇性激光小梁成形術作為一線選擇之一的隨機試驗。是否適合由醫生決定。",
   },
+  montesano2026light: {
+    id: "montesano2026light",
+    authors: "Montesano G, Crabb DP, Garway-Heath DF, et al.",
+    title:
+      "Six-Year Rate of Visual Field Progression in the Laser in Glaucoma and Ocular Hypertension Trial",
+    source:
+      "Ophthalmology. 2026;133(2):169-177. DOI 10.1016/j.ophtha.2025.09.023",
+    pmid: "41043781",
+    note: "LiGHT 六年視野進展公開分析（後設分析）。長期約數不是個人預後／不是品牌比較／不是人人必須；已失去的視野不能還原。",
+  },
   wang2019liwan: {
     id: "wang2019liwan",
     authors: "Wang L, Huang W, Huang S, et al.",

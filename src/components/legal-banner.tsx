@@ -13,7 +13,6 @@ export function LegalBanner() {
       aria-label={t("legalLink")}
     >
       <p>{legal.disclosure}</p>
-      <p className="mt-2">{legal.funding}</p>
       <p className="mt-2">{legal.notSubstitute}</p>
       <p className="mt-2">
         <Link to="/legal" className="font-semibold text-navy underline">

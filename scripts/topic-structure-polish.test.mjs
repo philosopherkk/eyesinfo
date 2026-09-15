@@ -129,9 +129,9 @@ describe("topic structure polish", () => {
     assert.match(read("src/lib/topic-related.ts"), /PRIMARY_TOPIC_CAP\s*=\s*5/);
   });
 
-  it("CONTENT_VERSION is 1.65", () => {
+  it("CONTENT_VERSION is 1.66", () => {
     const site = read("src/lib/site.ts");
-    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.65"/);
+    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.66"/);
     assert.match(site, /CONTENT_UPDATED\s*=\s*"2026-09-15"/);
   });
 
@@ -317,6 +317,64 @@ describe("topic structure polish", () => {
       assert.doesNotMatch(hkos, new RegExp(id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
     }
     assert.doesNotMatch(topics, /t-three-symptoms|三大症狀專題/);
+  });
+
+  it("Exact 1.66: E1/E2/E5 + Cap C1 scaffold drop + Lex correction + Home LEAD row", () => {
+    const topics = read("src/data/topics.ts");
+    const en = read("src/i18n/topics-en.ts");
+    const ja = read("src/i18n/topics-ja.ts");
+    const cites = read("src/data/citations.ts");
+    const extra = read("src/data/extra-topics.ts");
+    const editorial = read("src/data/editorial.ts");
+    const legalPage = read("src/routes/legal.tsx");
+    const banner = read("src/components/legal-banner.tsx");
+    const shell = read("src/components/app-shell.tsx");
+    const home = read("src/routes/index.tsx");
+    const hkos = read("src/data/hkos-videos.ts");
+
+    assert.match(topics, /較需審慎或不宜多焦的情況/);
+    assert.doesNotMatch(topics, /較需審慎或通常避免多焦/);
+    assert.match(topics, /不宜多焦及多數延伸景深設計/);
+    assert.doesNotMatch(topics, /通常避免多焦及多數延伸景深/);
+    assert.match(topics, /\["多焦／三焦"[^\]]*"不宜"\]/);
+    assert.match(topics, /文獻上並不少見；糖尿病、後囊破裂者較高/);
+    assert.match(topics, /負向光視（顳側陰影感）：早期文獻可見/);
+    assert.doesNotMatch(topics, /可至約數個百分點/);
+    assert.doesNotMatch(topics, /可達一成以上/);
+    assert.match(topics, /後續六年視野進展分析（Montesano 等）/);
+    assert.match(topics, /不是品牌比較、不是人人必須/);
+    assert.match(topics, /montesano2026light/);
+    assert.match(cites, /montesano2026light:/);
+    assert.match(cites, /pmid:\s*"41043781"/);
+    assert.match(cites, /pmid:\s*"30862377"/);
+
+    assert.match(en, /where multifocals are not suitable/);
+    assert.match(en, /Not suitable/);
+    assert.match(en, /Not uncommon in the literature/);
+    assert.match(en, /seen in early literature/);
+    assert.match(en, /Montesano et al\./);
+    assert.match(en, /not a brand comparison/);
+
+    assert.match(ja, /多焦点が不適な状況/);
+    assert.match(ja, /文献上まれではない/);
+    assert.match(ja, /早期文献にみられ/);
+    assert.match(ja, /Montesanoら/);
+
+    assert.doesNotMatch(extra, /鏈接結構 only/);
+    assert.match(editorial, /本站暫未公開營運者電郵；更正政策見本段/);
+    assert.doesNotMatch(editorial, /法律頁所列更正聯絡方式/);
+    assert.match(editorial, /funding:\s*""/);
+    assert.doesNotMatch(banner, /legal\.funding/);
+    assert.doesNotMatch(legalPage, /legal\.funding/);
+    assert.doesNotMatch(legalPage, /本站目前未公開營運者電郵。更正政策見上/);
+
+    assert.match(shell, /ariaCurrentPage/);
+    assert.match(home, /newSheets/);
+    assert.match(home, /t-optic-neuritis/);
+    assert.match(home, /t-corneal-transplant/);
+    assert.match(home, /t-nystagmus/);
+    assert.match(home, /t-ocular-tumours/);
+    assert.match(hkos, /CONTENT_VERSION 1\.66/);
   });
 });
 
