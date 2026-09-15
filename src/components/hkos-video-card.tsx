@@ -1,9 +1,10 @@
 import { ExternalLink } from "lucide-react";
 import {
-  getHkosVideo,
+  getHkosVideos,
   hkosThumbUrl,
   hkosWatchUrl,
   type HkosSoftCalloutKey,
+  type HkosVideoEntry,
 } from "@/data/hkos-videos";
 import { useI18n } from "@/i18n";
 import type { UiKey } from "@/i18n/ui";
@@ -11,17 +12,17 @@ import type { UiKey } from "@/i18n/ui";
 const SOFT_KEYS: Record<HkosSoftCalloutKey, UiKey> = {
   hkosSoftMyopia: "hkosSoftMyopia",
   hkosSoftRvo: "hkosSoftRvo",
+  hkosSoftGlaucoma: "hkosSoftGlaucoma",
 };
 
-/**
- * HKOS「眼睛解碼」education video card — linked thumbnail + Exact chrome.
- * Soft mode (myopia / RVO) shows Cap/Lex callout before credit/disclaimer.
- */
-export function HkosVideoCard({ topicId }: { topicId: string }) {
+function HkosVideoItem({
+  entry,
+  index,
+}: {
+  entry: HkosVideoEntry;
+  index: number;
+}) {
   const { t, tx } = useI18n();
-  const entry = getHkosVideo(topicId);
-  if (!entry) return null;
-
   const title = tx(entry.title);
   const watchUrl = hkosWatchUrl(entry.videoId);
   const thumbUrl = hkosThumbUrl(entry.videoId);
@@ -31,20 +32,10 @@ export function HkosVideoCard({ topicId }: { topicId: string }) {
       : undefined;
 
   return (
-    <section
-      className="mt-6 border-t border-line pt-4"
-      aria-labelledby={`hkos-video-${topicId}`}
-    >
-      <h2
-        id={`hkos-video-${topicId}`}
-        className="scroll-mt-20 text-[0.95rem] font-semibold tracking-tight text-navy"
-      >
-        {t("hkosSectionHeading")}
-      </h2>
-
+    <div className={index === 0 ? "mt-3" : "mt-4"}>
       {softKey ? (
         <aside
-          className="mt-3 rounded-lg border border-line bg-line/25 px-3.5 py-3 text-[0.82rem] leading-relaxed text-muted"
+          className="mb-3 rounded-lg border border-line bg-line/25 px-3.5 py-3 text-[0.82rem] leading-relaxed text-muted"
           aria-label={t("hkosSoftLabel")}
         >
           <p className="font-semibold text-navy">{t("hkosSoftLabel")}</p>
@@ -56,7 +47,7 @@ export function HkosVideoCard({ topicId }: { topicId: string }) {
         href={watchUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-3 flex gap-3 rounded-lg border border-line bg-card p-3 text-navy no-underline transition-colors hover:border-navy/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
+        className="flex gap-3 rounded-lg border border-line bg-card p-3 text-navy no-underline transition-colors hover:border-navy/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
       >
         <img
           src={thumbUrl}
@@ -75,6 +66,34 @@ export function HkosVideoCard({ topicId }: { topicId: string }) {
           </span>
         </span>
       </a>
+    </div>
+  );
+}
+
+/**
+ * HKOS「眼睛解碼」education video card(s) — linked thumbnail + Exact chrome.
+ * Soft mode shows Cap/Lex callout before that card’s thumb (myopia / RVO / glaucoma).
+ */
+export function HkosVideoCard({ topicId }: { topicId: string }) {
+  const { t } = useI18n();
+  const entries = getHkosVideos(topicId);
+  if (entries.length === 0) return null;
+
+  return (
+    <section
+      className="mt-6 border-t border-line pt-4"
+      aria-labelledby={`hkos-video-${topicId}`}
+    >
+      <h2
+        id={`hkos-video-${topicId}`}
+        className="scroll-mt-20 text-[0.95rem] font-semibold tracking-tight text-navy"
+      >
+        {t("hkosSectionHeading")}
+      </h2>
+
+      {entries.map((entry, index) => (
+        <HkosVideoItem key={entry.videoId} entry={entry} index={index} />
+      ))}
 
       <p className="mt-2.5 text-[0.78rem] leading-relaxed text-muted">
         {t("hkosCredit")}

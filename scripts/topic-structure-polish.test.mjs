@@ -129,9 +129,9 @@ describe("topic structure polish", () => {
     assert.match(read("src/lib/topic-related.ts"), /PRIMARY_TOPIC_CAP\s*=\s*5/);
   });
 
-  it("CONTENT_VERSION is 1.62", () => {
+  it("CONTENT_VERSION is 1.63", () => {
     const site = read("src/lib/site.ts");
-    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.62"/);
+    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.63"/);
     assert.match(site, /CONTENT_UPDATED\s*=\s*"2026-09-15"/);
   });
 
@@ -143,7 +143,7 @@ describe("topic structure polish", () => {
     }
   });
 
-  it("HKOS video cards map A–H with soft C/F and Exact chrome keys", () => {
+  it("HKOS video cards map A–U with soft C/F/O, multi-card cataract/d4, Exact chrome keys", () => {
     const data = read("src/data/hkos-videos.ts");
     const card = read("src/components/hkos-video-card.tsx");
     const page = read("src/routes/t.$topicId.tsx");
@@ -157,11 +157,29 @@ describe("topic structure polish", () => {
       "T0lAQqReMIY",
       "VeQ5zOkYIss",
       "ukB9jv7wHtQ",
+      "5aTivFEkGtg",
+      "-f1YcyPgNGc",
+      "p8d9GaMx7Mo",
+      "I469GiYU0Uk",
+      "uwi0FBL8m80",
+      "kquTYPHnQcw",
+      "p04cr1epB2c",
+      "NnvroE-Jn7A",
+      "i0S-UpBAIfI",
+      "7OvJHPnsTyE",
+      "EllqSl5B78I",
+      "wgFExnBiddA",
+      "yU9bhrNHnFk",
     ]) {
-      assert.match(data, new RegExp(id));
+      assert.match(data, new RegExp(id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
     }
     assert.match(data, /"t-myopia"[\s\S]*soft:\s*true[\s\S]*hkosSoftMyopia/);
     assert.match(data, /"t-rvo"[\s\S]*soft:\s*true[\s\S]*hkosSoftRvo/);
+    assert.match(data, /d4:[\s\S]*soft:\s*true[\s\S]*hkosSoftGlaucoma/);
+    assert.match(data, /"t-cataract":\s*\[[\s\S]*p4xkxGxRh-E[\s\S]*EllqSl5B78I/);
+    assert.match(data, /d4:\s*\[[\s\S]*p04cr1epB2c[\s\S]*wgFExnBiddA/);
+    assert.match(data, /Record<string,\s*HkosVideoEntry\[\]>/);
+    assert.match(card, /getHkosVideos/);
     assert.match(card, /hkosDisclaimer/);
     assert.match(card, /target="_blank"/);
     assert.match(card, /noopener noreferrer/);
@@ -175,6 +193,7 @@ describe("topic structure polish", () => {
       "hkosDisclaimer",
       "hkosSoftMyopia",
       "hkosSoftRvo",
+      "hkosSoftGlaucoma",
     ]) {
       const hits = [...ui.matchAll(new RegExp(`${key}:`, "g"))];
       assert.equal(hits.length, 3, `${key} should appear in zh/en/ja`);
@@ -182,6 +201,12 @@ describe("topic structure polish", () => {
     assert.doesNotMatch(ui, /90\s*[–-]\s*95\s*%|好有效/);
     assert.match(ui, /不能保證視力回到阻塞前/);
     assert.match(ui, /本站不以該影片為準/);
+    assert.match(ui, /已損失的視野及視神經纖維不能還原/);
+    assert.match(ui, /立即急症室／999/);
+    const lasikBlock = data.match(/"t-lasik":\s*\[[\s\S]*?\],\s*\n\s*"t-/);
+    assert.ok(lasikBlock, "t-lasik block present");
+    assert.match(lasikBlock[0], /I469GiYU0Uk/);
+    assert.doesNotMatch(lasikBlock[0], /soft:\s*true/);
   });
 });
 
