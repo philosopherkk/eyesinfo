@@ -203,26 +203,45 @@ export const CITE: Record<string, Citation> = {
     authors: "CATT Research Group, Martin DF, Maguire MG, et al.",
     title: "Ranibizumab and bevacizumab for neovascular age-related macular degeneration",
     source: "N Engl J Med. 2011;364(20):1897-1908",
-    pmid: "21506142",
-    note: "比較兩種抗血管內皮生長因子注射的大型試驗。本頁不列商品名、不保證視力。",
+    pmid: "21526923",
+    note: "比較兩種抗血管內皮生長因子注射的大型試驗（bevacizumab 僅作試驗對照，不是本港選藥表）。本頁不列商品名、不保證視力。",
   },
-  star2023: {
-    id: "star2023",
-    authors: "Li X, Qu J, Su G, et al.; STAR Study Group",
+  view2012: {
+    id: "view2012",
+    authors: "Heier JS, Brown DM, Chong V, et al.; VIEW 1 and VIEW 2 Study Groups",
     title:
-      "The comparison of two different strategies of intravitreal conbercept for polypoidal choroidal vasculopathy in Chinese patients results from a 48-week randomized phase 4 study: STAR study",
-    source: "Acta Ophthalmol. 2023;101(3):e327-e337. DOI 10.1111/aos.15272",
-    pmid: "36259089",
-    note: "中國多中心 STAR：初治 PCV 固定間隔與 treat-and-extend。說明策略調整，不是商品或診所成功率比較。",
+      "Intravitreal aflibercept (VEGF trap-eye) in wet age-related macular degeneration",
+    source: "Ophthalmology. 2012;119(12):2537-2548. DOI 10.1016/j.ophtha.2012.09.006",
+    pmid: "23084240",
+    note: "VIEW：aflibercept 與每月 ranibizumab 視力結果相若的給藥策略討論。不是商品比較或本港處方保證。",
   },
-  sailing2022: {
-    id: "sailing2022",
-    authors: "Liu K, Wang H, He W, et al.",
+  hawkHarrier2020: {
+    id: "hawkHarrier2020",
+    authors: "Dugel PU, Koh A, Ogura Y, et al.; HAWK and HARRIER Study Investigators",
     title:
-      "Intravitreal conbercept for diabetic macular oedema: 2-year results from a randomised controlled trial and open-label extension study",
-    source: "Br J Ophthalmol. 2022;106(10):1436-1443. DOI 10.1136/bjophthalmol-2020-318690",
-    pmid: "34001667",
-    note: "中國多中心 Sailing：中心凹受累 DME 按需抗 VEGF 相對激光／安慰劑注射的一年視力約數。不是個人預後或品牌比較。",
+      "HAWK and HARRIER: Phase 3, Multicenter, Randomized, Double-Masked Trials of Brolucizumab for Neovascular Age-Related Macular Degeneration",
+    source: "Ophthalmology. 2020;127(1):72-84. DOI 10.1016/j.ophtha.2019.04.017",
+    pmid: "30986442",
+    note: "HAWK/HARRIER：brolucizumab 相對 aflibercept 視力非劣；安全性（包括眼內炎症）須個別討論。不是商品比較。",
+  },
+  tenayaLucerne2022: {
+    id: "tenayaLucerne2022",
+    authors: "Heier JS, Khanani AM, Quezada Ruiz C, et al.; TENAYA and LUCERNE Investigators",
+    title:
+      "Efficacy, durability, and safety of intravitreal faricimab up to every 16 weeks for neovascular age-related macular degeneration (TENAYA and LUCERNE): two randomised, double-masked, phase 3, non-inferiority trials",
+    source: "Lancet. 2022;399(10326):729-740. DOI 10.1016/S0140-6736(22)00010-1",
+    pmid: "35085502",
+    note: "TENAYA/LUCERNE：faricimab 延長注射間隔的試驗討論。不是商品比較或本港處方保證。",
+  },
+  everestII2020: {
+    id: "everestII2020",
+    authors: "Lim TH, Lai TYY, Takahashi K, et al.; EVEREST II Study Group",
+    title:
+      "Comparison of Ranibizumab With or Without Verteporfin Photodynamic Therapy for Polypoidal Choroidal Vasculopathy: The EVEREST II Randomized Clinical Trial",
+    source:
+      "JAMA Ophthalmol. 2020;138(9):935-942. DOI 10.1001/jamaophthalmol.2020.2443",
+    pmid: "32672800",
+    note: "亞洲多中心 EVEREST II：有症狀黃斑 PCV，ranibizumab ± 維替泊芬光動力。試驗約數；不是個人預後或商品比較。",
   },
   lin2024ctr: {
     id: "lin2024ctr",
