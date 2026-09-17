@@ -129,9 +129,9 @@ describe("topic structure polish", () => {
     assert.match(read("src/lib/topic-related.ts"), /PRIMARY_TOPIC_CAP\s*=\s*5/);
   });
 
-  it("CONTENT_VERSION is 1.67", () => {
+  it("CONTENT_VERSION is 1.68", () => {
     const site = read("src/lib/site.ts");
-    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.67"/);
+    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.68"/);
     assert.match(site, /CONTENT_UPDATED\s*=\s*"2026-09-17"/);
   });
 
@@ -319,7 +319,7 @@ describe("topic structure polish", () => {
     assert.doesNotMatch(topics, /t-three-symptoms|三大症狀專題/);
   });
 
-  it("Exact 1.67: CME qualitative + corneal no organ-compare + nystagmus hedge/cites", () => {
+  it("Exact 1.68: nystagmus Chang+Hertle cites; keep 1.67 CME/corneal Exact", () => {
     const topics = read("src/data/topics.ts");
     const en = read("src/i18n/topics-en.ts");
     const ja = read("src/i18n/topics-ja.ts");
@@ -361,6 +361,7 @@ describe("topic structure polish", () => {
     assert.match(en, /rejection risk varies by person and disease state — but is never zero/);
     assert.doesNotMatch(en, /lower than for some solid organs/);
     assert.match(en, /not a guarantee of “curing” nystagmus/);
+    assert.match(en, /not your personal prognosis and not a brand comparison/);
 
     assert.match(ja, /多焦点が不適な状況/);
     assert.match(ja, /術後黄斑浮腫は起こり得る；糖尿病・後嚢破損では高め/);
@@ -371,15 +372,20 @@ describe("topic structure polish", () => {
     assert.match(ja, /拒絶リスクは人・病状により異なりますが、ゼロではありません/);
     assert.doesNotMatch(ja, /実質臓器移植より拒絶/);
     assert.match(ja, /眼振の治癒」や視力正常化の保証ではありません/);
+    assert.match(ja, /個人予後でも、ブランド比較でもありません/);
 
     assert.match(extra, /排斥風險因人／病情而異，但絕非零風險/);
     assert.doesNotMatch(extra, /低於部分實質器官移植/);
     assert.match(extra, /不是保證「治癒震顫」或視力升至正常/);
-    assert.match(extra, /refs:\s*\["ehrt2012",\s*"bertsch2017"\]/);
-    assert.doesNotMatch(cites, /chang2023aao:/);
-    assert.doesNotMatch(cites, /hertle2010:/);
-    assert.doesNotMatch(cites, /pmid:\s*"36435636"/);
-    assert.doesNotMatch(cites, /pmid:\s*"21061884"/);
+    assert.match(extra, /不是你的個人預後，亦不是品牌比較/);
+    assert.match(
+      extra,
+      /refs:\s*\["ehrt2012",\s*"bertsch2017",\s*"chang2023aao",\s*"hertle2010"\]/,
+    );
+    assert.match(cites, /chang2023aao:/);
+    assert.match(cites, /hertle2010:/);
+    assert.match(cites, /pmid:\s*"36435636"/);
+    assert.match(cites, /pmid:\s*"21061884"/);
     assert.match(cites, /pmid:\s*"22459007"/);
     assert.match(cites, /pmid:\s*"28177849"/);
     assert.doesNotMatch(cites, /pmid:\s*"33598911"/);
@@ -399,7 +405,7 @@ describe("topic structure polish", () => {
     assert.match(home, /t-corneal-transplant/);
     assert.match(home, /t-nystagmus/);
     assert.match(home, /t-ocular-tumours/);
-    assert.match(hkos, /CONTENT_VERSION 1\.67/);
+    assert.match(hkos, /CONTENT_VERSION 1\.68/);
   });
 });
 

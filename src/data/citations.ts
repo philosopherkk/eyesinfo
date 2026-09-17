@@ -777,6 +777,24 @@ export const CITE: Record<string, Citation> = {
     pmid: "28177849",
     note: "嬰幼兒眼震評估次序／CEMAS 取向討論。不是自行診斷工具。",
   },
+  chang2023aao: {
+    id: "chang2023aao",
+    authors: "Chang MY, et al.; American Academy of Ophthalmology",
+    title:
+      "Surgical Treatments to Improve Visual Acuity in Infantile Nystagmus Syndrome: A Report by the American Academy of Ophthalmology",
+    source: "Ophthalmology. 2023;130:331-344. DOI 10.1016/j.ophtha.2022.10.006",
+    pmid: "36435636",
+    note: "AAO 嬰幼兒眼震手術評估；公開綜述結論，不是個人預後或品牌比較。",
+  },
+  hertle2010: {
+    id: "hertle2010",
+    authors: "Hertle RW",
+    title:
+      "Nystagmus in Infancy and Childhood: Characteristics and Evidence for Treatment",
+    source: "Am Orthopt J. 2010;60:48-58. DOI 10.3368/aoj.60.1.48",
+    pmid: "21061884",
+    note: "嬰幼兒／兒童眼震特徵與治療證據綜述。不是個人療效保證。",
+  },
   coms18: {
     id: "coms18",
     authors: "Collaborative Ocular Melanoma Study Group",
