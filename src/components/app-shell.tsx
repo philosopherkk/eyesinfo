@@ -12,6 +12,8 @@ import { CONTENT_VERSION, COPYRIGHT_LINE, PUBLIC_ORIGIN } from "@/lib/site";
 import { EDITORIAL } from "@/data/editorial";
 import { LegalBanner } from "@/components/legal-banner";
 import { LegalShortLine } from "@/components/legal-short-line";
+import { ThemeControl } from "@/components/theme-control";
+import { applyTheme, readThemePref } from "@/lib/theme";
 
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -43,6 +45,16 @@ export function AppShell({ children }: { children: ReactNode }) {
   }, [locale]);
 
   useEffect(() => {
+    applyTheme(readThemePref());
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    const onScheme = () => {
+      if (readThemePref() === "system") applyTheme("system");
+    };
+    mq.addEventListener("change", onScheme);
+    return () => mq.removeEventListener("change", onScheme);
+  }, []);
+
+  useEffect(() => {
     const onCopy = (e: ClipboardEvent) => {
       const sel = window.getSelection()?.toString() ?? "";
       if (sel.length < 48 || !e.clipboardData) return;
@@ -64,7 +76,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       </a>
 
       <header
-        className="sticky top-0 z-30 border-b border-line/80 bg-navy text-paper no-print"
+        className="sticky top-0 z-30 border-b border-line/80 bg-brand text-paper no-print"
         data-locale={locale}
         style={{ paddingTop: "max(0.35rem, env(safe-area-inset-top))" }}
       >
@@ -87,11 +99,12 @@ export function AppShell({ children }: { children: ReactNode }) {
             </span>
           </Link>
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
+            <ThemeControl compact surface="navy" />
             {/* On home, language lives in 「顯示選項」; keep it here on other pages. */}
             {!isHome ? <LangSwitch compact /> : null}
             <Link
               to="/urgent"
-              className="inline-flex min-h-10 items-center gap-1 rounded-full bg-danger px-2.5 text-[0.72rem] font-semibold text-paper no-underline sm:min-h-11 sm:px-3.5 sm:text-[0.75rem]"
+              className="urgent-on-danger inline-flex min-h-10 items-center gap-1 rounded-full bg-danger px-2.5 text-[0.72rem] font-semibold text-paper no-underline sm:min-h-11 sm:px-3.5 sm:text-[0.75rem]"
             >
               <Phone className="size-3.5" strokeWidth={2.2} aria-hidden />
               {t("urgent")}

@@ -19,6 +19,13 @@ const zhHant = {
   bookmarked: "已收藏",
   install: "加到主畫面",
   displayOpts: "顯示選項",
+  themeToggle: "外觀",
+  themeLight: "日間",
+  themeDark: "深色",
+  themeSystem: "跟隨系統",
+  themeAriaLight: "外觀：日間",
+  themeAriaDark: "外觀：深色",
+  themeAriaSystem: "外觀：跟隨系統",
   homeKicker: "香港眼科公眾教育",
   homeTitle: "常見眼疾與專題單張",
   homeLead: "按解剖分組認識徵狀與求醫時機。",
@@ -85,9 +92,9 @@ const zhHant = {
     "以人手檢查為主，包括鍵盤操作、焦點可見性、標題層級、語系標記，以及主要互動元件的觸控目標。尚未完成完整自動化掃描或第三方審計。",
   a11yGapsH: "已知限制（待跟進）",
   a11yGaps:
-    "部分示意動畫與複雜圖示（例如眼圖熱區）在輔助技術下的體驗仍可再改善；高對比主題與深色模式尚未提供。詳細清單會隨版本更新。",
+    "部分示意動畫與複雜圖示（例如眼圖熱區）在輔助技術下的體驗仍可再改善。深色外觀已可在顯示選項或頁首切換（日間／深色／跟隨系統）；高對比主題仍未另設。詳細清單會隨版本更新。",
   a11yDateH: "聲明日期",
-  a11yDate: "2026年9月15日（內容版本 1.62）",
+  a11yDate: "2026年9月17日（內容版本 1.69）",
   a11yFeedbackH: "意見與更正",
   a11yFeedback:
     "若發現無障礙或內容錯誤，請參閱法律與專業守則頁的覆核與更正說明。本站不提供診所電話、預約或即時通訊，亦不經此頁接收病歷。",
@@ -112,12 +119,12 @@ const zhHant = {
   privacyTitle: "私隱與本機資料",
   privacyCap486H: "個人資料（私隱）條例（第486章）",
   privacyCap486:
-    "本教育網站不經此頁收集姓名、身份證號碼、病歷、聯絡電話或付款資料，亦沒有會員帳戶或伺服器端病歷／問診紀錄。本站目前沒有 Google Analytics／同類第三方分析追蹤。頁面可能載入 Google Fonts 字型，以及建置環境相關腳本（若存在）。字型大小、收藏、阿姆斯勒自記及戶外時間僅存於本機 localStorage，不上載伺服器。可用下方「清除本機資料」或瀏覽器網站資料刪除本機紀錄。",
+    "本教育網站不經此頁收集姓名、身份證號碼、病歷、聯絡電話或付款資料，亦沒有會員帳戶或伺服器端病歷／問診紀錄。本站目前沒有 Google Analytics／同類第三方分析追蹤。頁面可能載入 Google Fonts 字型，以及建置環境相關腳本（若存在）。字型大小、外觀、收藏、阿姆斯勒自記及戶外時間僅存於本機 localStorage，不上載伺服器。可用下方「清除本機資料」或瀏覽器網站資料刪除本機紀錄。",
   privacyP2:
     "本站沒有會員帳戶，不經此網站收集身份證、病歷或付款資料。請勿在任何表格上傳送敏感個人資料——本站亦沒有此類表格。問醫生清單等工具只在你裝置上顯示，不會上載問答內容。",
   privacyClearH: "清除本機資料",
   privacyClearP:
-    "清除字型大小、語言、收藏、阿姆斯勒自記及戶外時間等本機偏好（localStorage）。不上載伺服器。更正或營運查詢請見法律頁更正政策；本站不經此頁接收病歷或預約，亦未公開營運者電郵。",
+    "清除字型大小、外觀、語言、收藏、阿姆斯勒自記及戶外時間等本機偏好（localStorage）。不上載伺服器。更正或營運查詢請見法律頁更正政策；本站不經此頁接收病歷或預約，亦未公開營運者電郵。",
   privacyClearBtn: "清除本機資料",
   privacyClearDone: "已清除本機偏好。",
   clinicTitle: "本站不提供執業資料",
@@ -413,6 +420,13 @@ const en: Record<Key, string> = {
   bookmarked: "Saved",
   install: "Add to Home Screen",
   displayOpts: "Display options",
+  themeToggle: "Appearance",
+  themeLight: "Light",
+  themeDark: "Dark",
+  themeSystem: "System",
+  themeAriaLight: "Appearance: light",
+  themeAriaDark: "Appearance: dark",
+  themeAriaSystem: "Appearance: system",
   homeKicker: "Hong Kong public eye education",
   homeTitle: "Common eye conditions and fact sheets",
   homeLead: "Learn symptoms and when to seek care, grouped by anatomy.",
@@ -481,9 +495,9 @@ const en: Record<Key, string> = {
     "Mainly manual checks: keyboard use, visible focus, heading structure, language markup, and touch targets on primary controls. Full automated scans and third-party audits are not complete yet.",
   a11yGapsH: "Known gaps (to follow up)",
   a11yGaps:
-    "Some demos and complex diagrams (for example eye-map hotspots) can still improve with assistive technologies. A high-contrast theme and dark mode are not offered yet. The list will update with later versions.",
+    "Some demos and complex diagrams (for example eye-map hotspots) can still improve with assistive technologies. Dark appearance is available under Display options or in the header (light / dark / system); a separate high-contrast theme is not offered yet. The list will update with later versions.",
   a11yDateH: "Statement date",
-  a11yDate: "15 September 2026 (content version 1.62)",
+  a11yDate: "17 September 2026 (content version 1.69)",
   a11yFeedbackH: "Feedback and corrections",
   a11yFeedback:
     "For accessibility or content errors, see the review and corrections note on the Law and professional code page. This site does not list clinic phones, bookings or messaging, and does not take medical records here.",
@@ -509,12 +523,12 @@ const en: Record<Key, string> = {
   privacyTitle: "Privacy and on-device data",
   privacyCap486H: "Personal Data (Privacy) Ordinance (Cap. 486)",
   privacyCap486:
-    "This education site does not collect names, ID numbers, medical records, phone numbers or payment data through this page. There is no account and no server-side medical Q&A log. There is currently no Google Analytics or similar third-party analytics tracking. The page may load Google Fonts, and build-environment scripts if present. Type size, bookmarks, Amsler notes and outdoor time stay in on-device localStorage only and are not uploaded. Use “Clear local data” below or clear site data in the browser to delete local records.",
+    "This education site does not collect names, ID numbers, medical records, phone numbers or payment data through this page. There is no account and no server-side medical Q&A log. There is currently no Google Analytics or similar third-party analytics tracking. The page may load Google Fonts, and build-environment scripts if present. Type size, appearance, bookmarks, Amsler notes and outdoor time stay in on-device localStorage only and are not uploaded. Use “Clear local data” below or clear site data in the browser to delete local records.",
   privacyP2:
     "There is no account. This site does not collect ID numbers, medical records or payment data. Do not send sensitive personal data — there is no form for that. Tools such as the questions checklist stay on your device and are not uploaded.",
   privacyClearH: "Clear local data",
   privacyClearP:
-    "Clears on-device preferences in localStorage (type size, language, bookmarks, Amsler notes, outdoor time). Nothing is uploaded. For corrections, see the corrections policy on the legal page; this site does not take medical records or bookings here, and no operator email is published.",
+    "Clears on-device preferences in localStorage (type size, appearance, language, bookmarks, Amsler notes, outdoor time). Nothing is uploaded. For corrections, see the corrections policy on the legal page; this site does not take medical records or bookings here, and no operator email is published.",
   privacyClearBtn: "Clear local data",
   privacyClearDone: "Local preferences cleared.",
   clinicTitle: "No practice information on this site",
@@ -815,6 +829,13 @@ const ja: Record<Key, string> = {
   bookmarked: "保存済み",
   install: "ホーム画面に追加",
   displayOpts: "表示オプション",
+  themeToggle: "外観",
+  themeLight: "ライト",
+  themeDark: "ダーク",
+  themeSystem: "システムに合わせる",
+  themeAriaLight: "外観：ライト",
+  themeAriaDark: "外観：ダーク",
+  themeAriaSystem: "外観：システム",
   homeKicker: "香港の眼科市民教育",
   homeTitle: "よくある目の病気と解説",
   homeLead: "解剖ごとに症状と受診の目安を学べます。",
@@ -883,9 +904,9 @@ const ja: Record<Key, string> = {
     "主に人手確認です。キーボード操作、フォーカスの可視性、見出し構造、言語マーク、主要操作のタッチ目標を見ます。完全な自動スキャンや第三者監査はまだ完了していません。",
   a11yGapsH: "既知の制限（今後の課題）",
   a11yGaps:
-    "一部の図示や複雑な図（眼の図のホットスポットなど）は支援技術での体験をさらに改善できます。高コントラストテーマとダークモードはまだありません。一覧は版に応じて更新します。",
+    "一部の図示や複雑な図（眼の図のホットスポットなど）は支援技術での体験をさらに改善できます。ダーク外観は表示オプションまたはヘッダーで切り替えできます（ライト／ダーク／システムに合わせる）。別の高コントラストテーマはまだありません。一覧は版に応じて更新します。",
   a11yDateH: "声明日",
-  a11yDate: "2026年9月15日（コンテンツ版 1.62）",
+  a11yDate: "2026年9月17日（コンテンツ版 1.69）",
   a11yFeedbackH: "意見と訂正",
   a11yFeedback:
     "アクセシビリティや内容の誤りは、法令と職業倫理の頁の確認・訂正の説明を参照してください。診療所電話・予約・メッセージ連絡は掲載せず、病歴も受け取りません。",
@@ -910,12 +931,12 @@ const ja: Record<Key, string> = {
   privacyTitle: "プライバシーと端末内データ",
   privacyCap486H: "個人資料（私隱）条例（第486章）",
   privacyCap486:
-    "本教育サイトでは、氏名・身分証番号・病歴・電話・決済情報をこの頁で集めません。会員登録も、サーバー側の病歴／問診記録もありません。現時点で Google Analytics や同種の第三者分析トラッキングはありません。ページは Google Fonts を読み込むことがあり、構築環境の関連スクリプトがある場合も読み込みます。文字サイズ、保存、アムスラー自己記録、屋外時間は端末の localStorage のみで、サーバーへは上げません。下の「端末内データを消す」またはブラウザのサイトデータ削除で端末内記録を消せます。",
+    "本教育サイトでは、氏名・身分証番号・病歴・電話・決済情報をこの頁で集めません。会員登録も、サーバー側の病歴／問診記録もありません。現時点で Google Analytics や同種の第三者分析トラッキングはありません。ページは Google Fonts を読み込むことがあり、構築環境の関連スクリプトがある場合も読み込みます。文字サイズ、外観、保存、アムスラー自己記録、屋外時間は端末の localStorage のみで、サーバーへは上げません。下の「端末内データを消す」またはブラウザのサイトデータ削除で端末内記録を消せます。",
   privacyP2:
     "会員登録はありません。身分証番号・病歴・決済情報は集めません。機密情報を送らないでください。その種のフォームもありません。医師に聞くリストなどのツールは端末上のみで、内容はアップロードしません。",
   privacyClearH: "端末内データを消す",
   privacyClearP:
-    "文字サイズ・言語・保存・アムスラー記録・屋外時間など localStorage の端末内設定を消します。アップロードはありません。訂正は法令頁の訂正方針を参照；病歴や予約は受け付けず、運営者メールも公開していません。",
+    "文字サイズ・外観・言語・保存・アムスラー記録・屋外時間など localStorage の端末内設定を消します。アップロードはありません。訂正は法令頁の訂正方針を参照；病歴や予約は受け付けず、運営者メールも公開していません。",
   privacyClearBtn: "端末内データを消す",
   privacyClearDone: "端末内の設定を消しました。",
   clinicTitle: "診療所情報は掲載しません",

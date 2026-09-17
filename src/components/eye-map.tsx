@@ -77,7 +77,7 @@ export function EyeMap() {
           <ellipse cx="140" cy="80" rx="118" ry="70" fill="var(--color-paper)" stroke="var(--color-navy)" strokeWidth="2" />
           <path d="M30,80 Q140,18 250,80" fill="none" stroke="var(--color-navy)" strokeWidth="6" strokeLinecap="round" />
           <path d="M30,80 Q140,142 250,80" fill="none" stroke="var(--color-navy)" strokeWidth="6" strokeLinecap="round" />
-          <ellipse cx="140" cy="80" rx="52" ry="52" fill="#dce8ef" stroke="var(--color-navy)" strokeWidth="1.5" />
+          <ellipse cx="140" cy="80" rx="52" ry="52" fill="var(--color-iris)" stroke="var(--color-navy)" strokeWidth="1.5" />
           <circle cx="140" cy="80" r="22" fill="var(--color-navy)" />
           <circle cx="148" cy="72" r="6" fill="var(--color-paper)" />
           {sel === "lid" ? <path d="M30,80 Q140,18 250,80" fill="none" stroke="var(--color-danger)" strokeWidth="8" opacity="0.45" /> : null}
@@ -94,10 +94,10 @@ export function EyeMap() {
         </p>
         <svg viewBox="0 0 280 150" className="w-full" role="img" aria-label={tx("眼睛側面示意")}>
           <ellipse cx="120" cy="75" rx="70" ry="55" fill="var(--color-paper)" stroke="var(--color-navy)" strokeWidth="2" />
-          <path d="M50,75 Q55,40 85,38 Q70,75 85,112 Q55,110 50,75" fill="#dce8ef" stroke="var(--color-navy)" />
+          <path d="M50,75 Q55,40 85,38 Q70,75 85,112 Q55,110 50,75" fill="var(--color-iris)" stroke="var(--color-navy)" />
           <ellipse cx="78" cy="75" rx="10" ry="18" fill="var(--color-navy)" opacity="0.35" />
           <circle cx="95" cy="75" r="16" fill="none" stroke="var(--color-navy)" strokeWidth="2" />
-          <path d="M175,62 L230,52 L230,98 L175,88 Z" fill="#dce8ef" stroke="var(--color-navy)" />
+          <path d="M175,62 L230,52 L230,98 L175,88 Z" fill="var(--color-iris)" stroke="var(--color-navy)" />
           {sel === "lens" ? <circle cx="95" cy="75" r="16" fill="none" stroke="var(--color-danger)" strokeWidth="3" /> : null}
           {sel === "angle" ? <circle cx="58" cy="52" r="8" fill="none" stroke="var(--color-danger)" strokeWidth="2" /> : null}
           {sel === "macula" ? <circle cx="150" cy="80" r="7" fill="var(--color-danger)" opacity="0.55" /> : null}

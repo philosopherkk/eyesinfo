@@ -18,13 +18,13 @@ export function EmergencyShell({ variant = "banner", className }: Props) {
   const body = (
     <span>
       <span className="block text-[0.9rem] font-semibold">{t("homeUrgentTitle")}</span>
-      <span className="mt-0.5 block text-[0.8rem] leading-snug text-paper/90">
+      <span className="mt-0.5 block text-[0.8rem] leading-snug opacity-90">
         {t("homeUrgentBody")}
       </span>
-      <span className="mt-1.5 block text-[0.8rem] leading-snug text-paper/90">
+      <span className="mt-1.5 block text-[0.8rem] leading-snug opacity-90">
         {t("emergencyDoNotDrive")}
       </span>
-      <span className="mt-1 block text-[0.78rem] leading-snug text-paper/85">
+      <span className="mt-1 block text-[0.78rem] leading-snug opacity-85">
         {t("emergencyCannotTravel")}
       </span>
     </span>
@@ -34,7 +34,7 @@ export function EmergencyShell({ variant = "banner", className }: Props) {
     return (
       <aside
         className={cn(
-          "rounded-xl bg-danger px-3.5 py-3 text-paper",
+          "urgent-on-danger rounded-xl bg-danger px-3.5 py-3 text-paper",
           className,
         )}
         aria-label={t("homeUrgentTitle")}
@@ -50,10 +50,10 @@ export function EmergencyShell({ variant = "banner", className }: Props) {
   return (
     <Link
       to="/urgent"
-      className={cn(
-        "flex items-start gap-3 rounded-xl bg-danger px-3.5 py-3 text-paper no-underline",
-        className,
-      )}
+        className={cn(
+          "urgent-on-danger flex items-start gap-3 rounded-xl bg-danger px-3.5 py-3 text-paper no-underline",
+          className,
+        )}
     >
       <ShieldAlert className="mt-0.5 size-5 shrink-0" aria-hidden />
       {body}

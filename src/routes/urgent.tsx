@@ -45,7 +45,7 @@ function UrgentPage() {
         <EmergencyShell variant="block" />
       </div>
 
-      <section className="mt-5 rounded-xl bg-danger px-4 py-4 text-paper">
+      <section className="urgent-on-danger mt-5 rounded-xl bg-danger px-4 py-4 text-paper">
         <h2 className="text-[1rem] font-semibold">{t("urgent999")}</h2>
         <ul className="mt-2 list-disc space-y-1 pl-5 text-[0.9rem] leading-relaxed">
           {flags.map((s) => (
@@ -55,7 +55,7 @@ function UrgentPage() {
         <Call999 />
       </section>
 
-      <section className="mt-5 rounded-xl bg-danger px-4 py-4 text-paper">
+      <section className="urgent-on-danger mt-5 rounded-xl bg-danger px-4 py-4 text-paper">
         <h2 className="text-[1rem] font-semibold">{t("chemH")}</h2>
         <ol className="mt-2 list-decimal space-y-1.5 pl-5 text-[0.9rem] leading-relaxed">
           <li>{t("chem1")}</li>
@@ -66,7 +66,7 @@ function UrgentPage() {
         <Call999 />
       </section>
 
-      <section className="mt-5 rounded-xl bg-danger px-4 py-4 text-paper">
+      <section className="urgent-on-danger mt-5 rounded-xl bg-danger px-4 py-4 text-paper">
         <h2 className="text-[1rem] font-semibold">{t("globeH")}</h2>
         <p className="mt-2 text-[0.9rem] leading-relaxed">{globe}</p>
         <Call999 />
