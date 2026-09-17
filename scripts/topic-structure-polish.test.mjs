@@ -129,10 +129,10 @@ describe("topic structure polish", () => {
     assert.match(read("src/lib/topic-related.ts"), /PRIMARY_TOPIC_CAP\s*=\s*5/);
   });
 
-  it("CONTENT_VERSION is 1.66", () => {
+  it("CONTENT_VERSION is 1.67", () => {
     const site = read("src/lib/site.ts");
-    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.66"/);
-    assert.match(site, /CONTENT_UPDATED\s*=\s*"2026-09-15"/);
+    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.67"/);
+    assert.match(site, /CONTENT_UPDATED\s*=\s*"2026-09-17"/);
   });
 
   it("ui keys include TOC and related group labels in all locales", () => {
@@ -319,7 +319,7 @@ describe("topic structure polish", () => {
     assert.doesNotMatch(topics, /t-three-symptoms|三大症狀專題/);
   });
 
-  it("Exact 1.66: E1/E2/E5 + Cap C1 scaffold drop + Lex correction + Home LEAD row", () => {
+  it("Exact 1.67: CME qualitative + corneal no organ-compare + nystagmus hedge/cites", () => {
     const topics = read("src/data/topics.ts");
     const en = read("src/i18n/topics-en.ts");
     const ja = read("src/i18n/topics-ja.ts");
@@ -337,7 +337,9 @@ describe("topic structure polish", () => {
     assert.match(topics, /不宜多焦及多數延伸景深設計/);
     assert.doesNotMatch(topics, /通常避免多焦及多數延伸景深/);
     assert.match(topics, /\["多焦／三焦"[^\]]*"不宜"\]/);
-    assert.match(topics, /文獻上並不少見；糖尿病、後囊破裂者較高/);
+    assert.match(topics, /術後黃斑水腫可發生；糖尿病、後囊破裂者較高/);
+    assert.doesNotMatch(topics, /文獻上並不少見；糖尿病、後囊破裂者較高/);
+    assert.doesNotMatch(topics, /高峰多在術後 4–6 週/);
     assert.match(topics, /負向光視（顳側陰影感）：早期文獻可見/);
     assert.doesNotMatch(topics, /可至約數個百分點/);
     assert.doesNotMatch(topics, /可達一成以上/);
@@ -350,20 +352,43 @@ describe("topic structure polish", () => {
 
     assert.match(en, /where multifocals are not suitable/);
     assert.match(en, /Not suitable/);
-    assert.match(en, /Not uncommon in the literature/);
+    assert.match(en, /Post-op macular oedema can occur; higher with diabetes or posterior capsule rupture/);
+    assert.doesNotMatch(en, /Not uncommon in the literature; higher with diabetes/);
+    assert.doesNotMatch(en, /often peaks at 4–6 weeks/);
     assert.match(en, /seen in early literature/);
     assert.match(en, /Montesano et al\./);
     assert.match(en, /not a brand comparison/);
+    assert.match(en, /rejection risk varies by person and disease state — but is never zero/);
+    assert.doesNotMatch(en, /lower than for some solid organs/);
+    assert.match(en, /not a guarantee of “curing” nystagmus/);
 
     assert.match(ja, /多焦点が不適な状況/);
-    assert.match(ja, /文献上まれではない/);
+    assert.match(ja, /術後黄斑浮腫は起こり得る；糖尿病・後嚢破損では高め/);
+    assert.doesNotMatch(ja, /文献上まれではない；糖尿病・後嚢破損で高め/);
+    assert.doesNotMatch(ja, /術後4–6週にピークが多い/);
     assert.match(ja, /早期文献にみられ/);
     assert.match(ja, /Montesanoら/);
+    assert.match(ja, /拒絶リスクは人・病状により異なりますが、ゼロではありません/);
+    assert.doesNotMatch(ja, /実質臓器移植より拒絶/);
+    assert.match(ja, /眼振の治癒」や視力正常化の保証ではありません/);
+
+    assert.match(extra, /排斥風險因人／病情而異，但絕非零風險/);
+    assert.doesNotMatch(extra, /低於部分實質器官移植/);
+    assert.match(extra, /不是保證「治癒震顫」或視力升至正常/);
+    assert.match(extra, /refs:\s*\["ehrt2012",\s*"bertsch2017"\]/);
+    assert.doesNotMatch(cites, /chang2023aao:/);
+    assert.doesNotMatch(cites, /hertle2010:/);
+    assert.doesNotMatch(cites, /pmid:\s*"36435636"/);
+    assert.doesNotMatch(cites, /pmid:\s*"21061884"/);
+    assert.match(cites, /pmid:\s*"22459007"/);
+    assert.match(cites, /pmid:\s*"28177849"/);
+    assert.doesNotMatch(cites, /pmid:\s*"33598911"/);
 
     assert.doesNotMatch(extra, /鏈接結構 only/);
     assert.match(editorial, /本站暫未公開營運者電郵；更正政策見本段/);
     assert.doesNotMatch(editorial, /法律頁所列更正聯絡方式/);
     assert.match(editorial, /funding:\s*""/);
+    assert.match(editorial, /reviewedIso:\s*"2026-09-17"/);
     assert.doesNotMatch(banner, /legal\.funding/);
     assert.doesNotMatch(legalPage, /legal\.funding/);
     assert.doesNotMatch(legalPage, /本站目前未公開營運者電郵。更正政策見上/);
@@ -374,7 +399,7 @@ describe("topic structure polish", () => {
     assert.match(home, /t-corneal-transplant/);
     assert.match(home, /t-nystagmus/);
     assert.match(home, /t-ocular-tumours/);
-    assert.match(hkos, /CONTENT_VERSION 1\.66/);
+    assert.match(hkos, /CONTENT_VERSION 1\.67/);
   });
 });
 

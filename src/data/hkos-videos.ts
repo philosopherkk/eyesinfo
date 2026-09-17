@@ -1,5 +1,5 @@
 /**
- * HKOS「眼睛解碼」public-education YouTube cards (CONTENT_VERSION 1.66).
+ * HKOS「眼睛解碼」public-education YouTube cards (CONTENT_VERSION 1.67).
  * Linked thumbnail only — no embed. Soft callouts lead the card for Cap/Lex KEEP.
  * A topic may list multiple cards (rendered in array order).
  */
