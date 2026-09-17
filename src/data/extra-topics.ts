@@ -2604,7 +2604,7 @@ export const EXTRA_TOPICS: Topic[] = [
     category: "lens",
     featured: false,
     lastReviewed: "2026-09-17",
-    refs: ["ehrt2012", "bertsch2017", "chang2023aao", "hertle2010"],
+    refs: ["ehrt2012", "bertsch2017"],
     blocks: [
       { type: "h", text: "是甚麼" },
       {

@@ -337,7 +337,7 @@ describe("topic structure polish", () => {
     assert.match(topics, /不宜多焦及多數延伸景深設計/);
     assert.doesNotMatch(topics, /通常避免多焦及多數延伸景深/);
     assert.match(topics, /\["多焦／三焦"[^\]]*"不宜"\]/);
-    assert.match(topics, /糖尿病、後囊破裂者風險較高；發生時間因人而異/);
+    assert.match(topics, /術後黃斑水腫可發生；糖尿病、後囊破裂者較高/);
     assert.doesNotMatch(topics, /文獻上並不少見；糖尿病、後囊破裂者較高/);
     assert.doesNotMatch(topics, /高峰多在術後 4–6 週/);
     assert.match(topics, /負向光視（顳側陰影感）：早期文獻可見/);
@@ -352,7 +352,7 @@ describe("topic structure polish", () => {
 
     assert.match(en, /where multifocals are not suitable/);
     assert.match(en, /Not suitable/);
-    assert.match(en, /Higher risk with diabetes or capsule rupture; timing varies by person/);
+    assert.match(en, /Post-op macular oedema can occur; higher with diabetes or posterior capsule rupture/);
     assert.doesNotMatch(en, /Not uncommon in the literature; higher with diabetes/);
     assert.doesNotMatch(en, /often peaks at 4–6 weeks/);
     assert.match(en, /seen in early literature/);
@@ -363,7 +363,7 @@ describe("topic structure polish", () => {
     assert.match(en, /not a guarantee of “curing” nystagmus/);
 
     assert.match(ja, /多焦点が不適な状況/);
-    assert.match(ja, /糖尿病・後嚢破損ではリスクが高め；発症時期は人により異なる/);
+    assert.match(ja, /術後黄斑浮腫は起こり得る；糖尿病・後嚢破損では高め/);
     assert.doesNotMatch(ja, /文献上まれではない；糖尿病・後嚢破損で高め/);
     assert.doesNotMatch(ja, /術後4–6週にピークが多い/);
     assert.match(ja, /早期文献にみられ/);
@@ -375,11 +375,11 @@ describe("topic structure polish", () => {
     assert.match(extra, /排斥風險因人／病情而異，但絕非零風險/);
     assert.doesNotMatch(extra, /低於部分實質器官移植/);
     assert.match(extra, /不是保證「治癒震顫」或視力升至正常/);
-    assert.match(extra, /refs:\s*\["ehrt2012",\s*"bertsch2017",\s*"chang2023aao",\s*"hertle2010"\]/);
-    assert.match(cites, /chang2023aao:/);
-    assert.match(cites, /hertle2010:/);
-    assert.match(cites, /pmid:\s*"36435636"/);
-    assert.match(cites, /pmid:\s*"21061884"/);
+    assert.match(extra, /refs:\s*\["ehrt2012",\s*"bertsch2017"\]/);
+    assert.doesNotMatch(cites, /chang2023aao:/);
+    assert.doesNotMatch(cites, /hertle2010:/);
+    assert.doesNotMatch(cites, /pmid:\s*"36435636"/);
+    assert.doesNotMatch(cites, /pmid:\s*"21061884"/);
     assert.match(cites, /pmid:\s*"22459007"/);
     assert.match(cites, /pmid:\s*"28177849"/);
     assert.doesNotMatch(cites, /pmid:\s*"33598911"/);

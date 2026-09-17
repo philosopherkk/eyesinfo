@@ -448,7 +448,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
           ["Dropped nucleus", "Uncommon; may need retinal surgery"],
           ["Suprachoroidal haemorrhage", "Very rare but can be severe"],
           ["Endophthalmitis", "Uncommon; emergency; this page’s bibliography (ESCRS) emphasises prevention; intracameral antibiotic lowers published rates"],
-          ["Clinically significant macular oedema", "Higher risk with diabetes or capsule rupture; timing varies by person"],
+          ["Clinically significant macular oedema", "Post-op macular oedema can occur; higher with diabetes or posterior capsule rupture"],
           ["Retinal detachment after surgery", "Uncommon; higher with high myopia, younger age, male sex, or after capsule rupture"],
           ["Endothelial failure / bullous keratopathy", "Uncommon; low endothelial counts and high ultrasound energy raise risk"],
           ["Posterior capsule opacification (years)", "Not uncommon over years; rates vary by person — see below; not a returning cataract"],
