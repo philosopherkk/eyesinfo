@@ -120,7 +120,7 @@ export const LEGAL_I18N: L<{
     mchk:
       "This education site does not carry clinic addresses, phone numbers, fees or booking routes, and does not link to any practice website. Authors/reviewers are identified only by name, specialist register field and qualifications. There are no outcome promises, comparisons with other doctors, patient testimonials, or words such as “cure / most effective”.",
     privacy:
-      "This app may store type size, saved topics, Amsler notes and outdoor time in localStorage on this device. Nothing is uploaded to a server. No name or ID is required. Clearing the site data in the browser deletes it. Adding to the Home Screen is an on-device prompt, not an account.",
+      "This app may store type size, appearance (light / dark / system), saved topics, Amsler notes and outdoor time in localStorage on this device. Nothing is uploaded to a server. No name or ID is required. Clearing the site data in the browser deletes it. Adding to the Home Screen is an on-device prompt, not an account.",
     notSubstitute:
       "This content cannot replace an in-person consultation with a registered ophthalmologist and is not a diagnosis. This page is not diagnostic, prescribing or surgical advice. Only doctors listed on the Medical Council specialist register in ophthalmology may use the title “ophthalmologist” (眼科專科醫生).",
     noServices:
@@ -143,7 +143,7 @@ export const LEGAL_I18N: L<{
     mchk:
       "本教育サイトに診療所住所・電話・料金・予約経路はなく、診療所サイトへのリンクもありません。執筆／確認者は氏名・専門医名簿の分野・学歴のみで示します。効果の保証、他の医師との比較、患者の体験談、「根治／最も有効」などの表現は用いません。",
     privacy:
-      "文字サイズ、保存した解説、アムスラー自己記録、屋外時間は、この端末のlocalStorageに保存されます。サーバーへは上げません。氏名や身分証は求めません。ブラウザのサイトデータを消すと削除されます。ホーム画面追加は端末上の案内であり、アカウントではありません。",
+      "文字サイズ、外観（ライト／ダーク／システム）、保存した解説、アムスラー自己記録、屋外時間は、この端末のlocalStorageに保存されます。サーバーへは上げません。氏名や身分証は求めません。ブラウザのサイトデータを消すと削除されます。ホーム画面追加は端末上の案内であり、アカウントではありません。",
     notSubstitute:
       "内容は登録眼科専門医の対面診察の代わりにはならず、診断でもありません。診断・処方・手術の助言ではありません。医師委員会の眼科専門医名簿に載る者だけが「眼科専科医」を名乗れます。",
     noServices: "予約・処方・販売・紹介は行わず、診療所サイトへもリンクしません。",

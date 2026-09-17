@@ -129,9 +129,9 @@ describe("topic structure polish", () => {
     assert.match(read("src/lib/topic-related.ts"), /PRIMARY_TOPIC_CAP\s*=\s*5/);
   });
 
-  it("CONTENT_VERSION is 1.68", () => {
+  it("CONTENT_VERSION is 1.69", () => {
     const site = read("src/lib/site.ts");
-    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.68"/);
+    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.69"/);
     assert.match(site, /CONTENT_UPDATED\s*=\s*"2026-09-17"/);
   });
 
@@ -405,7 +405,7 @@ describe("topic structure polish", () => {
     assert.match(home, /t-corneal-transplant/);
     assert.match(home, /t-nystagmus/);
     assert.match(home, /t-ocular-tumours/);
-    assert.match(hkos, /CONTENT_VERSION 1\.68/);
+    assert.match(hkos, /CONTENT_VERSION 1\.69/);
   });
 });
 

@@ -3,6 +3,7 @@ import { ChevronRight, Download } from "lucide-react";
 import { CATEGORIES, TOPICS } from "@/data/topics";
 import { TOOLS } from "@/data/tools";
 import { FontControl } from "@/components/font-control";
+import { ThemeControl } from "@/components/theme-control";
 import { LangSwitch } from "@/components/lang-switch";
 import { TopicRow } from "@/components/topic-row";
 import { EyeAnatomyViewer } from "@/components/eye-anatomy-viewer";
@@ -75,9 +76,10 @@ function Home() {
           <div className="space-y-3 border-t border-line/70 px-3.5 pt-3">
             <LangSwitch surface="paper" />
             <FontControl />
+            <ThemeControl surface="paper" />
             <Link
               to="/install"
-              className="inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-full bg-navy px-3.5 text-[0.8rem] font-semibold text-paper no-underline sm:w-auto"
+              className="inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-full bg-brand px-3.5 text-[0.8rem] font-semibold text-paper no-underline sm:w-auto"
             >
               <Download className="size-4" />
               {t("install")}

@@ -10,6 +10,7 @@ import { AppShell } from "@/components/app-shell";
 import appCss from "../styles.css?url";
 import { PUBLIC_ORIGIN, COPYRIGHT_LINE, COPYRIGHT_YEAR, COPYRIGHT_HOLDER } from "@/lib/site";
 import { SEO_SITE_NAME } from "@/lib/page-seo";
+import { THEME_BOOT_SCRIPT, THEME_COLOR_LIGHT } from "@/lib/theme";
 
 const APP_NAME = SEO_SITE_NAME;
 const APP_DESC =
@@ -26,7 +27,7 @@ export const Route = createRootRoute({
       },
       { title: APP_NAME },
       { name: "description", content: APP_DESC },
-      { name: "theme-color", content: "#003153" },
+      { name: "theme-color", content: THEME_COLOR_LIGHT },
       { name: "apple-mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
       { name: "apple-mobile-web-app-title", content: APP_NAME },
@@ -68,6 +69,8 @@ function Root() {
   return (
     <html lang="zh-Hant" suppressHydrationWarning>
       <head>
+        {/* FOUC-safe theme boot: localStorage → prefers-color-scheme → light */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
         <HeadContent />
       </head>
       <body>

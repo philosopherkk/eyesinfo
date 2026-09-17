@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* Daylight tokens = live education paper look (authoritative). */
 @theme {
   --color-ink: #1a2433;
   --color-muted: #5c6b7a;
@@ -7,11 +8,19 @@
   --color-paper: #f3f0e9;
   --color-card: #fffdf8;
   --color-line: #d8d2c6;
+  /* Brand sticky header / identity — never remapped off #003153. */
+  --color-brand: #003153;
+  /*
+   * Daylight: navy = brand text/accent.
+   * Dark: navy remaps to link/active accent (#9ec5dd) so text-navy / bottom-nav
+   * stay readable; header chrome uses --color-brand instead.
+   */
   --color-navy: #003153;
   --color-navy-2: #0a4468;
   --color-steel: #4d6d86;
   --color-danger: #8b1e2d;
   --color-danger-bg: #f8e8ea;
+  --color-iris: #dce8ef;
   --color-amsler-dark: #0c0c0c;
   --color-amsler-light: #f6f4ee;
   --font-sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", ui-sans-serif,
@@ -20,6 +29,39 @@
   --radius-md: 14px;
   --radius-lg: 22px;
   --radius-xl: 28px;
+}
+
+/* Deep navy education dark — not pure #000. Soft danger (muted, not neon). */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --color-ink: #e8eef4;
+  --color-muted: #9aabba;
+  --color-faint: #7a8d9c;
+  --color-paper: #0c1a28;
+  --color-card: #132736;
+  --color-line: #2a4054;
+  --color-brand: #003153;
+  --color-navy: #9ec5dd;
+  --color-navy-2: #1a5a7c;
+  --color-steel: #8aa4b8;
+  --color-danger: #d46a76;
+  --color-danger-bg: #3a1c24;
+  --color-iris: #2a4a5e;
+}
+
+/* Soft danger (#d46a76) needs dark ink — Cap 231 muted, not neon-on-white. */
+html[data-theme="dark"] .urgent-on-danger {
+  color: #1a1012;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html[data-theme] body,
+  html[data-theme] .theme-surface {
+    transition:
+      background-color 140ms ease,
+      color 140ms ease,
+      border-color 140ms ease;
+  }
 }
 
 @layer base {
@@ -167,6 +209,24 @@
 }
 
 @media print {
+  /* Education handouts stay daylight paper — force ink-on-paper. */
+  html,
+  html[data-theme="dark"] {
+    color-scheme: light;
+    --color-ink: #1a2433;
+    --color-muted: #5c6b7a;
+    --color-faint: #6b7785;
+    --color-paper: #f3f0e9;
+    --color-card: #fffdf8;
+    --color-line: #d8d2c6;
+    --color-brand: #003153;
+    --color-navy: #003153;
+    --color-navy-2: #0a4468;
+    --color-steel: #4d6d86;
+    --color-danger: #8b1e2d;
+    --color-danger-bg: #f8e8ea;
+    --color-iris: #dce8ef;
+  }
   header,
   nav,
   .no-print,

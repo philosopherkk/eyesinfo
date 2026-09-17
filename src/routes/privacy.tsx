@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { useI18n } from "@/i18n";
 import { usePrefs } from "@/lib/prefs";
+import { applyTheme, clearThemePref } from "@/lib/theme";
 import { pageHead } from "@/lib/page-seo";
 
 export const Route = createFileRoute("/privacy")({
@@ -38,6 +39,8 @@ function PrivacyPage() {
             className="mt-3 inline-flex min-h-11 items-center justify-center rounded-xl border border-navy bg-card px-4 text-[0.88rem] font-semibold text-navy"
             onClick={() => {
               clearLocalData();
+              clearThemePref();
+              applyTheme("system");
               setCleared(true);
             }}
           >
