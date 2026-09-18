@@ -12,7 +12,7 @@ import { EmergencyShell } from "@/components/emergency-shell";
 import { SaveButton } from "@/components/save-button";
 import { topicSaveKey } from "@/lib/saved";
 import { collectTocEntries } from "@/lib/topic-anchors";
-import { useI18n, useLocalizedTopic } from "@/i18n";
+import { useI18n, useLocalizedTopic, hasTopicLocalePack } from "@/i18n";
 import type { UiKey } from "@/i18n/ui";
 import { pageHead } from "@/lib/page-seo";
 
@@ -72,11 +72,12 @@ function TopicPage() {
   const raw = getTopic(topicId);
   const topic = useLocalizedTopic(raw ?? TOPICS[0]);
   const tools = TOPIC_TOOLS[raw?.id ?? ""] ?? [];
-  const { t, legal } = useI18n();
+  const { t, legal, locale } = useI18n();
   if (!raw) throw notFound();
   const { lastReviewed, reviewer } = topicEditorial(raw);
   const tocEntries = collectTocEntries(topic.blocks);
   const hasRefs = (raw.refs?.length ?? 0) > 0;
+  const showLocaleFallback = !hasTopicLocalePack(raw.id, locale);
 
   return (
     <article>
@@ -103,6 +104,14 @@ function TopicPage() {
         </div>
         {topic.meta ? (
           <p className="mt-1 text-[0.85rem] text-muted">{topic.meta}</p>
+        ) : null}
+        {showLocaleFallback ? (
+          <p
+            className="mt-2 rounded-lg border border-line bg-line/30 px-3 py-2 text-[0.8rem] leading-snug text-muted"
+            role="status"
+          >
+            {t("localeTopicFallback")}
+          </p>
         ) : null}
         <TopicToc entries={tocEntries} includeRefs={hasRefs} />
       </header>

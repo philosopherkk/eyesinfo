@@ -43,6 +43,14 @@ export function EduLink({
   if (href === "/clinic") return <Link to="/clinic" {...props}>{children}</Link>;
   if (href === "/install") return <Link to="/install" {...props}>{children}</Link>;
   if (href === "/qr") return <Link to="/qr" {...props}>{children}</Link>;
+  if (href === "/en" || href === "/en/") return <Link to="/en" {...props}>{children}</Link>;
+  if (href === "/ja" || href === "/ja/") return <Link to="/ja" {...props}>{children}</Link>;
+  if (href === "/zh-Hans" || href === "/zh-Hans/")
+    return (
+      <Link to="/zh-Hans" {...props}>
+        {children}
+      </Link>
+    );
 
   if (href.startsWith("/tools/")) {
     const id = href.split("/").pop() ?? "map";

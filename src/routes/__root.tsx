@@ -7,6 +7,7 @@ import {
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { AppShell } from "@/components/app-shell";
+import { LangSearchSync } from "@/components/lang-search-sync";
 import appCss from "../styles.css?url";
 import { PUBLIC_ORIGIN, COPYRIGHT_LINE, COPYRIGHT_YEAR, COPYRIGHT_HOLDER } from "@/lib/site";
 import { SEO_SITE_NAME } from "@/lib/page-seo";
@@ -93,6 +94,7 @@ function Root() {
           }}
         />
         <PreviewHostBridge />
+        <LangSearchSync />
         <AuthProvider>
           <AppShell>
             <Outlet />

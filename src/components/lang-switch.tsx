@@ -1,6 +1,8 @@
-import { LOCALES } from "@/i18n/locale";
+import { useNavigate, useRouterState } from "@tanstack/react-router";
+import { LOCALES, type Locale } from "@/i18n/locale";
 import { useI18n } from "@/i18n";
 import { cn } from "@/lib/utils";
+import { isLocaleHomePath, pathForLocale } from "@/lib/locale-path";
 
 export function LangSwitch({
   compact,
@@ -11,7 +13,22 @@ export function LangSwitch({
   surface?: "navy" | "paper";
 }) {
   const { locale, setLocale, t } = useI18n();
+  const navigate = useNavigate();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
   const onPaper = surface === "paper";
+  const onLocaleHome = isLocaleHomePath(pathname);
+
+  function pick(next: Locale) {
+    setLocale(next);
+    // On home / locale entry pages, keep the URL honest so /en is not a 404.
+    if (onLocaleHome) {
+      const target = pathForLocale(next);
+      if (target !== pathname.replace(/\/$/, "") && !(target === "/" && (pathname === "/" || pathname === ""))) {
+        void navigate({ href: target, replace: true });
+      }
+    }
+  }
+
   return (
     <div
       className={cn("flex items-center gap-1", compact ? "" : "flex-wrap")}
@@ -22,7 +39,7 @@ export function LangSwitch({
         <button
           key={l.id}
           type="button"
-          onClick={() => setLocale(l.id)}
+          onClick={() => pick(l.id)}
           className={cn(
             "inline-flex items-center justify-center rounded-full font-semibold",
             compact

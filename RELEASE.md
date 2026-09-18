@@ -21,7 +21,7 @@ Bump **only** when KK says this is a release (`CONTENT_VERSION` in `src/lib/site
 
 ## Post-deploy check
 
-Open https://eyesinfo.org. Homepage **最近覆核** and **網站版本** must match the deployed commit. If not, say so.
+Open https://www.eyesinfo.org (canonical host). Homepage **最近覆核** and **網站版本** must match the deployed commit. If not, say so. Apex `eyesinfo.org` must 301/308 to www.
 
 ## Normal content update flow
 

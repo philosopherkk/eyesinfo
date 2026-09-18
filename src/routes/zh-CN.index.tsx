@@ -1,0 +1,7 @@
+import { createFileRoute, redirect } from "@tanstack/react-router";
+
+export const Route = createFileRoute("/zh-CN/")({
+  beforeLoad: () => {
+    throw redirect({ to: "/zh-Hans", replace: true });
+  },
+});

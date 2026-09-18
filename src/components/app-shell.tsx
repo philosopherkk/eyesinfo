@@ -14,21 +14,24 @@ import { LegalBanner } from "@/components/legal-banner";
 import { LegalShortLine } from "@/components/legal-short-line";
 import { ThemeControl } from "@/components/theme-control";
 import { applyTheme, readThemePref } from "@/lib/theme";
+import { isLocaleHomePath, pathForLocale } from "@/lib/locale-path";
 
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const fontPx = usePrefs((s) => s.fontPx);
   const { t, locale } = useI18n();
-  const isHome = pathname === "/" || pathname === "";
+  const isHome = isLocaleHomePath(pathname);
+  const homeHref = pathForLocale(locale);
 
   const tabs = [
     {
-      to: "/",
+      to: homeHref,
       label: t("home"),
       icon: Home,
       // Visual highlight for education browsing (/c /t); aria-current only on true home.
-      match: (p: string) => p === "/" || p.startsWith("/c/") || p.startsWith("/t/"),
-      ariaCurrentPage: (p: string) => p === "/" || p === "",
+      match: (p: string) =>
+        isLocaleHomePath(p) || p.startsWith("/c/") || p.startsWith("/t/"),
+      ariaCurrentPage: (p: string) => isLocaleHomePath(p),
     },
     { to: "/search", label: t("search"), icon: Search, match: (p: string) => p.startsWith("/search"), ariaCurrentPage: (p: string) => p.startsWith("/search") },
     { to: "/tools", label: t("tools"), icon: LayoutGrid, match: (p: string) => p.startsWith("/tools") || p.startsWith("/amsler") || p.startsWith("/iol"), ariaCurrentPage: (p: string) => p.startsWith("/tools") || p.startsWith("/amsler") || p.startsWith("/iol") },
@@ -81,7 +84,10 @@ export function AppShell({ children }: { children: ReactNode }) {
         style={{ paddingTop: "max(0.35rem, env(safe-area-inset-top))" }}
       >
         <div className="flex items-center justify-between gap-2 px-3 pb-1.5 pt-0.5 sm:px-4 sm:pb-2 sm:pt-1">
-          <Link to="/" className="flex min-h-10 items-center gap-2 no-underline sm:min-h-11 sm:gap-2.5">
+          <Link
+            to={homeHref}
+            className="flex min-h-10 items-center gap-2 no-underline sm:min-h-11 sm:gap-2.5"
+          >
             <img
               src="/logo.png"
               alt=""
