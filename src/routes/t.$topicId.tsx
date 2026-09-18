@@ -27,6 +27,8 @@ const TOPIC_ALIASES: Record<string, string> = {
   "t-protopic": "t-tacrolimus-eyelid",
   /** Intermediate INN guess from earlier draft → Evidence lock. */
   "t-tacrolimus": "t-tacrolimus-eyelid",
+  /** Short slug → Exact macular-hole land. */
+  "t-mh": "t-macular-hole",
 };
 
 export const Route = createFileRoute("/t/$topicId")({

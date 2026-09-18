@@ -2252,4 +2252,255 @@ export const EN_PACKS: Record<string, TopicPack> = {
     ],
   },
 
+  "t-macular-hole": {
+    title: "Macular hole",
+    tag: "Macula topic",
+    meta: "Full-thickness / lamellar / pseudo-hole · OCT · closure not guaranteed",
+    blocks: [
+      { type: "h", text: "What it is" },
+      {
+        type: "p",
+        text: "A macular hole is a defect or layered separation at the macula (the retinal region of sharpest central vision). Public education often means a full-thickness macular hole (FTMH)—a full-thickness break in that retina. There are also lamellar holes and pseudo-holes from epiretinal-membrane contraction (looks like a hole on the surface, but OCT shows it is not full-thickness). The three are managed differently; do not self-label.",
+      },
+      {
+        type: "p",
+        text: "Common symptoms: blurred central vision and reading difficulty; bent straight lines or image distortion (metamorphopsia); a fixed central scotoma or a sense that “a piece is missing.”",
+      },
+      {
+        type: "p",
+        text: "Most idiopathic FTMHs relate to vitreous traction on the macula / vitreomacular interface change (traction during age-related posterior vitreous detachment is the classic pathologic concept). High myopia, trauma, and other retinal disease can also be associated—which category applies is for a doctor to judge.",
+      },
+      { type: "h", text: "Formation and staging (soft concepts, not a self-test)" },
+      {
+        type: "p",
+        text: "In the public literature, Gass and others described early stages and pathogenesis of idiopathic macular hole from clinical / biomicroscopic observation, later reappraised staging; modern practice often uses OCT and International Vitreomacular Traction Study (IVTS)–style imaging classes to aid communication (vitreomacular adhesion / traction, FTMH size, and so on). This page does not teach you to stage yourself; stage language is only vocabulary for reading a doctor’s report.",
+      },
+      { type: "h", text: "Prevalence (named studies · not personal risk)" },
+      {
+        type: "ul",
+        items: [
+          "Beaver Dam Eye Study (SD-OCT, Meuer et al., 2015): among gradable scans in roughly ages 63–102 in that round, estimated FTMH prevalence was about 0.4%; the same study also reported lamellar holes, epiretinal membranes, and other interface findings. These are results for that study, method, and age band—not your personal risk, and not a clinic comparison.",
+          "FTMH is relatively uncommon in population studies; after OCT became widespread, “interface abnormalities” are seen more often—that does not mean everyone progresses to an FTMH.",
+        ],
+      },
+      {
+        type: "note",
+        text: "Do not list bare “X per 10,000” figures without a study name; this page does not scare-stack uncited numbers.",
+      },
+      { type: "h", text: "Natural history (education)" },
+      {
+        type: "ul",
+        items: [
+          "Eye Disease Case-Control Study (Chew et al., 1999): in eyes that already had a macular hole, some holes enlarged and some vision worsened in follow-up; the rate of later new holes in fellow eyes that were initially unaffected was relatively low in that study’s follow-up strata. Not a prediction of whether you personally will worsen.",
+          "Vitrectomy for Macular Hole Study (Kim et al., 1995): many stage-2 FTMHs in the observation arm progressed to larger stages in follow-up—supporting the educational point that FTMHs are often not stably static, still not a personal timetable.",
+          "Spontaneous closure can occur, but published series do not make it a reliable expectation for most FTMHs; do not assume “it will heal by itself.”",
+        ],
+      },
+      { type: "h", text: "When to seek care" },
+      {
+        type: "p",
+        text: "Prompt (usually same-day) ophthalmic assessment: new clear drop in central vision, metamorphopsia, or a central scotoma.",
+      },
+      {
+        type: "ul",
+        items: [
+          "A&E / 999 (and see the retinal detachment topic): a curtain over the visual field, large field loss, sudden blindness; severe pain with vomiting, penetrating injury, chemical splash, and so on (see the urgent page).",
+          "New flashes or a clear increase in floaters without a curtain / without sudden blindness: seek dilated fundus exam as soon as possible (ideally same day)—the same path as the retinal detachment topic; the macular-hole topic does not replace peripheral tear / detachment checks.",
+        ],
+      },
+      { type: "h", text: "Tests a doctor may discuss (concepts)" },
+      {
+        type: "ul",
+        items: [
+          "Vision testing and an Amsler grid (supportive; not a substitute for examination)",
+          "Dilated fundus examination",
+          "Optical coherence tomography (OCT): distinguish FTMH / lamellar / pseudo-hole, measure minimum aperture, assess vitreomacular traction, and whether an epiretinal membrane is present—the core modern tool for diagnosis and shared understanding",
+          "Fundus photography or other imaging when needed (doctor’s decision)",
+        ],
+      },
+      { type: "h", text: "Treatment classes (not a prescription · not a guarantee)" },
+      {
+        type: "p",
+        text: "For a symptomatic FTMH, a doctor may discuss pars plana vitrectomy to relieve traction, often with internal limiting membrane–related steps, and intraocular gas tamponade to encourage anatomic closure; posture (e.g. face-down) may be discussed in some cases—how many days and whether it is required can only be individualised by a doctor; this page is not a recipe.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Kelly / Wendel early series (1991, 1993): pioneering / series experience of vitreous surgery for idiopathic macular hole—foundational technique direction, not a modern single success-rate benchmark, and not your prognosis.",
+          "Multicentre randomised trial (Freeman et al. / Vitrectomy for Macular Hole Study, 1997): versus observation, the surgery arm had higher anatomic closure rates and signals of visual benefit, with adverse events such as cataract—results under trial conditions, not clinic advertising.",
+          "Moorfields randomised trial (Ezra / Gregor et al., 2004): compared natural history, vitrectomy, and vitrectomy plus autologous serum—educationally stresses surgery’s role versus observation, not a guarantee.",
+          "Larger holes may involve discussion of technique variants such as inverted ILM flaps (e.g. methods reported by Michalewska et al.)—options education, not a ranking of clinic technique.",
+        ],
+      },
+      {
+        type: "ul",
+        items: [
+          "Whether closure occurs varies with duration, hole size, and individual factors, and is still not guaranteed; shorter duration is often more favourable—not “earlier always means full recovery.”",
+          "In phakic eyes, cataract often accelerates after surgery (qualitative education; details in the retinal detachment topic’s gas / complication concepts).",
+          "While expansile gas remains in the eye, do not fly and avoid nitrous oxide anaesthesia; blurred vision before the bubble absorbs is expected—see the retinal detachment topic.",
+        ],
+      },
+      {
+        type: "note",
+        text: "This page does not offer booking, prescribing, or purchasing; it lists no trade names (if gas chemistry is needed for education, use generic classes such as sulfur hexafluoride / perfluoropropane—same as the retinal detachment topic, not as brands).",
+      },
+      { type: "h", text: "Common misconceptions" },
+      {
+        type: "table",
+        rows: [
+          ["Misconception", "Closer wording"],
+          [
+            "“Macular hole = retinal detachment; operate immediately”",
+            "They differ; a curtain / sudden blindness is an emergency path. Whether to operate on an FTMH is a specialty decision from OCT and symptoms.",
+          ],
+          [
+            "“A hole always means blindness”",
+            "Impact is mainly central vision; degree varies—not a single outcome.",
+          ],
+          [
+            "“Surgery always closes and vision always recovers”",
+            "Anatomic closure and vision gain are related but not guaranteed; cataract and other factors can also affect postoperative vision.",
+          ],
+          [
+            "“OCT interface change = FTMH”",
+            "Membrane, traction, lamellar hole, and pseudo-hole differ from FTMH and need a doctor’s reading.",
+          ],
+          [
+            "“The fellow eye will soon be hit for sure”",
+            "Named follow-up studies show limited strata for fellow-eye new holes; not a personal-risk guarantee.",
+          ],
+        ],
+      },
+      {
+        type: "note",
+        text: "Public education only—not personal prognosis, and not a substitute for an in-person visit with a registered ophthalmology specialist. This site does not book, prescribe, or sell. Emergencies: A&E / call 999. Cross-read: retinal detachment topic; epiretinal membrane topic.",
+      },
+    ],
+  },
+
+  "t-erm": {
+    title: "Epiretinal membrane (macular pucker / ERM)",
+    tag: "Macula topic",
+    meta: "ERM · not surgery just because it is found · OCT",
+    blocks: [
+      { type: "h", text: "What it is" },
+      {
+        type: "p",
+        text: "An epiretinal membrane (ERM; also called a preretinal membrane) is a sheet of fibrocellular tissue on the macular surface. When it contracts it can wrinkle and thicken the retina, lowering central vision or causing metamorphopsia (straight lines bend).",
+      },
+      {
+        type: "p",
+        text: "Public education often roughly groups appearance as: cellophane macular reflex (CMR)—earlier, without clear retinal folds; and preretinal macular fibrosis (PMF)—more advanced, with visible folds.",
+      },
+      {
+        type: "p",
+        text: "Most are idiopathic (a concept linked to age-related posterior vitreous detachment / vitreoretinal interface change); they can also follow retinal tear / detachment, inflammation, vascular occlusion, diabetic retinopathy, trauma, or prior intraocular surgery—classification is a doctor’s judgement; this page is not a self-diagnosis list.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Membrane contraction can create a pseudo–macular hole (looks like a hole; OCT shows it is not full-thickness)",
+          "Less often it can coexist with or relate to lamellar / full-thickness holes—see the macular hole topic",
+          "Having an ERM is not the same as having an FTMH.",
+        ],
+      },
+      { type: "h", text: "Common symptoms (education, not a diagnosis checklist)" },
+      {
+        type: "ul",
+        items: [
+          "Metamorphopsia and reading strain",
+          "Mild to moderate central blur",
+          "Some people are nearly asymptomatic and are found only on exam / OCT",
+        ],
+      },
+      { type: "h", text: "Prevalence (named studies · not personal risk · methods matter a lot)" },
+      {
+        type: "p",
+        text: "Population figures vary widely by age band, ethnicity, fundus photography vs OCT, and grading definitions—so studies must be named; bare scare-stacks are forbidden. If citing both photography studies (roughly percent-level) and OCT studies (higher percent), one sentence must say: methods differ; the numbers are not direct personal-odds comparisons.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Blue Mountains Eye Study (Mitchell et al., 1997): among participants aged 49+, any ERM sign about 7% (CMR ~4.8%; PMF ~2.2%). Not your personal risk / not a brand comparison.",
+          "Blue Mountains five-year cumulative incidence (Fraser-Bell et al., 2003): among those with no ERM in either eye at baseline, first-eye new ERM over five years about 5.3%; new ERM after cataract surgery was higher than in non-operated eyes in that study—cohort association education, not “cataract surgery always causes ERM.”",
+          "Melbourne Visual Impairment Project (McCarty et al., 2005): any ERM about 6.0% in a sample aged 40+ (age-standardised CMR / PMF strata in the paper).",
+          "Beaver Dam Eye Study SD-OCT (Meuer et al., 2015): in an older cohort, OCT-estimated ERM prevalence about 34.1%—clearly higher than early photography-only studies, reflecting a more sensitive tool, not a sudden “outbreak” or a personal high-risk label.",
+          "MESA multi-ethnic photography study (Ng et al., 2011): any ERM about 28.9% (definition / method differ from BMES); the Chinese-ancestry group was higher in that study—ethnicity comparisons are that study’s results, not a Hong Kong personal-risk guarantee.",
+          "Systematic review / meta-analysis (Xiao et al., 2017): after age standardisation, earlier ERM (CMR) about 6.5%, advanced (PMF) about 2.6%, any ERM about 9.1%; ethnicity and imaging method can explain between-study differences. Pooled figures are still not your prognosis.",
+        ],
+      },
+      { type: "h", text: "When to seek care" },
+      {
+        type: "p",
+        text: "Outpatient ophthalmic assessment (not usually an emergency unless warning signs): metamorphopsia, gradually falling central vision, reading difficulty.",
+      },
+      {
+        type: "ul",
+        items: [
+          "A&E / 999 (see retinal detachment topic): field curtain, large field loss, sudden blindness; severe pain with vomiting, penetrating injury, chemical splash, and so on.",
+          "New flashes or a clear increase in floaters: dilated exam as soon as possible (ideally same day)—to check peripheral tears / detachment; separate from the ERM topic but can coexist.",
+        ],
+      },
+      { type: "h", text: "Tests a doctor may discuss (concepts)" },
+      {
+        type: "ul",
+        items: [
+          "Vision and metamorphopsia assessment (including Amsler grid support)",
+          "Dilated fundus exam (cellophane sheen, vessel distortion, folds)",
+          "OCT: membrane location and thickness, macular thickening / cystic change, pseudo-hole or coexisting full-thickness / lamellar defects—core for follow-up and surgical decision talk",
+          "Fundus photos when needed; other tests if a vascular / inflammatory cause is suspected",
+        ],
+      },
+      { type: "h", text: "Treatment classes (not a prescription · not a guarantee)" },
+      {
+        type: "p",
+        text: "Aligned with the retinal detachment topic: when clear wrinkling affects vision (or distortion), a doctor may discuss membrane peeling; it is not surgery just because an ERM is found.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Observation: for asymptomatic or mildly affected eyes, periodic OCT / vision follow-up is common (pace set by the doctor).",
+          "Pars plana vitrectomy + membrane peel (often with ILM handling, doctor’s choice): for clear symptoms and structural change. Goal is to improve distortion and/or vision—the amount varies with preoperative vision, duration, and macular structure; not a cure guarantee and not a clinic success-rate comparison.",
+          "Public reviews (e.g. Bu et al. on idiopathic ERM; Scheerlinck et al. systematic review of postoperative vision predictors) emphasise preoperative vision, duration, OCT structure, and related factors—education only, not a personal prediction formula.",
+          "In phakic eyes, cataract often accelerates after surgery (qualitative; same direction as RD / macular-hole topics).",
+          "After surgery, sudden curtain, severe pain, or sharp vision drop: treat as emergency (link retinal detachment topic).",
+        ],
+      },
+      {
+        type: "note",
+        text: "This page does not book, prescribe, or sell; it lists no trade names.",
+      },
+      { type: "h", text: "Common misconceptions" },
+      {
+        type: "table",
+        rows: [
+          ["Misconception", "Closer wording"],
+          [
+            "“OCT shows ERM → operate”",
+            "Not surgery just because it is found; depends on symptoms and structure.",
+          ],
+          [
+            "“ERM = macular hole”",
+            "Can be related or cause a pseudo-hole, but most are not full-thickness holes.",
+          ],
+          [
+            "“Vision always returns to normal after peeling”",
+            "Many people improve in distortion / vision, to varying degrees; not guaranteed.",
+          ],
+          [
+            "“Prevalence over 30% is terrifying”",
+            "That figure is from a specific older OCT cohort; photography studies are lower; methods differ—not personal fate.",
+          ],
+          [
+            "“Cataract surgery doomed me to ERM”",
+            "Named cohorts show higher new-onset association; most people do not get blindness-level outcomes from that alone; individual risk is explained by a doctor.",
+          ],
+        ],
+      },
+      {
+        type: "note",
+        text: "Public education only—not personal prognosis, and not a substitute for an in-person visit with a registered ophthalmology specialist. This site does not book, prescribe, or sell. Emergencies: A&E / call 999. Cross-read: retinal detachment topic; macular hole topic.",
+      },
+    ],
+  },
 };
