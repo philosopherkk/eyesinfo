@@ -12,19 +12,21 @@ Bump **only** when KK says this is a release (`CONTENT_VERSION` in `src/lib/site
 
 ## Deploy
 
-- Target: **Vercel production** for https://eyesinfo.org.
-- Only when KK says **deploy**.
-- Merge / PR to `main`, then Vercel prod (or EyesInfo’s established Vercel path).
-- **Never** auto weekday deploy.
+- GitHub **philosopherkk/eyesinfo** → Vercel build (Vite React). Production **eyesinfo.org** = branch **`main` only**.
+- Content path: feature branch → push → Preview URL → KK reads 繁 → KK says **merge** → production.
+- **Never** weekday auto-deploy.
+- **Never** CLI `vercel --prod` unless KK typed **“prod deploy”** in that message.
+- Never deploy from a Bot disk copy — only this repo’s git remote.
+- Do not “fix live” in the Vercel dashboard.
 
 ## Post-deploy check
 
-Homepage must show **最近覆核** and **網站版本** matching the deployed commit.
+Open https://eyesinfo.org. Homepage **最近覆核** and **網站版本** must match the deployed commit. If not, say so.
 
 ## Normal content update flow
 
-1. Draft 繁
-2. KK approve
-3. Write files in this repo
-4. Commit
-5. **Stop** unless KK said deploy
+1. Draft 繁 → KK approve
+2. Write on feature branch → push
+3. Paste Preview URL → KK reads
+4. KK says merge → production (`main`)
+5. Post-deploy homepage check
