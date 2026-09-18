@@ -11,7 +11,7 @@ export type PageSeoInput = {
   path: string;
 };
 
-/** Absolute canonical URL on the public apex origin (matches PUBLIC_ORIGIN). */
+/** Absolute canonical URL on the public www origin (matches PUBLIC_ORIGIN). */
 export function canonicalUrl(path: string): string {
   if (!path || path === "/") return `${PUBLIC_ORIGIN}/`;
   const normalized = path.startsWith("/") ? path : `/${path}`;
