@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { usePrefs } from "@/lib/prefs";
 import { useI18n } from "@/i18n";
 import { LOCALES } from "@/i18n/locale";
+import { LangSwitch } from "@/components/lang-switch";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CONTENT_VERSION, COPYRIGHT_LINE, PUBLIC_ORIGIN } from "@/lib/site";
 import { EDITORIAL } from "@/data/editorial";
@@ -13,20 +14,24 @@ import { LegalBanner } from "@/components/legal-banner";
 import { LegalShortLine } from "@/components/legal-short-line";
 import { ThemeControl } from "@/components/theme-control";
 import { applyTheme, readThemePref } from "@/lib/theme";
+import { isLocaleHomePath, pathForLocale } from "@/lib/locale-path";
 
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const fontPx = usePrefs((s) => s.fontPx);
   const { t, locale } = useI18n();
+  const isHome = isLocaleHomePath(pathname);
+  const homeHref = pathForLocale(locale);
 
   const tabs = [
     {
-      to: "/",
+      to: homeHref,
       label: t("home"),
       icon: Home,
       // Visual highlight for education browsing (/c /t); aria-current only on true home.
-      match: (p: string) => p === "/" || p.startsWith("/c/") || p.startsWith("/t/"),
-      ariaCurrentPage: (p: string) => p === "/" || p === "",
+      match: (p: string) =>
+        isLocaleHomePath(p) || p.startsWith("/c/") || p.startsWith("/t/"),
+      ariaCurrentPage: (p: string) => isLocaleHomePath(p),
     },
     { to: "/search", label: t("search"), icon: Search, match: (p: string) => p.startsWith("/search"), ariaCurrentPage: (p: string) => p.startsWith("/search") },
     { to: "/tools", label: t("tools"), icon: LayoutGrid, match: (p: string) => p.startsWith("/tools") || p.startsWith("/amsler") || p.startsWith("/iol"), ariaCurrentPage: (p: string) => p.startsWith("/tools") || p.startsWith("/amsler") || p.startsWith("/iol") },
@@ -79,7 +84,10 @@ export function AppShell({ children }: { children: ReactNode }) {
         style={{ paddingTop: "max(0.35rem, env(safe-area-inset-top))" }}
       >
         <div className="flex items-center justify-between gap-2 px-3 pb-1.5 pt-0.5 sm:px-4 sm:pb-2 sm:pt-1">
-          <Link to="/" className="flex min-h-10 items-center gap-2 no-underline sm:min-h-11 sm:gap-2.5">
+          <Link
+            to={homeHref}
+            className="flex min-h-10 items-center gap-2 no-underline sm:min-h-11 sm:gap-2.5"
+          >
             <img
               src="/logo.png"
               alt=""
@@ -98,6 +106,8 @@ export function AppShell({ children }: { children: ReactNode }) {
           </Link>
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
             <ThemeControl compact surface="navy" />
+            {/* On home, language lives in 「顯示選項」; keep it here on other pages. */}
+            {!isHome ? <LangSwitch compact /> : null}
             <Link
               to="/urgent"
               className="urgent-on-danger inline-flex min-h-10 items-center gap-1 rounded-full bg-danger px-2.5 text-[0.72rem] font-semibold text-paper no-underline sm:min-h-11 sm:px-3.5 sm:text-[0.75rem]"

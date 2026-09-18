@@ -1,9 +1,11 @@
 import { useCallback, useMemo } from "react";
+import { useRouterState } from "@tanstack/react-router";
 import { usePrefs } from "@/lib/prefs";
 import type { Topic } from "@/data/topics";
 import { LEGAL } from "@/data/legal";
 import { EDITORIAL } from "@/data/editorial";
 import { GLOBE_PROTECT, RED_FLAGS_999, SAME_DAY_EYE } from "@/data/urgent";
+import { stripLocalePrefix } from "@/lib/locale-path";
 import type { Locale } from "./locale";
 import { toHans } from "./hans";
 import { walkStrings } from "./walk";
@@ -37,17 +39,40 @@ const LEGAL_HANT = {
 LEGAL_I18N["zh-Hant"] = LEGAL_HANT;
 LEGAL_I18N["zh-Hans"] = fill(LEGAL_HANT);
 
-/**
- * Interim: Traditional Chinese–only chrome until multilingual routes are
- * release-ready. Ignore prefs / URL locale so we never advertise EN/简/日.
- */
+/** URL locale prefix wins over prefs so `/en` SSR is English, not TC chrome. */
+function localeFromSearch(search: Record<string, unknown> | string): Locale | null {
+  let raw: unknown;
+  if (typeof search === "string") {
+    raw = new URLSearchParams(search.startsWith("?") ? search.slice(1) : search).get("lang");
+  } else if (search && typeof search === "object") {
+    raw = (search as { lang?: unknown }).lang;
+  }
+  if (raw === "en" || raw === "ja" || raw === "zh-Hans" || raw === "zh-Hant") return raw;
+  if (raw === "zh-CN" || raw === "zh-cn") return "zh-Hans";
+  return null;
+}
+
+function useEffectiveLocale(): Locale {
+  const prefsLocale = usePrefs((s) => s.locale);
+  const pathname = useRouterState({
+    select: (s) => s.location.pathname,
+  });
+  const search = useRouterState({
+    select: (s) => s.location.search,
+  });
+  const fromPath = stripLocalePrefix(pathname).locale;
+  const fromSearch = localeFromSearch(search as Record<string, unknown>);
+  return fromPath ?? fromSearch ?? prefsLocale;
+}
+
 export function useI18n() {
+  const locale = useEffectiveLocale();
   const setLocale = usePrefs((s) => s.setLocale);
-  const locale: Locale = "zh-Hant";
 
   const t = useCallback(
     (key: UiKey, vars?: Record<string, string | number>) => {
       let s = UI[locale][key] ?? UI["zh-Hant"][key];
+      if (locale === "zh-Hans") s = toHans(s);
       if (vars) {
         for (const [k, v] of Object.entries(vars)) {
           s = s.replaceAll(`{${k}}`, String(v));
@@ -58,7 +83,14 @@ export function useI18n() {
     [locale],
   );
 
-  const tx = useCallback((s: string) => s, []);
+  const tx = useCallback(
+    (s: string) => {
+      if (locale === "zh-Hant") return s;
+      if (locale === "zh-Hans") return toHans(s);
+      return s;
+    },
+    [locale],
+  );
 
   const legal = LEGAL_I18N[locale];
 

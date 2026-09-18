@@ -9,6 +9,7 @@ import { localizeTopic, useI18n, TOOL_TEXT } from "@/i18n";
 import type { Locale } from "@/i18n/locale";
 import type { UiKey } from "@/i18n/ui";
 import { EduLink } from "@/components/edu-link";
+import { isLocaleHomePath } from "@/lib/locale-path";
 
 export type Crumb = {
   label: string;
@@ -39,7 +40,8 @@ const STATIC_LABEL: Record<string, UiKey> = {
 };
 
 function buildCrumbs(pathname: string, t: (k: UiKey) => string, locale: Locale): Crumb[] | null {
-  if (pathname === "/" || pathname === "") return null;
+  // Locale entry homes (`/`, `/en`, `/ja`, `/zh-Hans`) — no trail.
+  if (isLocaleHomePath(pathname)) return null;
 
   const home: Crumb = { label: t("home"), href: "/" };
   const trail: Crumb[] = [home];
