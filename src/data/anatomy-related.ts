@@ -9,9 +9,16 @@ export type AnatomyRegionId =
   | "macula"
   | "opticNerve";
 
+export type AnatomyCatId = "lens" | "lid" | "glaucoma" | "retina" | "surface";
+
 export type AnatomyRelatedLink =
-  | { kind: "cat"; catId: "lens" | "lid" | "glaucoma" | "retina" | "surface" }
-  | { kind: "topic"; topicId: string };
+  | { kind: "cat"; catId: AnatomyCatId }
+  | { kind: "topic"; topicId: string }
+  | {
+      kind: "topics";
+      topicIds: string[];
+      hub: { kind: "cat"; catId: AnatomyCatId };
+    };
 
 export const ANATOMY_REGION_ORDER: AnatomyRegionId[] = [
   "cornea",
@@ -29,6 +36,10 @@ export const ANATOMY_RELATED: Record<AnatomyRegionId, AnatomyRelatedLink> = {
   lens: { kind: "cat", catId: "lens" },
   vitreous: { kind: "topic", topicId: "d8" },
   retina: { kind: "cat", catId: "retina" },
-  macula: { kind: "topic", topicId: "d5" },
+  macula: {
+    kind: "topics",
+    topicIds: ["d5", "t-macular-hole", "t-erm", "t-high-myopia-pathology"],
+    hub: { kind: "cat", catId: "retina" },
+  },
   opticNerve: { kind: "cat", catId: "glaucoma" },
 };
