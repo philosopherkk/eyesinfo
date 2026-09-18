@@ -129,9 +129,9 @@ describe("topic structure polish", () => {
     assert.match(read("src/lib/topic-related.ts"), /PRIMARY_TOPIC_CAP\s*=\s*5/);
   });
 
-  it("CONTENT_VERSION is 1.70", () => {
+  it("CONTENT_VERSION is 1.71", () => {
     const site = read("src/lib/site.ts");
-    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.70"/);
+    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.71"/);
     assert.match(site, /CONTENT_UPDATED\s*=\s*"2026-09-18"/);
   });
 
@@ -235,6 +235,35 @@ describe("topic structure polish", () => {
     assert.ok(lasikBlock, "t-lasik block present");
     assert.match(lasikBlock[0], /I469GiYU0Uk/);
     assert.doesNotMatch(lasikBlock[0], /soft:\s*true/);
+  });
+
+  it("CONTENT 1.71 macular hole + ERM Exact land in TC/EN/JA retina hub", () => {
+    const extra = read("src/data/extra-topics.ts");
+    const en = read("src/i18n/topics-en.ts");
+    const ja = read("src/i18n/topics-ja.ts");
+    const site = read("src/lib/site.ts");
+    const tools = read("src/data/tools.ts");
+    const route = read("src/routes/t.$topicId.tsx");
+    const hkos = read("src/data/hkos-videos.ts");
+    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.71"/);
+    for (const id of ["t-macular-hole", "t-erm"]) {
+      assert.match(extra, new RegExp(`id:\\s*"${id}"`));
+      assert.match(en, new RegExp(`"${id}"\\s*:`));
+      assert.match(ja, new RegExp(`"${id}"\\s*:`));
+    }
+    assert.match(extra, /"t-macular-hole"[\s\S]*category:\s*"retina"/);
+    assert.match(extra, /"t-erm"[\s\S]*category:\s*"retina"/);
+    assert.match(extra, /仍非保證/);
+    assert.match(extra, /不是一發現就必須手術/);
+    assert.match(extra, /不是個人風險/);
+    assert.match(extra, /不是品牌比較/);
+    assert.match(tools, /"t-macular-hole"/);
+    assert.match(tools, /"t-erm"/);
+    assert.match(route, /"t-mh"\s*:\s*"t-macular-hole"/);
+    assert.doesNotMatch(hkos, /"t-macular-hole"|"t-erm"/);
+    assert.doesNotMatch(extra, /dr-poon\.html/);
+    assert.doesNotMatch(en, /dr-poon\.html/);
+    assert.doesNotMatch(ja, /dr-poon\.html/);
   });
 
   it("LEAD Exact topics 1.64 exist in TC/EN/JA with categories and refs", () => {

@@ -829,6 +829,177 @@ export const CITE: Record<string, Citation> = {
     pmid: "15763190",
     note: "眼內視網膜母細胞瘤分期分類討論；教育用，不是自行分期工具。",
   },
+
+  gass1988: {
+    id: "gass1988",
+    authors: "Gass JD",
+    title: "Idiopathic senile macular hole. Its early stages and pathogenesis",
+    source: "Arch Ophthalmol. 1988;106:629-639. DOI 10.1001/archopht.1988.01060130683026",
+    pmid: "3358729",
+    note: "分期／機制概念奠基。不是自行分期工具。",
+  },
+  johnsonGass1988: {
+    id: "johnsonGass1988",
+    authors: "Johnson RN, Gass JD",
+    title:
+      "Idiopathic macular holes. Observations, stages of formation, and implications for surgical intervention",
+    source: "Ophthalmology. 1988;95:917-924. DOI 10.1016/s0161-6420(88)33075-7",
+    pmid: "3174041",
+    note: "特發性黃斑裂孔形成階段觀察；教育用，不是個人手術適應保證。",
+  },
+  gass1995: {
+    id: "gass1995",
+    authors: "Gass JD",
+    title: "Reappraisal of biomicroscopic classification of stages of development of a macular hole",
+    source: "Am J Ophthalmol. 1995;119:752-759. DOI 10.1016/s0002-9394(14)72781-3",
+    pmid: "7785690",
+    note: "黃斑裂孔分期再評估。不是自行對號入座。",
+  },
+  duker2013: {
+    id: "duker2013",
+    authors: "Duker JS, et al.",
+    title:
+      "The International Vitreomacular Traction Study Group classification of vitreomacular adhesion, traction, and macular hole",
+    source: "Ophthalmology. 2013;120:2611-2619. DOI 10.1016/j.ophtha.2013.07.042",
+    pmid: "24053995",
+    note: "IVTS 影像分類教育。不是自行分期工具。",
+  },
+  meuer2015: {
+    id: "meuer2015",
+    authors: "Meuer SM, et al.",
+    title:
+      "The epidemiology of vitreoretinal interface abnormalities as detected by spectral-domain optical coherence tomography: the Beaver Dam Eye Study",
+    source: "Ophthalmology. 2015;122:787-795. DOI 10.1016/j.ophtha.2014.10.014",
+    pmid: "25556116",
+    note: "Beaver Dam SD-OCT：全層黃斑裂孔約 0.4% 等。不是個人風險／不是品牌比較。",
+  },
+  chew1999: {
+    id: "chew1999",
+    authors: "Chew EY, et al.",
+    title: "Clinical course of macular holes: the Eye Disease Case-Control Study",
+    source: "Arch Ophthalmol. 1999;117:242-246. DOI 10.1001/archopht.117.2.242",
+    pmid: "10037571",
+    note: "黃斑裂孔臨床病程隨訪教育。不是預測你個人會否惡化。",
+  },
+  kim1995: {
+    id: "kim1995",
+    authors: "Kim JW, et al.; Vitrectomy for Macular Hole Study Group",
+    title:
+      "Baseline characteristics, natural history, and risk factors to progression in eyes with stage 2 macular holes",
+    source: "Ophthalmology. 1995;102:1818-1829. DOI 10.1016/s0161-6420(95)30788-9",
+    pmid: "9098283",
+    note: "第 2 期全層孔自然史教育。仍非個人時間表。",
+  },
+  kelly1991: {
+    id: "kelly1991",
+    authors: "Kelly NE, Wendel RT",
+    title: "Vitreous surgery for idiopathic macular holes. Results of a pilot study",
+    source: "Arch Ophthalmol. 1991;109:654-659. DOI 10.1001/archopht.1991.01080050068031",
+    pmid: "2025167",
+    note: "特發性黃斑裂孔玻璃體手術先導系列。不是現代單一成功率標竿，亦不是你的預後。",
+  },
+  wendel1993: {
+    id: "wendel1993",
+    authors: "Wendel RT, et al.",
+    title: "Vitreous surgery for macular holes",
+    source: "Ophthalmology. 1993;100:1671-1676. DOI 10.1016/s0161-6420(93)31419-3",
+    pmid: "8233393",
+    note: "黃斑裂孔玻璃體手術系列經驗。不是診所廣告。",
+  },
+  freeman1997: {
+    id: "freeman1997",
+    authors: "Freeman WR, et al.; Vitrectomy for Treatment of Macular Hole Study Group",
+    title:
+      "Vitrectomy for the treatment of full-thickness stage 3 or 4 macular holes. Results of a multicentered randomized clinical trial",
+    source: "Arch Ophthalmol. 1997;115:11-21. DOI 10.1001/archopht.1997.01100150013002",
+    pmid: "9006420",
+    note: "多中心隨機試驗：手術相對觀察。試驗設定下的結果，不是個人預後／不是品牌比較。",
+  },
+  ezra2004: {
+    id: "ezra2004",
+    authors: "Ezra E, Gregor ZJ; Moorfields Macular Hole Study Group",
+    title:
+      "Surgery for idiopathic full-thickness macular hole: two-year results of a randomized clinical trial. Report no. 1",
+    source: "Arch Ophthalmol. 2004;122:224-236. DOI 10.1001/archopht.122.2.224",
+    pmid: "14769600",
+    note: "Moorfields 隨機試驗教育。不是保證閉合或視力。",
+  },
+  michalewska2010: {
+    id: "michalewska2010",
+    authors: "Michalewska Z, et al.",
+    title: "Inverted internal limiting membrane flap technique for large macular holes",
+    source: "Ophthalmology. 2010;117:2018-2025. DOI 10.1016/j.ophtha.2010.02.011",
+    pmid: "20541263",
+    note: "較大裂孔內界膜翻瓣等術式變體教育，非診所技術比較。",
+  },
+  steel2013: {
+    id: "steel2013",
+    authors: "Steel DH, Lotery AJ",
+    title:
+      "Idiopathic vitreomacular traction and macular hole: a comprehensive review of pathophysiology, diagnosis, and treatment",
+    source: "Eye (Lond). 2013;27 Suppl 1:S1-S21. DOI 10.1038/eye.2013.212",
+    pmid: "24108069",
+    note: "特發性玻璃體黃斑牽引與黃斑裂孔綜述教育。不是個人預後。",
+  },
+  mitchell1997: {
+    id: "mitchell1997",
+    authors: "Mitchell P, et al.",
+    title: "Prevalence and associations of epiretinal membranes. The Blue Mountains Eye Study, Australia",
+    source: "Ophthalmology. 1997;104:1033-1040. DOI 10.1016/s0161-6420(97)30190-0",
+    pmid: "9186446",
+    note: "Blue Mountains：任何前膜徵象約 7%。不是個人風險／不是品牌比較。",
+  },
+  fraserBell2003: {
+    id: "fraserBell2003",
+    authors: "Fraser-Bell S, et al.",
+    title:
+      "Five-year cumulative incidence and progression of epiretinal membranes: the Blue Mountains Eye Study",
+    source: "Ophthalmology. 2003;110:34-40. DOI 10.1016/s0161-6420(02)01443-4",
+    pmid: "12511343",
+    note: "五年累積發生教育。不是「做白內障就一定有前膜」。",
+  },
+  mccarty2005: {
+    id: "mccarty2005",
+    authors: "McCarty DJ, et al.",
+    title: "Prevalence and associations of epiretinal membranes in the visual impairment project",
+    source: "Am J Ophthalmol. 2005;140:288-294. DOI 10.1016/j.ajo.2005.03.032",
+    pmid: "16023066",
+    note: "Melbourne VIP 前膜盛行率教育。不是個人風險。",
+  },
+  ng2011: {
+    id: "ng2011",
+    authors: "Ng CH, et al.",
+    title: "Prevalence and risk factors for epiretinal membranes in a multi-ethnic United States population",
+    source: "Ophthalmology. 2011;118:694-699. DOI 10.1016/j.ophtha.2010.08.009",
+    pmid: "21035863",
+    note: "MESA 多種族照相研究。種族比較屬該研究結果，不是香港個人風險保證。",
+  },
+  xiao2017: {
+    id: "xiao2017",
+    authors: "Xiao W, et al.",
+    title:
+      "Prevalence and risk factors of epiretinal membranes: a systematic review and meta-analysis of population-based studies",
+    source: "BMJ Open. 2017;7:e014644. DOI 10.1136/bmjopen-2016-014644",
+    pmid: "28951399",
+    note: "系統性回顧／統合；方法差異可解釋研究間數字。統合數字仍不是你的預後。",
+  },
+  bu2014: {
+    id: "bu2014",
+    authors: "Bu SC, et al.",
+    title: "Idiopathic epiretinal membrane",
+    source: "Retina. 2014;34:2317-2335. DOI 10.1097/IAE.0000000000000349",
+    pmid: "25360790",
+    note: "特發性前膜綜述教育。不是個人手術適應保證。",
+  },
+  scheerlinck2015: {
+    id: "scheerlinck2015",
+    authors: "Scheerlinck LM, van der Valk R, van Leeuwen R",
+    title:
+      "Predictive factors for postoperative visual acuity in idiopathic epiretinal membrane: a systematic review",
+    source: "Acta Ophthalmol. 2015;93:203-212. DOI 10.1111/aos.12537",
+    pmid: "25160648",
+    note: "術後視力相關因素系統回顧。不是個人預後公式。",
+  },
 };
 
 export function citationsFor(ids: string[]): Citation[] {

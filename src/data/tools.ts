@@ -231,7 +231,25 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-gca", label: "巨細胞動脈炎" },
     { href: "/t/t-migraine", label: "偏頭痛與眼科" },
   ],
-  "t-rd": [{ href: "/tools/floaters", label: "飛蚊與簾幕" }],
+  "t-rd": [
+    { href: "/tools/floaters", label: "飛蚊與簾幕" },
+    { href: "/t/t-macular-hole", label: "黃斑裂孔" },
+    { href: "/t/t-erm", label: "黃斑前膜" },
+  ],
+  "t-macular-hole": [
+    { href: "/t/t-rd", label: "視網膜脫離與玻璃體切除" },
+    { href: "/t/t-erm", label: "黃斑前膜" },
+    { href: "/t/t-octm", label: "黃斑 OCT" },
+    { href: "/amsler", label: "阿姆斯勒方格" },
+    { href: "/urgent", label: "急症與同日評估" },
+  ],
+  "t-erm": [
+    { href: "/t/t-rd", label: "視網膜脫離與玻璃體切除" },
+    { href: "/t/t-macular-hole", label: "黃斑裂孔" },
+    { href: "/t/t-octm", label: "黃斑 OCT" },
+    { href: "/amsler", label: "阿姆斯勒方格" },
+    { href: "/c/retina", label: "視網膜與黃斑" },
+  ],
   "t-octm": [
     { href: "/t/t-vegf", label: "玻璃體內注射" },
     { href: "/t/d6", label: "糖尿病視網膜病變" },
