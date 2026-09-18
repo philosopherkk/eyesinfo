@@ -1,6 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { LocaleLayout } from "@/components/locale-layout";
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 
+/** Interim: any `/zh-Hans` URL → TC home. Do not serve 简 clinical chrome. */
 export const Route = createFileRoute("/zh-Hans")({
-  component: () => <LocaleLayout locale="zh-Hans" />,
+  beforeLoad: () => {
+    throw redirect({ to: "/", replace: true });
+  },
+  component: () => <Outlet />,
 });
