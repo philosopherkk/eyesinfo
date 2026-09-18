@@ -4,33 +4,17 @@ Hong Kong public eye-education site. Traditional Chinese first; also Simplified,
 
 Live site: https://eyesinfo.org
 
-## Open in Cursor (recommended from now on)
+## Edit and deploy
 
-This GitHub repo is the source of truth. Grok chat edits will **not** appear in Cursor unless you pull them. Cursor `git push` to `main` updates Vercel → eyesinfo.org.
+Source of truth is this repo, not chat history and not an editor buffer.
 
-1. Install [Cursor](https://cursor.com) and sign in with GitHub if asked.
-2. **File → Clone repo** (or Command Palette: `Git: Clone`).
-3. Paste: `https://github.com/philosopherkk/eyesinfo`
-4. Open the cloned folder.
-5. In Cursor’s terminal:
+1. New work: `git checkout -b feat/short-name` or `chore/…` (never commit on main).
+2. Edit files. Bump CONTENT_VERSION / 網站版本 only when KK says this is a release. Update 最近覆核 when copy changes.
+3. `git add` only the files for this change. Commit. `git push -u origin HEAD`.
+4. Open the PR. Use the Vercel Preview URL. KK reads 繁 there and merges main.
+5. After merge: hard-refresh https://eyesinfo.org and check footer 網站版本 / 最近覆核.
 
-```bash
-npm install
-npm run dev
-```
-
-6. Browser: http://localhost:8080
-
-After you change files:
-
-```bash
-# bump version in src/lib/site.ts when you change education content
-git add -A
-git commit -m "describe the change"
-git push origin main
-```
-
-Vercel builds `main` automatically. Wait for Production, then hard-refresh https://eyesinfo.org (footer shows the content version).
+If you use Cursor, clone https://github.com/philosopherkk/eyesinfo and pull before you edit. Same rules. Chat-only edits that are not committed do not exist.
 
 ## Where to edit
 
