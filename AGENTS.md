@@ -28,12 +28,22 @@ Release commit message form: `vX.YZ — short description`.
 
 **Never** push, force-push, amend published history, or rewrite `main` without explicit KK yes. PRs are the normal path.
 
-### 3) DEPLOY FROM REPO
+### 3) DEPLOY PATH (git → preview → merge)
 
-- Production = **Vercel** for https://eyesinfo.org from **this repo’s HEAD** after KK says “deploy”.
-- Never upload from chat, a preview build, or a second working copy.
-- Show the deploy plan first.
-- After deploy: check the homepage **最近覆核** date and **網站版本** match the commit that was deployed.
+Deploy path for **eyesinfo.org**:
+
+- GitHub repo **philosopherkk/eyesinfo** is what **Vercel builds** (Vite React app — **not** static-HTML-only folklore).
+- Production domain **eyesinfo.org** tracks branch **`main` only**.
+- A content edit: commit on a **feature branch** → push → **Vercel Preview URL** → KK reads **繁體** on the preview → KK says **merge** → production.
+- **Never** `vercel --prod` from chat unless KK typed **“prod deploy”** in that message.
+- **Never** deploy from a Bot’s cloud disk copy. Only from **this repo’s git remote**.
+- After production: open https://eyesinfo.org and confirm **網站版本** and **最近覆核** match the commit. If not, say so. Do not “fix live” by editing in the Vercel dashboard.
+- **Preview** for medical copy; **production** for releases.
+- One page, one branch (e.g. `feat/t-d1-…`) when practical.
+
+**Allowed without extra ceremony** after KK approved the file edits: write files, commit, push a **feature branch**, paste Preview URL and wait.
+
+**Still needs KK yes that turn:** merge to `main`, `vercel --prod` / prod deploy, DNS / domain / env / token, deleting deployments, making repo public.
 
 ## Hard rules
 
