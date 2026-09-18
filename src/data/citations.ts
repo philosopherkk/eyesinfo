@@ -6,6 +6,8 @@ export type Citation = {
   title: string;
   source: string;
   pmid?: string;
+  /** Official public-education HTTPS outlink when there is no PMID. */
+  url?: string;
   note: string;
 };
 
@@ -318,6 +320,7 @@ export const CITE: Record<string, Citation> = {
     authors: "RANZCO",
     title: "Orthokeratology Patient Guideline",
     source: "Royal Australian and New Zealand College of Ophthalmologists patient guidance",
+    url: "https://ranzco.edu/wp-content/uploads/2019/11/RANZCO-Orthokeratology-Patient-Guideline.pdf",
     note: "過夜感染可損視；禁止自來水；護理警示共識。療效不作保證。",
   },
   cdcAcanthamoebaCL: {
@@ -325,6 +328,7 @@ export const CITE: Record<string, Citation> = {
     authors: "CDC",
     title: "Acanthamoeba keratitis — contact lens hygiene points",
     source: "U.S. Centers for Disease Control and Prevention public education",
+    url: "https://www.cdc.gov/acanthamoeba/about/about-acanthamoeba-keratitis.html",
     note: "棘阿米巴角膜炎與隱形眼鏡衛生的公開要點。連結屬教育，非售賣。",
   },
   pedig2005: {

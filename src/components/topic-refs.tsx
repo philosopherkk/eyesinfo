@@ -1,6 +1,14 @@
 import { citationsFor } from "@/data/citations";
 import { useI18n } from "@/i18n";
 
+function citeHost(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return "link";
+  }
+}
+
 export function TopicRefs({ ids }: { ids?: string[] }) {
   const { t } = useI18n();
   const list = citationsFor(ids ?? []);
@@ -27,6 +35,17 @@ export function TopicRefs({ ids }: { ids?: string[] }) {
                 target="_blank"
               >
                 PMID {c.pmid}
+              </a>
+            ) : null}
+            {c.pmid && c.url ? " · " : null}
+            {c.url ? (
+              <a
+                href={c.url}
+                className="font-semibold text-navy"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                {citeHost(c.url)}
               </a>
             ) : null}
             <span className="mt-0.5 block text-muted">{c.note}</span>

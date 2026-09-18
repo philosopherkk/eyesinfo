@@ -1,6 +1,6 @@
-/** Public education origin — no clinic shopfront on this host. */
-export const PUBLIC_HOST = "eyesinfo.org";
-export const PUBLIC_ORIGIN = "https://eyesinfo.org";
+/** Public education origin — production redirects apex → www. */
+export const PUBLIC_HOST = "www.eyesinfo.org";
+export const PUBLIC_ORIGIN = "https://www.eyesinfo.org";
 export const PUBLIC_HOSTS = ["eyesinfo.org", "www.eyesinfo.org"] as const;
 
 /**
@@ -16,5 +16,5 @@ export const COPYRIGHT_YEAR = "2026";
 export const COPYRIGHT_HOLDER = "護眼學堂";
 /** Reuse restriction only — do not self-label as statutory「醫療廣告」. */
 export const COPYRIGHT_LINE =
-  "© 2026 護眼學堂 · 公眾教育 https://eyesinfo.org （保留版權；不得改作後作診所推廣）";
+  "© 2026 護眼學堂 · 公眾教育 https://www.eyesinfo.org （保留版權；不得改作後作診所推廣）";
 export const WATERMARK_TEXT = "護眼學堂 · 公眾教育 · eyesinfo.org";

@@ -94,7 +94,7 @@ const zhHant = {
   a11yGaps:
     "部分示意動畫與複雜圖示（例如眼圖熱區）在輔助技術下的體驗仍可再改善。深色外觀已可在顯示選項或頁首切換（日間／深色／跟隨系統）；高對比主題仍未另設。詳細清單會隨版本更新。",
   a11yDateH: "聲明日期",
-  a11yDate: "2026年9月18日（內容版本 1.70）",
+  a11yDate: "2026年9月18日（內容版本 1.72）",
   a11yFeedbackH: "意見與更正",
   a11yFeedback:
     "若發現無障礙或內容錯誤，請參閱法律與專業守則頁的覆核與更正說明。本站不提供診所電話、預約或即時通訊，亦不經此頁接收病歷。",
@@ -498,7 +498,7 @@ const en: Record<Key, string> = {
   a11yGaps:
     "Some demos and complex diagrams (for example eye-map hotspots) can still improve with assistive technologies. Dark appearance is available under Display options or in the header (light / dark / system); a separate high-contrast theme is not offered yet. The list will update with later versions.",
   a11yDateH: "Statement date",
-  a11yDate: "18 September 2026 (content version 1.70)",
+  a11yDate: "18 September 2026 (content version 1.72)",
   a11yFeedbackH: "Feedback and corrections",
   a11yFeedback:
     "For accessibility or content errors, see the review and corrections note on the Law and professional code page. This site does not list clinic phones, bookings or messaging, and does not take medical records here.",
@@ -907,7 +907,7 @@ const ja: Record<Key, string> = {
   a11yGaps:
     "一部の図示や複雑な図（眼の図のホットスポットなど）は支援技術での体験をさらに改善できます。ダーク外観は表示オプションまたはヘッダーで切り替えできます（ライト／ダーク／システムに合わせる）。別の高コントラストテーマはまだありません。一覧は版に応じて更新します。",
   a11yDateH: "声明日",
-  a11yDate: "2026年9月18日（コンテンツ版 1.70）",
+  a11yDate: "2026年9月18日（コンテンツ版 1.72）",
   a11yFeedbackH: "意見と訂正",
   a11yFeedback:
     "アクセシビリティや内容の誤りは、法令と職業倫理の頁の確認・訂正の説明を参照してください。診療所電話・予約・メッセージ連絡は掲載せず、病歴も受け取りません。",

@@ -32,12 +32,11 @@ export const Route = createFileRoute("/amsler")({
 
 const CARD_W_MM = 85.6;
 const GRID_MM = 100;
-const DEG_PER_CELL = 1;
-const TAN1 = Math.tan((DEG_PER_CELL * Math.PI) / 180);
+/** Soft education hold distance (cm) for a full ~10 cm grid. Classic 1°/5 mm geometry rounds to 29; copy teaches 30. */
+const SOFT_HOLD_CM = 30;
 
 function distanceCm(gridMm: number) {
-  const squareMm = gridMm / 20;
-  return Math.round(squareMm / TAN1 / 10);
+  return Math.max(1, Math.round(SOFT_HOLD_CM * (gridMm / GRID_MM)));
 }
 
 function AmslerPage() {

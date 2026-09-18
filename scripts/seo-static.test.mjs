@@ -37,11 +37,11 @@ test("public/sitemap.xml and public/robots.txt exist", () => {
   assert.ok(existsSync(ROBOTS), "public/robots.txt missing");
 });
 
-test("robots.txt allows crawl and points at apex sitemap", () => {
+test("robots.txt allows crawl and points at www sitemap", () => {
   const text = readFileSync(ROBOTS, "utf8");
   assert.match(text, /User-agent:\s*\*/);
   assert.match(text, /Allow:\s*\//);
-  assert.match(text, /Sitemap:\s*https:\/\/eyesinfo\.org\/sitemap\.xml/);
+  assert.match(text, /Sitemap:\s*https:\/\/www\.eyesinfo\.org\/sitemap\.xml/);
 });
 
 test("sitemap.xml is a valid urlset covering edu tools including outdoor", () => {
@@ -50,11 +50,16 @@ test("sitemap.xml is a valid urlset covering edu tools including outdoor", () =>
   assert.match(xml, /<urlset xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9">/);
   assert.match(xml, /<\/urlset>\s*$/);
   assert.doesNotMatch(xml, /\/qr[<\s]/, "/qr is Lattice-only and must stay off the public sitemap");
+  assert.doesNotMatch(
+    xml,
+    /<loc>https:\/\/eyesinfo\.org\//,
+    "sitemap locs must use www host (apex redirects to www)",
+  );
 
   for (const path of REQUIRED_TOOL_PATHS) {
     assert.match(
       xml,
-      new RegExp(`<loc>https://eyesinfo\\.org${path.replaceAll("/", "\\/")}</loc>`),
+      new RegExp(`<loc>https://www.eyesinfo\\.org${path.replaceAll("/", "\\/")}</loc>`),
       `sitemap missing ${path}`,
     );
   }
@@ -76,7 +81,7 @@ test("sitemap.xml is a valid urlset covering edu tools including outdoor", () =>
   ]) {
     assert.match(
       xml,
-      new RegExp(`<loc>https://eyesinfo\\.org${core.replaceAll("/", "\\/")}</loc>`),
+      new RegExp(`<loc>https://www.eyesinfo\\.org${core.replaceAll("/", "\\/")}</loc>`),
       `sitemap missing ${core}`,
     );
   }
