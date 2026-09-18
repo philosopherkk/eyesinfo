@@ -94,7 +94,7 @@ const zhHant = {
   a11yGaps:
     "部分示意動畫與複雜圖示（例如眼圖熱區）在輔助技術下的體驗仍可再改善。深色外觀已可在顯示選項或頁首切換（日間／深色／跟隨系統）；高對比主題仍未另設。詳細清單會隨版本更新。",
   a11yDateH: "聲明日期",
-  a11yDate: "2026年9月17日（內容版本 1.69）",
+  a11yDate: "2026年9月18日（內容版本 1.70）",
   a11yFeedbackH: "意見與更正",
   a11yFeedback:
     "若發現無障礙或內容錯誤，請參閱法律與專業守則頁的覆核與更正說明。本站不提供診所電話、預約或即時通訊，亦不經此頁接收病歷。",
@@ -316,7 +316,8 @@ const zhHant = {
   iolNightOff: "日間街景",
   iolGlassesOn: "已戴眼鏡矯正",
   iolGlassesOff: "不戴眼鏡",
-  iolGlassesHint: "眼鏡可補球面及散光殘餘，但多焦／延伸景深的光暈不會因戴鏡而消失。",
+  iolGlassesHint:
+    "眼鏡可補球面及散光殘餘（清晰度／對焦），但多焦／延伸景深因光學設計而下降的對比度，以及夜間光暈，不會因戴鏡而恢復或消失。此為光學示意，不能預測個人術後，亦不是品牌比較。",
   iolRangeH: "清晰範圍示意",
   iolHowH: "如何閱讀這個示意",
   iolHow1:
@@ -497,7 +498,7 @@ const en: Record<Key, string> = {
   a11yGaps:
     "Some demos and complex diagrams (for example eye-map hotspots) can still improve with assistive technologies. Dark appearance is available under Display options or in the header (light / dark / system); a separate high-contrast theme is not offered yet. The list will update with later versions.",
   a11yDateH: "Statement date",
-  a11yDate: "17 September 2026 (content version 1.69)",
+  a11yDate: "18 September 2026 (content version 1.70)",
   a11yFeedbackH: "Feedback and corrections",
   a11yFeedback:
     "For accessibility or content errors, see the review and corrections note on the Law and professional code page. This site does not list clinic phones, bookings or messaging, and does not take medical records here.",
@@ -726,7 +727,7 @@ const en: Record<Key, string> = {
   iolGlassesOn: "Spectacles on",
   iolGlassesOff: "No spectacles",
   iolGlassesHint:
-    "Spectacles can correct residual sphere and cylinder, but multifocal / EDOF halos do not go away with glasses.",
+    "Spectacles can correct residual sphere and cylinder (clarity / focus), but contrast loss from multifocal / EDOF optic design, and night halos, are not restored or removed by glasses. Optical illustration only — not a personal outcome prediction and not a brand comparison.",
   iolRangeH: "Depth-of-focus sketch",
   iolHowH: "How to read this demo",
   iolHow1:
@@ -906,7 +907,7 @@ const ja: Record<Key, string> = {
   a11yGaps:
     "一部の図示や複雑な図（眼の図のホットスポットなど）は支援技術での体験をさらに改善できます。ダーク外観は表示オプションまたはヘッダーで切り替えできます（ライト／ダーク／システムに合わせる）。別の高コントラストテーマはまだありません。一覧は版に応じて更新します。",
   a11yDateH: "声明日",
-  a11yDate: "2026年9月17日（コンテンツ版 1.69）",
+  a11yDate: "2026年9月18日（コンテンツ版 1.70）",
   a11yFeedbackH: "意見と訂正",
   a11yFeedback:
     "アクセシビリティや内容の誤りは、法令と職業倫理の頁の確認・訂正の説明を参照してください。診療所電話・予約・メッセージ連絡は掲載せず、病歴も受け取りません。",
@@ -1132,7 +1133,7 @@ const ja: Record<Key, string> = {
   iolGlassesOn: "眼鏡で矯正済み",
   iolGlassesOff: "眼鏡なし",
   iolGlassesHint:
-    "眼鏡は球面と乱視の残りを補えますが、多焦点／EDOFのハローは眼鏡では消えません。",
+    "眼鏡は球面・乱視の残り（清晰／焦点）を補えますが、多焦点／EDOFの設計によるコントラスト低下や夜間ハローは眼鏡では戻りません／消えません。光学図示のみで、個人の術後結果の予測でもブランド比較でもありません。",
   iolRangeH: "清晰範囲の図示",
   iolHowH: "この図示の読み方",
   iolHow1:
