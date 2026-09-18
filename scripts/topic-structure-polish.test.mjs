@@ -129,9 +129,9 @@ describe("topic structure polish", () => {
     assert.match(read("src/lib/topic-related.ts"), /PRIMARY_TOPIC_CAP\s*=\s*5/);
   });
 
-  it("CONTENT_VERSION is 1.71", () => {
+  it("CONTENT_VERSION is 1.72", () => {
     const site = read("src/lib/site.ts");
-    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.71"/);
+    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.72"/);
     assert.match(site, /CONTENT_UPDATED\s*=\s*"2026-09-18"/);
   });
 
@@ -245,7 +245,7 @@ describe("topic structure polish", () => {
     const tools = read("src/data/tools.ts");
     const route = read("src/routes/t.$topicId.tsx");
     const hkos = read("src/data/hkos-videos.ts");
-    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.71"/);
+    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.72"/);
     for (const id of ["t-macular-hole", "t-erm"]) {
       assert.match(extra, new RegExp(`id:\\s*"${id}"`));
       assert.match(en, new RegExp(`"${id}"\\s*:`));
@@ -264,6 +264,25 @@ describe("topic structure polish", () => {
     assert.doesNotMatch(extra, /dr-poon\.html/);
     assert.doesNotMatch(en, /dr-poon\.html/);
     assert.doesNotMatch(ja, /dr-poon\.html/);
+  });
+
+  it("CONTENT 1.72 macula anatomy picker: multi-topic chooser, no tools row", () => {
+    const related = read("src/data/anatomy-related.ts");
+    const viewer = read("src/components/eye-anatomy-viewer.tsx");
+    const site = read("src/lib/site.ts");
+    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.72"/);
+    assert.match(related, /macula:\s*\{[\s\S]*?kind:\s*"topics"/);
+    for (const id of ["d5", "t-macular-hole", "t-erm", "t-high-myopia-pathology"]) {
+      assert.match(related, new RegExp(`"${id}"`));
+    }
+    assert.match(related, /hub:\s*\{\s*kind:\s*"cat",\s*catId:\s*"retina"/);
+    assert.match(viewer, /黃斑相關主題/);
+    assert.match(viewer, /Macula-related topics/);
+    assert.match(viewer, /黄斑に関連するテーマ/);
+    assert.match(viewer, /更多：視網膜與黃斑專題/);
+    assert.match(viewer, /RelatedTopicsChooser/);
+    assert.doesNotMatch(viewer, /t-octm|t-vegf|\/amsler/);
+    assert.doesNotMatch(viewer, /立即預約|booking|WhatsApp/i);
   });
 
   it("LEAD Exact topics 1.64 exist in TC/EN/JA with categories and refs", () => {

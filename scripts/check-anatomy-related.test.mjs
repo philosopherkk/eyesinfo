@@ -19,7 +19,12 @@ describe("anatomy RELATED targets", () => {
   it("every catId / topicId in ANATOMY_RELATED exists", () => {
     const relatedSrc = readFileSync(join(root, "src/data/anatomy-related.ts"), "utf8");
     const cats = [...relatedSrc.matchAll(/catId:\s*"([^"]+)"/g)].map((m) => m[1]);
-    const topics = [...relatedSrc.matchAll(/topicId:\s*"([^"]+)"/g)].map((m) => m[1]);
+    const topics = [
+      ...[...relatedSrc.matchAll(/topicId:\s*"([^"]+)"/g)].map((m) => m[1]),
+      ...[...relatedSrc.matchAll(/topicIds:\s*\[([^\]]+)\]/g)].flatMap((m) =>
+        [...m[1].matchAll(/"([^"]+)"/g)].map((x) => x[1]),
+      ),
+    ];
 
     const categoryIds = new Set(
       [...readFileSync(join(root, "src/data/topics.ts"), "utf8").matchAll(/id:\s*"(lens|lid|glaucoma|retina|surface)"/g)].map(
