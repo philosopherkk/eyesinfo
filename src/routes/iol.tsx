@@ -73,7 +73,8 @@ function IolPage() {
   const [glasses, setGlasses] = useState(false);
 
   const astig = glasses ? 0 : astigDefocus(cyl, toric);
-  const contrast = glasses ? 0 : contrastLoss(optic);
+  // Spectacles clear residual sphere/cyl blur only; IOL optic contrast loss stays.
+  const contrast = contrastLoss(optic);
   const halo = haloStrength(optic, night);
   const opticKeys = OPTIC_KEYS[optic];
 
