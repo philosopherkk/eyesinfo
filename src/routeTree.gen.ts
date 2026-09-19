@@ -13,8 +13,10 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccessibilityRouteImport } from './routes/accessibility'
 import { Route as AmslerRouteImport } from './routes/amsler'
 import { Route as ClinicRouteImport } from './routes/clinic'
+import { Route as EnRouteImport } from './routes/en'
 import { Route as InstallRouteImport } from './routes/install'
 import { Route as IolRouteImport } from './routes/iol'
+import { Route as JaRouteImport } from './routes/ja'
 import { Route as LegalRouteImport } from './routes/legal'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as QrRouteImport } from './routes/qr'
@@ -22,10 +24,20 @@ import { Route as SavedRouteImport } from './routes/saved'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as ToolsRouteImport } from './routes/tools'
 import { Route as UrgentRouteImport } from './routes/urgent'
+import { Route as ZhCNRouteImport } from './routes/zh-CN'
+import { Route as ZhHansRouteImport } from './routes/zh-Hans'
 import { Route as CCatIdRouteImport } from './routes/c.$catId'
+import { Route as EnIndexRouteImport } from './routes/en.index'
+import { Route as EnSplatRouteImport } from './routes/en.$'
+import { Route as JaIndexRouteImport } from './routes/ja.index'
+import { Route as JaSplatRouteImport } from './routes/ja.$'
 import { Route as TTopicIdRouteImport } from './routes/t.$topicId'
 import { Route as ToolsIndexRouteImport } from './routes/tools.index'
 import { Route as ToolsToolIdRouteImport } from './routes/tools.$toolId'
+import { Route as ZhCNIndexRouteImport } from './routes/zh-CN.index'
+import { Route as ZhCNSplatRouteImport } from './routes/zh-CN.$'
+import { Route as ZhHansIndexRouteImport } from './routes/zh-Hans.index'
+import { Route as ZhHansSplatRouteImport } from './routes/zh-Hans.$'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -47,6 +59,11 @@ const ClinicRoute = ClinicRouteImport.update({
   path: '/clinic',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EnRoute = EnRouteImport.update({
+  id: '/en',
+  path: '/en',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const InstallRoute = InstallRouteImport.update({
   id: '/install',
   path: '/install',
@@ -55,6 +72,11 @@ const InstallRoute = InstallRouteImport.update({
 const IolRoute = IolRouteImport.update({
   id: '/iol',
   path: '/iol',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JaRoute = JaRouteImport.update({
+  id: '/ja',
+  path: '/ja',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LegalRoute = LegalRouteImport.update({
@@ -92,10 +114,40 @@ const UrgentRoute = UrgentRouteImport.update({
   path: '/urgent',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ZhCNRoute = ZhCNRouteImport.update({
+  id: '/zh-CN',
+  path: '/zh-CN',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ZhHansRoute = ZhHansRouteImport.update({
+  id: '/zh-Hans',
+  path: '/zh-Hans',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CCatIdRoute = CCatIdRouteImport.update({
   id: '/c/$catId',
   path: '/c/$catId',
   getParentRoute: () => rootRouteImport,
+} as any)
+const EnIndexRoute = EnIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnSplatRoute = EnSplatRouteImport.update({
+  id: '/$',
+  path: '/$',
+  getParentRoute: () => EnRoute,
+} as any)
+const JaIndexRoute = JaIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => JaRoute,
+} as any)
+const JaSplatRoute = JaSplatRouteImport.update({
+  id: '/$',
+  path: '/$',
+  getParentRoute: () => JaRoute,
 } as any)
 const TTopicIdRoute = TTopicIdRouteImport.update({
   id: '/t/$topicId',
@@ -112,14 +164,36 @@ const ToolsToolIdRoute = ToolsToolIdRouteImport.update({
   path: '/$toolId',
   getParentRoute: () => ToolsRoute,
 } as any)
+const ZhCNIndexRoute = ZhCNIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ZhCNRoute,
+} as any)
+const ZhCNSplatRoute = ZhCNSplatRouteImport.update({
+  id: '/$',
+  path: '/$',
+  getParentRoute: () => ZhCNRoute,
+} as any)
+const ZhHansIndexRoute = ZhHansIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ZhHansRoute,
+} as any)
+const ZhHansSplatRoute = ZhHansSplatRouteImport.update({
+  id: '/$',
+  path: '/$',
+  getParentRoute: () => ZhHansRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/accessibility': typeof AccessibilityRoute
   '/amsler': typeof AmslerRoute
   '/clinic': typeof ClinicRoute
+  '/en': typeof EnRouteWithChildren
   '/install': typeof InstallRoute
   '/iol': typeof IolRoute
+  '/ja': typeof JaRouteWithChildren
   '/legal': typeof LegalRoute
   '/privacy': typeof PrivacyRoute
   '/qr': typeof QrRoute
@@ -127,10 +201,20 @@ export interface FileRoutesByFullPath {
   '/search': typeof SearchRoute
   '/tools': typeof ToolsRouteWithChildren
   '/urgent': typeof UrgentRoute
+  '/zh-CN': typeof ZhCNRouteWithChildren
+  '/zh-Hans': typeof ZhHansRouteWithChildren
   '/c/$catId': typeof CCatIdRoute
+  '/en/$': typeof EnSplatRoute
+  '/ja/$': typeof JaSplatRoute
   '/t/$topicId': typeof TTopicIdRoute
   '/tools/$toolId': typeof ToolsToolIdRoute
+  '/zh-CN/$': typeof ZhCNSplatRoute
+  '/zh-Hans/$': typeof ZhHansSplatRoute
+  '/en/': typeof EnIndexRoute
+  '/ja/': typeof JaIndexRoute
   '/tools/': typeof ToolsIndexRoute
+  '/zh-CN/': typeof ZhCNIndexRoute
+  '/zh-Hans/': typeof ZhHansIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -146,9 +230,17 @@ export interface FileRoutesByTo {
   '/search': typeof SearchRoute
   '/urgent': typeof UrgentRoute
   '/c/$catId': typeof CCatIdRoute
+  '/en/$': typeof EnSplatRoute
+  '/ja/$': typeof JaSplatRoute
   '/t/$topicId': typeof TTopicIdRoute
   '/tools/$toolId': typeof ToolsToolIdRoute
+  '/zh-CN/$': typeof ZhCNSplatRoute
+  '/zh-Hans/$': typeof ZhHansSplatRoute
+  '/en': typeof EnIndexRoute
+  '/ja': typeof JaIndexRoute
   '/tools': typeof ToolsIndexRoute
+  '/zh-CN': typeof ZhCNIndexRoute
+  '/zh-Hans': typeof ZhHansIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -156,8 +248,10 @@ export interface FileRoutesById {
   '/accessibility': typeof AccessibilityRoute
   '/amsler': typeof AmslerRoute
   '/clinic': typeof ClinicRoute
+  '/en': typeof EnRouteWithChildren
   '/install': typeof InstallRoute
   '/iol': typeof IolRoute
+  '/ja': typeof JaRouteWithChildren
   '/legal': typeof LegalRoute
   '/privacy': typeof PrivacyRoute
   '/qr': typeof QrRoute
@@ -165,10 +259,20 @@ export interface FileRoutesById {
   '/search': typeof SearchRoute
   '/tools': typeof ToolsRouteWithChildren
   '/urgent': typeof UrgentRoute
+  '/zh-CN': typeof ZhCNRouteWithChildren
+  '/zh-Hans': typeof ZhHansRouteWithChildren
   '/c/$catId': typeof CCatIdRoute
+  '/en/$': typeof EnSplatRoute
+  '/ja/$': typeof JaSplatRoute
   '/t/$topicId': typeof TTopicIdRoute
   '/tools/$toolId': typeof ToolsToolIdRoute
+  '/zh-CN/$': typeof ZhCNSplatRoute
+  '/zh-Hans/$': typeof ZhHansSplatRoute
+  '/en/': typeof EnIndexRoute
+  '/ja/': typeof JaIndexRoute
   '/tools/': typeof ToolsIndexRoute
+  '/zh-CN/': typeof ZhCNIndexRoute
+  '/zh-Hans/': typeof ZhHansIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -177,8 +281,10 @@ export interface FileRouteTypes {
     | '/accessibility'
     | '/amsler'
     | '/clinic'
+    | '/en'
     | '/install'
     | '/iol'
+    | '/ja'
     | '/legal'
     | '/privacy'
     | '/qr'
@@ -186,10 +292,20 @@ export interface FileRouteTypes {
     | '/search'
     | '/tools'
     | '/urgent'
+    | '/zh-CN'
+    | '/zh-Hans'
     | '/c/$catId'
+    | '/en/$'
+    | '/ja/$'
     | '/t/$topicId'
     | '/tools/$toolId'
+    | '/zh-CN/$'
+    | '/zh-Hans/$'
+    | '/en/'
+    | '/ja/'
     | '/tools/'
+    | '/zh-CN/'
+    | '/zh-Hans/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -205,17 +321,27 @@ export interface FileRouteTypes {
     | '/search'
     | '/urgent'
     | '/c/$catId'
+    | '/en/$'
+    | '/ja/$'
     | '/t/$topicId'
     | '/tools/$toolId'
+    | '/zh-CN/$'
+    | '/zh-Hans/$'
+    | '/en'
+    | '/ja'
     | '/tools'
+    | '/zh-CN'
+    | '/zh-Hans'
   id:
     | '__root__'
     | '/'
     | '/accessibility'
     | '/amsler'
     | '/clinic'
+    | '/en'
     | '/install'
     | '/iol'
+    | '/ja'
     | '/legal'
     | '/privacy'
     | '/qr'
@@ -223,10 +349,20 @@ export interface FileRouteTypes {
     | '/search'
     | '/tools'
     | '/urgent'
+    | '/zh-CN'
+    | '/zh-Hans'
     | '/c/$catId'
+    | '/en/$'
+    | '/ja/$'
     | '/t/$topicId'
     | '/tools/$toolId'
+    | '/zh-CN/$'
+    | '/zh-Hans/$'
+    | '/en/'
+    | '/ja/'
     | '/tools/'
+    | '/zh-CN/'
+    | '/zh-Hans/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -234,8 +370,10 @@ export interface RootRouteChildren {
   AccessibilityRoute: typeof AccessibilityRoute
   AmslerRoute: typeof AmslerRoute
   ClinicRoute: typeof ClinicRoute
+  EnRoute: typeof EnRouteWithChildren
   InstallRoute: typeof InstallRoute
   IolRoute: typeof IolRoute
+  JaRoute: typeof JaRouteWithChildren
   LegalRoute: typeof LegalRoute
   PrivacyRoute: typeof PrivacyRoute
   QrRoute: typeof QrRoute
@@ -243,6 +381,8 @@ export interface RootRouteChildren {
   SearchRoute: typeof SearchRoute
   ToolsRoute: typeof ToolsRouteWithChildren
   UrgentRoute: typeof UrgentRoute
+  ZhCNRoute: typeof ZhCNRouteWithChildren
+  ZhHansRoute: typeof ZhHansRouteWithChildren
   CCatIdRoute: typeof CCatIdRoute
   TTopicIdRoute: typeof TTopicIdRoute
 }
@@ -277,6 +417,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ClinicRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/en': {
+      id: '/en'
+      path: '/en'
+      fullPath: '/en'
+      preLoaderRoute: typeof EnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/install': {
       id: '/install'
       path: '/install'
@@ -289,6 +436,13 @@ declare module '@tanstack/react-router' {
       path: '/iol'
       fullPath: '/iol'
       preLoaderRoute: typeof IolRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ja': {
+      id: '/ja'
+      path: '/ja'
+      fullPath: '/ja'
+      preLoaderRoute: typeof JaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/legal': {
@@ -340,12 +494,54 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UrgentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/zh-CN': {
+      id: '/zh-CN'
+      path: '/zh-CN'
+      fullPath: '/zh-CN'
+      preLoaderRoute: typeof ZhCNRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/zh-Hans': {
+      id: '/zh-Hans'
+      path: '/zh-Hans'
+      fullPath: '/zh-Hans'
+      preLoaderRoute: typeof ZhHansRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/c/$catId': {
       id: '/c/$catId'
       path: '/c/$catId'
       fullPath: '/c/$catId'
       preLoaderRoute: typeof CCatIdRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/en/': {
+      id: '/en/'
+      path: '/'
+      fullPath: '/en/'
+      preLoaderRoute: typeof EnIndexRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/$': {
+      id: '/en/$'
+      path: '/$'
+      fullPath: '/en/$'
+      preLoaderRoute: typeof EnSplatRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/ja/': {
+      id: '/ja/'
+      path: '/'
+      fullPath: '/ja/'
+      preLoaderRoute: typeof JaIndexRouteImport
+      parentRoute: typeof JaRoute
+    }
+    '/ja/$': {
+      id: '/ja/$'
+      path: '/$'
+      fullPath: '/ja/$'
+      preLoaderRoute: typeof JaSplatRouteImport
+      parentRoute: typeof JaRoute
     }
     '/t/$topicId': {
       id: '/t/$topicId'
@@ -368,8 +564,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsToolIdRouteImport
       parentRoute: typeof ToolsRoute
     }
+    '/zh-CN/': {
+      id: '/zh-CN/'
+      path: '/'
+      fullPath: '/zh-CN/'
+      preLoaderRoute: typeof ZhCNIndexRouteImport
+      parentRoute: typeof ZhCNRoute
+    }
+    '/zh-CN/$': {
+      id: '/zh-CN/$'
+      path: '/$'
+      fullPath: '/zh-CN/$'
+      preLoaderRoute: typeof ZhCNSplatRouteImport
+      parentRoute: typeof ZhCNRoute
+    }
+    '/zh-Hans/': {
+      id: '/zh-Hans/'
+      path: '/'
+      fullPath: '/zh-Hans/'
+      preLoaderRoute: typeof ZhHansIndexRouteImport
+      parentRoute: typeof ZhHansRoute
+    }
+    '/zh-Hans/$': {
+      id: '/zh-Hans/$'
+      path: '/$'
+      fullPath: '/zh-Hans/$'
+      preLoaderRoute: typeof ZhHansSplatRouteImport
+      parentRoute: typeof ZhHansRoute
+    }
   }
 }
+
+interface EnRouteChildren {
+  EnSplatRoute: typeof EnSplatRoute
+  EnIndexRoute: typeof EnIndexRoute
+}
+
+const EnRouteChildren: EnRouteChildren = {
+  EnSplatRoute: EnSplatRoute,
+  EnIndexRoute: EnIndexRoute,
+}
+
+const EnRouteWithChildren = EnRoute._addFileChildren(EnRouteChildren)
+
+interface JaRouteChildren {
+  JaSplatRoute: typeof JaSplatRoute
+  JaIndexRoute: typeof JaIndexRoute
+}
+
+const JaRouteChildren: JaRouteChildren = {
+  JaSplatRoute: JaSplatRoute,
+  JaIndexRoute: JaIndexRoute,
+}
+
+const JaRouteWithChildren = JaRoute._addFileChildren(JaRouteChildren)
 
 interface ToolsRouteChildren {
   ToolsToolIdRoute: typeof ToolsToolIdRoute
@@ -383,13 +631,40 @@ const ToolsRouteChildren: ToolsRouteChildren = {
 
 const ToolsRouteWithChildren = ToolsRoute._addFileChildren(ToolsRouteChildren)
 
+interface ZhCNRouteChildren {
+  ZhCNSplatRoute: typeof ZhCNSplatRoute
+  ZhCNIndexRoute: typeof ZhCNIndexRoute
+}
+
+const ZhCNRouteChildren: ZhCNRouteChildren = {
+  ZhCNSplatRoute: ZhCNSplatRoute,
+  ZhCNIndexRoute: ZhCNIndexRoute,
+}
+
+const ZhCNRouteWithChildren = ZhCNRoute._addFileChildren(ZhCNRouteChildren)
+
+interface ZhHansRouteChildren {
+  ZhHansSplatRoute: typeof ZhHansSplatRoute
+  ZhHansIndexRoute: typeof ZhHansIndexRoute
+}
+
+const ZhHansRouteChildren: ZhHansRouteChildren = {
+  ZhHansSplatRoute: ZhHansSplatRoute,
+  ZhHansIndexRoute: ZhHansIndexRoute,
+}
+
+const ZhHansRouteWithChildren =
+  ZhHansRoute._addFileChildren(ZhHansRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccessibilityRoute: AccessibilityRoute,
   AmslerRoute: AmslerRoute,
   ClinicRoute: ClinicRoute,
+  EnRoute: EnRouteWithChildren,
   InstallRoute: InstallRoute,
   IolRoute: IolRoute,
+  JaRoute: JaRouteWithChildren,
   LegalRoute: LegalRoute,
   PrivacyRoute: PrivacyRoute,
   QrRoute: QrRoute,
@@ -397,6 +672,8 @@ const rootRouteChildren: RootRouteChildren = {
   SearchRoute: SearchRoute,
   ToolsRoute: ToolsRouteWithChildren,
   UrgentRoute: UrgentRoute,
+  ZhCNRoute: ZhCNRouteWithChildren,
+  ZhHansRoute: ZhHansRouteWithChildren,
   CCatIdRoute: CCatIdRoute,
   TTopicIdRoute: TTopicIdRoute,
 }

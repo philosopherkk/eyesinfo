@@ -2,7 +2,7 @@
 
 Hong Kong public eye-education site. Traditional Chinese first; also Simplified, English, Japanese. Not a clinic shopfront.
 
-Live site: https://eyesinfo.org
+Live site: https://www.eyesinfo.org (apex `eyesinfo.org` 301/308 → www)
 
 ## Edit and deploy
 
@@ -12,7 +12,7 @@ Source of truth is this repo, not chat history and not an editor buffer.
 2. Edit files. Bump CONTENT_VERSION / 網站版本 only when KK says this is a release. Update 最近覆核 when copy changes.
 3. `git add` only the files for this change. Commit. `git push -u origin HEAD`.
 4. Open the PR. Use the Vercel Preview URL. KK reads 繁 there and merges main.
-5. After merge: hard-refresh https://eyesinfo.org and check footer 網站版本 / 最近覆核.
+5. After merge: hard-refresh https://www.eyesinfo.org and check footer 網站版本 / 最近覆核.
 
 If you use Cursor, clone https://github.com/philosopherkk/eyesinfo and pull before you edit. Same rules. Chat-only edits that are not committed do not exist.
 

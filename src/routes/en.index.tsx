@@ -2,13 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { HomePage } from "@/components/home-page";
 import { pageHead, SEO_SITE_NAME } from "@/lib/page-seo";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/en/")({
   head: () =>
     pageHead({
       title: SEO_SITE_NAME,
       description:
-        "香港眼科公眾教育：常見眼疾、專題單張與自我監察工具。不能代替與註冊眼科專科醫生的面診。",
-      path: "/",
+        "Hong Kong public eye-health education: common conditions, fact sheets and self-check tools. Not a substitute for seeing a registered ophthalmologist.",
+      path: "/en",
     }),
   component: HomePage,
 });

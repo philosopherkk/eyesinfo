@@ -44,6 +44,21 @@ test("robots.txt allows crawl and points at www sitemap", () => {
   assert.match(text, /Sitemap:\s*https:\/\/www\.eyesinfo\.org\/sitemap\.xml/);
 });
 
+test("vercel.json redirects apex host to www", () => {
+  const raw = readFileSync(join(ROOT, "vercel.json"), "utf8");
+  const conf = JSON.parse(raw);
+  assert.ok(Array.isArray(conf.redirects), "vercel.json must declare redirects");
+  const apex = conf.redirects.find(
+    (r) =>
+      Array.isArray(r.has) &&
+      r.has.some((h) => h.type === "host" && h.value === "eyesinfo.org") &&
+      typeof r.destination === "string" &&
+      r.destination.startsWith("https://www.eyesinfo.org"),
+  );
+  assert.ok(apex, "missing eyesinfo.org → www.eyesinfo.org redirect");
+  assert.equal(apex.permanent, true);
+});
+
 test("sitemap.xml is a valid urlset covering edu tools including outdoor", () => {
   const xml = readFileSync(SITEMAP, "utf8");
   assert.match(xml, /^<\?xml version="1\.0" encoding="UTF-8"\?>/);

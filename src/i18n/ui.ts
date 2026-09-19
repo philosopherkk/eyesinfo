@@ -57,6 +57,8 @@ const zhHant = {
     "本站提供一般眼健康教育，不能代替註冊醫生的個別評估，不提供個別診斷、處方、預約、購買或轉介服務。",
   langAuthority:
     "各語言版本如有歧義或不完整，以本站繁體中文版為準。",
+  localeTopicFallback:
+    "本專題暫無完整英／日譯文，以下顯示繁體中文正文（本站以繁體為準）。",
   eduToolBadge: "教育工具 · 自我察覺",
   eduToolCaveat:
     "本工具並非診斷工具。結果無論正常或異常，均不能代替眼科檢查。如有新出現的視力變化，請盡快求醫。",
@@ -459,6 +461,8 @@ const en: Record<Key, string> = {
     "This site provides general eye-health education. It cannot replace individual assessment by a registered doctor, and does not offer personal diagnosis, prescriptions, bookings, sales or referrals.",
   langAuthority:
     "If translations differ or are incomplete, the Traditional Chinese (zh-Hant) text on this site prevails.",
+  localeTopicFallback:
+    "This topic is not fully translated yet. The Traditional Chinese (繁) body is shown below — that text is authoritative on this site.",
   eduToolBadge: "Education tool · self-awareness",
   eduToolCaveat:
     "This tool is not a diagnostic tool. Whether results appear normal or abnormal, they cannot replace an eye examination. If you notice new vision changes, seek care promptly.",
@@ -868,6 +872,8 @@ const ja: Record<Key, string> = {
     "本サイトは一般的な眼の健康教育を提供します。登録医師の個別評価の代わりにはならず、個別の診断・処方・予約・購入・紹介は行いません。",
   langAuthority:
     "翻訳に相違または不足がある場合は、本サイトの繁体字中国語（zh-Hant）版を基準とします。",
+  localeTopicFallback:
+    "このトピックはまだ完全な翻訳がありません。以下は繁体字中国語の本文です（本サイトは繁体字を基準とします）。",
   eduToolBadge: "教育ツール · 自己観察",
   eduToolCaveat:
     "本ツールは診断ツールではありません。結果が正常でも異常でも、眼科検査の代わりにはなりません。新たに視力の変化があれば、できるだけ早く受診してください。",
