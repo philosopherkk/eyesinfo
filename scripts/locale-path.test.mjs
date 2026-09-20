@@ -113,7 +113,7 @@ test("route files exist for locale entries (no hide-switcher fallback)", () => {
   assert.match(lang, /LOCALES\.map/);
   assert.doesNotMatch(lang, /return null/);
   const i18n = readFileSync(join(ROOT, "src/i18n/index.ts"), "utf8");
-  assert.match(i18n, /stripLocalePrefix/);
+  assert.match(i18n, /resolveLocaleFromLocation|stripLocalePrefix/);
   assert.match(i18n, /useEffectiveLocale|fromPath/);
 });
 

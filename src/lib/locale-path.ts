@@ -12,7 +12,7 @@ export const LOCALE_ENTRY: Record<Exclude<Locale, "zh-Hant">, string> = {
 export const LOCALE_ALIASES: Record<string, Locale> = {
   "zh-CN": "zh-Hans",
   "zh-cn": "zh-Hans",
-  "zh_CN": "zh-Hans",
+  zh_CN: "zh-Hans",
 };
 
 const ENTRY_BY_PATH = new Map<string, Locale>([
@@ -39,6 +39,35 @@ export function pathForLocale(locale: Locale): string {
 
 export function isKnownLocale(id: string): id is Locale {
   return LOCALES.some((l) => l.id === id);
+}
+
+/** `html lang` — match LOCALES[].htmlLang (zh-Hans → zh-CN). */
+export function htmlLangForLocale(locale: Locale): string {
+  return LOCALES.find((l) => l.id === locale)?.htmlLang ?? "zh-Hant";
+}
+
+/** `?lang=` on deep routes after `/en/…` redirects. */
+export function localeFromSearch(search: Record<string, unknown> | string): Locale | null {
+  let raw: unknown;
+  if (typeof search === "string") {
+    raw = new URLSearchParams(search.startsWith("?") ? search.slice(1) : search).get("lang");
+  } else if (search && typeof search === "object") {
+    raw = (search as { lang?: unknown }).lang;
+  }
+  if (raw === "en" || raw === "ja" || raw === "zh-Hans" || raw === "zh-Hant") return raw;
+  if (raw === "zh-CN" || raw === "zh-cn") return "zh-Hans";
+  return null;
+}
+
+/**
+ * Effective UI locale from the URL (prefix wins, then `?lang=`).
+ * Does not read prefs — safe for SSR document lang / title.
+ */
+export function resolveLocaleFromLocation(
+  pathname: string,
+  search: Record<string, unknown> | string = "",
+): Locale | null {
+  return stripLocalePrefix(pathname).locale ?? localeFromSearch(search);
 }
 
 /** Strip `/en`, `/ja`, `/zh-Hans`, `/zh-CN` prefix from a pathname. */
