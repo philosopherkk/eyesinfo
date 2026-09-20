@@ -101,6 +101,14 @@ test("sitemap.xml is a valid urlset covering edu tools including outdoor", () =>
     );
   }
 
+  for (const localePath of ["/en", "/zh-Hans", "/ja"]) {
+    assert.match(
+      xml,
+      new RegExp(`<loc>https://www.eyesinfo\\.org${localePath.replaceAll("/", "\\/")}</loc>`),
+      `sitemap missing locale entry ${localePath}`,
+    );
+  }
+
   // Canonical INN slug only — old Protopic alias must not be listed.
   assert.doesNotMatch(xml, /\/t\/t-protopic[<\s]/);
   const urlCount = (xml.match(/<url>/g) || []).length;

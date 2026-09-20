@@ -3,6 +3,7 @@ import {
   HeadContent,
   Outlet,
   Scripts,
+  useRouterState,
 } from "@tanstack/react-router";
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
@@ -12,6 +13,7 @@ import appCss from "../styles.css?url";
 import { PUBLIC_ORIGIN, COPYRIGHT_LINE, COPYRIGHT_YEAR, COPYRIGHT_HOLDER } from "@/lib/site";
 import { SEO_SITE_NAME } from "@/lib/page-seo";
 import { THEME_BOOT_SCRIPT, THEME_COLOR_LIGHT } from "@/lib/theme";
+import { htmlLangForLocale, resolveLocaleFromLocation } from "@/lib/locale-path";
 
 const APP_NAME = SEO_SITE_NAME;
 const APP_DESC =
@@ -67,8 +69,14 @@ export const Route = createRootRoute({
 });
 
 function Root() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const search = useRouterState({ select: (s) => s.location.search });
+  const locale =
+    resolveLocaleFromLocation(pathname, search as Record<string, unknown>) ?? "zh-Hant";
+  const htmlLang = htmlLangForLocale(locale);
+
   return (
-    <html lang="zh-Hant" suppressHydrationWarning>
+    <html lang={htmlLang} suppressHydrationWarning>
       <head>
         {/* FOUC-safe theme boot: localStorage → prefers-color-scheme → light */}
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
