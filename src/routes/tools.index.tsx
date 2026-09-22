@@ -24,10 +24,10 @@ function ToolsHub() {
   const { t, locale } = useI18n();
   const text = TOOL_TEXT[locale];
   return (
-    <div className="px-4 pt-5 pb-8">
-      <h1 className="text-[1.35rem] font-semibold text-navy">{t("toolsTitle")}</h1>
-      <p className="mt-2 text-[0.88rem] leading-relaxed text-muted">{t("toolsLead")}</p>
-      <div className="mt-4 overflow-hidden rounded-xl border border-line bg-card">
+    <div className="px-4 pt-5 pb-8 lg:px-6">
+      <h1 className="text-[1.35rem] font-semibold text-navy lg:text-[1.5rem]">{t("toolsTitle")}</h1>
+      <p className="mt-2 max-w-prose text-[0.88rem] leading-relaxed text-muted">{t("toolsLead")}</p>
+      <div className="mt-4 overflow-hidden rounded-xl border border-line bg-card lg:grid lg:grid-cols-2 lg:gap-2 xl:grid-cols-3 lg:overflow-visible lg:rounded-none lg:border-0 lg:bg-transparent">
         {TOOLS.map((item) => (
           <ToolRow key={item.id} tool={item} title={text[item.id].title} blurb={`${text[item.id].blurb} · ${text[item.id].canto}`} />
         ))}
@@ -56,7 +56,7 @@ function ToolRow({
     </>
   );
   const cls =
-    "flex items-center gap-3 border-b border-line px-4 py-3.5 no-underline last:border-b-0";
+    "flex items-center gap-3 border-b border-line px-4 py-3.5 no-underline last:border-b-0 lg:rounded-xl lg:border lg:border-line lg:bg-card lg:last:border-b";
   return (
     <SpaHref href={hrefWithLang(tool.href, locale)} className={cls}>
       {inner}

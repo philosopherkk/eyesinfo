@@ -71,7 +71,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div
-      className="mx-auto flex min-h-dvh max-w-shell flex-col bg-paper text-ink lg:max-w-shell-lg"
+      className="mx-auto flex min-h-dvh max-w-lg flex-col bg-paper text-ink lg:max-w-5xl"
       data-site="eyesinfo.org"
       data-copyright={COPYRIGHT_LINE}
     >
@@ -87,20 +87,20 @@ export function AppShell({ children }: { children: ReactNode }) {
         <div className="flex items-center justify-between gap-2 px-3 pb-1.5 pt-0.5 sm:px-4 sm:pb-2 sm:pt-1 lg:px-6">
           <SpaHref
             href={homeHref}
-            className="flex min-h-10 items-center gap-2 no-underline sm:min-h-11 sm:gap-2.5"
+            className="flex min-h-10 min-w-0 items-center gap-2 no-underline sm:min-h-11 sm:gap-2.5"
           >
             <img
               src="/logo.png"
               alt=""
               width={28}
               height={28}
-              className="size-7 rounded-md sm:size-8"
+              className="size-7 shrink-0 rounded-md sm:size-8"
             />
-            <span className="leading-tight">
-              <span className="block text-[0.88rem] font-semibold tracking-tight sm:text-[0.95rem]">
+            <span className="flex min-w-0 items-baseline gap-2 leading-tight">
+              <span className="whitespace-nowrap text-[0.88rem] font-semibold tracking-tight sm:text-[0.95rem] lg:text-[1rem]">
                 {t("brand")}
               </span>
-              <span className="hidden text-[0.68rem] text-paper/80 sm:block">
+              <span className="hidden truncate text-[0.68rem] text-paper/80 sm:inline lg:text-[0.72rem]">
                 {t("brandSub")}
               </span>
             </span>
@@ -161,7 +161,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       </main>
 
       <nav
-        className="fixed inset-x-0 bottom-0 z-30 mx-auto max-w-shell border-t border-line bg-card no-print lg:max-w-shell-lg"
+        className="fixed inset-x-0 bottom-0 z-30 mx-auto max-w-lg border-t border-line bg-card no-print lg:max-w-5xl"
         aria-label={t("navMain")}
         style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       >

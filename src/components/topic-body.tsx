@@ -175,5 +175,5 @@ export function TopicBody({
     });
   }, [blocks, mentions, selfHref]);
 
-  return <div className="space-y-4">{nodes}</div>;
+  return <div className="max-w-prose space-y-4">{nodes}</div>;
 }

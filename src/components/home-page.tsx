@@ -99,7 +99,7 @@ export function HomePage() {
 
       <section className="px-4 pb-4 lg:px-6">
         <h2 className="mb-2 text-[0.8rem] font-semibold text-muted">{t("tools")}</h2>
-        <div className="grid grid-cols-2 gap-2 lg:grid-cols-3">
+        <div className="grid grid-cols-2 gap-2 lg:grid-cols-3 xl:grid-cols-5">
           {HOME_TOOLS.map((item) => (
             <HomeTool
               key={item.id}
@@ -129,7 +129,7 @@ export function HomePage() {
         >
           {t("homeAnatomyCta")}
         </LocaleHrefLink>
-        <div className="mt-3 grid gap-2 lg:grid-cols-2">
+        <div className="mt-3 grid gap-2 lg:grid-cols-2 xl:grid-cols-3">
           {CATEGORIES.map((cat) => (
             <LocaleHrefLink
               key={cat.id}
@@ -153,7 +153,7 @@ export function HomePage() {
           <h2 className="mb-2 text-[0.8rem] font-semibold text-muted">
             {t("newSheets")}
           </h2>
-          <div className="grid grid-cols-2 gap-2 lg:grid-cols-3">
+          <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
             {newSheets.map(({ id, label }) => (
               <LocaleHrefLink
                 key={id}
@@ -171,7 +171,7 @@ export function HomePage() {
         <h2 className="px-4 pb-1 text-[0.8rem] font-semibold text-muted lg:px-6">
           {t("top10")}
         </h2>
-        <div className="mx-4 overflow-hidden rounded-xl border border-line bg-card lg:mx-6">
+        <div className="mx-4 overflow-hidden rounded-xl border border-line bg-card lg:mx-6 lg:grid lg:grid-cols-2 lg:gap-2 lg:overflow-visible lg:rounded-none lg:border-0 lg:bg-transparent">
           {featured.map((topic) => (
             <TopicRow key={topic.id} topic={topic} />
           ))}

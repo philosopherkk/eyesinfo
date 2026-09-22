@@ -29,9 +29,13 @@
   --radius-md: 14px;
   --radius-lg: 22px;
   --radius-xl: 28px;
-  /* App column: phone stays ~512px; lg+ widens for laptop gutters. */
+  /*
+   * App column tokens (also mirrored as max-w-lg / lg:max-w-5xl on the shell).
+   * Phone stays ~512px; lg+ ~1024px (within 960–1120) for laptop gutters.
+   * Topic Exact body keeps its own lg:max-w-prose reading measure.
+   */
   --max-width-shell: 32rem; /* ≈ max-w-lg */
-  --max-width-shell-lg: 48rem; /* ≈ max-w-3xl — readable 繁中 line length */
+  --max-width-shell-lg: 64rem; /* ≈ max-w-5xl */
 }
 
 /* Deep navy education dark — not pure #000. Soft danger (muted, not neon). */
