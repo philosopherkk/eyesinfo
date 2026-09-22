@@ -3,6 +3,7 @@ import { CATEGORIES, getTopic, TOPICS } from "@/data/topics";
 import { TOOLS } from "@/data/tools";
 import { FontControl } from "@/components/font-control";
 import { ThemeControl } from "@/components/theme-control";
+import { LayoutControl } from "@/components/layout-control";
 import { LangSwitch } from "@/components/lang-switch";
 import { TopicRow } from "@/components/topic-row";
 import { EyeAnatomyViewer } from "@/components/eye-anatomy-viewer";
@@ -54,7 +55,7 @@ export function HomePage() {
 
   return (
     <div>
-      <section className="px-4 pb-3 pt-4 sm:pb-4 sm:pt-5 lg:px-6">
+      <section className="px-4 pb-3 pt-4 sm:pb-4 sm:pt-5 layout-lg:px-6">
         <p className="text-[0.75rem] font-semibold tracking-[0.14em] text-steel">
           {t("homeKicker")}
         </p>
@@ -82,6 +83,7 @@ export function HomePage() {
             <LangSwitch surface="paper" />
             <FontControl />
             <ThemeControl surface="paper" />
+            <LayoutControl surface="paper" />
             <SpaHref
               href={hrefWithLang("/install", locale)}
               className="inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-full bg-brand px-3.5 text-[0.8rem] font-semibold text-paper no-underline sm:w-auto"
@@ -93,13 +95,13 @@ export function HomePage() {
         </details>
       </section>
 
-      <div className="mx-4 mb-3 sm:mb-4 lg:mx-6">
+      <div className="mx-4 mb-3 sm:mb-4 layout-lg:mx-6">
         <EmergencyShell />
       </div>
 
-      <section className="px-4 pb-4 lg:px-6">
+      <section className="px-4 pb-4 layout-lg:px-6">
         <h2 className="mb-2 text-[0.8rem] font-semibold text-muted">{t("tools")}</h2>
-        <div className="grid grid-cols-2 gap-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="grid grid-cols-2 gap-2 layout-lg:grid-cols-3 layout-xl:grid-cols-5">
           {HOME_TOOLS.map((item) => (
             <HomeTool
               key={item.id}
@@ -118,7 +120,7 @@ export function HomePage() {
         </LocaleHrefLink>
       </section>
 
-      <section className="px-4 pb-2 lg:px-6">
+      <section className="px-4 pb-2 layout-lg:px-6">
         <h2 className="mb-2 text-[0.8rem] font-semibold text-muted">
           {t("byAnatomy")}
         </h2>
@@ -129,7 +131,7 @@ export function HomePage() {
         >
           {t("homeAnatomyCta")}
         </LocaleHrefLink>
-        <div className="mt-3 grid gap-2 lg:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-3 grid gap-2 layout-lg:grid-cols-2 layout-xl:grid-cols-3">
           {CATEGORIES.map((cat) => (
             <LocaleHrefLink
               key={cat.id}
@@ -149,11 +151,11 @@ export function HomePage() {
       </section>
 
       {newSheets.length > 0 ? (
-        <section className="px-4 pb-4 lg:px-6">
+        <section className="px-4 pb-4 layout-lg:px-6">
           <h2 className="mb-2 text-[0.8rem] font-semibold text-muted">
             {t("newSheets")}
           </h2>
-          <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-2 layout-lg:grid-cols-4">
             {newSheets.map(({ id, label }) => (
               <LocaleHrefLink
                 key={id}
@@ -168,17 +170,17 @@ export function HomePage() {
       ) : null}
 
       <section className="mt-1">
-        <h2 className="px-4 pb-1 text-[0.8rem] font-semibold text-muted lg:px-6">
+        <h2 className="px-4 pb-1 text-[0.8rem] font-semibold text-muted layout-lg:px-6">
           {t("top10")}
         </h2>
-        <div className="mx-4 overflow-hidden rounded-xl border border-line bg-card lg:mx-6 lg:grid lg:grid-cols-2 lg:gap-2 lg:overflow-visible lg:rounded-none lg:border-0 lg:bg-transparent">
+        <div className="mx-4 overflow-hidden rounded-xl border border-line bg-card layout-lg:mx-6 layout-lg:grid layout-lg:grid-cols-2 layout-lg:gap-2 layout-lg:overflow-visible layout-lg:rounded-none layout-lg:border-0 layout-lg:bg-transparent">
           {featured.map((topic) => (
             <TopicRow key={topic.id} topic={topic} />
           ))}
         </div>
       </section>
 
-      <p className="mx-4 mt-6 mb-4 text-[0.75rem] leading-relaxed text-muted lg:mx-6">
+      <p className="mx-4 mt-6 mb-4 text-[0.75rem] leading-relaxed text-muted layout-lg:mx-6">
         <LocaleHrefLink path="/legal" className="text-navy underline">
           {t("legalLink")}
         </LocaleHrefLink>

@@ -108,7 +108,7 @@ function CategoryResearchNote({
   const idx = text.indexOf(linkPhrase);
   return (
     <aside
-      className="mx-4 mt-3 rounded-lg border border-line bg-line/25 px-3.5 py-3 lg:mx-6"
+      className="mx-4 mt-3 rounded-lg border border-line bg-line/25 px-3.5 py-3 layout-lg:mx-6"
       aria-label={label}
     >
       <p className="text-[0.78rem] font-semibold tracking-wide text-navy">
@@ -151,11 +151,11 @@ function AnatomyChooserPage({ regionId }: { regionId: AnatomyRegionId }) {
   const hubLabel =
     ANATOMY_CHOOSER_HUB_LABEL[locale] ?? ANATOMY_CHOOSER_HUB_LABEL["zh-Hant"];
   const linkCls =
-    "flex min-h-11 items-center border-b border-line px-4 py-3 text-[0.9rem] font-semibold text-navy no-underline last:border-b-0 lg:rounded-xl lg:border lg:border-line lg:bg-card lg:last:border-b";
+    "flex min-h-11 items-center border-b border-line px-4 py-3 text-[0.9rem] font-semibold text-navy no-underline last:border-b-0 layout-lg:rounded-xl layout-lg:border layout-lg:border-line layout-lg:bg-card layout-lg:last:border-b";
 
   return (
     <div>
-      <div className="flex items-center gap-2 px-2 pt-3 lg:px-6">
+      <div className="flex items-center gap-2 px-2 pt-3 layout-lg:px-6">
         <SpaHref
           href={pathForLocale(locale)}
           className="grid size-10 place-items-center rounded-md text-navy no-underline"
@@ -164,12 +164,12 @@ function AnatomyChooserPage({ regionId }: { regionId: AnatomyRegionId }) {
           <ArrowLeft className="size-5" />
         </SpaHref>
         <div>
-          <h1 className="text-[1.15rem] font-semibold text-navy lg:text-[1.35rem]">{title}</h1>
+          <h1 className="text-[1.15rem] font-semibold text-navy layout-lg:text-[1.35rem]">{title}</h1>
           <p className="max-w-prose text-[0.78rem] text-muted">{lead}</p>
         </div>
       </div>
       <nav
-        className="mx-4 mt-3 overflow-hidden rounded-xl border border-line bg-card lg:mx-6 lg:grid lg:grid-cols-2 lg:gap-2 xl:grid-cols-3 lg:overflow-visible lg:rounded-none lg:border-0 lg:bg-transparent"
+        className="mx-4 mt-3 overflow-hidden rounded-xl border border-line bg-card layout-lg:mx-6 layout-lg:grid layout-lg:grid-cols-2 layout-lg:gap-2 layout-xl:grid-cols-3 layout-lg:overflow-visible layout-lg:rounded-none layout-lg:border-0 layout-lg:bg-transparent"
         aria-label={title}
       >
         {related.topicIds.map((topicId) => {
@@ -187,7 +187,7 @@ function AnatomyChooserPage({ regionId }: { regionId: AnatomyRegionId }) {
           {hubLabel}
         </LocaleHrefLink>
       </nav>
-      <div className="px-4 pb-8 lg:px-6">
+      <div className="px-4 pb-8 layout-lg:px-6">
         <EditorialFooter />
       </div>
     </div>
@@ -208,7 +208,7 @@ function CategoryPage() {
 
   return (
     <div>
-      <div className="flex items-center gap-2 px-2 pt-3 lg:px-6">
+      <div className="flex items-center gap-2 px-2 pt-3 layout-lg:px-6">
         <SpaHref
           href={pathForLocale(locale)}
           className="grid size-10 place-items-center rounded-md text-navy no-underline"
@@ -217,7 +217,7 @@ function CategoryPage() {
           <ArrowLeft className="size-5" />
         </SpaHref>
         <div>
-          <h1 className="text-[1.15rem] font-semibold text-navy lg:text-[1.35rem]">{t(CAT_TITLE[cat.id])}</h1>
+          <h1 className="text-[1.15rem] font-semibold text-navy layout-lg:text-[1.35rem]">{t(CAT_TITLE[cat.id])}</h1>
           <p className="text-[0.78rem] text-muted">{t(CAT_SUB[cat.id])}</p>
         </div>
       </div>
@@ -227,12 +227,12 @@ function CategoryPage() {
           href={cat.researchNote.href}
         />
       ) : null}
-      <div className="mx-4 mt-3 overflow-hidden rounded-xl border border-line bg-card lg:mx-6 lg:grid lg:grid-cols-2 lg:gap-2 xl:grid-cols-3 lg:overflow-visible lg:rounded-none lg:border-0 lg:bg-transparent">
+      <div className="mx-4 mt-3 overflow-hidden rounded-xl border border-line bg-card layout-lg:mx-6 layout-lg:grid layout-lg:grid-cols-2 layout-lg:gap-2 layout-xl:grid-cols-3 layout-lg:overflow-visible layout-lg:rounded-none layout-lg:border-0 layout-lg:bg-transparent">
         {topics.map((topic) => (
           <TopicRow key={topic.id} topic={topic} />
         ))}
       </div>
-      <div className="px-4 pb-8 lg:px-6">
+      <div className="px-4 pb-8 layout-lg:px-6">
         <EditorialFooter />
       </div>
     </div>

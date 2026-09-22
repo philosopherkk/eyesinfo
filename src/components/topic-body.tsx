@@ -86,7 +86,7 @@ export function TopicBody({
           <h2
             key={i}
             id={id}
-            className="scroll-mt-20 pt-1 text-[0.95rem] font-semibold tracking-tight text-navy lg:text-[1.05rem]"
+            className="scroll-mt-20 pt-1 text-[0.95rem] font-semibold tracking-tight text-navy layout-lg:text-[1.05rem]"
           >
             {block.text}
           </h2>
@@ -94,7 +94,7 @@ export function TopicBody({
       }
       if (block.type === "p") {
         return (
-          <p key={i} className="text-[0.95rem] leading-relaxed text-ink lg:text-[1rem]">
+          <p key={i} className="text-[0.95rem] leading-relaxed text-ink layout-lg:text-[1rem]">
             {rich(block.text)}
           </p>
         );

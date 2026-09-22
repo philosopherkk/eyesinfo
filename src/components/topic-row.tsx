@@ -21,7 +21,7 @@ export function TopicRow({
       params={{ topicId: topic.id }}
       className={cn(
         "flex items-center gap-3 border-b border-line px-4 py-3.5 no-underline last:border-b-0",
-        "lg:rounded-xl lg:border lg:border-line lg:bg-card lg:last:border-b",
+        "layout-lg:rounded-xl layout-lg:border layout-lg:border-line layout-lg:bg-card layout-lg:last:border-b",
         className,
       )}
     >

@@ -9,7 +9,7 @@ export function LegalBanner() {
   const { t, legal } = useI18n();
   return (
     <aside
-      className="mx-4 mb-2 rounded-lg border border-line bg-line/25 px-3.5 py-3 text-[0.82rem] leading-relaxed text-muted lg:mx-6"
+      className="mx-4 mb-2 rounded-lg border border-line bg-line/25 px-3.5 py-3 text-[0.82rem] leading-relaxed text-muted layout-lg:mx-6"
       aria-label={t("legalLink")}
     >
       <p>{legal.disclosure}</p>
