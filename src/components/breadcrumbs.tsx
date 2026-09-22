@@ -161,7 +161,7 @@ export function Breadcrumbs() {
   return (
     <>
       <nav
-        className="border-b border-line/60 bg-paper px-4 py-1.5 no-print sm:py-2"
+        className="border-b border-line/60 bg-paper px-4 py-1.5 no-print sm:py-2 lg:px-6"
         aria-label={t("breadcrumbNav")}
       >
         {isTopic && catCrumb?.href ? (

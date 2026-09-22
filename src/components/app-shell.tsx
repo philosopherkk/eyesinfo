@@ -71,7 +71,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div
-      className="mx-auto flex min-h-dvh max-w-lg flex-col bg-paper text-ink"
+      className="mx-auto flex min-h-dvh max-w-shell flex-col bg-paper text-ink lg:max-w-shell-lg"
       data-site="eyesinfo.org"
       data-copyright={COPYRIGHT_LINE}
     >
@@ -84,7 +84,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         data-locale={locale}
         style={{ paddingTop: "max(0.35rem, env(safe-area-inset-top))" }}
       >
-        <div className="flex items-center justify-between gap-2 px-3 pb-1.5 pt-0.5 sm:px-4 sm:pb-2 sm:pt-1">
+        <div className="flex items-center justify-between gap-2 px-3 pb-1.5 pt-0.5 sm:px-4 sm:pb-2 sm:pt-1 lg:px-6">
           <SpaHref
             href={homeHref}
             className="flex min-h-10 items-center gap-2 no-underline sm:min-h-11 sm:gap-2.5"
@@ -131,7 +131,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         <div className="mt-8 no-print">
           <LegalBanner />
         </div>
-        <footer className="px-4 pb-5 pt-4 text-center text-[0.7rem] leading-relaxed text-muted no-print">
+        <footer className="px-4 pb-5 pt-4 text-center text-[0.7rem] leading-relaxed text-muted no-print lg:px-6">
           <p>
             {t("reviewed")}：{EDITORIAL.reviewedIso}
           </p>
@@ -161,7 +161,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       </main>
 
       <nav
-        className="fixed inset-x-0 bottom-0 z-30 mx-auto max-w-lg border-t border-line bg-card no-print"
+        className="fixed inset-x-0 bottom-0 z-30 mx-auto max-w-shell border-t border-line bg-card no-print lg:max-w-shell-lg"
         aria-label={t("navMain")}
         style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       >

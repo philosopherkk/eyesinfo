@@ -9,7 +9,7 @@ export function LegalShortLine() {
   const { t } = useI18n();
   return (
     <div
-      className="border-b border-line/70 bg-line/20 px-4 py-1.5 text-[0.75rem] leading-snug text-muted sm:py-2.5 sm:text-[0.8rem]"
+      className="border-b border-line/70 bg-line/20 px-4 py-1.5 text-[0.75rem] leading-snug text-muted sm:py-2.5 sm:text-[0.8rem] lg:px-6"
       role="note"
     >
       <p>{t("legalShortLine")}</p>

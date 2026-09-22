@@ -88,7 +88,7 @@ function TopicPage() {
   return (
     <article>
       {/* Desktop: keep icon back; mobile uses collapsed breadcrumb 「返回分類」. */}
-      <div className="hidden items-center px-2 pt-3 sm:flex">
+      <div className="hidden items-center px-2 pt-3 sm:flex lg:px-6">
         <SpaHref
           href={hrefWithLang(`/c/${raw.category}`, locale)}
           className="grid size-11 place-items-center rounded-md text-navy no-underline"
@@ -97,18 +97,18 @@ function TopicPage() {
           <ArrowLeft className="size-5" />
         </SpaHref>
       </div>
-      <header className="px-4 pb-3 pt-3 sm:pt-1">
+      <header className="px-4 pb-3 pt-3 sm:pt-1 lg:px-6">
         <p className="text-[0.75rem] text-steel">
           {t(CAT_TITLE[raw.category])} · {topic.num}
         </p>
         <div className="mt-1 flex items-start gap-2 sm:gap-3">
-          <h1 className="min-w-0 flex-1 text-[1.2rem] font-semibold leading-snug text-navy sm:text-[1.35rem]">
+          <h1 className="min-w-0 flex-1 text-[1.2rem] font-semibold leading-snug text-navy sm:text-[1.35rem] lg:text-[1.5rem]">
             {topic.title}
           </h1>
           <SaveButton saveId={topicSaveKey(raw.id)} className="mt-0.5" />
         </div>
         {topic.meta ? (
-          <p className="mt-1 text-[0.85rem] text-muted">{topic.meta}</p>
+          <p className="mt-1 text-[0.85rem] text-muted lg:text-[0.9rem]">{topic.meta}</p>
         ) : null}
         {showLocaleFallback ? (
           <p
@@ -121,11 +121,11 @@ function TopicPage() {
         <TopicToc entries={tocEntries} includeRefs={hasRefs} />
       </header>
       {raw.isAcuteEmergency ? (
-        <div className="mx-4 mb-4">
+        <div className="mx-4 mb-4 lg:mx-6">
           <EmergencyShell />
         </div>
       ) : null}
-      <div className="px-4 pb-6">
+      <div className="px-4 pb-6 lg:px-6">
         <TopicBody blocks={topic.blocks} topicId={raw.id} />
         <HkosVideoCard topicId={raw.id} />
         {/* Related chips before bibliography so siblings are reachable without scrolling past refs. */}

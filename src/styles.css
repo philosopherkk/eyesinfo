@@ -29,6 +29,9 @@
   --radius-md: 14px;
   --radius-lg: 22px;
   --radius-xl: 28px;
+  /* App column: phone stays ~512px; lg+ widens for laptop gutters. */
+  --max-width-shell: 32rem; /* ≈ max-w-lg */
+  --max-width-shell-lg: 48rem; /* ≈ max-w-3xl — readable 繁中 line length */
 }
 
 /* Deep navy education dark — not pure #000. Soft danger (muted, not neon). */

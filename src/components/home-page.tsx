@@ -54,7 +54,7 @@ export function HomePage() {
 
   return (
     <div>
-      <section className="px-4 pb-3 pt-4 sm:pb-4 sm:pt-5">
+      <section className="px-4 pb-3 pt-4 sm:pb-4 sm:pt-5 lg:px-6">
         <p className="text-[0.75rem] font-semibold tracking-[0.14em] text-steel">
           {t("homeKicker")}
         </p>
@@ -93,13 +93,13 @@ export function HomePage() {
         </details>
       </section>
 
-      <div className="mx-4 mb-3 sm:mb-4">
+      <div className="mx-4 mb-3 sm:mb-4 lg:mx-6">
         <EmergencyShell />
       </div>
 
-      <section className="px-4 pb-4">
+      <section className="px-4 pb-4 lg:px-6">
         <h2 className="mb-2 text-[0.8rem] font-semibold text-muted">{t("tools")}</h2>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 gap-2 lg:grid-cols-3">
           {HOME_TOOLS.map((item) => (
             <HomeTool
               key={item.id}
@@ -118,7 +118,7 @@ export function HomePage() {
         </LocaleHrefLink>
       </section>
 
-      <section className="px-4 pb-2">
+      <section className="px-4 pb-2 lg:px-6">
         <h2 className="mb-2 text-[0.8rem] font-semibold text-muted">
           {t("byAnatomy")}
         </h2>
@@ -129,7 +129,7 @@ export function HomePage() {
         >
           {t("homeAnatomyCta")}
         </LocaleHrefLink>
-        <div className="mt-3 grid gap-2">
+        <div className="mt-3 grid gap-2 lg:grid-cols-2">
           {CATEGORIES.map((cat) => (
             <LocaleHrefLink
               key={cat.id}
@@ -149,11 +149,11 @@ export function HomePage() {
       </section>
 
       {newSheets.length > 0 ? (
-        <section className="px-4 pb-4">
+        <section className="px-4 pb-4 lg:px-6">
           <h2 className="mb-2 text-[0.8rem] font-semibold text-muted">
             {t("newSheets")}
           </h2>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-2 lg:grid-cols-3">
             {newSheets.map(({ id, label }) => (
               <LocaleHrefLink
                 key={id}
@@ -168,17 +168,17 @@ export function HomePage() {
       ) : null}
 
       <section className="mt-1">
-        <h2 className="px-4 pb-1 text-[0.8rem] font-semibold text-muted">
+        <h2 className="px-4 pb-1 text-[0.8rem] font-semibold text-muted lg:px-6">
           {t("top10")}
         </h2>
-        <div className="mx-4 overflow-hidden rounded-xl border border-line bg-card">
+        <div className="mx-4 overflow-hidden rounded-xl border border-line bg-card lg:mx-6">
           {featured.map((topic) => (
             <TopicRow key={topic.id} topic={topic} />
           ))}
         </div>
       </section>
 
-      <p className="mx-4 mt-6 mb-4 text-[0.75rem] leading-relaxed text-muted">
+      <p className="mx-4 mt-6 mb-4 text-[0.75rem] leading-relaxed text-muted lg:mx-6">
         <LocaleHrefLink path="/legal" className="text-navy underline">
           {t("legalLink")}
         </LocaleHrefLink>
