@@ -1,14 +1,17 @@
-import { Link } from "@tanstack/react-router";
 import { useId, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/i18n";
 import type { Locale } from "@/i18n/locale";
 import {
+  ANATOMY_CHOOSER_HUB_LABEL,
+  ANATOMY_CHOOSER_TOPIC_LABELS,
   ANATOMY_RELATED,
   ANATOMY_REGION_ORDER,
   type AnatomyRegionId,
   type AnatomyRelatedLink,
 } from "@/data/anatomy-related";
+import { SpaHref } from "@/components/locale-href";
+import { hrefWithLang } from "@/lib/locale-path";
 
 type RegionCopy = {
   title: string;
@@ -200,44 +203,6 @@ const VIEW_RELATED: Record<Locale, string> = {
   "zh-Hans": "打开相关专题",
   en: "Open related topic",
   ja: "関連の解説を開く",
-};
-
-/** In-panel disease chooser labels for macula (education links only). */
-const MACULA_TOPIC_LABELS: Record<
-  Locale,
-  Record<"d5" | "t-macular-hole" | "t-erm" | "t-high-myopia-pathology", string>
-> = {
-  "zh-Hant": {
-    d5: "年齡相關性黃斑病變",
-    "t-macular-hole": "黃斑裂孔",
-    "t-erm": "黃斑前膜（ERM）",
-    "t-high-myopia-pathology": "高度近視：近視性黃斑病變等",
-  },
-  "zh-Hans": {
-    d5: "年龄相关性黄斑病变",
-    "t-macular-hole": "黄斑裂孔",
-    "t-erm": "黄斑前膜（ERM）",
-    "t-high-myopia-pathology": "高度近视：近视性黄斑病变等",
-  },
-  en: {
-    d5: "Age-related macular degeneration",
-    "t-macular-hole": "Macular hole",
-    "t-erm": "Epiretinal membrane (macular pucker / ERM)",
-    "t-high-myopia-pathology": "High myopia: myopic maculopathy & more",
-  },
-  ja: {
-    d5: "加齢黄斑変性",
-    "t-macular-hole": "黄斑円孔",
-    "t-erm": "黄斑前膜（網膜前膜／ERM）",
-    "t-high-myopia-pathology": "強度近視：近視性黄斑症など",
-  },
-};
-
-const MACULA_HUB_LABEL: Record<Locale, string> = {
-  "zh-Hant": "更多：視網膜與黃斑專題",
-  "zh-Hans": "更多：视网膜与黄斑专题",
-  en: "More: Retina & macula topics",
-  ja: "もっと見る：網膜と黄斑",
 };
 
 const LEAD: Record<Locale, string> = {
@@ -470,8 +435,10 @@ function RelatedTopicsChooser({
   title: string;
   locale: Locale;
 }) {
-  const labels = MACULA_TOPIC_LABELS[locale] ?? MACULA_TOPIC_LABELS["zh-Hant"];
-  const hubLabel = MACULA_HUB_LABEL[locale] ?? MACULA_HUB_LABEL["zh-Hant"];
+  const labels =
+    ANATOMY_CHOOSER_TOPIC_LABELS[locale] ?? ANATOMY_CHOOSER_TOPIC_LABELS["zh-Hant"];
+  const hubLabel =
+    ANATOMY_CHOOSER_HUB_LABEL[locale] ?? ANATOMY_CHOOSER_HUB_LABEL["zh-Hant"];
   const linkCls =
     "inline-flex min-h-11 w-full items-center rounded-xl border border-line bg-card px-3.5 py-2 text-left text-[0.85rem] font-semibold text-navy no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy";
 
@@ -481,23 +448,18 @@ function RelatedTopicsChooser({
       <ul className="flex flex-col gap-2">
         {related.topicIds.map((topicId) => (
           <li key={topicId}>
-            <Link
-              to="/t/$topicId"
-              params={{ topicId }}
-              className={linkCls}
-            >
-              {labels[topicId as keyof typeof labels] ?? topicId}
-            </Link>
+            <SpaHref href={hrefWithLang(`/t/${topicId}`, locale)} className={linkCls}>
+              {labels[topicId] ?? topicId}
+            </SpaHref>
           </li>
         ))}
         <li>
-          <Link
-            to="/c/$catId"
-            params={{ catId: related.hub.catId }}
+          <SpaHref
+            href={hrefWithLang(`/c/${related.hub.catId}`, locale)}
             className={linkCls}
           >
             {hubLabel}
-          </Link>
+          </SpaHref>
         </li>
       </ul>
     </nav>
@@ -511,19 +473,20 @@ function RelatedButton({
   related: Extract<AnatomyRelatedLink, { kind: "cat" | "topic" }>;
   label: string;
 }) {
+  const { locale } = useI18n();
   const cls =
     "mt-3 inline-flex h-11 items-center rounded-full bg-navy px-4 text-[0.85rem] font-semibold text-paper no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy";
   if (related.kind === "cat") {
     return (
-      <Link to="/c/$catId" params={{ catId: related.catId }} className={cls}>
+      <SpaHref href={hrefWithLang(`/c/${related.catId}`, locale)} className={cls}>
         {label}
-      </Link>
+      </SpaHref>
     );
   }
   return (
-    <Link to="/t/$topicId" params={{ topicId: related.topicId }} className={cls}>
+    <SpaHref href={hrefWithLang(`/t/${related.topicId}`, locale)} className={cls}>
       {label}
-    </Link>
+    </SpaHref>
   );
 }
 

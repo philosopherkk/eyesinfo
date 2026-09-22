@@ -1,15 +1,21 @@
 import type { ReactNode } from "react";
-import { Link, useRouterState } from "@tanstack/react-router";
+import { useRouterState } from "@tanstack/react-router";
 import { ChevronRight } from "lucide-react";
 import { useMemo } from "react";
 import { CATEGORIES, getTopic } from "@/data/topics";
 import { TOOLS } from "@/data/tools";
+import {
+  ANATOMY_CHOOSER_TITLE,
+  isAnatomyTopicsChooser,
+  type AnatomyRegionId,
+} from "@/data/anatomy-related";
 import { PUBLIC_ORIGIN } from "@/lib/site";
 import { localizeTopic, useI18n, TOOL_TEXT } from "@/i18n";
 import type { Locale } from "@/i18n/locale";
 import type { UiKey } from "@/i18n/ui";
 import { EduLink } from "@/components/edu-link";
-import { isLocaleHomePath } from "@/lib/locale-path";
+import { SpaHref } from "@/components/locale-href";
+import { hrefWithLang, isLocaleHomePath, pathForLocale } from "@/lib/locale-path";
 
 export type Crumb = {
   label: string;
@@ -43,7 +49,7 @@ function buildCrumbs(pathname: string, t: (k: UiKey) => string, locale: Locale):
   // Locale entry homes (`/`, `/en`, `/ja`, `/zh-Hans`) — no trail.
   if (isLocaleHomePath(pathname)) return null;
 
-  const home: Crumb = { label: t("home"), href: "/" };
+  const home: Crumb = { label: t("home"), href: pathForLocale(locale) };
   const trail: Crumb[] = [home];
 
   const topicMatch = pathname.match(/^\/t\/([^/]+)\/?$/);
@@ -54,7 +60,7 @@ function buildCrumbs(pathname: string, t: (k: UiKey) => string, locale: Locale):
       if (cat) {
         trail.push({
           label: t(CAT_UI[cat.id]),
-          href: `/c/${cat.id}`,
+          href: hrefWithLang(`/c/${cat.id}`, locale),
         });
       }
       const loc = localizeTopic(topic, locale);
@@ -70,11 +76,20 @@ function buildCrumbs(pathname: string, t: (k: UiKey) => string, locale: Locale):
       trail.push({ label: t(CAT_UI[cat.id]) });
       return trail;
     }
+    if (isAnatomyTopicsChooser(catMatch[1])) {
+      const region = catMatch[1] as AnatomyRegionId;
+      const title =
+        ANATOMY_CHOOSER_TITLE[locale]?.[region] ??
+        ANATOMY_CHOOSER_TITLE["zh-Hant"][region] ??
+        region;
+      trail.push({ label: title });
+      return trail;
+    }
   }
 
   const toolMatch = pathname.match(/^\/tools\/([^/]+)\/?$/);
   if (toolMatch) {
-    trail.push({ label: t("toolsTitle"), href: "/tools" });
+    trail.push({ label: t("toolsTitle"), href: hrefWithLang("/tools", locale) });
     const tool = TOOLS.find((x) => x.id === toolMatch[1]);
     if (tool) {
       const title = TOOL_TEXT[locale]?.[tool.id]?.title ?? tool.title;
@@ -86,7 +101,7 @@ function buildCrumbs(pathname: string, t: (k: UiKey) => string, locale: Locale):
   }
 
   if (pathname === "/amsler" || pathname === "/iol") {
-    trail.push({ label: t("toolsTitle"), href: "/tools" });
+    trail.push({ label: t("toolsTitle"), href: hrefWithLang("/tools", locale) });
     trail.push({
       label: t(pathname === "/amsler" ? "amslerTitle" : "iolTitle"),
     });
@@ -227,9 +242,10 @@ export function Breadcrumbs() {
 
 /** Tiny helper retained for typed home-only crumbs if needed elsewhere. */
 export function HomeCrumbLink({ children, className }: { children: ReactNode; className?: string }) {
+  const { locale } = useI18n();
   return (
-    <Link to="/" className={className}>
+    <SpaHref href={pathForLocale(locale)} className={className}>
       {children}
-    </Link>
+    </SpaHref>
   );
 }

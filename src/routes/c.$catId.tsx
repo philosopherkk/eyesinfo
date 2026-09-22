@@ -1,28 +1,24 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, notFound } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
-import { CATEGORIES, topicsByCategory, type CategoryId } from "@/data/topics";
+import { CATEGORIES, getTopic, topicsByCategory, type CategoryId } from "@/data/topics";
+import {
+  ANATOMY_CHOOSER_HUB_LABEL,
+  ANATOMY_CHOOSER_LEAD,
+  ANATOMY_CHOOSER_TITLE,
+  ANATOMY_CHOOSER_TOPIC_LABELS,
+  ANATOMY_RELATED,
+  isAnatomyTopicsChooser,
+  type AnatomyRegionId,
+} from "@/data/anatomy-related";
 import { TopicRow } from "@/components/topic-row";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { EduLink } from "@/components/edu-link";
-import { useI18n } from "@/i18n";
+import { LocaleHrefLink, SpaHref } from "@/components/locale-href";
+import { localizeTopic, useI18n } from "@/i18n";
 import type { UiKey } from "@/i18n/ui";
 import { pageHead } from "@/lib/page-seo";
-
-export const Route = createFileRoute("/c/$catId")({
-  head: ({ params }) => {
-    const cat = CATEGORIES.find((c) => c.id === params.catId);
-    const title = cat?.title ?? "分類";
-    const description = cat
-      ? `${cat.title}：${cat.subtitle}。香港眼科公眾教育專題。`
-      : "眼科教育專題分類。";
-    return pageHead({
-      title,
-      description,
-      path: `/c/${params.catId}`,
-    });
-  },
-  component: CategoryPage,
-});
+import { localeFromMatch, pathForLocale } from "@/lib/locale-path";
+import { uiText } from "@/lib/ui-text";
 
 const CAT_TITLE: Record<string, UiKey> = {
   lens: "cat_lens",
@@ -38,6 +34,47 @@ const CAT_SUB: Record<string, UiKey> = {
   retina: "cat_retina_sub",
   surface: "cat_surface_sub",
 };
+
+export const Route = createFileRoute("/c/$catId")({
+  head: ({ params, match }) => {
+    const locale = localeFromMatch(match);
+    const cat = CATEGORIES.find((c) => c.id === params.catId);
+    if (cat) {
+      const title = uiText(locale, CAT_TITLE[cat.id]);
+      const sub = uiText(locale, CAT_SUB[cat.id]);
+      return pageHead({
+        title,
+        description: `${title}：${sub}`,
+        path: `/c/${params.catId}`,
+        locale,
+      });
+    }
+    if (isAnatomyTopicsChooser(params.catId)) {
+      const region = params.catId as AnatomyRegionId;
+      const title =
+        ANATOMY_CHOOSER_TITLE[locale]?.[region] ??
+        ANATOMY_CHOOSER_TITLE["zh-Hant"][region] ??
+        region;
+      const lead =
+        ANATOMY_CHOOSER_LEAD[locale]?.[region] ??
+        ANATOMY_CHOOSER_LEAD["zh-Hant"][region] ??
+        "";
+      return pageHead({
+        title,
+        description: lead,
+        path: `/c/${params.catId}`,
+        locale,
+      });
+    }
+    return pageHead({
+      title: uiText(locale, "byAnatomy"),
+      description: uiText(locale, "homeLead"),
+      path: `/c/${params.catId}`,
+      locale,
+    });
+  },
+  component: CategoryPage,
+});
 
 /** Optional per-category research callout UI keys (label / body / link phrase). */
 const CAT_RESEARCH: Partial<
@@ -97,23 +134,91 @@ function CategoryResearchNote({
   );
 }
 
-function CategoryPage() {
-  const { catId } = Route.useParams();
-  const cat = CATEGORIES.find((c) => c.id === catId);
-  if (!cat) throw notFound();
-  const topics = topicsByCategory(cat.id as CategoryId);
-  const { t } = useI18n();
+function AnatomyChooserPage({ regionId }: { regionId: AnatomyRegionId }) {
+  const { locale, t } = useI18n();
+  const related = ANATOMY_RELATED[regionId];
+  if (!related || related.kind !== "topics") throw notFound();
+  const title =
+    ANATOMY_CHOOSER_TITLE[locale]?.[regionId] ??
+    ANATOMY_CHOOSER_TITLE["zh-Hant"][regionId] ??
+    regionId;
+  const lead =
+    ANATOMY_CHOOSER_LEAD[locale]?.[regionId] ??
+    ANATOMY_CHOOSER_LEAD["zh-Hant"][regionId] ??
+    "";
+  const labels =
+    ANATOMY_CHOOSER_TOPIC_LABELS[locale] ?? ANATOMY_CHOOSER_TOPIC_LABELS["zh-Hant"];
+  const hubLabel =
+    ANATOMY_CHOOSER_HUB_LABEL[locale] ?? ANATOMY_CHOOSER_HUB_LABEL["zh-Hant"];
+  const linkCls =
+    "flex min-h-11 items-center border-b border-line px-4 py-3 text-[0.9rem] font-semibold text-navy no-underline last:border-b-0";
 
   return (
     <div>
       <div className="flex items-center gap-2 px-2 pt-3">
-        <Link
-          to="/"
+        <SpaHref
+          href={pathForLocale(locale)}
           className="grid size-10 place-items-center rounded-md text-navy no-underline"
           aria-label={t("back")}
         >
           <ArrowLeft className="size-5" />
-        </Link>
+        </SpaHref>
+        <div>
+          <h1 className="text-[1.15rem] font-semibold text-navy">{title}</h1>
+          <p className="text-[0.78rem] text-muted">{lead}</p>
+        </div>
+      </div>
+      <nav className="mx-4 mt-3 overflow-hidden rounded-xl border border-line bg-card" aria-label={title}>
+        <ul>
+          {related.topicIds.map((topicId) => {
+            const topic = getTopic(topicId);
+            const label =
+              labels[topicId] ??
+              (topic ? localizeTopic(topic, locale).title : topicId);
+            return (
+              <li key={topicId}>
+                <LocaleHrefLink path={`/t/${topicId}`} className={linkCls}>
+                  {label}
+                </LocaleHrefLink>
+              </li>
+            );
+          })}
+          <li>
+            <LocaleHrefLink path={`/c/${related.hub.catId}`} className={linkCls}>
+              {hubLabel}
+            </LocaleHrefLink>
+          </li>
+        </ul>
+      </nav>
+      <div className="px-4 pb-8">
+        <EditorialFooter />
+      </div>
+    </div>
+  );
+}
+
+function CategoryPage() {
+  const { catId } = Route.useParams();
+  const cat = CATEGORIES.find((c) => c.id === catId);
+  const { t, locale } = useI18n();
+
+  if (!cat && isAnatomyTopicsChooser(catId)) {
+    return <AnatomyChooserPage regionId={catId} />;
+  }
+  if (!cat) throw notFound();
+
+  const topics = topicsByCategory(cat.id as CategoryId);
+
+  return (
+    <div>
+      <div className="flex items-center gap-2 px-2 pt-3">
+        <SpaHref
+          href={pathForLocale(locale)}
+          className="grid size-10 place-items-center rounded-md text-navy no-underline"
+          aria-label={t("back")}
+        >
+          <ArrowLeft className="size-5" />
+        </SpaHref>
         <div>
           <h1 className="text-[1.15rem] font-semibold text-navy">{t(CAT_TITLE[cat.id])}</h1>
           <p className="text-[0.78rem] text-muted">{t(CAT_SUB[cat.id])}</p>

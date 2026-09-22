@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Link, useRouterState } from "@tanstack/react-router";
+import { useRouterState } from "@tanstack/react-router";
 import { Bookmark, Home, LayoutGrid, Phone, Search } from "lucide-react";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -8,13 +8,14 @@ import { useI18n } from "@/i18n";
 import { LOCALES } from "@/i18n/locale";
 import { LangSwitch } from "@/components/lang-switch";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { LocaleHrefLink, SpaHref } from "@/components/locale-href";
 import { CONTENT_VERSION, COPYRIGHT_LINE, PUBLIC_ORIGIN } from "@/lib/site";
 import { EDITORIAL } from "@/data/editorial";
 import { LegalBanner } from "@/components/legal-banner";
 import { LegalShortLine } from "@/components/legal-short-line";
 import { ThemeControl } from "@/components/theme-control";
 import { applyTheme, readThemePref } from "@/lib/theme";
-import { isLocaleHomePath, pathForLocale } from "@/lib/locale-path";
+import { hrefWithLang, isLocaleHomePath, pathForLocale } from "@/lib/locale-path";
 
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -25,7 +26,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   const tabs = [
     {
-      to: homeHref,
+      path: homeHref,
       label: t("home"),
       icon: Home,
       // Visual highlight for education browsing (/c /t); aria-current only on true home.
@@ -33,9 +34,9 @@ export function AppShell({ children }: { children: ReactNode }) {
         isLocaleHomePath(p) || p.startsWith("/c/") || p.startsWith("/t/"),
       ariaCurrentPage: (p: string) => isLocaleHomePath(p),
     },
-    { to: "/search", label: t("search"), icon: Search, match: (p: string) => p.startsWith("/search"), ariaCurrentPage: (p: string) => p.startsWith("/search") },
-    { to: "/tools", label: t("tools"), icon: LayoutGrid, match: (p: string) => p.startsWith("/tools") || p.startsWith("/amsler") || p.startsWith("/iol"), ariaCurrentPage: (p: string) => p.startsWith("/tools") || p.startsWith("/amsler") || p.startsWith("/iol") },
-    { to: "/saved", label: t("saved"), icon: Bookmark, match: (p: string) => p.startsWith("/saved"), ariaCurrentPage: (p: string) => p.startsWith("/saved") },
+    { path: "/search", label: t("search"), icon: Search, match: (p: string) => p.startsWith("/search"), ariaCurrentPage: (p: string) => p.startsWith("/search") },
+    { path: "/tools", label: t("tools"), icon: LayoutGrid, match: (p: string) => p.startsWith("/tools") || p.startsWith("/amsler") || p.startsWith("/iol"), ariaCurrentPage: (p: string) => p.startsWith("/tools") || p.startsWith("/amsler") || p.startsWith("/iol") },
+    { path: "/saved", label: t("saved"), icon: Bookmark, match: (p: string) => p.startsWith("/saved"), ariaCurrentPage: (p: string) => p.startsWith("/saved") },
   ] as const;
 
   useEffect(() => {
@@ -84,8 +85,8 @@ export function AppShell({ children }: { children: ReactNode }) {
         style={{ paddingTop: "max(0.35rem, env(safe-area-inset-top))" }}
       >
         <div className="flex items-center justify-between gap-2 px-3 pb-1.5 pt-0.5 sm:px-4 sm:pb-2 sm:pt-1">
-          <Link
-            to={homeHref}
+          <SpaHref
+            href={homeHref}
             className="flex min-h-10 items-center gap-2 no-underline sm:min-h-11 sm:gap-2.5"
           >
             <img
@@ -103,18 +104,18 @@ export function AppShell({ children }: { children: ReactNode }) {
                 {t("brandSub")}
               </span>
             </span>
-          </Link>
+          </SpaHref>
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
             <ThemeControl compact surface="navy" />
             {/* On home, language lives in 「顯示選項」; keep it here on other pages. */}
             {!isHome ? <LangSwitch compact /> : null}
-            <Link
-              to="/urgent"
+            <SpaHref
+              href={hrefWithLang("/urgent", locale)}
               className="urgent-on-danger inline-flex min-h-10 items-center gap-1 rounded-full bg-danger px-2.5 text-[0.72rem] font-semibold text-paper no-underline sm:min-h-11 sm:px-3.5 sm:text-[0.75rem]"
             >
               <Phone className="size-3.5" strokeWidth={2.2} aria-hidden />
               {t("urgent")}
-            </Link>
+            </SpaHref>
           </div>
         </div>
       </header>
@@ -146,15 +147,15 @@ export function AppShell({ children }: { children: ReactNode }) {
             </a>
           </p>
           <p className="mt-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
-            <Link to="/legal" className="text-navy underline">
+            <LocaleHrefLink path="/legal" className="text-navy underline">
               {t("legalLink")}
-            </Link>
-            <Link to="/privacy" className="text-navy underline">
+            </LocaleHrefLink>
+            <LocaleHrefLink path="/privacy" className="text-navy underline">
               {t("privacyLink")}
-            </Link>
-            <Link to="/accessibility" className="text-navy underline">
+            </LocaleHrefLink>
+            <LocaleHrefLink path="/accessibility" className="text-navy underline">
               {t("a11yLink")}
-            </Link>
+            </LocaleHrefLink>
           </p>
         </footer>
       </main>
@@ -169,9 +170,9 @@ export function AppShell({ children }: { children: ReactNode }) {
             const active = tab.match(pathname);
             const Icon = tab.icon;
             return (
-              <li key={tab.to}>
-                <Link
-                  to={tab.to}
+              <li key={tab.path}>
+                <LocaleHrefLink
+                  path={tab.path}
                   aria-current={tab.ariaCurrentPage(pathname) ? "page" : undefined}
                   className={cn(
                     "flex min-h-[3.65rem] flex-col items-center justify-center gap-0.5 text-[0.7rem] no-underline",
@@ -180,7 +181,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 >
                   <Icon className="size-5" strokeWidth={active ? 2.4 : 1.8} aria-hidden />
                   {tab.label}
-                </Link>
+                </LocaleHrefLink>
               </li>
             );
           })}

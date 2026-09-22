@@ -90,6 +90,68 @@ test("pathForLocale and stripLocalePrefix", () => {
   });
 });
 
+function hrefWithLang(path, locale) {
+  if (locale === "zh-Hant") return path;
+  const hashIdx = path.indexOf("#");
+  const hash = hashIdx >= 0 ? path.slice(hashIdx) : "";
+  const withoutHash = hashIdx >= 0 ? path.slice(0, hashIdx) : path;
+  const qIdx = withoutHash.indexOf("?");
+  const pathname = qIdx >= 0 ? withoutHash.slice(0, qIdx) : withoutHash;
+  const existing = qIdx >= 0 ? withoutHash.slice(qIdx + 1) : "";
+  const params = new URLSearchParams(existing);
+  params.set("lang", locale);
+  return `${pathname}?${params.toString()}${hash}`;
+}
+
+function localeFromSearch(search) {
+  let raw;
+  if (typeof search === "string") {
+    raw = new URLSearchParams(search.startsWith("?") ? search.slice(1) : search).get("lang");
+  } else if (search && typeof search === "object") {
+    raw = search.lang;
+  }
+  if (raw === "en" || raw === "ja" || raw === "zh-Hans" || raw === "zh-Hant") return raw;
+  if (raw === "zh-CN" || raw === "zh-cn") return "zh-Hans";
+  return null;
+}
+
+function resolveLocaleFromLocation(pathname, search = "") {
+  return stripLocalePrefix(pathname).locale ?? localeFromSearch(search);
+}
+
+function localeFromMatch(match) {
+  return resolveLocaleFromLocation(match.pathname ?? "/", match.search) ?? "zh-Hant";
+}
+
+test("hrefWithLang preserves non–zh-Hant locale on deep chrome paths", () => {
+  assert.equal(hrefWithLang("/tools", "zh-Hant"), "/tools");
+  assert.equal(hrefWithLang("/tools", "en"), "/tools?lang=en");
+  assert.equal(hrefWithLang("/urgent", "ja"), "/urgent?lang=ja");
+  assert.equal(hrefWithLang("/search?q=rd", "zh-Hans"), "/search?q=rd&lang=zh-Hans");
+  assert.equal(hrefWithLang("/t/d5#refs", "en"), "/t/d5?lang=en#refs");
+});
+
+test("localeFromMatch reads ?lang= for document title heads", () => {
+  assert.equal(localeFromMatch({ pathname: "/tools", search: { lang: "en" } }), "en");
+  assert.equal(localeFromMatch({ pathname: "/en", search: {} }), "en");
+  assert.equal(localeFromMatch({ pathname: "/c/macula", search: {} }), "zh-Hant");
+});
+
+test("chrome and chooser sources keep locale-aware links and section titles", () => {
+  const shell = readFileSync(join(ROOT, "src/components/app-shell.tsx"), "utf8");
+  const home = readFileSync(join(ROOT, "src/components/home-page.tsx"), "utf8");
+  const edu = readFileSync(join(ROOT, "src/components/edu-link.tsx"), "utf8");
+  const cat = readFileSync(join(ROOT, "src/routes/c.$catId.tsx"), "utf8");
+  const anatomy = readFileSync(join(ROOT, "src/data/anatomy-related.ts"), "utf8");
+  assert.match(shell, /hrefWithLang|LocaleHrefLink/);
+  assert.match(home, /hrefWithLang/);
+  assert.match(edu, /hrefWithLang/);
+  assert.match(cat, /ANATOMY_CHOOSER_TITLE|isAnatomyTopicsChooser/);
+  assert.match(anatomy, /macula:\s*"黃斑"/);
+  assert.match(anatomy, /macula:\s*"Macula"/);
+  assert.match(cat, /localeFromMatch/);
+});
+
 test("route files exist for locale entries (no hide-switcher fallback)", () => {
   const routes = [
     "src/routes/en.tsx",

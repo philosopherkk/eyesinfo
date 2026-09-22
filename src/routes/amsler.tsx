@@ -17,16 +17,20 @@ import { SaveButton } from "@/components/save-button";
 import { usePrefs, type AmslerResult } from "@/lib/prefs";
 import { toolSaveKey } from "@/lib/saved";
 import { useI18n } from "@/i18n";
-import { UI } from "@/i18n/ui";
 import { pageHead } from "@/lib/page-seo";
+import { localeFromMatch } from "@/lib/locale-path";
+import { uiText } from "@/lib/ui-text";
 
 export const Route = createFileRoute("/amsler")({
-  head: () =>
-    pageHead({
-      title: UI["zh-Hant"].amslerTitle,
-      description: UI["zh-Hant"].amslerSeoDesc,
+  head: ({ match }) => {
+    const locale = localeFromMatch(match);
+    return pageHead({
+      title: uiText(locale, "amslerTitle"),
+      description: uiText(locale, "amslerSeoDesc"),
       path: "/amsler",
-    }),
+      locale,
+    });
+  },
   component: AmslerPage,
 });
 

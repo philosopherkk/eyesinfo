@@ -1,7 +1,9 @@
-import { Link } from "@tanstack/react-router";
-import type { ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
+import { useNavigate } from "@tanstack/react-router";
+import { useI18n } from "@/i18n";
+import { hrefWithLang, pathForLocale } from "@/lib/locale-path";
 
-/** Route Link for education paths only (topics, tools, categories, static pages). */
+/** Route link for education paths only (topics, tools, categories, static pages). */
 export function EduLink({
   href,
   className,
@@ -21,64 +23,38 @@ export function EduLink({
   "aria-current"?: "page" | undefined;
   "aria-label"?: string;
 }) {
-  const props = {
-    className,
-    onClick,
-    role,
-    "aria-selected": ariaSelected,
-    "aria-current": ariaCurrent,
-    "aria-label": ariaLabel,
-  };
+  const { locale } = useI18n();
+  const navigate = useNavigate();
+  const clean = href.replace(/\/$/, "") || "/";
 
-  if (href === "/") return <Link to="/" {...props}>{children}</Link>;
-  if (href === "/amsler") return <Link to="/amsler" {...props}>{children}</Link>;
-  if (href === "/iol") return <Link to="/iol" {...props}>{children}</Link>;
-  if (href === "/urgent") return <Link to="/urgent" {...props}>{children}</Link>;
-  if (href === "/search") return <Link to="/search" {...props}>{children}</Link>;
-  if (href === "/tools" || href === "/tools/") return <Link to="/tools" {...props}>{children}</Link>;
-  if (href === "/saved") return <Link to="/saved" {...props}>{children}</Link>;
-  if (href === "/legal") return <Link to="/legal" {...props}>{children}</Link>;
-  if (href === "/privacy") return <Link to="/privacy" {...props}>{children}</Link>;
-  if (href === "/accessibility") return <Link to="/accessibility" {...props}>{children}</Link>;
-  if (href === "/clinic") return <Link to="/clinic" {...props}>{children}</Link>;
-  if (href === "/install") return <Link to="/install" {...props}>{children}</Link>;
-  if (href === "/qr") return <Link to="/qr" {...props}>{children}</Link>;
-  if (href === "/en" || href === "/en/") return <Link to="/en" {...props}>{children}</Link>;
-  if (href === "/ja" || href === "/ja/") return <Link to="/ja" {...props}>{children}</Link>;
-  if (href === "/zh-Hans" || href === "/zh-Hans/")
-    return (
-      <Link to="/zh-Hans" {...props}>
-        {children}
-      </Link>
-    );
+  let target = clean;
+  if (clean === "/") {
+    target = pathForLocale(locale);
+  } else if (clean === "/en" || clean === "/ja" || clean === "/zh-Hans") {
+    target = clean;
+  } else {
+    target = hrefWithLang(clean, locale);
+  }
 
-  if (href.startsWith("/tools/")) {
-    const id = href.split("/").pop() ?? "map";
-    return (
-      <Link to="/tools/$toolId" params={{ toolId: id }} {...props}>
-        {children}
-      </Link>
-    );
+  function handleClick(e: MouseEvent<HTMLAnchorElement>) {
+    onClick?.();
+    if (e.defaultPrevented) return;
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+    void navigate({ href: target });
   }
-  if (href.startsWith("/t/")) {
-    const id = href.split("/").pop() ?? "";
-    return (
-      <Link to="/t/$topicId" params={{ topicId: id }} {...props}>
-        {children}
-      </Link>
-    );
-  }
-  if (href.startsWith("/c/")) {
-    const id = href.split("/").pop() ?? "lid";
-    return (
-      <Link to="/c/$catId" params={{ catId: id }} {...props}>
-        {children}
-      </Link>
-    );
-  }
+
   return (
-    <Link to="/" {...props}>
+    <a
+      href={target}
+      className={className}
+      onClick={handleClick}
+      role={role}
+      aria-selected={ariaSelected}
+      aria-current={ariaCurrent}
+      aria-label={ariaLabel}
+    >
       {children}
-    </Link>
+    </a>
   );
 }

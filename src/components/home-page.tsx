@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import { ChevronRight, Download } from "lucide-react";
 import { CATEGORIES, getTopic, TOPICS } from "@/data/topics";
 import { TOOLS } from "@/data/tools";
@@ -8,10 +7,12 @@ import { LangSwitch } from "@/components/lang-switch";
 import { TopicRow } from "@/components/topic-row";
 import { EyeAnatomyViewer } from "@/components/eye-anatomy-viewer";
 import { EmergencyShell } from "@/components/emergency-shell";
+import { LocaleHrefLink, SpaHref } from "@/components/locale-href";
 import { localizeTopic, useI18n, TOOL_TEXT } from "@/i18n";
 import type { UiKey } from "@/i18n/ui";
 import { CONTENT_VERSION } from "@/lib/site";
 import { EDITORIAL } from "@/data/editorial";
+import { hrefWithLang } from "@/lib/locale-path";
 
 const HOME_TOOLS = TOOLS.filter((t) => t.home);
 
@@ -81,13 +82,13 @@ export function HomePage() {
             <LangSwitch surface="paper" />
             <FontControl />
             <ThemeControl surface="paper" />
-            <Link
-              to="/install"
+            <SpaHref
+              href={hrefWithLang("/install", locale)}
               className="inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-full bg-brand px-3.5 text-[0.8rem] font-semibold text-paper no-underline sm:w-auto"
             >
               <Download className="size-4" />
               {t("install")}
-            </Link>
+            </SpaHref>
           </div>
         </details>
       </section>
@@ -105,15 +106,16 @@ export function HomePage() {
               href={item.href}
               title={tools[item.id].title}
               blurb={tools[item.id].canto}
+              locale={locale}
             />
           ))}
         </div>
-        <Link
-          to="/tools"
+        <LocaleHrefLink
+          path="/tools"
           className="mt-2 inline-flex h-11 w-full items-center justify-center rounded-xl border border-line bg-card text-[0.85rem] font-semibold text-navy no-underline"
         >
           {t("allTools")}
-        </Link>
+        </LocaleHrefLink>
       </section>
 
       <section className="px-4 pb-2">
@@ -121,19 +123,17 @@ export function HomePage() {
           {t("byAnatomy")}
         </h2>
         <EyeAnatomyViewer />
-        <Link
-          to="/tools/$toolId"
-          params={{ toolId: "map" }}
+        <LocaleHrefLink
+          path="/tools/map"
           className="mt-3 inline-flex h-11 w-full items-center justify-center rounded-xl border border-line bg-card text-[0.85rem] font-semibold text-navy no-underline"
         >
           {t("homeAnatomyCta")}
-        </Link>
+        </LocaleHrefLink>
         <div className="mt-3 grid gap-2">
           {CATEGORIES.map((cat) => (
-            <Link
+            <LocaleHrefLink
               key={cat.id}
-              to="/c/$catId"
-              params={{ catId: cat.id }}
+              path={`/c/${cat.id}`}
               className="flex items-center justify-between rounded-xl bg-navy px-4 py-3.5 text-paper no-underline"
             >
               <span>
@@ -143,7 +143,7 @@ export function HomePage() {
                 </span>
               </span>
               <ChevronRight className="size-5 text-paper/60" />
-            </Link>
+            </LocaleHrefLink>
           ))}
         </div>
       </section>
@@ -155,14 +155,13 @@ export function HomePage() {
           </h2>
           <div className="grid grid-cols-2 gap-2">
             {newSheets.map(({ id, label }) => (
-              <Link
+              <LocaleHrefLink
                 key={id}
-                to="/t/$topicId"
-                params={{ topicId: id }}
+                path={`/t/${id}`}
                 className="flex min-h-11 items-center rounded-xl border border-line bg-card px-3 py-2 text-[0.82rem] font-semibold text-navy no-underline"
               >
                 {label}
-              </Link>
+              </LocaleHrefLink>
             ))}
           </div>
         </section>
@@ -180,17 +179,17 @@ export function HomePage() {
       </section>
 
       <p className="mx-4 mt-6 mb-4 text-[0.75rem] leading-relaxed text-muted">
-        <Link to="/legal" className="text-navy underline">
+        <LocaleHrefLink path="/legal" className="text-navy underline">
           {t("legalLink")}
-        </Link>
+        </LocaleHrefLink>
         <span aria-hidden="true"> · </span>
-        <Link to="/privacy" className="text-navy underline">
+        <LocaleHrefLink path="/privacy" className="text-navy underline">
           {t("privacyLink")}
-        </Link>
+        </LocaleHrefLink>
         <span aria-hidden="true"> · </span>
-        <Link to="/accessibility" className="text-navy underline">
+        <LocaleHrefLink path="/accessibility" className="text-navy underline">
           {t("a11yLink")}
-        </Link>
+        </LocaleHrefLink>
       </p>
     </div>
   );
@@ -200,10 +199,12 @@ function HomeTool({
   href,
   title,
   blurb,
+  locale,
 }: {
   href: string;
   title: string;
   blurb: string;
+  locale: import("@/i18n/locale").Locale;
 }) {
   const cls =
     "flex min-h-14 min-w-0 flex-col justify-center overflow-hidden rounded-xl border border-line bg-card px-3 py-2 no-underline";
@@ -213,31 +214,9 @@ function HomeTool({
       <span className="block w-full truncate text-[0.72rem] text-muted">{blurb}</span>
     </>
   );
-  if (href === "/amsler") {
-    return (
-      <Link to="/amsler" className={cls}>
-        {inner}
-      </Link>
-    );
-  }
-  if (href === "/iol") {
-    return (
-      <Link to="/iol" className={cls}>
-        {inner}
-      </Link>
-    );
-  }
-  if (href === "/urgent") {
-    return (
-      <Link to="/urgent" className={cls}>
-        {inner}
-      </Link>
-    );
-  }
-  const id = href.split("/").pop() ?? "map";
   return (
-    <Link to="/tools/$toolId" params={{ toolId: id }} className={cls}>
+    <SpaHref href={hrefWithLang(href, locale)} className={cls}>
       {inner}
-    </Link>
+    </SpaHref>
   );
 }

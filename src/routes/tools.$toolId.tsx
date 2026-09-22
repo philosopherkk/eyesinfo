@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, notFound } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import { TOOLS, type ToolId } from "@/data/tools";
 import { SimDisclaimer } from "@/components/sim-disclaimer";
@@ -10,24 +10,29 @@ import { EyeAnatomyViewer } from "@/components/eye-anatomy-viewer";
 import { FloaterDemo, HaloDemo, HazeDemo, TunnelDemo } from "@/components/tool-demos";
 import { DropTrainer, OutdoorCard, WarmTimer } from "@/components/care-tools";
 import { AskDoctor, RxDecoder, VisitWalk } from "@/components/ask-visit-rx";
+import { SpaHref } from "@/components/locale-href";
 import { toolSaveKey } from "@/lib/saved";
 import { useI18n, TOOL_TEXT } from "@/i18n";
 import { pageHead } from "@/lib/page-seo";
+import { hrefWithLang, localeFromMatch } from "@/lib/locale-path";
+import { uiText } from "@/lib/ui-text";
 
 export const Route = createFileRoute("/tools/$toolId")({
-  head: ({ params }) => {
+  head: ({ params, match }) => {
+    const locale = localeFromMatch(match);
     const tool = TOOLS.find(
       (item) => item.id === params.toolId && item.href.startsWith("/tools/"),
     );
-    const title = tool?.title ?? "教育工具";
-    const description =
-      tool?.blurb
-        ? `${tool.blurb}。公眾教育工具，不能代替檢查或面診。`
-        : "眼科公眾教育工具。不能代替檢查或面診。";
+    const pack = tool ? TOOL_TEXT[locale]?.[tool.id] : undefined;
+    const title = pack?.title ?? tool?.title ?? uiText(locale, "toolsTitle");
+    const description = pack?.blurb
+      ? `${pack.blurb} · ${pack.canto}`
+      : uiText(locale, "toolsLead");
     return pageHead({
       title,
       description,
       path: `/tools/${params.toolId}`,
+      locale,
     });
   },
   component: ToolPage,
@@ -46,13 +51,13 @@ function ToolPage() {
   return (
     <div className="pb-8">
       <div className="flex items-start gap-1 px-2 pt-3">
-        <Link
-          to="/tools"
+        <SpaHref
+          href={hrefWithLang("/tools", locale)}
           className="grid size-11 shrink-0 place-items-center rounded-md text-navy no-underline"
           aria-label={t("backTools")}
         >
           <ArrowLeft className="size-5" aria-hidden />
-        </Link>
+        </SpaHref>
         <div className="min-w-0 flex-1 pt-1">
           <h1 className="text-[1.2rem] font-semibold text-navy">{text.title}</h1>
           <p className="text-[0.75rem] text-steel">{text.canto}</p>

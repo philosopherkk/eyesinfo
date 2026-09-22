@@ -15,5 +15,13 @@ export function LocaleLayout({ locale }: { locale: Locale }) {
     setLocale(locale);
   }, [locale, setLocale]);
 
+  // Persist rehydration can overwrite URL-driven locale with stale localStorage.
+  useEffect(() => {
+    const persist = usePrefs.persist;
+    const apply = () => setLocale(locale);
+    if (persist.hasHydrated()) apply();
+    return persist.onFinishHydration(apply);
+  }, [locale, setLocale]);
+
   return <Outlet />;
 }
