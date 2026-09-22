@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
+import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import { getTopic, topicEditorial, TOPICS } from "@/data/topics";
 import { TOPIC_TOOLS } from "@/data/tools";
@@ -10,11 +10,14 @@ import { HkosVideoCard } from "@/components/hkos-video-card";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { EmergencyShell } from "@/components/emergency-shell";
 import { SaveButton } from "@/components/save-button";
+import { SpaHref } from "@/components/locale-href";
 import { topicSaveKey } from "@/lib/saved";
 import { collectTocEntries } from "@/lib/topic-anchors";
-import { useI18n, useLocalizedTopic, hasTopicLocalePack } from "@/i18n";
+import { useI18n, useLocalizedTopic, hasTopicLocalePack, localizeTopic } from "@/i18n";
 import type { UiKey } from "@/i18n/ui";
 import { pageHead } from "@/lib/page-seo";
+import { hrefWithLang, localeFromMatch } from "@/lib/locale-path";
+import { uiText } from "@/lib/ui-text";
 
 /** Retired stub IA: former hubs → merged / filled topics. */
 const TOPIC_ALIASES: Record<string, string> = {
@@ -42,18 +45,21 @@ export const Route = createFileRoute("/t/$topicId")({
       });
     }
   },
-  head: ({ params }) => {
+  head: ({ params, match }) => {
+    const locale = localeFromMatch(match);
     const resolved = TOPIC_ALIASES[params.topicId] ?? params.topicId;
-    const topic = getTopic(resolved);
-    const title = topic?.title ?? "專題";
+    const raw = getTopic(resolved);
+    const topic = raw ? localizeTopic(raw, locale) : null;
+    const title = topic?.title ?? uiText(locale, "relatedTopics");
     const description =
       topic?.meta ||
       topic?.tag ||
-      `眼科教育專題：${title}。公眾教育，不能代替面診。`;
+      `${uiText(locale, "homeKicker")}：${title}`;
     return pageHead({
       title,
       description,
       path: `/t/${resolved}`,
+      locale,
     });
   },
   component: TopicPage,
@@ -83,14 +89,13 @@ function TopicPage() {
     <article>
       {/* Desktop: keep icon back; mobile uses collapsed breadcrumb 「返回分類」. */}
       <div className="hidden items-center px-2 pt-3 sm:flex">
-        <Link
-          to="/c/$catId"
-          params={{ catId: raw.category }}
+        <SpaHref
+          href={hrefWithLang(`/c/${raw.category}`, locale)}
           className="grid size-11 place-items-center rounded-md text-navy no-underline"
           aria-label={t("backCat")}
         >
           <ArrowLeft className="size-5" />
-        </Link>
+        </SpaHref>
       </div>
       <header className="px-4 pb-3 pt-3 sm:pt-1">
         <p className="text-[0.75rem] text-steel">

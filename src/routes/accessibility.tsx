@@ -1,15 +1,19 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useI18n } from "@/i18n";
 import { pageHead } from "@/lib/page-seo";
+import { localeFromMatch } from "@/lib/locale-path";
+import { uiText } from "@/lib/ui-text";
 
 export const Route = createFileRoute("/accessibility")({
-  head: () =>
-    pageHead({
-      title: "無障礙聲明",
-      description:
-        "護眼學堂無障礙目標、評估方法與已知限制。以 WCAG 2.1 Level AA 為持續改善目標。",
+  head: ({ match }) => {
+    const locale = localeFromMatch(match);
+    return pageHead({
+      title: uiText(locale, "a11yTitle"),
+      description: uiText(locale, "a11yIntro"),
       path: "/accessibility",
-    }),
+      locale,
+    });
+  },
   component: AccessibilityPage,
 });
 

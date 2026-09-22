@@ -7,14 +7,19 @@ import { parseSaveKey } from "@/lib/saved";
 import { TopicRow } from "@/components/topic-row";
 import { useI18n, TOOL_TEXT } from "@/i18n";
 import { pageHead } from "@/lib/page-seo";
+import { localeFromMatch } from "@/lib/locale-path";
+import { uiText } from "@/lib/ui-text";
 
 export const Route = createFileRoute("/saved")({
-  head: () =>
-    pageHead({
-      title: "收藏",
-      description: "本機收藏的眼科教育專題與工具。資料只存在此裝置，不上載。",
+  head: ({ match }) => {
+    const locale = localeFromMatch(match);
+    return pageHead({
+      title: uiText(locale, "saved"),
+      description: uiText(locale, "savedLead"),
       path: "/saved",
-    }),
+      locale,
+    });
+  },
   component: SavedPage,
 });
 

@@ -1,15 +1,19 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useI18n } from "@/i18n";
 import { pageHead } from "@/lib/page-seo";
+import { localeFromMatch } from "@/lib/locale-path";
+import { uiText } from "@/lib/ui-text";
 
 export const Route = createFileRoute("/clinic")({
-  head: () =>
-    pageHead({
-      title: "本站不提供執業資料",
-      description:
-        "這是公眾教育網站，不提供診所地址、電話、收費或預約。急症請到急症室；無法自行前往：致電 999。",
+  head: ({ match }) => {
+    const locale = localeFromMatch(match);
+    return pageHead({
+      title: uiText(locale, "clinicTitle"),
+      description: uiText(locale, "clinicP1"),
       path: "/clinic",
-    }),
+      locale,
+    });
+  },
   component: NoPracticePage,
 });
 

@@ -2,14 +2,19 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Smartphone } from "lucide-react";
 import { useI18n } from "@/i18n";
 import { pageHead } from "@/lib/page-seo";
+import { localeFromMatch } from "@/lib/locale-path";
+import { uiText } from "@/lib/ui-text";
 
 export const Route = createFileRoute("/install")({
-  head: () =>
-    pageHead({
-      title: "加到主畫面",
-      description: "把護眼學堂加到 iPhone 或 Android 主畫面，方便閱讀眼科教育內容。",
+  head: ({ match }) => {
+    const locale = localeFromMatch(match);
+    return pageHead({
+      title: uiText(locale, "installTitle"),
+      description: uiText(locale, "installLead"),
       path: "/install",
-    }),
+      locale,
+    });
+  },
   component: InstallPage,
 });
 

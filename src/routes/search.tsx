@@ -9,19 +9,25 @@ import { searchSite } from "@/lib/site-search";
 import { useI18n, TOOL_TEXT, localizeTopic } from "@/i18n";
 import { pageHead } from "@/lib/page-seo";
 import { z } from "zod";
+import { localeFromMatch } from "@/lib/locale-path";
+import { uiText } from "@/lib/ui-text";
 
 const searchSchema = z.object({
   q: z.string().optional().catch(undefined),
+  lang: z.enum(["en", "ja", "zh-Hans", "zh-Hant"]).optional().catch(undefined),
 });
 
 export const Route = createFileRoute("/search")({
   validateSearch: searchSchema,
-  head: () =>
-    pageHead({
-      title: "搜尋",
-      description: "搜尋眼科教育專題、徵狀與自我監察工具。公眾教育，不作預約或轉介。",
+  head: ({ match }) => {
+    const locale = localeFromMatch(match);
+    return pageHead({
+      title: uiText(locale, "search"),
+      description: uiText(locale, "searchPh"),
       path: "/search",
-    }),
+      locale,
+    });
+  },
   component: SearchPage,
 });
 

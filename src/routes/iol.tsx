@@ -9,6 +9,8 @@ import { useI18n } from "@/i18n";
 import type { UiKey } from "@/i18n/ui";
 import { cn } from "@/lib/utils";
 import { pageHead } from "@/lib/page-seo";
+import { localeFromMatch } from "@/lib/locale-path";
+import { uiText } from "@/lib/ui-text";
 import {
   DISTANCES,
   OPTICS,
@@ -23,13 +25,15 @@ import {
 } from "@/lib/iol-optics";
 
 export const Route = createFileRoute("/iol")({
-  head: () =>
-    pageHead({
-      title: "人工晶體視力示意",
-      description:
-        "單焦目標度數與多焦光暈的教育示意。不是手術建議，亦不能代替面診。",
+  head: ({ match }) => {
+    const locale = localeFromMatch(match);
+    return pageHead({
+      title: uiText(locale, "iolTitle"),
+      description: uiText(locale, "toolsLead"),
       path: "/iol",
-    }),
+      locale,
+    });
+  },
   component: IolPage,
 });
 

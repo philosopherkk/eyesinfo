@@ -4,15 +4,19 @@ import { TOPICS } from "@/data/topics";
 import { EmergencyShell } from "@/components/emergency-shell";
 import { localizeTopic, localizedUrgent, useI18n } from "@/i18n";
 import { pageHead } from "@/lib/page-seo";
+import { localeFromMatch } from "@/lib/locale-path";
+import { uiText } from "@/lib/ui-text";
 
 export const Route = createFileRoute("/urgent")({
-  head: () =>
-    pageHead({
-      title: "急症與盡快求醫",
-      description:
-        "立即急症室與盡快眼科評估的教育指引。無法自行前往急症室：致電 999。穿通傷勿當化學傷沖洗。本站不作轉介。",
+  head: ({ match }) => {
+    const locale = localeFromMatch(match);
+    return pageHead({
+      title: uiText(locale, "urgentTitle"),
+      description: uiText(locale, "urgentLead"),
       path: "/urgent",
-    }),
+      locale,
+    });
+  },
   component: UrgentPage,
 });
 

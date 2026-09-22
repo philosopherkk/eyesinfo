@@ -1,17 +1,22 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { ChevronRight } from "lucide-react";
 import { TOOLS, type ToolDef } from "@/data/tools";
+import { SpaHref } from "@/components/locale-href";
 import { useI18n, TOOL_TEXT } from "@/i18n";
 import { pageHead } from "@/lib/page-seo";
+import { hrefWithLang, localeFromMatch } from "@/lib/locale-path";
+import { uiText } from "@/lib/ui-text";
 
 export const Route = createFileRoute("/tools/")({
-  head: () =>
-    pageHead({
-      title: "教育工具",
-      description:
-        "阿姆斯勒方格、眼圖、問醫生清單等自我監察與教育示意。不能代替眼科檢查。",
+  head: ({ match }) => {
+    const locale = localeFromMatch(match);
+    return pageHead({
+      title: uiText(locale, "toolsTitle"),
+      description: uiText(locale, "toolsLead"),
       path: "/tools",
-    }),
+      locale,
+    });
+  },
   component: ToolsHub,
 });
 
@@ -40,6 +45,7 @@ function ToolRow({
   title: string;
   blurb: string;
 }) {
+  const { locale } = useI18n();
   const inner = (
     <>
       <span className="min-w-0 flex-1">
@@ -51,23 +57,9 @@ function ToolRow({
   );
   const cls =
     "flex items-center gap-3 border-b border-line px-4 py-3.5 no-underline last:border-b-0";
-  if (tool.id === "amsler") {
-    return (
-      <Link to="/amsler" className={cls}>
-        {inner}
-      </Link>
-    );
-  }
-  if (tool.id === "iol") {
-    return (
-      <Link to="/iol" className={cls}>
-        {inner}
-      </Link>
-    );
-  }
   return (
-    <Link to="/tools/$toolId" params={{ toolId: tool.id }} className={cls}>
+    <SpaHref href={hrefWithLang(tool.href, locale)} className={cls}>
       {inner}
-    </Link>
+    </SpaHref>
   );
 }

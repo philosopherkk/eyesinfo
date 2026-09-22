@@ -4,15 +4,19 @@ import { useI18n } from "@/i18n";
 import { usePrefs } from "@/lib/prefs";
 import { applyTheme, clearThemePref } from "@/lib/theme";
 import { pageHead } from "@/lib/page-seo";
+import { localeFromMatch } from "@/lib/locale-path";
+import { uiText } from "@/lib/ui-text";
 
 export const Route = createFileRoute("/privacy")({
-  head: () =>
-    pageHead({
-      title: "私隱與本機資料",
-      description:
-        "本教育網站如何處理本機資料：不經此站收集病歷或聯絡電話，偏好設定只存於裝置。",
+  head: ({ match }) => {
+    const locale = localeFromMatch(match);
+    return pageHead({
+      title: uiText(locale, "privacyTitle"),
+      description: uiText(locale, "privacyCap486"),
       path: "/privacy",
-    }),
+      locale,
+    });
+  },
   component: PrivacyPage,
 });
 

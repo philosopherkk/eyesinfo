@@ -70,6 +70,34 @@ export function resolveLocaleFromLocation(
   return stripLocalePrefix(pathname).locale ?? localeFromSearch(search);
 }
 
+/**
+ * Append `?lang=` for non–zh-Hant deep links (same contract as `/en/$` →
+ * `/path?lang=en` redirects). zh-Hant stays bare so canonical TC URLs stay clean.
+ */
+export function hrefWithLang(path: string, locale: Locale): string {
+  if (locale === "zh-Hant") return path;
+  const hashIdx = path.indexOf("#");
+  const hash = hashIdx >= 0 ? path.slice(hashIdx) : "";
+  const withoutHash = hashIdx >= 0 ? path.slice(0, hashIdx) : path;
+  const qIdx = withoutHash.indexOf("?");
+  const pathname = qIdx >= 0 ? withoutHash.slice(0, qIdx) : withoutHash;
+  const existing = qIdx >= 0 ? withoutHash.slice(qIdx + 1) : "";
+  const params = new URLSearchParams(existing);
+  params.set("lang", locale);
+  return `${pathname}?${params.toString()}${hash}`;
+}
+
+/** Locale for route `head()` from the match pathname + search. */
+export function localeFromMatch(match: {
+  pathname?: string;
+  search?: unknown;
+}): Locale {
+  return (
+    resolveLocaleFromLocation(match.pathname ?? "/", match.search as Record<string, unknown>) ??
+    "zh-Hant"
+  );
+}
+
 /** Strip `/en`, `/ja`, `/zh-Hans`, `/zh-CN` prefix from a pathname. */
 export function stripLocalePrefix(pathname: string): {
   locale: Locale | null;
