@@ -18,7 +18,7 @@
     "typecheck": "tsc --noEmit",
     "check:compliance": "node scripts/check-mchk-compliance.mjs",
     "check:auth": "node scripts/check-auth-invariant.mjs",
-    "test": "node --test 'scripts/**/*.test.mjs' && node --experimental-strip-types --test src/lib/app-data/app-data.test.ts src/lib/auth/gate-identity.test.ts src/lib/theme.test.ts",
+    "test": "node --test 'scripts/**/*.test.mjs' && node --experimental-strip-types --test src/lib/app-data/app-data.test.ts src/lib/auth/gate-identity.test.ts src/lib/theme.test.ts src/lib/layout-mode.test.ts",
     "lint": "eslint .",
     "format": "prettier --write ."
   },

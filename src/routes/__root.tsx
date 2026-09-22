@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { PUBLIC_ORIGIN, COPYRIGHT_LINE, COPYRIGHT_YEAR, COPYRIGHT_HOLDER } from "@/lib/site";
 import { SEO_SITE_NAME } from "@/lib/page-seo";
 import { THEME_BOOT_SCRIPT, THEME_COLOR_LIGHT } from "@/lib/theme";
+import { LAYOUT_BOOT_SCRIPT } from "@/lib/layout-mode";
 import { htmlLangForLocale, resolveLocaleFromLocation } from "@/lib/locale-path";
 
 const APP_NAME = SEO_SITE_NAME;
@@ -80,6 +81,8 @@ function Root() {
       <head>
         {/* FOUC-safe theme boot: localStorage → prefers-color-scheme → light */}
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
+        {/* FOUC-safe layout boot: localStorage → data-layout (auto|mobile|desktop) */}
+        <script dangerouslySetInnerHTML={{ __html: LAYOUT_BOOT_SCRIPT }} />
         <HeadContent />
       </head>
       <body>

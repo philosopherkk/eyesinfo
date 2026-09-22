@@ -86,7 +86,7 @@ export function TopicBody({
           <h2
             key={i}
             id={id}
-            className="scroll-mt-20 pt-1 text-[0.95rem] font-semibold tracking-tight text-navy"
+            className="scroll-mt-20 pt-1 text-[0.95rem] font-semibold tracking-tight text-navy layout-lg:text-[1.05rem]"
           >
             {block.text}
           </h2>
@@ -94,7 +94,7 @@ export function TopicBody({
       }
       if (block.type === "p") {
         return (
-          <p key={i} className="text-[0.95rem] leading-relaxed text-ink">
+          <p key={i} className="text-[0.95rem] leading-relaxed text-ink layout-lg:text-[1rem]">
             {rich(block.text)}
           </p>
         );
@@ -175,5 +175,5 @@ export function TopicBody({
     });
   }, [blocks, mentions, selfHref]);
 
-  return <div className="space-y-4">{nodes}</div>;
+  return <div className="max-w-prose space-y-4">{nodes}</div>;
 }

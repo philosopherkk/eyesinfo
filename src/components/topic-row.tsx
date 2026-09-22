@@ -3,8 +3,15 @@ import { ChevronRight } from "lucide-react";
 import type { Topic } from "@/data/topics";
 import { topicCardTitle } from "@/data/topics";
 import { useLocalizedTopic } from "@/i18n";
+import { cn } from "@/lib/utils";
 
-export function TopicRow({ topic }: { topic: Topic }) {
+export function TopicRow({
+  topic,
+  className,
+}: {
+  topic: Topic;
+  className?: string;
+}) {
   const loc = useLocalizedTopic(topic);
   const cardTitle = topicCardTitle(loc.title);
   const sub = loc.meta || loc.tag;
@@ -12,7 +19,11 @@ export function TopicRow({ topic }: { topic: Topic }) {
     <Link
       to="/t/$topicId"
       params={{ topicId: topic.id }}
-      className="flex items-center gap-3 border-b border-line px-4 py-3.5 no-underline last:border-b-0"
+      className={cn(
+        "flex items-center gap-3 border-b border-line px-4 py-3.5 no-underline last:border-b-0",
+        "layout-lg:rounded-xl layout-lg:border layout-lg:border-line layout-lg:bg-card layout-lg:last:border-b",
+        className,
+      )}
     >
       <span className="grid size-9 shrink-0 place-items-center rounded-md bg-navy text-[0.72rem] font-semibold text-paper">
         {loc.num}

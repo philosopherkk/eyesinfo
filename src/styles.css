@@ -1,5 +1,30 @@
 @import "tailwindcss";
 
+/*
+ * Desktop layout variant (viewport-first, optional force via data-layout).
+ * - auto / unset: follow min-width like Tailwind lg / xl
+ * - data-layout="mobile": keep phone shell/grids even on wide viewports
+ * - data-layout="desktop": apply wide shell/grids even below lg (sensible max-width only)
+ */
+@custom-variant layout-lg {
+  @media (width >= 64rem) {
+    :root:not([data-layout="mobile"]) & {
+      @slot;
+    }
+  }
+  :root[data-layout="desktop"] & {
+    @slot;
+  }
+}
+
+@custom-variant layout-xl {
+  @media (width >= 80rem) {
+    :root:not([data-layout="mobile"]) & {
+      @slot;
+    }
+  }
+}
+
 /* Daylight tokens = live education paper look (authoritative). */
 @theme {
   --color-ink: #1a2433;
@@ -29,6 +54,13 @@
   --radius-md: 14px;
   --radius-lg: 22px;
   --radius-xl: 28px;
+  /*
+   * App column tokens (mirrored as max-w-lg / layout-lg:max-w-5xl on the shell).
+   * Phone stays ~512px; layout-lg ~1024px for laptop gutters.
+   * Topic Exact body keeps max-w-prose reading measure.
+   */
+  --max-width-shell: 32rem; /* ≈ max-w-lg */
+  --max-width-shell-lg: 64rem; /* ≈ max-w-5xl */
 }
 
 /* Deep navy education dark — not pure #000. Soft danger (muted, not neon). */

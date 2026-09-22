@@ -14,7 +14,9 @@ import { EDITORIAL } from "@/data/editorial";
 import { LegalBanner } from "@/components/legal-banner";
 import { LegalShortLine } from "@/components/legal-short-line";
 import { ThemeControl } from "@/components/theme-control";
+import { LayoutControl } from "@/components/layout-control";
 import { applyTheme, readThemePref } from "@/lib/theme";
+import { applyLayoutMode, readLayoutMode } from "@/lib/layout-mode";
 import { hrefWithLang, isLocaleHomePath, pathForLocale } from "@/lib/locale-path";
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -50,6 +52,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     applyTheme(readThemePref());
+    applyLayoutMode(readLayoutMode());
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
     const onScheme = () => {
       if (readThemePref() === "system") applyTheme("system");
@@ -71,7 +74,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div
-      className="mx-auto flex min-h-dvh max-w-lg flex-col bg-paper text-ink"
+      className="mx-auto flex min-h-dvh max-w-lg flex-col bg-paper text-ink layout-lg:max-w-5xl"
       data-site="eyesinfo.org"
       data-copyright={COPYRIGHT_LINE}
     >
@@ -84,39 +87,42 @@ export function AppShell({ children }: { children: ReactNode }) {
         data-locale={locale}
         style={{ paddingTop: "max(0.35rem, env(safe-area-inset-top))" }}
       >
-        <div className="flex items-center justify-between gap-2 px-3 pb-1.5 pt-0.5 sm:px-4 sm:pb-2 sm:pt-1">
+        {/* Row 1: brand + urgent — never share a row with lang/layout/theme. */}
+        <div className="flex items-center justify-between gap-2 px-3 pb-1 pt-0.5 sm:px-4 sm:pb-1.5 sm:pt-1 layout-lg:px-6">
           <SpaHref
             href={homeHref}
-            className="flex min-h-10 items-center gap-2 no-underline sm:min-h-11 sm:gap-2.5"
+            className="flex min-h-10 min-w-0 items-center gap-2 no-underline sm:min-h-11 sm:gap-2.5"
           >
             <img
               src="/logo.png"
               alt=""
               width={28}
               height={28}
-              className="size-7 rounded-md sm:size-8"
+              className="size-7 shrink-0 rounded-md sm:size-8"
             />
-            <span className="leading-tight">
-              <span className="block text-[0.88rem] font-semibold tracking-tight sm:text-[0.95rem]">
+            <span className="flex min-w-0 items-baseline gap-2 leading-tight">
+              <span className="whitespace-nowrap text-[0.88rem] font-semibold tracking-tight sm:text-[0.95rem] layout-lg:text-[1rem]">
                 {t("brand")}
               </span>
-              <span className="hidden text-[0.68rem] text-paper/80 sm:block">
+              <span className="hidden truncate text-[0.68rem] text-paper/80 sm:inline layout-lg:text-[0.72rem]">
                 {t("brandSub")}
               </span>
             </span>
           </SpaHref>
-          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
-            <ThemeControl compact surface="navy" />
-            {/* On home, language lives in 「顯示選項」; keep it here on other pages. */}
-            {!isHome ? <LangSwitch compact /> : null}
-            <SpaHref
-              href={hrefWithLang("/urgent", locale)}
-              className="urgent-on-danger inline-flex min-h-10 items-center gap-1 rounded-full bg-danger px-2.5 text-[0.72rem] font-semibold text-paper no-underline sm:min-h-11 sm:px-3.5 sm:text-[0.75rem]"
-            >
-              <Phone className="size-3.5" strokeWidth={2.2} aria-hidden />
-              {t("urgent")}
-            </SpaHref>
-          </div>
+          <SpaHref
+            href={hrefWithLang("/urgent", locale)}
+            className="urgent-on-danger inline-flex min-h-10 shrink-0 items-center gap-1 rounded-full bg-danger px-2.5 text-[0.72rem] font-semibold text-paper no-underline sm:min-h-11 sm:px-3.5 sm:text-[0.75rem]"
+          >
+            <Phone className="size-3.5" strokeWidth={2.2} aria-hidden />
+            {t("urgent")}
+          </SpaHref>
+        </div>
+        {/* Row 2: theme + layout + language — chrome cluster only. */}
+        <div className="flex flex-wrap items-center justify-end gap-1.5 border-t border-[#f3f0e9]/15 px-3 pb-1.5 pt-1 sm:gap-2 sm:px-4 sm:pb-2 layout-lg:px-6">
+          <ThemeControl compact surface="navy" />
+          <LayoutControl compact surface="navy" />
+          {/* On home, language lives in 「顯示選項」; keep it here on other pages. */}
+          {!isHome ? <LangSwitch compact /> : null}
         </div>
       </header>
 
@@ -131,7 +137,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         <div className="mt-8 no-print">
           <LegalBanner />
         </div>
-        <footer className="px-4 pb-5 pt-4 text-center text-[0.7rem] leading-relaxed text-muted no-print">
+        <footer className="px-4 pb-5 pt-4 text-center text-[0.7rem] leading-relaxed text-muted no-print layout-lg:px-6">
           <p>
             {t("reviewed")}：{EDITORIAL.reviewedIso}
           </p>
@@ -161,7 +167,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       </main>
 
       <nav
-        className="fixed inset-x-0 bottom-0 z-30 mx-auto max-w-lg border-t border-line bg-card no-print"
+        className="fixed inset-x-0 bottom-0 z-30 mx-auto max-w-lg border-t border-line bg-card no-print layout-lg:max-w-5xl"
         aria-label={t("navMain")}
         style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       >
