@@ -87,7 +87,8 @@ export function AppShell({ children }: { children: ReactNode }) {
         data-locale={locale}
         style={{ paddingTop: "max(0.35rem, env(safe-area-inset-top))" }}
       >
-        <div className="flex items-center justify-between gap-2 px-3 pb-1.5 pt-0.5 sm:px-4 sm:pb-2 sm:pt-1 layout-lg:px-6">
+        {/* Row 1: brand + urgent — never share a row with lang/layout/theme. */}
+        <div className="flex items-center justify-between gap-2 px-3 pb-1 pt-0.5 sm:px-4 sm:pb-1.5 sm:pt-1 layout-lg:px-6">
           <SpaHref
             href={homeHref}
             className="flex min-h-10 min-w-0 items-center gap-2 no-underline sm:min-h-11 sm:gap-2.5"
@@ -108,19 +109,20 @@ export function AppShell({ children }: { children: ReactNode }) {
               </span>
             </span>
           </SpaHref>
-          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
-            <ThemeControl compact surface="navy" />
-            <LayoutControl compact surface="navy" />
-            {/* On home, language lives in 「顯示選項」; keep it here on other pages. */}
-            {!isHome ? <LangSwitch compact /> : null}
-            <SpaHref
-              href={hrefWithLang("/urgent", locale)}
-              className="urgent-on-danger inline-flex min-h-10 items-center gap-1 rounded-full bg-danger px-2.5 text-[0.72rem] font-semibold text-paper no-underline sm:min-h-11 sm:px-3.5 sm:text-[0.75rem]"
-            >
-              <Phone className="size-3.5" strokeWidth={2.2} aria-hidden />
-              {t("urgent")}
-            </SpaHref>
-          </div>
+          <SpaHref
+            href={hrefWithLang("/urgent", locale)}
+            className="urgent-on-danger inline-flex min-h-10 shrink-0 items-center gap-1 rounded-full bg-danger px-2.5 text-[0.72rem] font-semibold text-paper no-underline sm:min-h-11 sm:px-3.5 sm:text-[0.75rem]"
+          >
+            <Phone className="size-3.5" strokeWidth={2.2} aria-hidden />
+            {t("urgent")}
+          </SpaHref>
+        </div>
+        {/* Row 2: theme + layout + language — chrome cluster only. */}
+        <div className="flex flex-wrap items-center justify-end gap-1.5 border-t border-[#f3f0e9]/15 px-3 pb-1.5 pt-1 sm:gap-2 sm:px-4 sm:pb-2 layout-lg:px-6">
+          <ThemeControl compact surface="navy" />
+          <LayoutControl compact surface="navy" />
+          {/* On home, language lives in 「顯示選項」; keep it here on other pages. */}
+          {!isHome ? <LangSwitch compact /> : null}
         </div>
       </header>
 
