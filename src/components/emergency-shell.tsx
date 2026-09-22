@@ -1,6 +1,7 @@
-import { Link } from "@tanstack/react-router";
 import { ShieldAlert } from "lucide-react";
+import { SpaHref } from "@/components/locale-href";
 import { useI18n } from "@/i18n";
+import { hrefWithLang } from "@/lib/locale-path";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -14,7 +15,7 @@ type Props = {
  * and the urgent page so offline-saved views keep the same Exact 1.46 wording.
  */
 export function EmergencyShell({ variant = "banner", className }: Props) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const body = (
     <span>
       <span className="block text-[0.9rem] font-semibold">{t("homeUrgentTitle")}</span>
@@ -48,15 +49,15 @@ export function EmergencyShell({ variant = "banner", className }: Props) {
   }
 
   return (
-    <Link
-      to="/urgent"
-        className={cn(
-          "urgent-on-danger flex items-start gap-3 rounded-xl bg-danger px-3.5 py-3 text-paper no-underline",
-          className,
-        )}
+    <SpaHref
+      href={hrefWithLang("/urgent", locale)}
+      className={cn(
+        "urgent-on-danger flex items-start gap-3 rounded-xl bg-danger px-3.5 py-3 text-paper no-underline",
+        className,
+      )}
     >
       <ShieldAlert className="mt-0.5 size-5 shrink-0" aria-hidden />
       {body}
-    </Link>
+    </SpaHref>
   );
 }

@@ -4,12 +4,11 @@ import { useI18n } from "@/i18n";
 import { cn } from "@/lib/utils";
 import {
   applyLayoutMode,
+  LAYOUT_MODES,
   readLayoutMode,
   writeLayoutMode,
   type LayoutMode,
 } from "@/lib/layout-mode";
-
-const CYCLE: LayoutMode[] = ["auto", "mobile", "desktop"];
 
 function labelKey(
   mode: LayoutMode,
@@ -37,6 +36,7 @@ function ModeIcon({ mode }: { mode: LayoutMode }) {
 
 /**
  * Layout override only — viewport CSS is default; persists eyesinfo.layoutMode.
+ * Adjacent 「手機版」｜「電腦版」｜「自動」 controls (not a 3-state cycle).
  * Not clinical; lives in chrome / display options.
  */
 export function LayoutControl({
@@ -63,49 +63,41 @@ export function LayoutControl({
 
   const onNavy = surface === "navy";
 
-  if (compact) {
-    const next = CYCLE[(CYCLE.indexOf(mode) + 1) % CYCLE.length]!;
-    return (
-      <button
-        type="button"
-        aria-label={t(ariaKey(mode))}
-        title={t(ariaKey(mode))}
-        className={cn(
-          "inline-flex min-h-10 items-center gap-1 rounded-full px-2.5 text-[0.68rem] font-semibold sm:min-h-11 sm:px-3 sm:text-[0.72rem]",
-          onNavy
-            ? "border border-[#f3f0e9]/30 bg-navy-2/55 text-[#f3f0e9]/95"
-            : "border border-line bg-card text-muted",
-        )}
-        onClick={() => choose(next)}
-      >
-        <ModeIcon mode={mode} />
-        <span className="hidden sm:inline">{t(labelKey(mode))}</span>
-      </button>
-    );
-  }
-
   return (
-    <div className="flex flex-wrap items-center gap-2" role="group" aria-label={t("layoutToggle")}>
-      <span className="text-[0.75rem] text-muted">{t("layoutToggle")}</span>
-      {CYCLE.map((option) => (
+    <div
+      className={cn(
+        "flex flex-wrap items-center",
+        compact ? "gap-1" : "gap-2",
+      )}
+      role="group"
+      aria-label={t("layoutToggle")}
+    >
+      {compact ? null : (
+        <span className="text-[0.75rem] text-muted">{t("layoutToggle")}</span>
+      )}
+      {LAYOUT_MODES.map((option) => (
         <button
           key={option}
           type="button"
           aria-label={t(ariaKey(option))}
           aria-pressed={mode === option}
+          title={t(ariaKey(option))}
           className={cn(
-            "inline-flex min-h-11 items-center gap-1.5 rounded-md border px-2.5 text-[0.75rem] font-semibold",
+            "inline-flex items-center gap-1 font-semibold",
+            compact
+              ? "min-h-10 rounded-full px-2 text-[0.68rem] sm:min-h-11 sm:px-2.5 sm:text-[0.72rem]"
+              : "min-h-11 gap-1.5 rounded-md border px-2.5 text-[0.75rem]",
             mode === option
               ? onNavy
-                ? "border-[#f3f0e9]/40 bg-[#f3f0e9] text-brand"
-                : "border-brand bg-brand text-paper"
+                ? "border border-[#f3f0e9]/40 bg-[#f3f0e9] text-brand"
+                : "border border-brand bg-brand text-paper"
               : onNavy
-                ? "border-[#f3f0e9]/25 bg-navy-2/40 text-[#f3f0e9]/90"
-                : "border-line bg-card text-muted",
+                ? "border border-[#f3f0e9]/25 bg-navy-2/40 text-[#f3f0e9]/90"
+                : "border border-line bg-card text-muted",
           )}
           onClick={() => choose(option)}
         >
-          <ModeIcon mode={option} />
+          {compact ? null : <ModeIcon mode={option} />}
           {t(labelKey(option))}
         </button>
       ))}

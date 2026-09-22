@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { LocaleHrefLink } from "@/components/locale-href";
 import { useI18n } from "@/i18n";
 
 /**
@@ -15,9 +15,9 @@ export function LegalBanner() {
       <p>{legal.disclosure}</p>
       <p className="mt-2">{legal.notSubstitute}</p>
       <p className="mt-2">
-        <Link to="/legal" className="font-semibold text-navy underline">
+        <LocaleHrefLink path="/legal" className="font-semibold text-navy underline">
           {t("legalLink")}
-        </Link>
+        </LocaleHrefLink>
       </p>
     </aside>
   );

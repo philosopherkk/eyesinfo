@@ -1,7 +1,8 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { Phone } from "lucide-react";
 import { TOPICS } from "@/data/topics";
 import { EmergencyShell } from "@/components/emergency-shell";
+import { LocaleHrefLink } from "@/components/locale-href";
 import { localizeTopic, localizedUrgent, useI18n } from "@/i18n";
 import { pageHead } from "@/lib/page-seo";
 import { localeFromMatch } from "@/lib/locale-path";
@@ -92,26 +93,25 @@ function UrgentPage() {
         <p className="mb-2 text-[0.8rem] font-semibold text-muted">{t("related")}</p>
         <div className="flex flex-wrap gap-2">
           {RELATED_TOPIC_IDS.slice(0, 2).map((id) => (
-            <RelatedTopicLink key={id} topicId={id} locale={locale} />
+            <RelatedTopicLink key={id} topicId={id} />
           ))}
-          <Link
-            to="/c/$catId"
-            params={{ catId: "surface" }}
+          <LocaleHrefLink
+            path="/c/surface"
             className="inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy no-underline"
           >
             {t("cat_surface")}
-          </Link>
+          </LocaleHrefLink>
           {RELATED_TOPIC_IDS.slice(2).map((id) => (
-            <RelatedTopicLink key={id} topicId={id} locale={locale} />
+            <RelatedTopicLink key={id} topicId={id} />
           ))}
         </div>
       </section>
 
       <p className="mt-6 text-[0.88rem] leading-relaxed text-muted">{t("urgentFollow")}</p>
       <p className="mt-3 text-[0.8rem] leading-relaxed text-faint">
-        <Link to="/legal" className="text-navy underline">
+        <LocaleHrefLink path="/legal" className="text-navy underline">
           {t("legalLink")}
-        </Link>
+        </LocaleHrefLink>
       </p>
     </div>
   );
@@ -119,21 +119,19 @@ function UrgentPage() {
 
 function RelatedTopicLink({
   topicId,
-  locale,
 }: {
   topicId: (typeof RELATED_TOPIC_IDS)[number];
-  locale: Parameters<typeof localizeTopic>[1];
 }) {
+  const { locale } = useI18n();
   const topic = TOPICS.find((x) => x.id === topicId);
   if (!topic) return null;
   const loc = localizeTopic(topic, locale);
   return (
-    <Link
-      to="/t/$topicId"
-      params={{ topicId }}
+    <LocaleHrefLink
+      path={`/t/${topicId}`}
       className="inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy no-underline"
     >
       {loc.title}
-    </Link>
+    </LocaleHrefLink>
   );
 }

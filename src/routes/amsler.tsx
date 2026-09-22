@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
@@ -13,12 +13,13 @@ import { AmslerGrid, type AmslerFinding } from "@/components/amsler-grid";
 import { SimDisclaimer } from "@/components/sim-disclaimer";
 import { EduToolCaveat } from "@/components/edu-tool-caveat";
 import { EditorialFooter } from "@/components/editorial-footer";
+import { LocaleHrefLink, SpaHref } from "@/components/locale-href";
 import { SaveButton } from "@/components/save-button";
 import { usePrefs, type AmslerResult } from "@/lib/prefs";
 import { toolSaveKey } from "@/lib/saved";
 import { useI18n } from "@/i18n";
 import { pageHead } from "@/lib/page-seo";
-import { localeFromMatch } from "@/lib/locale-path";
+import { hrefWithLang, localeFromMatch, pathForLocale } from "@/lib/locale-path";
 import { uiText } from "@/lib/ui-text";
 
 export const Route = createFileRoute("/amsler")({
@@ -45,7 +46,7 @@ function distanceCm(gridMm: number) {
 
 function AmslerPage() {
   const boxRef = useRef<HTMLDivElement>(null);
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const [boxW, setBoxW] = useState(320);
   const [vp, setVp] = useState({ w: 360, h: 640 });
   const [inverted, setInverted] = useState(true);
@@ -168,12 +169,12 @@ function AmslerPage() {
           >
             {t("amslerTestSwitch")}
           </button>
-          <Link
-            to="/urgent"
+          <SpaHref
+            href={hrefWithLang("/urgent", locale)}
             className="inline-flex h-12 items-center justify-center rounded-xl bg-danger text-[0.9rem] font-semibold text-paper no-underline"
           >
             {t("amslerTestAbnormal")}
-          </Link>
+          </SpaHref>
         </div>
       </div>
     );
@@ -182,13 +183,13 @@ function AmslerPage() {
   return (
     <div className="amsler-page pb-[max(2rem,env(safe-area-inset-bottom))]">
       <div className="flex items-center gap-1 px-2 pt-3">
-        <Link
-          to="/"
+        <SpaHref
+          href={pathForLocale(locale)}
           className="grid size-11 place-items-center rounded-md text-navy no-underline no-print"
           aria-label={t("back")}
         >
           <ArrowLeft className="size-5" aria-hidden />
-        </Link>
+        </SpaHref>
         <h1 className="min-w-0 flex-1 text-[1.25rem] font-semibold text-navy">
           {t("amslerTitle")}
         </h1>
@@ -358,13 +359,12 @@ function AmslerPage() {
       </div>
 
       <div className="mt-5 flex flex-wrap gap-2 px-4 no-print">
-        <Link
-          to="/t/$topicId"
-          params={{ topicId: "d5" }}
+        <LocaleHrefLink
+          path="/t/d5"
           className="inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy no-underline"
         >
           {t("amslerAmdLink")}
-        </Link>
+        </LocaleHrefLink>
       </div>
 
       <div className="amsler-print-keep px-4">
