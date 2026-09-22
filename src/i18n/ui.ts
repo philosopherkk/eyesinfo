@@ -386,6 +386,8 @@ const zhHant = {
   cat_retina_research_link: "抗 VEGF 專題",
   cat_surface: "角膜與眼表",
   cat_surface_sub: "結膜炎 · 過敏 · 激光治療角膜表面（PTK）",
+  cat_macula: "黃斑",
+  cat_macula_sub: "黃斑病變 · 裂孔 · 前膜",
   qrSub: "二維碼產生器",
   qrLead: "輸入網址或任何文字，圖樣即時更新。可改顏色、尺寸、容錯後下載 PNG。本頁不是診療、預約或轉介。",
   qrContent: "內容",
@@ -806,6 +808,8 @@ const en: Record<Key, string> = {
   cat_retina_research_link: "anti-VEGF topic",
   cat_surface: "Cornea and ocular surface",
   cat_surface_sub: "Conjunctivitis · allergy · laser for corneal surface (PTK)",
+  cat_macula: "Macula",
+  cat_macula_sub: "AMD · macular hole · ERM",
   qrSub: "QR code generator",
   qrLead:
     "Type a URL or any text. The mark updates as you go. Colours, size and error correction, then download a PNG. This page is not a consultation, booking or referral.",
@@ -1221,6 +1225,8 @@ const ja: Record<Key, string> = {
   cat_retina_research_link: "抗VEGFのページ",
   cat_surface: "角膜と眼表面",
   cat_surface_sub: "結膜炎 · アレルギー · 角膜表面のレーザー治療（PTK）",
+  cat_macula: "黄斑",
+  cat_macula_sub: "黄斑変性 · 円孔 · 前膜",
   qrSub: "二次元コード作成",
   qrLead:
     "URLや任意の文字を入れると図がすぐ更新されます。色・サイズ・誤り訂正を選んでPNGを保存。診療・予約・紹介ではありません。",

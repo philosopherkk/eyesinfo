@@ -2,6 +2,14 @@
 
 Git-sourced history for this site. Entries follow commits on `main`, not chat notes.
 
+## chore — structure/UX polish (preview)
+
+- Unknown `/c/{slug}` → HTTP 404 via `beforeLoad` (macula chooser kept)
+- `/c/macula` on homepage category strip + `sitemap.xml`
+- Locale-aware in-body `/legal` (and privacy/accessibility) + chrome `/urgent`
+- 版面：adjacent 「手機版」｜「電腦版」｜「自動」 (no 3-state cycle)
+- `CONTENT_VERSION` stays **1.72**
+
 ## [1.72] — 2026-09-18
 
 - **Commit:** `d4e897b` (`d4e897ba059f2a88c3ae1f0d3f1ba990bd941161`)

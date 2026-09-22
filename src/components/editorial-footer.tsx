@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { LocaleHrefLink } from "@/components/locale-href";
 import { editorialBits, useI18n } from "@/i18n";
 import { DEFAULT_TOPIC_REVIEWER } from "@/data/editorial";
 import type { TopicReviewer } from "@/data/topics";
@@ -71,17 +71,17 @@ export function EditorialFooter({
       ) : null}
       <p>{legal.disclosure}</p>
       <p className="no-print">
-        <Link to="/legal" className="text-navy underline">
+        <LocaleHrefLink path="/legal" className="text-navy underline">
           {t("legalLink")}
-        </Link>
+        </LocaleHrefLink>
         {" · "}
-        <Link to="/privacy" className="text-navy underline">
+        <LocaleHrefLink path="/privacy" className="text-navy underline">
           {t("privacyLink")}
-        </Link>
+        </LocaleHrefLink>
         {" · "}
-        <Link to="/accessibility" className="text-navy underline">
+        <LocaleHrefLink path="/accessibility" className="text-navy underline">
           {t("a11yLink")}
-        </Link>
+        </LocaleHrefLink>
       </p>
     </aside>
   );

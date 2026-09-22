@@ -143,13 +143,22 @@ test("chrome and chooser sources keep locale-aware links and section titles", ()
   const edu = readFileSync(join(ROOT, "src/components/edu-link.tsx"), "utf8");
   const cat = readFileSync(join(ROOT, "src/routes/c.$catId.tsx"), "utf8");
   const anatomy = readFileSync(join(ROOT, "src/data/anatomy-related.ts"), "utf8");
+  const emergency = readFileSync(join(ROOT, "src/components/emergency-shell.tsx"), "utf8");
+  const editorial = readFileSync(join(ROOT, "src/components/editorial-footer.tsx"), "utf8");
+  const layout = readFileSync(join(ROOT, "src/components/layout-control.tsx"), "utf8");
   assert.match(shell, /hrefWithLang|LocaleHrefLink/);
   assert.match(home, /hrefWithLang/);
+  assert.match(home, /macula/);
   assert.match(edu, /hrefWithLang/);
   assert.match(cat, /ANATOMY_CHOOSER_TITLE|isAnatomyTopicsChooser/);
+  assert.match(cat, /beforeLoad/);
   assert.match(anatomy, /macula:\s*"黃斑"/);
   assert.match(anatomy, /macula:\s*"Macula"/);
   assert.match(cat, /localeFromMatch/);
+  assert.match(emergency, /hrefWithLang\("\/urgent"/);
+  assert.match(editorial, /LocaleHrefLink/);
+  assert.doesNotMatch(layout, /CYCLE/);
+  assert.match(layout, /LAYOUT_MODES/);
 });
 
 test("route files exist for locale entries (no hide-switcher fallback)", () => {

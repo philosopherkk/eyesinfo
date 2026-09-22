@@ -23,6 +23,7 @@ const CAT_TITLE: Record<string, UiKey> = {
   glaucoma: "cat_glaucoma",
   retina: "cat_retina",
   surface: "cat_surface",
+  macula: "cat_macula",
 };
 const CAT_SUB: Record<string, UiKey> = {
   lens: "cat_lens_sub",
@@ -30,7 +31,14 @@ const CAT_SUB: Record<string, UiKey> = {
   glaucoma: "cat_glaucoma_sub",
   retina: "cat_retina_sub",
   surface: "cat_surface_sub",
+  macula: "cat_macula_sub",
 };
+
+/** Home strip hubs: CATEGORIES + anatomy chooser /c/macula (not a CategoryId). */
+const HOME_CATEGORY_HUBS: { id: string }[] = [
+  ...CATEGORIES.map((c) => ({ id: c.id })),
+  { id: "macula" },
+];
 
 /** Lead leaflets on the home hub — hide the whole block if none resolve. */
 const NEW_SHEET_IDS: { id: string; labelKey: UiKey }[] = [
@@ -132,7 +140,7 @@ export function HomePage() {
           {t("homeAnatomyCta")}
         </LocaleHrefLink>
         <div className="mt-3 grid gap-2 layout-lg:grid-cols-2 layout-xl:grid-cols-3">
-          {CATEGORIES.map((cat) => (
+          {HOME_CATEGORY_HUBS.map((cat) => (
             <LocaleHrefLink
               key={cat.id}
               path={`/c/${cat.id}`}

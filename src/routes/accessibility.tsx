@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+import { LocaleHrefLink } from "@/components/locale-href";
 import { useI18n } from "@/i18n";
 import { pageHead } from "@/lib/page-seo";
 import { localeFromMatch } from "@/lib/locale-path";
@@ -46,12 +47,12 @@ function AccessibilityPage() {
           <p className="mt-1">{t("a11yFeedback")}</p>
         </div>
         <p className="flex flex-wrap gap-x-3 gap-y-1 text-[0.85rem]">
-          <Link to="/legal" className="font-semibold text-navy underline">
+          <LocaleHrefLink path="/legal" className="font-semibold text-navy underline">
             {t("legalLink")}
-          </Link>
-          <Link to="/privacy" className="font-semibold text-navy underline">
+          </LocaleHrefLink>
+          <LocaleHrefLink path="/privacy" className="font-semibold text-navy underline">
             {t("privacyLink")}
-          </Link>
+          </LocaleHrefLink>
         </p>
       </section>
     </div>

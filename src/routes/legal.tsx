@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+import { LocaleHrefLink } from "@/components/locale-href";
 import { editorialBits, useI18n } from "@/i18n";
 import { KEY_REFS } from "@/data/editorial";
 import { toHans } from "@/i18n/hans";
@@ -73,13 +74,13 @@ function LegalPage() {
           <p className="mt-1">{t("copyP")}</p>
         </div>
         <p>
-          <Link to="/privacy" className="font-semibold text-navy">
+          <LocaleHrefLink path="/privacy" className="font-semibold text-navy">
             {t("privacyLink")}
-          </Link>
+          </LocaleHrefLink>
           {" · "}
-          <Link to="/accessibility" className="font-semibold text-navy">
+          <LocaleHrefLink path="/accessibility" className="font-semibold text-navy">
             {t("a11yLink")}
-          </Link>
+          </LocaleHrefLink>
         </p>
       </section>
     </div>

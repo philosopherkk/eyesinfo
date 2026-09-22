@@ -1,5 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { LocaleHrefLink } from "@/components/locale-href";
 import { useI18n } from "@/i18n";
 import { usePrefs } from "@/lib/prefs";
 import { applyTheme, clearThemePref } from "@/lib/theme";
@@ -58,12 +59,12 @@ function PrivacyPage() {
         </div>
       </section>
       <p className="mt-6 flex flex-wrap gap-x-3 gap-y-1 text-[0.8rem]">
-        <Link to="/legal" className="text-navy underline">
+        <LocaleHrefLink path="/legal" className="text-navy underline">
           {t("legalLink")}
-        </Link>
-        <Link to="/accessibility" className="text-navy underline">
+        </LocaleHrefLink>
+        <LocaleHrefLink path="/accessibility" className="text-navy underline">
           {t("a11yLink")}
-        </Link>
+        </LocaleHrefLink>
       </p>
     </div>
   );

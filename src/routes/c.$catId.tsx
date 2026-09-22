@@ -35,7 +35,18 @@ const CAT_SUB: Record<string, UiKey> = {
   surface: "cat_surface_sub",
 };
 
+/** Known hubs: CATEGORIES + anatomy multi-topic choosers (e.g. /c/macula). */
+function isKnownCategoryHub(catId: string): boolean {
+  return (
+    CATEGORIES.some((c) => c.id === catId) || isAnatomyTopicsChooser(catId)
+  );
+}
+
 export const Route = createFileRoute("/c/$catId")({
+  // Throw in beforeLoad so SSR returns HTTP 404 (component-only notFound → hollow 200).
+  beforeLoad: ({ params }) => {
+    if (!isKnownCategoryHub(params.catId)) throw notFound();
+  },
   head: ({ params, match }) => {
     const locale = localeFromMatch(match);
     const cat = CATEGORIES.find((c) => c.id === params.catId);
@@ -66,12 +77,8 @@ export const Route = createFileRoute("/c/$catId")({
         locale,
       });
     }
-    return pageHead({
-      title: uiText(locale, "byAnatomy"),
-      description: uiText(locale, "homeLead"),
-      path: `/c/${params.catId}`,
-      locale,
-    });
+    // Unknown slug: beforeLoad already threw; keep head defensive.
+    throw notFound();
   },
   component: CategoryPage,
 });

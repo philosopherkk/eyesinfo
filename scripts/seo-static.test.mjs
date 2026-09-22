@@ -90,6 +90,7 @@ test("sitemap.xml is a valid urlset covering edu tools including outdoor", () =>
     "/saved",
     "/clinic",
     "/c/lens",
+    "/c/macula",
     "/t/d1",
     "/t/d10",
     "/t/t-tacrolimus-eyelid",
