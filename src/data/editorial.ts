@@ -35,7 +35,7 @@ export const EDITORIAL = {
    * Not for booking, clinical advice, or referrals; never nest beside clinic CTAs.
    */
   correction:
-    "若發現內容錯誤，請電郵 drkkpoon@gmail.com（只供內容糾錯／建議，不處理預約、診症或轉介）。更正政策見本段。現階段不經本站接收病歷、預約或個別診治查詢。",
+    "若發現內容錯誤，請電郵 hokusaivision@gmail.com（只供內容糾錯／建議，不處理預約、診症或轉介）。更正政策見本段。現階段不經本站接收病歷、預約或個別診治查詢。",
 };
 
 /** Structured reviewer stamp — same person as EDITORIAL; do not invent new reviewers. */

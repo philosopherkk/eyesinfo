@@ -2,6 +2,11 @@
 
 Git-sourced history for this site. Entries follow commits on `main`, not chat notes.
 
+## [1.75] — 2026-09-24
+
+- **Summary:** Corrections contact email → `hokusaivision@gmail.com` (all locales); purpose labels unchanged
+- **Files:** `src/data/editorial.ts`, `src/i18n/{catalog,index,ui}.ts`, `src/lib/site.ts`
+
 ## chore — structure/UX polish (preview)
 
 - Unknown `/c/{slug}` → HTTP 404 via `beforeLoad` (macula chooser kept)
