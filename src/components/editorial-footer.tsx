@@ -82,6 +82,10 @@ export function EditorialFooter({
         <LocaleHrefLink path="/accessibility" className="text-navy underline">
           {t("a11yLink")}
         </LocaleHrefLink>
+        {" · "}
+        <LocaleHrefLink path="/resources" className="text-navy underline">
+          {t("resourcesLink")}
+        </LocaleHrefLink>
       </p>
     </aside>
   );

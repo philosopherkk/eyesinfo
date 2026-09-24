@@ -2,6 +2,11 @@
 
 Git-sourced history for this site. Entries follow commits on `main`, not chat notes.
 
+## [1.76] — 2026-09-24
+
+- **Summary:** New `/resources` further-reading page (GovHK, Student Health Service, HKOS Public Education, AAO EyeSmart, Cleveland Clinic Health Library); footer/sitemap/search wiring; `CONTENT_VERSION` → 1.76
+- **Files:** `src/routes/resources.tsx`, `src/data/resources.ts`, `src/i18n/ui.ts`, `src/lib/site.ts`, `src/lib/site-search.ts`, `src/components/{app-shell,home-page,editorial-footer,breadcrumbs}.tsx`, `public/sitemap.xml`, `CHANGELOG.md`
+
 ## [1.75] — 2026-09-24
 
 - **Summary:** Corrections contact email → `hokusaivision@gmail.com` (all locales); purpose labels unchanged
