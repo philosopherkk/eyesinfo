@@ -166,6 +166,7 @@ export function searchSite(
     { id: "privacy", href: "/privacy", titleKey: "privacyTitle", extra: ["私隱", "privacy"] },
     { id: "a11y", href: "/accessibility", titleKey: "a11yTitle", extra: ["無障礙", "accessibility"] },
     { id: "legal", href: "/legal", titleKey: "legalTitle", extra: ["法律", "legal", "231"] },
+    { id: "resources", href: "/resources", titleKey: "resourcesTitle", extra: ["延伸", "資料", "resources", "further", "reading", "関連"] },
   ];
   for (const page of pages) {
     const title = t(page.titleKey);
