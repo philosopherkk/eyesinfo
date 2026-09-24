@@ -162,6 +162,9 @@ export function AppShell({ children }: { children: ReactNode }) {
             <LocaleHrefLink path="/accessibility" className="text-navy underline">
               {t("a11yLink")}
             </LocaleHrefLink>
+            <LocaleHrefLink path="/resources" className="text-navy underline">
+              {t("resourcesLink")}
+            </LocaleHrefLink>
           </p>
         </footer>
       </main>

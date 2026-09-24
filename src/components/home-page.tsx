@@ -200,6 +200,10 @@ export function HomePage() {
         <LocaleHrefLink path="/accessibility" className="text-navy underline">
           {t("a11yLink")}
         </LocaleHrefLink>
+        <span aria-hidden="true"> · </span>
+        <LocaleHrefLink path="/resources" className="text-navy underline">
+          {t("resourcesLink")}
+        </LocaleHrefLink>
       </p>
     </div>
   );
