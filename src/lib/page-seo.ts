@@ -1,4 +1,5 @@
 import type { Locale } from "@/i18n/locale";
+import { hrefWithLang } from "@/lib/locale-path";
 import { PUBLIC_ORIGIN } from "@/lib/site";
 
 /** Brand in document titles (zh-Hant primary for SSR / crawlers). */
@@ -37,20 +38,31 @@ export function canonicalUrl(path: string): string {
  * Per-route document head: unique title, description, og tags, and canonical.
  * Child route meta overrides the root defaults (TanStack dedupes by name/property).
  * Canonical is omitted from `__root` so it is not duplicated (links are not deduped).
+ * TC (zh-Hant) is the standing canonical; hreflang lists all locales + x-default → TC.
  */
 export function pageHead({ title, description, path, locale = "zh-Hant" }: PageSeoInput) {
   const brand = seoSiteName(locale);
   const fullTitle =
     title === brand || title === SEO_SITE_NAME ? brand : `${title}｜${brand}`;
-  const url = canonicalUrl(path);
+  const barePath = path.split("?")[0] || "/";
+  const canonical = canonicalUrl(barePath);
+  const hreflang: Locale[] = ["zh-Hant", "zh-Hans", "en", "ja"];
   return {
     meta: [
       { title: fullTitle },
       { name: "description", content: description },
       { property: "og:title", content: fullTitle },
       { property: "og:description", content: description },
-      { property: "og:url", content: url },
+      { property: "og:url", content: canonical },
     ],
-    links: [{ rel: "canonical", href: url }],
+    links: [
+      { rel: "canonical", href: canonical },
+      ...hreflang.map((loc) => ({
+        rel: "alternate",
+        hrefLang: loc === "zh-Hant" ? "zh-Hant" : loc === "zh-Hans" ? "zh-Hans" : loc,
+        href: canonicalUrl(hrefWithLang(barePath, loc)),
+      })),
+      { rel: "alternate", hrefLang: "x-default", href: canonical },
+    ],
   };
 }

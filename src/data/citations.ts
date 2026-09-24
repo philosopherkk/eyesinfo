@@ -162,7 +162,7 @@ export const CITE: Record<string, Citation> = {
     source:
       "Ophthalmology. 2026;133(2):169-177. DOI 10.1016/j.ophtha.2025.09.023",
     pmid: "41043781",
-    note: "LiGHT 六年視野進展公開分析（後設分析）。長期約數不是個人預後／不是品牌比較／不是人人必須；已失去的視野不能還原。",
+    note: "LiGHT 六年視野進展公開分析（事後／次級分析）。長期約數不是個人預後／不是品牌比較／不是人人必須；已失去的視野不能還原。",
   },
   wang2019liwan: {
     id: "wang2019liwan",
@@ -235,6 +235,24 @@ export const CITE: Record<string, Citation> = {
     source: "Ophthalmology. 2012;119(12):2537-2548. DOI 10.1016/j.ophtha.2012.09.006",
     pmid: "23084240",
     note: "VIEW：aflibercept 與每月 ranibizumab 視力結果相若的給藥策略討論。不是商品比較或本港處方保證。",
+  },
+  vividVista2014: {
+    id: "vividVista2014",
+    authors: "Korobelnik JF, Do DV, Schmidt-Erfurth U, et al.",
+    title:
+      "Intravitreal aflibercept for diabetic macular edema (VIVID-DME and VISTA-DME)",
+    source: "Ophthalmology. 2014;121(11):2247-2254. DOI 10.1016/j.ophtha.2014.05.006",
+    pmid: "25012934",
+    note: "VIVID-DME／VISTA-DME：aflibercept 用於糖尿病黃斑水腫。數字是公開試驗結果，不是個人預後或商品比較。",
+  },
+  protocolT2015: {
+    id: "protocolT2015",
+    authors: "Wells JA, Glassman AR, Ayala AR, et al.; Diabetic Retinopathy Clinical Research Network",
+    title:
+      "Aflibercept, bevacizumab, or ranibizumab for diabetic macular edema (Protocol T)",
+    source: "N Engl J Med. 2015;372(13):1193-1203. DOI 10.1056/NEJMoa1414264",
+    pmid: "25692915",
+    note: "Protocol T（DRCR）：比較多種抗 VEGF 用於糖尿病黃斑水腫。數字是公開試驗結果，不是個人預後或商品比較。bevacizumab 為試驗對照語境，不是本港選藥表。",
   },
   hawkHarrier2020: {
     id: "hawkHarrier2020",

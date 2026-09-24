@@ -121,7 +121,7 @@ function CategoryResearchNote({
       <p className="text-[0.78rem] font-semibold tracking-wide text-navy">
         {label}
       </p>
-      <p className="mt-1.5 text-[0.88rem] leading-relaxed text-muted">
+      <p className="mt-1.5 whitespace-pre-line text-[0.88rem] leading-relaxed text-muted">
         {idx < 0 ? (
           text
         ) : (

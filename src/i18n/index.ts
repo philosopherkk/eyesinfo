@@ -191,9 +191,9 @@ export function editorialBits(locale: Locale) {
           : EDITORIAL.registerNote;
   const reviewed =
     locale === "en"
-      ? "11 September 2026"
+      ? "24 September 2026"
       : locale === "ja"
-        ? "2026年9月11日"
+        ? "2026年9月24日"
         : EDITORIAL.reviewed;
   const quals =
     locale === "zh-Hans" ? EDITORIAL.quals.map(toHans) : EDITORIAL.quals;
@@ -205,13 +205,39 @@ export function editorialBits(locale: Locale) {
         : locale === "ja"
           ? "発行／運営：護眼學堂（eyesinfo.org）。臨床確認：潘家健医師（香港医師委員会登録医師；専門医名簿（眼科））。本教育サイトは診療所の連絡・予約・紹介を行わず、診療所サイトにもリンクしません。現時点で商業スポンサーはありません；今後の資金提供や利益関係があれば法令頁で開示します。教育内容は診療所宣伝と分けて示します；確認者は臨床も行うことがあり、紹介はしません。"
           : EDITORIAL.disclosure;
+  const ownership =
+    locale === "zh-Hans"
+      ? toHans(EDITORIAL.ownership)
+      : locale === "en"
+        ? "This site was founded, funded and is operated by Dr Poon Ka Kin."
+        : locale === "ja"
+          ? "本サイトは潘家健医師が創設・出資・運営しています。"
+          : EDITORIAL.ownership;
+  const funding =
+    locale === "zh-Hans"
+      ? toHans(EDITORIAL.funding)
+      : locale === "en"
+        ? "This site is self-funded by Dr Poon Ka Kin."
+        : locale === "ja"
+          ? "本サイトは潘家健医師の自己資金で運営しています。"
+          : EDITORIAL.funding;
   const correction =
     locale === "zh-Hans"
       ? toHans(EDITORIAL.correction)
       : locale === "en"
-        ? "If you find an error in the content, no operator email is published on this site yet; the corrections policy is this paragraph. At this stage the site does not receive medical records, bookings or individual care queries."
+        ? "If you find a content error, email drkkpoon@gmail.com (For content corrections/suggestions only — not for bookings, clinical advice, or referrals.). The corrections policy is this paragraph. At this stage the site does not receive medical records, bookings or individual care queries."
         : locale === "ja"
-          ? "内容の誤りを見つけた場合、運営者のメールは現時点で本サイトに掲載していません；訂正方針はこの段落です。現段階では本サイト経由で病歴・予約・個別の診療照会は受け付けません。"
+          ? "内容の誤りを見つけた場合は drkkpoon@gmail.com へ（内容の訂正／提案のみ。予約・診療相談・紹介は扱いません）。訂正方針はこの段落です。現段階では本サイト経由で病歴・予約・個別の診療照会は受け付けません。"
           : EDITORIAL.correction;
-  return { name, title, register, reviewed, quals, disclosure, correction };
+  return {
+    name,
+    title,
+    register,
+    reviewed,
+    quals,
+    disclosure,
+    ownership,
+    funding,
+    correction,
+  };
 }

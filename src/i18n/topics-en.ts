@@ -264,7 +264,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
           ],
           [
             "brolucizumab",
-            "Single-chain antibody fragment; HAWK/HARRIER noninferior to aflibercept; some people need discussion of intraocular inflammation and other safety points",
+            "Single-chain antibody fragment; HAWK/HARRIER noninferior to aflibercept; discuss intraocular inflammation individually, including retinal vasculitis / vascular occlusion risk; after injection, sudden vision drop, many new floaters or a field defect need prompt care (sharp drop / curtain: A&E)",
           ],
           [
             "faricimab",
@@ -280,7 +280,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       h("Polypoidal choroidal vasculopathy (PCV) (education)"),
       p("PCV is more common in East Asian / Chinese wet macular disease and often needs tools such as indocyanine green angiography (ICGA) to help distinguish it — not self-labelling. The Asian multicentre EVEREST II randomised trial (JAMA Ophthalmol 2020), in symptomatic macular PCV, compared ranibizumab alone with ranibizumab plus verteporfin photodynamic therapy (vPDT): at 24 months the combination arm had greater vision gain and a higher rate of polyp regression, with a lower median injection count — trial-order figures, not your personal prognosis, and not a product or clinic-success comparison on this site. Whether to inject, which Hong Kong–registered INN, and whether to add PDT are specialist decisions."),
       h("Diabetic macular oedema: anti-VEGF class (education)"),
-      p("In centre-involved diabetic macular oedema (DME), the anti-VEGF class versus traditional laser alone can yield better vision outcomes in suitable cases. Large-trial examples include aflibercept in VIEW-pathway extensions / DME registration studies, and Protocol T comparing several anti-VEGF agents — published trial figures, not personal prognosis or brand comparison. Which INN and interval can only be decided by a doctor against Hong Kong registration and examination."),
+      p("In centre-involved diabetic macular oedema (DME), the anti-VEGF class versus traditional laser alone can yield better vision outcomes in suitable cases. Large-trial examples include aflibercept in VIVID-DME / VISTA-DME (Korobelnik et al.), and Protocol T comparing several anti-VEGF agents (Wells et al., DRCR) — published trial figures, not personal prognosis or brand comparison. VIEW discusses dosing strategy in wet AMD, not as primary DME evidence. Which INN and interval can only be decided by a doctor against Hong Kong registration and examination."),
       h("Procedure (for consent education)"),
       p("An outpatient injection, usually a few minutes. Asepsis and conjunctival iodine have the strongest evidence for lowering endophthalmitis. This is a class of care, not a pitch for any product."),
       ol([
@@ -623,7 +623,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
     meta: "PCO · sealing a tear",
     blocks: [
       h("YAG posterior capsulotomy"),
-      p("Not a “returning cataract”. Lens epithelial cells cloud the posterior capsule. Over years this is not uncommon; rates in the literature vary and are not your personal odds. Outpatient laser, no incision. Not every blur needs YAG; a doctor judges whether it affects function. Short pressure rise and extra floaters can occur; retinal tear is uncommon. A shower of new floaters, flashes, a curtain or severe pain after laser: A&E."),
+      p("Not a “returning cataract”. Lens epithelial cells cloud the posterior capsule. Over years this is not uncommon; rates in the literature vary and are not your personal odds. Outpatient laser, no incision. Not every blur needs YAG; a doctor judges whether it affects function. Short pressure rise and extra floaters can occur; retinal tear is uncommon. After YAG: new flashes or many new floaters, without a curtain, sudden blindness or severe pain — dilated fundus exam the same day if possible. A curtain, sudden blindness or severe pain: go to A&E now."),
       h("Retinal barrier laser"),
       p("Scars around a tear to reduce fluid going under the retina. Activity limits depend on the tear and the doctor’s instructions — not a blanket two-week sports ban. Laser cannot fix a retina that is already detached. An expanding curtain is an emergency."),
     ],
@@ -826,7 +826,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
         "Refractive: hyperopia can drive accommodative esotropia; a large difference between the eyes can make the brain ignore the blurrier one",
         "Development: alignment is still settling in infancy; family history is common but not destiny",
         "Poor vision in one eye: cataract, fundus disease or uncorrected refractive error",
-        "Nerves: VI (limited abduction, esotropia), IV (head tilt), III (ptosis, limited movements; the pupil may dilate)",
+        "Nerves: VI (limited abduction, esotropia), IV / trochlear (superior oblique, head tilt), III (ptosis, limited movements; the pupil may dilate)",
         "Orbit and muscle: thyroid eye disease, myasthenia (variable diplopia, often better in the morning), trauma; tumour is uncommon",
         "Systemic: stroke, raised intracranial pressure, diabetic palsy — imaging is a doctor’s decision",
         "After surgery: a change in alignment is for review, not self-diagnosis",
