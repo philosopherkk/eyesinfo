@@ -323,9 +323,9 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
     }
   },
   "/t/t-gca": {
-    zh: "介紹巨細胞動脈炎相關新頭痛、顎跛行與突然失明等警號，強調須立即急症室評估（公眾教育，不能代替面診。）",
-    en: "Warning education on giant cell arteritis—new headache, jaw claudication, sudden vision loss—and going to A&E now.",
-    ja: "巨細胞性動脈炎の新頭痛・顎跛行・視力症状は直ちに救急へ。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    zh: "介紹巨細胞動脈炎警號：有新視力症狀須立即急症室；僅有全身警號而無視力症狀時，應盡快（最好當日）專科評估（公眾教育，不能代替面診。）",
+    en: "Giant cell arteritis: any new visual symptom means A&E now; systemic signs alone need specialist review ASAP, ideally the same day.",
+    ja: "巨細胞性動脈炎の警号。視力症状があれば直ちに救急へ、全身症状のみでも当日中に専門医評価を。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["巨細胞動脈炎"],
       en: ["Giant cell arteritis"],
@@ -515,7 +515,7 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   "/t/t-roles": {
     zh: "介紹眼科專科醫生、視光師與配鏡分工的公眾教育，方便理解各自角色而非比較廣告（公眾教育，不能代替面診。）",
     en: "Public education on roles of ophthalmologists, optometrists and dispensing—not a comparative advertisement.",
-    ja: "眼科専門医・視能／オプトメトリスト・調製の役割分担を紹介します（比較広告ではありません）。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
+    ja: "眼科専門医・オプトメトリスト（視光師）・調製の役割分担を紹介します（比較広告ではありません）。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/t/t-rvo": {
     zh: "介紹視網膜靜脈或動脈阻塞的突然視力影響，以及何時須作急症處理的教育（公眾教育，不能代替面診。）詳見內文。",
@@ -687,5 +687,35 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
     en: "Warm-compress timer for eyelid-care education. Use the temperature and duration your clinician advised—not a treatment guarantee.",
     ja: "眼瞼温罨法のタイマー図示。温度と時間は医師の指示に従ってください。効果を保証するものではなく、診療の代わりでもありません。教育目的の説明です。"
   },
-};
 
+  "/accessibility": {
+    zh: "護眼學堂致力讓公眾教育內容盡量人人可用。本頁說明無障礙目標、已知限制與反映問題的方法（公眾教育，不能代替面診。）",
+    en: "Accessibility goals for this education site, known limits, and how to report problems. Not a formal WCAG certification.",
+    ja: "この市民教育サイトのアクセシビリティ方針、既知の制限、問題の伝え方を紹介します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
+  },
+  "/amsler": {
+    zh: "阿姆斯勒方格自我監察中央視力示意。不是診斷工具；新出現變形或暗點須盡快眼科評估（公眾教育，不能代替面診。）",
+    en: "Amsler-grid education for central-vision self-checks. Not a diagnosis; new distortion or a dark patch needs prompt ophthalmic review.",
+    ja: "アムスラーグリッドによる中心視力の自己確認の教育。診断ではなく、新しい歪みや暗点は速やかな眼科評価を。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
+  },
+  "/iol": {
+    zh: "人工晶體示意與練習步驟。唔包括診金、預約或商品；不能代替面診或檢查（公眾教育，不能代替面診。）",
+    en: "Interactive IOL diagrams for education only—not a clinic visit, booking, prescription, product sale or referral.",
+    ja: "眼内レンズの教育用図示と手順練習。予約・処方・販売・紹介はありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
+  },
+  "/privacy": {
+    zh: "本教育網站不經此頁收集姓名、證件、病歷或付款資料；偏好僅存本機（公眾教育，不能代替面診。）",
+    en: "This education site collects no names, IDs, records or payments here. Preferences stay on-device in localStorage only.",
+    ja: "本教育サイトはこの頁で氏名・ID・病歴・決済を集めず、設定は端末内のみです。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
+  },
+  "/tools": {
+    zh: "示意與練習步驟工具。唔包括診金、預約或商品；不能代替面診或檢查（公眾教育，不能代替面診。）",
+    en: "Education tools with diagrams and practice steps. Not a clinic visit, booking, prescription, product sale or referral.",
+    ja: "図示と手順練習の教育ツール。予約・処方・販売・紹介はありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
+  },
+  "/urgent": {
+    zh: "私家診所不是急症室。本頁分開「立即急症室」與「盡快（最好當日）眼科評估」（公眾教育，不能代替面診。）",
+    en: "A private clinic is not A&E. This page separates go-to-A&E-now from same-day ophthalmic assessment. Public education only.",
+    ja: "私設クリニックは救急ではありません。「直ちに救急」と「当日中の眼科評価」を分けて示します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
+  },
+};

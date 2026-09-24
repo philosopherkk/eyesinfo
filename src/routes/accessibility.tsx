@@ -4,13 +4,18 @@ import { useI18n } from "@/i18n";
 import { pageHead } from "@/lib/page-seo";
 import { localeFromMatch } from "@/lib/locale-path";
 import { uiText } from "@/lib/ui-text";
+import { seoDescriptionFor } from "@/lib/seo-description";
 
 export const Route = createFileRoute("/accessibility")({
   head: ({ match }) => {
     const locale = localeFromMatch(match);
     return pageHead({
       title: uiText(locale, "a11yTitle"),
-      description: uiText(locale, "a11yIntro"),
+      description: seoDescriptionFor(
+        "/accessibility",
+        locale,
+        uiText(locale, "a11yIntro"),
+      ),
       path: "/accessibility",
       locale,
     });

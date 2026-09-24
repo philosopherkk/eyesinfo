@@ -7,13 +7,18 @@ import { applyTheme, clearThemePref } from "@/lib/theme";
 import { pageHead } from "@/lib/page-seo";
 import { localeFromMatch } from "@/lib/locale-path";
 import { uiText } from "@/lib/ui-text";
+import { seoDescriptionFor } from "@/lib/seo-description";
 
 export const Route = createFileRoute("/privacy")({
   head: ({ match }) => {
     const locale = localeFromMatch(match);
     return pageHead({
       title: uiText(locale, "privacyTitle"),
-      description: uiText(locale, "privacyCap486"),
+      description: seoDescriptionFor(
+        "/privacy",
+        locale,
+        uiText(locale, "privacyCap486"),
+      ),
       path: "/privacy",
       locale,
     });

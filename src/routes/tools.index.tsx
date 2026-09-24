@@ -6,13 +6,18 @@ import { useI18n, TOOL_TEXT } from "@/i18n";
 import { pageHead } from "@/lib/page-seo";
 import { hrefWithLang, localeFromMatch } from "@/lib/locale-path";
 import { uiText } from "@/lib/ui-text";
+import { seoDescriptionFor } from "@/lib/seo-description";
 
 export const Route = createFileRoute("/tools/")({
   head: ({ match }) => {
     const locale = localeFromMatch(match);
     return pageHead({
       title: uiText(locale, "toolsTitle"),
-      description: uiText(locale, "toolsLead"),
+      description: seoDescriptionFor(
+        "/tools",
+        locale,
+        uiText(locale, "toolsLead"),
+      ),
       path: "/tools",
       locale,
     });

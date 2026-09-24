@@ -1,6 +1,6 @@
 # SEO descriptions — 1.77
 
-Head-only meta description replacements. Visible on-page meta/tag lines are **unchanged**.
+Head-only meta description replacements. Visible on-page body copy is **unchanged**.
 `zh-Hans` is produced via `toHans()` at read time.
 
 | Route | Locale | Old (thin) | New |
@@ -116,9 +116,9 @@ Head-only meta description replacements. Visible on-page meta/tag lines are **un
 | `/t/t-erm` | zh-Hant | (keyword / fragment meta or tool blurb) | 介紹黃斑前膜如何引起視物變形，以及並非一經發現就必須手術的教育要點（公眾教育，不能代替面診。）詳見內文。 |
 | `/t/t-erm` | en | (keyword / fragment meta or tool blurb) | Education on epiretinal membrane causing distortion, and why finding a membrane does not always mean immediate surgery. |
 | `/t/t-erm` | ja | (keyword / fragment meta or tool blurb) | 黄斑前膜による歪みと、見つかってもすぐ手術とは限らない点を説明します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。 |
-| `/t/t-gca` | zh-Hant | (keyword / fragment meta or tool blurb) | 介紹巨細胞動脈炎相關新頭痛、顎跛行與突然失明等警號，強調須立即急症室評估（公眾教育，不能代替面診。） |
-| `/t/t-gca` | en | (keyword / fragment meta or tool blurb) | Warning education on giant cell arteritis—new headache, jaw claudication, sudden vision loss—and going to A&E now. |
-| `/t/t-gca` | ja | (keyword / fragment meta or tool blurb) | 巨細胞性動脈炎の新頭痛・顎跛行・視力症状は直ちに救急へ。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。 |
+| `/t/t-gca` | zh-Hant | (keyword / fragment meta or tool blurb) | 介紹巨細胞動脈炎警號：有新視力症狀須立即急症室；僅有全身警號而無視力症狀時，應盡快（最好當日）專科評估（公眾教育，不能代替面診。） |
+| `/t/t-gca` | en | (keyword / fragment meta or tool blurb) | Giant cell arteritis: any new visual symptom means A&E now; systemic signs alone need specialist review ASAP, ideally the same day. |
+| `/t/t-gca` | ja | (keyword / fragment meta or tool blurb) | 巨細胞性動脈炎の警号。視力症状があれば直ちに救急へ、全身症状のみでも当日中に専門医評価を。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。 |
 | `/t/t-glaucoma-monitor` | zh-Hant | (keyword / fragment meta or tool blurb) | 介紹青光眼長期監察中目標眼壓、OCT 與視野報告的解讀教育，報告顏色不是判詞（公眾教育，不能代替面診。） |
 | `/t/t-glaucoma-monitor` | en | (keyword / fragment meta or tool blurb) | Education on long-term glaucoma monitoring: target pressure, OCT and visual-field reports; colours on a printout are not a verdict. |
 | `/t/t-glaucoma-monitor` | ja | (keyword / fragment meta or tool blurb) | 緑内障の目標眼圧・OCT・視野レポートの読み方。色は判決ではありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。 |
@@ -184,7 +184,7 @@ Head-only meta description replacements. Visible on-page meta/tag lines are **un
 | `/t/t-rd` | ja | (keyword / fragment meta or tool blurb) | 網膜剥離・裂孔・硝子体手術の救急教育と、黄斑が残っているかどうかで急ぐ度合いの話し合いが変わる理由です。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。 |
 | `/t/t-roles` | zh-Hant | (keyword / fragment meta or tool blurb) | 介紹眼科專科醫生、視光師與配鏡分工的公眾教育，方便理解各自角色而非比較廣告（公眾教育，不能代替面診。） |
 | `/t/t-roles` | en | (keyword / fragment meta or tool blurb) | Public education on roles of ophthalmologists, optometrists and dispensing—not a comparative advertisement. |
-| `/t/t-roles` | ja | (keyword / fragment meta or tool blurb) | 眼科専門医・視能／オプトメトリスト・調製の役割分担を紹介します（比較広告ではありません）。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。 |
+| `/t/t-roles` | ja | (keyword / fragment meta or tool blurb) | 眼科専門医・オプトメトリスト（視光師）・調製の役割分担を紹介します（比較広告ではありません）。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。 |
 | `/t/t-rvo` | zh-Hant | (keyword / fragment meta or tool blurb) | 介紹視網膜靜脈或動脈阻塞的突然視力影響，以及何時須作急症處理的教育（公眾教育，不能代替面診。）詳見內文。 |
 | `/t/t-rvo` | en | (keyword / fragment meta or tool blurb) | Education on retinal vein or artery occlusion with sudden vision change, and when emergency care is discussed. |
 | `/t/t-rvo` | ja | (keyword / fragment meta or tool blurb) | 網膜の動静脈閉塞による急な視力変化と、救急が必要な目安を紹介します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。 |
@@ -257,3 +257,21 @@ Head-only meta description replacements. Visible on-page meta/tag lines are **un
 | `/tools/warm` | zh-Hant | (keyword / fragment meta or tool blurb) | 眼瞼熱敷計時示意，提醒跟從醫生建議的溫度與時間；這不是治療效果承諾，亦不能代替面診指導，詳見專題正文。 |
 | `/tools/warm` | en | (keyword / fragment meta or tool blurb) | Warm-compress timer for eyelid-care education. Use the temperature and duration your clinician advised—not a treatment guarantee. |
 | `/tools/warm` | ja | (keyword / fragment meta or tool blurb) | 眼瞼温罨法のタイマー図示。温度と時間は医師の指示に従ってください。効果を保証するものではなく、診療の代わりでもありません。教育目的の説明です。 |
+| `/accessibility` | zh-Hant | (keyword / fragment meta or tool blurb) | 護眼學堂致力讓公眾教育內容盡量人人可用。本頁說明無障礙目標、已知限制與反映問題的方法（公眾教育，不能代替面診。） |
+| `/accessibility` | en | (keyword / fragment meta or tool blurb) | Accessibility goals for this education site, known limits, and how to report problems. Not a formal WCAG certification. |
+| `/accessibility` | ja | (keyword / fragment meta or tool blurb) | この市民教育サイトのアクセシビリティ方針、既知の制限、問題の伝え方を紹介します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。 |
+| `/amsler` | zh-Hant | (keyword / fragment meta or tool blurb) | 阿姆斯勒方格自我監察中央視力示意。不是診斷工具；新出現變形或暗點須盡快眼科評估（公眾教育，不能代替面診。） |
+| `/amsler` | en | (keyword / fragment meta or tool blurb) | Amsler-grid education for central-vision self-checks. Not a diagnosis; new distortion or a dark patch needs prompt ophthalmic review. |
+| `/amsler` | ja | (keyword / fragment meta or tool blurb) | アムスラーグリッドによる中心視力の自己確認の教育。診断ではなく、新しい歪みや暗点は速やかな眼科評価を。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。 |
+| `/iol` | zh-Hant | (keyword / fragment meta or tool blurb) | 人工晶體示意與練習步驟。唔包括診金、預約或商品；不能代替面診或檢查（公眾教育，不能代替面診。） |
+| `/iol` | en | (keyword / fragment meta or tool blurb) | Interactive IOL diagrams for education only—not a clinic visit, booking, prescription, product sale or referral. |
+| `/iol` | ja | (keyword / fragment meta or tool blurb) | 眼内レンズの教育用図示と手順練習。予約・処方・販売・紹介はありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。 |
+| `/privacy` | zh-Hant | (keyword / fragment meta or tool blurb) | 本教育網站不經此頁收集姓名、證件、病歷或付款資料；偏好僅存本機（公眾教育，不能代替面診。） |
+| `/privacy` | en | (keyword / fragment meta or tool blurb) | This education site collects no names, IDs, records or payments here. Preferences stay on-device in localStorage only. |
+| `/privacy` | ja | (keyword / fragment meta or tool blurb) | 本教育サイトはこの頁で氏名・ID・病歴・決済を集めず、設定は端末内のみです。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。 |
+| `/tools` | zh-Hant | (keyword / fragment meta or tool blurb) | 示意與練習步驟工具。唔包括診金、預約或商品；不能代替面診或檢查（公眾教育，不能代替面診。） |
+| `/tools` | en | (keyword / fragment meta or tool blurb) | Education tools with diagrams and practice steps. Not a clinic visit, booking, prescription, product sale or referral. |
+| `/tools` | ja | (keyword / fragment meta or tool blurb) | 図示と手順練習の教育ツール。予約・処方・販売・紹介はありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。 |
+| `/urgent` | zh-Hant | (keyword / fragment meta or tool blurb) | 私家診所不是急症室。本頁分開「立即急症室」與「盡快（最好當日）眼科評估」（公眾教育，不能代替面診。） |
+| `/urgent` | en | (keyword / fragment meta or tool blurb) | A private clinic is not A&E. This page separates go-to-A&E-now from same-day ophthalmic assessment. Public education only. |
+| `/urgent` | ja | (keyword / fragment meta or tool blurb) | 私設クリニックは救急ではありません。「直ちに救急」と「当日中の眼科評価」を分けて示します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。 |
