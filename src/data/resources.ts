@@ -56,7 +56,10 @@ function studentHealthHref(locale: Locale): string {
   if (locale === "en" || locale === "ja") {
     return "https://www.studenthealth.gov.hk/english/health/health_ev/health_ev.html";
   }
-  // 繁 / 简 — publisher’s Chinese education page
+  if (locale === "zh-Hans") {
+    return "https://www.studenthealth.gov.hk/sc_chi/health/health_ev/health_ev.html";
+  }
+  // 繁 — publisher’s Traditional Chinese education page
   return "https://www.studenthealth.gov.hk/tc_chi/health/health_ev/health_ev.html";
 }
 
