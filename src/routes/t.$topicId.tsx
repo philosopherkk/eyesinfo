@@ -102,7 +102,7 @@ function TopicPage() {
         locale={locale}
         name={topic.title}
         description={jsonLdDescription}
-        dateModified={lastReviewed}
+        lastReviewed={lastReviewed}
       />
       {/* Desktop: keep icon back; mobile uses collapsed breadcrumb 「返回分類」. */}
       <div className="hidden items-center px-2 pt-3 sm:flex layout-lg:px-6">

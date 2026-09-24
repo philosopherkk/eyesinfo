@@ -175,7 +175,7 @@ function AnatomyChooserPage({ regionId }: { regionId: AnatomyRegionId }) {
         locale={locale}
         name={title}
         description={jsonLdDescription}
-        dateModified={CONTENT_UPDATED}
+        lastReviewed={CONTENT_UPDATED}
       />
       <div className="flex items-center gap-2 px-2 pt-3 layout-lg:px-6">
         <SpaHref
@@ -239,7 +239,7 @@ function CategoryPage() {
         locale={locale}
         name={title}
         description={jsonLdDescription}
-        dateModified={CONTENT_UPDATED}
+        lastReviewed={CONTENT_UPDATED}
       />
       <div className="flex items-center gap-2 px-2 pt-3 layout-lg:px-6">
         <SpaHref

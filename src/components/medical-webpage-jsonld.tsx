@@ -17,7 +17,7 @@ export type MedicalWebPageJsonLdProps = {
   name: string;
   description: string;
   /** ISO date `YYYY-MM-DD` from 最近覆核 / CONTENT_UPDATED. */
-  dateModified: string;
+  lastReviewed: string;
 };
 
 /**
@@ -29,7 +29,7 @@ export function MedicalWebPageJsonLd({
   locale,
   name,
   description,
-  dateModified,
+  lastReviewed,
 }: MedicalWebPageJsonLdProps) {
   const url = canonicalUrl(path);
   const aboutNames = seoAboutNames(path, locale);
@@ -41,7 +41,7 @@ export function MedicalWebPageJsonLd({
     url,
     inLanguage: IN_LANGUAGE[locale],
     isAccessibleForFree: true,
-    dateModified,
+    lastReviewed,
     audience: {
       "@type": "MedicalAudience",
       audienceType: "Patient",
