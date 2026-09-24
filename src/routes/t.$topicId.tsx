@@ -18,6 +18,8 @@ import type { UiKey } from "@/i18n/ui";
 import { pageHead } from "@/lib/page-seo";
 import { hrefWithLang, localeFromMatch } from "@/lib/locale-path";
 import { uiText } from "@/lib/ui-text";
+import { seoDescriptionFor } from "@/lib/seo-description";
+import { MedicalWebPageJsonLd } from "@/components/medical-webpage-jsonld";
 
 /** Retired stub IA: former hubs → merged / filled topics. */
 const TOPIC_ALIASES: Record<string, string> = {
@@ -51,14 +53,16 @@ export const Route = createFileRoute("/t/$topicId")({
     const raw = getTopic(resolved);
     const topic = raw ? localizeTopic(raw, locale) : null;
     const title = topic?.title ?? uiText(locale, "relatedTopics");
-    const description =
+    const fallback =
       topic?.meta ||
       topic?.tag ||
       `${uiText(locale, "homeKicker")}：${title}`;
+    const path = `/t/${resolved}`;
+    const description = seoDescriptionFor(path, locale, fallback);
     return pageHead({
       title,
       description,
-      path: `/t/${resolved}`,
+      path,
       locale,
     });
   },
@@ -84,9 +88,22 @@ function TopicPage() {
   const tocEntries = collectTocEntries(topic.blocks);
   const hasRefs = (raw.refs?.length ?? 0) > 0;
   const showLocaleFallback = !hasTopicLocalePack(raw.id, locale);
+  const path = `/t/${raw.id}`;
+  const jsonLdDescription = seoDescriptionFor(
+    path,
+    locale,
+    topic.meta || topic.tag || topic.title,
+  );
 
   return (
     <article>
+      <MedicalWebPageJsonLd
+        path={path}
+        locale={locale}
+        name={topic.title}
+        description={jsonLdDescription}
+        dateModified={lastReviewed}
+      />
       {/* Desktop: keep icon back; mobile uses collapsed breadcrumb 「返回分類」. */}
       <div className="hidden items-center px-2 pt-3 sm:flex layout-lg:px-6">
         <SpaHref

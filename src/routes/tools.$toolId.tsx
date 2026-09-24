@@ -16,6 +16,7 @@ import { useI18n, TOOL_TEXT } from "@/i18n";
 import { pageHead } from "@/lib/page-seo";
 import { hrefWithLang, localeFromMatch } from "@/lib/locale-path";
 import { uiText } from "@/lib/ui-text";
+import { seoDescriptionFor } from "@/lib/seo-description";
 
 export const Route = createFileRoute("/tools/$toolId")({
   head: ({ params, match }) => {
@@ -25,13 +26,14 @@ export const Route = createFileRoute("/tools/$toolId")({
     );
     const pack = tool ? TOOL_TEXT[locale]?.[tool.id] : undefined;
     const title = pack?.title ?? tool?.title ?? uiText(locale, "toolsTitle");
-    const description = pack?.blurb
+    const fallback = pack?.blurb
       ? `${pack.blurb} · ${pack.canto}`
       : uiText(locale, "toolsLead");
+    const path = `/tools/${params.toolId}`;
     return pageHead({
       title,
-      description,
-      path: `/tools/${params.toolId}`,
+      description: seoDescriptionFor(path, locale, fallback),
+      path,
       locale,
     });
   },

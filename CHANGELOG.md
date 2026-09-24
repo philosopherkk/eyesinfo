@@ -2,6 +2,11 @@
 
 Git-sourced history for this site. Entries follow commits on `main`, not chat notes.
 
+## [1.77] — 2026-09-24
+
+- **Summary:** SEO 1.77 — IndexNow key + post-Production workflow; fuller head-only meta descriptions (zh/en/ja; zh-Hans via toHans); MedicalWebPage JSON-LD on `/t/*` and `/c/*` (BreadcrumbList unchanged). `CONTENT_UPDATED` unchanged. Google verification HTML untouched.
+- **Files:** `public/<indexnow-key>.txt`, `.github/workflows/indexnow.yml`, `vercel.json`, `src/data/seo-descriptions.ts`, `src/lib/seo-description.ts`, `src/components/medical-webpage-jsonld.tsx`, topic/category/tools/search routes, `docs/seo-descriptions-1.77.md`, `src/lib/site.ts`
+
 ## [1.75] — 2026-09-24
 
 - **Summary:** Corrections contact email → `hokusaivision@gmail.com` (all locales); purpose labels unchanged

@@ -1,0 +1,84 @@
+# Notify IndexNow (Bing and other engines) after a successful Vercel
+# Production deployment. Key file is public/<key>.txt (not a secret).
+name: IndexNow
+
+on:
+  deployment_status:
+  workflow_dispatch:
+
+# No repo secrets required. Read sitemap from the live site only.
+permissions: {}
+
+jobs:
+  submit:
+    # Vercel reports Production success via GitHub deployment_status.
+    # workflow_dispatch allows a manual re-ping after merge.
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.deployment_status.state == 'success' &&
+       github.event.deployment.environment == 'Production')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Submit sitemap URLs to IndexNow
+        env:
+          INDEXNOW_KEY: 6c0a3657fd6bdda1a9630426f9fe3bac
+          # Must match PUBLIC_HOST / live www origin.
+          HOST: www.eyesinfo.org
+        run: |
+          set -euo pipefail
+          KEY="$INDEXNOW_KEY"
+          KEY_LOCATION="https://${HOST}/${KEY}.txt"
+          SITEMAP="https://${HOST}/sitemap.xml"
+
+          echo "Fetching $SITEMAP"
+          XML="$(curl -fsSL "$SITEMAP")"
+          mapfile -t URLS < <(printf '%s' "$XML" | grep -oP '(?<=<loc>)[^<]+' | sort -u)
+          COUNT="${#URLS[@]}"
+          echo "Found $COUNT URLs"
+
+          if [ "$COUNT" -eq 0 ]; then
+            echo "No URLs in sitemap; nothing to submit."
+            exit 0
+          fi
+
+          printf '%s\n' "${URLS[@]}" > /tmp/indexnow-urls.txt
+
+          # IndexNow accepts up to 10,000 URLs per request; we are well under that.
+          BODY="$(HOST="$HOST" KEY="$KEY" KEY_LOCATION="$KEY_LOCATION" python3 <<'PY'
+          import json, os
+          urls = [line.strip() for line in open("/tmp/indexnow-urls.txt", encoding="utf-8") if line.strip()]
+          print(json.dumps({
+              "host": os.environ["HOST"],
+              "key": os.environ["KEY"],
+              "keyLocation": os.environ["KEY_LOCATION"],
+              "urlList": urls,
+          }, ensure_ascii=False))
+          PY
+          )"
+
+          echo "POSTing to https://api.indexnow.org/indexnow ($COUNT URLs)"
+          HTTP_CODE="$(curl -sS -o /tmp/indexnow-body.txt -w '%{http_code}' \
+            -X POST 'https://api.indexnow.org/indexnow' \
+            -H 'Content-Type: application/json; charset=utf-8' \
+            --data "$BODY")"
+          echo "IndexNow HTTP status: $HTTP_CODE"
+          if [ -s /tmp/indexnow-body.txt ]; then
+            echo "Response body:"
+            head -c 2000 /tmp/indexnow-body.txt || true
+            echo
+          fi
+
+          case "$HTTP_CODE" in
+            200|202)
+              echo "IndexNow accepted the submission."
+              ;;
+            429)
+              echo "IndexNow rate-limited (429); logging only — not failing the job."
+              ;;
+            *)
+              echo "IndexNow returned unexpected status $HTTP_CODE" >&2
+              exit 1
+              ;;
+          esac

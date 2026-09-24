@@ -121,5 +121,15 @@ test("PWA middleware treats .xml and .txt as non-document paths", () => {
   // static sitemap/robots are never rewritten as HTML documents.
   assert.equal(isDocumentPath("/sitemap.xml"), false);
   assert.equal(isDocumentPath("/robots.txt"), false);
+  assert.equal(isDocumentPath("/6c0a3657fd6bdda1a9630426f9fe3bac.txt"), false);
   assert.equal(isDocumentPath("/urgent"), true);
+});
+
+test("IndexNow key file is present in public/ as exact key text", () => {
+  const key = "6c0a3657fd6bdda1a9630426f9fe3bac";
+  const keyPath = join(ROOT, `public/${key}.txt`);
+  assert.ok(existsSync(keyPath), `missing IndexNow key file public/${key}.txt`);
+  const body = readFileSync(keyPath);
+  assert.equal(body.toString("utf8"), key);
+  assert.equal(body.length, 32);
 });
