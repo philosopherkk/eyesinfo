@@ -59,6 +59,8 @@ function LegalPage() {
             ))}
           </ul>
           <p className="mt-3">{ed.disclosure}</p>
+          {ed.ownership ? <p className="mt-2">{ed.ownership}</p> : null}
+          {ed.funding ? <p className="mt-2">{ed.funding}</p> : null}
           <p className="mt-2">{ed.correction}</p>
         </div>
         <div>

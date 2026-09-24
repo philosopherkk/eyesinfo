@@ -133,7 +133,7 @@ const zhHant = {
     "本站沒有會員帳戶，不經此網站收集身份證、病歷或付款資料。請勿在任何表格上傳送敏感個人資料——本站亦沒有此類表格。問醫生清單等工具只在你裝置上顯示，不會上載問答內容。",
   privacyClearH: "清除本機資料",
   privacyClearP:
-    "清除字型大小、外觀、語言、收藏、阿姆斯勒自記及戶外時間等本機偏好（localStorage）。不上載伺服器。更正或營運查詢請見法律頁更正政策；本站不經此頁接收病歷或預約，亦未公開營運者電郵。",
+    "清除字型大小、外觀、語言、收藏、阿姆斯勒自記及戶外時間等本機偏好（localStorage）。不上載伺服器。更正見法律頁；電郵 drkkpoon@gmail.com（只供內容糾錯／建議，不處理預約、診症或轉介）。本站不經此頁接收病歷或預約。",
   privacyClearBtn: "清除本機資料",
   privacyClearDone: "已清除本機偏好。",
   clinicTitle: "本站不提供執業資料",
@@ -248,8 +248,8 @@ const zhHant = {
   amslerSeoDesc:
     "阿姆斯勒方格自我監察中央視力示意。不是診斷工具；新出現變形或暗點須盡快（通常當日）眼科評估（散瞳眼底是常用步驟，但不是「只散瞳」便足夠；同時視力急降、簾幕或劇痛嘔吐：急症室）。",
   amslerCalP:
-    "螢幕像素與真實厘米不同。把八達通或信用卡（短邊 85.6 毫米）貼在下面的長方形上，拖動滑桿直至兩邊一樣闊。對準後，方格會接近常用教學尺寸約 10 厘米（螢幕仍有誤差，不能當正式檢查）。",
-  amslerCalCardHint: "卡片示意（對準短邊闊度）",
+    "螢幕像素與真實厘米不同。把八達通或信用卡（長邊 85.6 毫米）貼在下面的長方形上，拖動滑桿直至兩邊一樣闊。將卡的長邊對準參考線。對準後，方格會接近常用教學尺寸約 10 厘米（螢幕仍有誤差，不能當正式檢查）。",
+  amslerCalCardHint: "卡片示意（對準長邊闊度）",
   amslerCalSliderAria: "調整卡片闊度以對準實體卡",
   amslerCalSave: "儲存尺寸",
   amslerCalSaved: "已儲存在此裝置。換手機或電腦請重新對準。",
@@ -372,7 +372,7 @@ const zhHant = {
   cat_lens_sub: "近視遠視 · 白內障 · 斜視",
   cat_lens_research_label: "華人／本港研究",
   cat_lens_research_text:
-    "本港兒童眼科研究／LAMP2：疫情後近視盛行率上升；低濃度阿托品在特定兒童可降低發生風險（試驗約數）。詳見兒童近視專題。數字不是個人機率或診所效果保證。",
+    "香港兒童眼科研究（Zhang 等，2023）：疫情後近視盛行率上升（橫斷面約數，不是個人機率）。\nLAMP2（2023）：低濃度阿托品在尚未近視的特定兒童可降低發生風險（試驗發生率約數）。詳見兒童近視專題。數字不是診所效果保證。",
   cat_lens_research_link: "兒童近視專題",
   cat_lid: "眼瞼與淚膜",
   cat_lid_sub: "乾眼 · 瞼炎 · 內翻 · 溢淚",
@@ -549,7 +549,7 @@ const en: Record<Key, string> = {
     "There is no account. This site does not collect ID numbers, medical records or payment data. Do not send sensitive personal data — there is no form for that. Tools such as the questions checklist stay on your device and are not uploaded.",
   privacyClearH: "Clear local data",
   privacyClearP:
-    "Clears on-device preferences in localStorage (type size, appearance, language, bookmarks, Amsler notes, outdoor time). Nothing is uploaded. For corrections, see the corrections policy on the legal page; this site does not take medical records or bookings here, and no operator email is published.",
+    "Clears on-device preferences in localStorage (type size, appearance, language, bookmarks, Amsler notes, outdoor time). Nothing is uploaded. For corrections, see the legal page; email drkkpoon@gmail.com (For content corrections/suggestions only — not for bookings, clinical advice, or referrals.). This site does not take medical records or bookings here.",
   privacyClearBtn: "Clear local data",
   privacyClearDone: "Local preferences cleared.",
   clinicTitle: "No practice information on this site",
@@ -666,8 +666,8 @@ const en: Record<Key, string> = {
   amslerSeoDesc:
     "Amsler grid for self-awareness of central vision. Not a diagnostic tool; new distortion or a dark patch needs prompt ophthalmic assessment (usually same day). Dilated fundus exam is a common step, but dilation alone is not enough; if vision also drops sharply, there is a curtain, or severe pain with vomiting: go to A&E.",
   amslerCalP:
-    "Screen pixels are not real centimetres. Place an Octopus card or credit card (short edge 85.6 mm) on the rectangle below and drag the slider until the widths match. After matching, the grid is near the usual teaching size of about 10 cm (screen error remains — this is not a formal exam).",
-  amslerCalCardHint: "Card guide (match the short-edge width)",
+    "Screen pixels are not real centimetres. Place an Octopus card or credit card (long edge 85.6 mm) on the rectangle below and drag the slider until the widths match. Align the long edge of the card with the guide. After matching, the grid is near the usual teaching size of about 10 cm (screen error remains — this is not a formal exam).",
+  amslerCalCardHint: "Card guide (match the long-edge width)",
   amslerCalSliderAria: "Adjust the card width to match a physical card",
   amslerCalSave: "Save size",
   amslerCalSaved: "Saved on this device. Recalibrate if you change phone or computer.",
@@ -794,7 +794,7 @@ const en: Record<Key, string> = {
   cat_lens_sub: "Myopia, hyperopia · cataract · squint",
   cat_lens_research_label: "Chinese / Hong Kong research",
   cat_lens_research_text:
-    "Hong Kong Children Eye Study / LAMP2: myopia prevalence rose after pandemic restrictions; low-concentration atropine can lower incidence risk in selected children (trial figures). See the childhood myopia topic. Figures are not personal odds or a clinic outcome guarantee.",
+    "Hong Kong Children Eye Study (Zhang et al., 2023): myopia prevalence rose after pandemic restrictions (cross-sectional figures, not personal odds).\nLAMP2 (2023): low-concentration atropine can lower incidence risk in selected children not yet myopic (trial incidence figures). See the childhood myopia topic. Figures are not a clinic outcome guarantee.",
   cat_lens_research_link: "childhood myopia topic",
   cat_lid: "Eyelids and tear film",
   cat_lid_sub: "Dry eye · blepharitis · entropion · watering",
@@ -968,7 +968,7 @@ const ja: Record<Key, string> = {
     "会員登録はありません。身分証番号・病歴・決済情報は集めません。機密情報を送らないでください。その種のフォームもありません。医師に聞くリストなどのツールは端末上のみで、内容はアップロードしません。",
   privacyClearH: "端末内データを消す",
   privacyClearP:
-    "文字サイズ・外観・言語・保存・アムスラー記録・屋外時間など localStorage の端末内設定を消します。アップロードはありません。訂正は法令頁の訂正方針を参照；病歴や予約は受け付けず、運営者メールも公開していません。",
+    "文字サイズ・外観・言語・保存・アムスラー記録・屋外時間など localStorage の端末内設定を消します。アップロードはありません。訂正は法令頁を参照；メール drkkpoon@gmail.com（内容の訂正／提案のみ。予約・診療相談・紹介は扱いません）。病歴や予約は受け付けません。",
   privacyClearBtn: "端末内データを消す",
   privacyClearDone: "端末内の設定を消しました。",
   clinicTitle: "診療所情報は掲載しません",
@@ -1085,8 +1085,8 @@ const ja: Record<Key, string> = {
   amslerSeoDesc:
     "中心視力の自己観察用アムスラーチャートの図示。診断ツールではありません。新たに出た歪みや暗点はできるだけ早く（通常は当日）の眼科評価を。散瞳眼底はよく行う一歩ですが、「散瞳だけ」では足りません。同時に視力急低下・カーテン・激痛嘔吐がある場合は救急へ。",
   amslerCalP:
-    "画面のピクセルは実寸のセンチメートルではありません。オクトパスカードまたはクレジットカード（短辺 85.6 mm）を下の長方形に合わせ、スライダーで幅を揃えます。合わせたあと、マス目はよく使う教育サイズ約 10 cm に近くなります（画面誤差は残り、正式検査ではありません）。",
-  amslerCalCardHint: "カードの図示（短辺の幅を合わせる）",
+    "画面のピクセルは実寸のセンチメートルではありません。オクトパスカードまたはクレジットカード（長辺 85.6 mm）を下の長方形に合わせ、スライダーで幅を揃えます。カードの長辺を基準線に合わせてください。合わせたあと、マス目はよく使う教育サイズ約 10 cm に近くなります（画面誤差は残り、正式検査ではありません）。",
+  amslerCalCardHint: "カードの図示（長辺の幅を合わせる）",
   amslerCalSliderAria: "実物のカードに合わせて幅を調整",
   amslerCalSave: "サイズを保存",
   amslerCalSaved: "この端末に保存しました。スマホやパソコンを変えたら再調整してください。",
@@ -1211,7 +1211,7 @@ const ja: Record<Key, string> = {
   cat_lens_sub: "近視遠視 · 白内障 · 斜視",
   cat_lens_research_label: "華人／香港の研究",
   cat_lens_research_text:
-    "香港小児眼科研究／LAMP2：制限後に近視有病率が上昇；低濃度アトロピンは特定の小児で発生リスクを下げうる（試験の概数）。詳しくは小児近視のページへ。数字は個人の確率やクリニック効果の保証ではありません。",
+    "香港小児眼科研究（Zhangら、2023）：制限後に近視有病率が上昇（横断の概数であり個人の確率ではない）。\nLAMP2（2023）：低濃度アトロピンはまだ近視でない特定の小児で発生リスクを下げうる（試験の発生率の概数）。詳しくは小児近視のページへ。数字はクリニック効果の保証ではありません。",
   cat_lens_research_link: "小児近視のページ",
   cat_lid: "眼瞼と涙液",
   cat_lid_sub: "ドライアイ · 眼瞼炎 · 内反 · 流涙",

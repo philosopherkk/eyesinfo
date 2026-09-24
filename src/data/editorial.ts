@@ -1,9 +1,9 @@
 /** Education-site authorship only: name, specialty, qualifications. No contact. */
 
 export const EDITORIAL = {
-  reviewed: "2026年9月17日",
+  reviewed: "2026年9月24日",
   /** ISO date matching the site-wide stamp used when a topic omits lastReviewed. */
-  reviewedIso: "2026-09-17",
+  reviewedIso: "2026-09-24",
   name: "潘家健醫生",
   title: "眼科專科醫生",
   registerNote: "香港醫務委員會註冊醫生；名列專科名冊（眼科）",
@@ -21,18 +21,21 @@ export const EDITORIAL = {
    */
   disclosure:
     "出版／營運：護眼學堂（eyesinfo.org）。臨床覆核：潘家健醫生（香港醫務委員會註冊醫生；名列專科名冊（眼科））。本教育網站不提供診所聯絡、預約或轉介，亦不連至執業網站。本教育網站目前無商業贊助；若日後有資助或利益關係將於法律頁披露。教育內容與任何診所推廣分開展示；覆核者亦可能從事臨床執業，本站不作轉介。",
+  /** Ownership stamp — education site only; not a clinic shopfront. */
+  ownership: "本站由潘家健醫生創辦、出資及營運",
   /**
-   * Funding / COI lives inside `disclosure` only (Lex L2) — do not also render
-   * this string on legal/banner, or the no-sponsor line repeats.
+   * Funding / COI. Shown on the legal page when non-empty; keep consistent with
+   * the no-commercial-sponsor line inside `disclosure`.
    */
-  funding: "",
+  funding: "本站由潘家健醫生自資",
   notSubstitute:
     "內容不能代替與註冊眼科專科醫生的面診，亦不能作為診斷。本頁不是診斷、處方或手術建議。只有列於醫務委員會眼科專科名冊者可稱「眼科專科醫生」。",
   /**
-   * Corrections policy only — no operator email in-repo; do not imply a listed contact.
+   * Corrections contact — email + Exact purpose label on every instance.
+   * Not for booking, clinical advice, or referrals; never nest beside clinic CTAs.
    */
   correction:
-    "若發現內容錯誤，本站暫未公開營運者電郵；更正政策見本段。現階段不經本站接收病歷、預約或個別診治查詢。",
+    "若發現內容錯誤，請電郵 drkkpoon@gmail.com（只供內容糾錯／建議，不處理預約、診症或轉介）。更正政策見本段。現階段不經本站接收病歷、預約或個別診治查詢。",
 };
 
 /** Structured reviewer stamp — same person as EDITORIAL; do not invent new reviewers. */
