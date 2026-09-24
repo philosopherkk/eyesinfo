@@ -122,7 +122,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
   d5: {
     title: "Age-related macular degeneration",
     tag: "Central vision",
-    meta: "Bent lines or a central dark patch: prompt dilated exam",
+    meta: "Bent lines or a central dark patch: same-day ophthalmic assessment",
     blocks: [
       h("What it is"),
       p("The macula serves fine central vision. Dry AMD is more common (drusen, geographic atrophy). Wet AMD is driven by choroidal neovascular leakage and can steal vision quickly. Polypoidal choroidal vasculopathy (PCV) is not rare among Chinese patients with wet disease. Wet macular neovascularisation / leakage involves several signals: vascular endothelial growth factor A (VEGF-A) drives endothelial proliferation, new vessels and higher permeability and is one main clinical anti-VEGF target; angiopoietin-2 (Ang-2) can weaken vessel stability via Tie-2 and make vessels more VEGF-sensitive (literature reviews; dual-pathway drug labelling also describes this mechanism, but the independent contribution of Ang-2 inhibition to clinical efficacy is still being established). Related family factors such as PlGF and PDGF are also discussed in vessel maturation and fibrosis-related processes — no single molecule explains every patient. Whether to inject, and which registered class, is decided only by an ophthalmologist against the indication; this page does not compare products."),
@@ -175,7 +175,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
   d8: {
     title: "Floaters and retinal detachment risk",
     tag: "Do not ignore flashes",
-    meta: "New flashes or more floaters: prompt dilated exam",
+    meta: "New flashes or more floaters: same-day dilated assessment",
     blocks: [
       h("What it is"),
       p("The vitreous liquefies and collagen clumps cast shadows (floaters). Most are posterior vitreous detachment. A few warn of a retinal tear or bleed. High myopia (≥ 600 degrees) can bring this on in the 20s–30s, with higher tear/detachment risk."),
@@ -468,7 +468,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       h("Years later: posterior capsule opacification (not a returning cataract)"),
       p("The implant stays in the original bag. Lens epithelial cells can cloud the posterior capsule over years (PCO, sometimes called an after-cataract). A systematic overview pooled roughly 12% at 1 year, 21% at 3 years, and 28% at 5 years (Schaumberg et al., Ophthalmology 1998; mostly Nd:YAG / discission definitions); a large modern UK registry shows a similar rise with time (RCOphth NOD Report 9, Eye 2023). These are not your personal odds — rates vary with lens, surgery and how PCO is counted. This is not a new lens growing back, and it is not a failed operation."),
       p("Blur years after cataract surgery is usually PCO, not a “returning cataract”. Not every blur needs YAG capsulotomy. A doctor must judge whether it affects function and exclude macular, corneal or other causes. The laser is outpatient, with no incision. See the YAG fact sheet."),
-      w("After YAG: new flashes or many new floaters, without a curtain, sudden blindness or severe pain — dilated fundus exam the same day if possible. A curtain, sudden blindness or severe pain: go to A&E now."),
+      w("After YAG: new flashes or many new floaters, without a curtain, sudden blindness or severe pain — dilated fundus exam the same day (required). A curtain, sudden blindness or severe pain: go to A&E now."),
     ],
   },
   "t-warm": {
@@ -623,7 +623,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
     meta: "PCO · sealing a tear",
     blocks: [
       h("YAG posterior capsulotomy"),
-      p("Not a “returning cataract”. Lens epithelial cells cloud the posterior capsule. Over years this is not uncommon; rates in the literature vary and are not your personal odds. Outpatient laser, no incision. Not every blur needs YAG; a doctor judges whether it affects function. Short pressure rise and extra floaters can occur; retinal tear is uncommon. After YAG: new flashes or many new floaters, without a curtain, sudden blindness or severe pain — dilated fundus exam the same day if possible. A curtain, sudden blindness or severe pain: go to A&E now."),
+      p("Not a “returning cataract”. Lens epithelial cells cloud the posterior capsule. Over years this is not uncommon; rates in the literature vary and are not your personal odds. Outpatient laser, no incision. Not every blur needs YAG; a doctor judges whether it affects function. Short pressure rise and extra floaters can occur; retinal tear is uncommon. After YAG: new flashes or many new floaters, without a curtain, sudden blindness or severe pain — dilated fundus exam the same day (required). A curtain, sudden blindness or severe pain: go to A&E now."),
       h("Retinal barrier laser"),
       p("Scars around a tear to reduce fluid going under the retina. Activity limits depend on the tear and the doctor’s instructions — not a blanket two-week sports ban. Laser cannot fix a retina that is already detached. An expanding curtain is an emergency."),
     ],
@@ -842,12 +842,14 @@ export const EN_PACKS: Record<string, TopicPack> = {
       ul([
         "Sudden double vision with ptosis, a dilated pupil, severe headache, vomiting, slurred speech, weakness or reduced consciousness — rule out a third-nerve palsy and other neurological emergencies",
         "A new squint, double vision or a stuck eye after head or orbital trauma",
-        "A white pupil or nystagmus at any age: go to A&E now, or same-day dilated exam by an ophthalmologist to exclude retinoblastoma and other causes. Do not wait and watch at home",
+        "A white pupil (leukocoria) at any age: go to A&E now, or same-day dilated exam by an ophthalmologist to exclude retinoblastoma and other causes. Do not wait and watch at home",
+        "New nystagmus that is asymmetric, or with diplopia, severe vertigo or neurological signs: A&E / 999. Known stable, long-standing congenital or infantile nystagmus alone is not automatic “go to A&E now”",
         "A child’s eye that suddenly turns markedly while the child is unwell — not “ordinary squint”",
       ]),
       h("Same-day ophthalmic assessment (see an ophthalmologist as soon as possible)"),
       ul([
         "New adult double vision without the red flags above: same-day assessment by an ophthalmologist who can examine the nerves, with dilation and imaging if the doctor decides",
+        "New nystagmus without the emergency red flags above: same-day assessment by an ophthalmologist as soon as possible",
         "A child’s squint that worsens over days, a constant head tilt, or covering one eye to look",
         "Known thyroid eye disease or myasthenia with a sudden jump in double vision",
       ]),
@@ -885,7 +887,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
           [
             "Newborn to early months",
             "Red reflex, lid/pupil appearance, a clear constant turn",
-            "White pupil, nystagmus, or a sudden marked turn while unwell → A&E / same-day dilation",
+            "White pupil; new nystagmus with red flags; or a sudden marked turn while unwell → A&E / same-day dilation",
           ],
           [
             "Later infancy",
@@ -905,7 +907,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
         ],
       },
       ul([
-        "Do not wait: white pupil, nystagmus, post-trauma double vision / a stuck eye, or new adult double vision with neurological red flags → A&E / 999",
+        "Do not wait: white pupil; new / asymmetric nystagmus with red flags; post-trauma double vision / a stuck eye; or new adult double vision with neurological red flags → A&E / 999",
         "A child’s squint that worsens over days, a constant head tilt, or covering one eye to look → same-day / see an ophthalmologist as soon as possible",
         "Abnormal screen, more frequent intermittent exotropia, or repeated turns noticed by teachers / parents → book specialty care; do not wait indefinitely for the child to “grow out of it”",
       ]),
@@ -965,7 +967,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
     tag: "For parents",
     meta: "A guide, not a score",
     blocks: [
-      p("Rough public-education timing only. Babies start regarding faces in the first weeks. Alignment should settle around 2–3 months. Persistent squint after 3–4 months: see an ophthalmologist promptly. Usually not a same-day emergency, but do not wait until school. A white pupil or nystagmus at any age: go to A&E now, or same-day dilated exam by an ophthalmologist to exclude retinoblastoma and other causes. Do not wait and watch at home. Preschool is an important window for amblyopia, strabismus and high refractive error."),
+      p("Rough public-education timing only. Babies start regarding faces in the first weeks. Alignment should settle around 2–3 months. Persistent squint after 3–4 months: see an ophthalmologist promptly. Usually not a same-day emergency, but do not wait until school. A white pupil (leukocoria) at any age: go to A&E now, or same-day dilated exam by an ophthalmologist to exclude retinoblastoma and other causes. Do not wait and watch at home. New nystagmus that is asymmetric, or with diplopia, severe vertigo or neurological signs: A&E / 999; new nystagmus without those red flags: same-day ophthalmic assessment. Known stable, long-standing congenital or infantile nystagmus alone is not automatic “go to A&E now”. Preschool is an important window for amblyopia, strabismus and high refractive error."),
     ],
   },
   "t-cl": {

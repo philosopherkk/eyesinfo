@@ -132,7 +132,7 @@ export function localizedUrgent(locale: Locale): {
         "Sudden drop in vision or sudden blindness",
         "A curtain, a large field cut, or a cloth-like shadow",
         "Brief monocular blackout (one eye goes dark or blank, then recovers)",
-        "New double vision",
+        "New double vision with neurological / red-flag companions (e.g. dilated pupil, ptosis, limb weakness, slurred speech, severe headache, jaw claudication / scalp tenderness suggesting giant cell arteritis, or after head / orbital trauma)",
         "Severe eye pain with headache and vomiting (rule out acute angle-closure glaucoma)",
         "Chemical splash (irrigate first, go to A&E while irrigating)",
         "Penetrating injury, suspected ruptured globe, or other severe trauma",
@@ -140,6 +140,7 @@ export function localizedUrgent(locale: Locale): {
         "After an intravitreal (into-the-eye) injection: worse pain, worse redness, or a sharp vision drop (rule out endophthalmitis)",
       ],
       same: [
+        "New double vision without the neurological / red-flag companions above: same-day assessment as soon as possible by an ophthalmologist who can examine the nerves, or by A&E eye care",
         "New or suddenly increased flashes or floaters: urgent ophthalmic assessment is needed (dilated fundus exam is a common step, but what is done is decided by the duty doctor — dilation alone is not enough). If there is also vision loss or a curtain, go to A&E now; if you cannot get there: call 999. Without a curtain and without sudden blindness: same-day assessment as soon as possible by an ophthalmologist who can dilate, or by A&E eye care.",
         "A red, painful eye without severe pain with vomiting or sudden blindness — same-day ophthalmic assessment",
         "Contact-lens-related pain and light sensitivity — same-day assessment; do not delay if pain continues after lens removal",
@@ -153,7 +154,7 @@ export function localizedUrgent(locale: Locale): {
         "突然の視力低下または突然の失明",
         "カーテン状の欠損、大きな視野欠損、布で覆われたような影",
         "一過性の片眼暗黒（片眼の視力が短く黒く／消えて、その後戻る）",
-        "新たに出た複視",
+        "新たに出た複視に神経／危険徴候を伴う場合（例：瞳孔散大、眼瞼下垂、手足の力低下、呂律不良、激しい頭痛、顎跛行／頭皮の圧痛など巨細胞性動脈炎を疑う徴候、または頭／眼窩外傷のあと）",
         "頭痛・嘔吐を伴う強い眼痛（急性閉塞隅角緑内障の除外）",
         "薬品の飛入（まず洗浄し、洗いながら救急へ）",
         "穿孔外傷、眼球破裂の疑い、その他の重い外傷",
@@ -161,6 +162,7 @@ export function localizedUrgent(locale: Locale): {
         "硝子体内注射後の痛み増悪・充血悪化・急な視力低下（眼内炎の除外）",
       ],
       same: [
+        "上記の神経／危険徴候を伴わない新たに出た複視：神経診察ができる眼科専門医または救急眼科で当日できるだけ早く評価",
         "新しい／急に増えた光視または飛蚊：緊急の眼科評価が必要（散瞳眼底はよく行う一歩だが、内容は当直医が決め、「散瞳だけ」では足りない）。視力低下やカーテンを伴う場合は直ちに救急へ；行けない場合は999番。カーテンも突然の失明もない場合：散瞳眼底ができる眼科専門医または救急眼科で当日できるだけ早く評価。",
         "激しい眼痛と嘔吐や突然の失明のない片眼の充血疼痛 — 同日の眼科評価",
         "コンタクトレンズ関連の充血疼痛・羞明 — はずしたあとも痛ければ同日の評価；遅らせない",

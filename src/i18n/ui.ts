@@ -207,7 +207,7 @@ const zhHant = {
     "資料儲存在你的裝置（字體、收藏、語言）。這不是 App Store / Google Play 上架的原生安裝包，而是同一套眼科教育內容的手機版。",
   amslerTitle: "阿姆斯勒方格",
   amslerLead:
-    "教育工具 · 自我察覺中央視力（黃斑）。螢幕版只供參考，不能代替散瞳眼底檢查。突然直線變彎、中央暗點或視力急降，請到急症室。",
+    "教育工具 · 自我察覺中央視力（黃斑）。螢幕版只供參考，不能代替散瞳眼底檢查。新出現直線變彎或中央暗點：須緊急眼科評估（通常當日）；若同時視力急降、簾幕或劇痛嘔吐：立即急症室。",
   amslerMidFlowCaveat:
     "示意／自查不是診斷；結果正常不能排除黃斑或視網膜疾病，亦不能代替散瞳眼底或 OCT。",
   distortionUrgent:
@@ -279,7 +279,7 @@ const zhHant = {
   amslerAbnormal2: "正中間缺一塊或圓點消失（中央暗點，central scotoma）",
   amslerAbnormal3: "圓點仍在、旁邊缺格或看不見一塊（旁中央暗點，paracentral scotoma）",
   amslerAbnormal4:
-    "與昨天相比，新出現的變形（可固定每週同一時間自查；自查唔取代醫生安排的散瞳／OCT 覆診）",
+    "固定每週同一時間自查是否有新出現或加重的變形；自查唔取代醫生安排的散瞳／OCT 覆診",
   amslerAmdLink: "年齡相關性黃斑病變",
   amslerNoteH: "4. 今日記錄（只在此裝置）",
   amslerNoteLead: "不記姓名、不上載。用來同自己昨日比。點選只係本機備忘，不是黃斑病分級或診斷。",
@@ -625,7 +625,7 @@ const en: Record<Key, string> = {
     "Data stay on your device (type size, saved topics, language). This is not a native App Store / Google Play package; it is the same education content on your phone.",
   amslerTitle: "Amsler grid",
   amslerLead:
-    "Education tool · self-awareness of central vision (macula). A screen version is only a guide and cannot replace a dilated fundus exam. Sudden distortion, a central dark patch or a sharp drop in vision: go to A&E.",
+    "Education tool · self-awareness of central vision (macula). A screen version is only a guide and cannot replace a dilated fundus exam. New straight-line distortion or a central dark patch: urgent ophthalmic assessment is needed (usually same day). If vision also drops sharply, there is a curtain, or severe pain with vomiting: go to A&E now.",
   amslerMidFlowCaveat:
     "Illustration / self-check is not a diagnosis; a normal result does not rule out macular or retinal disease, and does not replace dilated fundus exam or OCT.",
   distortionUrgent:
@@ -699,7 +699,7 @@ const en: Record<Key, string> = {
   amslerAbnormal2: "A missing patch in the very centre, or the centre dot vanishes (central scotoma)",
   amslerAbnormal3: "The centre dot remains, but a blank or missing patch sits beside it (paracentral scotoma)",
   amslerAbnormal4:
-    "New distortion compared with yesterday (you may self-check at a fixed weekly time; self-check does not replace dilated / OCT follow-up your doctor arranged)",
+    "Self-check at a fixed weekly time for new or worse distortion; self-check does not replace dilated / OCT follow-up your doctor arranged",
   amslerAmdLink: "Age-related macular degeneration",
   amslerNoteH: "4. Today’s note (this device only)",
   amslerNoteLead:
@@ -1044,7 +1044,7 @@ const ja: Record<Key, string> = {
     "データはこの端末に残ります（文字サイズ、保存、言語）。App Store / Google Playのネイティブアプリではなく、同じ教育内容の携帯版です。",
   amslerTitle: "アムスラーチャート",
   amslerLead:
-    "教育ツール · 中心視力（黄斑）の自己観察用です。画面版は参考であり、散瞳眼底検査の代わりにはなりません。突然のゆがみ、中心暗点、急な視力低下は救急外来へ。",
+    "教育ツール · 中心視力（黄斑）の自己観察用です。画面版は参考であり、散瞳眼底検査の代わりにはなりません。新たに出た直線のゆがみや中心暗点：緊急の眼科評価が必要（通常は当日）。同時に視力急低下・カーテン・激痛嘔吐がある場合は直ちに救急へ。",
   amslerMidFlowCaveat:
     "図示／自己チェックは診断ではありません。正常でも黄斑や網膜の病気を否定できず、散瞳眼底やOCTの代わりにもなりません。",
   distortionUrgent:
@@ -1116,7 +1116,7 @@ const ja: Record<Key, string> = {
   amslerAbnormal2: "ど真ん中が欠け、または中央の点が消える（中心暗点、central scotoma）",
   amslerAbnormal3: "点は残り、横にマス目が欠けて見えない（傍中心暗点、paracentral scotoma）",
   amslerAbnormal4:
-    "昨日と比べて新たに出た歪み（毎週同じ時間の自己観察でも可。自己観察は医師が手配した散瞳／OCT再診の代わりにはなりません）",
+    "毎週同じ時間に固定して、新たに出た・悪化した歪みがないか自己観察する。自己観察は医師が手配した散瞳／OCT再診の代わりにはなりません",
   amslerAmdLink: "加齢黄斑変性",
   amslerNoteH: "4. 今日の記録（この端末のみ）",
   amslerNoteLead:
