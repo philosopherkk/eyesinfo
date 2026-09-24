@@ -260,9 +260,9 @@ Head-only meta description replacements. Visible on-page body copy is **unchange
 | `/accessibility` | zh-Hant | (keyword / fragment meta or tool blurb) | 護眼學堂致力讓公眾教育內容盡量人人可用。本頁說明無障礙目標、已知限制與反映問題的方法（公眾教育，不能代替面診。） |
 | `/accessibility` | en | (keyword / fragment meta or tool blurb) | Accessibility goals for this education site, known limits, and how to report problems. Not a formal WCAG certification. |
 | `/accessibility` | ja | (keyword / fragment meta or tool blurb) | この市民教育サイトのアクセシビリティ方針、既知の制限、問題の伝え方を紹介します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。 |
-| `/amsler` | zh-Hant | (keyword / fragment meta or tool blurb) | 阿姆斯勒方格自我監察中央視力示意。不是診斷工具；新出現變形或暗點須盡快眼科評估（公眾教育，不能代替面診。） |
-| `/amsler` | en | (keyword / fragment meta or tool blurb) | Amsler-grid education for central-vision self-checks. Not a diagnosis; new distortion or a dark patch needs prompt ophthalmic review. |
-| `/amsler` | ja | (keyword / fragment meta or tool blurb) | アムスラーグリッドによる中心視力の自己確認の教育。診断ではなく、新しい歪みや暗点は速やかな眼科評価を。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。 |
+| `/amsler` | zh-Hant | (keyword / fragment meta or tool blurb) | 阿姆斯勒方格自我監察中央視力示意。不是診斷工具；新出現直線變彎或中央暗點須緊急眼科評估（通常當日）（公眾教育，不能代替面診。） |
+| `/amsler` | en | (keyword / fragment meta or tool blurb) | Amsler-grid education for central vision. Not a diagnosis; new distortion or a dark patch needs urgent ophthalmic assessment (usually same day). |
+| `/amsler` | ja | (keyword / fragment meta or tool blurb) | アムスラーグリッドによる中心視力の自己確認の教育。診断ではなく、新しい直線のゆがみや中心暗点は緊急の眼科評価（通常は当日）を。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。 |
 | `/iol` | zh-Hant | (keyword / fragment meta or tool blurb) | 人工晶體示意與練習步驟。唔包括診金、預約或商品；不能代替面診或檢查（公眾教育，不能代替面診。） |
 | `/iol` | en | (keyword / fragment meta or tool blurb) | Interactive IOL diagrams for education only—not a clinic visit, booking, prescription, product sale or referral. |
 | `/iol` | ja | (keyword / fragment meta or tool blurb) | 眼内レンズの教育用図示と手順練習。予約・処方・販売・紹介はありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。 |
