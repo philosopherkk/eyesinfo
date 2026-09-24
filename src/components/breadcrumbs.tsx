@@ -55,18 +55,17 @@ function buildCrumbs(pathname: string, t: (k: UiKey) => string, locale: Locale):
   const topicMatch = pathname.match(/^\/t\/([^/]+)\/?$/);
   if (topicMatch) {
     const topic = getTopic(topicMatch[1]);
-    if (topic) {
-      const cat = CATEGORIES.find((c) => c.id === topic.category);
-      if (cat) {
-        trail.push({
-          label: t(CAT_UI[cat.id]),
-          href: hrefWithLang(`/c/${cat.id}`, locale),
-        });
-      }
-      const loc = localizeTopic(topic, locale);
-      trail.push({ label: loc.title });
-      return trail;
+    if (!topic) return null; // 404 — no BreadcrumbList / visible trail
+    const cat = CATEGORIES.find((c) => c.id === topic.category);
+    if (cat) {
+      trail.push({
+        label: t(CAT_UI[cat.id]),
+        href: hrefWithLang(`/c/${cat.id}`, locale),
+      });
     }
+    const loc = localizeTopic(topic, locale);
+    trail.push({ label: loc.title });
+    return trail;
   }
 
   const catMatch = pathname.match(/^\/c\/([^/]+)\/?$/);
@@ -85,18 +84,16 @@ function buildCrumbs(pathname: string, t: (k: UiKey) => string, locale: Locale):
       trail.push({ label: title });
       return trail;
     }
+    return null; // unknown /c/* → 404
   }
 
   const toolMatch = pathname.match(/^\/tools\/([^/]+)\/?$/);
   if (toolMatch) {
-    trail.push({ label: t("toolsTitle"), href: hrefWithLang("/tools", locale) });
     const tool = TOOLS.find((x) => x.id === toolMatch[1]);
-    if (tool) {
-      const title = TOOL_TEXT[locale]?.[tool.id]?.title ?? tool.title;
-      trail.push({ label: title });
-    } else {
-      trail.push({ label: toolMatch[1] });
-    }
+    if (!tool) return null; // unknown tool → 404
+    trail.push({ label: t("toolsTitle"), href: hrefWithLang("/tools", locale) });
+    const title = TOOL_TEXT[locale]?.[tool.id]?.title ?? tool.title;
+    trail.push({ label: title });
     return trail;
   }
 
@@ -119,14 +116,25 @@ function buildCrumbs(pathname: string, t: (k: UiKey) => string, locale: Locale):
     return trail;
   }
 
-  const seg = pathname.split("/").filter(Boolean).pop() ?? pathname;
-  trail.push({ label: seg });
-  return trail;
+  // Unknown route (e.g. /resources before 1.76) — no trail, no BreadcrumbList JSON-LD.
+  return null;
 }
 
 function absoluteUrl(href: string): string {
   if (href.startsWith("http")) return href;
   return `${PUBLIC_ORIGIN}${href.startsWith("/") ? href : `/${href}`}`;
+}
+
+/**
+ * Breadcrumb item URL matching pageHead hreflang alternates for `locale`:
+ * zh-Hant → bare path; en/ja/zh-Hans → `path?lang=…`.
+ * Locale entry homes (`/en`, `/ja`, `/zh-Hans`) normalize to `/` first.
+ */
+function breadcrumbItemUrl(hrefOrPath: string, locale: Locale): string {
+  const bare = (hrefOrPath.split("?")[0] || "/").replace(/\/$/, "") || "/";
+  const normalized =
+    bare === "/en" || bare === "/ja" || bare === "/zh-Hans" ? "/" : bare;
+  return absoluteUrl(hrefWithLang(normalized, locale));
 }
 
 /**
@@ -136,26 +144,30 @@ function absoluteUrl(href: string): string {
  */
 export function Breadcrumbs() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const routeNotFound = useRouterState({
+    select: (s) => s.matches.some((m) => m.status === "notFound"),
+  });
   const { t, locale } = useI18n();
   const crumbs = useMemo(() => buildCrumbs(pathname, t, locale), [pathname, t, locale]);
   const isTopic = /^\/t\/[^/]+\/?$/.test(pathname);
   const catCrumb = isTopic ? crumbs?.find((c) => c.href?.startsWith("/c/")) : undefined;
 
-  if (!crumbs || crumbs.length < 2) return null;
+  // 404 / unmatched routes: WebSite JSON-LD only (from __root), no BreadcrumbList.
+  if (routeNotFound || !crumbs || crumbs.length < 2) return null;
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: crumbs.map((c, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: c.label,
-      ...(c.href
-        ? { item: absoluteUrl(c.href) }
-        : i === crumbs.length - 1
-          ? { item: absoluteUrl(pathname) }
-          : {}),
-    })),
+    itemListElement: crumbs.map((c, i) => {
+      const rawPath =
+        c.href ?? (i === crumbs.length - 1 ? pathname : undefined);
+      return {
+        "@type": "ListItem",
+        position: i + 1,
+        name: c.label,
+        ...(rawPath ? { item: breadcrumbItemUrl(rawPath, locale) } : {}),
+      };
+    }),
   };
 
   return (
