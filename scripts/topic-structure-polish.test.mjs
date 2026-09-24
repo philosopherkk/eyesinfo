@@ -129,9 +129,9 @@ describe("topic structure polish", () => {
     assert.match(read("src/lib/topic-related.ts"), /PRIMARY_TOPIC_CAP\s*=\s*5/);
   });
 
-  it("CONTENT_VERSION is 1.74", () => {
+  it("CONTENT_VERSION is 1.75", () => {
     const site = read("src/lib/site.ts");
-    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.74"/);
+    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.75"/);
     assert.match(site, /CONTENT_UPDATED\s*=\s*"2026-09-24"/);
   });
 
@@ -245,7 +245,7 @@ describe("topic structure polish", () => {
     const tools = read("src/data/tools.ts");
     const route = read("src/routes/t.$topicId.tsx");
     const hkos = read("src/data/hkos-videos.ts");
-    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.74"/);
+    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.75"/);
     for (const id of ["t-macular-hole", "t-erm"]) {
       assert.match(extra, new RegExp(`id:\\s*"${id}"`));
       assert.match(en, new RegExp(`"${id}"\\s*:`));
@@ -271,7 +271,7 @@ describe("topic structure polish", () => {
     const viewer = read("src/components/eye-anatomy-viewer.tsx");
     const cat = read("src/routes/c.$catId.tsx");
     const site = read("src/lib/site.ts");
-    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.74"/);
+    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.75"/);
     assert.match(related, /macula:\s*\{[\s\S]*?kind:\s*"topics"/);
     for (const id of ["d5", "t-macular-hole", "t-erm", "t-high-myopia-pathology"]) {
       assert.match(related, new RegExp(`"${id}"`));
@@ -444,7 +444,7 @@ describe("topic structure polish", () => {
     assert.doesNotMatch(cites, /pmid:\s*"33598911"/);
 
     assert.doesNotMatch(extra, /鏈接結構 only/);
-    assert.match(editorial, /drkkpoon@gmail\.com/);
+    assert.match(editorial, /hokusaivision@gmail\.com/);
     assert.match(editorial, /只供內容糾錯／建議，不處理預約、診症或轉介/);
     assert.doesNotMatch(editorial, /暫未公開營運者電郵/);
     assert.doesNotMatch(editorial, /法律頁所列更正聯絡方式/);

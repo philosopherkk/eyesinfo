@@ -227,9 +227,9 @@ export function editorialBits(locale: Locale) {
     locale === "zh-Hans"
       ? toHans(EDITORIAL.correction)
       : locale === "en"
-        ? "If you find a content error, email drkkpoon@gmail.com (For content corrections/suggestions only — not for bookings, clinical advice, or referrals.). The corrections policy is this paragraph. At this stage the site does not receive medical records, bookings or individual care queries."
+        ? "If you find a content error, email hokusaivision@gmail.com (For content corrections/suggestions only — not for bookings, clinical advice, or referrals.). The corrections policy is this paragraph. At this stage the site does not receive medical records, bookings or individual care queries."
         : locale === "ja"
-          ? "内容の誤りを見つけた場合は drkkpoon@gmail.com へ（内容の訂正／提案のみ。予約・診療相談・紹介は扱いません）。訂正方針はこの段落です。現段階では本サイト経由で病歴・予約・個別の診療照会は受け付けません。"
+          ? "内容の誤りを見つけた場合は hokusaivision@gmail.com へ（内容の訂正／提案のみ。予約・診療相談・紹介は扱いません）。訂正方針はこの段落です。現段階では本サイト経由で病歴・予約・個別の診療照会は受け付けません。"
           : EDITORIAL.correction;
   return {
     name,

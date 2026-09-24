@@ -129,7 +129,7 @@ export const LEGAL_I18N: L<{
       "Publisher / operator: 護眼學堂 (eyesinfo.org). Clinical review: Dr Poon Ka Kin (registered doctor, Medical Council of Hong Kong; Specialist Register (Ophthalmology)). This education site does not provide clinic contact, booking or referral, and does not link to a practice website. This education site currently has no commercial sponsorship; if funding or conflicts of interest arise later, they will be disclosed on the legal page. Education content is shown separately from any clinic promotion; the reviewer may also practise clinically — this site does not refer.",
     funding: "This site is self-funded by Dr Poon Ka Kin.",
     correction:
-      "If you find a content error, email drkkpoon@gmail.com (For content corrections/suggestions only — not for bookings, clinical advice, or referrals.). The corrections policy is this paragraph. At this stage the site does not receive medical records, bookings or individual care queries.",
+      "If you find a content error, email hokusaivision@gmail.com (For content corrections/suggestions only — not for bookings, clinical advice, or referrals.). The corrections policy is this paragraph. At this stage the site does not receive medical records, bookings or individual care queries.",
   },
   ja: {
     short:
@@ -151,6 +151,6 @@ export const LEGAL_I18N: L<{
       "発行／運営：護眼學堂（eyesinfo.org）。臨床確認：潘家健医師（香港医師委員会登録医師；専門医名簿（眼科））。本教育サイトは診療所の連絡・予約・紹介を行わず、診療所サイトにもリンクしません。現時点で商業スポンサーはありません；今後の資金提供や利益関係があれば法令頁で開示します。教育内容は診療所宣伝と分けて示します；確認者は臨床も行うことがあり、紹介はしません。",
     funding: "本サイトは潘家健医師の自己資金で運営しています。",
     correction:
-      "内容の誤りを見つけた場合は drkkpoon@gmail.com へ（内容の訂正／提案のみ。予約・診療相談・紹介は扱いません）。訂正方針はこの段落です。現段階では本サイト経由で病歴・予約・個別の診療照会は受け付けません。",
+      "内容の誤りを見つけた場合は hokusaivision@gmail.com へ（内容の訂正／提案のみ。予約・診療相談・紹介は扱いません）。訂正方針はこの段落です。現段階では本サイト経由で病歴・予約・個別の診療照会は受け付けません。",
   },
 };

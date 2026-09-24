@@ -133,7 +133,7 @@ const zhHant = {
     "本站沒有會員帳戶，不經此網站收集身份證、病歷或付款資料。請勿在任何表格上傳送敏感個人資料——本站亦沒有此類表格。問醫生清單等工具只在你裝置上顯示，不會上載問答內容。",
   privacyClearH: "清除本機資料",
   privacyClearP:
-    "清除字型大小、外觀、語言、收藏、阿姆斯勒自記及戶外時間等本機偏好（localStorage）。不上載伺服器。更正見法律頁；電郵 drkkpoon@gmail.com（只供內容糾錯／建議，不處理預約、診症或轉介）。本站不經此頁接收病歷或預約。",
+    "清除字型大小、外觀、語言、收藏、阿姆斯勒自記及戶外時間等本機偏好（localStorage）。不上載伺服器。更正見法律頁；電郵 hokusaivision@gmail.com（只供內容糾錯／建議，不處理預約、診症或轉介）。本站不經此頁接收病歷或預約。",
   privacyClearBtn: "清除本機資料",
   privacyClearDone: "已清除本機偏好。",
   clinicTitle: "本站不提供執業資料",
@@ -549,7 +549,7 @@ const en: Record<Key, string> = {
     "There is no account. This site does not collect ID numbers, medical records or payment data. Do not send sensitive personal data — there is no form for that. Tools such as the questions checklist stay on your device and are not uploaded.",
   privacyClearH: "Clear local data",
   privacyClearP:
-    "Clears on-device preferences in localStorage (type size, appearance, language, bookmarks, Amsler notes, outdoor time). Nothing is uploaded. For corrections, see the legal page; email drkkpoon@gmail.com (For content corrections/suggestions only — not for bookings, clinical advice, or referrals.). This site does not take medical records or bookings here.",
+    "Clears on-device preferences in localStorage (type size, appearance, language, bookmarks, Amsler notes, outdoor time). Nothing is uploaded. For corrections, see the legal page; email hokusaivision@gmail.com (For content corrections/suggestions only — not for bookings, clinical advice, or referrals.). This site does not take medical records or bookings here.",
   privacyClearBtn: "Clear local data",
   privacyClearDone: "Local preferences cleared.",
   clinicTitle: "No practice information on this site",
@@ -968,7 +968,7 @@ const ja: Record<Key, string> = {
     "会員登録はありません。身分証番号・病歴・決済情報は集めません。機密情報を送らないでください。その種のフォームもありません。医師に聞くリストなどのツールは端末上のみで、内容はアップロードしません。",
   privacyClearH: "端末内データを消す",
   privacyClearP:
-    "文字サイズ・外観・言語・保存・アムスラー記録・屋外時間など localStorage の端末内設定を消します。アップロードはありません。訂正は法令頁を参照；メール drkkpoon@gmail.com（内容の訂正／提案のみ。予約・診療相談・紹介は扱いません）。病歴や予約は受け付けません。",
+    "文字サイズ・外観・言語・保存・アムスラー記録・屋外時間など localStorage の端末内設定を消します。アップロードはありません。訂正は法令頁を参照；メール hokusaivision@gmail.com（内容の訂正／提案のみ。予約・診療相談・紹介は扱いません）。病歴や予約は受け付けません。",
   privacyClearBtn: "端末内データを消す",
   privacyClearDone: "端末内の設定を消しました。",
   clinicTitle: "診療所情報は掲載しません",
