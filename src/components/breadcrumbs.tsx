@@ -38,6 +38,7 @@ const STATIC_LABEL: Record<string, UiKey> = {
   "/legal": "legalTitle",
   "/privacy": "privacyTitle",
   "/accessibility": "a11yTitle",
+  "/resources": "resourcesTitle",
   "/clinic": "clinicTitle",
   "/install": "installTitle",
   "/qr": "qrSub",

@@ -129,9 +129,9 @@ describe("topic structure polish", () => {
     assert.match(read("src/lib/topic-related.ts"), /PRIMARY_TOPIC_CAP\s*=\s*5/);
   });
 
-  it("CONTENT_VERSION is 1.75", () => {
+  it("CONTENT_VERSION is 1.76", () => {
     const site = read("src/lib/site.ts");
-    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.75"/);
+    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.76"/);
     assert.match(site, /CONTENT_UPDATED\s*=\s*"2026-09-24"/);
   });
 
@@ -245,7 +245,7 @@ describe("topic structure polish", () => {
     const tools = read("src/data/tools.ts");
     const route = read("src/routes/t.$topicId.tsx");
     const hkos = read("src/data/hkos-videos.ts");
-    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.75"/);
+    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.76"/);
     for (const id of ["t-macular-hole", "t-erm"]) {
       assert.match(extra, new RegExp(`id:\\s*"${id}"`));
       assert.match(en, new RegExp(`"${id}"\\s*:`));
@@ -271,7 +271,7 @@ describe("topic structure polish", () => {
     const viewer = read("src/components/eye-anatomy-viewer.tsx");
     const cat = read("src/routes/c.$catId.tsx");
     const site = read("src/lib/site.ts");
-    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.75"/);
+    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.76"/);
     assert.match(related, /macula:\s*\{[\s\S]*?kind:\s*"topics"/);
     for (const id of ["d5", "t-macular-hole", "t-erm", "t-high-myopia-pathology"]) {
       assert.match(related, new RegExp(`"${id}"`));

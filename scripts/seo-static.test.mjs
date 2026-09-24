@@ -85,6 +85,7 @@ test("sitemap.xml is a valid urlset covering edu tools including outdoor", () =>
     "/legal",
     "/privacy",
     "/accessibility",
+    "/resources",
     "/search",
     "/install",
     "/saved",
