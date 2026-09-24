@@ -169,7 +169,7 @@ const zhHant = {
   backHome: "返回教育首頁",
   urgentTitle: "急症與盡快求醫",
   urgentLead:
-    "私家診所不是急症室。以下分開「立即急症室」與「盡快（最好當日）眼科評估」。化學濺入另列（邊沖邊去急症室）；可疑穿通傷／眼球破裂另列（勿當化學傷沖洗）。",
+    "私家診所不是急症室：有下列紅旗徵狀，請直接前往急症室。以下分開「立即急症室」與「盡快（最好當日）眼科評估」。化學濺入另列（邊沖邊去急症室）；可疑穿通傷／眼球破裂另列（勿當化學傷沖洗）。",
   urgent999: "立即到急症室；無法自行前往：致電 999",
   call999: "致電 999",
   chemH: "化學濺入眼睛",
@@ -180,7 +180,7 @@ const zhHant = {
   globeH: "可疑穿通傷或眼球破裂",
   sameDayH: "盡快（最好當日）眼科評估（儘快睇眼科醫生）",
   sameDayP:
-    "閃光／飛蚊等情況須緊急眼科評估；散瞳眼底是常用步驟之一，但評估內容由當值醫生決定，不是「只散瞳」便足夠。沒有簾幕、沒有突然失明時：當日儘快由可作散瞳眼底的眼科專科醫生或急症室眼科評估。",
+    "閃光／飛蚊等情況須緊急眼科評估；散瞳眼底是常用步驟之一，但評估內容由當值醫生決定，不是「只散瞳」便足夠。沒有簾幕、沒有突然失明時：當日儘快由可作散瞳眼底的眼科專科醫生或急症室眼科評估。部分私家眼科專科醫生可安排即日診症，可先致電查詢；如未能即日獲安排，請前往急症室。",
   urgentFollow:
     "急症室分流後，或會轉介公立醫院眼科，或由你自行約見任何眼科專科醫生跟進。本站不作轉介。內容不能代替與註冊眼科專科醫生的面診，亦不能作為診斷。詳見法律與專業守則。",
   searchPh: "眼疾名稱、徵狀、檢查、工具……",
@@ -612,7 +612,7 @@ const en: Record<Key, string> = {
   backHome: "Back to education home",
   urgentTitle: "Emergencies and same-day care",
   urgentLead:
-    "A private clinic is not an A&E. Below: go to A&E now versus same-day ophthalmic assessment. Chemical splash is listed separately (irrigate while going to A&E). Suspected penetrating injury / ruptured globe is also separate (do not irrigate as for chemical injury).",
+    "A private clinic is not A&E: with any red flag below, go straight to A&E. Below: go to A&E now versus same-day ophthalmic assessment. Chemical splash is listed separately (irrigate while going to A&E). Suspected penetrating injury / ruptured globe is also separate (do not irrigate as for chemical injury).",
   urgent999: "Go to A&E now; if you cannot get there: call 999",
   call999: "Call 999",
   chemH: "Chemical splash in the eye",
@@ -624,7 +624,7 @@ const en: Record<Key, string> = {
   globeH: "Suspected penetrating injury or ruptured globe",
   sameDayH: "Prompt ophthalmic assessment (same day if possible — see an ophthalmologist as soon as possible)",
   sameDayP:
-    "Flashes / floaters need urgent ophthalmic assessment; dilated fundus exam is a common step, but what is done is decided by the duty doctor — dilation alone is not enough. Without a curtain and without sudden blindness: same-day assessment as soon as possible by an ophthalmologist who can dilate, or by A&E eye care.",
+    "Flashes / floaters need urgent ophthalmic assessment; dilated fundus exam is a common step, but what is done is decided by the duty doctor — dilation alone is not enough. Without a curtain and without sudden blindness: same-day assessment as soon as possible by an ophthalmologist who can dilate, or by A&E eye care. Some private ophthalmologists (eye specialists) can arrange same-day appointments, so call ahead to ask. If you can't be seen the same day, go to A&E.",
   urgentFollow:
     "After A&E triage you may be referred to public hospital ophthalmology, or you may see any registered ophthalmologist. This site does not refer. This content cannot replace an in-person consultation with a registered ophthalmologist and is not a diagnosis. See Law and professional code.",
   searchPh: "Condition, symptom, test, tool…",
@@ -1057,7 +1057,7 @@ const ja: Record<Key, string> = {
   backHome: "教育ホームへ戻る",
   urgentTitle: "救急と同じ日の受診",
   urgentLead:
-    "私設クリニックは救急外来ではありません。「直ちに救急外来」と「できるだけ早く（できれば当日）の眼科評価」を分けています。薬品飛入は別枠（洗いながら救急へ）。穿孔／眼球破裂も別枠（薬品のように強く洗わない）。",
+    "私的クリニックは救急外来ではありません。下記の危険サインがあれば直ちに救急へ。「直ちに救急外来」と「できるだけ早く（できれば当日）の眼科評価」を分けています。薬品飛入は別枠（洗いながら救急へ）。穿孔／眼球破裂も別枠（薬品のように強く洗わない）。",
   urgent999: "直ちに救急外来へ。行けない場合は999番に電話",
   call999: "999番に電話",
   chemH: "薬品が目に入ったとき",
@@ -1069,7 +1069,7 @@ const ja: Record<Key, string> = {
   globeH: "穿孔外傷または眼球破裂の疑い",
   sameDayH: "できるだけ早く（できれば当日）の眼科評価（眼科専門医を受診）",
   sameDayP:
-    "光視／飛蚊などは緊急の眼科評価が必要。散瞳眼底はよく行う一歩だが、内容は当直医が決め、「散瞳だけ」では足りない。カーテンも突然の失明もない場合：散瞳眼底ができる眼科専門医または救急眼科で当日できるだけ早く評価。",
+    "光視／飛蚊などは緊急の眼科評価が必要。散瞳眼底はよく行う一歩だが、内容は当直医が決め、「散瞳だけ」では足りない。カーテンも突然の失明もない場合：散瞳眼底ができる眼科専門医または救急眼科で当日できるだけ早く評価。一部の民間の眼科専門医は当日診察に対応しています。事前に電話でご確認ください。当日受診できない場合は救急へ。",
   urgentFollow:
     "救急のトリアージ後、公立病院眼科へ紹介されることも、ご自身で眼科専門医を受診することもあります。本サイトは紹介しません。内容は登録眼科専門医の対面診察の代わりにはならず、診断でもありません。法令と職業倫理の頁を参照。",
   searchPh: "病名、症状、検査、ツール…",

@@ -714,8 +714,8 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
     ja: "図示と手順練習の教育ツール。予約・処方・販売・紹介はありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/urgent": {
-    zh: "私家診所不是急症室。本頁分開「立即急症室」與「盡快（最好當日）眼科評估」（公眾教育，不能代替面診。）",
-    en: "A private clinic is not A&E. This page separates go-to-A&E-now from same-day ophthalmic assessment. Public education only.",
-    ja: "私設クリニックは救急ではありません。「直ちに救急」と「当日中の眼科評価」を分けて示します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
+    zh: "私家診所不是急症室。紅旗徵狀請即往急症室；其他須盡快（最好當日）眼科評估的情況，可找私家眼科專科醫生或急症室（公眾教育，不能代替面診。）",
+    en: "A private clinic is not A&E. Red flags: A&E now. Listed same-day problems: an eye specialist, private or via A&E, ideally the same day.",
+    ja: "私的クリニックは救急外来ではありません。危険サインは直ちに救急へ、当日評価が必要な場合は民間の眼科専門医または救急へ。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
 };
