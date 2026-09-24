@@ -38,8 +38,9 @@ export const Route = createRootRoute({
       { name: "mobile-web-app-capable", content: "yes" },
       { name: "copyright", content: COPYRIGHT_LINE },
       { name: "application-name", content: APP_NAME },
-      { property: "og:title", content: APP_NAME },
-      { property: "og:description", content: APP_DESC },
+      // og:title / og:description are set per-route via pageHead() — root must
+      // not emit them (TanStack concatenates property= tags without reliable
+      // child override, so crawlers would keep the home defaults).
       { property: "og:site_name", content: APP_NAME },
     ],
     // Canonical is set per-route via pageHead() — root must not emit one

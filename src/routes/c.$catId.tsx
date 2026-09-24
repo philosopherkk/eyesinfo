@@ -19,6 +19,9 @@ import type { UiKey } from "@/i18n/ui";
 import { pageHead } from "@/lib/page-seo";
 import { localeFromMatch, pathForLocale } from "@/lib/locale-path";
 import { uiText } from "@/lib/ui-text";
+import { seoDescriptionFor } from "@/lib/seo-description";
+import { MedicalWebPageJsonLd } from "@/components/medical-webpage-jsonld";
+import { CONTENT_UPDATED } from "@/lib/site";
 
 const CAT_TITLE: Record<string, UiKey> = {
   lens: "cat_lens",
@@ -53,10 +56,12 @@ export const Route = createFileRoute("/c/$catId")({
     if (cat) {
       const title = uiText(locale, CAT_TITLE[cat.id]);
       const sub = uiText(locale, CAT_SUB[cat.id]);
+      const path = `/c/${params.catId}`;
+      const fallback = `${title}：${sub}`;
       return pageHead({
         title,
-        description: `${title}：${sub}`,
-        path: `/c/${params.catId}`,
+        description: seoDescriptionFor(path, locale, fallback),
+        path,
         locale,
       });
     }
@@ -70,10 +75,11 @@ export const Route = createFileRoute("/c/$catId")({
         ANATOMY_CHOOSER_LEAD[locale]?.[region] ??
         ANATOMY_CHOOSER_LEAD["zh-Hant"][region] ??
         "";
+      const path = `/c/${params.catId}`;
       return pageHead({
         title,
-        description: lead,
-        path: `/c/${params.catId}`,
+        description: seoDescriptionFor(path, locale, lead),
+        path,
         locale,
       });
     }
@@ -159,9 +165,18 @@ function AnatomyChooserPage({ regionId }: { regionId: AnatomyRegionId }) {
     ANATOMY_CHOOSER_HUB_LABEL[locale] ?? ANATOMY_CHOOSER_HUB_LABEL["zh-Hant"];
   const linkCls =
     "flex min-h-11 items-center border-b border-line px-4 py-3 text-[0.9rem] font-semibold text-navy no-underline last:border-b-0 layout-lg:rounded-xl layout-lg:border layout-lg:border-line layout-lg:bg-card layout-lg:last:border-b";
+  const path = `/c/${regionId}`;
+  const jsonLdDescription = seoDescriptionFor(path, locale, lead);
 
   return (
     <div>
+      <MedicalWebPageJsonLd
+        path={path}
+        locale={locale}
+        name={title}
+        description={jsonLdDescription}
+        lastReviewed={CONTENT_UPDATED}
+      />
       <div className="flex items-center gap-2 px-2 pt-3 layout-lg:px-6">
         <SpaHref
           href={pathForLocale(locale)}
@@ -212,9 +227,20 @@ function CategoryPage() {
   if (!cat) throw notFound();
 
   const topics = topicsByCategory(cat.id as CategoryId);
+  const path = `/c/${cat.id}`;
+  const title = t(CAT_TITLE[cat.id]);
+  const sub = t(CAT_SUB[cat.id]);
+  const jsonLdDescription = seoDescriptionFor(path, locale, `${title}：${sub}`);
 
   return (
     <div>
+      <MedicalWebPageJsonLd
+        path={path}
+        locale={locale}
+        name={title}
+        description={jsonLdDescription}
+        lastReviewed={CONTENT_UPDATED}
+      />
       <div className="flex items-center gap-2 px-2 pt-3 layout-lg:px-6">
         <SpaHref
           href={pathForLocale(locale)}

@@ -11,6 +11,7 @@ import { pageHead } from "@/lib/page-seo";
 import { z } from "zod";
 import { localeFromMatch } from "@/lib/locale-path";
 import { uiText } from "@/lib/ui-text";
+import { seoDescriptionFor } from "@/lib/seo-description";
 
 const searchSchema = z.object({
   q: z.string().optional().catch(undefined),
@@ -23,7 +24,11 @@ export const Route = createFileRoute("/search")({
     const locale = localeFromMatch(match);
     return pageHead({
       title: uiText(locale, "search"),
-      description: uiText(locale, "searchPh"),
+      description: seoDescriptionFor(
+        "/search",
+        locale,
+        uiText(locale, "searchPh"),
+      ),
       path: "/search",
       locale,
     });

@@ -2,12 +2,30 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "eyesinfo.org" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "eyesinfo.org"
+        }
+      ],
       "destination": "https://www.eyesinfo.org/:path*",
       "permanent": true
     }
   ],
   "headers": [
+    {
+      "source": "/6c0a3657fd6bdda1a9630426f9fe3bac.txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
+      ]
+    },
     {
       "source": "/(.*)",
       "headers": [

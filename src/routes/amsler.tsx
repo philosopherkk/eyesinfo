@@ -21,13 +21,18 @@ import { useI18n } from "@/i18n";
 import { pageHead } from "@/lib/page-seo";
 import { hrefWithLang, localeFromMatch, pathForLocale } from "@/lib/locale-path";
 import { uiText } from "@/lib/ui-text";
+import { seoDescriptionFor } from "@/lib/seo-description";
 
 export const Route = createFileRoute("/amsler")({
   head: ({ match }) => {
     const locale = localeFromMatch(match);
     return pageHead({
       title: uiText(locale, "amslerTitle"),
-      description: uiText(locale, "amslerSeoDesc"),
+      description: seoDescriptionFor(
+        "/amsler",
+        locale,
+        uiText(locale, "amslerSeoDesc"),
+      ),
       path: "/amsler",
       locale,
     });

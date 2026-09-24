@@ -7,13 +7,18 @@ import { localizeTopic, localizedUrgent, useI18n } from "@/i18n";
 import { pageHead } from "@/lib/page-seo";
 import { localeFromMatch } from "@/lib/locale-path";
 import { uiText } from "@/lib/ui-text";
+import { seoDescriptionFor } from "@/lib/seo-description";
 
 export const Route = createFileRoute("/urgent")({
   head: ({ match }) => {
     const locale = localeFromMatch(match);
     return pageHead({
       title: uiText(locale, "urgentTitle"),
-      description: uiText(locale, "urgentLead"),
+      description: seoDescriptionFor(
+        "/urgent",
+        locale,
+        uiText(locale, "urgentLead"),
+      ),
       path: "/urgent",
       locale,
     });

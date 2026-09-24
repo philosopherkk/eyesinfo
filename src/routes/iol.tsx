@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { pageHead } from "@/lib/page-seo";
 import { localeFromMatch } from "@/lib/locale-path";
 import { uiText } from "@/lib/ui-text";
+import { seoDescriptionFor } from "@/lib/seo-description";
 import {
   DISTANCES,
   OPTICS,
@@ -29,7 +30,11 @@ export const Route = createFileRoute("/iol")({
     const locale = localeFromMatch(match);
     return pageHead({
       title: uiText(locale, "iolTitle"),
-      description: uiText(locale, "toolsLead"),
+      description: seoDescriptionFor(
+        "/iol",
+        locale,
+        uiText(locale, "toolsLead"),
+      ),
       path: "/iol",
       locale,
     });
