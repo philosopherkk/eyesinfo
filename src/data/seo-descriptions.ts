@@ -14,7 +14,7 @@ export type SeoDescription = {
 export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   "/c/glaucoma": {
     zh: "青光眼與視神經分類頁：整理眼壓、視神經掃描與視野檢查等相關公眾教育專題（公眾教育，不能代替面診。）詳見內文。",
-    en: "Category hub for glaucoma and optic-nerve education: eye pressure, nerve scans and visual-field leaflets by theme. Public education only—not a substitute f",
+    en: "Category hub for glaucoma and optic-nerve education: eye pressure, nerve scans and visual-field leaflets gathered by theme.",
     ja: "緑内障と視神経のハブ：眼圧・OCT・視野など関連する教育トピックをまとめています。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/c/lens": {
@@ -24,7 +24,7 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/c/lid": {
     zh: "眼瞼與淚膜分類頁：整理乾眼、瞼緣炎、內翻與溢淚等相關公眾教育專題（公眾教育，不能代替面診。）詳見內文。",
-    en: "Category hub for eyelid and tear-film education: dry eye, blepharitis, entropion and watering leaflets by theme. Public education only—not a substitute for",
+    en: "Category hub for eyelid and tear-film education: dry eye, blepharitis, entropion and watering leaflets by theme.",
     ja: "眼瞼と涙膜のハブ：ドライアイ・眼瞼炎・内反・流涙など関連トピックをまとめています。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/c/macula": {
@@ -39,17 +39,17 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/c/retina": {
     zh: "視網膜與黃斑分類頁：整理黃斑病變、糖尿上眼與視網膜脫離等相關公眾教育專題（公眾教育，不能代替面診。）",
-    en: "Category hub for retina and macula education: macular disease, diabetic eye disease and detachment leaflets by theme. Public education only—not a substitut",
+    en: "Category hub for retina and macula education: macular disease, diabetic eye disease and detachment leaflets by theme.",
     ja: "網膜と黄斑のハブ：黄斑疾患・糖尿病の目・剥離など関連トピックをまとめています。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/c/surface": {
     zh: "角膜與眼表分類頁：整理結膜炎、過敏與角膜表面激光等相關公眾教育專題（公眾教育，不能代替面診。）詳見內文。",
-    en: "Category hub for cornea and ocular-surface education: conjunctivitis, allergy and surface-laser leaflets by theme. Public education only—not a substitute f",
+    en: "Category hub for cornea and ocular-surface education: conjunctivitis, allergy and surface-laser leaflets by theme.",
     ja: "角膜と眼表面のハブ：結膜炎・アレルギー・表面レーザーなど関連トピックをまとめています。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/search": {
     zh: "搜尋本站眼科教育專題與工具：可輸入眼疾名稱、徵狀、檢查或工具關鍵字（公眾教育，不能代替面診。）詳見內文。",
-    en: "Search this site’s ophthalmology education topics and tools by condition name, symptom, test or tool keyword. Public education only—not a substitute for an",
+    en: "Search this site’s ophthalmology education topics and tools by condition name, symptom, test or tool keyword.",
     ja: "眼の教育トピックやツールを、病名・症状・検査・ツール名のキーワードで検索します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/t/d1": {
@@ -84,7 +84,7 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/d3": {
     zh: "介紹白內障如何令晶體混濁、常見視力與眩光影響，以及何時與眼科專科醫生討論手術（公眾教育，不能代替面診。）",
-    en: "Explains cataract as clouding of the lens, gradual blur and glare, and when to discuss surgery with an ophthalmologist. Public education only—not a substit",
+    en: "Explains cataract as clouding of the lens, gradual blur and glare, and when to discuss surgery with an ophthalmologist.",
     ja: "白内障による水晶体の濁り、視力や眩しさへの影響、手術を眼科専門医と相談する目安を紹介します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["白內障"],
@@ -94,7 +94,7 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/d4": {
     zh: "介紹青光眼與視神經損害的類型概念、視野不能還原的要點，以及閉角發作的求醫警號（公眾教育，不能代替面診。）",
-    en: "Outlines glaucoma types, irreversible optic-nerve damage, and warning signs of angle-closure that need urgent care. Public education only—not a substitute ",
+    en: "Outlines glaucoma types, irreversible optic-nerve damage, and warning signs of angle-closure that need urgent care.",
     ja: "緑内障の病型、視神経障害が戻らないこと、急性発作時の受診の目安を教育的に説明します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["青光眼"],
@@ -144,7 +144,7 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/d9": {
     zh: "介紹瞼緣炎、麥粒腫與霰粒腫的分別概念，以及眼瞼紅腫硬粒時為何不應自行擠壓（公眾教育，不能代替面診。）",
-    en: "Distinguishes blepharitis, stye and chalazion, and explains why a red lid lump should not be squeezed at home. Public education only—not a substitute for a",
+    en: "Distinguishes blepharitis, stye and chalazion, and explains why a red lid lump should not be squeezed at home.",
     ja: "眼瞼炎・ものもらい・霰粒腫の違いと、赤く硬い腫れを自分で潰さない理由を説明します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["瞼緣炎", "麥粒腫", "霰粒腫"],
@@ -164,7 +164,7 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-allergy": {
     zh: "介紹過敏性結膜炎的類型概念、藥物類別討論方向，以及較重過敏須醫生評估而非自行用藥（公眾教育，不能代替面診。）",
-    en: "Covers allergic conjunctivitis types, drug classes doctors may discuss, and why heavier allergy needs medical review. Public education only—not a substitut",
+    en: "Covers allergic conjunctivitis types, drug classes doctors may discuss, and why heavier allergy needs medical review.",
     ja: "アレルギー性結膜炎のタイプ、医師が話しうる薬の種類、重い症状は自己判断で薬を使わない理由を説明します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["過敏性結膜炎"],
@@ -174,8 +174,8 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-allergy-hk": {
     zh: "介紹香港環境下眼部過敏誘因、與感染的分辨，以及為何不要自行購買類固醇（公眾教育，不能代替面診。）詳見內文。",
-    en: "Hong Kong–context education on ocular allergy triggers, separating infection, and why not to self-buy steroid drops. Public education only—not a substitute",
-    ja: "アレルギー性結膜炎について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    en: "Hong Kong–context education on ocular allergy triggers, separating infection, and why not to self-buy steroid drops.",
+    ja: "香港の環境誘因による眼アレルギー、感染との見分け、ステロイド自己購入を避ける理由。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["過敏性結膜炎"],
       en: ["Allergic conjunctivitis"],
@@ -184,8 +184,8 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-bluelight": {
     zh: "介紹藍光與屏幕相關的數碼視疲勞常見誤解，屬文獻取向教育而非產品推介（公眾教育，不能代替面診。）詳見內文。",
-    en: "Evidence-oriented education on blue light and digital eye strain myths—not product promotion or device marketing. Public education only—not a substitute fo",
-    ja: "このテーマについて、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
+    en: "Evidence-oriented education on blue light and digital eye strain myths—not product promotion or device marketing.",
+    ja: "ブルーライトと画面の誤解、デジタル眼精疲労の要点（製品推介ではありません）。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/t/t-cataract": {
     zh: "介紹白內障超聲波乳化與人工晶體的手術類別教育，以及何時與專科醫生討論手術時機（公眾教育，不能代替面診。）",
@@ -209,8 +209,8 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-chem": {
     zh: "介紹化學濺入須即時沖洗並前往急症室，以及其後專科分期討論的教育步驟（公眾教育，不能代替面診。）詳見內文。",
-    en: "Education on chemical eye injury: irrigate immediately, go to A&E, then specialist staging discussions afterwards. Public education only—not a substitute f",
-    ja: "化学眼外傷について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    en: "Education on chemical eye injury: irrigate immediately, go to A&E, then specialist staging discussions afterwards.",
+    ja: "化学けがはただちに洗浄し、洗いながら救急へ。病期は後で専門医と。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["化學性眼損傷"],
       en: ["Chemical eye injury"],
@@ -220,12 +220,12 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   "/t/t-child": {
     zh: "介紹兒童視力里程碑的粗略參考，強調整體差異大，不能代替正式檢查（公眾教育，不能代替面診。）詳見內文。",
     en: "Rough childhood vision-milestone references for public education; individual differences are large and this is not a formal test.",
-    ja: "このテーマについて、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
+    ja: "子どもの視力の目安は参考であり、個人差が大きく正式検査の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/t/t-cl": {
     zh: "介紹隱形眼鏡類型、衛生與嚴重或較輕併發症，以及何時應除鏡求醫的教育（公眾教育，不能代替面診。）詳見內文。",
-    en: "Education on contact-lens types, hygiene, serious and milder complications, and when to remove lenses and seek care. Public education only—not a substitute",
-    ja: "コンタクトレンズ関連角膜炎について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    en: "Education on contact-lens types, hygiene, serious and milder complications, and when to remove lenses and seek care.",
+    ja: "コンタクトレンズの種類・衛生と合併症、外して受診する目安を紹介します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["隱形眼鏡相關角膜炎"],
       en: ["Contact-lens keratitis"],
@@ -234,8 +234,8 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-colour-vision": {
     zh: "介紹先天與後天色覺異常的分別、檢查概念，以及不作職業裁決的教育界限（公眾教育，不能代替面診。）詳見內文。",
-    en: "Education on congenital versus acquired colour-vision change, testing ideas, and limits—this page makes no job rulings. Public education only—not a substit",
-    ja: "色覚異常について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    en: "Education on congenital versus acquired colour-vision change, testing ideas, and limits—this page makes no job rulings.",
+    ja: "先天と後天の色覚異常、検査の考え方。適性や職業の判定はしません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["色覺異常"],
       en: ["Colour vision deficiency"],
@@ -254,7 +254,7 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-demodex": {
     zh: "介紹蠕形蟎相關瞼緣炎的袖套狀碎屑體徵概念，以及診斷與處理須由醫生檢查後決定（公眾教育，不能代替面診。）",
-    en: "Covers Demodex-related blepharitis and collarettes, and why diagnosis and treatment are decided after clinical review. Public education only—not a substitu",
+    en: "Covers Demodex-related blepharitis and collarettes, and why diagnosis and treatment are decided after clinical review.",
     ja: "デモデックス関連眼瞼炎と睫毛根元の汚れ（カラーレット）の概念、診断は医師の診察後である点を説明します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["蠕形蟎瞼緣炎"],
@@ -265,16 +265,16 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   "/t/t-dilate": {
     zh: "介紹散瞳檢查後常見數小時畏光與近距離模糊，以及回家安排上的注意事項（公眾教育，不能代替面診。）詳見內文。",
     en: "What to expect after dilating drops: hours of light sensitivity and near blur, and practical arrangements for going home.",
-    ja: "このテーマについて、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
+    ja: "散瞳後は数時間の眩しさと近見不良があり、帰宅の手配に注意します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/t/t-drops": {
     zh: "介紹正確使用眼藥水的步驟教育，強調應跟從說明書與醫生示範，以減少漏滴等可改善因素（公眾教育，不能代替面診。）",
-    en: "Step-by-step education on using eye drops as labelled and demonstrated, including reducing missed doses where possible. Public education only—not a substit",
+    en: "Step-by-step education on using eye drops as labelled and demonstrated, including reducing missed doses where possible.",
     ja: "点眼の正しい手順、説明書と医師の実演に従うこと、打ち忘れを減らす要点を教育的に説明します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/t/t-dry": {
     zh: "介紹乾眼症的蒸發型、水液不足與混合型分類，以及國際共識中的處理梯階教育概念（公眾教育，不能代替面診。）",
-    en: "Outlines evaporative, aqueous-deficient and mixed dry eye, and the stepped care ideas used in consensus education. Public education only—not a substitute f",
+    en: "Outlines evaporative, aqueous-deficient and mixed dry eye, and the stepped care ideas used in consensus education.",
     ja: "蒸発亢進型・涙液減少型・混合型のドライアイ分類と、国際合意に沿った段階的対応の考え方を紹介します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["乾眼症"],
@@ -284,7 +284,7 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-early": {
     zh: "介紹遠視、淺前房與晶體增厚如何影響房角，以及閉角風險與急症識別的公眾教育要點（公眾教育，不能代替面診。）",
-    en: "Explains hyperopia, shallow anterior chamber and lens thickening in angle-closure risk education and emergency cues. Public education only—not a substitute",
+    en: "Explains hyperopia, shallow anterior chamber and lens thickening in angle-closure risk education and emergency cues.",
     ja: "遠視・浅い前房・水晶体の厚みが房角に与える影響と、閉塞隅角リスク・救急サインの市民教育です。必要に応じて受診してください。",
     about: {
       zh: ["閉角型青光眼"],
@@ -294,8 +294,8 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-entropion": {
     zh: "介紹真性眼瞼內翻（尤其長者退化性）如何令睫毛摩擦角膜，以及與假性內翻的分別教育（公眾教育，不能代替面診。）",
-    en: "Educational page on true eyelid entropion—especially involutional change in older adults—and how lashes rub the cornea. Public education only—not a substit",
-    ja: "眼瞼内反について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    en: "Educational page on true eyelid entropion—especially involutional change in older adults—and how lashes rub the cornea.",
+    ja: "真性眼瞼内反（とくに加齢性）で睫毛が角膜をこする仕組みを紹介します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["眼瞼內翻"],
       en: ["Entropion"],
@@ -304,8 +304,8 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-epiblepharon": {
     zh: "介紹假性內翻（下瞼贅皮）瞼緣位置正常但皮褶推睫毛的特點，以及與真性內翻的鑑別教育（公眾教育，不能代替面診。）",
-    en: "Educational page on epiblepharon, where the lid margin sits normally but a skin fold pushes lashes toward the eye. Public education only—not a substitute f",
-    ja: "眼瞼贅皮について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    en: "Educational page on epiblepharon, where the lid margin sits normally but a skin fold pushes lashes toward the eye.",
+    ja: "下瞼贅皮は縁が正常でも皮ひだが睫毛を押し、真性内反と見分けます。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["假性內翻"],
       en: ["Epiblepharon"],
@@ -314,8 +314,8 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-erm": {
     zh: "介紹黃斑前膜如何引起視物變形，以及並非一經發現就必須手術的教育要點（公眾教育，不能代替面診。）詳見內文。",
-    en: "Education on epiretinal membrane causing distortion, and why finding a membrane does not always mean immediate surgery. Public education only—not a substit",
-    ja: "黄斑前膜について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    en: "Education on epiretinal membrane causing distortion, and why finding a membrane does not always mean immediate surgery.",
+    ja: "黄斑前膜による歪みと、見つかってもすぐ手術とは限らない点を説明します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["黃斑前膜"],
       en: ["Epiretinal membrane"],
@@ -324,8 +324,8 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-gca": {
     zh: "介紹巨細胞動脈炎相關新頭痛、顎跛行與突然失明等警號，強調須立即急症室評估（公眾教育，不能代替面診。）",
-    en: "Warning education on giant cell arteritis—new headache, jaw claudication, sudden vision loss—and going to A&E now. Public education only—not a substitute f",
-    ja: "巨細胞性動脈炎について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    en: "Warning education on giant cell arteritis—new headache, jaw claudication, sudden vision loss—and going to A&E now.",
+    ja: "巨細胞性動脈炎の新頭痛・顎跛行・視力症状は直ちに救急へ。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["巨細胞動脈炎"],
       en: ["Giant cell arteritis"],
@@ -335,7 +335,7 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   "/t/t-glaucoma-monitor": {
     zh: "介紹青光眼長期監察中目標眼壓、OCT 與視野報告的解讀教育，報告顏色不是判詞（公眾教育，不能代替面診。）",
     en: "Education on long-term glaucoma monitoring: target pressure, OCT and visual-field reports; colours on a printout are not a verdict.",
-    ja: "緑内障について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    ja: "緑内障の目標眼圧・OCT・視野レポートの読み方。色は判決ではありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["青光眼"],
       en: ["Glaucoma"],
@@ -344,13 +344,13 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-gldrops": {
     zh: "介紹青光眼眼藥水的主要作用類別、依從性與點藥技巧教育；本頁不列商品名（公眾教育，不能代替面診。）詳見內文。",
-    en: "Education on glaucoma drop classes, adherence and instillation technique; this page lists no product brand names. Public education only—not a substitute fo",
-    ja: "このテーマについて、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
+    en: "Education on glaucoma drop classes, adherence and instillation technique; this page lists no product brand names.",
+    ja: "緑内障点眼の作用クラス、続け方と点眼手技。商品名は掲載しません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/t/t-high-myopia-pathology": {
     zh: "介紹高度近視長遠的病理近視、近視性黃斑與裂孔脫離等結構風險教育（公眾教育，不能代替面診。）詳見內文。",
     en: "Education on long-term structural risks of high myopia: pathologic myopia, myopic maculopathy and tear or detachment risk.",
-    ja: "病的近視について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    ja: "強度近視の病的近視・近視性黄斑・裂孔／剥離など長期の構造リスクを紹介します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["病理近視"],
       en: ["Pathologic myopia"],
@@ -359,13 +359,13 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-iol": {
     zh: "介紹人工晶體單焦、散光矯正、延伸景深與多焦等選擇細節的教育比較，強調沒有一款適合所有人（公眾教育，不能代替面診。）",
-    en: "Compares monofocal, toric, extended-depth and multifocal lens ideas in education—no single option suits everyone. Public education only—not a substitute fo",
+    en: "Compares monofocal, toric, extended-depth and multifocal lens ideas in education—no single option suits everyone.",
     ja: "単焦点・乱視矯正・焦点深度拡張・多焦点など眼内レンズ選択の教育的比較です。万人向けの一択はありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/t/t-keratoconus": {
     zh: "介紹圓錐角膜的進展監測、急性水腫與光學或交聯等類別討論的公眾教育（公眾教育，不能代替面診。）詳見內文。",
-    en: "Education on keratoconus monitoring, acute hydrops, and optical or crosslinking class discussions from the leaflet. Public education only—not a substitute ",
-    ja: "円錐角膜について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    en: "Education on keratoconus monitoring, acute hydrops, and optical or crosslinking class discussions from the leaflet.",
+    ja: "円錐角膜の進行観察、急性水腫、光学矯正やクロスリンキングの概念を紹介します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["圓錐角膜"],
       en: ["Keratoconus"],
@@ -374,18 +374,18 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-lasik": {
     zh: "介紹 LASIK 與 SMILE 等激光矯視如何改變角膜度數，並說明不能消除高度近視的眼底風險（公眾教育，不能代替面診。）",
-    en: "Education on LASIK and SMILE changing corneal power, and why they do not remove fundus risks of high myopia. Public education only—not a substitute for an ",
-    ja: "このテーマについて、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
+    en: "Education on LASIK and SMILE changing corneal power, and why they do not remove fundus risks of high myopia.",
+    ja: "LASIK・SMILEは角膜度数を変えますが、強度近視の眼底リスクは残り得ます。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/t/t-lube": {
     zh: "介紹潤眼液與眼表潤滑劑的淚膜與成分類別教育，以及何時應連同乾眼專題一併理解（公眾教育，不能代替面診。）",
     en: "Education on lubricating drops and gels by tear-film layer and ingredient class, and when to read the dry-eye topic too.",
-    ja: "このテーマについて、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
+    ja: "潤い点眼・潤滑剤の涙液層と成分クラス、ドライアイ頁と併せて読む目安。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/t/t-macular-hole": {
     zh: "介紹黃斑裂孔的全層／板層／假性裂孔概念與 OCT 角色，並說明閉合與否因人而異（公眾教育，不能代替面診。）",
     en: "Education on full-thickness, lamellar and pseudo macular holes, the role of OCT, and that hole closure is not guaranteed.",
-    ja: "黄斑円孔について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    ja: "黄斑円孔の全層／層状／偽円孔とOCTの役割。閉鎖は保証されません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["黃斑裂孔"],
       en: ["Macular hole"],
@@ -399,8 +399,8 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-migraine": {
     zh: "介紹偏頭痛視覺先兆與需排除的眼科／血管急症分別，屬教育而非神經科診斷（公眾教育，不能代替面診。）詳見內文。",
-    en: "Education separating migraine visual aura from ophthalmic or vascular emergencies that must not be missed. Public education only—not a substitute for an in",
-    ja: "片頭痛について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    en: "Education separating migraine visual aura from ophthalmic or vascular emergencies that must not be missed.",
+    ja: "片頭痛の視覚前兆と、見逃せない眼科・血管の救急との見分けを紹介します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["偏頭痛"],
       en: ["Migraine"],
@@ -419,8 +419,8 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-nldo": {
     zh: "介紹先天或後天鼻淚管阻塞如何引起溢淚，以及相關評估方向的公眾教育（公眾教育，不能代替面診。）詳見內文。",
-    en: "Educational page on congenital or acquired nasolacrimal duct obstruction as a cause of watering, and evaluation themes. Public education only—not a substit",
-    ja: "鼻涙管閉塞について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    en: "Educational page on congenital or acquired nasolacrimal duct obstruction as a cause of watering, and evaluation themes.",
+    ja: "先天または後天の鼻涙管閉塞による流涙と、評価の方向を紹介します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["鼻淚管阻塞"],
       en: ["Nasolacrimal duct obstruction"],
@@ -444,8 +444,8 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-ocular-tumours": {
     zh: "介紹眼瞼、眼眶與眼內腫瘤位置的公眾教育框架，以及常見警號的求醫方向（公眾教育，不能代替面診。）詳見內文。",
-    en: "Public-education framework for eyelid, orbital and intraocular tumours, with common warning signs for seeking care. Public education only—not a substitute ",
-    ja: "眼腫瘍について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    en: "Public-education framework for eyelid, orbital and intraocular tumours, with common warning signs for seeking care.",
+    ja: "眼瞼・眼窩・眼内の腫瘍の枠組みと、よくある受診の警鐘を紹介します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["眼部腫瘤"],
       en: ["Ocular tumour"],
@@ -454,8 +454,8 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-optic-neuritis": {
     zh: "介紹視神經炎常見的單眼視力下降與轉動痛，以及何時求醫與醫生或會討論的方向（公眾教育，不能代替面診。）",
-    en: "Education on optic neuritis themes—monocular vision drop and pain on eye movement—and when to seek care. Public education only—not a substitute for an in-p",
-    ja: "視神経炎について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    en: "Education on optic neuritis themes—monocular vision drop and pain on eye movement—and when to seek care.",
+    ja: "視神経炎の片眼視力低下と眼球運動時痛、受診の目安を紹介します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["視神經炎"],
       en: ["Optic neuritis"],
@@ -495,7 +495,7 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   "/t/t-ptosis": {
     zh: "介紹上瞼下垂與提上瞼肌或腱膜問題的教育概念，以及需要排除的神經或肌源警號（公眾教育，不能代替面診。）",
     en: "Educational page on ptosis and levator or aponeurosis problems, including red-flag neurological or muscle causes to exclude.",
-    ja: "眼瞼下垂について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    ja: "眼瞼下垂と挙筋・腱膜の概念、神経や筋の原因を除外する警鐘を紹介します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["上瞼下垂"],
       en: ["Ptosis"],
@@ -514,13 +514,13 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-roles": {
     zh: "介紹眼科專科醫生、視光師與配鏡分工的公眾教育，方便理解各自角色而非比較廣告（公眾教育，不能代替面診。）",
-    en: "Public education on roles of ophthalmologists, optometrists and dispensing—not a comparative advertisement. Public education only—not a substitute for an i",
-    ja: "このテーマについて、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
+    en: "Public education on roles of ophthalmologists, optometrists and dispensing—not a comparative advertisement.",
+    ja: "眼科専門医・視能／オプトメトリスト・調製の役割分担を紹介します（比較広告ではありません）。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/t/t-rvo": {
     zh: "介紹視網膜靜脈或動脈阻塞的突然視力影響，以及何時須作急症處理的教育（公眾教育，不能代替面診。）詳見內文。",
-    en: "Education on retinal vein or artery occlusion with sudden vision change, and when emergency care is discussed. Public education only—not a substitute for a",
-    ja: "網膜血管閉塞について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    en: "Education on retinal vein or artery occlusion with sudden vision change, and when emergency care is discussed.",
+    ja: "網膜の動静脈閉塞による急な視力変化と、救急が必要な目安を紹介します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["視網膜血管阻塞"],
       en: ["Retinal vessel occlusion"],
@@ -530,7 +530,7 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   "/t/t-scleritis": {
     zh: "介紹表層鞏膜炎與鞏膜炎的痛楚與風險分別，以及感染未排除前不做免疫抑制的教育（公眾教育，不能代替面診。）",
     en: "Education distinguishing episcleritis from scleritis pain and risk, and avoiding immunosuppression until infection is excluded.",
-    ja: "強膜炎について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    ja: "上強膜炎と強膜炎の痛み・リスクの違い。感染除外前の免疫抑制はしません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["鞏膜炎"],
       en: ["Scleritis"],
@@ -540,7 +540,7 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   "/t/t-steroid": {
     zh: "介紹類固醇眼藥水與眼壓、白內障及感染擴散風險，強調須按醫生指示使用（公眾教育，不能代替面診。）詳見內文。",
     en: "Education on steroid eye drops versus eye-pressure rise, cataract risk and infection spread; use only as a clinician directs.",
-    ja: "ステロイド緑内障について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    ja: "ステロイド点眼と眼圧・白内障・感染拡大のリスク。医師の指示で使います。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["類固醇性青光眼"],
       en: ["Steroid-induced glaucoma"],
@@ -549,13 +549,13 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-steroid-sparing": {
     zh: "介紹眼表類固醇節約用藥中環孢素與他克莫司等處方藥類別教育，非購買推介（公眾教育，不能代替面診。）詳見內文。",
-    en: "Education on steroid-sparing ocular-surface options such as ciclosporin and tacrolimus classes—not a shopping guide. Public education only—not a substitute",
-    ja: "このテーマについて、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
+    en: "Education on steroid-sparing ocular-surface options such as ciclosporin and tacrolimus classes—not a shopping guide.",
+    ja: "眼表面のステロイド節約薬（シクロスポリン・タクロリムス等）。購入案内ではありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/t/t-strab": {
     zh: "介紹斜視與弱視的視軸對不齊概念、內斜外斜複視，以及何時屬急症評估（公眾教育，不能代替面診。）詳見內文。",
-    en: "Educational page on strabismus and amblyopia, misaligned visual axes, and when double vision needs urgent assessment. Public education only—not a substitut",
-    ja: "斜視について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    en: "Educational page on strabismus and amblyopia, misaligned visual axes, and when double vision needs urgent assessment.",
+    ja: "斜視と弱視、内斜・外斜・複視、急いで評価が要る目安を紹介します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["斜視"],
       en: ["Strabismus"],
@@ -564,8 +564,8 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-strabsx": {
     zh: "介紹斜視手術的術前評估與術後急症紅旗教育，方便理解適應與風險討論方向（公眾教育，不能代替面診。）詳見內文。",
-    en: "Education on strabismus surgery assessment and postoperative red flags—adaptation and risk discussion themes only. Public education only—not a substitute f",
-    ja: "斜視について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    en: "Education on strabismus surgery assessment and postoperative red flags—adaptation and risk discussion themes only.",
+    ja: "斜視手術の術前評価と術後の救急サイン。適応とリスクの教育です。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["斜視"],
       en: ["Strabismus"],
@@ -580,7 +580,7 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   "/t/t-ted": {
     zh: "介紹甲狀腺眼疾的凸眼、複視與視神經受壓等教育要點，以及何時需要急症評估（公眾教育，不能代替面診。）詳見內文。",
     en: "Educational points on thyroid eye disease—bulging, double vision and optic-nerve pressure—and when urgent review is needed.",
-    ja: "甲状腺眼症について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    ja: "甲状腺眼症の突出・複視・視神経圧迫と、急ぎの評価が要る目安を紹介します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["甲狀腺眼疾"],
       en: ["Thyroid eye disease"],
@@ -589,8 +589,8 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-uveitis": {
     zh: "介紹葡萄膜炎的解剖分類與感染性／非感染性概念，以及專科處理梯階的公眾教育（公眾教育，不能代替面診。）",
-    en: "Education on uveitis anatomic classes and infectious versus non-infectious ideas, plus specialist stepped-care themes. Public education only—not a substitu",
-    ja: "ぶどう膜炎について、公開中の教育文に沿った要点と受診の目安を紹介します。診断の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    en: "Education on uveitis anatomic classes and infectious versus non-infectious ideas, plus specialist stepped-care themes.",
+    ja: "ぶどう膜炎の解剖分類と感染／非感染の考え方、専門医の段階的対応を紹介します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["葡萄膜炎"],
       en: ["Uveitis"],
@@ -609,7 +609,7 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-warm": {
     zh: "介紹眼瞼熱敷及按摩如何協助瞼板腺油脂流動，適用於瞼板腺功能障礙、瞼緣炎與霰粒腫的家居護理教育（公眾教育，不能代替面診。）",
-    en: "Explains lid warming and massage to help meibomian oil flow in MGD, blepharitis and chalazion home-care education. Public education only—not a substitute f",
+    en: "Explains lid warming and massage to help meibomian oil flow in MGD, blepharitis and chalazion home-care education.",
     ja: "マイボーム腺機能不全や眼瞼炎・霰粒腫向けの、眼瞼温罨法とマッサージの家事ケア教育です。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["瞼板腺功能障礙"],
@@ -619,7 +619,7 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-yag": {
     zh: "介紹 YAG 後囊切開與視網膜裂孔屏障激光的教育概念，包括後囊混濁與裂孔封邊的分別（公眾教育，不能代替面診。）",
-    en: "Educational notes on YAG capsulotomy and retinal barrier laser for posterior capsule opacity or tear sealing. Public education only—not a substitute for an",
+    en: "Educational notes on YAG capsulotomy and retinal barrier laser for posterior capsule opacity or tear sealing.",
     ja: "後嚢混濁に対するYAG切開と、網膜裂孔のバリアレーザーについての教育的説明です。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/t/water-acanthamoeba": {
@@ -634,7 +634,7 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/tools/ask": {
     zh: "面診前可思考的問題清單示意，幫助整理病情描述；不能代替面診或診斷（公眾教育，不能代替面診。）詳見內文。",
-    en: "Suggested questions to organise your story before a clinic visit. Education only—not booking, advice or a diagnosis. Public education only—not a substitute",
+    en: "Suggested questions to organise your story before a clinic visit. Education only—not booking, advice or a diagnosis.",
     ja: "受診前に整理したい質問例。診断の代わりにはならない教育ツールです。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/tools/drops": {
@@ -654,7 +654,7 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/tools/haze": {
     zh: "顏色變淡、霧感與車燈眩光的示意，幫助描述症狀；不能代替視力或眼底檢查（公眾教育，不能代替面診。）詳見內文。",
-    en: "Illustration of washed-out colour, haze and headlight glare to help describe symptoms—not a vision or fundus test. Public education only—not a substitute f",
+    en: "Illustration of washed-out colour, haze and headlight glare to help describe symptoms—not a vision or fundus test.",
     ja: "色あせ・霧・ライトの眩しさの図示。視力や眼底の検査の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/tools/map": {
@@ -669,12 +669,12 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/tools/rx": {
     zh: "眼鏡處方上球鏡、柱鏡、軸與老花加度等欄位的解讀教育；不能代替驗光（公眾教育，不能代替面診。）詳見內文。",
-    en: "Explains sphere, cylinder, axis and near-add fields on a glasses prescription. Education only—not a refraction. Public education only—not a substitute for ",
+    en: "Explains sphere, cylinder, axis and near-add fields on a glasses prescription. Education only—not a refraction.",
     ja: "眼鏡処方せんの球面・円柱・軸・加入などの読み方教育。検眼の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/tools/tunnel": {
     zh: "青光眼周邊視野收窄的示意動畫，幫助理解「隧道視野」概念；不是視野檢查（公眾教育，不能代替面診。）詳見內文。",
-    en: "Animation suggesting tunnel-like peripheral field loss for glaucoma education. Not a visual-field test or diagnosis. Public education only—not a substitute",
+    en: "Animation suggesting tunnel-like peripheral field loss for glaucoma education. Not a visual-field test or diagnosis.",
     ja: "緑内障で周辺視野が狭く感じる様子の図示。視野検査そのものではありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/tools/visit": {
