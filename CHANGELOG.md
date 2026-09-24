@@ -2,6 +2,11 @@
 
 Git-sourced history for this site. Entries follow commits on `main`, not chat notes.
 
+## [1.78] — 2026-09-24
+
+- **Summary:** `/urgent` only — clarified private-clinic vs A&E lead; added same-day private ophthalmologist call-ahead line under the same-day tier; updated `/urgent` meta (zh/en/ja; zh-Hans via toHans). No clinic names, phones, booking or WhatsApp. `CONTENT_VERSION` → **1.78**.
+- **Files:** `src/i18n/ui.ts`, `src/data/seo-descriptions.ts`, `src/lib/site.ts`
+
 ## [1.77] — 2026-09-24
 
 - **Summary:** SEO 1.77 — IndexNow key + post-Production workflow; fuller head-only meta descriptions (zh/en/ja; zh-Hans via toHans); MedicalWebPage JSON-LD on `/t/*` and `/c/*` (BreadcrumbList unchanged). `CONTENT_UPDATED` unchanged. Google verification HTML untouched.
