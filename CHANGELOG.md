@@ -2,6 +2,11 @@
 
 Git-sourced history for this site. Entries follow commits on `main`, not chat notes.
 
+## [1.79] — 2026-09-25
+
+- **Summary:** Polish 1.79 — per-URL sitemap `lastmod` from topic `lastReviewed` + route overrides (generator script; `/urgent` → 2026-09-24); home/hub sticky-header language switcher parity with topic pages; `/t/t-cataract` EN meta hedge aligned with 繁/简/JA (≤155 chars); `/iol` EN/JA (and 简 via toHans) localize clarity badges + distance scale, JA range heading 「見え方の範囲（図示）」. Hedges unchanged. `CONTENT_VERSION` → **1.79**. `CONTENT_UPDATED` / 最近覆核 unchanged (no 繁 body copy edits).
+- **Files:** `public/sitemap.xml`, `scripts/generate-sitemap.mjs`, `scripts/seo-static.test.mjs`, `src/components/app-shell.tsx`, `src/components/iol-scene.tsx`, `src/data/seo-descriptions.ts`, `src/i18n/ui.ts`, `src/lib/iol-optics.ts`, `src/lib/site.ts`, `src/routes/iol.tsx`, `CHANGELOG.md`
+
 ## [1.78] — 2026-09-24
 
 - **Summary:** `/urgent` only — clarified private-clinic vs A&E lead; added same-day private ophthalmologist call-ahead line under the same-day tier; updated `/urgent` meta (zh/en/ja; zh-Hans via toHans). No clinic names, phones, booking or WhatsApp. `CONTENT_VERSION` → **1.78**.

@@ -1,8 +1,17 @@
 import { useId } from "react";
 import { cn } from "@/lib/utils";
-import { qualityLabel } from "@/lib/iol-optics";
+import { qualityLabel, type QualityTier } from "@/lib/iol-optics";
 import { HaloOverlay } from "@/components/halo-overlay";
 import type { HaloKind } from "@/lib/night-lights";
+import { useI18n } from "@/i18n";
+import type { UiKey } from "@/i18n/ui";
+
+const IOL_Q_KEY: Record<QualityTier, UiKey> = {
+  clear: "iolQClear",
+  fair: "iolQFair",
+  blur: "iolQBlur",
+  veryBlur: "iolQVeryBlur",
+};
 
 type Props = {
   src: string;
@@ -29,6 +38,7 @@ export function IolScene({
   night,
   optic = "mono",
 }: Props) {
+  const { t } = useI18n();
   const fid = useId().replace(/:/g, "");
   const total = sphere + astig;
   const q = qualityLabel(total);
@@ -51,7 +61,7 @@ export function IolScene({
             q.tone === "bad" && "bg-danger-bg text-danger",
           )}
         >
-          {q.text}
+          {t(IOL_Q_KEY[q.tier])}
         </span>
       </div>
       <div className="relative mt-2 aspect-video overflow-hidden bg-navy">

@@ -115,6 +115,34 @@ test("sitemap.xml is a valid urlset covering edu tools including outdoor", () =>
   assert.doesNotMatch(xml, /\/t\/t-protopic[<\s]/);
   const urlCount = (xml.match(/<url>/g) || []).length;
   assert.ok(urlCount > 50, `sitemap too thin (${urlCount} urls); expected full topic+tools map`);
+  assert.equal(urlCount, 99, `sitemap URL count drifted (${urlCount}); keep 99`);
+});
+
+test("sitemap lastmod varies by route and /urgent reflects 1.78 content date", () => {
+  const xml = readFileSync(SITEMAP, "utf8");
+  const lastmods = [...xml.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((m) => m[1]);
+  assert.equal(lastmods.length, 99, "every sitemap URL should carry lastmod");
+  const distinct = new Set(lastmods);
+  assert.ok(
+    distinct.size >= 3,
+    `expected varied lastmods (≥3), got ${distinct.size}: ${[...distinct].sort().join(", ")}`,
+  );
+  assert.doesNotMatch(
+    xml,
+    /<loc>https:\/\/www\.eyesinfo\.org\/urgent<\/loc><lastmod>2026-09-18<\/lastmod>/,
+    "/urgent must not keep the stale 2026-09-18 bulk stamp after 1.78",
+  );
+  assert.match(
+    xml,
+    /<loc>https:\/\/www\.eyesinfo\.org\/urgent<\/loc><lastmod>2026-09-2[4-9]<\/lastmod>/,
+    "/urgent lastmod should be 2026-09-24 or later",
+  );
+  // Spot-check: a topic with an explicit lastReviewed earlier than the bulk stamp.
+  assert.match(
+    xml,
+    /<loc>https:\/\/www\.eyesinfo\.org\/t\/t-chem<\/loc><lastmod>2026-09-05<\/lastmod>/,
+    "/t/t-chem should use topic lastReviewed (2026-09-05), not the baseline",
+  );
 });
 
 test("PWA middleware treats .xml and .txt as non-document paths", () => {

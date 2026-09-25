@@ -189,7 +189,7 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
   },
   "/t/t-cataract": {
     zh: "介紹白內障超聲波乳化與人工晶體的手術類別教育，以及何時與專科醫生討論手術時機（公眾教育，不能代替面診。）",
-    en: "Educational overview of phacoemulsification and intraocular lenses, and when surgery timing is discussed with a specialist.",
+    en: "Overview of phacoemulsification and intraocular lenses; when to discuss surgery timing with a specialist. Not a substitute for an in-person consultation.",
     ja: "白内障の超音波乳化吸引と眼内レンズの種類、手術時期を専門医と相談する目安を紹介します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
       zh: ["白內障"],

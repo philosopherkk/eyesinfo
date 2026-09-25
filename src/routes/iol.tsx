@@ -313,15 +313,26 @@ function IolPage() {
             const d =
               (glasses ? 0 : sphereDefocus(optic, target, s.demand)) + astig;
             const h = Math.max(12, Math.round((1 - Math.min(1, d / 2.2)) * 56));
+            const stopKey = (
+              s.id === "6m"
+                ? "iolStop6m"
+                : s.id === "2m"
+                  ? "iolStop2m"
+                  : s.id === "1m"
+                    ? "iolStop1m"
+                    : s.id === "60cm"
+                      ? "iolStop60cm"
+                      : "iolStop40cm"
+            ) as UiKey;
             return (
-              <div key={s.label} className="flex flex-col items-center">
+              <div key={s.id} className="flex flex-col items-center">
                 <div className="flex h-14 items-end">
                   <div
                     className="w-6 rounded-sm bg-navy"
                     style={{ height: h, opacity: 0.35 + (h / 56) * 0.65 }}
                   />
                 </div>
-                <span className="mt-1 text-[0.65rem] text-muted">{s.label}</span>
+                <span className="mt-1 text-[0.65rem] text-muted">{t(stopKey)}</span>
               </div>
             );
           })}
