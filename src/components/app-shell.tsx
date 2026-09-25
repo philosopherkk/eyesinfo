@@ -23,7 +23,6 @@ export function AppShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const fontPx = usePrefs((s) => s.fontPx);
   const { t, locale } = useI18n();
-  const isHome = isLocaleHomePath(pathname);
   const homeHref = pathForLocale(locale);
 
   const tabs = [
@@ -121,8 +120,8 @@ export function AppShell({ children }: { children: ReactNode }) {
         <div className="flex flex-wrap items-center justify-end gap-1.5 border-t border-[#f3f0e9]/15 px-3 pb-1.5 pt-1 sm:gap-2 sm:px-4 sm:pb-2 layout-lg:px-6">
           <ThemeControl compact surface="navy" />
           <LayoutControl compact surface="navy" />
-          {/* On home, language lives in 「顯示選項」; keep it here on other pages. */}
-          {!isHome ? <LangSwitch compact /> : null}
+          {/* Same language chrome on home/hubs and topic pages (row 2). */}
+          <LangSwitch compact />
         </div>
       </header>
 

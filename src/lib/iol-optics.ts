@@ -40,13 +40,16 @@ export const DISTANCES = [
   { id: "near" as const, title: "近距離", sub: "約 40 厘米 · 賽程表", demand: 2.5, img: "/iol/near.jpg" },
 ];
 
+/** Distance scale stops — labels via `iolStop*` UI keys (not hardcoded 繁). */
 export const RANGE_STOPS = [
-  { label: "6米", demand: 0 },
-  { label: "2米", demand: 0.5 },
-  { label: "1米", demand: 1 },
-  { label: "60厘米", demand: 1.67 },
-  { label: "40厘米", demand: 2.5 },
+  { id: "6m" as const, demand: 0 },
+  { id: "2m" as const, demand: 0.5 },
+  { id: "1m" as const, demand: 1 },
+  { id: "60cm" as const, demand: 1.67 },
+  { id: "40cm" as const, demand: 2.5 },
 ];
+
+export type QualityTier = "clear" | "fair" | "blur" | "veryBlur";
 
 export function sphereDefocus(optic: Optic, target: number, demand: number): number {
   if (optic === "mf") {
@@ -83,14 +86,15 @@ export function haloStrength(optic: Optic, night: boolean): number {
   return 0.06;
 }
 
+/** Tone + tier id — resolve display text with `iolQ*` UI keys. */
 export function qualityLabel(defocus: number): {
-  text: string;
+  tier: QualityTier;
   tone: "ok" | "mid" | "bad";
 } {
-  if (defocus < 0.4) return { text: "清晰", tone: "ok" };
-  if (defocus < 0.85) return { text: "尚可", tone: "mid" };
-  if (defocus < 1.6) return { text: "模糊", tone: "bad" };
-  return { text: "很模糊", tone: "bad" };
+  if (defocus < 0.4) return { tier: "clear", tone: "ok" };
+  if (defocus < 0.85) return { tier: "fair", tone: "mid" };
+  if (defocus < 1.6) return { tier: "blur", tone: "bad" };
+  return { tier: "veryBlur", tone: "bad" };
 }
 
 export function formatD(n: number): string {
