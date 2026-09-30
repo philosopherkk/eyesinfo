@@ -24,14 +24,14 @@ export type ToolDef = {
 
 export const TOOLS: ToolDef[] = [
   { id: "amsler", title: "阿姆斯勒方格", blurb: "自我監察中央視力", canto: "遮一眼望中央", href: "/amsler", home: true },
-  { id: "iol", title: "晶體視力示意", blurb: "單焦目標度數與多焦光暈", canto: "睇遠睇近差幾多", href: "/iol", home: true },
+  { id: "iol", title: "晶體視力示意", blurb: "遠中近與日夜點光源的光學示意", canto: "睇遠睇近差幾多", href: "/iol", home: true },
   { id: "map", title: "眼圖", blurb: "撳部位打開相關專題", canto: "撳眼圖就明", href: "/tools/map", home: true },
   { id: "drops", title: "滴藥水步驟", blurb: "洗手、唔好掂睫毛；跟說明書", canto: "跟住步驟滴", href: "/tools/drops", home: true },
   { id: "ask", title: "問醫生清單", blurb: "面診前可帶去的問題", canto: "問清楚先好決定", href: "/tools/ask", home: true },
   { id: "tunnel", title: "隧道視野示意", blurb: "青光眼周邊視野收窄（不是檢查）", canto: "睇下隧道點樣", href: "/tools/tunnel" },
   { id: "haze", title: "白內障日夜示意", blurb: "顏色變淡、霧、車燈眩光", canto: "夜晚開車矇唔矇", href: "/tools/haze" },
   { id: "floaters", title: "飛蚊與簾幕", blurb: "會飄的飛蚊 vs 唔郁的簾幕", canto: "有簾幕去急症；新飛蚊同日散瞳眼底（不是只散瞳便足夠）", href: "/tools/floaters" },
-  { id: "halo", title: "夜間光暈比較", blurb: "單焦、延伸景深、三焦點示意", canto: "唔係術後保證", href: "/tools/halo" },
+  { id: "halo", title: "夜間光暈比較", blurb: "單焦、增強單焦、延伸景深、多焦的示意", canto: "唔係術後保證", href: "/tools/halo" },
   { id: "warm", title: "熱敷計時", blurb: "示意計時，跟醫生指示", canto: "熱敷跟時間", href: "/tools/warm" },
   { id: "visit", title: "一次眼科檢查", blurb: "散瞳後唔好自己開車", canto: "去診所會做咩", href: "/tools/visit" },
   { id: "outdoor", title: "兒童戶外時間", blurb: "戶外日光時間記錄（公共衞生約數）", canto: "出街睇日光", href: "/tools/outdoor" },

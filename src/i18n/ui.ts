@@ -328,7 +328,7 @@ const zhHant = {
   iolTitle: "人工晶體視力示意",
   iolNotGuarantee: "不是術後保證。本站不提供預約或轉介。",
   iolLead:
-    "拖動目標度數，比較遠、中、近看起來差多少。只是光學示意，不能預測你手術後的視力，亦不是推介任何晶體品牌。",
+    "比較遠、中、近，以及日間與夜間的點光源。只是光學示意，不是臨床測試，不能預測你手術後的視力，亦不是推介任何晶體類別或品牌。",
   iolOpticsH: "光學設計",
   iolTargetH: "單焦／預留目標度數",
   iolTargetHint:
@@ -352,7 +352,7 @@ const zhHant = {
   iolGlassesOn: "已戴眼鏡矯正",
   iolGlassesOff: "不戴眼鏡",
   iolGlassesHint:
-    "眼鏡可補球面及散光殘餘（清晰度／對焦），但多焦／延伸景深因光學設計而下降的對比度，以及夜間光暈，不會因戴鏡而恢復或消失。此為光學示意，不能預測個人術後，亦不是品牌比較。",
+    "眼鏡可補球面及散光殘餘（清晰度／對焦），但多焦／延伸景深因光學設計而下降的對比度、多焦的重影，以及夜間光暈，不會因戴鏡而恢復或消失。此為光學示意，不能預測個人術後，亦不是品牌比較。",
   iolRangeH: "清晰範圍示意",
   iolHowH: "如何閱讀這個示意",
   iolHow1:
@@ -361,9 +361,12 @@ const zhHant = {
     "單焦預留近視 −3.00：約 33 厘米閱讀較易，遠處路牌會很糊。−2.00 則約 50 厘米。有人一眼正視、一眼輕微近視（迷你單眼視），須個別討論。",
   iolHow3:
     "單焦預留遠視 +3.00：遠近都不夠焦，是「晶體度數偏少」的示範，不是常用目標。+2.00 同樣遠近都偏糊，只是幅度較小。",
-  iolHow4: "增強型單焦：中距離往往比普通單焦好一點，細字多數仍需鏡。",
-  iolHow5: "延伸景深：遠到中距離較連貫，細字仍常需鏡，夜間光暈因產品而異。",
-  iolHow6: "多焦／三焦：遠中近都嘗試兼顧，對比可略降，夜間光暈較明顯。不是人人適合，不是術後保證。",
+  iolHow4:
+    "增強型單焦：仍是單焦，不是延伸景深。中距離往往比普通單焦好一點，細字多數仍要鏡，夜間光暈接近單焦。",
+  iolHow5:
+    "延伸景深：遠到中距離較連貫；約 40 厘米的細字仍常要鏡，畫面不應看成第二個清晰焦點。夜間光暈、星芒通常輕於繞射多焦，因產品而異。",
+  iolHow6:
+    "多焦／三焦：遠中近都嘗試兼顧，近距離通常比延伸景深有用；對比較低，可有重影，夜間光暈與星芒較明顯。不是人人適合，不是術後保證。",
   iolLinkDetail: "晶體選擇細節",
   iolLinkMf: "多焦篩選原則",
   iolLinkHalo: "夜間光暈比較",
@@ -377,23 +380,41 @@ const zhHant = {
   iolOpticMonoNote:
     "只在預留的那個距離最清晰。預留正視則看遠清楚、看近多數要老花眼鏡；預留近視則相反。夜間光暈一般少於繞射多焦，仍因瞳孔及眼表而異。",
   iolOpticEmono: "增強型單焦點",
-  iolOpticEmonoShort: "輕微延伸景深",
+  iolOpticEmonoShort: "中距離稍好",
   iolOpticEmonoNote:
-    "以單焦為底，輕微拉長清晰範圍，中距離（電腦／賽程）通常較普通單焦好，細字閱讀多數仍需眼鏡。夜間光學干擾因產品及瞳孔而異，一般少於繞射多焦，不是保證「少光暈」。",
+    "仍是單焦一類，不是延伸景深，也不是多焦。清晰範圍只是稍長：中距離（電腦、儀表）通常比普通單焦好一點，約 40 厘米的細字多數仍然要眼鏡。對比大致保持。夜間光暈、星芒接近普通單焦，一般少於繞射多焦。實際因產品及瞳孔而異。不是術後保證。",
   iolOpticEdof: "延伸景深（EDOF）",
   iolOpticEdofShort: "遠至中距離",
   iolOpticEdofNote:
-    "遠至約 60 厘米較連貫。報紙細字多數仍需近用鏡。光暈通常少於多焦、多於單焦，實際因產品及病人而異。",
+    "遠距離至中距離（約電腦、儀表，遠至約 60 厘米）通常較連貫，中距離一般好於增強單焦，不必與遠距離一樣銳利。約 40 厘米的報紙細字多數仍然吃力，常要近用鏡；這不是第二個清晰焦點。光暈、眩光、星芒通常輕於繞射多焦、多於單焦。對比或稍降，一般仍比多焦保留得多。實際因產品及病人而異。不是術後保證。",
   iolOpticMf: "多焦／三焦點",
   iolOpticMfShort: "遠中近幾個焦點",
   iolOpticMfNote:
-    "嘗試同時照顧遠、中、近。對比度可略降，夜間光暈／眩光較明顯。黃斑病變或明顯視野缺損者通常不宜。不能保證脫鏡。",
+    "同時有多於一個焦點，遠、中、近都會試。近距離通常比延伸景深有用，但仍可有重影，對比下降也較延伸景深明顯，不是單焦那種乾淨影像。夜間光暈、星芒與眩光較明顯。黃斑病變或明顯視野缺損者通常不宜。不能保證脫鏡。不是術後保證。",
   iolDistFar: "遠距離",
   iolDistFarSub: "約 6 米 · 駕駛／街景",
   iolDistMid: "中距離",
   iolDistMidSub: "約 60–70 厘米 · 賽事新聞",
   iolDistNear: "近距離",
   iolDistNearSub: "約 40 厘米 · 賽程表",
+  iolPointH: "日間／夜間點光源",
+  iolPointDay: "日間",
+  iolPointNight: "夜間",
+  iolPointCaveat:
+    "點光源只示意有人會注意到的光暈、星芒、眩光或重影，不是臨床測試，不能預測你的夜間駕駛。",
+  iolCompare: "四款並排",
+  iolCompareHint: "並排時建議先把目標放回正視 0。拖離正視會讓四款一起移位。",
+  iolQClear: "清晰",
+  iolQFair: "尚可",
+  iolQBlur: "模糊",
+  iolQVery: "很模糊",
+  iolQContrast: "對比較低",
+  iolQGhost: "可有重影",
+  iolStop6: "6米",
+  iolStop2: "2米",
+  iolStop1: "1米",
+  iolStop60: "60厘米",
+  iolStop40: "40厘米",
   cat_lens: "晶體與屈光",
   cat_lens_sub: "近視遠視 · 白內障 · 斜視",
   cat_lens_research_label: "華人／本港研究",
@@ -775,7 +796,7 @@ const en: Record<Key, string> = {
   iolTitle: "Intraocular lens vision demo",
   iolNotGuarantee: "Not a post-operative guarantee. This site does not book or refer.",
   iolLead:
-    "Drag the target power to compare far, intermediate and near. Optical illustration only — it cannot predict your post-operative vision and does not recommend any lens brand.",
+    "Compare far, intermediate and near, and point lights by day and by night. An optical illustration only — not a clinical test, not a prediction of your vision after surgery, and not a recommendation of any lens class or brand.",
   iolOpticsH: "Optical design",
   iolTargetH: "Monofocal / target power",
   iolTargetHint:
@@ -799,7 +820,7 @@ const en: Record<Key, string> = {
   iolGlassesOn: "Spectacles on",
   iolGlassesOff: "No spectacles",
   iolGlassesHint:
-    "Spectacles can correct residual sphere and cylinder (clarity / focus), but contrast loss from multifocal / EDOF optic design, and night halos, are not restored or removed by glasses. Optical illustration only — not a personal outcome prediction and not a brand comparison.",
+    "Spectacles can correct residual sphere and cylinder (clarity / focus). They do not restore contrast lost to multifocal / EDOF optic design, they do not remove a multifocal ghost image, and they do not remove night halos. Optical illustration only — not a personal outcome and not a brand comparison.",
   iolRangeH: "Depth-of-focus sketch",
   iolHowH: "How to read this demo",
   iolHow1:
@@ -808,10 +829,12 @@ const en: Record<Key, string> = {
     "Monofocal target myopia −3.00: reading at about 33 cm is easier; distant signs are very blurry. −2.00 is about 50 cm. Some people use mini-monovision (one eye distance, one mildly near) — individual discussion.",
   iolHow3:
     "Monofocal target hyperopia +3.00: neither far nor near is in focus — an under-powered demo, not a usual target. +2.00 is similarly soft both ways, milder.",
-  iolHow4: "Enhanced monofocal: intermediate often a bit better than standard monofocal; fine print usually still needs glasses.",
-  iolHow5: "EDOF: far-to-intermediate more continuous; fine print often still needs glasses; night halos vary by product.",
+  iolHow4:
+    "Enhanced monofocal: still a monofocal, not EDOF. Intermediate is often a bit better than a standard monofocal; fine print usually still needs glasses; night halos stay close to a monofocal.",
+  iolHow5:
+    "EDOF: far-to-intermediate is more continuous; fine print at about 40 cm often still needs glasses, and the picture should not be read as a second sharp focus. Night halos and starburst are usually milder than a diffractive multifocal, and vary by product.",
   iolHow6:
-    "Multifocal / trifocal: tries far, intermediate and near; contrast may drop a little; night halos more noticeable. Not for everyone and not a surgical promise.",
+    "Multifocal / trifocal: tries far, intermediate and near; near is usually more useful than EDOF; contrast is lower; a ghost image is possible; night halos and starburst are more noticeable. Not for everyone and not a post-operative promise.",
   iolLinkDetail: "Lens choice detail",
   iolLinkMf: "Multifocal screening principles",
   iolLinkHalo: "Night halo comparison",
@@ -825,23 +848,42 @@ const en: Record<Key, string> = {
   iolOpticMonoNote:
     "Clearest at the targeted distance. Emmetropia: distance clear, near usually needs readers; myopic target reverses that. Night halos usually fewer than diffractive multifocals, still pupil- and surface-dependent.",
   iolOpticEmono: "Enhanced monofocal",
-  iolOpticEmonoShort: "Slightly longer depth of focus",
+  iolOpticEmonoShort: "Modest intermediate gain",
   iolOpticEmonoNote:
-    "Monofocal base with a slightly longer clear range; intermediate (computer / fixtures) often better than standard monofocal; fine print usually still needs glasses. Night optical effects vary by product and pupil — generally less than diffractive multifocal, not a “few halos” promise.",
+    "Still a monofocal design, not an EDOF lens and not a multifocal. The clear range is only a little longer: intermediate (computer, dashboard) is often a bit better than a standard monofocal, and fine print at about 40 cm usually still needs glasses. Contrast is largely kept. Night halos and starburst stay close to a standard monofocal, and are generally less than with a diffractive multifocal. Product and pupil still matter. Not a post-operative promise.",
   iolOpticEdof: "Extended depth of focus (EDOF)",
   iolOpticEdofShort: "Far to intermediate",
   iolOpticEdofNote:
-    "More continuous far to about 60 cm. Newspaper fine print usually still needs readers. Halos usually between monofocal and multifocal; product- and patient-dependent.",
+    "Far through intermediate (computer or dashboard, out to about 60 cm) is usually more continuous. Intermediate is generally better than an enhanced monofocal, and need not be as crisp as distance. Newspaper fine print at about 40 cm is often still hard and usually needs readers; it is not a second sharp focus. Halos, glare and starburst are usually milder than a diffractive multifocal and stronger than a monofocal. Contrast may dip a little, and is generally kept better than with a multifocal. Product and person still matter. Not a post-operative promise.",
   iolOpticMf: "Multifocal / trifocal",
   iolOpticMfShort: "Far, mid and near foci",
   iolOpticMfNote:
-    "Tries far, intermediate and near together. Contrast may drop; night halos/glare more noticeable. Usually unsuitable with macular disease or a clear field defect. Spectacle independence is not guaranteed.",
+    "More than one focus is present at the same time, so far, intermediate and near are all attempted. Near is usually more useful than EDOF, but a ghost image is possible and contrast falls more than with EDOF. It is not the clean image of a monofocal. Night halos, starburst and glare are more noticeable. Usually unsuitable with macular disease or a clear field defect. Spectacle independence is not guaranteed. Not a post-operative promise.",
   iolDistFar: "Distance",
   iolDistFarSub: "About 6 m · driving / street",
   iolDistMid: "Intermediate",
   iolDistMidSub: "About 60–70 cm · match reports",
   iolDistNear: "Near",
   iolDistNearSub: "About 40 cm · fixture list",
+  iolPointH: "Day / night point lights",
+  iolPointDay: "Day",
+  iolPointNight: "Night",
+  iolPointCaveat:
+    "Point lights only illustrate halos, starburst, glare or ghosting that some people notice. Not a clinical test, and not a prediction of night driving.",
+  iolCompare: "Compare four classes",
+  iolCompareHint:
+    "For a side-by-side view, set the target back to emmetropia 0. Moving off emmetropia shifts all four together.",
+  iolQClear: "Clear",
+  iolQFair: "Fair",
+  iolQBlur: "Blurred",
+  iolQVery: "Very blurred",
+  iolQContrast: "Lower contrast",
+  iolQGhost: "Ghost image possible",
+  iolStop6: "6 m",
+  iolStop2: "2 m",
+  iolStop1: "1 m",
+  iolStop60: "60 cm",
+  iolStop40: "40 cm",
   cat_lens: "Lens and refraction",
   cat_lens_sub: "Myopia, hyperopia · cataract · squint",
   cat_lens_research_label: "Chinese / Hong Kong research",
@@ -1218,7 +1260,7 @@ const ja: Record<Key, string> = {
   iolTitle: "眼内レンズの見え方の図示",
   iolNotGuarantee: "術後の保証ではありません。予約・紹介はしません。",
   iolLead:
-    "目標度数を動かして遠・中・近の差を比べます。光学の図示であり、術後視力を予測できず、レンズブランドの推介でもありません。",
+    "遠・中・近と、昼と夜の点光源を比べます。光学の図示であり、臨床検査ではなく、術後視力の予測でも、レンズの種類やブランドの推介でもありません。",
   iolOpticsH: "光学デザイン",
   iolTargetH: "単焦点／目標度数",
   iolTargetHint:
@@ -1242,7 +1284,7 @@ const ja: Record<Key, string> = {
   iolGlassesOn: "眼鏡で矯正済み",
   iolGlassesOff: "眼鏡なし",
   iolGlassesHint:
-    "眼鏡は球面・乱視の残り（清晰／焦点）を補えますが、多焦点／EDOFの設計によるコントラスト低下や夜間ハローは眼鏡では戻りません／消えません。光学図示のみで、個人の術後結果の予測でもブランド比較でもありません。",
+    "眼鏡は球面と乱視の残り（清晰／焦点）を補えます。多焦点／EDOFの設計によるコントラスト低下、多焦点のゴースト、夜間ハローは眼鏡では戻りません。光学図示のみで、個人の術後結果でもブランド比較でもありません。",
   iolRangeH: "清晰範囲の図示",
   iolHowH: "この図示の読み方",
   iolHow1:
@@ -1251,10 +1293,12 @@ const ja: Record<Key, string> = {
     "単焦点で近視 −3.00：約33 cmの読書はしやすいが遠方の看板は大きくぼける。−2.00は約50 cm。一眼正視・一眼軽近視（ミニ単眼視）は個別相談。",
   iolHow3:
     "単焦点で遠視 +3.00：遠近とも焦点不足。「度数が足りない」示意であり常用目標ではない。+2.00も遠近ともややぼけ、程度は小さい。",
-  iolHow4: "強化単焦点：中距離は普通の単焦点より少し良いことが多く、細字はなお眼鏡が必要なことが多い。",
-  iolHow5: "EDOF：遠〜中がより連続；細字はなお眼鏡が多い；夜間ハローは製品次第。",
+  iolHow4:
+    "強化単焦点：なお単焦点であり、EDOFではありません。中距離は普通の単焦点より少し良いことが多く、細字はなお眼鏡、夜間ハローは単焦点に近いです。",
+  iolHow5:
+    "EDOF：遠〜中がより連続。約40 cmの細字はなお眼鏡が多く、第二の鮮明な焦点として見ないでください。夜間のハローとスターバーストは回折多焦点より軽いことが多く、製品で変わります。",
   iolHow6:
-    "多焦点／3焦点：遠中近を試み、コントラストは少し下がることがあり、夜間ハローはより目立つ。万人向きでも術後保証でもない。",
+    "多焦点／3焦点：遠中近を試み、近見はEDOFより役立つことが多い。コントラストは低く、ゴーストがあり得て、夜間のハローとスターバーストがより目立つ。万人向きでも術後保証でもありません。",
   iolLinkDetail: "レンズ選択の詳細",
   iolLinkMf: "多焦点の術前の考え方",
   iolLinkHalo: "夜間ハロー比較",
@@ -1268,23 +1312,42 @@ const ja: Record<Key, string> = {
   iolOpticMonoNote:
     "狙った距離がいちばんはっきり。正視なら遠方が見えやすく近くは老眼鏡が多い；近視寄りはその逆。夜間ハローは回折多焦点より少ないことが多いが、瞳孔と眼表面次第。",
   iolOpticEmono: "強化単焦点",
-  iolOpticEmonoShort: "わずかに長い焦点深度",
+  iolOpticEmonoShort: "中距離が少し良い",
   iolOpticEmonoNote:
-    "単焦点を底に清晰範囲を少し延ばす。中距離（パソコン／日程）は普通の単焦点より良いことが多く、細字はなお眼鏡。夜間の光学効果は製品と瞳孔次第で、一般に回折多焦点より少ないが「ハローが少ない」保証ではない。",
+    "なお単焦点の一種であり、EDOFでも多焦点でもありません。清晰範囲はわずかに長いだけです。中距離（パソコン、計器）は普通の単焦点より少し良いことが多く、約40 cmの細字はなお眼鏡が必要なことが多いです。コントラストはおおむね保たれます。夜間のハローとスターバーストは普通の単焦点に近く、回折多焦点より少ないことが多いです。製品と瞳孔で変わります。術後の保証ではありません。",
   iolOpticEdof: "焦点深度拡張（EDOF）",
   iolOpticEdofShort: "遠〜中距離",
   iolOpticEdofNote:
-    "遠〜約60 cmがより連続。新聞の細字は近用眼鏡が必要なことが多い。ハローは単焦点と多焦点の間が多く、製品・個人差あり。",
+    "遠方から中距離（パソコンや計器、およそ60 cmまで）がより連続しやすいです。中距離は強化単焦点より良いことが多く、遠方と同じ鋭さである必要はありません。約40 cmの新聞の細字はなおつらく、近用眼鏡が必要なことが多いです。第二の鮮明な焦点ではありません。ハロー、グレア、スターバーストは回折多焦点より軽く、単焦点より強いことが多いです。コントラストは少し下がることがあり、一般に多焦点より保たれます。製品と個人で変わります。術後の保証ではありません。",
   iolOpticMf: "多焦点／3焦点",
   iolOpticMfShort: "遠中近の複数焦点",
   iolOpticMfNote:
-    "遠・中・近を同時に試みる。コントラスト低下や夜間ハロー／眩しさが目立ちやすい。黄斑疾患や明らかな視野欠損では通常向かない。眼鏡なしは保証されない。",
+    "同時に複数の焦点があり、遠・中・近を試みます。近見はEDOFより役立つことが多い一方、ゴーストが出ることがあり、コントラスト低下もEDOFより目立ちます。単焦点のようなきれいな像ではありません。夜間のハロー、スターバースト、グレアがより目立ちます。黄斑疾患や明らかな視野欠損では通常向きません。眼鏡なしは保証されません。術後の保証ではありません。",
   iolDistFar: "遠距離",
   iolDistFarSub: "約6 m · 運転／街並み",
   iolDistMid: "中距離",
   iolDistMidSub: "約60–70 cm · 試合ニュース",
   iolDistNear: "近距離",
   iolDistNearSub: "約40 cm · 日程表",
+  iolPointH: "昼／夜の点光源",
+  iolPointDay: "昼",
+  iolPointNight: "夜",
+  iolPointCaveat:
+    "点光源は、ハロー、スターバースト、グレア、ゴーストに気づく人がいることの図示です。臨床検査ではなく、夜間運転の予測でもありません。",
+  iolCompare: "4種類を並べる",
+  iolCompareHint:
+    "並べるときは目標を正視0に戻してください。正視から外すと4種類が一緒にずれます。",
+  iolQClear: "鮮明",
+  iolQFair: "まずまず",
+  iolQBlur: "ぼけ",
+  iolQVery: "大きくぼけ",
+  iolQContrast: "コントラスト低め",
+  iolQGhost: "ゴーストがあり得る",
+  iolStop6: "6 m",
+  iolStop2: "2 m",
+  iolStop1: "1 m",
+  iolStop60: "60 cm",
+  iolStop40: "40 cm",
   cat_lens: "水晶体と屈折",
   cat_lens_sub: "近視遠視 · 白内障 · 斜視",
   cat_lens_research_label: "華人／香港の研究",

@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { ArrowLeft, Moon, Sun } from "lucide-react";
 import { IolScene } from "@/components/iol-scene";
+import { IolDistanceQuad } from "@/components/iol-distance-quad";
+import { IolPointLights } from "@/components/iol-point-lights";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { SaveButton } from "@/components/save-button";
 import { toolSaveKey } from "@/lib/saved";
@@ -20,8 +22,10 @@ import {
   contrastLoss,
   formatD,
   formatDegrees,
+  ghostStrength,
   haloStrength,
   sphereDefocus,
+  usableDefocus,
   type Optic,
 } from "@/lib/iol-optics";
 
@@ -80,11 +84,14 @@ function IolPage() {
   const [toric, setToric] = useState(false);
   const [night, setNight] = useState(false);
   const [glasses, setGlasses] = useState(false);
+  const [compare, setCompare] = useState(false);
+  const [pointTime, setPointTime] = useState<"day" | "night">("night");
 
   const astig = glasses ? 0 : astigDefocus(cyl, toric);
-  // Spectacles clear residual sphere/cyl blur only; IOL optic contrast loss stays.
+  // Spectacles clear residual sphere/cyl blur only. Contrast, ghost and night phenomena stay.
   const contrast = contrastLoss(optic);
   const halo = haloStrength(optic, night);
+  const ghost = ghostStrength(optic);
   const opticKeys = OPTIC_KEYS[optic];
 
   const scenes = useMemo(
@@ -306,44 +313,139 @@ function IolPage() {
         <p className="px-4 pt-2 text-[0.78rem] text-muted">{t("iolGlassesHint")}</p>
       ) : null}
 
+      <section className="mt-4 px-4">
+        <button
+          type="button"
+          aria-pressed={compare}
+          onClick={() => setCompare((v) => !v)}
+          className={cn(
+            "inline-flex h-11 w-full items-center justify-center rounded-xl border text-[0.85rem] font-semibold",
+            compare
+              ? "border-navy bg-navy text-paper"
+              : "border-line bg-card text-navy",
+          )}
+        >
+          {t("iolCompare")}
+        </button>
+        <p className="mt-2 text-[0.78rem] leading-relaxed text-muted">{t("iolCompareHint")}</p>
+      </section>
+
       <section className="mt-5 px-4">
         <h2 className="mb-2 text-[0.8rem] font-semibold text-muted">{t("iolRangeH")}</h2>
         <div className="grid grid-cols-5 gap-1">
           {RANGE_STOPS.map((s) => {
-            const d =
-              (glasses ? 0 : sphereDefocus(optic, target, s.demand)) + astig;
+            const sphere = glasses ? 0 : sphereDefocus(optic, target, s.demand);
+            const d = usableDefocus(optic, sphere, astig);
             const h = Math.max(12, Math.round((1 - Math.min(1, d / 2.2)) * 56));
             return (
-              <div key={s.label} className="flex flex-col items-center">
+              <div key={s.labelKey} className="flex flex-col items-center">
                 <div className="flex h-14 items-end">
                   <div
                     className="w-6 rounded-sm bg-navy"
                     style={{ height: h, opacity: 0.35 + (h / 56) * 0.65 }}
                   />
                 </div>
-                <span className="mt-1 text-[0.65rem] text-muted">{s.label}</span>
+                <span className="mt-1 text-[0.65rem] text-muted">{t(s.labelKey)}</span>
               </div>
             );
           })}
         </div>
       </section>
 
-      <section className="mt-5 grid gap-3 px-4">
-        {scenes.map((s) => (
-          <IolScene
-            key={s.id}
-            src={s.src}
-            title={s.title}
-            sub={s.sub}
-            sample={s.sample}
-            sphere={s.sph}
-            astig={astig}
-            contrast={contrast}
-            halo={s.id === "far" ? halo : 0}
-            night={s.id === "far" && night}
-            optic={optic === "mf" ? "mf" : optic === "edof" ? "edof" : "mono"}
+      {compare ? (
+        <section className="mt-5 grid gap-3 px-4">
+          {DISTANCES.map((d) => {
+            const src = d.id === "far" && night ? "/iol/night.jpg" : d.img;
+            const sample =
+              d.id === "far"
+                ? t("iolSampleFar")
+                : d.id === "mid"
+                  ? t("iolSampleMid")
+                  : t("iolSampleNear");
+            const title =
+              d.id === "far"
+                ? t("iolDistFar")
+                : d.id === "mid"
+                  ? t("iolDistMid")
+                  : t("iolDistNear");
+            const sub =
+              d.id === "far"
+                ? t("iolDistFarSub")
+                : d.id === "mid"
+                  ? t("iolDistMidSub")
+                  : t("iolDistNearSub");
+            return (
+              <IolDistanceQuad
+                key={d.id}
+                distanceId={d.id}
+                title={title}
+                sub={sub}
+                src={src}
+                sample={sample}
+                cells={OPTICS.map((o) => ({
+                  optic: o.id,
+                  label: t(OPTIC_KEYS[o.id].short),
+                  sphere: glasses ? 0 : sphereDefocus(o.id, target, d.demand),
+                  astig,
+                  contrast: contrastLoss(o.id),
+                  halo: d.id === "far" ? haloStrength(o.id, night) : 0,
+                  ghost: ghostStrength(o.id),
+                  night: d.id === "far" && night,
+                }))}
+              />
+            );
+          })}
+        </section>
+      ) : (
+        <section className="mt-5 grid gap-3 px-4">
+          {scenes.map((s) => (
+            <IolScene
+              key={s.id}
+              src={s.src}
+              title={s.title}
+              sub={s.sub}
+              sample={s.sample}
+              sphere={s.sph}
+              astig={astig}
+              contrast={contrast}
+              halo={s.id === "far" ? halo : 0}
+              ghost={ghost}
+              night={s.id === "far" && night}
+              optic={optic}
+            />
+          ))}
+        </section>
+      )}
+
+      <section className="mt-5 px-4">
+        <h2 className="text-[0.8rem] font-semibold text-muted">{t("iolPointH")}</h2>
+        <p className="mt-1 text-[0.78rem] leading-relaxed text-muted">
+          {t("iolPointCaveat")}
+        </p>
+        <div className="mt-2 grid grid-cols-2 gap-2">
+          {(["day", "night"] as const).map((time) => (
+            <button
+              key={time}
+              type="button"
+              onClick={() => setPointTime(time)}
+              className={cn(
+                "min-h-11 rounded-xl border text-[0.82rem] font-semibold",
+                pointTime === time
+                  ? "border-navy bg-navy text-paper"
+                  : "border-line bg-card text-navy",
+              )}
+            >
+              {time === "day" ? t("iolPointDay") : t("iolPointNight")}
+            </button>
+          ))}
+        </div>
+        <div className="mt-3">
+          <IolPointLights
+            optic={optic}
+            time={pointTime}
+            title={t(opticKeys.title)}
           />
-        ))}
+        </div>
       </section>
 
       <section className="mt-6 px-4">

@@ -193,9 +193,9 @@ export function editorialBits(locale: Locale) {
           : EDITORIAL.registerNote;
   const reviewed =
     locale === "en"
-      ? "24 September 2026"
+      ? "30 September 2026"
       : locale === "ja"
-        ? "2026年9月24日"
+        ? "2026年9月30日"
         : EDITORIAL.reviewed;
   const quals =
     locale === "zh-Hans" ? EDITORIAL.quals.map(toHans) : EDITORIAL.quals;

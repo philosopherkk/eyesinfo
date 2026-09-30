@@ -9,7 +9,7 @@ export const PUBLIC_HOSTS = ["eyesinfo.org", "www.eyesinfo.org"] as const;
  * wording/typos). Shown at the bottom of every page.
  */
 export const CONTENT_VERSION = "1.78";
-export const CONTENT_UPDATED = "2026-09-24";
+export const CONTENT_UPDATED = "2026-09-30";
 
 /** Copyright identity for watermark, copy-attribution and metadata. Education site only. */
 export const COPYRIGHT_YEAR = "2026";

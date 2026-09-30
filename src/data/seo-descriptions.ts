@@ -648,9 +648,9 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
     ja: "動く飛蚊と動かないカーテン状の影の対比図示。新しい症状は早めの散瞳評価を。検査や診断の代わりではありません。教育目的の説明です。"
   },
   "/tools/halo": {
-    zh: "單焦、延伸景深與多焦人工晶體光暈差異的示意，屬光學教育而非產品推介（公眾教育，不能代替面診。）詳見內文。",
-    en: "Halo illustrations comparing monofocal, extended-depth and multifocal intraocular-lens ideas. Optics education—not product promotion.",
-    ja: "単焦点・EDOF・多焦点のハロー差の図示。光学の教育であり製品の勧誘ではありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
+    zh: "單焦、增強單焦、延伸景深與多焦的夜間光暈示意。增強單焦接近單焦；延伸景深通常輕於繞射多焦。屬光學教育，不是產品推介，亦不是臨床測試（公眾教育，不能代替面診。）",
+    en: "Night-halo illustration for monofocal, enhanced monofocal, EDOF and multifocal lenses. Enhanced monofocal stays close to monofocal; EDOF is usually milder than a diffractive multifocal. Optics education, not a product pitch and not a clinical test.",
+    ja: "単焦点・強化単焦点・EDOF・多焦点の夜間ハロー図示。強化単焦点は単焦点に近く、EDOFは回折多焦点より軽いことが多いです。光学の教育であり、製品の勧誘でも臨床検査でもありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/tools/haze": {
     zh: "顏色變淡、霧感與車燈眩光的示意，幫助描述症狀；不能代替視力或眼底檢查（公眾教育，不能代替面診。）詳見內文。",
