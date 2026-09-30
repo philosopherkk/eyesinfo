@@ -22,15 +22,72 @@ export const NIGHT_LIGHTS: { x: number; y: number; r: number; warm: number }[] =
   { x: 66.6, y: 46.7, r: 0.42, warm: 0.55 },
 ];
 
-export type HaloKind = "mono" | "edof" | "mf";
+export type HaloKind = "mono" | "emono" | "edof" | "mf";
 
-/** Intensity ladder only — not separate LASIK-only looks. Caps avoid white-out / catastrophic MF. */
+/**
+ * Four drawings, not one halo turned up.
+ * Monofocal and enhanced monofocal stay faint and close to each other.
+ * EDOF is one softer ring and a shorter starburst.
+ * Multifocal has a second ring, a longer starburst, more glare, and a ghost.
+ * No rainbow rings — those are reserved for acute angle-closure teaching.
+ */
 export function haloScale(kind: HaloKind) {
   if (kind === "mono") {
-    return { size: 0.82, ring: 0.32, rings: 1 as const, burst: 0.1, opacity: 0.48 };
+    return {
+      size: 0.55,
+      ring: 0.12,
+      rings: 1 as const,
+      burst: 0.02,
+      opacity: 0.28,
+      glare: 0.04,
+      ghost: 0,
+      spikes: 0,
+    };
+  }
+  if (kind === "emono") {
+    return {
+      size: 0.62,
+      ring: 0.16,
+      rings: 1 as const,
+      burst: 0.07,
+      opacity: 0.32,
+      glare: 0.05,
+      ghost: 0,
+      spikes: 6,
+    };
   }
   if (kind === "edof") {
-    return { size: 1.02, ring: 0.5, rings: 1 as const, burst: 0.42, opacity: 0.62 };
+    return {
+      size: 0.95,
+      ring: 0.42,
+      rings: 1 as const,
+      burst: 0.28,
+      opacity: 0.55,
+      glare: 0.18,
+      ghost: 0,
+      spikes: 8,
+    };
   }
-  return { size: 1.22, ring: 0.68, rings: 2 as const, burst: 0.82, opacity: 0.74 };
+  return {
+    size: 1.28,
+    ring: 0.72,
+    rings: 2 as const,
+    burst: 0.88,
+    opacity: 0.78,
+    glare: 0.42,
+    ghost: 0.55,
+    spikes: 14,
+  };
 }
+
+/** Simple day/night point sources for the illustration panel (not the street photo). */
+export const POINT_LIGHTS_DAY: { x: number; y: number; r: number; warm: number }[] = [
+  { x: 36, y: 46, r: 0.85, warm: 0.2 },
+  { x: 66, y: 40, r: 0.75, warm: 0.25 },
+];
+
+export const POINT_LIGHTS_NIGHT: { x: number; y: number; r: number; warm: number }[] = [
+  { x: 36, y: 62, r: 1.15, warm: 0.08 },
+  { x: 46, y: 60, r: 1.05, warm: 0.1 },
+  { x: 74, y: 30, r: 0.95, warm: 0.84 },
+];

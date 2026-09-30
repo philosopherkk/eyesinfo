@@ -306,6 +306,10 @@ export function HaloDemo() {
   const { tx, locale } = useI18n();
   const kinds = [
     { id: "mono" as const, title: locale === "en" ? "Monofocal" : locale === "ja" ? "単焦点" : tx("單焦點") },
+    {
+      id: "emono" as const,
+      title: locale === "en" ? "Enhanced monofocal" : locale === "ja" ? "強化単焦点" : tx("增強單焦"),
+    },
     { id: "edof" as const, title: locale === "en" ? "EDOF" : locale === "ja" ? "焦点深度延長" : tx("延伸景深") },
     { id: "mf" as const, title: locale === "en" ? "Trifocal / MF" : locale === "ja" ? "3焦点／多焦点" : tx("三焦點／多焦") },
   ];
@@ -314,10 +318,10 @@ export function HaloDemo() {
   const [showStarburst, setShowStarburst] = useState(true);
   const intro =
     locale === "en"
-      ? "Halo = soft ring(s) around lamps. Starburst = spikes from the same lights. Intensity rises monofocal → EDOF → trifocal/MF as a teaching ladder only — pupil and design matter. Not a post-op promise."
+      ? "A halo is a soft edge around a lamp. Starburst is spikes from that same light. A ghost is a second, fainter image of the light. Night phenomena with an enhanced monofocal stay close to a monofocal. EDOF is usually milder than a diffractive multifocal. A multifocal has more noticeable halos, starburst and glare, and may show a ghost. The four classes are not the same drawing turned up. Pupil and optic design still matter. Illustration only — not a post-operative promise."
       : locale === "ja"
-        ? "ハロー＝光源まわりのやわらかい環。スターバースト＝同じ光源からの放射状の筋。単焦点→EDOF→3焦点／多焦点で強さだけ示します。瞳孔と光学設計で変わり、術後保証ではありません。"
-        : tx("光暈＝燈外一圈／多圈柔邊；星芒＝同一光源向外的放射線。單焦→延伸景深→三焦／多焦只調強度示意，實際因瞳孔與光學設計而異，唔係術後保證。");
+        ? "ハローは光源の柔かい縁、スターバーストは同じ光源からの放射状の筋、ゴーストは光源のもう一つの淡い像です。強化単焦点の夜間の見え方は単焦点に近く、EDOFは回折多焦点より軽いことが多いです。多焦点はハロー、スターバースト、グレアがより目立ち、ゴーストもあり得ます。4種類は同じ図を強くしただけではありません。瞳孔と光学設計で変わります。図示であり、術後保証ではありません。"
+        : tx("光暈是燈外的柔邊，星芒是同一光源向外的放射線，重影是點光源旁另一個較淡的影像。增強單焦的夜間現象接近單焦。延伸景深通常輕於繞射多焦。多焦的光暈、星芒與眩光較明顯，也可有重影。四款並不相同。實際因瞳孔與光學設計而異。這是示意，不是術後保證。");
   const haloLabel = locale === "en" ? "Halo" : locale === "ja" ? "ハロー" : tx("光暈");
   const starLabel = locale === "en" ? "Starburst" : locale === "ja" ? "スターバースト" : tx("星芒");
 
@@ -366,9 +370,9 @@ export function HaloDemo() {
         </button>
       </div>
       <p className="mt-3 text-[0.75rem] font-semibold text-steel">
-        {locale === "en" ? "Intensity ladder (illustration)" : locale === "ja" ? "強さの段階（図示）" : tx("強度示意（唔係術後保證）")}
+        {locale === "en" ? "Four classes (illustration)" : locale === "ja" ? "4種類（図示）" : tx("四款示意（唔係術後保證）")}
       </p>
-      <div className="mt-1.5 grid grid-cols-3 gap-2">
+      <div className="mt-1.5 grid grid-cols-2 gap-2">
         {kinds.map((item) => (
           <button
             key={item.id}
