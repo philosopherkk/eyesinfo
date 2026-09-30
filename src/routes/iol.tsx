@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { ArrowLeft, Moon, Sun } from "lucide-react";
 import { IolScene } from "@/components/iol-scene";
+import { IolDistanceQuad } from "@/components/iol-distance-quad";
 import { IolPointLights } from "@/components/iol-point-lights";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { SaveButton } from "@/components/save-button";
@@ -84,9 +85,6 @@ function IolPage() {
   const [night, setNight] = useState(false);
   const [glasses, setGlasses] = useState(false);
   const [compare, setCompare] = useState(false);
-  const [compareView, setCompareView] = useState<
-    "far" | "mid" | "near" | "day" | "night"
-  >("far");
   const [pointTime, setPointTime] = useState<"day" | "night">("night");
 
   const astig = glasses ? 0 : astigDefocus(cyl, toric);
@@ -123,43 +121,6 @@ function IolPage() {
       }),
     [optic, target, glasses, night, t],
   );
-
-  function sceneFor(id: Optic, distanceId: "far" | "mid" | "near") {
-    const d = DISTANCES.find((item) => item.id === distanceId)!;
-    const keys = OPTIC_KEYS[id];
-    const sph = glasses ? 0 : sphereDefocus(id, target, d.demand);
-    const src = d.id === "far" && night ? "/iol/night.jpg" : d.img;
-    const sample =
-      d.id === "far"
-        ? t("iolSampleFar")
-        : d.id === "mid"
-          ? t("iolSampleMid")
-          : t("iolSampleNear");
-    const title =
-      d.id === "far"
-        ? t("iolDistFar")
-        : d.id === "mid"
-          ? t("iolDistMid")
-          : t("iolDistNear");
-    const sub =
-      d.id === "far"
-        ? t("iolDistFarSub")
-        : d.id === "mid"
-          ? t("iolDistMidSub")
-          : t("iolDistNearSub");
-    return {
-      src,
-      sph,
-      sample,
-      distanceTitle: title,
-      sub,
-      classTitle: t(keys.title),
-      contrast: contrastLoss(id),
-      halo: haloStrength(id, night && d.id === "far"),
-      ghost: ghostStrength(id),
-      night: d.id === "far" && night,
-    };
-  }
 
   return (
     <div className="pb-8">
@@ -367,35 +328,6 @@ function IolPage() {
           {t("iolCompare")}
         </button>
         <p className="mt-2 text-[0.78rem] leading-relaxed text-muted">{t("iolCompareHint")}</p>
-        {compare ? (
-          <div className="mt-3 grid grid-cols-2 gap-2">
-            {(
-              [
-                ["far", t("iolDistFar")],
-                ["mid", t("iolDistMid")],
-                ["near", t("iolDistNear")],
-                ["day", t("iolPointDay")],
-                ["night", t("iolPointNight")],
-              ] as const
-            ).map(([id, label]) => (
-              <button
-                key={id}
-                type="button"
-                onClick={() => setCompareView(id)}
-                className={cn(
-                  "min-h-11 rounded-xl border px-2 text-[0.78rem] font-semibold",
-                  compareView === id
-                    ? "border-navy bg-navy text-paper"
-                    : "border-line bg-card text-navy",
-                )}
-              >
-                {id === "day" || id === "night"
-                  ? `${t("iolPointH")} · ${label}`
-                  : label}
-              </button>
-            ))}
-          </div>
-        ) : null}
       </section>
 
       <section className="mt-5 px-4">
@@ -422,91 +354,99 @@ function IolPage() {
 
       {compare ? (
         <section className="mt-5 grid gap-3 px-4">
-          {compareView === "day" || compareView === "night" ? (
-            <p className="text-[0.78rem] leading-relaxed text-muted">{t("iolPointCaveat")}</p>
-          ) : null}
-          {OPTICS.map((o) => {
-            if (compareView === "day" || compareView === "night") {
-              return (
-                <IolPointLights
-                  key={o.id}
-                  optic={o.id}
-                  time={compareView}
-                  title={t(OPTIC_KEYS[o.id].title)}
-                />
-              );
-            }
-            const s = sceneFor(o.id, compareView);
+          {DISTANCES.map((d) => {
+            const src = d.id === "far" && night ? "/iol/night.jpg" : d.img;
+            const sample =
+              d.id === "far"
+                ? t("iolSampleFar")
+                : d.id === "mid"
+                  ? t("iolSampleMid")
+                  : t("iolSampleNear");
+            const title =
+              d.id === "far"
+                ? t("iolDistFar")
+                : d.id === "mid"
+                  ? t("iolDistMid")
+                  : t("iolDistNear");
+            const sub =
+              d.id === "far"
+                ? t("iolDistFarSub")
+                : d.id === "mid"
+                  ? t("iolDistMidSub")
+                  : t("iolDistNearSub");
             return (
-              <IolScene
-                key={o.id}
-                src={s.src}
-                title={s.classTitle}
-                sub={`${s.distanceTitle} · ${s.sub}`}
-                sample={s.sample}
-                sphere={s.sph}
-                astig={astig}
-                contrast={s.contrast}
-                halo={s.halo}
-                ghost={s.ghost}
-                night={s.night}
-                optic={o.id}
+              <IolDistanceQuad
+                key={d.id}
+                distanceId={d.id}
+                title={title}
+                sub={sub}
+                src={src}
+                sample={sample}
+                cells={OPTICS.map((o) => ({
+                  optic: o.id,
+                  label: t(OPTIC_KEYS[o.id].short),
+                  sphere: glasses ? 0 : sphereDefocus(o.id, target, d.demand),
+                  astig,
+                  contrast: contrastLoss(o.id),
+                  halo: d.id === "far" ? haloStrength(o.id, night) : 0,
+                  ghost: ghostStrength(o.id),
+                  night: d.id === "far" && night,
+                }))}
               />
             );
           })}
         </section>
       ) : (
-        <>
-          <section className="mt-5 grid gap-3 px-4">
-            {scenes.map((s) => (
-              <IolScene
-                key={s.id}
-                src={s.src}
-                title={s.title}
-                sub={s.sub}
-                sample={s.sample}
-                sphere={s.sph}
-                astig={astig}
-                contrast={contrast}
-                halo={s.id === "far" ? halo : 0}
-                ghost={ghost}
-                night={s.id === "far" && night}
-                optic={optic}
-              />
-            ))}
-          </section>
-          <section className="mt-5 px-4">
-            <h2 className="text-[0.8rem] font-semibold text-muted">{t("iolPointH")}</h2>
-            <p className="mt-1 text-[0.78rem] leading-relaxed text-muted">
-              {t("iolPointCaveat")}
-            </p>
-            <div className="mt-2 grid grid-cols-2 gap-2">
-              {(["day", "night"] as const).map((time) => (
-                <button
-                  key={time}
-                  type="button"
-                  onClick={() => setPointTime(time)}
-                  className={cn(
-                    "min-h-11 rounded-xl border text-[0.82rem] font-semibold",
-                    pointTime === time
-                      ? "border-navy bg-navy text-paper"
-                      : "border-line bg-card text-navy",
-                  )}
-                >
-                  {time === "day" ? t("iolPointDay") : t("iolPointNight")}
-                </button>
-              ))}
-            </div>
-            <div className="mt-3">
-              <IolPointLights
-                optic={optic}
-                time={pointTime}
-                title={t(opticKeys.title)}
-              />
-            </div>
-          </section>
-        </>
+        <section className="mt-5 grid gap-3 px-4">
+          {scenes.map((s) => (
+            <IolScene
+              key={s.id}
+              src={s.src}
+              title={s.title}
+              sub={s.sub}
+              sample={s.sample}
+              sphere={s.sph}
+              astig={astig}
+              contrast={contrast}
+              halo={s.id === "far" ? halo : 0}
+              ghost={ghost}
+              night={s.id === "far" && night}
+              optic={optic}
+            />
+          ))}
+        </section>
       )}
+
+      <section className="mt-5 px-4">
+        <h2 className="text-[0.8rem] font-semibold text-muted">{t("iolPointH")}</h2>
+        <p className="mt-1 text-[0.78rem] leading-relaxed text-muted">
+          {t("iolPointCaveat")}
+        </p>
+        <div className="mt-2 grid grid-cols-2 gap-2">
+          {(["day", "night"] as const).map((time) => (
+            <button
+              key={time}
+              type="button"
+              onClick={() => setPointTime(time)}
+              className={cn(
+                "min-h-11 rounded-xl border text-[0.82rem] font-semibold",
+                pointTime === time
+                  ? "border-navy bg-navy text-paper"
+                  : "border-line bg-card text-navy",
+              )}
+            >
+              {time === "day" ? t("iolPointDay") : t("iolPointNight")}
+            </button>
+          ))}
+        </div>
+        <div className="mt-3">
+          <IolPointLights
+            optic={optic}
+            time={pointTime}
+            title={t(opticKeys.title)}
+          />
+        </div>
+      </section>
 
       <section className="mt-6 px-4">
         <h2 className="text-[1.05rem] font-semibold text-navy">{t("iolHowH")}</h2>
