@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
+  contrastLoss,
   ghostStrength,
   haloStrength,
   qualityLabel,
@@ -33,10 +34,24 @@ describe("iol symptom illustration", () => {
     assert.ok(sphereDefocus("mf", 0, NEAR) < near);
   });
 
-  it("does not draw multifocal as three clean foci", () => {
-    for (const demand of [FAR, MID, NEAR]) {
-      assert.ok(sphereDefocus("mf", 0, demand) >= 0.4);
-    }
+  it("draws multifocal peaks clear, with a residual and a light contrast cue", () => {
+    const far = sphereDefocus("mf", 0, FAR);
+    const mid = sphereDefocus("mf", 0, MID);
+    const near = sphereDefocus("mf", 0, NEAR);
+    assert.equal(qualityLabel(far).key, "clear");
+    assert.equal(qualityLabel(mid).key, "clear");
+    assert.equal(qualityLabel(near).key, "clear");
+    assert.ok(far > sphereDefocus("mono", 0, FAR));
+    assert.ok(mid > far);
+    assert.ok(near > mid);
+    assert.ok(near < 0.4);
+    assert.equal(qualityLabel(sphereDefocus("edof", 0, NEAR)).key, "blur");
+    assert.ok(near < sphereDefocus("edof", 0, NEAR));
+    assert.equal(qualityLabel(sphereDefocus("emono", 0, MID)).key, "fair");
+    assert.equal(qualityLabel(sphereDefocus("edof", 0, MID)).key, "fair");
+    const loss = contrastLoss("mf");
+    assert.ok(loss > contrastLoss("edof"));
+    assert.ok(loss < 0.25);
     assert.ok(ghostStrength("mf") > 0);
     assert.equal(ghostStrength("mono"), 0);
     assert.equal(ghostStrength("emono"), 0);

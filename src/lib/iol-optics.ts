@@ -30,14 +30,27 @@ export const RANGE_STOPS = [
  * EDOF slopes through intermediate, then falls so 40 cm fine print stays
  * blurred at emmetropia. A mild myopic shift can ease intermediate, but
  * that same shift does not turn 40 cm into a second sharp focus.
- * Multifocal peaks are never a clean monofocal zero: a residual remains
- * so the picture stays softer than a monofocal at its target.
+ * Multifocal peaks at emmetropia stay in the clear band, with a residual
+ * so none is a monofocal-clean zero. Near keeps a little more residual
+ * than distance, and stays more useful than EDOF fine print at 40 cm.
  */
 export function sphereDefocus(optic: Optic, target: number, demand: number): number {
   if (optic === "mf") {
-    const peaks = [-target, -target + 1.5, -target + 2.5];
-    const nearest = Math.min(...peaks.map((p) => Math.abs(demand - p)));
-    return nearest + 0.42;
+    const peaks = [
+      { at: -target, floor: 0.14 },
+      { at: -target + 1.5, floor: 0.22 },
+      { at: -target + 2.5, floor: 0.34 },
+    ];
+    let best = peaks[0];
+    let bestD = Math.abs(demand - best.at);
+    for (const peak of peaks) {
+      const d = Math.abs(demand - peak.at);
+      if (d < bestD) {
+        best = peak;
+        bestD = d;
+      }
+    }
+    return bestD + best.floor;
   }
   if (optic === "edof") {
     const x = demand + target;
@@ -56,7 +69,7 @@ export function astigDefocus(cyl: number, toric: boolean): number {
 
 /** CSS contrast reduction (0 = unchanged). Illustration weight, not a CS score. */
 export function contrastLoss(optic: Optic): number {
-  if (optic === "mf") return 0.38;
+  if (optic === "mf") return 0.16;
   if (optic === "edof") return 0.1;
   if (optic === "emono") return 0.03;
   return 0;
