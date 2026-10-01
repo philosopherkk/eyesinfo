@@ -325,12 +325,10 @@ const zhHant = {
     "本工具只解釋處方常見英文字，不能核對你的處方是否正確，亦不是診斷或驗光建議。數字只在此畫面顯示，不上載。",
   iolTitle: "人工晶體視力示意",
   iolNotGuarantee: "不是術後保證。本站不提供預約或轉介。",
-  iolLead:
-    "比較單焦點、增強型單焦點、折射式延伸景深及繞射式三焦點，在遠、中、近及夜間的光學示意。可調光線、年齡、瞳孔、目標度數、散光及乾眼。畫面上的清晰程度用詞及光暈教學標度是模型示意，不是個人預後，亦不推介任何品牌。",
+  iolLead: "拖動目標度數，比較遠、中、近看起來差多少。只是光學示意，不能預測你手術後的視力，亦不是推介任何晶體品牌。",
   iolOpticsH: "光學設計",
-  iolTargetH: "目標屈光（主視眼）",
-  iolTargetHint:
-    "由 −3.00 D 到 +3.00 D，每格 0.25 D。滑桿 −12 至 +12 代表四分之一度。正數是遠視，負數是近視。",
+  iolTargetH: "單焦／預留目標度數",
+  iolTargetHint: "由遠視 +3.00（晶體度數明顯不夠）拖到近視 −3.00（預留更近）。每格 0.25 D（25 度）。多焦通常以正視為目標；偏離會令各個焦點一齊移位。",
   iolTargetAria: "目標球面度數",
   iolHyper: "+3.00 遠視",
   iolEmme: "0 正視",
@@ -343,50 +341,41 @@ const zhHant = {
   iolCylNone: "0 無散光",
   iolToricOn: "已選擇散光矯正晶體",
   iolToricOff: "未用散光矯正晶體",
-  iolToricHint:
-    "散光是某一方向拉長模糊，與「遠或近」不是同一件事。規則角膜散光大約 ≥0.75–1.00 D 時，醫生或會討論環曲面晶體，可加在單焦、增強單焦、延伸景深或多焦之上。晶體旋轉會減少矯正量。",
+  iolToricHint: "散光是某一方向拉長模糊，與「遠或近」不是同一件事。規則角膜散光大約 ≥0.75–1.00 D 時，醫生或會討論環曲面晶體，可加在單焦、增強單焦、延伸景深或多焦之上。晶體旋轉會減少矯正量。",
   iolNightOn: "夜間光暈",
   iolNightOff: "日間街景",
   iolGlassesOn: "已戴眼鏡矯正",
   iolGlassesOff: "不戴眼鏡",
-  iolGlassesHint:
-    "眼鏡可補球面及散光殘餘（清晰度／對焦），但多焦／延伸景深因光學設計而下降的對比度，以及夜間光暈，不會因戴鏡而恢復或消失。此為光學示意，不能預測個人術後，亦不是品牌比較。",
+  iolGlassesHint: "眼鏡可補球面及散光殘餘（清晰度／對焦），但多焦／延伸景深因光學設計而下降的對比度，以及夜間光暈，不會因戴鏡而恢復或消失。此為光學示意，不能預測個人術後，亦不是品牌比較。",
   iolRangeH: "清晰範圍示意",
-  iolHowH: "如何閱讀目前設定",
-  iolHow1: "單焦預留正視 0：看街、開車通常最清楚；中距離賽事新聞及近距離賽程多數要近用鏡。",
-  iolHow2:
-    "單焦預留近視 −3.00：約 33 厘米閱讀較易，遠處路牌會很糊。−2.00 則約 50 厘米。有人一眼正視、一眼輕微近視（迷你單眼視），須個別討論。",
-  iolHow3:
-    "單焦預留遠視 +3.00：遠近都不夠焦，是「晶體度數偏少」的示範，不是常用目標。+2.00 同樣遠近都偏糊，只是幅度較小。",
+  iolHowH: "如何閱讀這個示意",
+  iolHow1: "單焦預留正視 0：看遠通常最清楚；中距離賽事新聞及近距離賽程多數要近用鏡。",
+  iolHow2: "單焦預留近視 −3.00：約 33 厘米閱讀較易，遠處路牌會很糊。−2.00 則約 50 厘米。有人一眼正視、一眼輕微近視（迷你單眼視），須個別討論。",
+  iolHow3: "單焦預留遠視 +3.00：遠近都不夠焦，是「晶體度數偏少」的示範，不是常用目標。+2.00 同樣遠近都偏糊，只是幅度較小。",
   iolHow4: "增強型單焦：中距離往往比普通單焦好一點，細字多數仍需鏡。",
   iolHow5: "延伸景深：遠到中距離較連貫，細字仍常需鏡，夜間光暈因設計而異。",
   iolHow6: "多焦／三焦：遠中近都嘗試兼顧，對比可略降，夜間光暈較明顯。不是人人適合，不是術後保證。",
   iolLinkDetail: "晶體選擇細節",
   iolLinkMf: "多焦篩選原則",
   iolLinkHalo: "夜間光暈比較",
-  iolFoot:
-    "示意／自我監察不能代替散瞳眼底、視野或光學相干斷層掃描（OCT）。此工具結果正常不能排除眼疾。不是術後保證。本站不提供預約或轉介。",
+  iolFoot: "示意／自我監察不能代替散瞳眼底、視野或光學相干斷層掃描（OCT）。此工具結果正常不能排除眼疾。不是術後保證。本站不提供預約或轉介。",
   iolSampleFar: "巴士 112",
   iolSampleMid: "羽毛球公開賽",
   iolSampleNear: "週日賽程",
   iolOpticMono: "單焦點",
   iolOpticMonoShort: "一個焦點",
-  iolOpticMonoNote:
-    "只在預留的那個距離最清晰。預留正視則看遠清楚、看近多數要老花眼鏡；預留近視則相反。光暈通常較少。",
+  iolOpticMonoNote: "只在預留的那個距離最清晰。預留正視則看遠清楚、看近多數要老花眼鏡；預留近視則相反。夜間光暈一般少於繞射多焦，仍因瞳孔及眼表而異。",
   iolOpticEmono: "增強型單焦點",
   iolOpticEmonoShort: "輕微延伸景深",
-  iolOpticEmonoNote:
-    "在單焦基礎上輕微延伸景深，中距離（如儀錶板、電腦）往往比普通單焦好一點；細字多數仍需眼鏡。光暈與單焦相若。",
-  iolOpticEdof: "延伸景深（折射式）",
-  iolOpticEdofShort: "遠至中距離連貫",
-  iolOpticEdofNote:
-    "純折射式延伸景深設計：遠至中距離連貫，近距離細字仍常需眼鏡。光暈細小、能量低，接近單焦；部分設計在瞳孔較大時，景深延伸會減少，夜間中距離會稍遜。",
-  iolOpticMf: "三焦點（繞射式）",
-  iolOpticMfShort: "遠、中、近三個焦點",
-  iolOpticMfNote:
-    "繞射式三焦點：遠、中（約 60 厘米）、近（約 40 厘米）都有焦點；代價是對比略降，夜間光源周圍較易見光環。有些人會持續受夜間光環困擾。",
+  iolOpticEmonoNote: "以單焦為底，輕微拉長清晰範圍，中距離（電腦／賽程）通常較普通單焦好，細字閱讀多數仍需眼鏡。夜間光學干擾因設計及瞳孔而異，一般少於繞射多焦，不是保證「少光暈」。",
+  iolOpticEdof: "延伸景深（EDOF）",
+  iolOpticEdofShort: "遠至中距離",
+  iolOpticEdofNote: "遠到中距離，因設計而異。報紙細字多數仍需近用鏡。光暈因設計而異，不是哪一種較好。",
+  iolOpticMf: "多焦／三焦點",
+  iolOpticMfShort: "遠中近幾個焦點",
+  iolOpticMfNote: "嘗試同時照顧遠、中、近。對比度可略降，夜間光暈／眩光較明顯。黃斑病變或明顯視野缺損者通常不宜。不能保證脫鏡。",
   iolDistFar: "遠距離",
-  iolDistFarSub: "約 6 米 · 駕駛／街景",
+  iolDistFarSub: "約 6 米 · 駕駛／街景 · 不是夜間駕駛能力評估",
   iolDistFarSubNight: "約 6 米 · 駕駛／街景 · 不是夜間駕駛能力評估",
   iolDistMid: "中距離",
   iolDistMidSub: "約 60–70 厘米 · 賽事新聞",
@@ -433,18 +422,31 @@ const zhHant = {
     "實線是目前設計，虛線是對照。橫軸是主視眼的離焦（正數偏遠視側）。曲線是教育用示意：形狀參考文獻中的離焦曲線概念（單焦、增強型單焦、延伸景深、三焦點各有不同闊度）。Monaco 2017 與 Tarib 2019 為繞射式設計比較，不是折射式延伸景深或增強型單焦點曲線的來源；Savini 2026 僅作「部分景深／增強型單焦」分類示例，不是此處繪線的形狀依據。不是複製任何廠商圖，亦不是個人預後。0.2 logMAR 虛線只是閱讀參考，不是個人視力標準。見下方文獻。",
   iolNightFx:
     "夜間示意可包括柔光暈、條紋；繞射式設計或會見光環或輕微重影感。屬教學用光學現象，不是測量或術後預測。",
-  iolDomEyeH: "甚麼是主視眼？",
-  iolDomEyeDef:
-    "主視眼（慣用眼）是大腦在睜眼時較偏向採用的一隻眼的視覺訊息，尤其在需要精準對焦時（如瞄準、閱讀部分細節）。此工具裏「目標屈光（主視眼）」及離焦曲線橫軸，是指你設定作為主參考的那隻眼，不是自動測量結果。",
-  iolDomEyeTestH: "家居可做的科學化自我觀察（示意，不是診斷）",
-  iolDomEyeTest1:
-    "Miles 三角法：雙手前伸，拇指與食指圈成細三角，對準約 3 米外一個小目標。逐隻眼閉上：仍能把目標留在圈中心的那隻，通常是視覺慣用眼——可多試幾次，結果可能左右稍有出入。",
-  iolDomEyeTest2:
-    "Dolman 卡片法：雙眼睜開，將紙卡中央小圓孔對準約 3 米外一個固定目標；保持對準時觀察邊隻眼仍可透過小孔睇到該目標，該眼常是慣用眼。可多試幾次。",
+  iolEduH: "選擇時常一併理解",
+  iolEduIntro:
+    "以下為白內障／人工晶體討論時常提到的因素，配合本頁示意閱讀。不是處方、不是術後保證，不能代替與註冊醫生面談。",
+  iolEduDryH: "乾眼與術後視覺質素",
+  iolEduDryP:
+    "淚膜不穩（乾眼）會令角膜表面光學不規則，降低對比、增加眩光感，即使球面及散光度數已矯正，仍可能覺得「唔夠清」或夜間吃力。嚴重或難治乾眼時，醫生或會審慎考慮多焦點或延伸景深設計。本頁示意未單獨模擬乾眼，但術前術後淚膜護理仍會影響你實際睇到的質素。",
+  iolEduDomH: "主視眼（主力眼）為何重要",
+  iolEduDomP:
+    "主視眼（慣用眼／主力眼）是大腦在雙眼睜開時較優先採用的一隻眼的訊息，尤其在對準遠目標、閱讀部分細節時。討論單眼視或兩眼不同度數時，哪一隻眼負責主要距離會影響適應與滿意度。本頁一次只示範一個「目標度數」設定，不能自動量度邊隻係主視眼。",
+  iolEduMvH: "單眼視／迷你單眼視",
+  iolEduMvP:
+    "單眼視（monovision）是刻意讓一眼偏看遠、另一眼偏看近（或中近），用大腦融合換取部分距離少戴鏡。「迷你單眼視」通常指兩眼度數差距較小（以醫生處方為準）。代價可包括立體感或深度判斷改變、部分人不適、需時間適應；必須試戴或試用後與醫生決定。本頁滑桿只示範其中一隻眼的目標度數，不能模擬兩眼一併融合。",
+  iolEduPhotoH: "光暈、光環與其他術後光學現象（多焦／延伸景深）",
+  iolEduPhotoP:
+    "繞射式多焦／三焦點會把光能分到多個焦點，日間對比可略降，夜間點光源周圍較易見光環或光暈（可開本頁「夜間光暈」作示意）。延伸景深（EDOF）一般光暈較柔，但仍可能有對比下降或夜間光學干擾，因設計與瞳孔而異。眼鏡可補球面及散光殘餘，但設計帶來的對比下降及夜間光暈通常不能靠戴鏡消除。詳見站內多焦篩選專題及夜間光暈比較工具；本頁不是測量或排名。",
+  iolLinkDry: "乾眼專題",
+
+  iolDomEyeH: "甚麼是主視眼（主力眼）？",
+  iolDomEyeDef: "主視眼（慣用眼）並不等於利手。它是視覺上較常作為對焦、對位參考的一隻眼。醫生規劃單眼視或主要看遠距離時會一併考慮，不能靠自我測試代替散瞳驗光或處方。",
+  iolDomEyeTestH: "家居可做的自我觀察（示意，不是診斷）",
+  iolDomEyeTest1: "Miles 三角法：雙手前伸，拇指與食指圈成細三角，對準約 3 米外一個小目標。逐隻眼閉上：仍能把目標留在圈中心的那隻，通常是視覺慣用眼——可多試幾次，結果可能左右稍有出入。",
+  iolDomEyeTest2: "Dolman 卡片法：雙眼睜開，將紙卡中央小圓孔對準約 3 米外一個固定目標；保持對準時觀察邊隻眼仍可透過小孔睇到該目標，該眼常是慣用眼。可多試幾次。",
   iolDomEyeTest3:
     "若啟用「迷你單眼視」，兩眼目標可不同：主視眼通常保留看遠或常用距離，另一眼保留另一個度數；實際安排須與醫生討論，不能靠自我測試代替處方。",
-  iolDomEyeCaveat:
-    "慣用眼與「手學」或運動主導未必一致。以上方法只供自己理解，不能代替散瞳驗光，不能代替醫生判斷哪隻眼適合做主要距離，亦不是術後保證。",
+  iolDomEyeCaveat: "以上方法只供自己理解，不能代替散瞳驗光，不能代替醫生判斷哪隻眼適合做主要距離，亦不是術後保證。",
   iolChart020: "0.2 logMAR",
   iolTableH: "四種設計（雙眼，目前設定）",
   iolTableCap: "不是品牌比較，亦不是哪一種較好",
@@ -882,12 +884,10 @@ const en: Record<Key, string> = {
     "This tool only explains common English abbreviations on a written Rx. It cannot verify that your prescription is correct and is not a diagnosis or refraction advice. Numbers stay on this screen only and are not uploaded.",
   iolTitle: "Intraocular lens vision demo",
   iolNotGuarantee: "Not a post-operative guarantee. This site does not book or refer.",
-  iolLead:
-    "Compare monofocal, enhanced monofocal, refractive extended-depth and diffractive trifocal designs at far, intermediate, near and at night. Light, age, pupil, target, astigmatism and dry eye can be changed. On-screen clarity words and the halo teaching scale are model illustrations, not a personal prognosis, and not a brand recommendation.",
+  iolLead: "Drag the target power to compare far, intermediate and near. Optical illustration only — it cannot predict your post-operative vision and does not recommend any lens brand.",
   iolOpticsH: "Optical design",
-  iolTargetH: "Target refraction (dominant eye)",
-  iolTargetHint:
-    "From −3.00 D to +3.00 D in 0.25 D steps. Slider −12 to +12 is quarter-diopters. Positive is hyperopia, negative is myopia.",
+  iolTargetH: "Monofocal / target power",
+  iolTargetHint: "From hyperopia +3.00 (under-powered lens) to myopia −3.00 (near bias). Steps of 0.25 D (25 degrees). Multifocals usually aim for emmetropia; offset shifts every focus together.",
   iolTargetAria: "Target spherical power",
   iolHyper: "+3.00 hyperopia",
   iolEmme: "0 emmetropia",
@@ -900,54 +900,41 @@ const en: Record<Key, string> = {
   iolCylNone: "0 no astigmatism",
   iolToricOn: "Toric correction selected",
   iolToricOff: "No toric correction",
-  iolToricHint:
-    "Astigmatism stretches blur in one meridian — not the same as far vs near. For regular corneal astigmatism of about ≥0.75–1.00 D, a doctor may discuss a toric lens on monofocal, enhanced monofocal, EDOF or multifocal platforms. Lens rotation reduces the correction.",
+  iolToricHint: "Astigmatism stretches blur in one meridian — not the same as far vs near. For regular corneal astigmatism of about ≥0.75–1.00 D, a doctor may discuss a toric lens on monofocal, enhanced monofocal, EDOF or multifocal platforms. Lens rotation reduces the correction.",
   iolNightOn: "Night halos",
   iolNightOff: "Daytime street",
   iolGlassesOn: "Spectacles on",
   iolGlassesOff: "No spectacles",
-  iolGlassesHint:
-    "Spectacles can correct residual sphere and cylinder (clarity / focus), but contrast loss from multifocal / EDOF optic design, and night halos, are not restored or removed by glasses. Optical illustration only — not a personal outcome prediction and not a brand comparison.",
+  iolGlassesHint: "Spectacles can correct residual sphere and cylinder (clarity / focus), but contrast loss from multifocal / EDOF optic design, and night halos, are not restored or removed by glasses. Optical illustration only — not a personal outcome prediction and not a brand comparison.",
   iolRangeH: "Depth-of-focus sketch",
-  iolHowH: "How to read the current settings",
-  iolHow1:
-    "Monofocal target emmetropia 0: street and driving are usually clearest; mid-distance news and near schedules often need readers.",
-  iolHow2:
-    "Monofocal target myopia −3.00: reading at about 33 cm is easier; distant signs are very blurry. −2.00 is about 50 cm. Some people use mini-monovision (one eye distance, one mildly near) — individual discussion.",
-  iolHow3:
-    "Monofocal target hyperopia +3.00: neither far nor near is in focus — an under-powered demo, not a usual target. +2.00 is similarly soft both ways, milder.",
-  iolHow4:
-    "Enhanced monofocal: intermediate often a bit better than standard monofocal; fine print usually still needs glasses.",
-  iolHow5:
-    "EDOF: far-to-intermediate more continuous; fine print often still needs glasses; night halos vary by design.",
-  iolHow6:
-    "Multifocal / trifocal: tries far, intermediate and near; contrast may drop a little; night halos more noticeable. Not for everyone and not a surgical promise.",
+  iolHowH: "How to read this demo",
+  iolHow1: "Monofocal target emmetropia 0: distance is usually clearest; mid-distance news and near schedules often need readers.",
+  iolHow2: "Monofocal target myopia −3.00: reading at about 33 cm is easier; distant signs are very blurry. −2.00 is about 50 cm. Some people use mini-monovision (one eye distance, one mildly near) — individual discussion.",
+  iolHow3: "Monofocal target hyperopia +3.00: neither far nor near is in focus — an under-powered demo, not a usual target. +2.00 is similarly soft both ways, milder.",
+  iolHow4: "Enhanced monofocal: intermediate often a bit better than standard monofocal; fine print usually still needs glasses.",
+  iolHow5: "EDOF: far-to-intermediate more continuous; fine print often still needs glasses; night halos vary by design.",
+  iolHow6: "Multifocal / trifocal: tries far, intermediate and near; contrast may drop a little; night halos more noticeable. Not for everyone and not a surgical promise.",
   iolLinkDetail: "Lens choice detail",
   iolLinkMf: "Multifocal screening principles",
   iolLinkHalo: "Night halo comparison",
-  iolFoot:
-    "Illustration / self-check cannot replace dilated fundus exam, visual field or OCT. A normal tool result cannot rule out disease. Not a post-operative guarantee. This site does not book or refer.",
+  iolFoot: "Illustration / self-check cannot replace dilated fundus exam, visual field or OCT. A normal tool result cannot rule out disease. Not a post-operative guarantee. This site does not book or refer.",
   iolSampleFar: "Bus 112",
   iolSampleMid: "Badminton Open",
   iolSampleNear: "Sunday fixtures",
   iolOpticMono: "Monofocal",
   iolOpticMonoShort: "One focus",
-  iolOpticMonoNote:
-    "Clearest at the targeted distance. Emmetropia: distance is clear and near usually needs readers; a myopic target reverses that. Halos are usually fewer.",
+  iolOpticMonoNote: "Clearest at the targeted distance. Emmetropia: distance clear, near usually needs readers; myopic target reverses that. Night halos usually fewer than diffractive multifocals, still pupil- and surface-dependent.",
   iolOpticEmono: "Enhanced monofocal",
   iolOpticEmonoShort: "Slightly longer depth of focus",
-  iolOpticEmonoNote:
-    "A small extension of depth on a monofocal base. Intermediate (dashboard, computer) is often a little better than a standard monofocal; fine print usually still needs glasses. Halos are similar to a monofocal.",
-  iolOpticEdof: "Extended depth (refractive)",
-  iolOpticEdofShort: "Continuous far to intermediate",
-  iolOpticEdofNote:
-    "Refractive extended depth: far through intermediate is continuous; fine print up close often still needs glasses. The halo is small and close to a monofocal; in some designs a larger pupil shortens the extension, so intermediate at night is a little weaker.",
-  iolOpticMf: "Trifocal (diffractive)",
-  iolOpticMfShort: "Far, intermediate and near foci",
-  iolOpticMfNote:
-    "Diffractive trifocal: foci at far, intermediate (about 60 cm) and near (about 40 cm). Contrast is a little lower, and rings around lights are easier to notice at night. Some people stay bothered by those rings.",
+  iolOpticEmonoNote: "Monofocal base with a slightly longer clear range; intermediate (computer / fixtures) often better than standard monofocal; fine print usually still needs glasses. Night optical effects vary by design and pupil — generally less than diffractive multifocal, not a “few halos” promise.",
+  iolOpticEdof: "Extended depth of focus (EDOF)",
+  iolOpticEdofShort: "Far to intermediate",
+  iolOpticEdofNote: "Far to intermediate, and this varies by design. Newspaper fine print usually still needs readers. Halos vary by design. This is not which design is better.",
+  iolOpticMf: "Multifocal / trifocal",
+  iolOpticMfShort: "Far, mid and near foci",
+  iolOpticMfNote: "Tries far, intermediate and near together. Contrast may drop; night halos/glare more noticeable. Usually unsuitable with macular disease or a clear field defect. Spectacle independence is not guaranteed.",
   iolDistFar: "Distance",
-  iolDistFarSub: "About 6 m · driving / street",
+  iolDistFarSub: "About 6 m · driving / street · This is not a night-driving ability assessment.",
   iolDistFarSubNight: "About 6 m · driving / street · not a night-driving ability assessment",
   iolDistMid: "Intermediate",
   iolDistMidSub: "About 60–70 cm · match reports",
@@ -994,18 +981,31 @@ const en: Record<Key, string> = {
     "Solid line is the selected design, dashed is the comparison. The horizontal axis is defocus for the dominant eye (positive is the hyperopic side). The curves are educational schematics informed by published defocus-curve concepts (monofocal, enhanced monofocal, EDOF and trifocal differ in width). Monaco 2017 and Tarib 2019 are diffractive-design comparisons — not the source for refractive EDOF or enhanced-monofocal curve shapes; Savini 2026 is cited only as a partial-depth-of-field classification example, not as the shape basis for the drawn curves. Not a copy of any manufacturer trace and not a personal prognosis. The 0.2 logMAR dashed line is a reading guide, not a personal acuity standard. See references below.",
   iolNightFx:
     "The night illustration may include soft halos and streaks; diffractive designs may show rings or a faint ghosting feel — teaching optics only, not a measurement or surgical prediction.",
-  iolDomEyeH: "What is the dominant eye?",
-  iolDomEyeDef:
-    "The dominant (sighting) eye is the one the brain tends to rely on for aligning and fine focus when both eyes are open. In this tool, “target refraction (dominant eye)” and the chart horizontal axis refer to the eye you set as the main reference — not an automatic measurement.",
-  iolDomEyeTestH: "Structured self-checks at home (illustration, not a diagnosis)",
-  iolDomEyeTest1:
-    "Miles triangle: extend your arms, form a small triangle with thumbs and index fingers, and centre a distant target (~3 m). Close one eye at a time — the eye that still keeps the target centred is usually the sighting-dominant eye. Repeat; results can vary slightly.",
-  iolDomEyeTest2:
-    "Dolman hole-in-card: with both eyes open, centre a small hole in a card on a fixed target about 3 m away; while keeping alignment, note which eye still sees the target through the hole — that eye is often dominant. Repeat a few times.",
+  iolEduH: "Often discussed together",
+  iolEduIntro:
+    "Factors commonly raised in cataract / IOL discussions, to read alongside this illustration. Not prescribing, not a surgical promise, and not a substitute for seeing a registered doctor.",
+  iolEduDryH: "Dry eye and post-operative visual quality",
+  iolEduDryP:
+    "An unstable tear film makes the corneal surface less smooth, lowering contrast and increasing glare — vision can feel “not crisp” even when sphere and cylinder are corrected. Severe or difficult dry eye may make doctors cautious about multifocal or extended-depth designs. This page does not simulate dry eye separately, but tear-film care still affects real-world quality.",
+  iolEduDomH: "Why the dominant (sighting) eye matters",
+  iolEduDomP:
+    "The dominant eye is the one the brain tends to prefer when both eyes are open, especially for aligning on a distant target or fine detail. When monovision or different powers are planned, which eye carries the main distance can affect adaptation and satisfaction. This page shows one target-power setting at a time and cannot measure which eye is dominant.",
+  iolEduMvH: "Monovision / mini-monovision",
+  iolEduMvP:
+    "Monovision deliberately sets one eye toward distance and the other toward intermediate or near (or mild myopia), relying on binocular fusion to reduce spectacle wear. Mini-monovision usually means a smaller inter-eye difference (follow your doctor). Trade-offs can include changed stereo / depth cues, discomfort in some people, and adaptation time; trial frames or contact trials and medical planning are required. The slider here illustrates one eye’s target only, not binocular fusion.",
+  iolEduPhotoH: "Halos, rings and other optical effects (multifocal / extended depth)",
+  iolEduPhotoP:
+    "Diffractive multifocal / trifocal designs split light among several foci — daytime contrast may drop a little, and rings or halos around point lights are easier to notice at night (try the “Night halos” button on this page). Extended depth (EDOF) halos are usually softer, but contrast can still fall a little and night effects vary by design and pupil. Spectacles can correct residual sphere and cylinder, but design-related contrast loss and night halos are usually not removed by glasses. See the multifocal screening topic and the night-halo comparison tool; this page is not a measurement or ranking.",
+  iolLinkDry: "Dry-eye topic",
+
+  iolDomEyeH: "What is the dominant (sighting) eye?",
+  iolDomEyeDef: "The dominant eye is not the same as hand dominance. It is the eye you more often use as a visual reference for alignment and focus. Doctors consider it when planning monovision or a main-distance eye — self-checks cannot replace dilated refraction or prescribing.",
+  iolDomEyeTestH: "Home self-checks (illustration, not a diagnosis)",
+  iolDomEyeTest1: "Miles triangle: extend your arms, form a small triangle with thumbs and index fingers, and centre a distant target (~3 m). Close one eye at a time — the eye that still keeps the target centred is usually the sighting-dominant eye. Repeat; results can vary slightly.",
+  iolDomEyeTest2: "Dolman hole-in-card: with both eyes open, centre a small hole in a card on a fixed target about 3 m away; while keeping alignment, note which eye still sees the target through the hole — that eye is often dominant. Repeat a few times.",
   iolDomEyeTest3:
     "With mini-monovision, each eye can have a different target — typically one eye for distance and the other mildly nearer; only a doctor can plan that. Self-tests cannot replace prescribing.",
-  iolDomEyeCaveat:
-    "Hand dominance and sports dominance need not match ocular dominance. These checks are for understanding only — not a substitute for dilated refraction, clinical choice of the main-distance eye, or a surgical promise.",
+  iolDomEyeCaveat: "These checks are for understanding only — not a substitute for dilated refraction, clinical choice of the main-distance eye, or a surgical promise.",
   iolChart020: "0.2 logMAR",
   iolTableH: "All four designs (binocular, current settings)",
   iolTableCap: "Not a brand comparison, and not a ranking of which design is better",
@@ -1433,12 +1433,10 @@ const ja: Record<Key, string> = {
     "このツールは処方箋によくある英語略語の説明のみです。処方内容の正誤確認はできず、診断や検眼の提案でもありません。数字はこの画面のみで、アップロードしません。",
   iolTitle: "眼内レンズの見え方の図示",
   iolNotGuarantee: "術後の保証ではありません。予約・紹介はしません。",
-  iolLead:
-    "単焦点、強化単焦点、屈折型の焦点深度拡張、回折型の3焦点を、遠・中・近と夜間で比べる光学の図示です。光線、年齢、瞳孔、目標度数、乱視、ドライアイを変えられます。画面の見え方の語とハローの教学標度は模型の示意であり、個人の予後でもブランドの推介でもありません。",
+  iolLead: "目標度数を動かして遠・中・近の差を比べます。光学の図示であり、術後視力を予測できず、レンズブランドの推介でもありません。",
   iolOpticsH: "光学デザイン",
-  iolTargetH: "目標屈折（優位眼）",
-  iolTargetHint:
-    "−3.00 D から +3.00 D、1目盛 0.25 D。スライダー −12〜+12 は四分の一度。正は遠視、負は近視。",
+  iolTargetH: "単焦点／目標度数",
+  iolTargetHint: "遠視 +3.00（度数が明らかに足りない）から近視 −3.00（より近くを狙う）まで。1目盛 0.25 D（25度）。多焦点は多く正視を目標にし、ずれると各焦点が一緒にずれます。",
   iolTargetAria: "目標球面度数",
   iolHyper: "+3.00 遠視",
   iolEmme: "0 正視",
@@ -1451,53 +1449,41 @@ const ja: Record<Key, string> = {
   iolCylNone: "0 乱視なし",
   iolToricOn: "乱視矯正レンズを選択",
   iolToricOff: "乱視矯正なし",
-  iolToricHint:
-    "乱視はある方向に伸びたぼけで、「遠いか近いか」とは別です。規則的な角膜乱視がおよそ ≥0.75–1.00 D のとき、医師がトーリックを単焦点・強化単焦点・EDOF・多焦点の上に載せる話をすることがあります。レンズの回転で矯正量は減ります。",
+  iolToricHint: "乱視はある方向に伸びたぼけで、「遠いか近いか」とは別です。規則的な角膜乱視がおよそ ≥0.75–1.00 D のとき、医師がトーリックを単焦点・強化単焦点・EDOF・多焦点の上に載せる話をすることがあります。レンズの回転で矯正量は減ります。",
   iolNightOn: "夜間ハロー",
   iolNightOff: "昼間の街並み",
   iolGlassesOn: "眼鏡で矯正済み",
   iolGlassesOff: "眼鏡なし",
-  iolGlassesHint:
-    "眼鏡は球面・乱視の残り（清晰／焦点）を補えますが、多焦点／EDOFの設計によるコントラスト低下や夜間ハローは眼鏡では戻りません／消えません。光学図示のみで、個人の術後結果の予測でもブランド比較でもありません。",
+  iolGlassesHint: "眼鏡は球面・乱視の残り（清晰／焦点）を補えますが、多焦点／EDOFの設計によるコントラスト低下や夜間ハローは眼鏡では戻りません／消えません。光学図示のみで、個人の術後結果の予測でもブランド比較でもありません。",
   iolRangeH: "清晰範囲の図示",
-  iolHowH: "今の設定の読み方",
-  iolHow1:
-    "単焦点で正視0：街や運転は多くの場合いちばんはっきり；中距離の試合ニュースや近距離の日程は近用眼鏡が必要なことが多い。",
-  iolHow2:
-    "単焦点で近視 −3.00：約33 cmの読書はしやすいが遠方の看板は大きくぼける。−2.00は約50 cm。一眼正視・一眼軽近視（ミニ単眼視）は個別相談。",
-  iolHow3:
-    "単焦点で遠視 +3.00：遠近とも焦点不足。「度数が足りない」示意であり常用目標ではない。+2.00も遠近ともややぼけ、程度は小さい。",
-  iolHow4:
-    "強化単焦点：中距離は普通の単焦点より少し良いことが多く、細字はなお眼鏡が必要なことが多い。",
+  iolHowH: "この図示の読み方",
+  iolHow1: "単焦点で正視0：遠方が多くの場合いちばんはっきり；中距離の試合ニュースや近距離の日程は近用眼鏡が必要なことが多い。",
+  iolHow2: "単焦点で近視 −3.00：約33 cmの読書はしやすいが遠方の看板は大きくぼける。−2.00は約50 cm。一眼正視・一眼軽近視（ミニ単眼視）は個別相談。",
+  iolHow3: "単焦点で遠視 +3.00：遠近とも焦点不足。「度数が足りない」示意であり常用目標ではない。+2.00も遠近ともややぼけ、程度は小さい。",
+  iolHow4: "強化単焦点：中距離は普通の単焦点より少し良いことが多く、細字はなお眼鏡が必要なことが多い。",
   iolHow5: "EDOF：遠〜中がより連続；細字はなお眼鏡が多い；夜間ハローは設計次第。",
-  iolHow6:
-    "多焦点／3焦点：遠中近を試み、コントラストは少し下がることがあり、夜間ハローはより目立つ。万人向きでも術後保証でもない。",
+  iolHow6: "多焦点／3焦点：遠中近を試み、コントラストは少し下がることがあり、夜間ハローはより目立つ。万人向きでも術後保証でもない。",
   iolLinkDetail: "レンズ選択の詳細",
   iolLinkMf: "多焦点の術前の考え方",
   iolLinkHalo: "夜間ハロー比較",
-  iolFoot:
-    "図示／自己観察は散瞳眼底・視野・OCTの代わりになりません。正常でも眼疾患を否定できません。術後保証ではありません。予約・紹介はしません。",
+  iolFoot: "図示／自己観察は散瞳眼底・視野・OCTの代わりになりません。正常でも眼疾患を否定できません。術後保証ではありません。予約・紹介はしません。",
   iolSampleFar: "バス 112",
   iolSampleMid: "バドミントン公開",
   iolSampleNear: "日曜の試合日程",
   iolOpticMono: "単焦点",
   iolOpticMonoShort: "一つの焦点",
-  iolOpticMonoNote:
-    "狙った距離がいちばんはっきり。正視なら遠くがよく見え近くは老眼鏡が多く、近視寄りはその逆。ハローは通常少なめ。",
+  iolOpticMonoNote: "狙った距離がいちばんはっきり。正視なら遠方が見えやすく近くは老眼鏡が多い；近視寄りはその逆。夜間ハローは回折多焦点より少ないことが多いが、瞳孔と眼表面次第。",
   iolOpticEmono: "強化単焦点",
   iolOpticEmonoShort: "わずかに長い焦点深度",
-  iolOpticEmonoNote:
-    "単焦点に少し焦点深度を足したもの。中距離（計器、パソコン）は普通の単焦点より少し良いことが多く、細字はなお眼鏡。ハローは単焦点と同程度。",
-  iolOpticEdof: "焦点深度拡張（屈折型）",
-  iolOpticEdofShort: "遠から中まで連続",
-  iolOpticEdofNote:
-    "屈折型の焦点深度拡張：遠から中距離まで連続し、近くの細字はなお眼鏡が多い。ハローは小さく単焦点に近い。一部の設計では、瞳孔が大きいほど延長が減り、夜間の中距離は少し劣る。",
-  iolOpticMf: "3焦点（回折型）",
-  iolOpticMfShort: "遠・中・近の三つの焦点",
-  iolOpticMfNote:
-    "回折型3焦点：遠、中（約60 cm）、近（約40 cm）に焦点がある。代償はコントラストが少し下がり、夜間は光源のまわりに輪が見えやすい。輪が気になり続ける人もいる。",
+  iolOpticEmonoNote: "単焦点を底に清晰範囲を少し延ばす。中距離（パソコン／日程）は普通の単焦点より良いことが多く、細字はなお眼鏡。夜間の光学効果は設計と瞳孔次第で、一般に回折多焦点より少ないが「ハローが少ない」保証ではない。",
+  iolOpticEdof: "焦点深度拡張（EDOF）",
+  iolOpticEdofShort: "遠〜中距離",
+  iolOpticEdofNote: "遠方から中距離までで、設計によって異なります。新聞の細字は近用眼鏡が必要なことが多い。ハローは設計によって異なり、どの設計がよいかの比較ではありません。",
+  iolOpticMf: "多焦点／3焦点",
+  iolOpticMfShort: "遠中近の複数焦点",
+  iolOpticMfNote: "遠・中・近を同時に試みる。コントラスト低下や夜間ハロー／眩しさが目立ちやすい。黄斑疾患や明らかな視野欠損では通常向かない。眼鏡なしは保証されない。",
   iolDistFar: "遠距離",
-  iolDistFarSub: "約6 m · 運転／街並み",
+  iolDistFarSub: "約6 m · 運転／街並み · 夜間の運転能力の評価ではありません。",
   iolDistFarSubNight: "約6 m · 運転／街並み · 夜間運転能力の評価ではありません",
   iolDistMid: "中距離",
   iolDistMidSub: "約60–70 cm · 試合ニュース",
@@ -1544,18 +1530,31 @@ const ja: Record<Key, string> = {
     "実線が選択中、破線が比較です。横軸は優位眼のデフォーカス（正は遠視側）。曲線は教育用の示意で、文献のデフォーカス曲線の概念（単焦点・強化単焦点・EDOF・3焦点で幅が異なる）を参考にした形状です。Monaco 2017 と Tarib 2019 は回折型デザインの比較であり、屈折型 EDOF や強化単焦点の曲線形状の出典ではありません。Savini 2026 は「部分景深／強化単焦点」の分類例としてのみ引用し、ここに描いた曲線の形状根拠ではありません。メーカー図の複製でも個人の予後でもありません。0.2 logMAR の破線は読むための目安です。文献は下記。",
   iolNightFx:
     "夜間の示意には柔らかいハロー、筋（ストリーク）があり得ます。回折型では輪や軽いゴースト感があり得ます。教学用の光学現象であり、測定や術後の予測ではありません。",
-  iolDomEyeH: "優位眼（主視眼）とは？",
-  iolDomEyeDef:
-    "優位眼は、両眼で見るときに脳がやや優先する眼です（精密な合わせ込みなど）。このツールの「目標屈折（主視眼）」と曲線の横軸は、主参照として設定した眼を指し、自動測定ではありません。",
-  iolDomEyeTestH: "自宅でできる科学的な自己観察（示意であり診断ではない）",
-  iolDomEyeTest1:
-    "Miles 三角法：両腕を伸ばし、親指と人差し指で小さな三角を作り、約3 m先の小さな目標を三角の中心に合わせます。片眼ずつ閉じ、目標が中心に残る眼が視覚的優位眼であることが多いです。数回試してください。",
-  iolDomEyeTest2:
-    "Dolman カード法：両眼を開いたまま、カード中央の小孔を約3 m先の固定した目標に合わせます。合わせた状態で、どちらの眼が小孔越しに目標を見られるかを確かめます。多くの場合それが優位眼です。数回試してください。",
+  iolEduH: "選ぶときによく一緒に理解する",
+  iolEduIntro:
+    "白内障・眼内レンズの話でよく出る要素を、この示意と合わせて読むための説明です。処方でも術後保証でもなく、登録医との対面の代わりにはなりません。",
+  iolEduDryH: "ドライアイと術後の視覚の質",
+  iolEduDryP:
+    "涙膜が不安定だと角膜表面の光学が乱れ、コントラストが下がり、ぎらつきが増えます。球面・乱視が合っていても「はっきりしない」と感じることがあります。重症または難治のドライアイでは、多焦点や焦点深度延長の設計は慎重に検討されます。本ページはドライアイを別途シミュレートしませんが、涙膜ケアは実際の見え方に関わります。",
+  iolEduDomH: "優位眼（主視眼）が重要な理由",
+  iolEduDomP:
+    "優位眼は両眼で見るとき脳がやや優先する眼で、遠方の合わせ込みや細部の読み取りで関係します。単眼視や両眼で度数を分ける場合、どちらを主要距離にするかは適応や満足度に関わります。本ページは一度に一つの「目標度数」だけを示し、どちらが優位眼かは自動測定しません。",
+  iolEduMvH: "単眼視／ミニ単眼視",
+  iolEduMvP:
+    "単眼視（monovision）は、一眼を遠用、もう一方を中・近（または軽い近視）に寄せ、両眼融合で眼鏡依存を減らす考え方です。ミニ単眼視は両眼の差を小さくする方法（医師の処方に従う）。立体視や距離感の変化、不快感、順応期間などの代償があり、試着と医師の計画が必要です。本ページのスライダーは片眼の目標のみを示し、両眼融合は模しません。",
+  iolEduPhotoH: "ハロー、輪、その他の光学現象（多焦点／焦点深度延長）",
+  iolEduPhotoP:
+    "回折型の多焦点／3焦点は光を複数焦点に分け、日中のコントラストがやや下がり、夜間は点光源のまわりに輪やハローが見えやすい（本ページの「夜間ハロー」を試せます）。焦点深度拡張（EDOF）のハローは一般に柔らかいですが、コントラスト低下や夜間の光学ノイズがあり得、設計と瞳孔次第です。眼鏡は球面・乱視の残りを補えますが、設計によるコントラスト低下や夜間ハローは通常消えません。多焦点の考え方のページと夜間ハロー比較ツールを参照。本ページは測定や順位ではありません。",
+  iolLinkDry: "ドライアイのページ",
+
+  iolDomEyeH: "優位眼（主視眼／主力眼）とは？",
+  iolDomEyeDef: "優位眼は利き手と同じではありません。視覚的な合わせ込み・位置合わせの参照になりやすい眼です。単眼視や遠用の主眼を決めるとき医師が考慮します。自己テストは散瞳検査や処方の代わりにはなりません。",
+  iolDomEyeTestH: "自宅での自己観察（示意であり診断ではない）",
+  iolDomEyeTest1: "Miles 三角法：両腕を伸ばし、親指と人差し指で小さな三角を作り、約3 m先の小さな目標を三角の中心に合わせます。片眼ずつ閉じ、目標が中心に残る眼が視覚的優位眼であることが多いです。数回試してください。",
+  iolDomEyeTest2: "Dolman カード法：両眼を開いたまま、カード中央の小孔を約3 m先の固定した目標に合わせます。合わせた状態で、どちらの眼が小孔越しに目標を見られるかを確かめます。多くの場合それが優位眼です。数回試してください。",
   iolDomEyeTest3:
     "ミニ単眼視では両眼の目標が異なり得ます。どちらを遠用・近用にするかは医師と相談が必要で、自己テストは処方の代わりになりません。",
-  iolDomEyeCaveat:
-    "利き手やスポーツの優位と眼の優位は一致しないことがあります。理解のための方法であり、散瞳検査や術後保証の代わりにはなりません。",
+  iolDomEyeCaveat: "理解のための方法であり、散瞳検査や術後保証の代わりにはなりません。",
   iolChart020: "0.2 logMAR",
   iolTableH: "四つのデザイン（両眼・現在の設定）",
   iolTableCap: "ブランド比較でも、どれが良いかの順位でもありません",
