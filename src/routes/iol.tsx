@@ -4,6 +4,8 @@ import { ArrowLeft } from "lucide-react";
 import { IolScene } from "@/components/iol-scene";
 import { IolDefocusChart } from "@/components/iol-chart";
 import { EditorialFooter } from "@/components/editorial-footer";
+import { TopicRefs } from "@/components/topic-refs";
+import { IOL_SIM_REF_IDS } from "@/data/iol-references";
 import { SaveButton } from "@/components/save-button";
 import { toolSaveKey } from "@/lib/saved";
 import { useI18n } from "@/i18n";
@@ -281,6 +283,9 @@ function IolPage() {
             </button>
           ))}
         </div>
+        {state.light === "night" ? (
+          <p className="mt-2 text-[0.78rem] leading-relaxed text-muted">{t("iolNightFx")}</p>
+        ) : null}
       </section>
 
       <section className="mt-5 min-w-0 px-4">
@@ -527,6 +532,21 @@ function IolPage() {
           />
           {t("iolDry")}
         </label>
+        <details className="mt-3 rounded-xl border border-line bg-card px-3">
+          <summary className="flex min-h-11 cursor-pointer items-center font-semibold text-navy">
+            {t("iolDomEyeH")}
+          </summary>
+          <div className="space-y-2 pb-3 text-[0.82rem] leading-relaxed">
+            <p>{t("iolDomEyeDef")}</p>
+            <p className="font-semibold text-navy">{t("iolDomEyeTestH")}</p>
+            <ol className="list-decimal space-y-1.5 pl-5">
+              <li>{t("iolDomEyeTest1")}</li>
+              <li>{t("iolDomEyeTest2")}</li>
+              <li>{t("iolDomEyeTest3")}</li>
+            </ol>
+            <p className="text-muted">{t("iolDomEyeCaveat")}</p>
+          </div>
+        </details>
       </section>
 
       <section className="mt-5 min-w-0 px-4">
@@ -734,6 +754,7 @@ function IolPage() {
         </Link>
       </div>
       <div className="px-4">
+        <TopicRefs ids={[...IOL_SIM_REF_IDS]} />
         <p className="mt-6 text-[0.78rem] leading-relaxed text-faint">{t("iolFoot")}</p>
         <EditorialFooter lastReviewed="2026-10-01" />
       </div>

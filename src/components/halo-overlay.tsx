@@ -6,6 +6,10 @@ type Props = {
   showHalo?: boolean;
   /** Radial spikes from the same cores (default on; intensity still follows kind). */
   showStarburst?: boolean;
+  /** Scales overall halo / starburst strength (illustration only). */
+  strength?: number;
+  /** Faint offset duplicate rings — diffractive / night-driving illustration. */
+  ghostRings?: boolean;
 };
 
 /**
@@ -13,8 +17,15 @@ type Props = {
  * Halo = soft ring(s), dimmer than the lamp core, warm/cool lamp colour only.
  * Starburst = radial spikes that fade outward. No rainbow / neon / white-out.
  */
-export function HaloOverlay({ kind, showHalo = true, showStarburst = true }: Props) {
+export function HaloOverlay({
+  kind,
+  showHalo = true,
+  showStarburst = true,
+  strength = 1,
+  ghostRings = false,
+}: Props) {
   const s = haloScale(kind);
+  const boost = Math.min(1.35, Math.max(0.65, strength));
   const uid = `halo-${kind}`;
   const burstLights = NIGHT_LIGHTS.filter((L) => L.r >= 0.65);
   const spikes = kind === "mf" ? 12 : kind === "edof" ? 10 : 8;
@@ -99,7 +110,27 @@ export function HaloOverlay({ kind, showHalo = true, showStarburst = true }: Pro
                   cy={cy}
                   r={r}
                   fill={`url(#${uid}-ring-${i})`}
-                  opacity={s.opacity * (0.7 + L.r * 0.18)}
+                  opacity={s.opacity * boost * (0.7 + L.r * 0.18)}
+                />
+              );
+            })
+          : null}
+
+        {showHalo && ghostRings && kind === "mf"
+          ? NIGHT_LIGHTS.filter((L) => L.r >= 0.55).map((L, i) => {
+              const warm = L.warm > 0.5;
+              const col = warm ? "255,196,110" : "255,248,230";
+              const cx = L.x + 0.55;
+              const cy = (L.y / 100) * 56 + 0.35;
+              const r = Math.max(2.8, L.r * s.size * 6.4);
+              return (
+                <circle
+                  key={`g-${i}`}
+                  cx={cx}
+                  cy={cy}
+                  r={r}
+                  fill={`rgb(${col})`}
+                  opacity={0.07 * boost}
                 />
               );
             })
@@ -112,7 +143,7 @@ export function HaloOverlay({ kind, showHalo = true, showStarburst = true }: Pro
               const len = Math.max(5.5, L.r * s.size * 9.2);
               const halfW = kind === "mf" ? 0.22 : 0.16;
               return (
-                <g key={`b-${i}`} opacity={Math.min(0.8, 0.32 + s.burst * 0.4)}>
+                <g key={`b-${i}`} opacity={Math.min(0.85, (0.32 + s.burst * 0.4) * boost)}>
                   {Array.from({ length: spikes }, (_, k) => {
                     const a = (k * Math.PI * 2) / spikes + (i % 2) * 0.07;
                     const tipX = cx + Math.cos(a) * len;

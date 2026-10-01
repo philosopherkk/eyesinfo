@@ -429,7 +429,21 @@ const zhHant = {
   iolCopied: "已複製連結",
   iolChartH: "離焦曲線（示意）",
   iolChartNote:
-    "實線是目前設計，虛線是對照。橫軸是主視眼的離焦（正數偏遠視側）。0.2 logMAR 虛線只是閱讀參考，不是個人視力標準。",
+    "實線是目前設計，虛線是對照。橫軸是主視眼的離焦（正數偏遠視側）。曲線是教育用示意：形狀參考文獻中的離焦曲線比較（單焦、增強型單焦、延伸景深、三焦點各有不同闊度），不是複製任何廠商圖，亦不是個人預後。0.2 logMAR 虛線只是閱讀參考，不是個人視力標準。見下方文獻。",
+  iolNightFx:
+    "夜間示意可包括柔光暈、光環、星芒，繞射式設計或會見輕微重影感；屬教學用光學現象，不是測量或術後預測。",
+  iolDomEyeH: "甚麼是主視眼？",
+  iolDomEyeDef:
+    "主視眼（慣用眼）是大腦在睜眼時較偏向採用的一隻眼的視覺訊息，尤其在需要精準對焦時（如瞄準、閱讀部分細節）。此工具裏「目標屈光（主視眼）」及離焦曲線橫軸，是指你設定作為主參考的那隻眼，不是自動測量結果。",
+  iolDomEyeTestH: "家居可做的科學化自我觀察（示意，不是診斷）",
+  iolDomEyeTest1:
+    "Miles 三角法：雙手前伸，拇指與食指圈成細三角，對準約 3 米外一個小目標。逐隻眼閉上：仍能把目標留在圈中心的那隻，通常是視覺慣用眼——可多試幾次，結果可能左右稍有出入。",
+  iolDomEyeTest2:
+    "Dolman 卡片法：在紙卡中央開小圓孔，用一隻眼睇遠處文字，再改另一隻眼；較容易保持目標清晰的那隻，常是慣用眼。",
+  iolDomEyeTest3:
+    "若啟用「迷你單眼視」，兩眼目標可不同：主視眼通常保留看遠或常用距離，另一眼保留另一個度數；實際安排須與醫生討論，不能靠自我測試代替處方。",
+  iolDomEyeCaveat:
+    "慣用眼與「手學」或運動主導未必一致。以上方法只供自己理解，不能代替散瞳驗光，不能代替醫生判斷哪隻眼適合做主要距離，亦不是術後保證。",
   iolChart020: "0.2 logMAR",
   iolTableH: "四種設計（雙眼，目前設定）",
   iolTableCap: "不是品牌比較，亦不是哪一種較好",
@@ -975,7 +989,21 @@ const en: Record<Key, string> = {
   iolCopied: "Link copied",
   iolChartH: "Defocus curve (illustration)",
   iolChartNote:
-    "Solid line is the selected design, dashed is the comparison. The horizontal axis is defocus for the dominant eye (positive is the hyperopic side). The 0.2 logMAR dashed line is a reading guide, not a personal acuity standard.",
+    "Solid line is the selected design, dashed is the comparison. The horizontal axis is defocus for the dominant eye (positive is the hyperopic side). The curves are educational schematics informed by published defocus-curve comparisons (monofocal, enhanced monofocal, EDOF and trifocal differ in width) — not a copy of any manufacturer trace and not a personal prognosis. The 0.2 logMAR dashed line is a reading guide, not a personal acuity standard. See references below.",
+  iolNightFx:
+    "The night illustration may include soft halos, rings, starbursts and, with diffractive designs, a faint ghosting feel — teaching optics only, not a measurement or surgical prediction.",
+  iolDomEyeH: "What is the dominant eye?",
+  iolDomEyeDef:
+    "The dominant (sighting) eye is the one the brain tends to rely on for aligning and fine focus when both eyes are open. In this tool, “target refraction (dominant eye)” and the chart horizontal axis refer to the eye you set as the main reference — not an automatic measurement.",
+  iolDomEyeTestH: "Structured self-checks at home (illustration, not a diagnosis)",
+  iolDomEyeTest1:
+    "Miles triangle: extend your arms, form a small triangle with thumbs and index fingers, and centre a distant target (~3 m). Close one eye at a time — the eye that still keeps the target centred is usually the sighting-dominant eye. Repeat; results can vary slightly.",
+  iolDomEyeTest2:
+    "Dolman hole-in-card: cut a small hole in a card, view distant text through it with one eye then the other; the eye that keeps the target clearer is often dominant.",
+  iolDomEyeTest3:
+    "With mini-monovision, each eye can have a different target — typically one eye for distance and the other mildly nearer; only a doctor can plan that. Self-tests cannot replace prescribing.",
+  iolDomEyeCaveat:
+    "Hand dominance and sports dominance need not match ocular dominance. These checks are for understanding only — not a substitute for dilated refraction, clinical choice of the main-distance eye, or a surgical promise.",
   iolChart020: "0.2 logMAR",
   iolTableH: "All four designs (binocular, current settings)",
   iolTableCap: "Not a brand comparison, and not a ranking of which design is better",
@@ -1510,7 +1538,21 @@ const ja: Record<Key, string> = {
   iolCopied: "リンクをコピーしました",
   iolChartH: "デフォーカス曲線（示意）",
   iolChartNote:
-    "実線が選択中、破線が比較です。横軸は優位眼のデフォーカス（正は遠視側）。0.2 logMAR の破線は読むための目安で、個人の視力基準ではありません。",
+    "実線が選択中、破線が比較です。横軸は優位眼のデフォーカス（正は遠視側）。曲線は教育用の示意で、文献のデフォーカス曲線比較（単焦点・強化単焦点・EDOF・3焦点で幅が異なる）を参考にした形状であり、メーカー図の複製でも個人の予後でもありません。0.2 logMAR の破線は読むための目安です。文献は下記。",
+  iolNightFx:
+    "夜間の示意には柔らかいハロー、輪、スターバースト、回折型では軽いゴースト感があり得ます。教学用の光学現象であり、測定や術後の予測ではありません。",
+  iolDomEyeH: "優位眼（主視眼）とは？",
+  iolDomEyeDef:
+    "優位眼は、両眼で見るときに脳がやや優先する眼です（精密な合わせ込みなど）。このツールの「目標屈折（主視眼）」と曲線の横軸は、主参照として設定した眼を指し、自動測定ではありません。",
+  iolDomEyeTestH: "自宅でできる科学的な自己観察（示意であり診断ではない）",
+  iolDomEyeTest1:
+    "Miles 三角法：両腕を伸ばし、親指と人差し指で小さな三角を作り、約3 m先の小さな目標を三角の中心に合わせます。片眼ずつ閉じ、目標が中心に残る眼が視覚的優位眼であることが多いです。数回試してください。",
+  iolDomEyeTest2:
+    "Dolman カード法：カード中央に小孔を開け、片眼ずつ遠くの文字を見る。よりはっきり保てる眼が優位眼であることが多いです。",
+  iolDomEyeTest3:
+    "ミニ単眼視では両眼の目標が異なり得ます。どちらを遠用・近用にするかは医師と相談が必要で、自己テストは処方の代わりになりません。",
+  iolDomEyeCaveat:
+    "利き手やスポーツの優位と眼の優位は一致しないことがあります。理解のための方法であり、散瞳検査や術後保証の代わりにはなりません。",
   iolChart020: "0.2 logMAR",
   iolTableH: "四つのデザイン（両眼・現在の設定）",
   iolTableCap: "ブランド比較でも、どれが良いかの順位でもありません",

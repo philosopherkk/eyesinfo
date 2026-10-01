@@ -1022,6 +1022,54 @@ export const CITE: Record<string, Citation> = {
     pmid: "25160648",
     note: "術後視力相關因素系統回顧。不是個人預後公式。",
   },
+  breyer2017: {
+    id: "breyer2017",
+    authors: "Breyer DRH, Kaymak H, Axmann S, et al.",
+    title: "Multifocal Intraocular Lenses and Extended Depth of Focus Intraocular Lenses",
+    source: "Asia Pac J Ophthalmol (Phila). 2017 Jul-Aug;6(4):339-351",
+    pmid: "28780781",
+    note:
+      "綜述單焦、多焦及延伸景深人工晶體；說明離焦量度在功能性視力評估中的角色。不是品牌推介，曲線示意不複製任何廠商圖。",
+  },
+  monaco2017: {
+    id: "monaco2017",
+    authors: "Monaco G, Gari M, Di Censo F, et al.",
+    title:
+      "Visual performance after bilateral implantation of 2 new presbyopia-correcting intraocular lenses: Trifocal versus extended range of vision",
+    source: "J Cataract Refract Surg. 2017 Jun;43(6):737-747",
+    pmid: "28732606",
+    note:
+      "公開試驗比較三焦點與延伸景深設計的離焦曲線及視覺功能。數字是研究結果，不是個人術後預後或品牌排名。",
+  },
+  savini2026: {
+    id: "savini2026",
+    authors: "Savini G, Galzignato A, Coutinho CP, et al.",
+    title:
+      "Functional Classification of a New IOL Into the Category of Partial Depth of Field: Enhanced IOLs According to the ESCRS Criteria",
+    source: "J Refract Surg. 2026 Apr;42(4):e359-e366",
+    pmid: "41945698",
+    note:
+      "以離焦曲線及 ESCRS 準則說明「增強型單焦點／部分景深」分類。教育引用方法，不是型號推介。",
+  },
+  tarib2019: {
+    id: "tarib2019",
+    authors: "Tarib I, Kasier I, Herbers C, et al.",
+    title:
+      "Comparison of Visual Outcomes and Patient Satisfaction After Bilateral Implantation of an EDOF IOL and a Mix-and-Match Approach",
+    source: "J Refract Surg. 2019 Jul 1;35(7):408-416",
+    pmid: "31298720",
+    note:
+      "延伸景深人工晶體術後視覺功能及離焦表現的公開比較。不是個人預後，亦不是哪一種較好。",
+  },
+  wanniarachchi2025: {
+    id: "wanniarachchi2025",
+    authors: "Wanniarachchi K, Mehta JS, et al.",
+    title: "Management of positive and negative dysphotopsia postcataract surgery - A literature review",
+    source: "Taiwan J Ophthalmol. 2025 Oct-Dec;15(4):572-579",
+    pmid: "41523122",
+    note:
+      "術後光學現象（含光暈、星芒及正／負向光視）文獻回顧。夜景示意不是術後預測或測量。",
+  },
 };
 
 export function citationsFor(ids: string[]): Citation[] {
