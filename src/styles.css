@@ -48,8 +48,8 @@
   --color-iris: #dce8ef;
   --color-amsler-dark: #0c0c0c;
   --color-amsler-light: #f6f4ee;
-  --font-sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", ui-sans-serif,
-    system-ui, sans-serif;
+  --font-sans:
+    "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", ui-sans-serif, system-ui, sans-serif;
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 22px;
@@ -189,12 +189,24 @@ html[data-theme="dark"] .urgent-on-danger {
   transform-origin: center;
 }
 @keyframes floater-idle {
-  0% { transform: translate(0px, 0px); }
-  20% { transform: translate(42px, 24px); }
-  40% { transform: translate(-22px, 48px); }
-  60% { transform: translate(36px, -18px); }
-  80% { transform: translate(-38px, 14px); }
-  100% { transform: translate(0px, 0px); }
+  0% {
+    transform: translate(0px, 0px);
+  }
+  20% {
+    transform: translate(42px, 24px);
+  }
+  40% {
+    transform: translate(-22px, 48px);
+  }
+  60% {
+    transform: translate(36px, -18px);
+  }
+  80% {
+    transform: translate(-38px, 14px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
 }
 .halo-glow {
   mix-blend-mode: screen;
@@ -202,14 +214,21 @@ html[data-theme="dark"] .urgent-on-danger {
 }
 
 .anatomy-region-btn {
-  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
 }
 .anatomy-region-btn:focus-visible {
   outline: 2px solid var(--color-navy);
   outline-offset: 2px;
 }
 .anatomy-region {
-  transition: fill 160ms ease, stroke 160ms ease, stroke-width 160ms ease, opacity 160ms ease;
+  transition:
+    fill 160ms ease,
+    stroke 160ms ease,
+    stroke-width 160ms ease,
+    opacity 160ms ease;
 }
 .anatomy-hit {
   cursor: pointer;
@@ -298,4 +317,31 @@ html[data-theme="dark"] .urgent-on-danger {
 
 .print-only {
   display: none;
+}
+
+/* IOL simulator: one column under ~820px; chart/table scroll inside the card. */
+.iol-page {
+  max-width: 100%;
+  overflow-x: clip;
+}
+.iol-page input[type="range"] {
+  min-height: 2.75rem;
+}
+.iol-scenes {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.75rem;
+}
+.iol-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+@media (min-width: 820px) {
+  :root:not([data-layout="mobile"]) .iol-scenes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  :root:not([data-layout="mobile"]) .iol-lens-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
