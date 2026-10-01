@@ -328,9 +328,9 @@ const zhHant = {
   iolLead:
     "比較單焦點、增強型單焦點、折射式延伸景深及繞射式三焦點，在遠、中、近及夜間的光學示意。可調光線、年齡、瞳孔、目標度數、散光及乾眼。畫面上的清晰程度用詞及光暈教學標度是模型示意，不是個人預後，亦不推介任何品牌。",
   iolOpticsH: "光學設計",
-  iolTargetH: "目標屈光（主視眼）",
+  iolTargetH: "目標屈光（主視眼／主力眼）",
   iolTargetHint:
-    "由 −3.00 D 到 +3.00 D，每格 0.25 D。滑桿 −12 至 +12 代表四分之一度。正數是遠視，負數是近視。",
+    "由 −3.00 D 到 +3.00 D，每格 0.25 D。滑桿 −12 至 +12 代表四分之一度。正數是遠視，負數是近視。主視眼（主力眼）是此滑桿的參考眼，見下方「選擇時常一併理解」。",
   iolTargetAria: "目標球面度數",
   iolHyper: "+3.00 遠視",
   iolEmme: "0 正視",
@@ -405,6 +405,8 @@ const zhHant = {
   iolPupilAuto: "按光線自動設定",
   iolPupilNow: "目前 {mm} mm",
   iolMv: "迷你單眼視（第二眼另一個目標）",
+  iolMvHint:
+    "刻意讓兩眼目標屈光不同，以換取部分距離少戴鏡；須個別規劃，不是人人適合。詳見下方「單眼視／迷你單眼視」。",
   iolT2H: "第二眼目標",
   iolT2Aria: "第二眼目標屈光",
   iolAxisH: "散光軸向",
@@ -423,6 +425,24 @@ const zhHant = {
   iolViewDom: "主視眼",
   iolViewNon: "非主視眼",
   iolDry: "乾眼",
+  iolDryHint:
+    "勾選後示意淚膜不穩對對比及夜間光源的影響；不是預測你個人術後度數。術前術後乾眼處理可影響視覺質素，見下方說明。",
+  iolEduH: "選擇時常一併理解",
+  iolEduIntro:
+    "以下為白內障／人工晶體討論時常提到的因素，配合本頁示意閱讀。不是處方、不是術後保證，不能代替與註冊醫生面談。",
+  iolEduDryH: "乾眼與術後視覺質素",
+  iolEduDryP:
+    "淚膜不穩（乾眼）會令角膜表面光學不規則，降低對比、增加眩光或條紋感，即使球面及散光度數已矯正，仍可能覺得「唔夠清」或夜間吃力。嚴重或難治乾眼時，醫生或會審慎考慮多焦點或部分延伸景深設計。本頁「乾眼」選項只作教學疊加示意，不代表你的淚膜狀態。",
+  iolEduDomH: "主視眼（主力眼）為何重要",
+  iolEduDomP:
+    "主視眼（慣用眼／主力眼）是大腦在雙眼睜開時較優先採用的一隻眼的訊息，尤其在對準遠目標、閱讀部分細節時。討論單眼視或兩眼不同目標時，哪一隻眼負責主要距離會影響適應與滿意度。本工具「目標屈光（主視眼／主力眼）」及離焦曲線橫軸，是指你設定作主參考的那隻眼，不是儀器自動測量。家居自我觀察方法見上方「看哪一眼」區內折疊說明（示意，不是診斷）。",
+  iolEduMvH: "單眼視／迷你單眼視",
+  iolEduMvP:
+    "單眼視（monovision）是刻意讓一眼偏看遠、另一眼偏看近（或中近），用大腦融合換取部分距離少戴鏡。「迷你單眼視」通常指兩眼度數差距較小（以醫生處方為準，常見討論約 0.75–1.50 D 幅度）。代價可包括立體感或深度判斷改變、部分人不適、需時間適應；必須試戴或試用後與醫生決定，不能靠本工具設定代替。啟用本頁「迷你單眼視」可示意兩眼不同目標時的模糊疊加，不是個人預後。",
+  iolEduPhotoH: "光暈、光環與其他術後光學現象（多焦／延伸景深）",
+  iolEduPhotoP:
+    "繞射式多焦／三焦點設計會把光能分到多個焦點，日間對比可略降，夜間點光源周圍較易見光環或光暈，瞳孔較大時更明顯；部分人會長期覺得困擾。折射式延伸景深主要靠光學設計加闊遠至中距離，光暈一般較柔、接近單焦，但仍可能有對比下降、夜間中距離稍遜或光學干擾，因設計與瞳孔而異。正／負向光視（例如視野邊緣暗影或亮帶）屬另一類光學現象，與晶體位置或囊袋有關，不能靠戴眼鏡消除。文獻回顧見頁底參考（含 Breyer 2017 綜述、Wanniarachchi 2025 光學現象回顧）；本頁夜景與光暈欄為教學示意，不是測量或排名。",
+  iolLinkDry: "乾眼專題",
   iolCmpH: "對照設計",
   iolSbs: "並排比較（上下兩行）",
   iolReset: "重設",
@@ -433,7 +453,7 @@ const zhHant = {
     "實線是目前設計，虛線是對照。橫軸是主視眼的離焦（正數偏遠視側）。曲線是教育用示意：形狀參考文獻中的離焦曲線概念（單焦、增強型單焦、延伸景深、三焦點各有不同闊度）。Monaco 2017 與 Tarib 2019 為繞射式設計比較，不是折射式延伸景深或增強型單焦點曲線的來源；Savini 2026 僅作「部分景深／增強型單焦」分類示例，不是此處繪線的形狀依據。不是複製任何廠商圖，亦不是個人預後。0.2 logMAR 虛線只是閱讀參考，不是個人視力標準。見下方文獻。",
   iolNightFx:
     "夜間示意可包括柔光暈、條紋；繞射式設計或會見光環或輕微重影感。屬教學用光學現象，不是測量或術後預測。",
-  iolDomEyeH: "甚麼是主視眼？",
+  iolDomEyeH: "甚麼是主視眼（主力眼）？",
   iolDomEyeDef:
     "主視眼（慣用眼）是大腦在睜眼時較偏向採用的一隻眼的視覺訊息，尤其在需要精準對焦時（如瞄準、閱讀部分細節）。此工具裏「目標屈光（主視眼）」及離焦曲線橫軸，是指你設定作為主參考的那隻眼，不是自動測量結果。",
   iolDomEyeTestH: "家居可做的科學化自我觀察（示意，不是診斷）",
@@ -885,9 +905,9 @@ const en: Record<Key, string> = {
   iolLead:
     "Compare monofocal, enhanced monofocal, refractive extended-depth and diffractive trifocal designs at far, intermediate, near and at night. Light, age, pupil, target, astigmatism and dry eye can be changed. On-screen clarity words and the halo teaching scale are model illustrations, not a personal prognosis, and not a brand recommendation.",
   iolOpticsH: "Optical design",
-  iolTargetH: "Target refraction (dominant eye)",
+  iolTargetH: "Target refraction (dominant / sighting eye)",
   iolTargetHint:
-    "From −3.00 D to +3.00 D in 0.25 D steps. Slider −12 to +12 is quarter-diopters. Positive is hyperopia, negative is myopia.",
+    "From −3.00 D to +3.00 D in 0.25 D steps. Slider −12 to +12 is quarter-diopters. Positive is hyperopia, negative is myopia. The dominant eye is the reference for this slider — see “Often discussed together” below.",
   iolTargetAria: "Target spherical power",
   iolHyper: "+3.00 hyperopia",
   iolEmme: "0 emmetropia",
@@ -966,6 +986,8 @@ const en: Record<Key, string> = {
   iolPupilAuto: "Set from the light",
   iolPupilNow: "Now {mm} mm",
   iolMv: "Mini-monovision (second eye, other target)",
+  iolMvHint:
+    "Deliberately different targets in each eye to trade some spectacle freedom — individual planning only. See “Monovision / mini-monovision” below.",
   iolT2H: "Second-eye target",
   iolT2Aria: "Second-eye target refraction",
   iolAxisH: "Astigmatism axis",
@@ -984,6 +1006,24 @@ const en: Record<Key, string> = {
   iolViewDom: "Dominant",
   iolViewNon: "Non-dominant",
   iolDry: "Dry eye",
+  iolDryHint:
+    "When checked, illustrates unstable tear film lowering contrast and adding streaks on lights — not a prediction of your post-operative refraction. Dry-eye care can affect visual quality; see below.",
+  iolEduH: "Often discussed together",
+  iolEduIntro:
+    "Factors commonly raised in cataract / IOL discussions, to read alongside this illustration. Not prescribing, not a surgical promise, and not a substitute for seeing a registered doctor.",
+  iolEduDryH: "Dry eye and post-operative visual quality",
+  iolEduDryP:
+    "An unstable tear film makes the corneal surface less smooth, lowering contrast and increasing glare or streaks — vision can feel “not crisp” even when sphere and cylinder are corrected. Severe or difficult dry eye may make doctors cautious about multifocal or extended-depth designs. The dry-eye toggle here is a teaching overlay only.",
+  iolEduDomH: "Why the dominant (sighting) eye matters",
+  iolEduDomP:
+    "The dominant eye is the one the brain tends to prefer when both eyes are open, especially for aligning on a distant target or fine detail. When monovision or different targets are planned, which eye carries the main distance can affect adaptation and satisfaction. In this tool, “target refraction (dominant eye)” and the chart horizontal axis refer to the eye you set as the main reference — not an automatic measurement. Home self-checks are in the fold-out above under “Which eye” (illustration, not a diagnosis).",
+  iolEduMvH: "Monovision / mini-monovision",
+  iolEduMvP:
+    "Monovision deliberately sets one eye toward distance and the other toward intermediate or near (or mild myopia), relying on binocular fusion to reduce spectacle wear. Mini-monovision usually means a smaller inter-eye difference (follow your doctor; plans often discussed around roughly 0.75–1.50 D). Trade-offs can include changed stereo / depth cues, discomfort in some people, and adaptation time; trial frames or contact trials and medical planning are required — this tool cannot prescribe. Enabling mini-monovision here illustrates blur with two targets; it is not a personal prognosis.",
+  iolEduPhotoH: "Halos, rings and other optical effects (multifocal / extended depth)",
+  iolEduPhotoP:
+    "Diffractive multifocal / trifocal designs split light among several foci — daytime contrast may drop a little, and rings or halos around point lights are easier to notice at night, especially with a larger pupil; some people remain bothered. Refractive extended-depth designs mainly widen far-to-intermediate through optics — halos are usually softer and closer to a monofocal, but contrast can still fall a little, intermediate at night may be weaker, and optical effects vary by design and pupil. Positive / negative dysphotopsia (e.g. shadow or bright arc at the field edge) is a separate phenomenon linked to lens position or the capsule; spectacles do not remove it. See references below (including Breyer 2017; Wanniarachchi 2025 review). Night scenes and the halo column are teaching illustrations, not measurements or rankings.",
+  iolLinkDry: "Dry-eye topic",
   iolCmpH: "Comparison design",
   iolSbs: "Side by side (two rows)",
   iolReset: "Reset",
@@ -994,7 +1034,7 @@ const en: Record<Key, string> = {
     "Solid line is the selected design, dashed is the comparison. The horizontal axis is defocus for the dominant eye (positive is the hyperopic side). The curves are educational schematics informed by published defocus-curve concepts (monofocal, enhanced monofocal, EDOF and trifocal differ in width). Monaco 2017 and Tarib 2019 are diffractive-design comparisons — not the source for refractive EDOF or enhanced-monofocal curve shapes; Savini 2026 is cited only as a partial-depth-of-field classification example, not as the shape basis for the drawn curves. Not a copy of any manufacturer trace and not a personal prognosis. The 0.2 logMAR dashed line is a reading guide, not a personal acuity standard. See references below.",
   iolNightFx:
     "The night illustration may include soft halos and streaks; diffractive designs may show rings or a faint ghosting feel — teaching optics only, not a measurement or surgical prediction.",
-  iolDomEyeH: "What is the dominant eye?",
+  iolDomEyeH: "What is the dominant (sighting) eye?",
   iolDomEyeDef:
     "The dominant (sighting) eye is the one the brain tends to rely on for aligning and fine focus when both eyes are open. In this tool, “target refraction (dominant eye)” and the chart horizontal axis refer to the eye you set as the main reference — not an automatic measurement.",
   iolDomEyeTestH: "Structured self-checks at home (illustration, not a diagnosis)",
@@ -1436,9 +1476,9 @@ const ja: Record<Key, string> = {
   iolLead:
     "単焦点、強化単焦点、屈折型の焦点深度拡張、回折型の3焦点を、遠・中・近と夜間で比べる光学の図示です。光線、年齢、瞳孔、目標度数、乱視、ドライアイを変えられます。画面の見え方の語とハローの教学標度は模型の示意であり、個人の予後でもブランドの推介でもありません。",
   iolOpticsH: "光学デザイン",
-  iolTargetH: "目標屈折（優位眼）",
+  iolTargetH: "目標屈折（優位眼／主視眼）",
   iolTargetHint:
-    "−3.00 D から +3.00 D、1目盛 0.25 D。スライダー −12〜+12 は四分の一度。正は遠視、負は近視。",
+    "−3.00 D から +3.00 D、1目盛 0.25 D。スライダー −12〜+12 は四分の一度。正は遠視、負は近視。優位眼がこのスライダーの基準です。下の「選ぶときによく一緒に理解する」を参照。",
   iolTargetAria: "目標球面度数",
   iolHyper: "+3.00 遠視",
   iolEmme: "0 正視",
@@ -1516,6 +1556,8 @@ const ja: Record<Key, string> = {
   iolPupilAuto: "光線に合わせて自動",
   iolPupilNow: "現在 {mm} mm",
   iolMv: "ミニ単眼視（もう一方の眼は別目標）",
+  iolMvHint:
+    "両眼で意図的に異なる目標屈折にし、一部の距離で眼鏡を減らす考え方。個別計画が必要。下の「単眼視／ミニ単眼視」を参照。",
   iolT2H: "他眼の目標",
   iolT2Aria: "他眼の目標屈折",
   iolAxisH: "乱視軸",
@@ -1534,6 +1576,24 @@ const ja: Record<Key, string> = {
   iolViewDom: "優位眼",
   iolViewNon: "非優位眼",
   iolDry: "ドライアイ",
+  iolDryHint:
+    "オンにすると涙膜不安定によるコントラスト低下と光源の筋（ストリーク）を示意します。個人の術後度数の予測ではありません。術前術後のドライアイケアは視覚の質に関わり得ます。下記を参照。",
+  iolEduH: "選ぶときによく一緒に理解する",
+  iolEduIntro:
+    "白内障・眼内レンズの話でよく出る要素を、この示意と合わせて読むための説明です。処方でも術後保証でもなく、登録医との対面の代わりにはなりません。",
+  iolEduDryH: "ドライアイと術後の視覚の質",
+  iolEduDryP:
+    "涙膜が不安定だと角膜表面の光学が乱れ、コントラストが下がり、ぎらつきや筋（ストリーク）が増えます。球面・乱視が合っていても「はっきりしない」と感じることがあります。重症または難治のドライアイでは、多焦点や焦点深度延長の設計は慎重に検討されます。本ページのドライアイ切替は教学用の重ね示意のみです。",
+  iolEduDomH: "優位眼（主視眼）が重要な理由",
+  iolEduDomP:
+    "優位眼は両眼で見るとき脳がやや優先する眼で、遠方の合わせ込みや細部の読み取りで関係します。単眼視や両眼で目標を分ける場合、どちらを主要距離にするかは適応や満足度に関わります。本ツールの「目標屈折（優位眼）」と曲線の横軸は、主参照として設定した眼を指し、自動測定ではありません。自宅での自己観察は上の「どちらの眼」内の折りたたみ（示意、診断ではない）を参照。",
+  iolEduMvH: "単眼視／ミニ単眼視",
+  iolEduMvP:
+    "単眼視（monovision）は、一眼を遠用、もう一方を中・近（または軽い近視）に寄せ、両眼融合で眼鏡依存を減らす考え方です。ミニ単眼視は両眼の差を小さくする方法（医師の処方に従う；よく 0.75–1.50 D 程度の話が出る）。立体視や距離感の変化、不快感、順応期間などの代償があり、試着や試用レンズと医師の計画が必要で、本ツールは処方の代わりになりません。「ミニ単眼視」をオンにすると二つの目標でのぼけ示意ができますが、個人の予後ではありません。",
+  iolEduPhotoH: "ハロー、輪、その他の光学現象（多焦点／焦点深度延長）",
+  iolEduPhotoP:
+    "回折型の多焦点／3焦点は光を複数焦点に分け、日中のコントラストがやや下がり、夜間は点光源のまわりに輪やハローが見えやすく、瞳孔が大きいほど目立ちます。屈折型の焦点深度拡張は主に光学で遠〜中を広げ、ハローは一般に単焦点に近く柔らかいですが、コントラスト低下や夜間の中距離の弱さ、設計と瞳孔による光学ノイズがあり得ます。正／負の dysphotopsia（視野縁の影や光帯など）は別の現象で、レンズ位置や嚢に関係し、眼鏡では消えません。文献はページ下部（Breyer 2017、Wanniarachchi 2025 など）。夜景とハロー欄は教学示意であり、測定や順位ではありません。",
+  iolLinkDry: "ドライアイのページ",
   iolCmpH: "比較するデザイン",
   iolSbs: "並べて比較（上下二行）",
   iolReset: "リセット",
@@ -1544,7 +1604,7 @@ const ja: Record<Key, string> = {
     "実線が選択中、破線が比較です。横軸は優位眼のデフォーカス（正は遠視側）。曲線は教育用の示意で、文献のデフォーカス曲線の概念（単焦点・強化単焦点・EDOF・3焦点で幅が異なる）を参考にした形状です。Monaco 2017 と Tarib 2019 は回折型デザインの比較であり、屈折型 EDOF や強化単焦点の曲線形状の出典ではありません。Savini 2026 は「部分景深／強化単焦点」の分類例としてのみ引用し、ここに描いた曲線の形状根拠ではありません。メーカー図の複製でも個人の予後でもありません。0.2 logMAR の破線は読むための目安です。文献は下記。",
   iolNightFx:
     "夜間の示意には柔らかいハロー、筋（ストリーク）があり得ます。回折型では輪や軽いゴースト感があり得ます。教学用の光学現象であり、測定や術後の予測ではありません。",
-  iolDomEyeH: "優位眼（主視眼）とは？",
+  iolDomEyeH: "優位眼（主視眼／主力眼）とは？",
   iolDomEyeDef:
     "優位眼は、両眼で見るときに脳がやや優先する眼です（精密な合わせ込みなど）。このツールの「目標屈折（主視眼）」と曲線の横軸は、主参照として設定した眼を指し、自動測定ではありません。",
   iolDomEyeTestH: "自宅でできる科学的な自己観察（示意であり診断ではない）",

@@ -368,6 +368,7 @@ function IolPage() {
           />
           {t("iolMv")}
         </label>
+        <p className="mt-1 text-[0.78rem] leading-relaxed text-muted">{t("iolMvHint")}</p>
         {state.mv ? (
           <div className="mt-2">
             <div className="flex flex-wrap items-end justify-between gap-2">
@@ -532,6 +533,7 @@ function IolPage() {
           />
           {t("iolDry")}
         </label>
+        <p className="mt-1 text-[0.78rem] leading-relaxed text-muted">{t("iolDryHint")}</p>
         <details className="mt-3 rounded-xl border border-line bg-card px-3">
           <summary className="flex min-h-11 cursor-pointer items-center font-semibold text-navy">
             {t("iolDomEyeH")}
@@ -730,6 +732,39 @@ function IolPage() {
         <p className="mt-4 text-[0.78rem] leading-relaxed text-faint">{t("iolLimits")}</p>
       </section>
 
+      <section className="mt-6 min-w-0 px-4">
+        <h2 className="text-[1.05rem] font-semibold text-navy">{t("iolEduH")}</h2>
+        <p className="mt-1 text-[0.82rem] leading-relaxed text-muted">{t("iolEduIntro")}</p>
+        <div className="mt-3 space-y-2">
+          {(
+            [
+              ["iolEduDryH", "iolEduDryP", true],
+              ["iolEduDomH", "iolEduDomP", false],
+              ["iolEduMvH", "iolEduMvP", false],
+              ["iolEduPhotoH", "iolEduPhotoP", false],
+            ] as const
+          ).map(([head, body, dryLink]) => (
+            <details key={head} className="rounded-xl border border-line bg-card px-3">
+              <summary className="flex min-h-11 cursor-pointer items-center font-semibold text-navy">
+                {t(head)}
+              </summary>
+              <div className="space-y-2 pb-3 text-[0.82rem] leading-relaxed text-muted">
+                <p>{t(body)}</p>
+                {dryLink ? (
+                  <Link
+                    to="/t/$topicId"
+                    params={{ topicId: "t-dry" }}
+                    className="inline-flex min-h-11 items-center font-semibold text-navy no-underline"
+                  >
+                    {t("iolLinkDry")} →
+                  </Link>
+                ) : null}
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+
       <div className="mt-5 flex flex-wrap gap-2 px-4">
         <Link
           to="/t/$topicId"
@@ -756,7 +791,7 @@ function IolPage() {
       <div className="px-4">
         <TopicRefs ids={[...IOL_SIM_REF_IDS]} />
         <p className="mt-6 text-[0.78rem] leading-relaxed text-faint">{t("iolFoot")}</p>
-        <EditorialFooter lastReviewed="2026-10-01" />
+        <EditorialFooter lastReviewed="2026-10-02" />
       </div>
     </div>
   );

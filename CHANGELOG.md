@@ -2,6 +2,11 @@
 
 Git-sourced history for this site. Entries follow commits on `main`, not chat notes.
 
+## feat — IOL education on published 1.78 `/iol` (preview)
+
+- **Summary:** On **`main` / v1.78 simulator only** — expandable copy for dry eye & post-op visual quality, dominant (主力) eye, monovision, and MFIOL/EDOF photic phenomena; hints on dry-eye / mini-monovision toggles. No optics model changes. `CONTENT_VERSION` unchanged.
+- **Files:** `src/routes/iol.tsx`, `src/i18n/ui.ts`, `CHANGELOG.md`
+
 ## chore — IOL simulator hedges (preview)
 
 - **Summary:** `/iol` follow-up on `feat/iol-simulator-2` — qualitative acuity / teaching-scale halo / coarse toric alignment; night overlay (halos, rings, no radial starburst); PMID-backed defocus-curve & dysphotopsia references with diffractive-vs-refractive attribution hedges; dominant-eye copy (Dolman both-eyes-open); night-driving distance cap line; 因設計而異 / by design. `CONTENT_VERSION` unchanged.
