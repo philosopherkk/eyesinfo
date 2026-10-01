@@ -27,6 +27,8 @@ import {
   haloParams,
   parseHash,
   resCyl,
+  rotBandFromDeg,
+  ROT_BAND_DEG,
   sigmaFor,
   sliderToTarget,
   smearAngle,
@@ -39,6 +41,7 @@ import {
   warnings,
   type AxisId,
   type LensId,
+  type RotBand,
   type SimState,
   type ViewId,
 } from "@/lib/iol-optics";
@@ -434,20 +437,25 @@ function IolPage() {
             </div>
             {state.toric ? (
               <div className="mt-3">
-                <div className="flex flex-wrap items-end justify-between gap-2">
-                  <h3 className="text-[0.8rem] font-semibold text-muted">{t("iolRotH")}</h3>
-                  <p className="text-[0.85rem] font-semibold text-navy">{state.rot}°</p>
+                <h3 className="text-[0.8rem] font-semibold text-muted">{t("iolRotH")}</h3>
+                <div className="mt-2 flex flex-wrap gap-2" role="group" aria-label={t("iolRotAria")}>
+                  {(
+                    [
+                      ["aligned", "iolRotAligned"],
+                      ["little", "iolRotLittle"],
+                      ["more", "iolRotMore"],
+                    ] as const
+                  ).map(([id, key]) => (
+                    <button
+                      key={id}
+                      type="button"
+                      onClick={() => patch({ rot: ROT_BAND_DEG[id satisfies RotBand] })}
+                      className={chip(rotBandFromDeg(state.rot) === id)}
+                    >
+                      {t(key)}
+                    </button>
+                  ))}
                 </div>
-                <input
-                  type="range"
-                  min={0}
-                  max={30}
-                  step={1}
-                  value={state.rot}
-                  onChange={(e) => patch({ rot: Number(e.target.value) })}
-                  className="mt-2 w-full max-w-full accent-[var(--color-navy)]"
-                  aria-label={t("iolRotAria")}
-                />
               </div>
             ) : null}
           </>
@@ -667,7 +675,11 @@ function IolPage() {
           {notes.map((n) => (
             <li key={n.id}>
               {n.id === "cyl" ? t("iolWarnCyl", { d: n.d }) : null}
-              {n.id === "rot" ? t("iolWarnRot", { deg: n.deg, pct: n.pct }) : null}
+              {n.id === "rot"
+                ? t("iolWarnRot", {
+                    band: t(n.band === "more" ? "iolRotMore" : "iolRotLittle"),
+                  })
+                : null}
               {n.id === "diff" ? t("iolWarnDiff") : null}
               {n.id === "hyper" ? t("iolWarnHyper") : null}
               {n.id === "mf" ? t("iolWarnMf") : null}

@@ -7,6 +7,24 @@ export type LightId = "day" | "dusk" | "night";
 export type AgeId = "50" | "60" | "70";
 export type AxisId = "h" | "v" | "o";
 export type ViewId = "bin" | "dom" | "non";
+export type RotBand = "aligned" | "little" | "more";
+
+/** Internal residual-cylinder angles for each coarse band — never shown as °. */
+export const ROT_BAND_DEG: Record<RotBand, number> = {
+  aligned: 0,
+  little: 10,
+  more: 25,
+};
+
+export function rotBandFromDeg(rot: number): RotBand {
+  if (!Number.isFinite(rot) || rot < 5) return "aligned";
+  if (rot < 18) return "little";
+  return "more";
+}
+
+export function snapRotDeg(rot: number): number {
+  return ROT_BAND_DEG[rotBandFromDeg(rot)];
+}
 export type HaloType = "glow" | "soft" | "rings";
 export type OpticsKind = "refractive" | "diffractive";
 
@@ -324,7 +342,7 @@ export function targetToSlider(t: number): number {
 
 export type Warn =
   | { id: "cyl"; d: string }
-  | { id: "rot"; deg: number; pct: string }
+  | { id: "rot"; band: Exclude<RotBand, "aligned"> }
   | { id: "diff" }
   | { id: "hyper" }
   | { id: "mf" }
@@ -340,9 +358,9 @@ export function warnings(s: SimState): Warn[] {
   const out: Warn[] = [];
   if (C >= 0.5) out.push({ id: "cyl", d: C.toFixed(2) });
   // Toric at ~0.00 D is not cylinder correction — do not emit rotation loss.
-  if (s.toric && s.cyl >= 0.01 && s.rot >= 1) {
-    const pct = Math.min(100, Math.round(s.rot * 3.3));
-    out.push({ id: "rot", deg: Math.round(s.rot), pct: String(pct) });
+  if (s.toric && s.cyl >= 0.01) {
+    const band = rotBandFromDeg(s.rot);
+    if (band !== "aligned") out.push({ id: "rot", band });
   }
   if (L.optics === "diffractive" && C >= 0.5) out.push({ id: "diff" });
   if (s.t1 >= 0.25) out.push({ id: "hyper" });
@@ -394,7 +412,7 @@ export function encodeHash(s: SimState): string {
   q.set("t2", String(s.t2));
   q.set("c", String(s.cyl));
   q.set("to", s.toric ? "1" : "0");
-  q.set("r", String(s.rot));
+  q.set("r", String(snapRotDeg(s.rot)));
   q.set("ax", s.axis);
   q.set("dry", s.dry ? "1" : "0");
   q.set("v", s.view);
@@ -431,7 +449,7 @@ export function parseHash(hash: string): SimState | null {
     t2: snapQuarter(Number(q.get("t2")), -3, 3),
     cyl: snapQuarter(Number(q.get("c")), 0, 3),
     toric: q.get("to") === "1",
-    rot: Number.isFinite(rot) ? clamp(Math.round(rot), 0, 30) : 0,
+    rot: Number.isFinite(rot) ? snapRotDeg(clamp(rot, 0, 30)) : 0,
     axis: axis as AxisId,
     dry: q.get("dry") === "1",
     view: view as ViewId,

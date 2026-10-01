@@ -410,8 +410,11 @@ const zhHant = {
   iolAxisHori: "水平",
   iolAxisVert: "垂直",
   iolAxisObl: "斜向",
-  iolRotH: "環曲面旋轉",
-  iolRotAria: "環曲面晶體旋轉角度",
+  iolRotH: "環曲面對齊",
+  iolRotAria: "環曲面晶體對齊程度（示意）",
+  iolRotAligned: "對齊",
+  iolRotLittle: "稍偏",
+  iolRotMore: "更偏",
   iolMidH: "中距離",
   iolNearH: "近距離",
   iolViewH: "看哪一眼",
@@ -449,7 +452,7 @@ const zhHant = {
   iolHaloSoft: "柔光",
   iolHaloRings: "光環",
   iolWarnCyl: "殘餘散光約 {d} D（示意）。散光沿一個方向拉長模糊，與遠近不是同一件事。",
-  iolWarnRot: "環曲面晶體旋轉約每 1° 減少大約 3.3% 散光矯正。目前約 {deg}°，示意損失約 {pct}%。",
+  iolWarnRot: "環曲面示意為「{band}」：散光矯正會減少（示意，不是個人預測）。",
   iolWarnDiff:
     "繞射式設計對殘餘散光較敏感。大約 0.5 D 或以上時，遠、中、近焦點都較易一齊變糊（示意）。",
   iolWarnHyper: "目標在遠視側（正度數）。遠和近都偏離最佳焦點，通常不是常用目標（示意）。",
@@ -953,8 +956,11 @@ const en: Record<Key, string> = {
   iolAxisHori: "Horizontal",
   iolAxisVert: "Vertical",
   iolAxisObl: "Oblique",
-  iolRotH: "Toric rotation",
-  iolRotAria: "Toric lens rotation",
+  iolRotH: "Toric alignment",
+  iolRotAria: "Toric lens alignment (illustration)",
+  iolRotAligned: "Aligned",
+  iolRotLittle: "A little off",
+  iolRotMore: "More off",
   iolMidH: "Intermediate",
   iolNearH: "Near",
   iolViewH: "Which eye",
@@ -995,7 +1001,7 @@ const en: Record<Key, string> = {
   iolWarnCyl:
     "Residual cylinder about {d} D (illustration). Astigmatism stretches blur in one direction; it is not the same as far versus near.",
   iolWarnRot:
-    "About 3.3% of toric cylinder correction is lost per degree of rotation. At about {deg}°, the illustration loss is about {pct}%.",
+    "Toric alignment is illustrated as “{band}”: cylinder correction is reduced (illustration, not a personal prediction).",
   iolWarnDiff:
     "Diffractive designs are more sensitive to residual cylinder. Around 0.5 D or more, far, intermediate and near foci all soften together (illustration).",
   iolWarnHyper:
@@ -1485,8 +1491,11 @@ const ja: Record<Key, string> = {
   iolAxisHori: "水平",
   iolAxisVert: "垂直",
   iolAxisObl: "斜め",
-  iolRotH: "トーリックの回旋",
-  iolRotAria: "トーリックレンズの回旋角度",
+  iolRotH: "トーリックの整列",
+  iolRotAria: "トーリックレンズの整列（示意）",
+  iolRotAligned: "整列",
+  iolRotLittle: "少しずれ",
+  iolRotMore: "さらにずれ",
   iolMidH: "中距離",
   iolNearH: "近距離",
   iolViewH: "どちらの眼",
@@ -1525,7 +1534,7 @@ const ja: Record<Key, string> = {
   iolHaloRings: "輪",
   iolWarnCyl: "残乱視は約 {d} D（示意）。乱視は一方向に伸びたぼけで、遠近とは別です。",
   iolWarnRot:
-    "トーリックは約1°の回旋で乱視矯正のおおよそ 3.3% が減ります。現在約 {deg}°、示意の損失は約 {pct}%。",
+    "トーリックの示意は「{band}」：乱視矯正が減ります（示意であり個人の予測ではありません）。",
   iolWarnDiff:
     "回折型は残乱視に敏感です。およそ 0.5 D 以上では遠・中・近の焦点が一緒にぼけやすくなります（示意）。",
   iolWarnHyper:

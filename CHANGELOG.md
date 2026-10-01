@@ -4,8 +4,8 @@ Git-sourced history for this site. Entries follow commits on `main`, not chat no
 
 ## chore — IOL simulator hedges (preview)
 
-- **Summary:** `/iol` follow-up on `feat/iol-simulator-2` — live setting shows qualitative acuity only (no slider-linked 6/x or logMAR); halo column is an in-house teaching scale with no numeric index; toric UI inactive at 0.00 D; active-settings summary line; EDOF pupil line hedged as 部分設計; monofocal「光暈通常較少」; trifocal drops unsourced「較多人看近可不戴眼鏡」; table carries「不是品牌比較，亦不是哪一種較好」. `CONTENT_VERSION` unchanged.
-- **Files:** `src/routes/iol.tsx`, `src/lib/iol-optics.ts`, `src/i18n/ui.ts`, `CHANGELOG.md`
+- **Summary:** `/iol` follow-up on `feat/iol-simulator-2` — live setting shows qualitative acuity only (no slider-linked 6/x or logMAR); halo column is an in-house teaching scale with no numeric index; toric UI inactive at 0.00 D; toric alignment uses coarse labels only (對齊／稍偏／更偏), no exact degrees; active-settings summary line; EDOF pupil line hedged as 部分設計; monofocal「光暈通常較少」; trifocal drops unsourced「較多人看近可不戴眼鏡」; table carries「不是品牌比較，亦不是哪一種較好」. `CONTENT_VERSION` unchanged.
+- **Files:** `src/routes/iol.tsx`, `src/lib/iol-optics.ts`, `src/lib/iol-optics.test.ts`, `src/i18n/ui.ts`, `CHANGELOG.md`
 
 ## [1.78] — 2026-09-24
 
