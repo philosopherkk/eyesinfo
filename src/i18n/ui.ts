@@ -368,6 +368,32 @@ const zhHant = {
   iolDistMidSub: "約 60–70 厘米 · 賽事新聞",
   iolDistNear: "近距離",
   iolDistNearSub: "約 40 厘米 · 賽程表",
+  iolEduH: "選擇時常一併理解",
+  iolEduIntro:
+    "以下為白內障／人工晶體討論時常提到的因素，配合本頁示意閱讀。不是處方、不是術後保證，不能代替與註冊醫生面談。",
+  iolEduDryH: "乾眼與術後視覺質素",
+  iolEduDryP:
+    "淚膜不穩（乾眼）會令角膜表面光學不規則，降低對比、增加眩光感，即使球面及散光度數已矯正，仍可能覺得「唔夠清」或夜間吃力。嚴重或難治乾眼時，醫生或會審慎考慮多焦點或延伸景深設計。本頁示意未單獨模擬乾眼，但術前術後淚膜護理仍會影響你實際睇到的質素。",
+  iolEduDomH: "主視眼（主力眼）為何重要",
+  iolEduDomP:
+    "主視眼（慣用眼／主力眼）是大腦在雙眼睜開時較優先採用的一隻眼的訊息，尤其在對準遠目標、閱讀部分細節時。討論單眼視或兩眼不同度數時，哪一隻眼負責主要距離會影響適應與滿意度。本頁一次只示範一個「目標度數」設定，不能自動量度邊隻係主視眼。",
+  iolDomEyeH: "甚麼是主視眼（主力眼）？",
+  iolDomEyeDef:
+    "主視眼（慣用眼）並不等於利手。它是視覺上較常作為對焦、對位參考的一隻眼。醫生規劃單眼視或主要看遠距離時會一併考慮，不能靠自我測試代替散瞳驗光或處方。",
+  iolDomEyeTestH: "家居可做的自我觀察（示意，不是診斷）",
+  iolDomEyeTest1:
+    "Miles 三角法：雙手前伸，拇指與食指圈成細三角，對準約 3 米外一個小目標。逐隻眼閉上：仍能把目標留在圈中心的那隻，通常是視覺慣用眼——可多試幾次，結果可能左右稍有出入。",
+  iolDomEyeTest2:
+    "Dolman 卡片法：雙眼睜開，將紙卡中央小圓孔對準約 3 米外一個固定目標；保持對準時觀察邊隻眼仍可透過小孔睇到該目標，該眼常是慣用眼。可多試幾次。",
+  iolDomEyeCaveat:
+    "以上方法只供自己理解，不能代替散瞳驗光，不能代替醫生判斷哪隻眼適合做主要距離，亦不是術後保證。",
+  iolEduMvH: "單眼視／迷你單眼視",
+  iolEduMvP:
+    "單眼視（monovision）是刻意讓一眼偏看遠、另一眼偏看近（或中近），用大腦融合換取部分距離少戴鏡。「迷你單眼視」通常指兩眼度數差距較小（以醫生處方為準）。代價可包括立體感或深度判斷改變、部分人不適、需時間適應；必須試戴或試用後與醫生決定。本頁滑桿只示範其中一隻眼的目標度數，不能模擬兩眼一併融合。",
+  iolEduPhotoH: "光暈、光環與其他術後光學現象（多焦／延伸景深）",
+  iolEduPhotoP:
+    "繞射式多焦／三焦點會把光能分到多個焦點，日間對比可略降，夜間點光源周圍較易見光環或光暈（可開本頁「夜間光暈」作示意）。延伸景深（EDOF）一般光暈較柔、接近單焦，但仍可能有對比下降或夜間光學干擾，因設計與瞳孔而異。眼鏡可補球面及散光殘餘，但設計帶來的對比下降及夜間光暈通常不能靠戴鏡消除。詳見站內多焦篩選專題及夜間光暈比較工具；本頁不是測量或排名。",
+  iolLinkDry: "乾眼專題",
   cat_lens: "晶體與屈光",
   cat_lens_sub: "近視遠視 · 白內障 · 斜視",
   cat_lens_research_label: "華人／本港研究",
@@ -790,6 +816,32 @@ const en: Record<Key, string> = {
   iolDistMidSub: "About 60–70 cm · match reports",
   iolDistNear: "Near",
   iolDistNearSub: "About 40 cm · fixture list",
+  iolEduH: "Often discussed together",
+  iolEduIntro:
+    "Factors commonly raised in cataract / IOL discussions, to read alongside this illustration. Not prescribing, not a surgical promise, and not a substitute for seeing a registered doctor.",
+  iolEduDryH: "Dry eye and post-operative visual quality",
+  iolEduDryP:
+    "An unstable tear film makes the corneal surface less smooth, lowering contrast and increasing glare — vision can feel “not crisp” even when sphere and cylinder are corrected. Severe or difficult dry eye may make doctors cautious about multifocal or extended-depth designs. This page does not simulate dry eye separately, but tear-film care still affects real-world quality.",
+  iolEduDomH: "Why the dominant (sighting) eye matters",
+  iolEduDomP:
+    "The dominant eye is the one the brain tends to prefer when both eyes are open, especially for aligning on a distant target or fine detail. When monovision or different powers are planned, which eye carries the main distance can affect adaptation and satisfaction. This page shows one target-power setting at a time and cannot measure which eye is dominant.",
+  iolDomEyeH: "What is the dominant (sighting) eye?",
+  iolDomEyeDef:
+    "The dominant eye is not the same as hand dominance. It is the eye you more often use as a visual reference for alignment and focus. Doctors consider it when planning monovision or a main-distance eye — self-checks cannot replace dilated refraction or prescribing.",
+  iolDomEyeTestH: "Home self-checks (illustration, not a diagnosis)",
+  iolDomEyeTest1:
+    "Miles triangle: extend your arms, form a small triangle with thumbs and index fingers, and centre a distant target (~3 m). Close one eye at a time — the eye that still keeps the target centred is usually the sighting-dominant eye. Repeat; results can vary slightly.",
+  iolDomEyeTest2:
+    "Dolman hole-in-card: with both eyes open, centre a small hole in a card on a fixed target about 3 m away; while keeping alignment, note which eye still sees the target through the hole — that eye is often dominant. Repeat a few times.",
+  iolDomEyeCaveat:
+    "These checks are for understanding only — not a substitute for dilated refraction, clinical choice of the main-distance eye, or a surgical promise.",
+  iolEduMvH: "Monovision / mini-monovision",
+  iolEduMvP:
+    "Monovision deliberately sets one eye toward distance and the other toward intermediate or near (or mild myopia), relying on binocular fusion to reduce spectacle wear. Mini-monovision usually means a smaller inter-eye difference (follow your doctor). Trade-offs can include changed stereo / depth cues, discomfort in some people, and adaptation time; trial frames or contact trials and medical planning are required. The slider here illustrates one eye’s target only, not binocular fusion.",
+  iolEduPhotoH: "Halos, rings and other optical effects (multifocal / extended depth)",
+  iolEduPhotoP:
+    "Diffractive multifocal / trifocal designs split light among several foci — daytime contrast may drop a little, and rings or halos around point lights are easier to notice at night (try the “Night halos” button on this page). Extended depth (EDOF) halos are usually softer and closer to a monofocal, but contrast can still fall a little and night effects vary by design and pupil. Spectacles can correct residual sphere and cylinder, but design-related contrast loss and night halos are usually not removed by glasses. See the multifocal screening topic and the night-halo comparison tool; this page is not a measurement or ranking.",
+  iolLinkDry: "Dry-eye topic",
   cat_lens: "Lens and refraction",
   cat_lens_sub: "Myopia, hyperopia · cataract · squint",
   cat_lens_research_label: "Chinese / Hong Kong research",
@@ -1207,6 +1259,32 @@ const ja: Record<Key, string> = {
   iolDistMidSub: "約60–70 cm · 試合ニュース",
   iolDistNear: "近距離",
   iolDistNearSub: "約40 cm · 日程表",
+  iolEduH: "選ぶときによく一緒に理解する",
+  iolEduIntro:
+    "白内障・眼内レンズの話でよく出る要素を、この示意と合わせて読むための説明です。処方でも術後保証でもなく、登録医との対面の代わりにはなりません。",
+  iolEduDryH: "ドライアイと術後の視覚の質",
+  iolEduDryP:
+    "涙膜が不安定だと角膜表面の光学が乱れ、コントラストが下がり、ぎらつきが増えます。球面・乱視が合っていても「はっきりしない」と感じることがあります。重症または難治のドライアイでは、多焦点や焦点深度延長の設計は慎重に検討されます。本ページはドライアイを別途シミュレートしませんが、涙膜ケアは実際の見え方に関わります。",
+  iolEduDomH: "優位眼（主視眼）が重要な理由",
+  iolEduDomP:
+    "優位眼は両眼で見るとき脳がやや優先する眼で、遠方の合わせ込みや細部の読み取りで関係します。単眼視や両眼で度数を分ける場合、どちらを主要距離にするかは適応や満足度に関わります。本ページは一度に一つの「目標度数」だけを示し、どちらが優位眼かは自動測定しません。",
+  iolDomEyeH: "優位眼（主視眼／主力眼）とは？",
+  iolDomEyeDef:
+    "優位眼は利き手と同じではありません。視覚的な合わせ込み・位置合わせの参照になりやすい眼です。単眼視や遠用の主眼を決めるとき医師が考慮します。自己テストは散瞳検査や処方の代わりにはなりません。",
+  iolDomEyeTestH: "自宅での自己観察（示意であり診断ではない）",
+  iolDomEyeTest1:
+    "Miles 三角法：両腕を伸ばし、親指と人差し指で小さな三角を作り、約3 m先の小さな目標を三角の中心に合わせます。片眼ずつ閉じ、目標が中心に残る眼が視覚的優位眼であることが多いです。数回試してください。",
+  iolDomEyeTest2:
+    "Dolman カード法：両眼を開いたまま、カード中央の小孔を約3 m先の固定した目標に合わせます。合わせた状態で、どちらの眼が小孔越しに目標を見られるかを確かめます。多くの場合それが優位眼です。数回試してください。",
+  iolDomEyeCaveat:
+    "理解のための方法であり、散瞳検査や術後保証の代わりにはなりません。",
+  iolEduMvH: "単眼視／ミニ単眼視",
+  iolEduMvP:
+    "単眼視（monovision）は、一眼を遠用、もう一方を中・近（または軽い近視）に寄せ、両眼融合で眼鏡依存を減らす考え方です。ミニ単眼視は両眼の差を小さくする方法（医師の処方に従う）。立体視や距離感の変化、不快感、順応期間などの代償があり、試着と医師の計画が必要です。本ページのスライダーは片眼の目標のみを示し、両眼融合は模しません。",
+  iolEduPhotoH: "ハロー、輪、その他の光学現象（多焦点／焦点深度延長）",
+  iolEduPhotoP:
+    "回折型の多焦点／3焦点は光を複数焦点に分け、日中のコントラストがやや下がり、夜間は点光源のまわりに輪やハローが見えやすい（本ページの「夜間ハロー」を試せます）。焦点深度拡張（EDOF）のハローは一般に単焦点に近く柔らかいですが、コントラスト低下や夜間の光学ノイズがあり得ます。眼鏡は球面・乱視の残りを補えますが、設計によるコントラスト低下や夜間ハローは通常消えません。多焦点の考え方のページと夜間ハロー比較ツールを参照。本ページは測定や順位ではありません。",
+  iolLinkDry: "ドライアイのページ",
   cat_lens: "水晶体と屈折",
   cat_lens_sub: "近視遠視 · 白内障 · 斜視",
   cat_lens_research_label: "華人／香港の研究",

@@ -2,6 +2,12 @@
 
 Git-sourced history for this site. Entries follow commits on `main`, not chat notes.
 
+
+## feat — IOL education on published v1.77 `/iol` (preview)
+
+- **Summary:** Branch from **`09d93a7` / CONTENT_VERSION 1.77** (pre–simulator-2 `/iol`). Expandable education: dry eye & visual quality, dominant (主力) eye, monovision, MFIOL/EDOF photic phenomena; Miles / Dolman fold-out. No change to 1.77 optics model or site version string.
+- **Files:** `src/routes/iol.tsx`, `src/i18n/ui.ts`, `CHANGELOG.md`
+
 ## [1.77] — 2026-09-24
 
 - **Summary:** SEO 1.77 — IndexNow key + post-Production workflow; fuller head-only meta descriptions (zh/en/ja; zh-Hans via toHans); MedicalWebPage JSON-LD on `/t/*` and `/c/*` (BreadcrumbList unchanged). `CONTENT_UPDATED` unchanged. Google verification HTML untouched.
