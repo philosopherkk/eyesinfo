@@ -212,20 +212,6 @@ function IolPage() {
             </button>
           ))}
         </div>
-        <details className="mt-3 rounded-xl border border-line bg-card px-3">
-          <summary className="flex min-h-11 cursor-pointer items-center font-semibold text-navy">
-            {t("iolDomEyeH")}
-          </summary>
-          <div className="space-y-2 pb-3 text-[0.82rem] leading-relaxed">
-            <p>{t("iolDomEyeDef")}</p>
-            <p className="font-semibold text-navy">{t("iolDomEyeTestH")}</p>
-            <ol className="list-decimal space-y-1.5 pl-5">
-              <li>{t("iolDomEyeTest1")}</li>
-              <li>{t("iolDomEyeTest2")}</li>
-            </ol>
-            <p className="text-muted">{t("iolDomEyeCaveat")}</p>
-          </div>
-        </details>
       </section>
 
       <section className="mt-5 px-4">
@@ -371,32 +357,52 @@ function IolPage() {
         <h2 className="text-[1.05rem] font-semibold text-navy">{t("iolEduH")}</h2>
         <p className="mt-1 text-[0.82rem] leading-relaxed text-muted">{t("iolEduIntro")}</p>
         <div className="mt-3 space-y-2">
-          {(
-            [
-              ["iolEduDryH", "iolEduDryP", true],
-              ["iolEduDomH", "iolEduDomP", false],
-              ["iolEduMvH", "iolEduMvP", false],
-              ["iolEduPhotoH", "iolEduPhotoP", false],
-            ] as const
-          ).map(([head, body, dryLink]) => (
-            <details key={head} className="rounded-xl border border-line bg-card px-3">
-              <summary className="flex min-h-11 cursor-pointer items-center font-semibold text-navy">
-                {t(head)}
-              </summary>
-              <div className="space-y-2 pb-3 text-[0.82rem] leading-relaxed text-muted">
-                <p>{t(body)}</p>
-                {dryLink ? (
-                  <Link
-                    to="/t/$topicId"
-                    params={{ topicId: "t-dry" }}
-                    className="inline-flex min-h-11 items-center font-semibold text-navy no-underline"
-                  >
-                    {t("iolLinkDry")} →
-                  </Link>
-                ) : null}
-              </div>
-            </details>
-          ))}
+          <details className="rounded-xl border border-line bg-card px-3">
+            <summary className="flex min-h-11 cursor-pointer items-center font-semibold text-navy">
+              {t("iolEduDryH")}
+            </summary>
+            <div className="space-y-2 pb-3 text-[0.82rem] leading-relaxed text-muted">
+              <p>{t("iolEduDryP")}</p>
+              <Link
+                to="/t/$topicId"
+                params={{ topicId: "t-dry" }}
+                className="inline-flex min-h-11 items-center font-semibold text-navy no-underline"
+              >
+                {t("iolLinkDry")} →
+              </Link>
+            </div>
+          </details>
+          <details className="rounded-xl border border-line bg-card px-3">
+            <summary className="flex min-h-11 cursor-pointer items-center font-semibold text-navy">
+              {t("iolEduDomH")}
+            </summary>
+            <div className="space-y-2 pb-3 text-[0.82rem] leading-relaxed text-muted">
+              <p>{t("iolEduDomP")}</p>
+              <p>{t("iolDomEyeDef")}</p>
+              <p className="font-semibold text-navy">{t("iolDomEyeTestH")}</p>
+              <ol className="list-decimal space-y-1.5 pl-5">
+                <li>{t("iolDomEyeTest1")}</li>
+                <li>{t("iolDomEyeTest2")}</li>
+              </ol>
+              <p>{t("iolDomEyeCaveat")}</p>
+            </div>
+          </details>
+          <details className="rounded-xl border border-line bg-card px-3">
+            <summary className="flex min-h-11 cursor-pointer items-center font-semibold text-navy">
+              {t("iolEduMvH")}
+            </summary>
+            <div className="space-y-2 pb-3 text-[0.82rem] leading-relaxed text-muted">
+              <p>{t("iolEduMvP")}</p>
+            </div>
+          </details>
+          <details className="rounded-xl border border-line bg-card px-3">
+            <summary className="flex min-h-11 cursor-pointer items-center font-semibold text-navy">
+              {t("iolEduPhotoH")}
+            </summary>
+            <div className="space-y-2 pb-3 text-[0.82rem] leading-relaxed text-muted">
+              <p>{t("iolEduPhotoP")}</p>
+            </div>
+          </details>
         </div>
       </section>
 
