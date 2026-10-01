@@ -271,12 +271,13 @@ export function effectivePupil(s: SimState): number {
 }
 
 export function toEye(s: SimState): EyeState {
+  const toricOn = s.toric && s.cyl >= 0.01;
   return {
     pupil: effectivePupil(s),
     light: s.light,
-    toric: s.toric,
+    toric: toricOn,
     cyl: s.cyl,
-    rot: s.toric ? s.rot : 0,
+    rot: toricOn ? s.rot : 0,
     dry: s.dry,
     t1: s.t1,
     t2: s.t2,
@@ -338,7 +339,8 @@ export function warnings(s: SimState): Warn[] {
   const C = resCyl(eye);
   const out: Warn[] = [];
   if (C >= 0.5) out.push({ id: "cyl", d: C.toFixed(2) });
-  if (s.toric && s.rot >= 1) {
+  // Toric at ~0.00 D is not cylinder correction — do not emit rotation loss.
+  if (s.toric && s.cyl >= 0.01 && s.rot >= 1) {
     const pct = Math.min(100, Math.round(s.rot * 3.3));
     out.push({ id: "rot", deg: Math.round(s.rot), pct: String(pct) });
   }

@@ -24,9 +24,6 @@ import {
   encodeHash,
   formatD,
   formatDistance,
-  formatLogMAR,
-  formatSnellen,
-  haloIndex,
   haloParams,
   parseHash,
   resCyl,
@@ -120,10 +117,39 @@ function IolPage() {
   function badgeFor(va: number): { text: string; cls: string } {
     const info = vaInfo(va);
     return {
-      text: `${t(VA_KEY[info.txt])} · ${formatSnellen(va)} · ${formatLogMAR(va)}`,
+      // Live setting: qualitative band only — no slider-linked 6/x or logMAR.
+      text: t(VA_KEY[info.txt]),
       cls: BADGE[info.cls],
     };
   }
+
+  const cylActive = state.cyl >= 0.01;
+  const activeSettings = state.mv
+    ? t("iolActiveSettingsMv", {
+        lens: t(LENS_KEYS[state.lens].title),
+        light: t(
+          state.light === "day"
+            ? "iolLightDay"
+            : state.light === "dusk"
+              ? "iolLightDusk"
+              : "iolLightNight",
+        ),
+        mid: formatDistance(state.mid),
+        near: formatDistance(state.near),
+        t2: formatD(state.t2),
+      })
+    : t("iolActiveSettings", {
+        lens: t(LENS_KEYS[state.lens].title),
+        light: t(
+          state.light === "day"
+            ? "iolLightDay"
+            : state.light === "dusk"
+              ? "iolLightDusk"
+              : "iolLightNight",
+        ),
+        mid: formatDistance(state.mid),
+        near: formatDistance(state.near),
+      });
 
   const scenesFor = (lensId: LensId) => {
     const L = LENSES[lensId];
@@ -365,56 +391,69 @@ function IolPage() {
           max={3}
           step={0.25}
           value={state.cyl}
-          onChange={(e) => patch({ cyl: Number(e.target.value) })}
+          onChange={(e) => {
+            const cyl = Number(e.target.value);
+            // 0.00 D must not look like cylinder correction is on.
+            if (cyl < 0.01) patch({ cyl: 0, toric: false, rot: 0 });
+            else patch({ cyl });
+          }}
           className="mt-3 w-full max-w-full accent-[var(--color-navy)]"
           aria-label={t("iolCylAria")}
         />
-        <label className="mt-2 flex min-h-11 items-center gap-2 text-[0.85rem]">
-          <input
-            type="checkbox"
-            className="size-5"
-            checked={state.toric}
-            onChange={(e) => patch({ toric: e.target.checked })}
-          />
-          {state.toric ? t("iolToricOn") : t("iolToricOff")}
-        </label>
-        <h3 className="mt-3 text-[0.8rem] font-semibold text-muted">{t("iolAxisH")}</h3>
-        <div className="mt-2 flex flex-wrap gap-2">
-          {(
-            [
-              ["h", "iolAxisHori"],
-              ["v", "iolAxisVert"],
-              ["o", "iolAxisObl"],
-            ] as const
-          ).map(([id, key]) => (
-            <button
-              key={id}
-              type="button"
-              onClick={() => patch({ axis: id satisfies AxisId })}
-              className={chip(state.axis === id)}
-            >
-              {t(key)}
-            </button>
-          ))}
-        </div>
-        {state.toric ? (
-          <div className="mt-3">
-            <div className="flex flex-wrap items-end justify-between gap-2">
-              <h3 className="text-[0.8rem] font-semibold text-muted">{t("iolRotH")}</h3>
-              <p className="text-[0.85rem] font-semibold text-navy">{state.rot}°</p>
+        {cylActive ? (
+          <>
+            <label className="mt-2 flex min-h-11 items-center gap-2 text-[0.85rem]">
+              <input
+                type="checkbox"
+                className="size-5"
+                checked={state.toric}
+                onChange={(e) =>
+                  patch({ toric: e.target.checked, rot: e.target.checked ? state.rot : 0 })
+                }
+              />
+              {state.toric ? t("iolToricOn") : t("iolToricOff")}
+            </label>
+            <h3 className="mt-3 text-[0.8rem] font-semibold text-muted">{t("iolAxisH")}</h3>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {(
+                [
+                  ["h", "iolAxisHori"],
+                  ["v", "iolAxisVert"],
+                  ["o", "iolAxisObl"],
+                ] as const
+              ).map(([id, key]) => (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => patch({ axis: id satisfies AxisId })}
+                  className={chip(state.axis === id)}
+                >
+                  {t(key)}
+                </button>
+              ))}
             </div>
-            <input
-              type="range"
-              min={0}
-              max={30}
-              step={1}
-              value={state.rot}
-              onChange={(e) => patch({ rot: Number(e.target.value) })}
-              className="mt-2 w-full max-w-full accent-[var(--color-navy)]"
-              aria-label={t("iolRotAria")}
-            />
-          </div>
-        ) : null}
+            {state.toric ? (
+              <div className="mt-3">
+                <div className="flex flex-wrap items-end justify-between gap-2">
+                  <h3 className="text-[0.8rem] font-semibold text-muted">{t("iolRotH")}</h3>
+                  <p className="text-[0.85rem] font-semibold text-navy">{state.rot}°</p>
+                </div>
+                <input
+                  type="range"
+                  min={0}
+                  max={30}
+                  step={1}
+                  value={state.rot}
+                  onChange={(e) => patch({ rot: Number(e.target.value) })}
+                  className="mt-2 w-full max-w-full accent-[var(--color-navy)]"
+                  aria-label={t("iolRotAria")}
+                />
+              </div>
+            ) : null}
+          </>
+        ) : (
+          <p className="mt-2 text-[0.82rem] leading-relaxed text-muted">{t("iolToricOff")}</p>
+        )}
         <p className="mt-2 text-[0.78rem] leading-relaxed text-muted">{t("iolToricHint")}</p>
       </section>
 
@@ -526,6 +565,8 @@ function IolPage() {
         </div>
       </section>
 
+      <p className="mt-5 px-4 text-[0.82rem] leading-relaxed text-navy">{activeSettings}</p>
+
       <SceneBlock
         label={state.sbs ? `${t("iolRowA")} · ${t(LENS_KEYS[state.lens].title)}` : undefined}
         scenes={primaryScenes}
@@ -573,6 +614,7 @@ function IolPage() {
 
       <section className="mt-6 min-w-0 px-4">
         <h2 className="text-[0.8rem] font-semibold text-muted">{t("iolTableH")}</h2>
+        <p className="mt-1 text-[0.78rem] leading-relaxed text-muted">{t("iolTableCap")}</p>
         <div className="iol-scroll mt-2 rounded-xl border border-line bg-card">
           <table className="w-full min-w-[36rem] border-collapse text-left text-[0.78rem]">
             <thead>
@@ -590,7 +632,6 @@ function IolPage() {
                 const far = viewVa(L, FAR_M, eye, "bin");
                 const mid = viewVa(L, state.mid, eye, "bin");
                 const near = viewVa(L, state.near, eye, "bin");
-                const hi = haloIndex(L, eye);
                 const kind = haloParams(L, eye).type;
                 return (
                   <tr
@@ -609,9 +650,7 @@ function IolPage() {
                     <td className="px-2 py-2">{cell(far, t)}</td>
                     <td className="px-2 py-2">{cell(mid, t)}</td>
                     <td className="px-2 py-2">{cell(near, t)}</td>
-                    <td className="px-2 py-2">
-                      {hi.toFixed(1)} · {t(HALO_KEY[kind])}
-                    </td>
+                    <td className="px-2 py-2">{t(HALO_KEY[kind])}</td>
                   </tr>
                 );
               })}
@@ -744,14 +783,7 @@ function SceneBlock({
 
 function cell(va: number, t: (key: UiKey, vars?: Record<string, string | number>) => string) {
   const info = vaInfo(va);
-  return (
-    <span className="block leading-snug">
-      <span className="font-semibold">{t(VA_KEY[info.txt])}</span>
-      <span className="block text-muted">
-        {formatSnellen(va)} · {formatLogMAR(va)}
-      </span>
-    </span>
-  );
+  return <span className="font-semibold">{t(VA_KEY[info.txt])}</span>;
 }
 
 function defocusAt(distanceM: number, target: number): number {

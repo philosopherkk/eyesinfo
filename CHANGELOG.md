@@ -2,6 +2,11 @@
 
 Git-sourced history for this site. Entries follow commits on `main`, not chat notes.
 
+## chore — IOL simulator hedges (preview)
+
+- **Summary:** `/iol` follow-up on `feat/iol-simulator-2` — live setting shows qualitative acuity only (no slider-linked 6/x or logMAR); halo column is an in-house teaching scale with no numeric index; toric UI inactive at 0.00 D; active-settings summary line; EDOF pupil line hedged as 部分設計; monofocal「光暈通常較少」; trifocal drops unsourced「較多人看近可不戴眼鏡」; table carries「不是品牌比較，亦不是哪一種較好」. `CONTENT_VERSION` unchanged.
+- **Files:** `src/routes/iol.tsx`, `src/lib/iol-optics.ts`, `src/i18n/ui.ts`, `CHANGELOG.md`
+
 ## [1.78] — 2026-09-24
 
 - **Summary:** `/urgent` only — clarified private-clinic vs A&E lead; added same-day private ophthalmologist call-ahead line under the same-day tier; updated `/urgent` meta (zh/en/ja; zh-Hans via toHans). No clinic names, phones, booking or WhatsApp. `CONTENT_VERSION` → **1.78**.

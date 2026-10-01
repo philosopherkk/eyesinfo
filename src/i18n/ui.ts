@@ -326,7 +326,7 @@ const zhHant = {
   iolTitle: "人工晶體視力示意",
   iolNotGuarantee: "不是術後保證。本站不提供預約或轉介。",
   iolLead:
-    "比較單焦點、增強型單焦點、折射式延伸景深及繞射式三焦點，在遠、中、近及夜間的光學示意。可調光線、年齡、瞳孔、目標度數、散光及乾眼。畫面上的 logMAR、6/x 及光暈指數是模型示意，不是個人預後，亦不推介任何品牌。",
+    "比較單焦點、增強型單焦點、折射式延伸景深及繞射式三焦點，在遠、中、近及夜間的光學示意。可調光線、年齡、瞳孔、目標度數、散光及乾眼。畫面上的清晰程度用詞及光暈教學標度是模型示意，不是個人預後，亦不推介任何品牌。",
   iolOpticsH: "光學設計",
   iolTargetH: "目標屈光（主視眼）",
   iolTargetHint:
@@ -372,7 +372,7 @@ const zhHant = {
   iolOpticMono: "單焦點",
   iolOpticMonoShort: "一個焦點",
   iolOpticMonoNote:
-    "只在預留的那個距離最清晰。預留正視則看遠清楚、看近多數要老花眼鏡；預留近視則相反。夜間光暈一般最少。",
+    "只在預留的那個距離最清晰。預留正視則看遠清楚、看近多數要老花眼鏡；預留近視則相反。光暈通常較少。",
   iolOpticEmono: "增強型單焦點",
   iolOpticEmonoShort: "輕微延伸景深",
   iolOpticEmonoNote:
@@ -380,11 +380,11 @@ const zhHant = {
   iolOpticEdof: "延伸景深（折射式）",
   iolOpticEdofShort: "遠至中距離連貫",
   iolOpticEdofNote:
-    "純折射式延伸景深設計：遠至中距離連貫，近距離細字仍常需眼鏡。光暈細小、能量低，接近單焦；但瞳孔愈大，景深延伸愈少，夜間中距離會稍遜。",
+    "純折射式延伸景深設計：遠至中距離連貫，近距離細字仍常需眼鏡。光暈細小、能量低，接近單焦；部分設計在瞳孔較大時，景深延伸會減少，夜間中距離會稍遜。",
   iolOpticMf: "三焦點（繞射式）",
   iolOpticMfShort: "遠、中、近三個焦點",
   iolOpticMfNote:
-    "繞射式三焦點：遠、中（約 60 厘米）、近（約 40 厘米）都有焦點，較多人看近可不戴眼鏡；代價是對比略降，夜間光源周圍較易見光環。有些人會持續受夜間光環困擾。",
+    "繞射式三焦點：遠、中（約 60 厘米）、近（約 40 厘米）都有焦點；代價是對比略降，夜間光源周圍較易見光環。有些人會持續受夜間光環困擾。",
   iolDistFar: "遠距離",
   iolDistFarSub: "約 6 米 · 駕駛／街景",
   iolDistMid: "中距離",
@@ -429,13 +429,17 @@ const zhHant = {
     "實線是目前設計，虛線是對照。橫軸是主視眼的離焦（正數偏遠視側）。0.2 logMAR 虛線只是閱讀參考，不是個人視力標準。",
   iolChart020: "0.2 logMAR",
   iolTableH: "四種設計（雙眼，目前設定）",
+  iolTableCap: "不是品牌比較，亦不是哪一種較好",
   iolTableDesign: "設計",
   iolTableFar: "遠",
   iolTableMid: "中",
   iolTableNear: "近",
-  iolTableHalo: "夜間光暈指數",
+  iolTableHalo: "夜間光暈（本站教學標度，無單位）",
   iolTableNote:
-    "表內詞語、6/x、logMAR 及光暈指數都是模型示意，不是個人預後，亦不是廠商對比度。光暈指數隨目前瞳孔、目標度數及乾眼改變。",
+    "表內清晰程度用詞是定性示意，不是個人預後。光暈欄是本站自訂教學標度，沒有單位，不是測量值，亦不是廠商對比度。",
+  iolActiveSettings: "目前設定：{lens} · {light} · 中距離 {mid}、近距離 {near}",
+  iolActiveSettingsMv:
+    "目前設定：{lens} · {light} · 中距離 {mid}、近距離 {near} · 迷你單眼視第二眼 {t2}",
   iolVaClear: "清晰",
   iolVaOk: "尚可",
   iolVaHard: "吃力",
@@ -454,7 +458,8 @@ const zhHant = {
     "迷你單眼視：兩眼目標相差約 {d} D。差距較大時，有人會覺得不適，須個別討論（示意，不是個人預測）。",
   iolWarnRings:
     "夜間點光源周圍可出現同心光環，比延伸景深的柔和光暈更明顯。有些人會持續覺得困擾（示意，不是術後預測）。",
-  iolWarnEdof: "折射式延伸景深：瞳孔愈大，景深延伸愈少，中距離（尤其夜間）會稍遜（示意）。",
+  iolWarnEdof:
+    "折射式延伸景深：部分設計在瞳孔較大時，景深延伸會減少，中距離（尤其夜間）會稍遜（示意）。",
   iolWarnDry: "乾眼會再降低對比，光源可多一點星芒（示意）。",
   iolWarnNone: "以目前設定，沒有額外的度數或光學提示。曲線仍只是示意。",
   iolSummaryH: "各設計概要",
@@ -860,7 +865,7 @@ const en: Record<Key, string> = {
   iolTitle: "Intraocular lens vision demo",
   iolNotGuarantee: "Not a post-operative guarantee. This site does not book or refer.",
   iolLead:
-    "Compare monofocal, enhanced monofocal, refractive extended-depth and diffractive trifocal designs at far, intermediate, near and at night. Light, age, pupil, target, astigmatism and dry eye can be changed. On-screen logMAR, 6/x and the halo index are model illustrations, not a personal prognosis, and not a brand recommendation.",
+    "Compare monofocal, enhanced monofocal, refractive extended-depth and diffractive trifocal designs at far, intermediate, near and at night. Light, age, pupil, target, astigmatism and dry eye can be changed. On-screen clarity words and the halo teaching scale are model illustrations, not a personal prognosis, and not a brand recommendation.",
   iolOpticsH: "Optical design",
   iolTargetH: "Target refraction (dominant eye)",
   iolTargetHint:
@@ -910,7 +915,7 @@ const en: Record<Key, string> = {
   iolOpticMono: "Monofocal",
   iolOpticMonoShort: "One focus",
   iolOpticMonoNote:
-    "Clearest at the targeted distance. Emmetropia: distance is clear and near usually needs readers; a myopic target reverses that. Night halos are usually the least.",
+    "Clearest at the targeted distance. Emmetropia: distance is clear and near usually needs readers; a myopic target reverses that. Halos are usually fewer.",
   iolOpticEmono: "Enhanced monofocal",
   iolOpticEmonoShort: "Slightly longer depth of focus",
   iolOpticEmonoNote:
@@ -918,11 +923,11 @@ const en: Record<Key, string> = {
   iolOpticEdof: "Extended depth (refractive)",
   iolOpticEdofShort: "Continuous far to intermediate",
   iolOpticEdofNote:
-    "Refractive extended depth: far through intermediate is continuous; fine print up close often still needs glasses. The halo is small and close to a monofocal, but a larger pupil shortens the extension, so intermediate at night is a little weaker.",
+    "Refractive extended depth: far through intermediate is continuous; fine print up close often still needs glasses. The halo is small and close to a monofocal; in some designs a larger pupil shortens the extension, so intermediate at night is a little weaker.",
   iolOpticMf: "Trifocal (diffractive)",
   iolOpticMfShort: "Far, intermediate and near foci",
   iolOpticMfNote:
-    "Diffractive trifocal: foci at far, intermediate (about 60 cm) and near (about 40 cm), so more people can read without glasses. Contrast is a little lower, and rings around lights are easier to notice at night. Some people stay bothered by those rings.",
+    "Diffractive trifocal: foci at far, intermediate (about 60 cm) and near (about 40 cm). Contrast is a little lower, and rings around lights are easier to notice at night. Some people stay bothered by those rings.",
   iolDistFar: "Distance",
   iolDistFarSub: "About 6 m · driving / street",
   iolDistMid: "Intermediate",
@@ -967,13 +972,18 @@ const en: Record<Key, string> = {
     "Solid line is the selected design, dashed is the comparison. The horizontal axis is defocus for the dominant eye (positive is the hyperopic side). The 0.2 logMAR dashed line is a reading guide, not a personal acuity standard.",
   iolChart020: "0.2 logMAR",
   iolTableH: "All four designs (binocular, current settings)",
+  iolTableCap: "Not a brand comparison, and not a ranking of which design is better",
   iolTableDesign: "Design",
   iolTableFar: "Far",
   iolTableMid: "Mid",
   iolTableNear: "Near",
-  iolTableHalo: "Night-halo index",
+  iolTableHalo: "Night halo (in-house teaching scale, no unit)",
   iolTableNote:
-    "Words, 6/x, logMAR and the halo index are model illustrations, not a personal prognosis and not a manufacturer contrast figure. The index changes with the current pupil, target and dry eye.",
+    "Clarity words in the table are qualitative illustrations, not a personal prognosis. The halo column is this site’s own teaching scale with no unit — not a measurement and not a manufacturer contrast figure.",
+  iolActiveSettings:
+    "Current settings: {lens} · {light} · intermediate {mid}, near {near}",
+  iolActiveSettingsMv:
+    "Current settings: {lens} · {light} · intermediate {mid}, near {near} · mini-monovision second eye {t2}",
   iolVaClear: "Clear",
   iolVaOk: "Fair",
   iolVaHard: "Effortful",
@@ -997,7 +1007,7 @@ const en: Record<Key, string> = {
   iolWarnRings:
     "Concentric rings can appear around point lights at night, stronger than the soft glow of an extended-depth design. Some people remain bothered by them (illustration, not a surgical prediction).",
   iolWarnEdof:
-    "Refractive extended depth: a larger pupil shortens the extension, so intermediate (especially at night) is a little weaker (illustration).",
+    "Refractive extended depth: in some designs a larger pupil shortens the extension, so intermediate (especially at night) is a little weaker (illustration).",
   iolWarnDry:
     "Dry eye lowers contrast further and can add a light starburst on lamps (illustration).",
   iolWarnNone:
@@ -1388,7 +1398,7 @@ const ja: Record<Key, string> = {
   iolTitle: "眼内レンズの見え方の図示",
   iolNotGuarantee: "術後の保証ではありません。予約・紹介はしません。",
   iolLead:
-    "単焦点、強化単焦点、屈折型の焦点深度拡張、回折型の3焦点を、遠・中・近と夜間で比べる光学の図示です。光線、年齢、瞳孔、目標度数、乱視、ドライアイを変えられます。画面の logMAR、6/x、ハロー指数は模型の示意であり、個人の予後でもブランドの推介でもありません。",
+    "単焦点、強化単焦点、屈折型の焦点深度拡張、回折型の3焦点を、遠・中・近と夜間で比べる光学の図示です。光線、年齢、瞳孔、目標度数、乱視、ドライアイを変えられます。画面の見え方の語とハローの教学標度は模型の示意であり、個人の予後でもブランドの推介でもありません。",
   iolOpticsH: "光学デザイン",
   iolTargetH: "目標屈折（優位眼）",
   iolTargetHint:
@@ -1437,7 +1447,7 @@ const ja: Record<Key, string> = {
   iolOpticMono: "単焦点",
   iolOpticMonoShort: "一つの焦点",
   iolOpticMonoNote:
-    "狙った距離がいちばんはっきり。正視なら遠くがよく見え近くは老眼鏡が多く、近視寄りはその逆。夜間のハローは通常いちばん少ない。",
+    "狙った距離がいちばんはっきり。正視なら遠くがよく見え近くは老眼鏡が多く、近視寄りはその逆。ハローは通常少なめ。",
   iolOpticEmono: "強化単焦点",
   iolOpticEmonoShort: "わずかに長い焦点深度",
   iolOpticEmonoNote:
@@ -1445,11 +1455,11 @@ const ja: Record<Key, string> = {
   iolOpticEdof: "焦点深度拡張（屈折型）",
   iolOpticEdofShort: "遠から中まで連続",
   iolOpticEdofNote:
-    "屈折型の焦点深度拡張：遠から中距離まで連続し、近くの細字はなお眼鏡が多い。ハローは小さく単焦点に近いが、瞳孔が大きいほど延長は減り、夜間の中距離は少し劣る。",
+    "屈折型の焦点深度拡張：遠から中距離まで連続し、近くの細字はなお眼鏡が多い。ハローは小さく単焦点に近い。一部の設計では、瞳孔が大きいほど延長が減り、夜間の中距離は少し劣る。",
   iolOpticMf: "3焦点（回折型）",
   iolOpticMfShort: "遠・中・近の三つの焦点",
   iolOpticMfNote:
-    "回折型3焦点：遠、中（約60 cm）、近（約40 cm）に焦点があり、近くを眼鏡なしで見る人が増える。代償はコントラストが少し下がり、夜間は光源のまわりに輪が見えやすい。輪が気になり続ける人もいる。",
+    "回折型3焦点：遠、中（約60 cm）、近（約40 cm）に焦点がある。代償はコントラストが少し下がり、夜間は光源のまわりに輪が見えやすい。輪が気になり続ける人もいる。",
   iolDistFar: "遠距離",
   iolDistFarSub: "約6 m · 運転／街並み",
   iolDistMid: "中距離",
@@ -1494,13 +1504,17 @@ const ja: Record<Key, string> = {
     "実線が選択中、破線が比較です。横軸は優位眼のデフォーカス（正は遠視側）。0.2 logMAR の破線は読むための目安で、個人の視力基準ではありません。",
   iolChart020: "0.2 logMAR",
   iolTableH: "四つのデザイン（両眼・現在の設定）",
+  iolTableCap: "ブランド比較でも、どれが良いかの順位でもありません",
   iolTableDesign: "デザイン",
   iolTableFar: "遠",
   iolTableMid: "中",
   iolTableNear: "近",
-  iolTableHalo: "夜間ハロー指数",
+  iolTableHalo: "夜間ハロー（本サイト教学標度・単位なし）",
   iolTableNote:
-    "語、6/x、logMAR、ハロー指数は模型の示意であり、個人の予後でもメーカーのコントラスト数値でもありません。指数は現在の瞳孔・目標・ドライアイで変わります。",
+    "表内の見え方の語は定性の示意であり、個人の予後ではありません。ハロー欄は本サイト独自の教学標度で単位はなく、測定値でもメーカーのコントラスト数値でもありません。",
+  iolActiveSettings: "現在の設定：{lens} · {light} · 中距離 {mid}、近距離 {near}",
+  iolActiveSettingsMv:
+    "現在の設定：{lens} · {light} · 中距離 {mid}、近距離 {near} · ミニ単眼視の他眼 {t2}",
   iolVaClear: "鮮明",
   iolVaOk: "まずまず",
   iolVaHard: "努力がいる",
@@ -1523,7 +1537,7 @@ const ja: Record<Key, string> = {
   iolWarnRings:
     "夜間は点光源のまわりに同心の輪が出ることがあり、焦点深度拡張の柔らかい光より目立ちます。輪が気になり続ける人もいます（示意であり術後の予測ではありません）。",
   iolWarnEdof:
-    "屈折型の焦点深度拡張：瞳孔が大きいほど延長は減り、中距離（特に夜間）は少し劣ります（示意）。",
+    "屈折型の焦点深度拡張：一部の設計では、瞳孔が大きいほど延長が減り、中距離（特に夜間）は少し劣ります（示意）。",
   iolWarnDry:
     "ドライアイはコントラストをさらに下げ、光源に軽いスターバーストが加わることがあります（示意）。",
   iolWarnNone: "この設定では追加の度数・光学の注記はありません。曲線はなお示意だけです。",

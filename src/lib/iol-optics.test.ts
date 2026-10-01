@@ -154,6 +154,17 @@ describe("iol model constants", () => {
     const edof = warnings({ ...DEFAULTS, light: "night", age: "50" }).map((w) => w.id);
     assert.ok(edof.includes("edof"));
   });
+
+  it("does not treat toric at 0.00 D as cylinder correction", () => {
+    assert.equal(resCyl({ ...day, toric: true, cyl: 0, rot: 15 }), 0);
+    const ids = warnings({
+      ...DEFAULTS,
+      cyl: 0,
+      toric: true,
+      rot: 15,
+    }).map((w) => w.id);
+    assert.equal(ids.includes("rot"), false);
+  });
 });
 
 describe("iol copy", () => {
