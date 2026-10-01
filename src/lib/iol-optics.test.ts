@@ -14,7 +14,9 @@ import {
   haloParams,
   parseHash,
   resCyl,
+  rotBandFromDeg,
   sigmaFor,
+  snapRotDeg,
   vaAtDefocus,
   veilVisual,
   warnings,
@@ -77,6 +79,22 @@ describe("iol model constants", () => {
     assert.equal(resCyl({ ...day, toric: true, cyl: 1, rot: 0 }), 0);
     const at30 = resCyl({ ...day, toric: true, cyl: 1, rot: 30 });
     assert.ok(Math.abs(at30 - Math.abs(2 * Math.sin((30 * Math.PI) / 180))) < 1e-12);
+  });
+
+  it("snaps rotation to coarse bands without exposing degrees in warnings", () => {
+    assert.equal(rotBandFromDeg(0), "aligned");
+    assert.equal(rotBandFromDeg(10), "little");
+    assert.equal(rotBandFromDeg(25), "more");
+    assert.equal(snapRotDeg(7), 10);
+    assert.equal(snapRotDeg(22), 25);
+    const warn = warnings({
+      ...DEFAULTS,
+      cyl: 1,
+      toric: true,
+      rot: 15,
+    }).find((w) => w.id === "rot");
+    assert.ok(warn && warn.id === "rot");
+    if (warn && warn.id === "rot") assert.equal(warn.band, "little");
   });
 
   it("matches drafted defocus samples", () => {
@@ -153,6 +171,17 @@ describe("iol model constants", () => {
     }
     const edof = warnings({ ...DEFAULTS, light: "night", age: "50" }).map((w) => w.id);
     assert.ok(edof.includes("edof"));
+  });
+
+  it("does not treat toric at 0.00 D as cylinder correction", () => {
+    assert.equal(resCyl({ ...day, toric: true, cyl: 0, rot: 15 }), 0);
+    const ids = warnings({
+      ...DEFAULTS,
+      cyl: 0,
+      toric: true,
+      rot: 15,
+    }).map((w) => w.id);
+    assert.equal(ids.includes("rot"), false);
   });
 });
 

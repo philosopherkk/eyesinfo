@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
-import { NIGHT_LIGHTS } from "@/lib/night-lights";
+import { HaloOverlay } from "@/components/halo-overlay";
+import type { HaloKind } from "@/lib/night-lights";
 import type { HaloType } from "@/lib/iol-optics";
 
 type Halo = {
@@ -103,6 +104,17 @@ function paint(
   }
 }
 
+function haloKind(type: HaloType): HaloKind {
+  if (type === "rings") return "mf";
+  if (type === "soft") return "edof";
+  return "mono";
+}
+
+function haloStrength(halo: Halo): number {
+  const raw = halo.energy * (halo.type === "rings" ? 1.15 : 1);
+  return Math.min(1.35, Math.max(0.75, 0.82 + raw * 0.55));
+}
+
 export function IolScene({
   src,
   title,
@@ -133,6 +145,8 @@ export function IolScene({
       cancel = true;
     };
   }, [src, sigma, smear, angle]);
+
+  const kind = halo ? haloKind(halo.type) : null;
 
   return (
     <figure
@@ -172,126 +186,15 @@ export function IolScene({
             aria-hidden
           />
         ) : null}
-        {halo ? <IolHalo halo={halo} /> : null}
+        {halo && kind ? (
+          <HaloOverlay
+            kind={kind}
+            strength={haloStrength(halo)}
+            showStarburst={false}
+            ghostRings={halo.type === "rings"}
+          />
+        ) : null}
       </div>
     </figure>
-  );
-}
-
-/** Night photic phenomena over measured lamp positions. Drawn above the contrast veil. */
-function IolHalo({ halo }: { halo: Halo }) {
-  const uid = `iolh-${halo.type}`;
-  return (
-    <svg
-      className="pointer-events-none absolute inset-0 size-full"
-      viewBox="0 0 100 56"
-      preserveAspectRatio="none"
-      aria-hidden
-    >
-      <defs>
-        {NIGHT_LIGHTS.map((L, i) => {
-          const warm = L.warm > 0.5;
-          const col = warm ? "255,196,110" : "255,248,230";
-          const cy = (L.y / 100) * 56;
-          const radius =
-            halo.type === "rings"
-              ? Math.max(2.4, L.r * halo.size * 4.4)
-              : halo.type === "soft"
-                ? Math.max(3.2, L.r * halo.size * 6.2)
-                : Math.max(2.2, L.r * halo.size * 3.6);
-          return (
-            <radialGradient
-              key={i}
-              id={`${uid}-g-${i}`}
-              gradientUnits="userSpaceOnUse"
-              cx={L.x}
-              cy={cy}
-              r={radius}
-            >
-              <stop offset="0%" stopColor={`rgb(${col})`} stopOpacity="0" />
-              <stop
-                offset="18%"
-                stopColor={`rgb(${col})`}
-                stopOpacity={halo.type === "glow" ? 0.55 : 0.2}
-              />
-              <stop
-                offset="55%"
-                stopColor={`rgb(${col})`}
-                stopOpacity={halo.type === "soft" ? 0.45 : 0.12}
-              />
-              <stop offset="100%" stopColor={`rgb(${col})`} stopOpacity="0" />
-            </radialGradient>
-          );
-        })}
-      </defs>
-      {halo.type !== "rings"
-        ? NIGHT_LIGHTS.map((L, i) => {
-            const cy = (L.y / 100) * 56;
-            const radius =
-              halo.type === "soft"
-                ? Math.max(3.2, L.r * halo.size * 6.2)
-                : Math.max(2.2, L.r * halo.size * 3.6);
-            const opacity = Math.min(0.55, halo.energy * (halo.type === "soft" ? 2.5 : 1.6));
-            return (
-              <circle
-                key={i}
-                cx={L.x}
-                cy={cy}
-                r={radius}
-                fill={`url(#${uid}-g-${i})`}
-                opacity={opacity}
-              />
-            );
-          })
-        : null}
-      {halo.type === "rings"
-        ? NIGHT_LIGHTS.map((L, i) => {
-            const cy = (L.y / 100) * 56;
-            const maxR = Math.max(2.6, L.r * halo.size * 4.6);
-            const col = L.warm > 0.5 ? "rgb(255, 210, 140)" : "rgb(255, 248, 230)";
-            const opacity = Math.min(0.92, 0.28 + halo.energy * 1.25);
-            return (
-              <g key={i} fill="none" stroke={col} opacity={opacity}>
-                {[0.46, 0.72, 1].map((k) => (
-                  <circle
-                    key={k}
-                    cx={L.x}
-                    cy={cy}
-                    r={maxR * k}
-                    strokeWidth={k === 1 ? 0.42 : 0.32}
-                  />
-                ))}
-              </g>
-            );
-          })
-        : null}
-      {halo.star
-        ? NIGHT_LIGHTS.filter((L) => L.r >= 0.7).map((L, i) => {
-            const cx = L.x;
-            const cy = (L.y / 100) * 56;
-            const len = Math.max(4.5, L.r * halo.size * 5.5);
-            const spikes = 8;
-            const col = L.warm > 0.5 ? "rgb(255, 220, 160)" : "rgb(255, 250, 236)";
-            return (
-              <g key={`s-${i}`} opacity={Math.min(0.45, 0.12 + halo.energy * 0.35)}>
-                {Array.from({ length: spikes }, (_, k) => {
-                  const a = (k * Math.PI * 2) / spikes + i * 0.05;
-                  return (
-                    <line
-                      key={k}
-                      x1={cx}
-                      y1={cy}
-                      x2={cx + Math.cos(a) * len}
-                      y2={cy + Math.sin(a) * len}
-                      stroke={col}
-                      strokeWidth={0.18}
-                    />
-                  );
-                })}
-              </g>
-            );
-          })
-        : null}
-    </svg>
   );
 }
