@@ -171,7 +171,7 @@ function IolPage() {
       {
         id: "far",
         title: t("iolDistFar"),
-        sub: t("iolDistFarSub"),
+        sub: state.light === "night" ? t("iolDistFarSubNight") : t("iolDistFarSub"),
         src: state.light === "night" ? "/iol/night.jpg" : "/iol/far.jpg",
         d: FAR_M,
         night: state.light === "night",

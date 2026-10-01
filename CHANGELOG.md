@@ -4,7 +4,7 @@ Git-sourced history for this site. Entries follow commits on `main`, not chat no
 
 ## chore — IOL simulator hedges (preview)
 
-- **Summary:** `/iol` follow-up on `feat/iol-simulator-2` — qualitative acuity / teaching-scale halo / coarse toric alignment; softer night photic overlay (gradient halos, starburst, ghost rings for diffractive); PMID-backed defocus-curve & dysphotopsia references on-page; dominant-eye definition and Miles / Dolman self-check copy. `CONTENT_VERSION` unchanged.
+- **Summary:** `/iol` follow-up on `feat/iol-simulator-2` — qualitative acuity / teaching-scale halo / coarse toric alignment; night overlay (halos, rings, no radial starburst); PMID-backed defocus-curve & dysphotopsia references with diffractive-vs-refractive attribution hedges; dominant-eye copy (Dolman both-eyes-open); night-driving distance cap line; 因設計而異 / by design. `CONTENT_VERSION` unchanged.
 - **Files:** `src/routes/iol.tsx`, `src/components/iol-scene.tsx`, `src/components/halo-overlay.tsx`, `src/data/citations.ts`, `src/data/iol-references.ts`, `src/lib/iol-optics.ts`, `src/lib/iol-optics.test.ts`, `src/i18n/ui.ts`, `CHANGELOG.md`
 
 ## [1.78] — 2026-09-24

@@ -359,7 +359,7 @@ const zhHant = {
   iolHow3:
     "單焦預留遠視 +3.00：遠近都不夠焦，是「晶體度數偏少」的示範，不是常用目標。+2.00 同樣遠近都偏糊，只是幅度較小。",
   iolHow4: "增強型單焦：中距離往往比普通單焦好一點，細字多數仍需鏡。",
-  iolHow5: "延伸景深：遠到中距離較連貫，細字仍常需鏡，夜間光暈因產品而異。",
+  iolHow5: "延伸景深：遠到中距離較連貫，細字仍常需鏡，夜間光暈因設計而異。",
   iolHow6: "多焦／三焦：遠中近都嘗試兼顧，對比可略降，夜間光暈較明顯。不是人人適合，不是術後保證。",
   iolLinkDetail: "晶體選擇細節",
   iolLinkMf: "多焦篩選原則",
@@ -387,6 +387,7 @@ const zhHant = {
     "繞射式三焦點：遠、中（約 60 厘米）、近（約 40 厘米）都有焦點；代價是對比略降，夜間光源周圍較易見光環。有些人會持續受夜間光環困擾。",
   iolDistFar: "遠距離",
   iolDistFarSub: "約 6 米 · 駕駛／街景",
+  iolDistFarSubNight: "約 6 米 · 駕駛／街景 · 不是夜間駕駛能力評估",
   iolDistMid: "中距離",
   iolDistMidSub: "約 60–70 厘米 · 賽事新聞",
   iolDistNear: "近距離",
@@ -429,9 +430,9 @@ const zhHant = {
   iolCopied: "已複製連結",
   iolChartH: "離焦曲線（示意）",
   iolChartNote:
-    "實線是目前設計，虛線是對照。橫軸是主視眼的離焦（正數偏遠視側）。曲線是教育用示意：形狀參考文獻中的離焦曲線比較（單焦、增強型單焦、延伸景深、三焦點各有不同闊度），不是複製任何廠商圖，亦不是個人預後。0.2 logMAR 虛線只是閱讀參考，不是個人視力標準。見下方文獻。",
+    "實線是目前設計，虛線是對照。橫軸是主視眼的離焦（正數偏遠視側）。曲線是教育用示意：形狀參考文獻中的離焦曲線概念（單焦、增強型單焦、延伸景深、三焦點各有不同闊度）。Monaco 2017 與 Tarib 2019 為繞射式設計比較，不是折射式延伸景深或增強型單焦點曲線的來源；Savini 2026 僅作「部分景深／增強型單焦」分類示例，不是此處繪線的形狀依據。不是複製任何廠商圖，亦不是個人預後。0.2 logMAR 虛線只是閱讀參考，不是個人視力標準。見下方文獻。",
   iolNightFx:
-    "夜間示意可包括柔光暈、光環、星芒，繞射式設計或會見輕微重影感；屬教學用光學現象，不是測量或術後預測。",
+    "夜間示意可包括柔光暈、條紋；繞射式設計或會見光環或輕微重影感。屬教學用光學現象，不是測量或術後預測。",
   iolDomEyeH: "甚麼是主視眼？",
   iolDomEyeDef:
     "主視眼（慣用眼）是大腦在睜眼時較偏向採用的一隻眼的視覺訊息，尤其在需要精準對焦時（如瞄準、閱讀部分細節）。此工具裏「目標屈光（主視眼）」及離焦曲線橫軸，是指你設定作為主參考的那隻眼，不是自動測量結果。",
@@ -439,7 +440,7 @@ const zhHant = {
   iolDomEyeTest1:
     "Miles 三角法：雙手前伸，拇指與食指圈成細三角，對準約 3 米外一個小目標。逐隻眼閉上：仍能把目標留在圈中心的那隻，通常是視覺慣用眼——可多試幾次，結果可能左右稍有出入。",
   iolDomEyeTest2:
-    "Dolman 卡片法：在紙卡中央開小圓孔，用一隻眼睇遠處文字，再改另一隻眼；較容易保持目標清晰的那隻，常是慣用眼。",
+    "Dolman 卡片法：雙眼睜開，將紙卡中央小圓孔對準約 3 米外一個固定目標；保持對準時觀察邊隻眼仍可透過小孔睇到該目標，該眼常是慣用眼。可多試幾次。",
   iolDomEyeTest3:
     "若啟用「迷你單眼視」，兩眼目標可不同：主視眼通常保留看遠或常用距離，另一眼保留另一個度數；實際安排須與醫生討論，不能靠自我測試代替處方。",
   iolDomEyeCaveat:
@@ -477,7 +478,7 @@ const zhHant = {
     "夜間點光源周圍可出現同心光環，比延伸景深的柔和光暈更明顯。有些人會持續覺得困擾（示意，不是術後預測）。",
   iolWarnEdof:
     "折射式延伸景深：部分設計在瞳孔較大時，景深延伸會減少，中距離（尤其夜間）會稍遜（示意）。",
-  iolWarnDry: "乾眼會再降低對比，光源可多一點星芒（示意）。",
+  iolWarnDry: "乾眼會再降低對比，光源可多一點條紋（示意）。",
   iolWarnNone: "以目前設定，沒有額外的度數或光學提示。曲線仍只是示意。",
   iolSummaryH: "各設計概要",
   iolLimits:
@@ -918,7 +919,7 @@ const en: Record<Key, string> = {
   iolHow4:
     "Enhanced monofocal: intermediate often a bit better than standard monofocal; fine print usually still needs glasses.",
   iolHow5:
-    "EDOF: far-to-intermediate more continuous; fine print often still needs glasses; night halos vary by product.",
+    "EDOF: far-to-intermediate more continuous; fine print often still needs glasses; night halos vary by design.",
   iolHow6:
     "Multifocal / trifocal: tries far, intermediate and near; contrast may drop a little; night halos more noticeable. Not for everyone and not a surgical promise.",
   iolLinkDetail: "Lens choice detail",
@@ -947,6 +948,7 @@ const en: Record<Key, string> = {
     "Diffractive trifocal: foci at far, intermediate (about 60 cm) and near (about 40 cm). Contrast is a little lower, and rings around lights are easier to notice at night. Some people stay bothered by those rings.",
   iolDistFar: "Distance",
   iolDistFarSub: "About 6 m · driving / street",
+  iolDistFarSubNight: "About 6 m · driving / street · not a night-driving ability assessment",
   iolDistMid: "Intermediate",
   iolDistMidSub: "About 60–70 cm · match reports",
   iolDistNear: "Near",
@@ -989,9 +991,9 @@ const en: Record<Key, string> = {
   iolCopied: "Link copied",
   iolChartH: "Defocus curve (illustration)",
   iolChartNote:
-    "Solid line is the selected design, dashed is the comparison. The horizontal axis is defocus for the dominant eye (positive is the hyperopic side). The curves are educational schematics informed by published defocus-curve comparisons (monofocal, enhanced monofocal, EDOF and trifocal differ in width) — not a copy of any manufacturer trace and not a personal prognosis. The 0.2 logMAR dashed line is a reading guide, not a personal acuity standard. See references below.",
+    "Solid line is the selected design, dashed is the comparison. The horizontal axis is defocus for the dominant eye (positive is the hyperopic side). The curves are educational schematics informed by published defocus-curve concepts (monofocal, enhanced monofocal, EDOF and trifocal differ in width). Monaco 2017 and Tarib 2019 are diffractive-design comparisons — not the source for refractive EDOF or enhanced-monofocal curve shapes; Savini 2026 is cited only as a partial-depth-of-field classification example, not as the shape basis for the drawn curves. Not a copy of any manufacturer trace and not a personal prognosis. The 0.2 logMAR dashed line is a reading guide, not a personal acuity standard. See references below.",
   iolNightFx:
-    "The night illustration may include soft halos, rings, starbursts and, with diffractive designs, a faint ghosting feel — teaching optics only, not a measurement or surgical prediction.",
+    "The night illustration may include soft halos and streaks; diffractive designs may show rings or a faint ghosting feel — teaching optics only, not a measurement or surgical prediction.",
   iolDomEyeH: "What is the dominant eye?",
   iolDomEyeDef:
     "The dominant (sighting) eye is the one the brain tends to rely on for aligning and fine focus when both eyes are open. In this tool, “target refraction (dominant eye)” and the chart horizontal axis refer to the eye you set as the main reference — not an automatic measurement.",
@@ -999,7 +1001,7 @@ const en: Record<Key, string> = {
   iolDomEyeTest1:
     "Miles triangle: extend your arms, form a small triangle with thumbs and index fingers, and centre a distant target (~3 m). Close one eye at a time — the eye that still keeps the target centred is usually the sighting-dominant eye. Repeat; results can vary slightly.",
   iolDomEyeTest2:
-    "Dolman hole-in-card: cut a small hole in a card, view distant text through it with one eye then the other; the eye that keeps the target clearer is often dominant.",
+    "Dolman hole-in-card: with both eyes open, centre a small hole in a card on a fixed target about 3 m away; while keeping alignment, note which eye still sees the target through the hole — that eye is often dominant. Repeat a few times.",
   iolDomEyeTest3:
     "With mini-monovision, each eye can have a different target — typically one eye for distance and the other mildly nearer; only a doctor can plan that. Self-tests cannot replace prescribing.",
   iolDomEyeCaveat:
@@ -1043,7 +1045,7 @@ const en: Record<Key, string> = {
   iolWarnEdof:
     "Refractive extended depth: in some designs a larger pupil shortens the extension, so intermediate (especially at night) is a little weaker (illustration).",
   iolWarnDry:
-    "Dry eye lowers contrast further and can add a light starburst on lamps (illustration).",
+    "Dry eye lowers contrast further and can add light streaks on lamps (illustration).",
   iolWarnNone:
     "With these settings there is no extra refractive or optical note. The curves are still only an illustration.",
   iolSummaryH: "Design outlines",
@@ -1467,7 +1469,7 @@ const ja: Record<Key, string> = {
     "単焦点で遠視 +3.00：遠近とも焦点不足。「度数が足りない」示意であり常用目標ではない。+2.00も遠近ともややぼけ、程度は小さい。",
   iolHow4:
     "強化単焦点：中距離は普通の単焦点より少し良いことが多く、細字はなお眼鏡が必要なことが多い。",
-  iolHow5: "EDOF：遠〜中がより連続；細字はなお眼鏡が多い；夜間ハローは製品次第。",
+  iolHow5: "EDOF：遠〜中がより連続；細字はなお眼鏡が多い；夜間ハローは設計次第。",
   iolHow6:
     "多焦点／3焦点：遠中近を試み、コントラストは少し下がることがあり、夜間ハローはより目立つ。万人向きでも術後保証でもない。",
   iolLinkDetail: "レンズ選択の詳細",
@@ -1496,6 +1498,7 @@ const ja: Record<Key, string> = {
     "回折型3焦点：遠、中（約60 cm）、近（約40 cm）に焦点がある。代償はコントラストが少し下がり、夜間は光源のまわりに輪が見えやすい。輪が気になり続ける人もいる。",
   iolDistFar: "遠距離",
   iolDistFarSub: "約6 m · 運転／街並み",
+  iolDistFarSubNight: "約6 m · 運転／街並み · 夜間運転能力の評価ではありません",
   iolDistMid: "中距離",
   iolDistMidSub: "約60–70 cm · 試合ニュース",
   iolDistNear: "近距離",
@@ -1538,9 +1541,9 @@ const ja: Record<Key, string> = {
   iolCopied: "リンクをコピーしました",
   iolChartH: "デフォーカス曲線（示意）",
   iolChartNote:
-    "実線が選択中、破線が比較です。横軸は優位眼のデフォーカス（正は遠視側）。曲線は教育用の示意で、文献のデフォーカス曲線比較（単焦点・強化単焦点・EDOF・3焦点で幅が異なる）を参考にした形状であり、メーカー図の複製でも個人の予後でもありません。0.2 logMAR の破線は読むための目安です。文献は下記。",
+    "実線が選択中、破線が比較です。横軸は優位眼のデフォーカス（正は遠視側）。曲線は教育用の示意で、文献のデフォーカス曲線の概念（単焦点・強化単焦点・EDOF・3焦点で幅が異なる）を参考にした形状です。Monaco 2017 と Tarib 2019 は回折型デザインの比較であり、屈折型 EDOF や強化単焦点の曲線形状の出典ではありません。Savini 2026 は「部分景深／強化単焦点」の分類例としてのみ引用し、ここに描いた曲線の形状根拠ではありません。メーカー図の複製でも個人の予後でもありません。0.2 logMAR の破線は読むための目安です。文献は下記。",
   iolNightFx:
-    "夜間の示意には柔らかいハロー、輪、スターバースト、回折型では軽いゴースト感があり得ます。教学用の光学現象であり、測定や術後の予測ではありません。",
+    "夜間の示意には柔らかいハロー、筋（ストリーク）があり得ます。回折型では輪や軽いゴースト感があり得ます。教学用の光学現象であり、測定や術後の予測ではありません。",
   iolDomEyeH: "優位眼（主視眼）とは？",
   iolDomEyeDef:
     "優位眼は、両眼で見るときに脳がやや優先する眼です（精密な合わせ込みなど）。このツールの「目標屈折（主視眼）」と曲線の横軸は、主参照として設定した眼を指し、自動測定ではありません。",
@@ -1548,7 +1551,7 @@ const ja: Record<Key, string> = {
   iolDomEyeTest1:
     "Miles 三角法：両腕を伸ばし、親指と人差し指で小さな三角を作り、約3 m先の小さな目標を三角の中心に合わせます。片眼ずつ閉じ、目標が中心に残る眼が視覚的優位眼であることが多いです。数回試してください。",
   iolDomEyeTest2:
-    "Dolman カード法：カード中央に小孔を開け、片眼ずつ遠くの文字を見る。よりはっきり保てる眼が優位眼であることが多いです。",
+    "Dolman カード法：両眼を開いたまま、カード中央の小孔を約3 m先の固定した目標に合わせます。合わせた状態で、どちらの眼が小孔越しに目標を見られるかを確かめます。多くの場合それが優位眼です。数回試してください。",
   iolDomEyeTest3:
     "ミニ単眼視では両眼の目標が異なり得ます。どちらを遠用・近用にするかは医師と相談が必要で、自己テストは処方の代わりになりません。",
   iolDomEyeCaveat:
@@ -1590,7 +1593,7 @@ const ja: Record<Key, string> = {
   iolWarnEdof:
     "屈折型の焦点深度拡張：一部の設計では、瞳孔が大きいほど延長が減り、中距離（特に夜間）は少し劣ります（示意）。",
   iolWarnDry:
-    "ドライアイはコントラストをさらに下げ、光源に軽いスターバーストが加わることがあります（示意）。",
+    "ドライアイはコントラストをさらに下げ、光源に軽い筋（ストリーク）が加わることがあります（示意）。",
   iolWarnNone: "この設定では追加の度数・光学の注記はありません。曲線はなお示意だけです。",
   iolSummaryH: "各デザインの概要",
   iolLimits:

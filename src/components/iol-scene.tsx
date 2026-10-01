@@ -190,7 +190,7 @@ export function IolScene({
           <HaloOverlay
             kind={kind}
             strength={haloStrength(halo)}
-            showStarburst={halo.star || halo.type === "rings"}
+            showStarburst={false}
             ghostRings={halo.type === "rings"}
           />
         ) : null}

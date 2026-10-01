@@ -1024,7 +1024,7 @@ export const CITE: Record<string, Citation> = {
   },
   breyer2017: {
     id: "breyer2017",
-    authors: "Breyer DRH, Kaymak H, Axmann S, et al.",
+    authors: "Breyer DRH, Kaymak H, Ax T, et al.",
     title: "Multifocal Intraocular Lenses and Extended Depth of Focus Intraocular Lenses",
     source: "Asia Pac J Ophthalmol (Phila). 2017 Jul-Aug;6(4):339-351",
     pmid: "28780781",
@@ -1039,7 +1039,7 @@ export const CITE: Record<string, Citation> = {
     source: "J Cataract Refract Surg. 2017 Jun;43(6):737-747",
     pmid: "28732606",
     note:
-      "公開試驗比較三焦點與延伸景深設計的離焦曲線及視覺功能。數字是研究結果，不是個人術後預後或品牌排名。",
+      "公開試驗比較繞射式三焦點與延伸景深設計的離焦曲線及視覺功能。屬繞射式比較，不是折射式延伸景深曲線或增強型單焦點曲線的來源。數字是研究結果，不是個人術後預後或品牌排名。",
   },
   savini2026: {
     id: "savini2026",
@@ -1049,7 +1049,7 @@ export const CITE: Record<string, Citation> = {
     source: "J Refract Surg. 2026 Apr;42(4):e359-e366",
     pmid: "41945698",
     note:
-      "以離焦曲線及 ESCRS 準則說明「增強型單焦點／部分景深」分類。教育引用方法，不是型號推介。",
+      "以離焦曲線及 ESCRS 準則說明「增強型單焦點／部分景深」分類示例。僅作分類方法引用，不是本頁離焦曲線示意之繪線形狀依據，亦非型號推介。",
   },
   tarib2019: {
     id: "tarib2019",
@@ -1059,7 +1059,7 @@ export const CITE: Record<string, Citation> = {
     source: "J Refract Surg. 2019 Jul 1;35(7):408-416",
     pmid: "31298720",
     note:
-      "延伸景深人工晶體術後視覺功能及離焦表現的公開比較。不是個人預後，亦不是哪一種較好。",
+      "繞射式延伸景深人工晶體術後視覺功能及離焦表現的公開比較。屬繞射式比較，不是折射式延伸景深或增強型單焦點曲線的來源。不是個人預後，亦不是哪一種較好。",
   },
   wanniarachchi2025: {
     id: "wanniarachchi2025",
@@ -1068,7 +1068,7 @@ export const CITE: Record<string, Citation> = {
     source: "Taiwan J Ophthalmol. 2025 Oct-Dec;15(4):572-579",
     pmid: "41523122",
     note:
-      "術後光學現象（含光暈、星芒及正／負向光視）文獻回顧。夜景示意不是術後預測或測量。",
+      "術後光學現象（含光暈、條紋及正／負向光視）文獻回顧。夜景示意不是術後預測或測量。",
   },
 };
 
