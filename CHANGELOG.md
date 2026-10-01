@@ -2,6 +2,11 @@
 
 Git-sourced history for this site. Entries follow commits on `main`, not chat notes.
 
+## chore — IOL simulator hedges (preview)
+
+- **Summary:** `/iol` follow-up on `feat/iol-simulator-2` — qualitative acuity / teaching-scale halo / coarse toric alignment; night overlay (halos, rings, no radial starburst); PMID-backed defocus-curve & dysphotopsia references with diffractive-vs-refractive attribution hedges; dominant-eye copy (Dolman both-eyes-open); night-driving distance cap line; 因設計而異 / by design. `CONTENT_VERSION` unchanged.
+- **Files:** `src/routes/iol.tsx`, `src/components/iol-scene.tsx`, `src/components/halo-overlay.tsx`, `src/data/citations.ts`, `src/data/iol-references.ts`, `src/lib/iol-optics.ts`, `src/lib/iol-optics.test.ts`, `src/i18n/ui.ts`, `CHANGELOG.md`
+
 ## [1.78] — 2026-09-24
 
 - **Summary:** `/urgent` only — clarified private-clinic vs A&E lead; added same-day private ophthalmologist call-ahead line under the same-day tier; updated `/urgent` meta (zh/en/ja; zh-Hans via toHans). No clinic names, phones, booking or WhatsApp. `CONTENT_VERSION` → **1.78**.
