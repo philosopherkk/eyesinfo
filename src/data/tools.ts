@@ -182,7 +182,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-keratoconus", label: "圓錐角膜" },
   ],
   "t-yag": [
-    { href: "/t/t-yag-cap", label: "釹釔鋁石榴石（Nd:YAG）後囊切開當日過程" },
+    { href: "/t/t-yag-cap", label: "後囊切開當日" },
     { href: "/t/t-barrier-laser", label: "氬激光視網膜屏障光凝當日過程" },
   ],
   "t-glaucoma-monitor": [
@@ -268,7 +268,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-octm", label: "黃斑 OCT" },
     { href: "/t/d5", label: "年齡相關性黃斑病變" },
     { href: "/t/d6", label: "糖尿病視網膜病變" },
-    { href: "/t/t-ivt-day", label: "玻璃體內注射當日過程" },
+    { href: "/t/t-ivt-day", label: "抗血管內皮生長因子注射當日過程" },
   ],
   "t-presbyopia": [
     { href: "/iol", label: "晶體視力示意" },

@@ -548,7 +548,7 @@ export const SEARCH_SYNONYMS: SearchEntry[] = [
     id: "t-ivt-day",
     kind: "topic",
     href: "/t/t-ivt-day",
-    titleFallback: "玻璃體內注射當日過程",
+    titleFallback: "抗血管內皮生長因子注射當日過程",
     keywords: [
       "打眼底針",
       "玻璃體內注射",
@@ -586,7 +586,7 @@ export const SEARCH_SYNONYMS: SearchEntry[] = [
     id: "t-yag-cap",
     kind: "topic",
     href: "/t/t-yag-cap",
-    titleFallback: "釹釔鋁石榴石（Nd:YAG）後囊切開當日過程",
+    titleFallback: "後囊切開當日",
     keywords: ["後囊", "後發性白內障", "YAG", "Nd:YAG", "後囊切開", "capsulotomy", "後嚢"],
   },
   {
