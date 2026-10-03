@@ -2,6 +2,11 @@
 
 Git-sourced history for this site. Entries follow commits on `main`, not chat notes.
 
+## chore — procedure-day copy fixes (preview)
+
+- **Summary:** On `feat/procedure-day-pages` — YAG title shortened to 後囊切開當日 with Nd:YAG kept in the lead; remove failure / IOL-exchange lines; toric as add-on in cataract lead and day-sequence (zh/en/ja); barrier spots not a ring; injection title scoped to anti-VEGF; same-day path uses `/urgent` sameDayH wording. `CONTENT_VERSION` unchanged.
+- **Files:** `src/data/procedure-day-topics.ts`, `src/i18n/procedure-day-en.ts`, `src/i18n/procedure-day-ja.ts`, cross-link title strings in topics/tools/search/seo, `CHANGELOG.md`
+
 ## chore — IOL simulator hedges (preview)
 
 - **Summary:** `/iol` follow-up on `feat/iol-simulator-2` — qualitative acuity / teaching-scale halo / coarse toric alignment; night overlay (halos, rings, no radial starburst); PMID-backed defocus-curve & dysphotopsia references with diffractive-vs-refractive attribution hedges; dominant-eye copy (Dolman both-eyes-open); night-driving distance cap line; 因設計而異 / by design. `CONTENT_VERSION` unchanged.

@@ -96,7 +96,7 @@ function TopicPage() {
   );
 
   return (
-    <article>
+    <article className="min-w-0">
       <MedicalWebPageJsonLd
         path={path}
         locale={locale}
@@ -142,7 +142,7 @@ function TopicPage() {
           <EmergencyShell />
         </div>
       ) : null}
-      <div className="px-4 pb-6 layout-lg:px-6">
+      <div className="min-w-0 px-4 pb-6 layout-lg:px-6">
         <TopicBody blocks={topic.blocks} topicId={raw.id} />
         <HkosVideoCard topicId={raw.id} />
         {/* Related chips before bibliography so siblings are reachable without scrolling past refs. */}

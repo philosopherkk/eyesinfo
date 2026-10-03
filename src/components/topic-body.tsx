@@ -3,6 +3,7 @@ import type { Block } from "@/data/topics";
 import { TOPICS } from "@/data/topics";
 import { TOOLS } from "@/data/tools";
 import { EduLink } from "@/components/edu-link";
+import { ProcedureFrames } from "@/components/procedure-frames";
 import { useI18n, localizeTopic } from "@/i18n";
 import { toHans } from "@/i18n/hans";
 import { TOOL_TEXT } from "@/i18n/catalog";
@@ -118,6 +119,9 @@ export function TopicBody({
             {rich(block.text)}
           </div>
         );
+      }
+      if (block.type === "frames") {
+        return <ProcedureFrames key={i} frames={block.frames} />;
       }
       if (block.type === "ul" || block.type === "ol") {
         const Tag = block.type;
