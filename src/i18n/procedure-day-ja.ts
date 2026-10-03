@@ -16,7 +16,7 @@ const diagramNote =
 
 export const PROCEDURE_DAY_JA: Record<string, TopicPack> = {
   "t-ivt-day": {
-    title: "抗VEGF抗VEGF硝子体内注射の当日の経過",
+    title: "抗VEGF硝子体内注射の当日の経過",
     tag: "当日そのもの",
     meta: "抗VEGFのクラス · 感じること",
     blocks: [
