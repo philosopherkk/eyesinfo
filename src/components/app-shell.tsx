@@ -128,7 +128,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
       <main
         id="main-content"
-        className="flex-1 pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))]"
+        className="min-w-0 flex-1 pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))]"
         tabIndex={-1}
       >
         <LegalShortLine />

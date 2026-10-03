@@ -1,4 +1,5 @@
 import type { Topic } from "./topics";
+import { PROCEDURE_DAY_TOPICS } from "./procedure-day-topics";
 
 /** Extra leaflets: anatomy, roles, and oculoplastics. No product names, no success rates. */
 export const EXTRA_TOPICS: Topic[] = [
@@ -877,6 +878,7 @@ export const EXTRA_TOPICS: Topic[] = [
     meta: "靜脈阻塞 · 動脈阻塞 · 何時急症",
     category: "retina",
     featured: false,
+    lastReviewed: "2026-10-03",
     refs: ["hayreh2005"],
     isAcuteEmergency: true,
     blocks: [
@@ -896,7 +898,7 @@ export const EXTRA_TOPICS: Topic[] = [
       },
       {
         type: "p",
-        text: "與高血壓、糖尿病、血脂、青光眼、血液黏稠或炎症有關。全身檢查由內科／家庭醫生與眼科協調。注射間隔及是否激光按 OCT 及眼底決定，不能保證視力回到阻塞前。",
+        text: "與高血壓、糖尿病、血脂、青光眼、血液黏稠或炎症有關。全身檢查由內科／家庭醫生與眼科協調。注射間隔及是否激光按 OCT 及眼底決定，不能保證視力回到阻塞前。若醫生安排玻璃體內抗血管內皮生長因子注射，當日過程見「玻璃體內注射當日過程」。",
       },
       { type: "h", text: "動脈阻塞（較少，更急）" },
       {
@@ -1576,7 +1578,7 @@ export const EXTRA_TOPICS: Topic[] = [
     meta: "病理近視 · 近視性黃斑 · 裂孔／脫離",
     category: "retina",
     featured: false,
-    lastReviewed: "2026-09-07",
+    lastReviewed: "2026-10-03",
     refs: [
       "flitcroft2019",
       "ohnoMatsui2015",
@@ -1604,7 +1606,7 @@ export const EXTRA_TOPICS: Topic[] = [
           "漆裂紋（lacquer cracks）：Bruch 膜等複合結構的線性破裂，眼底可見黃白色細線；本身未必立即失明，但被視為 CNV 的重要前兆之一。",
           "近視性脈絡膜新生血管（myopic CNV）：異常血管長入黃斑下，可突然出血或滲出，常表現為中央視力驟降、視物變形。",
           "近視牽引性黃斑病變（myopic traction maculopathy, MTM）：玻璃體視網膜牽引加上後鞏膜葡萄腫等力量，可出現黃斑劈裂（foveoschisis／maculoschisis）、板層或全層黃斑裂孔，嚴重時可合併黃斑部視網膜脫離。",
-          "周邊視網膜裂孔／視網膜脫離：高度近視眼睛周邊變性較常見，裂孔可導致視網膜脫離——這與黃斑病變是不同位置、不同機制，但同樣屬於高度近視的長遠風險。",
+          "周邊視網膜裂孔／視網膜脫離：高度近視眼睛周邊變性較常見，裂孔可導致視網膜脫離——這與黃斑病變是不同位置、不同機制，但同樣屬於高度近視的長遠風險。若醫生建議屏障激光，當日過程見「氬激光視網膜屏障光凝當日過程」。",
         ],
       },
       {
@@ -1650,7 +1652,7 @@ export const EXTRA_TOPICS: Topic[] = [
       { type: "h", text: "檢查醫生或會做甚麼" },
       {
         type: "p",
-        text: "視力、屈光、眼壓；必要時視野；散瞳眼底（後極＋周邊）；光學相干斷層掃描（OCT）；眼底影像；懷疑 CNV 時或需螢光素血管造影（FFA）；眼軸量度／後鞏膜葡萄腫評估；懷疑青光眼時視神經評估。因人而異，非保證清單。抗血管內皮生長因子注射或手術僅屬專科概念層次討論，本頁不列商品名、不作療效保證。",
+        text: "視力、屈光、眼壓；必要時視野；散瞳眼底（後極＋周邊）；光學相干斷層掃描（OCT）；眼底影像；懷疑 CNV 時或需螢光素血管造影（FFA）；眼軸量度／後鞏膜葡萄腫評估；懷疑青光眼時視神經評估。因人而異，非保證清單。抗血管內皮生長因子注射或手術僅屬專科概念層次討論，本頁不列商品名、不作療效保證。當日過程見「玻璃體內注射當日過程」。",
       },
       { type: "h", text: "常見誤解" },
       {
@@ -3101,4 +3103,5 @@ export const EXTRA_TOPICS: Topic[] = [
       },
     ],
   },
+  ...PROCEDURE_DAY_TOPICS,
 ];

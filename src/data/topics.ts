@@ -4,11 +4,50 @@ import {
   DEFAULT_TOPIC_REVIEWER,
 } from "./editorial";
 
+/** Line-diagram ids for procedure-day pages. ASCII only — OpenCC must not rewrite them. */
+export type FrameDraw =
+  | "ivt-concept"
+  | "ivt-drops"
+  | "ivt-hold"
+  | "ivt-enter"
+  | "ivt-spot"
+  | "ivt-red"
+  | "ch-gland"
+  | "ch-numb"
+  | "ch-inner"
+  | "ch-ointment"
+  | "ch-bruise"
+  | "bar-fundus"
+  | "bar-sit"
+  | "bar-contact"
+  | "bar-spots"
+  | "bar-leave"
+  | "yag-fog"
+  | "yag-sit"
+  | "yag-flash"
+  | "yag-window"
+  | "yag-iop"
+  | "cat-cloud"
+  | "cat-light"
+  | "cat-water"
+  | "cat-iol"
+  | "cat-classes"
+  | "cat-shield";
+
+export type FrameSpec = {
+  title: string;
+  caption: string;
+  draw: FrameDraw;
+  /** Short on-diagram words. Long sentences stay in `caption`. */
+  labels?: string[];
+};
+
 export type Block =
   | { type: "p" | "warn" | "note"; text: string }
   | { type: "h"; text: string; id?: string }
   | { type: "ul" | "ol"; items: string[] }
-  | { type: "table"; rows: string[][] };
+  | { type: "table"; rows: string[][] }
+  | { type: "frames"; frames: FrameSpec[] };
 
 export type CategoryId = "lens" | "lid" | "glaucoma" | "retina" | "surface";
 
@@ -215,6 +254,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "視力漸矇、眩光 · 影響生活時與眼科專科醫生討論是否手術",
     category: "lens",
     featured: true,
+    lastReviewed: "2026-10-03",
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -242,6 +282,8 @@ export const CORE_TOPICS: Topic[] = [
           "手術與否須面診：醫生或會解釋超聲波乳化（角膜緣微切口、多數表面麻醉）及人工晶體類別",
           "晶體光學設計須按眼底、角膜散光、夜間駕駛需要及對眼鏡的期望決定，沒有一款適合所有人",
           "步驟、晶體類別與文獻報告的風險（包括後囊混濁）見專題「超聲波乳化與人工晶體」",
+          "當日過程見「白內障手術與人工晶體植入當日過程」。",
+          "後囊混濁的激光當日過程見「釹釔鋁石榴石（Nd:YAG）後囊切開當日過程」。",
         ],
       },
     ],
@@ -362,6 +404,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "直線變彎或中央暗點：須即日眼科評估",
     category: "retina",
     featured: true,
+    lastReviewed: "2026-10-03",
     refs: ["areds2", "catt2011", "dervenis2024namd", "faricimabFda2022"],
     blocks: [
       { type: "h", text: "是甚麼" },
@@ -386,6 +429,7 @@ export const CORE_TOPICS: Topic[] = [
           "濕性型：眼科專科醫生或會按本港註冊適應症考慮玻璃體內注射抗血管內皮生長因子藥物（俗稱打眼底針）。不能保證恢復已喪失的視力",
           "注射次數及間距因人而異，須配合光學相干斷層掃描覆檢",
           "華人濕性型較常見的 PCV，以及注射間隔策略的教育約數，見玻璃體內注射專題——不是商品比較",
+          "當日過程與術後哪個徵狀要急症室，見「玻璃體內注射當日過程」。",
         ],
       },
       {
@@ -402,6 +446,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "早期無徵狀 · 須定期散瞳眼底",
     category: "retina",
     featured: true,
+    lastReviewed: "2026-10-03",
     refs: ["ukpds33"],
     blocks: [
       { type: "h", text: "是甚麼" },
@@ -429,6 +474,7 @@ export const CORE_TOPICS: Topic[] = [
           "UKPDS 等試驗顯示：較積極的血糖控制與較低的微血管併發症（包括視網膜病變）風險有關。文獻常報告的是相對風險下降；絕對風險下降視基線風險而定，不是把某一個百分比直接套在你身上。血糖目標由內科決定；眼科負責眼底檢查。",
           "按眼科專科醫生指示作散瞳眼底檢查；多數病人需要定期檢查，間隔由病期決定，不是固定「你明年某日」",
           "糖尿病黃斑水腫：醫生或會考慮玻璃體內注射等處理，並非自行用藥。抗 VEGF 類別相對傳統單靠激光的試驗教育約數，見玻璃體內注射專題——不是個人預後或品牌比較",
+          "若醫生安排注射，當日過程見「玻璃體內注射當日過程」。本頁不把增生期的大範圍視網膜激光說成同一件事。",
           "增生期：或需視網膜激光光凝或玻璃體切除術，由醫生評估",
           "妊娠期間須更密監察",
         ],
@@ -494,6 +540,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "新閃光或飛蚊增多：須即日散瞳評估",
     category: "retina",
     featured: true,
+    lastReviewed: "2026-10-03",
     refs: ["hollands2009"],
     isAcuteEmergency: true,
     blocks: [
@@ -537,6 +584,7 @@ export const CORE_TOPICS: Topic[] = [
           "釔鋁石榴石（YAG）玻璃體溶解並非常規，證據及適應症有限，須醫生評估風險（包括眼壓、晶體、視網膜）",
           "玻璃體切除術可清除飛蚊，但會加速白內障，並有視網膜脫離等風險，僅在嚴重影響生活且醫生認為合適時才討論",
           "裂孔風險因形態而異：有症狀、帶玻璃體牽引的馬蹄形裂孔進展風險較高；無症狀的萎縮孔或蓋膜孔風險較低。是否激光由散瞳檢查決定，不是單一百分比",
+          "若醫生建議屏障激光，當日過程見「氬激光視網膜屏障光凝當日過程」。釔鋁石榴石玻璃體溶解是另一回事，並非常規。",
         ],
       },
     ],
@@ -549,6 +597,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "眼瞼紅腫硬粒 · 勿自行擠壓",
     category: "lid",
     featured: true,
+    lastReviewed: "2026-10-03",
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -570,6 +619,7 @@ export const CORE_TOPICS: Topic[] = [
           "醫生或會建議溫熱敷、按摩同瞼緣清潔作為家居護理方向；時間同做法跟面診指示，不要自行擠壓",
           "麥粒腫或需處方抗生素。反覆發作時，醫生或會按風險考慮屈光或內科評估，不是每一次都必須驗血糖",
           "霰粒腫切開刮除多由結膜面切口，以減少皮膚留疤；復發因術式與病人而異，不是你的個人預後",
+          "若醫生建議切開刮除，當日過程見「霰粒腫切開刮除當日過程」。",
           "非典型、久不消退、或反覆出現兼有睫毛脫落、潰瘍、變厚，尤其較年長病人，醫生或會考慮病理化驗以排除惡性腫瘤，不是每一個復發霰粒腫都自動送檢",
         ],
       },
@@ -659,6 +709,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "俗稱打眼底針",
     category: "retina",
     featured: false,
+    lastReviewed: "2026-10-03",
     refs: [
       "catt2011",
       "view2012",
@@ -724,6 +775,10 @@ export const CORE_TOPICS: Topic[] = [
         text: "屬門診程序，通常數分鐘。無菌技術及結膜碘液是降低眼內炎最有證據的步驟。以下為類別說明，不是推介某一針劑。",
       },
       {
+        type: "p",
+        text: "你當日會經歷的次序與圖解，見「玻璃體內注射當日過程」。上文是知情同意類別說明，不是叫人自行注射。",
+      },
+      {
         type: "ol",
         items: [
           "核對眼別、藥物及病歷（包括青光眼、近期手術、全身抗凝血）",
@@ -775,10 +830,15 @@ export const CORE_TOPICS: Topic[] = [
     meta: "結膜面切口",
     category: "lid",
     featured: false,
+    lastReviewed: "2026-10-03",
     blocks: [
       {
         type: "p",
         text: "若醫生建議切開刮除，知情同意時或會說明以下步驟。是否需要手術，須檢查後決定：許多霰粒腫經熱敷、瞼緣清潔數週可縮小，不是一出現硬粒就要切。",
+      },
+      {
+        type: "p",
+        text: "你當日會經歷的次序與圖解，見「霰粒腫切開刮除當日過程」。下文是知情同意要點，不是叫人自行切開或擠壓。",
       },
       {
         type: "note",
@@ -913,6 +973,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "白內障手術類別",
     category: "lens",
     featured: false,
+    lastReviewed: "2026-10-03",
     refs: ["escrs2007", "schaumberg1998", "donachie2023nod9", "fact2020", "femcat2020"],
     blocks: [
       { type: "h", text: "何時值得與醫生討論手術" },
@@ -948,6 +1009,10 @@ export const CORE_TOPICS: Topic[] = [
       {
         type: "p",
         text: "以下為知情同意常用的程序說明，不是任何一間診所的「標準套路」，實際切口、能量、麻醉由核硬度、角膜與全身情況決定。",
+      },
+      {
+        type: "p",
+        text: "你當日會經歷的次序與圖解，見「白內障手術與人工晶體植入當日過程」。下文保留知情同意類別說明。",
       },
       {
         type: "ol",
@@ -1033,7 +1098,7 @@ export const CORE_TOPICS: Topic[] = [
       },
       {
         type: "p",
-        text: "白內障術後數年視力再矇，多數是後囊混濁而不是「白內障復發」。並非所有視矇都需要釔鋁石榴石（YAG）後囊切開，須醫生評估是否影響視功能，並排除黃斑、角膜或其他原因。門診激光、無切口。詳見專題「YAG 後囊切開與視網膜屏障激光」。",
+        text: "白內障術後數年視力再矇，多數是後囊混濁而不是「白內障復發」。並非所有視矇都需要釔鋁石榴石（YAG）後囊切開，須醫生評估是否影響視功能，並排除黃斑、角膜或其他原因。門診激光、無切口。詳見專題「YAG 後囊切開與視網膜屏障激光」。當日過程見「釹釔鋁石榴石（Nd:YAG）後囊切開當日過程」。",
       },
       {
         type: "warn",
@@ -1047,6 +1112,7 @@ export const CORE_TOPICS: Topic[] = [
     title: "眼瞼熱敷及按摩",
     tag: "家居護理",
     meta: "瞼板腺功能障礙 · 瞼緣炎 · 霰粒腫",
+    lastReviewed: "2026-10-03",
     category: "lid",
     featured: false,
     blocks: [
@@ -1064,7 +1130,7 @@ export const CORE_TOPICS: Topic[] = [
         items: [
           "暖唔好燙；痛就停。兒童、長者或皮膚感覺較差者更要小心",
           "切勿把熱水袋直接貼眼、勿戴隱形眼鏡做熱敷、唔好用未熟雞蛋或過熱毛巾",
-          "霰粒腫術後何時再熱敷，跟傷口同醫生指示，不要自行決定",
+          "霰粒腫術後何時再熱敷，跟傷口同醫生指示，不要自行決定。當日過程見「霰粒腫切開刮除當日過程」。術後何時再熱敷仍跟傷口和醫生指示。",
         ],
       },
       {
@@ -1203,6 +1269,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "單焦 · 散光矯正 · 延伸景深 · 多焦",
     category: "lens",
     featured: false,
+    lastReviewed: "2026-10-03",
     blocks: [
       {
         type: "table",
@@ -1217,7 +1284,7 @@ export const CORE_TOPICS: Topic[] = [
       },
       {
         type: "p",
-        text: "角膜規則散光約 ≥0.75–1.00 D 時，醫生或會討論散光矯正晶體；旋轉 1° 約損失 3.3% 矯正量。最新型號或較高收費不等於最適合。黃斑病變、嚴重乾眼、青光眼明顯視野缺損，不宜多焦及多數延伸景深設計。品牌選擇屬術前個別討論，本頁不列出商品名。",
+        text: "角膜規則散光約 ≥0.75–1.00 D 時，醫生或會討論散光矯正晶體；旋轉 1° 約損失 3.3% 矯正量。最新型號或較高收費不等於最適合。黃斑病變、嚴重乾眼、青光眼明顯視野缺損，不宜多焦及多數延伸景深設計。品牌選擇屬術前個別討論，本頁不列出商品名。植入當日的次序見「白內障手術與人工晶體植入當日過程」。本頁仍只講光學類別，不列商品名。",
       },
     ],
   },
@@ -1266,16 +1333,17 @@ export const CORE_TOPICS: Topic[] = [
     meta: "後囊混濁 · 裂孔封邊",
     category: "lens",
     featured: false,
+    lastReviewed: "2026-10-03",
     blocks: [
       { type: "h", text: "釔鋁石榴石（YAG）後囊切開" },
       {
         type: "p",
-        text: "不是白內障「再生」，是囊袋上皮細胞增生令後囊混濁。術後數年文獻報告不一，後囊混濁並不少見，比例因人而異。屬門診激光，無切口。並非所有視矇都需要 YAG，須醫生評估是否影響視功能。可能出現眼壓短暫上升、飛蚊暫增；視網膜裂孔少見。YAG 後：新閃光或大量新飛蚊、沒有簾幕、沒有突然失明、沒有劇痛——須即日散瞳眼底檢查。簾幕、突然失明或劇痛：立即急症室。",
+        text: "不是白內障「再生」，是囊袋上皮細胞增生令後囊混濁。術後數年文獻報告不一，後囊混濁並不少見，比例因人而異。屬門診激光，無切口。並非所有視矇都需要 YAG，須醫生評估是否影響視功能。可能出現眼壓短暫上升、飛蚊暫增；視網膜裂孔少見。YAG 後：新閃光或大量新飛蚊、沒有簾幕、沒有突然失明、沒有劇痛——須即日散瞳眼底檢查。簾幕、突然失明或劇痛：立即急症室。當日過程與圖解見「釹釔鋁石榴石（Nd:YAG）後囊切開當日過程」。",
       },
       { type: "h", text: "視網膜屏障激光" },
       {
         type: "p",
-        text: "在裂孔周圍造成瘢痕，減少液體進入視網膜下。用於尚未脫離或局部有裂孔的選定情況。術後活動限制視裂孔位置、範圍及醫生個別指示而定，不是一律兩週禁止劇烈運動。激光不能修復已經脫離的視網膜；一旦簾幕擴大須按脫離急症處理。",
+        text: "在裂孔周圍造成瘢痕，減少液體進入視網膜下。用於尚未脫離或局部有裂孔的選定情況。術後活動限制視裂孔位置、範圍及醫生個別指示而定，不是一律兩週禁止劇烈運動。激光不能修復已經脫離的視網膜；一旦簾幕擴大須按脫離急症處理。當日過程與圖解見「氬激光視網膜屏障光凝當日過程」。本段不是治療配方。激光不能修復已經脫離的視網膜。",
       },
     ],
   },
@@ -1316,6 +1384,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "中心視網膜厚度 · 積液",
     category: "retina",
     featured: false,
+    lastReviewed: "2026-10-03",
     blocks: [
       {
         type: "p",
@@ -1332,7 +1401,7 @@ export const CORE_TOPICS: Topic[] = [
       },
       {
         type: "p",
-        text: "濕性年齡相關性黃斑病變：新出現視物變形須盡快求診。吸煙顯著增加風險。是否玻璃體內注射、用哪一種已註冊藥物，只可由眼科專科醫生按本港註冊適應症決定。大型試驗結果不能保證個人視力。",
+        text: "濕性年齡相關性黃斑病變：新出現視物變形須盡快求診。吸煙顯著增加風險。是否玻璃體內注射、用哪一種已註冊藥物，只可由眼科專科醫生按本港註冊適應症決定。大型試驗結果不能保證個人視力。注射當日過程見「玻璃體內注射當日過程」。是否注射仍由眼科專科醫生按檢查決定。",
       },
       {
         type: "p",
@@ -1352,6 +1421,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "眼鏡 · 隱形 · 縮瞳藥水 · 角膜激光 · 晶體",
     category: "lens",
     featured: false,
+    lastReviewed: "2026-10-03",
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -1425,7 +1495,7 @@ export const CORE_TOPICS: Topic[] = [
       { type: "h", text: "5. 人工晶體手術" },
       {
         type: "p",
-        text: "摘除自身晶體、放入人工晶體（可在有視覺意義的白內障時，或在晶體仍清時作為屈光晶體交換——後者適應症更嚴）。光學類別見晶體視力示意與超聲波乳化專題。",
+        text: "摘除自身晶體、放入人工晶體（可在有視覺意義的白內障時，或在晶體仍清時作為屈光晶體交換——後者適應症更嚴）。光學類別見晶體視力示意與超聲波乳化專題。已有白內障而做的手術，當日過程見「白內障手術與人工晶體植入當日過程」。晶體仍清時的屈光晶體交換，適應症更嚴，不在該頁展開。",
       },
       {
         type: "table",
@@ -1497,6 +1567,7 @@ export const CORE_TOPICS: Topic[] = [
     meta: "黃斑是否仍附著決定預後",
     category: "retina",
     featured: false,
+    lastReviewed: "2026-10-03",
     refs: ["hollands2009"],
     isAcuteEmergency: true,
     blocks: [
@@ -1512,6 +1583,10 @@ export const CORE_TOPICS: Topic[] = [
       {
         type: "p",
         text: "黃斑仍附著（macula-on）：屬急症，爭取盡快手術（常以小時至一日計），預後相對較好，但不能保證。黃斑已脫（macula-off）：黃斑已脫仍應盡快；文獻較支持中央視力喪失後數日內（尤其首三日）手術，預後通常較再延遲者佳，不是可等一週，也不是『每延遲一日就一定差一級』。勿等待「看會否自己好」。出現視野簾幕、大片缺損或突然視力下降：立即急症室。新出現閃光或飛蚊明顯增多，但沒有簾幕、沒有突然失明、沒有劇痛：應盡快（最好當日）接受散瞳眼底檢查。",
+      },
+      {
+        type: "p",
+        text: "尚未脫離、由醫生選定的裂孔，或會討論門診屏障激光，見「氬激光視網膜屏障光凝當日過程」。已經出現簾幕或突然視力下降：立即急症室，不是回家等激光。",
       },
       {
         type: "p",
@@ -1615,6 +1690,8 @@ export function searchTopics(q: string) {
             return b.items;
           case "table":
             return b.rows.flat();
+          case "frames":
+            return b.frames.flatMap((f) => [f.title, f.caption, ...(f.labels ?? [])]);
           default:
             return [b.text];
         }

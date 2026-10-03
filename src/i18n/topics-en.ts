@@ -1,4 +1,5 @@
 import type { Block } from "@/data/topics";
+import { PROCEDURE_DAY_EN } from "./procedure-day-en";
 
 export type TopicPack = { title: string; tag: string; meta: string; blocks: Block[] };
 
@@ -74,7 +75,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       h("Symptoms / when it is urgent"),
       ul(["Slow blur, glare from oncoming lights, faded colour", "Sudden pain, nausea and a steamy cornea: consider acute angle closure — go to A&E"]),
       h("What a doctor may discuss"),
-      ul(["Surgery when daily life or driving is affected — not waiting until the cataract is “ripe”", "Phacoemulsification and an intraocular lens; type of lens is individual", "Literature complication rates, not a clinic success rate"]),
+      ul(["Surgery when daily life or driving is affected — not waiting until the cataract is “ripe”", "Phacoemulsification and an intraocular lens; type of lens is individual", "Literature complication rates, not a clinic success rate", "The order of the day is on The day of cataract surgery and lens implantation.", "The laser day for posterior capsule opacity is on The day of Nd:YAG posterior capsulotomy."]),
     ],
   },
   d4: {
@@ -129,7 +130,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       h("Symptoms"),
       ul(["Straight lines look bent (metamorphopsia), a central dark patch, washed-out colour", "Trouble recognising faces, reading, or traffic lights"]),
       h("Care a doctor may discuss"),
-      ul(["Stop smoking; blood pressure and lipids. AREDS2-type nutrient formulas are mainly discussed for people who already have intermediate AMD — not as prevention for every healthy eye, and not a substitute for stopping smoking. Whether to use them is a doctor’s decision, not an advert.", "Amsler grid for self-checks. New distortion, a central dark patch or a sudden vision drop: dilated fundus exam the same day if possible. Sudden blindness or a clear curtain: go to A&E now.", "Wet AMD: an ophthalmologist may consider intravitreal anti-VEGF injections according to Hong Kong-registered indications. Recovery of lost vision is not guaranteed.", "Injection number and interval vary; OCT follow-up is usual.", "PCV is more common in Chinese wet disease; education figures on dosing strategy are on the intravitreal anti-VEGF topic — not a product comparison."]),
+      ul(["Stop smoking; blood pressure and lipids. AREDS2-type nutrient formulas are mainly discussed for people who already have intermediate AMD — not as prevention for every healthy eye, and not a substitute for stopping smoking. Whether to use them is a doctor’s decision, not an advert.", "Amsler grid for self-checks. New distortion, a central dark patch or a sudden vision drop: dilated fundus exam the same day if possible. Sudden blindness or a clear curtain: go to A&E now.", "Wet AMD: an ophthalmologist may consider intravitreal anti-VEGF injections according to Hong Kong-registered indications. Recovery of lost vision is not guaranteed.", "Injection number and interval vary; OCT follow-up is usual.", "PCV is more common in Chinese wet disease; education figures on dosing strategy are on the intravitreal anti-VEGF topic — not a product comparison.", "The order of the day, and which symptoms afterwards mean A&E, are on The day of an intravitreal injection."]),
       p("Nutrition reference: AREDS2 Research Group, JAMA 2013. No product names on this page."),
     ],
   },
@@ -149,6 +150,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
         "Trials such as UKPDS show more intensive glucose control is linked with lower risk of microvascular complications (including retinopathy). Literature often reports relative risk reduction; absolute risk reduction depends on baseline risk and is not a percentage you can paste onto yourself. Glucose targets are set by the medical team; ophthalmology does the fundus exams.",
         "Dilated fundus exams at intervals the ophthalmologist sets — not a fixed “see you next year on this date” for every person",
         "Diabetic macular oedema: an ophthalmologist may consider intravitreal injection and related care — not self-medication. Education figures on anti-VEGF class versus laser alone are on the intravitreal anti-VEGF topic — not personal prognosis or a brand comparison",
+        "If a doctor arranges an injection, the order of the day is on The day of an intravitreal injection. This page does not treat scatter laser for proliferative disease as the same thing.",
         "Intravitreal anti-VEGF, laser or surgery as classes of options when indicated",
       ]),
     ],
@@ -186,7 +188,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       h("Go to A&E now (curtain or sudden vision loss)"),
       ul(["A curtain or shadow over the field", "Any sudden sharp drop in vision"]),
       h("What a doctor may discuss"),
-      ul(["New or suddenly more floaters need a same-day dilated exam; do not self-diagnose. A curtain or sudden loss of vision is A&E.", "Most benign floaters are observed; the brain may notice them less over months.", "YAG vitreolysis is not routine.", "Vitrectomy can clear floaters but speeds cataract and has detachment risk — only if life is badly affected and a doctor agrees it is appropriate.", "Tear risk depends on type: a symptomatic horseshoe tear with traction is high risk; asymptomatic atrophic or operculated holes are lower. Laser is decided after dilation, not by a single percentage."]),
+      ul(["New or suddenly more floaters need a same-day dilated exam; do not self-diagnose. A curtain or sudden loss of vision is A&E.", "Most benign floaters are observed; the brain may notice them less over months.", "YAG vitreolysis is not routine.", "Vitrectomy can clear floaters but speeds cataract and has detachment risk — only if life is badly affected and a doctor agrees it is appropriate.", "Tear risk depends on type: a symptomatic horseshoe tear with traction is high risk; asymptomatic atrophic or operculated holes are lower. Laser is decided after dilation, not by a single percentage.", "If a doctor suggests barrier laser, the order of the day is on The day of argon retinal barrier laser. YAG vitreolysis is a different matter and is not routine."]),
     ],
   },
   d9: {
@@ -197,7 +199,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       h("What it is"),
       p("Blepharitis is chronic lash-line inflammation, often with meibomian dysfunction, Demodex or seborrhoea. A stye is an acute painful infection. A chalazion is a blocked meibomian granuloma, usually less painful. Incision is considered only if home care fails, and only after a doctor decides."),
       h("What a doctor may discuss"),
-      ul(["A doctor may suggest warm compress, massage and lid cleaning as home-care direction; time and method follow the consultation. Do not squeeze.", "A stye may need prescribed antibiotics. Repeated attacks: refraction or medical tests are considered by risk, not automatically every time", "Chalazion incision and curettage is usually from the conjunctival side to reduce skin scarring; recurrence varies with technique and the patient, and is not your personal prognosis", "Atypical, non-resolving or recurrent lumps with lash loss, ulcer or thickening — especially in older patients — may need pathology; not every recurrent chalazion is automatically sent"]),
+      ul(["A doctor may suggest warm compress, massage and lid cleaning as home-care direction; time and method follow the consultation. Do not squeeze.", "A stye may need prescribed antibiotics. Repeated attacks: refraction or medical tests are considered by risk, not automatically every time", "Chalazion incision and curettage is usually from the conjunctival side to reduce skin scarring; recurrence varies with technique and the patient, and is not your personal prognosis", "If a doctor suggests incision and curettage, the order of the day is on The day of chalazion incision and curettage.", "Atypical, non-resolving or recurrent lumps with lash loss, ulcer or thickening — especially in older patients — may need pathology; not every recurrent chalazion is automatically sent"]),
     ],
   },
   d10: {
@@ -283,6 +285,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       p("In centre-involved diabetic macular oedema (DME), the anti-VEGF class versus traditional laser alone can yield better vision outcomes in suitable cases. Large-trial examples include aflibercept in VIVID-DME / VISTA-DME (Korobelnik et al.), and Protocol T comparing several anti-VEGF agents (Wells et al., DRCR) — published trial figures, not personal prognosis or brand comparison. VIEW discusses dosing strategy in wet AMD, not as primary DME evidence. Which INN and interval can only be decided by a doctor against Hong Kong registration and examination."),
       h("Procedure (for consent education)"),
       p("An outpatient injection, usually a few minutes. Asepsis and conjunctival iodine have the strongest evidence for lowering endophthalmitis. This is a class of care, not a pitch for any product."),
+      p("The order of the day, and the diagrams, are on The day of an intravitreal injection. The lines above are a consent-style class outline, not instructions to inject yourself."),
       ol([
         "Confirm the eye, the drug and the history (glaucoma, recent surgery, anticoagulants)",
         "Topical anaesthetic; sometimes a soaked cotton pledget",
@@ -324,6 +327,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
     meta: "Conjunctival-side incision",
     blocks: [
       p("If a doctor recommends incision, consent may cover the steps below. Many chalazia shrink with weeks of warm compress and lid hygiene — not every lump needs surgery."),
+      p("The order of the day, and the diagrams, are on The day of chalazion incision and curettage. The lines below are consent points, not instructions to cut or squeeze it yourself."),
       note(
         "These steps are what a doctor may explain for informed consent — not instructions to cut or squeeze the lump yourself. Whether to operate, and how, can only be decided in person.",
       ),
@@ -409,6 +413,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       ul(["Optical biometry of axial length, keratometry and chamber depth; very dense cataracts may need ultrasound axial length", "IOL power calculation — the formula depends on the eye, not one formula for all", "Ocular surface, IOP, endothelium, fundus when visible, glaucoma or macular disease", "Dilation and antiseptic. Whether to pause an anticoagulant is a joint decision — this page does not give a blanket rule"]),
       h("Usual procedure in Hong Kong: phacoemulsification"),
       p("A consent-style outline, not a clinic’s private protocol. Incision, energy and anaesthesia depend on the nucleus, cornea and general health."),
+      p("The order of the day, and the diagrams, are on The day of cataract surgery and lens implantation. The lines below keep the consent-style class outline."),
       ol([
         "Anaesthesia: usually topical drops, sometimes with intracameral anaesthetic; sedation if needed; general anaesthesia for children or special anatomy",
         "Dilute iodine on the conjunctiva and lids (an alternative if iodine-allergic); drape and speculum",
@@ -467,7 +472,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       w("Worse pain, a sudden vision drop, pus-like discharge or marked redness: go to A&E. New flashes or many new floaters need same-day dilated fundus exam; a curtain or sudden loss of vision is A&E."),
       h("Years later: posterior capsule opacification (not a returning cataract)"),
       p("The implant stays in the original bag. Lens epithelial cells can cloud the posterior capsule over years (PCO, sometimes called an after-cataract). A systematic overview pooled roughly 12% at 1 year, 21% at 3 years, and 28% at 5 years (Schaumberg et al., Ophthalmology 1998; mostly Nd:YAG / discission definitions); a large modern UK registry shows a similar rise with time (RCOphth NOD Report 9, Eye 2023). These are not your personal odds — rates vary with lens, surgery and how PCO is counted. This is not a new lens growing back, and it is not a failed operation."),
-      p("Blur years after cataract surgery is usually PCO, not a “returning cataract”. Not every blur needs YAG capsulotomy. A doctor must judge whether it affects function and exclude macular, corneal or other causes. The laser is outpatient, with no incision. See the YAG fact sheet."),
+      p("Blur years after cataract surgery is usually PCO, not a “returning cataract”. Not every blur needs YAG capsulotomy. A doctor must judge whether it affects function and exclude macular, corneal or other causes. The laser is outpatient, with no incision. See the YAG fact sheet. The order of the day is on The day of Nd:YAG posterior capsulotomy."),
       w("After YAG: new flashes or many new floaters, without a curtain, sudden blindness or severe pain — dilated fundus exam the same day (required). A curtain, sudden blindness or severe pain: go to A&E now."),
     ],
   },
@@ -477,7 +482,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
     meta: "Meibomian dysfunction · blepharitis · chalazion",
     blocks: [
       p("Heat can soften stagnant oil. This page explains the idea, not a treatment plan and not a product sale. Temperature, minutes and massage — if used — follow the doctor who examined you, not a webpage protocol."),
-      ul(["Warm, not hot; stop if it hurts. Extra care for children, older people or reduced sensation.", "Do not put a hot-water bag on the eye, do not compress over contact lenses, and do not use a raw egg or a scalding towel.", "After chalazion surgery, when to restart is the doctor’s instruction."]),
+      ul(["Warm, not hot; stop if it hurts. Extra care for children, older people or reduced sensation.", "Do not put a hot-water bag on the eye, do not compress over contact lenses, and do not use a raw egg or a scalding towel.", "After chalazion surgery, when to restart is the doctor’s instruction. The order of the day is on The day of chalazion incision and curettage. When to restart warm compresses still follows the wound and the doctor’s instruction."]),
     ],
   },
   "t-demodex": {
@@ -603,7 +608,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
           ["Multifocal / trifocal", "Good", "Good", "Near often needs fewer readers; not guaranteed spectacle-free", "More noticeable", "Not suitable"],
         ],
       },
-      p("For regular corneal astigmatism of about ≥0.75–1.00 D a toric lens may be discussed; about 1° of rotation loses roughly 3.3% of the cylinder correction. The newest model or a higher fee is not automatically the best fit. Macular disease, severe dry eye, or clear glaucoma visual-field loss: multifocal and most EDOF designs are not suitable. Brand choice is an individual preoperative discussion. This page lists no product names."),
+      p("For regular corneal astigmatism of about ≥0.75–1.00 D a toric lens may be discussed; about 1° of rotation loses roughly 3.3% of the cylinder correction. The newest model or a higher fee is not automatically the best fit. Macular disease, severe dry eye, or clear glaucoma visual-field loss: multifocal and most EDOF designs are not suitable. Brand choice is an individual preoperative discussion. This page lists no product names. The order of implantation on the day is on The day of cataract surgery and lens implantation. This page still covers optical classes only, and lists no product names."),
     ],
   },
   "t-early": {
@@ -623,9 +628,9 @@ export const EN_PACKS: Record<string, TopicPack> = {
     meta: "PCO · sealing a tear",
     blocks: [
       h("YAG posterior capsulotomy"),
-      p("Not a “returning cataract”. Lens epithelial cells cloud the posterior capsule. Over years this is not uncommon; rates in the literature vary and are not your personal odds. Outpatient laser, no incision. Not every blur needs YAG; a doctor judges whether it affects function. Short pressure rise and extra floaters can occur; retinal tear is uncommon. After YAG: new flashes or many new floaters, without a curtain, sudden blindness or severe pain — dilated fundus exam the same day (required). A curtain, sudden blindness or severe pain: go to A&E now."),
+      p("Not a “returning cataract”. Lens epithelial cells cloud the posterior capsule. Over years this is not uncommon; rates in the literature vary and are not your personal odds. Outpatient laser, no incision. Not every blur needs YAG; a doctor judges whether it affects function. Short pressure rise and extra floaters can occur; retinal tear is uncommon. After YAG: new flashes or many new floaters, without a curtain, sudden blindness or severe pain — dilated fundus exam the same day (required). A curtain, sudden blindness or severe pain: go to A&E now. The order of the day and the diagrams are on The day of Nd:YAG posterior capsulotomy."),
       h("Retinal barrier laser"),
-      p("Scars around a tear to reduce fluid going under the retina. Activity limits depend on the tear and the doctor’s instructions — not a blanket two-week sports ban. Laser cannot fix a retina that is already detached. An expanding curtain is an emergency."),
+      p("Scars around a tear to reduce fluid going under the retina. Activity limits depend on the tear and the doctor’s instructions — not a blanket two-week sports ban. Laser cannot fix a retina that is already detached. An expanding curtain is an emergency. The order of the day and the diagrams are on The day of argon retinal barrier laser. This paragraph is not a treatment recipe. Laser cannot put a retina that has already detached back in place."),
     ],
   },
   "t-mfiol": {
@@ -650,7 +655,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
         "Pigment epithelial detachment (PED): large height or shape change suggests active neovascularisation",
         "Hyperreflective foci: those near the fovea may relate to inflammatory activity",
       ]),
-      p("Wet age-related macular degeneration: new distortion needs prompt review. Smoking markedly raises risk. Whether to give an intravitreal injection, and which registered medicine to use, can only be decided by an ophthalmologist under Hong Kong labelled indications. Large-trial averages do not guarantee personal vision."),
+      p("Wet age-related macular degeneration: new distortion needs prompt review. Smoking markedly raises risk. Whether to give an intravitreal injection, and which registered medicine to use, can only be decided by an ophthalmologist under Hong Kong labelled indications. Large-trial averages do not guarantee personal vision. The injection day is on The day of an intravitreal injection. Whether to inject is still decided by an ophthalmologist after examination."),
       p("Diabetic macular oedema: systemic HbA1c and blood-pressure control matter as much as ocular treatment and need medical follow-up. Drug choice is a prescribing decision."),
       p("Retinal vein occlusion: systemic factors such as blood pressure must be checked. Central retinal thickness can be very high. Severe pain or a sharp vision drop after injection — rule out endophthalmitis and go to A&E now."),
     ],
@@ -672,7 +677,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
       h("4. Corneal laser (including presbyopia designs)"),
       p("Excimer or femtosecond laser changes corneal shape (LASIK, SMILE, surface ablation). For presbyopia this may be monovision or a multifocal corneal pattern. It does not restore lens focusing. Dry eye, halos, under/over-correction; thin corneas and keratoconus are usually unsuitable. See the laser page."),
       h("5. Intraocular lens surgery"),
-      p("The natural lens is removed and an implant placed — with visually significant cataract, or as refractive lens exchange in a clear lens (stricter). Optical classes: monofocal (including monovision), enhanced monofocal, toric, EDOF, multifocal. Intraocular risks (capsule rupture, macular oedema, endophthalmitis, detachment) apply. Multifocal / EDOF designs try far–intermediate–near but bring halos and lower contrast; macular or field disease makes multifocal unsuitable. Lens opacity does not “grow back” (posterior capsule opacification: see YAG); a poorly chosen intraocular lens is hard to exchange lightly; not everyone ends up glasses-free. See phaco and the IOL demo."),
+      p("The natural lens is removed and an implant placed — with visually significant cataract, or as refractive lens exchange in a clear lens (stricter). Optical classes: monofocal (including monovision), enhanced monofocal, toric, EDOF, multifocal. Intraocular risks (capsule rupture, macular oedema, endophthalmitis, detachment) apply. Multifocal / EDOF designs try far–intermediate–near but bring halos and lower contrast; macular or field disease makes multifocal unsuitable. Lens opacity does not “grow back” (posterior capsule opacification: see YAG); a poorly chosen intraocular lens is hard to exchange lightly; not everyone ends up glasses-free. See phaco and the IOL demo. Surgery done because cataract is already present: the order of the day is on The day of cataract surgery and lens implantation. Refractive lens exchange while the lens is still clear has stricter indications and is not set out on that page."),
       w("No option fits everyone and none “cures” presbyopia. This page does not compare clinics or quote prices. A curtain or sudden vision drop: go to A&E now. New flashes or a clear increase in floaters without a curtain or sudden blindness: dilated fundus exam the same day if possible. See the urgent page."),
     ],
   },
@@ -712,6 +717,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
         ],
       },
       p("Macula still on: an emergency, aim for surgery in hours to a day. Macula already off: still operate promptly. Literature more often supports surgery within a few days of losing central vision (especially the first three days); outcomes are usually better than with further delay. This is not “wait a week”, and it is not “each extra day always costs one more line”. A curtain, a large field cut or a sudden vision drop: go to A&E now. New flashes or a clear increase in floaters without a curtain, sudden blindness or severe pain: dilated fundus exam the same day if possible."),
+      p("A tear that has not detached, and that a doctor has selected, may be discussed as outpatient barrier laser: see The day of argon retinal barrier laser. A curtain or a sudden vision drop already present: go to A&E now. Do not go home and wait for laser."),
       p("Epiretinal membrane: peel if folds affect vision — not automatic at diagnosis. Macular hole: a doctor may discuss vitrectomy with ILM work and gas; whether it closes varies with duration and the individual case — still not a guarantee; shorter duration is usually more favourable."),
       h("Two operations a doctor may discuss for a rhegmatogenous detachment"),
       p("Pars plana vitrectomy, scleral buckle, or both, depend on tear location, whether a PVD is already present, PVR, lens status and the doctor's judgement. This page is not comparing clinic “success rates”. Primary anatomic reattachment rates vary with the tear, PVR, lens status and technique; complex eyes are usually lower. This page does not summarise all rhegmatogenous-detachment success rates from a single paper."),
@@ -1222,7 +1228,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
     tag: "Sudden vision change",
     meta: "Vein · artery · when it is urgent",
     blocks: [
-      p("Arteries feed the retina; veins drain it. A blockage is a vascular event. Think blood pressure, diabetes, lipids, arrhythmia, glaucoma — and, for arterial occlusion, the carotids and giant-cell arteritis. This page does not promote any injection."),
+      p("Arteries feed the retina; veins drain it. A blockage is a vascular event. Think blood pressure, diabetes, lipids, arrhythmia, glaucoma — and, for arterial occlusion, the carotids and giant-cell arteritis. This page does not promote any injection. If a doctor arranges an intravitreal anti-VEGF injection, the order of the day is on The day of an intravitreal injection."),
       h("Vein occlusions"),
       ul(["Branch: a patch or half-field; anti-VEGF class for macular oedema; laser if new vessels", "Central: more widespread haemorrhage; watch for neovascular glaucoma over weeks to months — “100-day glaucoma” is a memory aid, not a calendar"]),
       h("Artery occlusions — more urgent"),
@@ -1561,7 +1567,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
         "Lacquer cracks: linear breaks in Bruch’s membrane and related complex, seen as fine yellowish-white lines; not immediate blindness by themselves, but an important harbinger of CNV.",
         "Myopic CNV: abnormal vessels under the macula that may bleed or leak suddenly — often sudden central vision drop and distortion.",
         "Myopic traction maculopathy (MTM): vitreoretinal traction plus staphyloma forces may cause foveoschisis / maculoschisis, lamellar or full-thickness macular hole, and in severe cases macular retinal detachment.",
-        "Peripheral retinal tear / retinal detachment: peripheral degeneration is more common in high myopia; a tear can lead to detachment — a different place and mechanism from maculopathy, but still a long-term high-myopia risk.",
+        "Peripheral retinal tear / retinal detachment: peripheral degeneration is more common in high myopia; a tear can lead to detachment — a different place and mechanism from maculopathy, but still a long-term high-myopia risk. If a doctor suggests barrier laser, the order of the day is on The day of argon retinal barrier laser.",
       ]),
       p("This page deepens the high-myopia risk overview on the refractive-error topic, focusing on macular and peripheral structural change. It does not replace regular dilated fundus exams. Childhood / adolescent options a doctor may discuss for slowing progression are on another education page — a different layer from “structural risk already present”."),
       h("Common symptoms"),
@@ -1586,7 +1592,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
         "Children / teens still progressing: discussion of slowing progression belongs on the childhood-myopia education page — different from structural risk on this page",
       ]),
       h("What a doctor may do"),
-      p("Vision, refraction, pressure; visual field if needed; dilated fundus (posterior pole and periphery); OCT; fundus imaging; fluorescein angiography (FFA) when CNV is suspected; axial length / staphyloma assessment; optic-nerve evaluation if glaucoma is a concern. Individual — not a guaranteed checklist. Anti-VEGF injection or surgery are specialty-level class discussions only; this page lists no brand names and makes no outcome promises."),
+      p("Vision, refraction, pressure; visual field if needed; dilated fundus (posterior pole and periphery); OCT; fundus imaging; fluorescein angiography (FFA) when CNV is suspected; axial length / staphyloma assessment; optic-nerve evaluation if glaucoma is a concern. Individual — not a guaranteed checklist. Anti-VEGF injection or surgery are specialty-level class discussions only; this page lists no brand names and makes no outcome promises. The order of the day is on The day of an intravitreal injection."),
       h("Common myths"),
       {
         type: "table",
@@ -2505,4 +2511,5 @@ export const EN_PACKS: Record<string, TopicPack> = {
       },
     ],
   },
+  ...PROCEDURE_DAY_EN,
 };
