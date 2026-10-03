@@ -40,6 +40,10 @@ export type FrameSpec = {
   draw: FrameDraw;
   /** Short on-diagram words. Long sentences stay in `caption`. */
   labels?: string[];
+  /** Dashed chip under the drawing (barrier spots). */
+  tag?: string;
+  /** Line under the drawing (toric add-on on the class card). */
+  note?: string;
 };
 
 export type Block =
@@ -1691,7 +1695,13 @@ export function searchTopics(q: string) {
           case "table":
             return b.rows.flat();
           case "frames":
-            return b.frames.flatMap((f) => [f.title, f.caption, ...(f.labels ?? [])]);
+            return b.frames.flatMap((f) => [
+              f.title,
+              f.caption,
+              ...(f.tag ? [f.tag] : []),
+              ...(f.note ? [f.note] : []),
+              ...(f.labels ?? []),
+            ]);
           default:
             return [b.text];
         }

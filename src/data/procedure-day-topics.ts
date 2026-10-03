@@ -183,7 +183,7 @@ export const PROCEDURE_DAY_TOPICS: Topic[] = [
         {
           draw: "ch-bruise",
           title: "腫與瘀",
-          caption: "一兩日腫脹常見。劇痛、視力下降或發燒不是普通腫。",
+          caption: "一兩日腫脹常見。",
         },
       ]),
       { type: "h", text: "風險與併發症" },
@@ -287,7 +287,7 @@ export const PROCEDURE_DAY_TOPICS: Topic[] = [
           draw: "bar-spots",
           title: "周圍一圈淡點",
           caption: "讓周圍慢慢結疤封邊。不能把已經脫離的視網膜復位。",
-          labels: ["概念圖，不是點數、排數或能量"],
+          tag: "概念圖，不是點數、排數或能量",
         },
         {
           draw: "bar-leave",
@@ -507,14 +507,14 @@ export const PROCEDURE_DAY_TOPICS: Topic[] = [
         },
         {
           draw: "cat-classes",
-          title: "五種類別，不是商品",
-          caption: "沒有一款適合所有人。詳見「人工晶體選擇細節」。晶體視力示意工具本頁不改。",
-          labels: ["光暈通常較明顯"],
+          title: "四種類別，不是商品",
+          caption: "沒有一款適合所有人。詳見「人工晶體選擇細節」。",
+          note: "虛線小記號＝散光矯正（toric）附加，可加在任何一類上，不是第五類。",
         },
         {
           draw: "cat-shield",
           title: "眼罩、當日回家",
-          caption: "多數即日回家。當日矇常見，不是即時失敗。痛加劇或視力急降：立即急症室。",
+          caption: "多數即日回家。當日矇常見，不是最終視力。痛加劇或視力急降：立即急症室。",
         },
       ]),
       { type: "h", text: "風險與併發症" },
