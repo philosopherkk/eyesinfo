@@ -109,7 +109,12 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-gca", label: "巨細胞動脈炎" },
     { href: "/c/lens", label: "晶體與屈光" },
   ],
-  d8: [{ href: "/tools/floaters", label: "飛蚊與簾幕" }, { href: "/t/t-rd", label: "脫離手術與風險" }, { href: "/t/t-uveitis", label: "葡萄膜炎" }],
+  d8: [
+    { href: "/tools/floaters", label: "飛蚊與簾幕" },
+    { href: "/t/t-rd", label: "脫離手術與風險" },
+    { href: "/t/t-uveitis", label: "葡萄膜炎" },
+    { href: "/t/t-barrier-laser", label: "氬激光視網膜屏障光凝當日過程" },
+  ],
   d9: [
     { href: "/tools/warm", label: "熱敷計時" },
     { href: "/t/t-chalazion", label: "霰粒腫切開刮除" },
@@ -118,6 +123,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/tools/haze", label: "白內障日夜示意" },
     { href: "/iol", label: "晶體視力示意" },
     { href: "/t/t-yag", label: "後囊混濁（不是白內障復發）" },
+    { href: "/t/t-cataract-day", label: "白內障手術與人工晶體植入當日過程" },
   ],
   "t-iol": [{ href: "/iol", label: "晶體視力示意" }, { href: "/tools/halo", label: "夜間光暈比較" }],
   "t-mfiol": [{ href: "/tools/halo", label: "夜間光暈比較" }, { href: "/iol", label: "晶體視力示意" }],
@@ -175,7 +181,10 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-lasik", label: "激光矯視" },
     { href: "/t/t-keratoconus", label: "圓錐角膜" },
   ],
-  "t-yag": [{ href: "/t/t-yag", label: "後囊混濁（不是白內障復發）" }],
+  "t-yag": [
+    { href: "/t/t-yag-cap", label: "後囊切開當日" },
+    { href: "/t/t-barrier-laser", label: "氬激光視網膜屏障光凝當日過程" },
+  ],
   "t-glaucoma-monitor": [
     { href: "/t/d4", label: "青光眼總論" },
     { href: "/t/t-gldrops", label: "青光眼眼藥水" },
@@ -259,6 +268,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-octm", label: "黃斑 OCT" },
     { href: "/t/d5", label: "年齡相關性黃斑病變" },
     { href: "/t/d6", label: "糖尿病視網膜病變" },
+    { href: "/t/t-ivt-day", label: "抗血管內皮生長因子注射當日過程" },
   ],
   "t-presbyopia": [
     { href: "/iol", label: "晶體視力示意" },
@@ -267,7 +277,34 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-lasik", label: "LASIK 與 SMILE" },
     { href: "/t/t-cataract", label: "超聲波乳化與晶體" },
   ],
-  "t-chalazion": [{ href: "/tools/warm", label: "熱敷計時" }],
+  "t-chalazion": [
+    { href: "/tools/warm", label: "熱敷計時" },
+    { href: "/t/t-chalazion-day", label: "霰粒腫切開刮除當日過程" },
+  ],
+  "t-ivt-day": [
+    { href: "/t/t-vegf", label: "玻璃體內注射（抗血管內皮生長因子）" },
+    { href: "/t/d5", label: "年齡相關性黃斑病變" },
+    { href: "/urgent", label: "急症與同日評估" },
+  ],
+  "t-chalazion-day": [
+    { href: "/t/t-chalazion", label: "霰粒腫切開刮除術" },
+    { href: "/t/d9", label: "瞼緣炎、麥粒腫與霰粒腫" },
+    { href: "/tools/warm", label: "熱敷計時" },
+  ],
+  "t-barrier-laser": [
+    { href: "/t/d8", label: "飛蚊症與視網膜脫離風險" },
+    { href: "/t/t-rd", label: "視網膜脫離、前膜、裂孔與玻璃體切除" },
+    { href: "/urgent", label: "急症與同日評估" },
+  ],
+  "t-yag-cap": [
+    { href: "/t/t-cataract", label: "超聲波乳化與人工晶體" },
+    { href: "/t/t-yag", label: "YAG 後囊切開與視網膜屏障激光" },
+  ],
+  "t-cataract-day": [
+    { href: "/t/t-cataract", label: "超聲波乳化與人工晶體" },
+    { href: "/t/t-iol", label: "人工晶體選擇細節" },
+    { href: "/iol", label: "晶體視力示意" },
+  ],
   "t-strab": [
     { href: "/urgent", label: "急症與同日評估" },
     { href: "/t/t-strabsx", label: "斜視手術" },

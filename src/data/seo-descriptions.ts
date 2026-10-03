@@ -622,6 +622,31 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
     en: "Educational notes on YAG capsulotomy and retinal barrier laser for posterior capsule opacity or tear sealing.",
     ja: "後嚢混濁に対するYAG切開と、網膜裂孔のバリアレーザーについての教育的説明です。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
+  "/t/t-ivt-day": {
+    zh: "說明玻璃體內抗血管內皮生長因子注射當日的感受次序、線條圖、風險與術後哪個徵狀要急症室（公眾教育，不能代替面診。）",
+    en: "What an intravitreal anti-VEGF injection day feels like, with line diagrams, risks, and which symptoms mean A&E.",
+    ja: "抗VEGF硝子体内注射の当日に感じる順番、線画、リスク、救急へ行く症状を説明します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+  },
+  "/t/t-chalazion-day": {
+    zh: "說明霰粒腫切開刮除當日的感受次序、線條圖、風險與術後哪個徵狀要急症室（公眾教育，不能代替面診。）",
+    en: "What chalazion incision and curettage feels like on the day, with line diagrams, risks, and which symptoms mean A&E.",
+    ja: "霰粒腫の切開掻爬の当日に感じる順番、線画、リスク、救急へ行く症状を説明します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+  },
+  "/t/t-barrier-laser": {
+    zh: "說明視網膜裂孔或柵狀變性的氬激光屏障光凝當日過程、線條圖與術後求醫分界（公眾教育，不能代替面診。）",
+    en: "What argon barrier laser for a retinal tear or lattice feels like on the day, with line diagrams and aftercare red flags.",
+    ja: "網膜裂孔や格子状変性に対するアルゴンバリア光凝固の当日、線画、術後の受診の分かれ目を説明します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+  },
+  "/t/t-yag-cap": {
+    zh: "說明釹釔鋁石榴石後囊切開當日的門診激光過程、線條圖與術後飛蚊或簾幕的求醫分界（公眾教育，不能代替面診。）",
+    en: "What Nd:YAG posterior capsulotomy feels like on the day, with line diagrams and when floaters or a curtain need urgent care.",
+    ja: "Nd:YAG後嚢切開の当日の外来レーザー、線画、飛蚊やカーテンのときの受診の分かれ目を説明します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+  },
+  "/t/t-cataract-day": {
+    zh: "說明白內障手術與人工晶體植入當日的感受次序、類別線條圖、風險與術後急症分界（公眾教育，不能代替面診。）",
+    en: "What cataract surgery and lens implantation feel like on the day, with class diagrams, risks, and which symptoms mean A&E.",
+    ja: "白内障手術と眼内レンズ挿入の当日に感じる順番、種類の線画、リスク、救急へ行く症状を説明します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+  },
   "/t/water-acanthamoeba": {
     zh: "介紹隱形眼鏡與水源相關的棘阿米巴角膜炎風險教育，以及出現疼痛畏光時須盡快接受眼科專科評估（公眾教育，不能代替面診。）",
     en: "Education on Acanthamoeba keratitis risk linked to contact lenses and water, and why pain with photophobia needs prompt review.",
