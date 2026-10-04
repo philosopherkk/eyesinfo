@@ -346,7 +346,11 @@ html[data-theme="dark"] .urgent-on-danger {
   }
 }
 
-/* Procedure-day schematic strip. Stroke defaults match the authored drawings. */
+/* Procedure-day schematic strip. Stroke defaults match the authored drawings.
+   The strip scrolls inside the article column; it must not widen the page. */
+.proc-measure {
+  overflow-x: clip;
+}
 .proc-strip {
   position: relative;
   min-width: 0;
