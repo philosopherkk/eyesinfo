@@ -31,6 +31,21 @@ function renderParts(parts: TextPart[]): ReactNode {
   );
 }
 
+/**
+ * These five pages share TopicBody with every other topic. The desktop shell
+ * is the wide article column; `max-w-prose` (65ch) stops the text early and
+ * leaves the rest of that column empty, so each line looks left-bunched.
+ * They use the full article width instead. Alignment stays `start` —
+ * justifying Chinese opens gaps or shoves the last line left.
+ */
+const ARTICLE_MEASURE_TOPICS = new Set([
+  "t-ivt-day",
+  "t-chalazion-day",
+  "t-barrier-laser",
+  "t-yag-cap",
+  "t-cataract-day",
+]);
+
 function linkText(
   text: string,
   mentions: MentionLink[],
@@ -179,5 +194,17 @@ export function TopicBody({
     });
   }, [blocks, mentions, selfHref]);
 
-  return <div className="max-w-prose space-y-4">{nodes}</div>;
+  const articleMeasure = topicId ? ARTICLE_MEASURE_TOPICS.has(topicId) : false;
+
+  return (
+    <div
+      className={
+        articleMeasure
+          ? "proc-measure w-full min-w-0 max-w-none space-y-4 text-start"
+          : "max-w-prose space-y-4"
+      }
+    >
+      {nodes}
+    </div>
+  );
 }
