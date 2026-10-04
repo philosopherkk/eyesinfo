@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import type { FrameDraw, FrameSpec } from "@/data/topics";
+import { useI18n } from "@/i18n";
 
 /**
  * Shared shapes for the procedure-day drawings.
@@ -457,47 +458,109 @@ function Draw({ draw }: { draw: FrameDraw }): ReactNode {
 
 /** Four optical classes. Toric is the dashed note under the row, not a fifth class. */
 function ClassRow() {
+  const { locale, tx } = useI18n();
+  // Labels follow procedure-day body wording (en / ja packs); zh keeps 增強型 to match 增強型單焦點.
+  const labels =
+    locale === "en"
+      ? {
+          mono: "Monofocal",
+          emono: (
+            <>
+              Enhanced
+              <br />
+              monofocal
+            </>
+          ),
+          edof: "EDOF",
+          mf: "Multifocal",
+          halo: "Halo is usually more noticeable",
+          monoAria: "Monofocal: light focuses to one point",
+          emonoAria: "Enhanced monofocal: focus slightly lengthened",
+          edofAria: "EDOF: focus stretched into a range",
+          mfAria: "Multifocal: light split to two foci",
+        }
+      : locale === "ja"
+        ? {
+            mono: "単焦点",
+            emono: (
+              <>
+                強化
+                <br />
+                単焦点
+              </>
+            ),
+            edof: (
+              <>
+                焦点深度
+                <br />
+                延長
+              </>
+            ),
+            mf: "多焦点",
+            // procedure-day-ja uses ハロー (not 光暈); claim matches the Chinese drawing line.
+            halo: "ハローは通常より目立つ",
+            monoAria: "単焦点：光が一点に集まる",
+            emonoAria: "強化単焦点：焦点がやや延びる",
+            edofAria: "焦点深度延長：焦点が一段になる",
+            mfAria: "多焦点：光が二つの焦点に分かれる",
+          }
+        : {
+            mono: tx("單焦點"),
+            emono: (
+              <>
+                {tx("增強型")}
+                <br />
+                {tx("單焦點")}
+              </>
+            ),
+            edof: (
+              <>
+                {tx("延伸景深")}
+                <br />
+                EDOF
+              </>
+            ),
+            mf: tx("多焦點"),
+            halo: tx("光暈通常較明顯"),
+            monoAria: tx("單焦點：光聚到一點"),
+            emonoAria: tx("增強型單焦點：焦點稍為拉長"),
+            edofAria: tx("延伸景深：焦點拉成一段"),
+            mfAria: tx("多焦點：光分到兩個焦點"),
+          };
+
   return (
     <div className="proc-cls">
       <div className="c">
-        <svg viewBox="0 0 70 80" role="img" aria-label="單焦點：光聚到一點" className="proc-svg">
+        <svg viewBox="0 0 70 80" role="img" aria-label={labels.monoAria} className="proc-svg">
           <path d="M2 26H18M2 40H18M2 54H18" stroke="#f0b400" strokeWidth="2" />
           <ellipse cx="24" cy="40" rx="5" ry="20" fill="#cdeeff" />
           <path d="M28 26L56 40L28 54M28 40H56" strokeWidth="1.8" />
           <circle cx="56" cy="40" r="3.5" fill="#e0433a" stroke="none" />
         </svg>
-        <b>單焦點</b>
+        <b>{labels.mono}</b>
       </div>
       <div className="c">
-        <svg viewBox="0 0 70 80" role="img" aria-label="加強型單焦點：焦點稍為拉長" className="proc-svg">
+        <svg viewBox="0 0 70 80" role="img" aria-label={labels.emonoAria} className="proc-svg">
           <path d="M2 26H18M2 40H18M2 54H18" stroke="#f0b400" strokeWidth="2" />
           <ellipse cx="24" cy="40" rx="5" ry="20" fill="#cdeeff" />
           <path d="M22 28Q27 40 22 52" strokeDasharray="2 2" strokeWidth="1.5" />
           <path d="M28 26L54 40L28 54M28 40H54" strokeWidth="1.8" />
           <path d="M54 40H61" stroke="#e0433a" strokeWidth="5" />
         </svg>
-        <b>
-          加強型
-          <br />
-          單焦點
-        </b>
+        <b>{labels.emono}</b>
       </div>
       <div className="c">
-        <svg viewBox="0 0 70 80" role="img" aria-label="延伸景深：焦點拉成一段" className="proc-svg">
+        <svg viewBox="0 0 70 80" role="img" aria-label={labels.edofAria} className="proc-svg">
           <path d="M2 26H18M2 40H18M2 54H18" stroke="#f0b400" strokeWidth="2" />
           <ellipse cx="24" cy="40" rx="5" ry="20" fill="#cdeeff" />
           <path d="M28 26L46 40L28 54M28 40H46" strokeWidth="1.8" />
           <path d="M46 40H66" stroke="#e0433a" strokeWidth="5" />
         </svg>
-        <b>
-          延伸景深
-          <br />
-          EDOF
-        </b>
-        <span className="proc-halo">光暈通常較明顯</span>
+        <b>{labels.edof}</b>
+        <span className="proc-halo">{labels.halo}</span>
       </div>
       <div className="c">
-        <svg viewBox="0 0 70 80" role="img" aria-label="多焦點：光分到兩個焦點" className="proc-svg">
+        <svg viewBox="0 0 70 80" role="img" aria-label={labels.mfAria} className="proc-svg">
           <path d="M2 26H18M2 40H18M2 54H18" stroke="#f0b400" strokeWidth="2" />
           <ellipse cx="24" cy="40" rx="5" ry="20" fill="#cdeeff" />
           <path d="M21 32Q24 40 21 48M27 32Q24 40 27 48" strokeWidth="1.3" />
@@ -505,8 +568,8 @@ function ClassRow() {
           <circle cx="44" cy="40" r="3.5" fill="#e0433a" stroke="none" />
           <circle cx="62" cy="40" r="3.5" fill="#e0433a" stroke="none" />
         </svg>
-        <b>多焦點</b>
-        <span className="proc-halo">光暈通常較明顯</span>
+        <b>{labels.mf}</b>
+        <span className="proc-halo">{labels.halo}</span>
       </div>
     </div>
   );
