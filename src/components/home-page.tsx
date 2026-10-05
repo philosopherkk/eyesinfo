@@ -103,7 +103,7 @@ export function HomePage() {
     });
   }, [openBranch]);
 
-  const newSheets = NEW_SHEET_IDS.flatMap(({ id, labelKey }) => {
+  const clinicalNotes = NEW_SHEET_IDS.flatMap(({ id, labelKey }) => {
     const topic = getTopic(id);
     if (!topic) return [];
     const label = t(labelKey).trim() || localizeTopic(topic, locale).title;
@@ -189,13 +189,41 @@ export function HomePage() {
           loading="lazy"
           className="eye-viewer-frame"
         />
+        {clinicalNotes.length > 0 ? (
+          <div className="mt-3 overflow-hidden rounded-xl border border-line bg-card">
+            {clinicalNotes.map(({ id, label }) => (
+              <LocaleHrefLink
+                key={id}
+                path={`/t/${id}`}
+                className="flex min-h-11 items-center border-b border-line px-3 py-2 text-[0.85rem] font-semibold text-navy no-underline last:border-b-0"
+              >
+                {label}
+              </LocaleHrefLink>
+            ))}
+          </div>
+        ) : null}
+        <a
+          href="#home-topics"
+          className="mt-2 inline-flex h-11 w-full items-center justify-center rounded-xl border border-line bg-card text-[0.85rem] font-semibold text-navy no-underline"
+          onClick={(event) => {
+            const target = document.getElementById("home-topics");
+            if (!target) return;
+            event.preventDefault();
+            target.scrollIntoView({ block: "start" });
+          }}
+        >
+          {t("homeTopics")}
+        </a>
         <LocaleHrefLink
           path="/tools/map"
           className="mt-3 inline-flex h-11 w-full items-center justify-center rounded-xl border border-line bg-card text-[0.85rem] font-semibold text-navy no-underline"
         >
           {t("homeAnatomyCta")}
         </LocaleHrefLink>
-        <div className="mt-3 grid gap-2 layout-lg:grid-cols-2 layout-xl:grid-cols-3">
+        <div
+          id="home-topics"
+          className="mt-3 grid scroll-mt-24 gap-2 layout-lg:grid-cols-2 layout-xl:grid-cols-3"
+        >
           {HOME_CATEGORY_HUBS.map((cat) => (
             <AnatomyBranch
               key={cat.id}
@@ -212,25 +240,6 @@ export function HomePage() {
           ))}
         </div>
       </section>
-
-      {newSheets.length > 0 ? (
-        <section className="px-4 pb-4 layout-lg:px-6">
-          <h2 className="mb-2 text-[0.8rem] font-semibold text-muted">
-            {t("newSheets")}
-          </h2>
-          <div className="grid grid-cols-2 gap-2 layout-lg:grid-cols-4">
-            {newSheets.map(({ id, label }) => (
-              <LocaleHrefLink
-                key={id}
-                path={`/t/${id}`}
-                className="flex min-h-11 items-center rounded-xl border border-line bg-card px-3 py-2 text-[0.82rem] font-semibold text-navy no-underline"
-              >
-                {label}
-              </LocaleHrefLink>
-            ))}
-          </div>
-        </section>
-      ) : null}
 
       <section className="mt-1">
         <h2 className="px-4 pb-1 text-[0.8rem] font-semibold text-muted layout-lg:px-6">

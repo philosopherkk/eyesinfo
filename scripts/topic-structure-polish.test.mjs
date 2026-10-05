@@ -457,7 +457,7 @@ describe("topic structure polish", () => {
     assert.doesNotMatch(legalPage, /本站目前未公開營運者電郵。更正政策見上/);
 
     assert.match(shell, /ariaCurrentPage/);
-    assert.match(home, /newSheets/);
+    assert.doesNotMatch(home, /newSheets|新單張/);
     assert.match(home, /t-optic-neuritis/);
     assert.match(home, /t-corneal-transplant/);
     assert.match(home, /t-nystagmus/);
