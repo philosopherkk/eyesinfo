@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Ophthalmic Procedures | 眼科手術 3D 教學</title>
+  <title>眼科手術 3D 教學 | Ophthalmic procedures</title>
 
   <!-- Pinned dependency version, not a claim about the latest release. -->
   <script type="importmap">
@@ -404,7 +404,7 @@
     <div class="selectors">
       <select id="procedure" aria-label="Select procedure / 選擇手術">
         <option value="rrd">
-          1. 視網膜剝離 — PPV + Endolaser + Gas
+          1. 視網膜脫離 — PPV + Endolaser + Gas
         </option>
         <option value="injection">
           2. 玻璃體內注射 — Intravitreal injection
@@ -518,7 +518,6 @@
     This is not an operative guide, competency trainer, or individual medical
     advice. Anatomy and movements are simplified. Timeline pacing is illustrative,
     and the model does not predict treatment outcomes.
-    Obtain ophthalmologist review before clinical or patient-facing deployment.
   </footer>
 
   <script type="module">
@@ -551,14 +550,14 @@
 
       const PROCEDURES = {
         rrd: {
-          zh: "裂孔性視網膜剝離手術",
+          zh: "裂孔性視網膜脫離手術",
           en: "Rhegmatogenous retinal detachment repair",
           subtitleZh: "經睫狀體平坦部玻璃體切除＋眼內雷射＋氣體填塞",
           subtitleEn: "Pars plana vitrectomy + endolaser + gas tamponade",
           warningZh:
             "眼內氣體尚未完全吸收時，不可搭飛機；避免高海拔及笑氣（氧化亞氮）。" +
             "任何麻醉或急診處置前，告知醫療人員眼內有氣體。" +
-            "姿勢及恢復活動時間須依主治醫師指示。",
+            "姿勢及恢復活動時間須依主診醫生指示。",
           warningEn:
             "While intraocular gas remains: no flying; avoid high altitude and " +
             "nitrous oxide. Tell anesthesia and emergency-care teams that gas " +
@@ -572,9 +571,9 @@
           stages: [
             stage(
               "病變與手術確認", "Assessment and confirmation",
-              "裂孔讓液體進入視網膜下方，使視網膜與眼球後壁分離。確認手術眼、剝離範圍、裂孔及手術計畫。",
+              "裂孔讓液體進入視網膜下方，使視網膜與眼球後壁分離。確認手術眼、脫離範圍、裂孔及手術計畫。",
               "A retinal break allows fluid beneath the retina, separating it from the underlying wall. The operative eye, detachment, breaks, and repair plan are confirmed.",
-              "模型僅示意一個裂孔與局部剝離，並非特定患者的影像。",
+              "模型僅示意一個裂孔與局部脫離，並非特定患者的影像。",
               "One break and a localized detachment are illustrated; this is not patient-specific imaging."
             ),
             stage(
@@ -1990,6 +1989,9 @@
         document.documentElement.lang =
           requestedLanguage === "en" ? "en" : "zh-Hant";
       }
+      document.title = language === "en"
+        ? "Ophthalmic procedures"
+        : "眼科手術 3D 教學";
       let playing = false;
 
       const progressByProcedure = {
@@ -2265,6 +2267,9 @@
         language = event.target.value;
         document.documentElement.lang =
           language === "en" ? "en" : "zh-Hant";
+        document.title = language === "en"
+          ? "Ophthalmic procedures"
+          : "眼科手術 3D 教學";
         updateHeader();
         refresh();
       });
