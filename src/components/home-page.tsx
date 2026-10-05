@@ -1,5 +1,14 @@
+import { useEffect, useState } from "react";
 import { ChevronRight, Download } from "lucide-react";
-import { CATEGORIES, getTopic, TOPICS } from "@/data/topics";
+import {
+  CATEGORIES,
+  getTopic,
+  topicCardTitle,
+  topicsByCategory,
+  TOPICS,
+  type CategoryId,
+  type Topic,
+} from "@/data/topics";
 import { TOOLS } from "@/data/tools";
 import { FontControl } from "@/components/font-control";
 import { ThemeControl } from "@/components/theme-control";
@@ -14,6 +23,11 @@ import { CONTENT_VERSION } from "@/lib/site";
 import { EDITORIAL } from "@/data/editorial";
 import { hrefWithLang } from "@/lib/locale-path";
 import type { Locale } from "@/i18n/locale";
+import {
+  ANATOMY_RELATED,
+  homeBranchForViewerStructure,
+  type AnatomyHomeBranchId,
+} from "@/data/anatomy-related";
 
 /**
  * KK's viewer is 繁 / EN only (`?lang=zh|en`).
@@ -61,6 +75,33 @@ export function HomePage() {
   const featured = TOPICS.filter((t) => t.featured);
   const { t, locale } = useI18n();
   const tools = TOOL_TEXT[locale];
+  const [openBranch, setOpenBranch] = useState<AnatomyHomeBranchId | null>(null);
+
+  useEffect(() => {
+    const onMessage = (event: MessageEvent) => {
+      if (event.origin !== window.location.origin) return;
+      const iframe = document.getElementById("eyesinfo-eye-viewer");
+      if (
+        !(iframe instanceof HTMLIFrameElement) ||
+        event.source !== iframe.contentWindow
+      ) {
+        return;
+      }
+      const data = event.data as { type?: unknown; structure?: unknown } | null;
+      if (!data || data.type !== "eyesinfo-eye-select") return;
+      if (typeof data.structure !== "string") return;
+      setOpenBranch(homeBranchForViewerStructure(data.structure));
+    };
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
+  }, []);
+
+  useEffect(() => {
+    if (!openBranch) return;
+    document.getElementById(`anatomy-branch-${openBranch}`)?.scrollIntoView({
+      block: "nearest",
+    });
+  }, [openBranch]);
 
   const newSheets = NEW_SHEET_IDS.flatMap(({ id, labelKey }) => {
     const topic = getTopic(id);
@@ -156,19 +197,18 @@ export function HomePage() {
         </LocaleHrefLink>
         <div className="mt-3 grid gap-2 layout-lg:grid-cols-2 layout-xl:grid-cols-3">
           {HOME_CATEGORY_HUBS.map((cat) => (
-            <LocaleHrefLink
+            <AnatomyBranch
               key={cat.id}
-              path={`/c/${cat.id}`}
-              className="flex items-center justify-between rounded-xl bg-navy px-4 py-3.5 text-paper no-underline"
-            >
-              <span>
-                <span className="block font-semibold">{t(CAT_TITLE[cat.id])}</span>
-                <span className="mt-0.5 block text-[0.78rem] text-paper/70">
-                  {t(CAT_SUB[cat.id])}
-                </span>
-              </span>
-              <ChevronRight className="size-5 text-paper/60" />
-            </LocaleHrefLink>
+              id={cat.id as AnatomyHomeBranchId}
+              title={t(CAT_TITLE[cat.id])}
+              subtitle={t(CAT_SUB[cat.id])}
+              topics={topicsForHub(cat.id)}
+              open={openBranch === cat.id}
+              locale={locale}
+              onToggle={() =>
+                setOpenBranch((current) => (current === cat.id ? null : (cat.id as AnatomyHomeBranchId)))
+              }
+            />
           ))}
         </div>
       </section>
@@ -220,6 +260,78 @@ export function HomePage() {
           {t("resourcesLink")}
         </LocaleHrefLink>
       </p>
+    </div>
+  );
+}
+
+function topicsForHub(hubId: string): Topic[] {
+  if (hubId === "macula") {
+    const related = ANATOMY_RELATED.macula;
+    if (related.kind !== "topics") return [];
+    return related.topicIds.flatMap((id) => {
+      const topic = getTopic(id);
+      return topic ? [topic] : [];
+    });
+  }
+  return topicsByCategory(hubId as CategoryId);
+}
+
+function AnatomyBranch({
+  id,
+  title,
+  subtitle,
+  topics,
+  open,
+  locale,
+  onToggle,
+}: {
+  id: AnatomyHomeBranchId;
+  title: string;
+  subtitle: string;
+  topics: Topic[];
+  open: boolean;
+  locale: Locale;
+  onToggle: () => void;
+}) {
+  const listId = `anatomy-topics-${id}`;
+  return (
+    <div id={`anatomy-branch-${id}`} className="overflow-hidden rounded-xl bg-navy">
+      <div className="flex items-stretch">
+        <LocaleHrefLink
+          path={`/c/${id}`}
+          className="flex min-w-0 flex-1 flex-col justify-center px-4 py-3.5 text-paper no-underline"
+        >
+          <span className="block font-semibold">{title}</span>
+          <span className="mt-0.5 block text-[0.78rem] text-paper/70">{subtitle}</span>
+        </LocaleHrefLink>
+        <button
+          type="button"
+          className="grid w-12 shrink-0 place-items-center text-paper/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper"
+          aria-expanded={open}
+          aria-controls={listId}
+          aria-label={title}
+          onClick={onToggle}
+        >
+          <ChevronRight className={open ? "size-5 rotate-90" : "size-5"} />
+        </button>
+      </div>
+      {topics.length > 0 ? (
+        <ul id={listId} hidden={!open} className="border-t border-paper/20 bg-card">
+          {topics.map((topic) => {
+            const loc = localizeTopic(topic, locale);
+            return (
+              <li key={topic.id} className="border-b border-line last:border-b-0">
+                <LocaleHrefLink
+                  path={`/t/${topic.id}`}
+                  className="flex min-h-11 items-center px-4 py-2.5 text-[0.85rem] font-semibold text-navy no-underline"
+                >
+                  {topicCardTitle(loc.title)}
+                </LocaleHrefLink>
+              </li>
+            );
+          })}
+        </ul>
+      ) : null}
     </div>
   );
 }
