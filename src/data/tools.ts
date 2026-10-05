@@ -241,6 +241,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-migraine", label: "偏頭痛與眼科" },
   ],
   "t-rd": [
+    { href: "/tools/procedures?procedure=rrd", label: "教學示意" },
     { href: "/tools/floaters", label: "飛蚊與簾幕" },
     { href: "/t/t-macular-hole", label: "黃斑裂孔" },
     { href: "/t/t-erm", label: "黃斑前膜" },
@@ -282,11 +283,13 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-chalazion-day", label: "霰粒腫切開刮除當日過程" },
   ],
   "t-ivt-day": [
+    { href: "/tools/procedures?procedure=injection", label: "教學示意" },
     { href: "/t/t-vegf", label: "玻璃體內注射（抗血管內皮生長因子）" },
     { href: "/t/d5", label: "年齡相關性黃斑病變" },
     { href: "/urgent", label: "急症與同日評估" },
   ],
   "t-chalazion-day": [
+    { href: "/tools/procedures?procedure=chalazion", label: "教學示意" },
     { href: "/t/t-chalazion", label: "霰粒腫切開刮除術" },
     { href: "/t/d9", label: "瞼緣炎、麥粒腫與霰粒腫" },
     { href: "/tools/warm", label: "熱敷計時" },

@@ -35,6 +35,7 @@ import { Route as JaSplatRouteImport } from './routes/ja.$'
 import { Route as TTopicIdRouteImport } from './routes/t.$topicId'
 import { Route as ToolsIndexRouteImport } from './routes/tools.index'
 import { Route as ToolsToolIdRouteImport } from './routes/tools.$toolId'
+import { Route as ToolsProceduresRouteImport } from './routes/tools.procedures'
 import { Route as ZhCNIndexRouteImport } from './routes/zh-CN.index'
 import { Route as ZhCNSplatRouteImport } from './routes/zh-CN.$'
 import { Route as ZhHansIndexRouteImport } from './routes/zh-Hans.index'
@@ -170,6 +171,11 @@ const ToolsToolIdRoute = ToolsToolIdRouteImport.update({
   path: '/$toolId',
   getParentRoute: () => ToolsRoute,
 } as any)
+const ToolsProceduresRoute = ToolsProceduresRouteImport.update({
+  id: '/procedures',
+  path: '/procedures',
+  getParentRoute: () => ToolsRoute,
+} as any)
 const ZhCNIndexRoute = ZhCNIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -215,6 +221,7 @@ export interface FileRoutesByFullPath {
   '/ja/$': typeof JaSplatRoute
   '/t/$topicId': typeof TTopicIdRoute
   '/tools/$toolId': typeof ToolsToolIdRoute
+  '/tools/procedures': typeof ToolsProceduresRoute
   '/zh-CN/$': typeof ZhCNSplatRoute
   '/zh-Hans/$': typeof ZhHansSplatRoute
   '/en/': typeof EnIndexRoute
@@ -242,6 +249,7 @@ export interface FileRoutesByTo {
   '/ja/$': typeof JaSplatRoute
   '/t/$topicId': typeof TTopicIdRoute
   '/tools/$toolId': typeof ToolsToolIdRoute
+  '/tools/procedures': typeof ToolsProceduresRoute
   '/zh-CN/$': typeof ZhCNSplatRoute
   '/zh-Hans/$': typeof ZhHansSplatRoute
   '/en': typeof EnIndexRoute
@@ -275,6 +283,7 @@ export interface FileRoutesById {
   '/ja/$': typeof JaSplatRoute
   '/t/$topicId': typeof TTopicIdRoute
   '/tools/$toolId': typeof ToolsToolIdRoute
+  '/tools/procedures': typeof ToolsProceduresRoute
   '/zh-CN/$': typeof ZhCNSplatRoute
   '/zh-Hans/$': typeof ZhHansSplatRoute
   '/en/': typeof EnIndexRoute
@@ -309,6 +318,7 @@ export interface FileRouteTypes {
     | '/ja/$'
     | '/t/$topicId'
     | '/tools/$toolId'
+    | '/tools/procedures'
     | '/zh-CN/$'
     | '/zh-Hans/$'
     | '/en/'
@@ -336,6 +346,7 @@ export interface FileRouteTypes {
     | '/ja/$'
     | '/t/$topicId'
     | '/tools/$toolId'
+    | '/tools/procedures'
     | '/zh-CN/$'
     | '/zh-Hans/$'
     | '/en'
@@ -368,6 +379,7 @@ export interface FileRouteTypes {
     | '/ja/$'
     | '/t/$topicId'
     | '/tools/$toolId'
+    | '/tools/procedures'
     | '/zh-CN/$'
     | '/zh-Hans/$'
     | '/en/'
@@ -584,6 +596,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsToolIdRouteImport
       parentRoute: typeof ToolsRoute
     }
+    '/tools/procedures': {
+      id: '/tools/procedures'
+      path: '/procedures'
+      fullPath: '/tools/procedures'
+      preLoaderRoute: typeof ToolsProceduresRouteImport
+      parentRoute: typeof ToolsRoute
+    }
     '/zh-CN/': {
       id: '/zh-CN/'
       path: '/'
@@ -641,11 +660,13 @@ const JaRouteWithChildren = JaRoute._addFileChildren(JaRouteChildren)
 
 interface ToolsRouteChildren {
   ToolsToolIdRoute: typeof ToolsToolIdRoute
+  ToolsProceduresRoute: typeof ToolsProceduresRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
 }
 
 const ToolsRouteChildren: ToolsRouteChildren = {
   ToolsToolIdRoute: ToolsToolIdRoute,
+  ToolsProceduresRoute: ToolsProceduresRoute,
   ToolsIndexRoute: ToolsIndexRoute,
 }
 

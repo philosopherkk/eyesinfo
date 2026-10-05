@@ -1,0 +1,2454 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Ophthalmic Procedures | 眼科手術 3D 教學</title>
+
+  <!-- Pinned dependency version, not a claim about the latest release. -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "/vendor/three/0.180.0/build/three.module.js",
+      "three/addons/": "/vendor/three/0.180.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #08111f;
+      --panel: #111e30;
+      --border: #2b3b51;
+      --text: #edf5ff;
+      --muted: #a9bdd4;
+      --accent: #65d9ee;
+      --gold: #ffd18b;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, "Noto Sans TC",
+        "Microsoft JhengHei", sans-serif;
+    }
+
+    button, select, input { font: inherit; }
+
+    button, select {
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      color: var(--text);
+      background: #1a2b42;
+    }
+
+    button { cursor: pointer; }
+    button:hover { border-color: var(--accent); }
+    button:disabled { opacity: .4; cursor: default; }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .primary {
+      background: #13576d;
+      border-color: #2a8196;
+    }
+
+    input { accent-color: var(--accent); }
+
+    header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .badge {
+      color: var(--accent);
+      letter-spacing: 1px;
+      font-size: 12px;
+      margin-bottom: 7px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(21px, 3vw, 29px);
+    }
+
+    #procedureSubtitle {
+      color: var(--muted);
+      margin: 8px 0 0;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .selectors {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    #procedure { max-width: 100%; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 370px;
+    }
+
+    .viewer {
+      position: relative;
+      min-height: 640px;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at center, #192e48, #08111f 76%);
+    }
+
+    #scene { position: absolute; inset: 0; }
+    #scene canvas { display: block; }
+
+    #labels {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .label {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      font-size: 11px;
+      border: 1px solid #58748b99;
+      border-radius: 6px;
+      padding: 4px 7px;
+      background: #091522df;
+      color: #e0f0ff;
+    }
+
+    .viewer-top {
+      position: absolute;
+      z-index: 2;
+      top: 16px;
+      left: 16px;
+      right: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      pointer-events: none;
+    }
+
+    .viewer-top button { pointer-events: auto; }
+
+    #stageTag {
+      max-width: 72%;
+      padding: 10px 13px;
+      background: #0b172bdc;
+      border: 1px solid #35516b;
+      border-radius: 10px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .viewer-bottom {
+      position: absolute;
+      z-index: 2;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 12px;
+      pointer-events: none;
+    }
+
+    #legend {
+      background: #0a1729dc;
+      border-radius: 10px;
+      padding: 11px 13px;
+      display: grid;
+      gap: 7px;
+      font-size: 11px;
+    }
+
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      flex: 0 0 auto;
+    }
+
+    .hint {
+      color: var(--muted);
+      text-align: right;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    #status {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      padding: 30px;
+      display: grid;
+      place-items: center;
+      background: #08111fee;
+      white-space: pre-line;
+      text-align: center;
+    }
+
+    #status[hidden] { display: none; }
+
+    aside {
+      background: var(--panel);
+      border-left: 1px solid var(--border);
+      padding: 22px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    #stageTitle {
+      margin: 0 0 7px;
+      font-size: 24px;
+    }
+
+    #stageSubtitle {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    #explanation {
+      margin-top: 19px;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    #explanation p { margin: 0 0 15px; }
+    #explanation .en { color: #b9cce1; }
+
+    .note {
+      border-left: 3px solid var(--gold);
+      background: #ffd18b0a;
+      padding: 12px;
+      font-size: 12px;
+      line-height: 1.7;
+      color: #e8d7ba;
+      white-space: pre-line;
+    }
+
+    #procedureWarning {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #f4906510;
+      border: 1px solid #9a664c77;
+      color: #efc7af;
+      font-size: 12px;
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .settings {
+      border-top: 1px solid var(--border);
+      margin-top: 19px;
+      padding-top: 17px;
+      display: grid;
+      gap: 14px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .settings label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .view-buttons { display: flex; gap: 8px; }
+    .view-buttons button { flex: 1; font-size: 12px; }
+
+    .timeline-panel {
+      border-top: 1px solid var(--border);
+      padding: 20px 24px 24px;
+      background: #0c1828;
+    }
+
+    .transport {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 15px;
+    }
+
+    #progressText {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    #timeline { width: 100%; margin: 6px 0 18px; }
+
+    #steps {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(110px, 1fr);
+      gap: 7px;
+      overflow-x: auto;
+      padding: 3px 2px 10px;
+    }
+
+    .step {
+      text-align: left;
+      font-size: 11px;
+      line-height: 1.5;
+      min-height: 84px;
+      padding: 8px;
+    }
+
+    .step strong {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .step small {
+      display: block;
+      color: #a8bdd4;
+      font-size: 10px;
+    }
+
+    .step.active {
+      background: #16465b;
+      border-color: var(--accent);
+    }
+
+    .step.active strong { color: var(--accent); }
+    .step.complete { border-color: #3d6555; }
+
+    footer {
+      color: var(--muted);
+      padding: 16px 24px;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 1000px) {
+      .layout { grid-template-columns: 1fr; }
+      .viewer { min-height: 520px; }
+      aside {
+        border-left: 0;
+        border-top: 1px solid var(--border);
+      }
+      .settings { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      header, .timeline-panel, footer {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+      .viewer { min-height: 430px; }
+      .settings { grid-template-columns: 1fr; }
+      .hint { max-width: 120px; }
+      #progressText { width: 100%; margin-left: 0; }
+      #legend { font-size: 10px; }
+      .viewer-top button { font-size: 11px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-row">
+      <div>
+        <div class="badge">
+          INTERACTIVE EDUCATION · 互動教學 · SCHEMATIC 3D
+        </div>
+        <h1 id="procedureTitle"></h1>
+        <p id="procedureSubtitle"></p>
+      </div>
+    </div>
+
+    <div class="selectors">
+      <select id="procedure" aria-label="Select procedure / 選擇手術">
+        <option value="rrd">
+          1. 視網膜剝離 — PPV + Endolaser + Gas
+        </option>
+        <option value="injection">
+          2. 玻璃體內注射 — Intravitreal injection
+        </option>
+        <option value="chalazion">
+          3. 霰粒腫切開刮除 — Chalazion I&amp;C
+        </option>
+      </select>
+
+      <select id="language" aria-label="Language / 語言">
+        <option value="both">繁體中文 + English</option>
+        <option value="zh">繁體中文</option>
+        <option value="en">English</option>
+      </select>
+    </div>
+  </header>
+
+  <main>
+    <div class="layout">
+      <section class="viewer" aria-label="Interactive 3D model">
+        <div id="scene"></div>
+        <div id="labels"></div>
+
+        <div class="viewer-top">
+          <div id="stageTag"></div>
+          <button id="resetView">重設視角 / Reset view</button>
+        </div>
+
+        <div class="viewer-bottom">
+          <div id="legend"></div>
+          <div class="hint">
+            拖曳旋轉 · 滾輪縮放<br />
+            Drag to rotate · Scroll to zoom<br />
+            非等比例 · Not to scale<br />
+            教學時間 · Not operative time
+          </div>
+        </div>
+
+        <div id="status">載入模型… / Loading models…</div>
+      </section>
+
+      <aside>
+        <div id="stepCount" class="eyebrow"></div>
+        <h2 id="stageTitle"></h2>
+        <div id="stageSubtitle"></div>
+        <div id="explanation"></div>
+        <div id="clinicalNote" class="note"></div>
+        <div id="procedureWarning"></div>
+
+        <div class="settings">
+          <label>
+            解剖標籤 / Labels
+            <input id="showLabels" type="checkbox" checked />
+          </label>
+
+          <label>
+            外層透明度 / Outer-layer opacity
+            <input id="outerOpacity" type="range"
+              min="0.02" max="0.9" step="0.01" value="0.12" />
+          </label>
+
+          <label>
+            外層顯示 / Show outer layer
+            <input id="showOuter" type="checkbox" checked />
+          </label>
+
+          <label>
+            教學播放 / Seconds per stage
+            <input id="stageDuration" type="range"
+              min="3" max="15" step="1" value="7" />
+          </label>
+
+          <div class="view-buttons">
+            <button id="frontView">正面 / Front</button>
+            <button id="sideView">側面 / Side</button>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <section class="timeline-panel" aria-label="Educational timeline">
+      <div class="transport">
+        <button id="previous">← 上一步 / Previous</button>
+        <button id="play" class="primary">▶ 播放 / Play</button>
+        <button id="next">下一步 / Next →</button>
+        <button id="restart">↺ 重播 / Restart</button>
+
+        <select id="speed" aria-label="Playback speed">
+          <option value="0.5">0.5×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.5">1.5×</option>
+          <option value="2">2×</option>
+        </select>
+
+        <div id="progressText"></div>
+      </div>
+
+      <input id="timeline" type="range"
+        min="0" max="1000" step="1" value="0"
+        aria-label="Procedure timeline / 手術時間軸" />
+
+      <div id="steps"></div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>教育用途 / Educational use only.</strong>
+    本模型不是完整手術指引、操作訓練或個別醫療建議。
+    器械、解剖、液體、雷射及眼瞼翻轉均經簡化。
+    時間軸不是實際手術時間，亦不保證治療結果。<br />
+    This is not an operative guide, competency trainer, or individual medical
+    advice. Anatomy and movements are simplified. Timeline pacing is illustrative,
+    and the model does not predict treatment outcomes.
+    Obtain ophthalmologist review before clinical or patient-facing deployment.
+  </footer>
+
+  <script type="module">
+    async function main() {
+      const THREE = await import("three");
+      const { OrbitControls } =
+        await import("three/addons/controls/OrbitControls.js");
+
+      const $ = id => document.getElementById(id);
+      const clamp = THREE.MathUtils.clamp;
+      const lerp = THREE.MathUtils.lerp;
+
+      const smooth = value => {
+        const x = clamp(value, 0, 1);
+        return x * x * (3 - 2 * x);
+      };
+
+      const V = (x = 0, y = 0, z = 0) =>
+        new THREE.Vector3(x, y, z);
+
+      const stage = (zh, en, bodyZh, bodyEn, noteZh, noteEn) => ({
+        zh, en, bodyZh, bodyEn, noteZh, noteEn
+      });
+
+      // ============================================================
+      // 1. BILINGUAL CONTENT
+      // These are original teaching summaries, not copied protocols.
+      // Edit wording here; animation stage indices match each array.
+      // ============================================================
+
+      const PROCEDURES = {
+        rrd: {
+          zh: "裂孔性視網膜剝離手術",
+          en: "Rhegmatogenous retinal detachment repair",
+          subtitleZh: "經睫狀體平坦部玻璃體切除＋眼內雷射＋氣體填塞",
+          subtitleEn: "Pars plana vitrectomy + endolaser + gas tamponade",
+          warningZh:
+            "眼內氣體尚未完全吸收時，不可搭飛機；避免高海拔及笑氣（氧化亞氮）。" +
+            "任何麻醉或急診處置前，告知醫療人員眼內有氣體。" +
+            "姿勢及恢復活動時間須依主治醫師指示。",
+          warningEn:
+            "While intraocular gas remains: no flying; avoid high altitude and " +
+            "nitrous oxide. Tell anesthesia and emergency-care teams that gas " +
+            "is present. Positioning and activity clearance are surgeon-specific.",
+          legend: [
+            ["#ee896a", "視網膜", "Retina"],
+            ["#ff454f", "視網膜裂孔", "Retinal break"],
+            ["#ffd17d", "雷射標記", "Laser markers"],
+            ["#73deff", "氣體界面", "Gas interface"]
+          ],
+          stages: [
+            stage(
+              "病變與手術確認", "Assessment and confirmation",
+              "裂孔讓液體進入視網膜下方，使視網膜與眼球後壁分離。確認手術眼、剝離範圍、裂孔及手術計畫。",
+              "A retinal break allows fluid beneath the retina, separating it from the underlying wall. The operative eye, detachment, breaks, and repair plan are confirmed.",
+              "模型僅示意一個裂孔與局部剝離，並非特定患者的影像。",
+              "One break and a localized detachment are illustrated; this is not patient-specific imaging."
+            ),
+            stage(
+              "麻醉與無菌準備", "Anesthesia and preparation",
+              "依手術計畫進行麻醉、消毒及鋪單，建立無菌手術區域。",
+              "Anesthesia, antisepsis, and draping establish the operative field according to the clinical plan.",
+              "不模擬所有麻醉、消毒或設備準備細節。",
+              "Complete anesthesia, antisepsis, and equipment preparation are not simulated."
+            ),
+            stage(
+              "建立玻璃體手術通道", "Pars plana access",
+              "建立灌注、照明及工作器械的通道。灌注系統協助維持眼內空間。",
+              "Access ports accommodate infusion, illumination, and working instruments. Infusion helps maintain intraocular space.",
+              "通道位置及器械尺寸是示意，不可用來判定實際進入位置。",
+              "Port positions and instrument dimensions are schematic, not entry-site guidance."
+            ),
+            stage(
+              "玻璃體切除", "Vitrectomy",
+              "切除並移除玻璃體，以提供修復視網膜所需的工作空間。淡藍色玻璃體符號逐漸減少。",
+              "Vitreous is cut and removed to provide working space for retinal repair. Pale-blue vitreous symbols progressively disappear.",
+              "模型未呈現切割速率、負壓、流量或完整周邊處理。",
+              "Cut rate, vacuum, flow, and complete peripheral work are not represented."
+            ),
+            stage(
+              "解除裂孔周圍牽引", "Relief of traction",
+              "處理裂孔周圍造成牽引的玻璃體，並再次檢查視網膜及裂孔。",
+              "Tractional vitreous around the break is addressed, and the retina and breaks are inspected.",
+              "此處將牽引解除獨立為教學步驟；實際可與玻璃體切除交錯進行。",
+              "Shown separately for teaching; traction relief may occur throughout vitrectomy."
+            ),
+            stage(
+              "引流與視網膜展平", "Drainage and retinal flattening",
+              "依病況移除視網膜下液體，使視網膜逐漸回到眼球後壁。模型以視網膜表面下降表示液體減少。",
+              "Subretinal fluid is removed as appropriate, allowing the retina to flatten toward the underlying wall. The surface settles as fluid decreases.",
+              "引流方式因病例而異；可能與液氣交換同時進行，其他輔助方法未呈現。",
+              "Drainage methods vary and may occur during fluid–air exchange. Other adjuncts are not shown."
+            ),
+            stage(
+              "液氣交換", "Fluid–air exchange",
+              "以空氣取代部分眼內液體，協助維持已展平的視網膜。上方透明區域與水平面示意氣液界面。",
+              "Air replaces intraocular fluid to help maintain the flattened retina. The upper transparent region and horizontal surface symbolize the air–fluid interface.",
+              "氣體浮力及液體動力學未做物理模擬；交換與引流順序可能不同。",
+              "Buoyancy and fluid dynamics are not physically simulated; exchange and drainage sequencing may differ."
+            ),
+            stage(
+              "裂孔周圍眼內雷射", "Endolaser around the break",
+              "在裂孔周圍施作雷射，促進之後形成脈絡膜視網膜黏著。黃色點代表治療位置。",
+              "Laser is applied around the break to promote subsequent chorioretinal adhesion. Yellow dots indicate treatment sites.",
+              "黃色點不是立即形成的永久黏著；不提供能量、時間或間距設定。",
+              "Markers do not represent instant permanent adhesion. No power, duration, or spacing settings are prescribed."
+            ),
+            stage(
+              "氣體填塞", "Gas tamponade",
+              "依手術計畫使用眼內氣體，支持視網膜及裂孔區域，直到雷射黏著逐漸形成。",
+              "Intraocular gas supports the retina and break region while laser-induced adhesion develops.",
+              "未指定氣體種類、濃度、體積或吸收時間；這些須由手術團隊決定。",
+              "Gas type, concentration, volume, and absorption duration are not specified."
+            ),
+            stage(
+              "傷口與術後計畫", "Wound assessment and postoperative plan",
+              "檢查切口、眼內狀態及視網膜。說明姿勢、回診與氣體安全注意事項；氣體不會在手術結束時立即消失。",
+              "Wounds and intraocular status are assessed. Positioning, follow-up, and gas precautions are explained. Gas does not disappear at the end of surgery.",
+              "完成畫面保留氣體；術後吸收並非此手術時間軸的一部分。",
+              "Gas remains visible in the final frame; postoperative absorption is not part of this operative timeline."
+            )
+          ]
+        },
+
+        injection: {
+          zh: "玻璃體內注射",
+          en: "Intravitreal injection",
+          subtitleZh: "無菌準備、藥物注入與注射後評估",
+          subtitleEn: "Aseptic preparation, medication delivery, and assessment",
+          warningZh:
+            "注射後眼痛加劇、眼紅惡化或視力急降（需排除眼內炎），視野簾幕、大片缺損，或突然視力下降、突然失明，突然劇痛：立即急症室；無法自行前往：致電 999。" +
+            "新出現閃光，或飛蚊明顯增多，但沒有簾幕、沒有突然失明、沒有劇痛：盡快（最好當日）眼科評估。",
+          warningEn:
+            "After the injection: worse pain, worse redness, or a sharp vision drop (to rule out endophthalmitis); a curtain, a large field defect, sudden vision loss or sudden blindness; or sudden severe pain: go to A&E now. If you cannot get there: call 999. " +
+            "New flashes, or a clear increase in floaters, without a curtain, without sudden blindness and without severe pain: ophthalmic assessment the same day if possible.",
+          legend: [
+            ["#bcd5e9", "鞏膜", "Sclera"],
+            ["#eac28a", "水晶體", "Lens"],
+            ["#8be3ba", "藥物示意", "Medication markers"],
+            ["#cf9ae9", "消毒區域示意", "Antisepsis symbol"]
+          ],
+          stages: [
+            stage(
+              "確認眼別及藥物", "Confirm eye and medication",
+              "確認治療目的、同意、手術眼、藥物及治療計畫。模型顯示藥物將送達的玻璃體腔。",
+              "The indication, consent, correct eye, medication, and treatment plan are confirmed. The model shows the vitreous cavity receiving treatment.",
+              "此模型為一般注射教學，不指定疾病、藥物或劑量。",
+              "This generic illustration does not select a disease, medication, or dose."
+            ),
+            stage(
+              "局部麻醉", "Local anesthesia",
+              "依臨床計畫使用局部麻醉，減少注射時的不適。",
+              "Local anesthesia is provided according to the clinical plan to reduce discomfort.",
+              "麻醉方式與等待時間依臨床流程決定。",
+              "Anesthetic method and waiting time depend on the clinical protocol."
+            ),
+            stage(
+              "眼表消毒", "Ocular antisepsis",
+              "使用適當眼表消毒，包含依流程使用聚維酮碘，以降低感染風險。紫色區域只是消毒的視覺符號。",
+              "Ocular antisepsis, including protocol-based povidone-iodine use, reduces infection risk. Purple shading is only a visual symbol.",
+              "色彩不是消毒效果或接觸時間的量測。",
+              "Color is not a measurement of antiseptic effectiveness or contact time."
+            ),
+            stage(
+              "眼瞼隔離及位置確認", "Lid isolation and site confirmation",
+              "避免睫毛或眼瞼接觸針具與注射區域，並依眼部解剖及臨床計畫確認注射位置。",
+              "Lids and lashes are kept away from the needle and injection field. The site is confirmed according to anatomy and the clinical plan.",
+              "模型不提供注射點距離；通道與位置標記非測量工具。",
+              "The model supplies no injection-site distances; markers are not measuring tools."
+            ),
+            stage(
+              "針具進入玻璃體腔", "Needle entry",
+              "無菌針具經眼壁進入玻璃體腔。圖中保留水晶體及視網膜，協助理解目標空間。",
+              "A sterile needle passes through the eye wall into the vitreous cavity. The lens and retina remain visible to clarify the target compartment.",
+              "路徑及深度經過簡化，不可作為針具操作指引。",
+              "The path and depth are schematic, not needle-placement guidance."
+            ),
+            stage(
+              "藥物注入", "Medication delivery",
+              "依處方及臨床流程注入藥物。綠色點示意藥物進入玻璃體腔。",
+              "Medication is delivered according to the prescription and clinical protocol. Green markers illustrate delivery into the vitreous.",
+              "藥物不一定可見；粒子不是氣泡、真實流場或藥物濃度。",
+              "Medication may not be visible clinically. Markers are not bubbles, a real flow field, or drug concentration."
+            ),
+            stage(
+              "針具退出", "Needle withdrawal",
+              "針具退出後，評估注射區域及眼部狀況。綠色標記保留，表示藥物已送入眼內。",
+              "After needle withdrawal, the injection site and eye are assessed. Green markers remain to indicate completed delivery.",
+              "不模擬所有注射後處理；用藥依個別方案。",
+              "Not all post-injection measures are simulated; medication plans are individualized."
+            ),
+            stage(
+              "注射後評估及警訊", "Assessment and warning symptoms",
+              "確認即時眼部狀態，依需要評估視力、灌流及眼壓，並安排追蹤。說明感染或視網膜問題的警訊。",
+              "Immediate ocular status is checked, including vision, perfusion, and pressure when indicated. Follow-up and warning symptoms are reviewed.",
+              "注射後眼痛加劇、眼紅惡化或視力急降：立即急症室；無法自行前往：致電 999。視野簾幕或突然失明：立即急症室；無法自行前往：致電 999。新閃光或飛蚊明顯增多，但沒有簾幕、沒有突然失明、沒有劇痛：盡快（最好當日）眼科評估。",
+              "Worse pain, worse redness, or a sharp vision drop after the injection: go to A&E now; if you cannot get there, call 999. A curtain or sudden blindness: go to A&E now; if you cannot get there, call 999. New flashes or a clear increase in floaters, without a curtain, without sudden blindness and without severe pain: same-day ophthalmic assessment if possible."
+            )
+          ]
+        },
+
+        chalazion: {
+          zh: "霰粒腫切開及刮除",
+          en: "Chalazion incision and curettage",
+          subtitleZh: "經結膜切開示意：麻醉、夾持、翻瞼、切開及刮除",
+          subtitleEn: "Transconjunctival illustration: anesthesia, clamp, eversion, incision, and curettage",
+          warningZh:
+            "此模型示意經結膜手術方式，不代表所有霰粒腫都需要手術。" +
+            "復發、位置相同或外觀不典型的病灶應重新評估，並考慮病理檢查。",
+          warningEn:
+            "This depicts a transconjunctival approach; not every chalazion needs surgery. " +
+            "Recurrent, same-site, or atypical lesions need reassessment and consideration of pathology.",
+          legend: [
+            ["#d89a8f", "眼瞼皮膚", "Lid skin"],
+            ["#d4bda6", "瞼板", "Tarsal plate"],
+            ["#ef9cad", "瞼結膜", "Palpebral conjunctiva"],
+            ["#efbf72", "病灶內容物示意", "Lesion contents"]
+          ],
+          stages: [
+            stage(
+              "病灶確認", "Lesion assessment",
+              "確認霰粒腫的位置、症狀及治療計畫。模型顯示眼瞼內的局部發炎性病灶。",
+              "The lesion location, symptoms, and treatment plan are confirmed. The model shows a localized inflammatory lesion within the eyelid.",
+              "霰粒腫並非單純膿瘍；內容物顏色與外觀為示意。",
+              "A chalazion is not simply an abscess; contents and colors are schematic."
+            ),
+            stage(
+              "局部麻醉與準備", "Local anesthesia and preparation",
+              "依計畫進行局部麻醉及手術準備。此動畫用注射器符號表示麻醉，而非完整麻醉操作。",
+              "Local anesthesia and preparation are performed according to the plan. A syringe symbol represents anesthesia rather than its complete administration.",
+              "年齡及配合程度可能影響麻醉選擇；未指定藥物或劑量。",
+              "Age and cooperation can affect anesthesia choice; no drug or dose is specified."
+            ),
+            stage(
+              "霰粒腫夾固定", "Chalazion clamp",
+              "以霰粒腫夾固定病灶區域，協助暴露及減少出血。",
+              "A chalazion clamp stabilizes the lesion region and assists exposure and hemostasis.",
+              "夾具的形狀、壓力及放置方式經簡化。",
+              "Clamp shape, pressure, and placement are simplified."
+            ),
+            stage(
+              "翻轉眼瞼", "Lid eversion",
+              "翻轉眼瞼，暴露病灶上方的瞼結膜。粉紅色內表面轉向觀察者。",
+              "The eyelid is everted to expose the palpebral conjunctiva over the lesion. The pink inner surface turns toward the viewer.",
+              "翻轉是概念性鉸鏈動畫，不模擬真實眼瞼的變形。",
+              "Eversion is a conceptual hinge animation, not realistic lid biomechanics."
+            ),
+            stage(
+              "結膜面切開", "Conjunctival incision",
+              "經病灶上方的結膜切開，建立刮除內容物的開口。此版本示意單一縱向切口。",
+              "An incision through the conjunctiva over the lesion provides access for curettage. This version illustrates a single vertical incision.",
+              "切口大小、深度及方向須依病灶決定；動畫不是切開指南。",
+              "Incision dimensions and orientation depend on the lesion; the animation is not an incision guide."
+            ),
+            stage(
+              "刮除病灶內容物", "Curettage",
+              "使用刮匙移除病灶內的發炎性內容物。金色標記逐漸移出病灶，示意刮除。",
+              "A curette removes inflammatory contents from the lesion. Gold markers progressively leave the lesion to illustrate curettage.",
+              "未模擬組織阻力、黏連處理或所有器械動作。",
+              "Tissue resistance, adhesion management, and complete instrument mechanics are not simulated."
+            ),
+            stage(
+              "止血與檢體考量", "Hemostasis and specimen consideration",
+              "評估出血及剩餘病灶。依臨床判斷決定是否送病理，尤其是復發或不典型病灶。",
+              "Bleeding and residual lesion are assessed. Pathology is considered according to clinical judgment, particularly for recurrent or atypical lesions.",
+              "小型內側切口可不需縫合；本模型不代表所有封閉方式。",
+              "Small internal incisions may be left without sutures; not all closure approaches are represented."
+            ),
+            stage(
+              "解除夾具及術後照護", "Clamp removal and aftercare",
+              "解除夾具並讓眼瞼回到原位，安排適當照護及追蹤。局部腫脹可能不會立即完全消失。",
+              "The clamp is removed and the lid returns to its resting position. Aftercare and follow-up are arranged. Swelling may not resolve immediately.",
+              "完成畫面仍保留少量腫脹；不表示保證治癒或不會復發。",
+              "Some swelling remains in the final illustration; cure and freedom from recurrence are not guaranteed."
+            )
+          ]
+        }
+      };
+      // ============================================================
+      // 2. SHARED RENDERER
+      // Eye optical axis: +Z anterior, -Z posterior.
+      // +Y is superior in the schematic view.
+      // ============================================================
+
+      const scene = new THREE.Scene();
+      const host = $("scene");
+      const camera = new THREE.PerspectiveCamera(39, 1, .1, 100);
+
+      const renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: true
+      });
+
+      renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+      renderer.setClearColor(0x08111f, 0);
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.localClippingEnabled = true;
+      host.appendChild(renderer.domElement);
+
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.enablePan = false;
+      controls.minDistance = 3.5;
+      controls.maxDistance = 13;
+
+      scene.add(new THREE.HemisphereLight(0xcdeeff, 0x263349, 2.5));
+
+      const key = new THREE.DirectionalLight(0xffffff, 3);
+      key.position.set(3, 5, 7);
+      scene.add(key);
+
+      const rim = new THREE.DirectionalLight(0x63bfff, 2);
+      rim.position.set(-4, 1, 2);
+      scene.add(rim);
+
+      function mat(color, opacity = 1, extra = {}) {
+        return new THREE.MeshStandardMaterial({
+          color,
+          opacity,
+          transparent: opacity < 1,
+          depthWrite: opacity >= 1,
+          roughness: .4,
+          metalness: 0,
+          side: THREE.DoubleSide,
+          ...extra
+        });
+      }
+
+      function mesh(parent, geometry, material) {
+        const object = new THREE.Mesh(geometry, material);
+        parent.add(object);
+        return object;
+      }
+
+      function ball(parent, radius, scale, position, material) {
+        const object = mesh(
+          parent,
+          new THREE.SphereGeometry(radius, 40, 24),
+          material
+        );
+        object.scale.set(...scale);
+        object.position.set(...position);
+        return object;
+      }
+
+      function ring(parent, radius, thickness, position, material) {
+        const object = mesh(
+          parent,
+          new THREE.TorusGeometry(radius, thickness, 10, 64),
+          material
+        );
+        object.position.set(...position);
+        return object;
+      }
+
+      function box(parent, size, position, material) {
+        const object = mesh(
+          parent,
+          new THREE.BoxGeometry(...size),
+          material
+        );
+        object.position.set(...position);
+        return object;
+      }
+
+      function segment(parent, start, end, radius, material) {
+        const object = mesh(
+          parent,
+          new THREE.CylinderGeometry(radius, radius, 1, 14),
+          material
+        );
+
+        object.position.copy(start).add(end).multiplyScalar(.5);
+        object.scale.y = start.distanceTo(end);
+        object.quaternion.setFromUnitVectors(
+          V(0, 1, 0),
+          end.clone().sub(start).normalize()
+        );
+
+        return object;
+      }
+
+      function curveTube(parent, points, radius, material) {
+        const curve = new THREE.CatmullRomCurve3(
+          points.map(point => V(...point))
+        );
+
+        return mesh(
+          parent,
+          new THREE.TubeGeometry(curve, 32, radius, 8, false),
+          material
+        );
+      }
+
+      function makeTool(parent, color = 0x528ab0) {
+        const root = new THREE.Group();
+        parent.add(root);
+
+        const shaft = mesh(
+          root,
+          new THREE.CylinderGeometry(.023, .023, 1, 16),
+          mat(0xc8d6e3, 1, { metalness: .65, roughness: .2 })
+        );
+
+        const handle = mesh(
+          root,
+          new THREE.CylinderGeometry(.09, .07, .62, 20),
+          mat(color)
+        );
+
+        const tipDot = ball(
+          root, .033, [1, 1, 1], [0, 0, 0],
+          mat(0xe1f4ff)
+        );
+
+        return {
+          root, shaft, handle,
+          set(tip, entry, width = 1) {
+            const direction = entry.clone().sub(tip).normalize();
+            const end = entry.clone().addScaledVector(direction, .72);
+
+            shaft.position.copy(tip).add(end).multiplyScalar(.5);
+            shaft.scale.set(width, tip.distanceTo(end), width);
+            shaft.quaternion.setFromUnitVectors(V(0, 1, 0), direction);
+
+            handle.position.copy(end).addScaledVector(direction, .20);
+            handle.quaternion.copy(shaft.quaternion);
+
+            tipDot.position.copy(tip);
+          }
+        };
+      }
+
+      function makeEye(root) {
+        const outerMat = mat(0xdce9f5, .12);
+        const shell = ball(
+          root, 2, [1, 1, 1], [0, 0, 0], outerMat
+        );
+
+        // Anterior cornea is schematic, offset in front of globe.
+        const cornea = ball(
+          root, 1,
+          [1.04, 1.04, .23],
+          [0, 0, 1.86],
+          mat(0x8edcff, .10, { roughness: .12 })
+        );
+
+        const limbus = ring(
+          root, 1.04, .025, [0, 0, 1.84],
+          mat(0xaec9df, .6)
+        );
+
+        const iris = mesh(
+          root,
+          new THREE.RingGeometry(.46, .96, 80),
+          mat(0xa78052, .26)
+        );
+        iris.position.z = 1.68;
+
+        const lens = ball(
+          root, .69, [1, 1, .30], [0, 0, 1.40],
+          mat(0xeac28a, .45)
+        );
+
+        return { shell, outerMat, cornea, limbus, iris, lens };
+      }
+
+      function outerSettings(eye) {
+        eye.shell.visible = $("showOuter").checked;
+        eye.outerMat.opacity = Number($("outerOpacity").value);
+      }
+
+      const models = {};
+
+      // ============================================================
+      // 3. RRD MODEL
+      // A deformable posterior retinal bowl, with a real mesh opening.
+      // Gas is a clipped sphere + symbolic horizontal interface.
+      // ============================================================
+
+      function buildRRD() {
+        const root = new THREE.Group();
+        scene.add(root);
+
+        const eye = makeEye(root);
+        const breakCenter = V(.72, .57, 0);
+        const retinaRadius = 1.91;
+
+        const columns = 64;
+        const rows = 64;
+        const span = 1.68;
+
+        const positions = [];
+        const records = [];
+        const indices = [];
+
+        function baseZ(x, y) {
+          return -Math.sqrt(
+            Math.max(.01, retinaRadius ** 2 - x ** 2 - y ** 2)
+          );
+        }
+
+        for (let row = 0; row <= rows; row++) {
+          for (let col = 0; col <= columns; col++) {
+            const x = -span + 2 * span * col / columns;
+            const y = -span + 2 * span * row / rows;
+            const valid = x * x + y * y < span * span;
+
+            positions.push(x, y, baseZ(x, y));
+
+            records.push({
+              x, y,
+              z: baseZ(x, y),
+              valid,
+              lift:
+                .56 * Math.exp(
+                  -((x - breakCenter.x) ** 2 +
+                    (y - breakCenter.y) ** 2) / .42
+                )
+            });
+          }
+        }
+
+        for (let row = 0; row < rows; row++) {
+          for (let col = 0; col < columns; col++) {
+            const a = row * (columns + 1) + col;
+            const b = a + 1;
+            const c = a + columns + 1;
+            const d = c + 1;
+
+            const centerX = (records[a].x + records[d].x) / 2;
+            const centerY = (records[a].y + records[d].y) / 2;
+
+            const inBreak =
+              (centerX - breakCenter.x) ** 2 +
+              (centerY - breakCenter.y) ** 2 < .13 ** 2;
+
+            if (
+              records[a].valid && records[b].valid &&
+              records[c].valid && records[d].valid &&
+              !inBreak
+            ) {
+              indices.push(a, b, c, b, d, c);
+            }
+          }
+        }
+
+        const retinaGeometry = new THREE.BufferGeometry();
+        retinaGeometry.setAttribute(
+          "position",
+          new THREE.Float32BufferAttribute(positions, 3)
+        );
+        retinaGeometry.setIndex(indices);
+        retinaGeometry.computeVertexNormals();
+
+        const retina = mesh(
+          root, retinaGeometry,
+          mat(0xee896a, .87, { roughness: .65 })
+        );
+
+        const breakRim = ring(
+          root, .13, .018,
+          [breakCenter.x, breakCenter.y, -1.1],
+          mat(0xff454f)
+        );
+
+        const fluid = ball(
+          root, .55, [1.05, .80, .30],
+          [breakCenter.x, breakCenter.y, -1.35],
+          mat(0x66bddd, .20)
+        );
+
+        // Traction symbols.
+        const tractionGroup = new THREE.Group();
+        root.add(tractionGroup);
+
+        for (let i = 0; i < 7; i++) {
+          const a = i / 7 * Math.PI * 2;
+
+          segment(
+            tractionGroup,
+            V(.72 + .18 * Math.cos(a), .57 + .18 * Math.sin(a), -.88),
+            V(.40 * Math.cos(a), .40 * Math.sin(a), -.12),
+            .008,
+            mat(0xc1edff, .6)
+          );
+        }
+
+        // Vitreous symbols.
+        const vitreousGroup = new THREE.Group();
+        root.add(vitreousGroup);
+        const vitreousMarkers = [];
+        const markerGeometry = new THREE.SphereGeometry(.022, 8, 6);
+        const markerMat = mat(0xa5d8ed, .40);
+
+        for (let i = 0; i < 90; i++) {
+          const angle = i * 2.399963;
+          const r = 1.32 * Math.sqrt((i + .5) / 90);
+          const object = mesh(vitreousGroup, markerGeometry, markerMat);
+
+          object.position.set(
+            Math.cos(angle) * r,
+            Math.sin(angle) * r,
+            -.65 + 1.50 * ((i * 29 % 89) / 89)
+          );
+          vitreousMarkers.push(object);
+        }
+
+        const portPositions = [
+          V(1.64, .78, .67),
+          V(-1.64, .78, .67),
+          V(1.54, -.94, .68)
+        ];
+
+        const ports = portPositions.map(position => {
+          const object = ring(
+            root, .08, .018, position.toArray(),
+            mat(0x74cfff)
+          );
+          object.lookAt(position.clone().multiplyScalar(2));
+          return object;
+        });
+
+        const infusion = segment(
+          root,
+          portPositions[2],
+          V(1.23, -.73, .45),
+          .026,
+          mat(0x64d7f0)
+        );
+
+        const lightPipe = segment(
+          root,
+          portPositions[1],
+          V(-.56, .28, -.27),
+          .016,
+          mat(0xbfe9ff)
+        );
+
+        const lightTip = ball(
+          root, .06, [1, 1, 1],
+          [-.56, .28, -.27],
+          mat(0xd9f7ff, 1, {
+            emissive: 0x71d8ff,
+            emissiveIntensity: 1
+          })
+        );
+
+        const tool = makeTool(root);
+
+        const laserGroup = new THREE.Group();
+        root.add(laserGroup);
+        const laserSpots = [];
+
+        for (let row = 0; row < 2; row++) {
+          for (let i = 0; i < 18; i++) {
+            const angle = i / 18 * Math.PI * 2;
+            const radius = .23 + row * .085;
+            const x = breakCenter.x + radius * Math.cos(angle);
+            const y = breakCenter.y + radius * Math.sin(angle);
+
+            const object = ball(
+              laserGroup, .029, [1, 1, .38],
+              [x, y, baseZ(x, y) + .018],
+              mat(0xffd17d, 1, {
+                emissive: 0x8c4910,
+                emissiveIntensity: .25
+              })
+            );
+
+            laserSpots.push(object);
+          }
+        }
+
+        const laserBeamGeometry = new THREE.BufferGeometry();
+        laserBeamGeometry.setAttribute(
+          "position",
+          new THREE.Float32BufferAttribute([0, 0, 0, 0, 0, 0], 3)
+        );
+
+        const laserBeam = new THREE.Line(
+          laserBeamGeometry,
+          new THREE.LineBasicMaterial({
+            color: 0x9aff81,
+            transparent: true,
+            opacity: .85
+          })
+        );
+        root.add(laserBeam);
+
+        // Positive side of plane is retained: y >= interface height.
+        const gasRadius = 1.58;
+        const gasPlane = new THREE.Plane(V(0, 1, 0), -gasRadius);
+
+        const gasMat = mat(0xd8efff, .12, {
+          roughness: .08,
+          clippingPlanes: [gasPlane]
+        });
+
+        const gas = ball(
+          root, gasRadius, [1, 1, 1], [0, 0, -.20], gasMat
+        );
+        gas.renderOrder = 4;
+
+        const gasInterface = mesh(
+          root,
+          new THREE.CircleGeometry(1, 80),
+          mat(0xbceeff, .25)
+        );
+        gasInterface.rotation.x = -Math.PI / 2;
+        gasInterface.position.z = -.20;
+        gasInterface.renderOrder = 5;
+
+        const drainageMarkers = [];
+        for (let i = 0; i < 18; i++) {
+          drainageMarkers.push(
+            ball(
+              root, .018, [1, 1, 1], [0, 0, 0],
+              mat(0x7bdbff, .8)
+            )
+          );
+        }
+
+        let lastFlatten = -1;
+
+        const labels = [
+          {
+            zh: "視網膜", en: "Retina",
+            point: V(-.90, -.62, -1.40)
+          },
+          {
+            zh: "視網膜裂孔", en: "Retinal break",
+            point: V(),
+            update: point => point.copy(breakRim.position)
+          },
+          {
+            zh: "水晶體", en: "Lens",
+            point: V(-.43, -.33, 1.44)
+          },
+          {
+            zh: "氣液界面", en: "Gas–fluid interface",
+            point: V(),
+            visible: progress => progress >= 6.15,
+            update: point => point.set(-.48, gasInterface.position.y, -.20)
+          }
+        ];
+
+        return {
+          root, labels,
+          target: V(0, 0, -.20),
+          home: V(3.4, 2.2, 6.7),
+
+          update(progress) {
+            outerSettings(eye);
+            const s = Math.min(Math.floor(progress), 9);
+            const p = clamp(progress - s, 0, 1);
+
+            const flatten = smooth(progress - 5);
+
+            if (Math.abs(flatten - lastFlatten) > .00001) {
+              lastFlatten = flatten;
+              const attribute = retinaGeometry.attributes.position;
+
+              records.forEach((record, i) => {
+                attribute.setZ(
+                  i,
+                  record.z + record.lift * (1 - flatten)
+                );
+              });
+
+              attribute.needsUpdate = true;
+              retinaGeometry.computeVertexNormals();
+              retinaGeometry.computeBoundingSphere();
+            }
+
+            breakRim.position.z =
+              baseZ(breakCenter.x, breakCenter.y) +
+              .56 * (1 - flatten) + .018;
+
+            fluid.visible = flatten < .995;
+            fluid.scale.set(
+              1.05, .80, Math.max(.005, .30 * (1 - flatten))
+            );
+
+            tractionGroup.visible = progress >= 2 && progress < 5;
+            tractionGroup.scale.setScalar(
+              Math.max(.01, 1 - smooth(progress - 4))
+            );
+
+            const vitreousRemaining = 1 - smooth(progress - 3);
+            vitreousMarkers.forEach((object, i) => {
+              object.visible =
+                i / vitreousMarkers.length < vitreousRemaining;
+            });
+
+            ports.forEach((object, i) => {
+              object.visible =
+                progress >= 2 + i * .22 &&
+                !(s === 9 && p > .45 + i * .15);
+            });
+
+            infusion.visible = progress >= 2.5 && progress < 9.4;
+            lightPipe.visible = progress >= 2.25 && progress < 9.35;
+            lightTip.visible = lightPipe.visible;
+
+            tool.root.visible = s >= 3 && s <= 7;
+
+            let target = V(.10, -.12, -.45);
+
+            if (s === 3) {
+              target.set(
+                .40 * Math.cos(p * Math.PI * 2),
+                .35 * Math.sin(p * Math.PI * 2),
+                -.25 - .45 * p
+              );
+            } else if (s === 4) {
+              target.copy(breakRim.position).add(V(.03, .04, .25));
+            } else if (s === 5) {
+              target.copy(breakRim.position).add(V(0, 0, .08));
+            } else if (s === 6) {
+              target.set(.15, -.25, -.70);
+            } else if (s === 7) {
+              const index = Math.min(
+                laserSpots.length - 1,
+                Math.floor(p * laserSpots.length)
+              );
+              target.copy(laserSpots[index].position).add(V(.02, 0, .32));
+            }
+
+            if (tool.root.visible) tool.set(target, portPositions[0]);
+
+            const laserAmount = clamp(progress - 7, 0, 1);
+            laserSpots.forEach((object, i) => {
+              object.visible =
+                i < Math.floor(laserAmount * laserSpots.length);
+            });
+
+            laserBeam.visible = s === 7 && p > .02 && p < .98;
+            if (laserBeam.visible) {
+              const index = Math.min(
+                laserSpots.length - 1,
+                Math.floor(p * laserSpots.length)
+              );
+
+              const attribute = laserBeamGeometry.attributes.position;
+              attribute.setXYZ(0, target.x, target.y, target.z);
+
+              const end = laserSpots[index].position;
+              attribute.setXYZ(1, end.x, end.y, end.z);
+              attribute.needsUpdate = true;
+              laserBeamGeometry.computeBoundingSphere();
+            }
+
+            const exchange = smooth(progress - 6);
+            gas.visible = exchange > .005;
+            gasInterface.visible = gas.visible;
+
+            const height = lerp(gasRadius - .001, -1.03, exchange);
+            gasPlane.constant = -height;
+            gasInterface.position.y = height;
+
+            const interfaceRadius = Math.sqrt(
+              Math.max(.0001, gasRadius ** 2 - height ** 2)
+            );
+            gasInterface.scale.setScalar(interfaceRadius);
+
+            // Air and gas are represented by the same schematic region.
+            const gasExchange = smooth(progress - 8);
+            gasMat.color.set(0xd8efff).lerp(
+              new THREE.Color(0x73deff), gasExchange
+            );
+            gasInterface.material.color.copy(gasMat.color);
+
+            drainageMarkers.forEach((object, i) => {
+              object.visible = s === 5 && p > .03 && p < .97;
+              if (!object.visible) return;
+
+              const q = (p * 3 + i / drainageMarkers.length) % 1;
+              const a = i * 2.399963;
+
+              const origin = V(
+                breakCenter.x + .29 * Math.cos(a),
+                breakCenter.y + .24 * Math.sin(a),
+                baseZ(breakCenter.x, breakCenter.y) + .20
+              );
+
+              object.position.copy(origin).lerp(target, q);
+            });
+          }
+        };
+      }
+      // ============================================================
+      // 4. INTRAVITREAL INJECTION MODEL
+      // No dosing, insertion depth, or entry-site measurements.
+      // Medication particles are symbolic, not a diffusion simulation.
+      // ============================================================
+
+      function buildInjection() {
+        const root = new THREE.Group();
+        scene.add(root);
+        const eye = makeEye(root);
+
+        const retina = mesh(
+          root,
+          new THREE.SphereGeometry(
+            1.89, 48, 24, 0, Math.PI * 2, 0, Math.PI / 2
+          ),
+          mat(0xe98b79, .24)
+        );
+        retina.rotation.x = -Math.PI / 2;
+
+        const vitreous = ball(
+          root, 1.52, [1, 1, 1], [0, 0, -.12],
+          mat(0x80bfdc, .065)
+        );
+
+        const entry = V(1.73, .28, .70);
+        const innerTarget = V(.73, .12, .12);
+        const direction = entry.clone().sub(innerTarget).normalize();
+
+        const entryMarker = ring(
+          root, .07, .013, entry.toArray(),
+          mat(0x7ee5cf)
+        );
+        entryMarker.lookAt(entry.clone().multiplyScalar(2));
+
+        const antisepsisSymbol = ball(
+          root, .30, [.90, 1.20, .25], entry.toArray(),
+          mat(0xcf9ae9, .20)
+        );
+        antisepsisSymbol.lookAt(entry.clone().multiplyScalar(2));
+
+        const anesthesiaSymbol = ring(
+          root, .72, .008, [0, 0, 2.10],
+          mat(0x8ee9ff, .4)
+        );
+
+        const speculum = new THREE.Group();
+        root.add(speculum);
+        const steel = mat(0xbacbdc, 1, {
+          metalness: .6, roughness: .22
+        });
+
+        curveTube(speculum, [
+          [-1.12, .76, 1.72],
+          [-.55, 1.04, 1.91],
+          [.55, 1.04, 1.91],
+          [1.12, .76, 1.72]
+        ], .025, steel);
+
+        curveTube(speculum, [
+          [-1.12, -.76, 1.72],
+          [-.55, -1.04, 1.91],
+          [.55, -1.04, 1.91],
+          [1.12, -.76, 1.72]
+        ], .025, steel);
+
+        const syringe = new THREE.Group();
+        root.add(syringe);
+
+        const needle = mesh(
+          syringe,
+          new THREE.CylinderGeometry(.012, .012, 1, 12),
+          steel
+        );
+
+        const barrel = mesh(
+          syringe,
+          new THREE.CylinderGeometry(.09, .09, .68, 24),
+          mat(0xc2e4f3, .58)
+        );
+
+        const plunger = mesh(
+          syringe,
+          new THREE.CylinderGeometry(.025, .025, .50, 16),
+          mat(0xc7d9e8)
+        );
+
+        const plungerCap = mesh(
+          syringe,
+          new THREE.CylinderGeometry(.12, .12, .04, 20),
+          mat(0x5d97b6)
+        );
+
+        const syringeQuaternion = new THREE.Quaternion()
+          .setFromUnitVectors(V(0, 1, 0), direction);
+
+        [needle, barrel, plunger, plungerCap].forEach(object => {
+          object.quaternion.copy(syringeQuaternion);
+        });
+
+        const drugGroup = new THREE.Group();
+        root.add(drugGroup);
+
+        const drugGeometry = new THREE.SphereGeometry(.020, 8, 6);
+        const drugMaterial = mat(0x8be3ba, .75);
+        const drugMarkers = [];
+
+        for (let i = 0; i < 80; i++) {
+          const object = mesh(drugGroup, drugGeometry, drugMaterial);
+
+          const angle = i * 2.399963;
+          const radius = .95 * Math.sqrt((i + .5) / 80);
+
+          const destination = V(
+            -.05 + .78 * radius * Math.cos(angle),
+            .80 * radius * Math.sin(angle),
+            -.15 + .70 * Math.sin(i * 1.43)
+          );
+
+          drugMarkers.push({ object, destination });
+        }
+
+        const labels = [
+          {
+            zh: "鞏膜", en: "Sclera",
+            point: V(-1.47, .74, .89)
+          },
+          {
+            zh: "水晶體", en: "Lens",
+            point: V(-.30, -.22, 1.43)
+          },
+          {
+            zh: "玻璃體腔", en: "Vitreous cavity",
+            point: V(-.44, -.44, -.05)
+          },
+          {
+            zh: "注射位置示意", en: "Schematic injection site",
+            point: entry.clone(),
+            visible: progress => progress >= 3
+          }
+        ];
+
+        return {
+          root, labels,
+          target: V(0, 0, .1),
+          home: V(3.7, 2.0, 6.5),
+
+          update(progress) {
+            outerSettings(eye);
+
+            const s = Math.min(Math.floor(progress), 7);
+            const p = clamp(progress - s, 0, 1);
+
+            anesthesiaSymbol.visible = s === 1;
+            anesthesiaSymbol.scale.setScalar(
+              1 + .10 * Math.sin(p * Math.PI * 4)
+            );
+
+            antisepsisSymbol.visible = progress >= 2 && progress < 7;
+            antisepsisSymbol.material.opacity =
+              .20 * smooth(progress - 2);
+
+            speculum.visible = progress >= 3 && progress < 7.35;
+            entryMarker.visible = progress >= 3 && progress < 7;
+
+            syringe.visible = s >= 4 && s <= 6;
+
+            let insertion = 0;
+            if (s === 4) insertion = smooth(p);
+            else if (s === 5) insertion = 1;
+            else if (s === 6) insertion = 1 - smooth(p);
+
+            const outsideTip = entry.clone()
+              .addScaledVector(direction, .53);
+
+            const tip = outsideTip.clone().lerp(innerTarget, insertion);
+            const needleEnd = entry.clone()
+              .addScaledVector(direction, .79);
+
+            needle.position.copy(tip).add(needleEnd).multiplyScalar(.5);
+            needle.scale.y = tip.distanceTo(needleEnd);
+
+            const barrelCenter = needleEnd.clone()
+              .addScaledVector(direction, .34);
+            barrel.position.copy(barrelCenter);
+
+            const delivery = smooth(progress - 5);
+
+            const plungerCenter = barrelCenter.clone()
+              .addScaledVector(direction, .63 - .32 * delivery);
+            plunger.position.copy(plungerCenter);
+
+            plungerCap.position.copy(plungerCenter)
+              .addScaledVector(direction, .25);
+
+            drugGroup.visible = delivery > .005;
+
+            drugMarkers.forEach((item, i) => {
+              const threshold = i / drugMarkers.length;
+              item.object.visible = delivery > threshold;
+
+              const travel = smooth(
+                (delivery - threshold) / Math.max(.15, 1 - threshold)
+              );
+
+              item.object.position.copy(innerTarget)
+                .lerp(item.destination, travel);
+
+              item.object.scale.setScalar(.65 + .35 * travel);
+            });
+          }
+        };
+      }
+
+      // ============================================================
+      // 5. CHALAZION MODEL
+      // Layered upper-lid flap attached to a conceptual hinge.
+      // Local +Z = skin side; local -Z = conjunctival side.
+      // Eversion turns the conjunctival side toward the camera.
+      // ============================================================
+
+      function buildChalazion() {
+        const root = new THREE.Group();
+        scene.add(root);
+
+        // Context globe, intentionally less prominent than the lid.
+        const globe = ball(
+          root, 1.20, [1, .90, 1],
+          [0, -.05, -.68],
+          mat(0xe5edf5, .13)
+        );
+
+        const iris = mesh(
+          root,
+          new THREE.RingGeometry(.25, .48, 64),
+          mat(0x9d7950, .45)
+        );
+        iris.position.set(0, -.12, .45);
+
+        const pupil = mesh(
+          root,
+          new THREE.CircleGeometry(.25, 48),
+          mat(0x142333)
+        );
+        pupil.position.set(0, -.12, .46);
+
+        const flap = new THREE.Group();
+        flap.position.set(0, .95, .72);
+        root.add(flap);
+
+        const skinMat = mat(0xd89a8f, .12);
+        const skin = box(
+          flap, [2.70, 1.08, .10],
+          [0, -.54, .12],
+          skinMat
+        );
+
+        const tarsus = box(
+          flap, [2.58, 1.00, .10],
+          [0, -.54, 0],
+          mat(0xd4bda6, .42)
+        );
+
+        const conjunctiva = box(
+          flap, [2.68, 1.07, .035],
+          [0, -.54, -.13],
+          mat(0xef9cad, .35)
+        );
+
+        const lidMargin = box(
+          flap, [2.73, .055, .17],
+          [0, -.025, 0],
+          mat(0xc98680)
+        );
+
+        // Meibomian-gland symbols.
+        for (let i = 0; i < 12; i++) {
+          const x = -1.13 + i * .205;
+          box(
+            flap, [.045, .76, .025],
+            [x, -.57, -.08],
+            mat(0xf0ce8d, .75)
+          );
+        }
+
+        // Lash symbols near the conceptual free margin.
+        for (let i = 0; i < 22; i++) {
+          const x = -1.25 + i * .119;
+          segment(
+            flap,
+            V(x, -.035, .16),
+            V(x + .015, .09, .23),
+            .007,
+            mat(0x443237)
+          );
+        }
+
+        const lesionCenter = V(.35, -.55, -.13);
+
+        const swelling = ball(
+          flap, .34, [1.05, .88, .58],
+          [.35, -.55, .12],
+          mat(0xcb7c77, .70)
+        );
+
+        const contentMat = mat(0xefbf72, .9);
+        const contents = ball(
+          flap, .26, [1, .9, .55],
+          lesionCenter.toArray(),
+          contentMat
+        );
+
+        const clampGroup = new THREE.Group();
+        flap.add(clampGroup);
+
+        const steel = mat(0xc6d1dc, 1, {
+          metalness: .65, roughness: .22
+        });
+
+        const clampRing = ring(
+          clampGroup, .42, .035,
+          [.35, -.55, -.28],
+          steel
+        );
+
+        const clampPlate = mesh(
+          clampGroup,
+          new THREE.CylinderGeometry(.40, .40, .055, 48),
+          steel
+        );
+        clampPlate.rotation.x = Math.PI / 2;
+        clampPlate.position.set(.35, -.55, .30);
+
+        segment(
+          clampGroup,
+          V(.75, -.55, -.28),
+          V(1.75, -.55, -.28),
+          .030, steel
+        );
+
+        segment(
+          clampGroup,
+          V(.75, -.55, .30),
+          V(1.75, -.55, .30),
+          .030, steel
+        );
+
+        segment(
+          clampGroup,
+          V(1.75, -.55, -.28),
+          V(1.75, -.55, .30),
+          .035, steel
+        );
+
+        const incision = box(
+          flap, [.028, .45, .012],
+          [.35, -.55, -.305],
+          mat(0x842e43)
+        );
+
+        const bladeGroup = new THREE.Group();
+        flap.add(bladeGroup);
+
+        const bladeGeometry = new THREE.BufferGeometry();
+        bladeGeometry.setAttribute(
+          "position",
+          new THREE.Float32BufferAttribute([
+            -.06, -.12, 0,
+             .06, -.12, 0,
+              0,  .20, 0
+          ], 3)
+        );
+        bladeGeometry.computeVertexNormals();
+
+        const blade = mesh(bladeGroup, bladeGeometry, steel);
+        box(
+          bladeGroup,
+          [.09, .55, .055],
+          [0, -.35, 0],
+          mat(0x5d819d)
+        );
+
+        const curetteGroup = new THREE.Group();
+        flap.add(curetteGroup);
+
+        ring(
+          curetteGroup, .065, .016, [0, 0, 0],
+          steel
+        );
+
+        segment(
+          curetteGroup,
+          V(.065, 0, 0),
+          V(.98, 0, -.05),
+          .017, steel
+        );
+
+        segment(
+          curetteGroup,
+          V(.98, 0, -.05),
+          V(1.38, 0, -.05),
+          .06, mat(0x6990aa)
+        );
+
+        const anesthesia = new THREE.Group();
+        flap.add(anesthesia);
+
+        segment(
+          anesthesia,
+          V(.02, -.56, .32),
+          V(-.48, -.56, 1.02),
+          .012, steel
+        );
+
+        segment(
+          anesthesia,
+          V(-.48, -.56, 1.02),
+          V(-.75, -.56, 1.40),
+          .075, mat(0xbcdcea, .75)
+        );
+
+        const debrisGroup = new THREE.Group();
+        flap.add(debrisGroup);
+        const debris = [];
+
+        for (let i = 0; i < 18; i++) {
+          const a = i * 2.399963;
+
+          const object = ball(
+            debrisGroup, .025, [1, .8, .6],
+            [.35, -.55, -.31],
+            mat(0xefbf72)
+          );
+
+          debris.push({
+            object,
+            destination: V(
+              .85 + .35 * Math.cos(a),
+              -.55 + .20 * Math.sin(a),
+              -.47
+            )
+          });
+        }
+
+        const labelPoint = (localPoint) => {
+          const point = V();
+          return {
+            point,
+            update(target) {
+              target.copy(localPoint);
+              flap.localToWorld(target);
+            }
+          };
+        };
+
+        const labels = [
+          {
+            zh: "眼瞼皮膚", en: "Lid skin",
+            ...labelPoint(V(-.84, -.48, .19))
+          },
+          {
+            zh: "瞼板", en: "Tarsal plate",
+            ...labelPoint(V(-.90, -.79, -.02))
+          },
+          {
+            zh: "瞼結膜", en: "Palpebral conjunctiva",
+            ...labelPoint(V(-.78, -.35, -.17)),
+            visible: progress => progress >= 3.4 && progress < 7.7
+          },
+          {
+            zh: "霰粒腫", en: "Chalazion",
+            ...labelPoint(V(.35, -.55, -.25))
+          }
+        ];
+
+        return {
+          root, labels,
+          target: V(0, .60, .2),
+          home: V(3.2, 2.6, 6.5),
+
+          update(progress) {
+            const s = Math.min(Math.floor(progress), 7);
+            const p = clamp(progress - s, 0, 1);
+
+            skin.visible = $("showOuter").checked;
+            skinMat.opacity = Number($("outerOpacity").value);
+
+            let eversion = smooth(progress - 3);
+            if (s === 7) eversion = 1 - smooth(p);
+
+            flap.rotation.x = Math.PI * eversion;
+
+            clampGroup.visible =
+              progress >= 2.05 && !(s === 7 && p > .16);
+
+            anesthesia.visible = s === 1;
+
+            incision.visible = progress >= 4;
+            incision.scale.y = Math.max(.01, smooth(progress - 4));
+            incision.scale.x =
+              1 + .85 * smooth(progress - 5);
+
+            bladeGroup.visible = s === 4 && p > .03 && p < .97;
+            bladeGroup.position.set(
+              .35,
+              -.36 - .35 * smooth(p),
+              -.36
+            );
+
+            curetteGroup.visible = s === 5 && p > .02 && p < .98;
+            curetteGroup.position.set(
+              .35 + .13 * Math.cos(p * Math.PI * 6),
+              -.55 + .10 * Math.sin(p * Math.PI * 6),
+              -.35 - .025 * Math.sin(p * Math.PI * 4)
+            );
+
+            const removed = smooth(progress - 5);
+            const remaining = 1 - removed;
+
+            contents.visible = remaining > .005;
+            contents.scale.set(
+              Math.max(.001, remaining),
+              .9 * Math.max(.001, remaining),
+              .55 * Math.max(.001, remaining)
+            );
+
+            // Retain some residual swelling rather than instant cure.
+            const residualSwelling = 1 - .55 * removed;
+            swelling.scale.set(
+              1.05 * residualSwelling,
+              .88 * residualSwelling,
+              .58 * residualSwelling
+            );
+
+            debrisGroup.visible = s === 5;
+
+            debris.forEach((item, i) => {
+              const q = clamp(
+                p * 1.45 - i / debris.length * .45,
+                0, 1
+              );
+
+              item.object.visible = q > .02 && q < .98;
+
+              item.object.position
+                .set(.35, -.55, -.32)
+                .lerp(item.destination, smooth(q));
+
+              item.object.scale.setScalar(1 - .65 * q);
+            });
+          }
+        };
+      }
+
+      models.rrd = buildRRD();
+      models.injection = buildInjection();
+      models.chalazion = buildChalazion();
+
+      // ============================================================
+      // 6. APPLICATION STATE
+      // Each procedure remembers its own timeline position.
+      // Deterministic state allows reverse scrubbing and replay.
+      // ============================================================
+
+      const query = new URLSearchParams(location.search);
+      const requestedProcedure = query.get("procedure");
+
+      let activeId =
+        Object.hasOwn(PROCEDURES, requestedProcedure)
+          ? requestedProcedure
+          : "rrd";
+
+      let language = "both";
+      const requestedLanguage = query.get("lang");
+      if (requestedLanguage === "zh" || requestedLanguage === "en") {
+        language = requestedLanguage;
+        $("language").value = requestedLanguage;
+        document.documentElement.lang =
+          requestedLanguage === "en" ? "en" : "zh-Hant";
+      }
+      let playing = false;
+
+      const progressByProcedure = {
+        rrd: 0,
+        injection: 0,
+        chalazion: 0
+      };
+
+      let buttons = [];
+      let labelElements = [];
+      let lastStage = -1;
+      let lastLanguage = "";
+
+      const activeData = () => PROCEDURES[activeId];
+      const activeModel = () => models[activeId];
+      const getProgress = () => progressByProcedure[activeId];
+
+      function setProgress(value) {
+        progressByProcedure[activeId] = clamp(
+          Number(value) || 0,
+          0,
+          activeData().stages.length
+        );
+      }
+
+      function localized(zh, en, separator = " / ") {
+        if (language === "zh") return zh;
+        if (language === "en") return en;
+        return zh + separator + en;
+      }
+
+      function getStageState() {
+        const progress = getProgress();
+        const total = activeData().stages.length;
+        const index = Math.min(Math.floor(progress), total - 1);
+
+        return {
+          progress,
+          total,
+          index,
+          fraction: clamp(progress - index, 0, 1)
+        };
+      }
+
+      function setHomeView() {
+        const model = activeModel();
+        camera.position.copy(model.home);
+        controls.target.copy(model.target);
+        controls.update();
+        controls.saveState();
+      }
+
+      function buildTimeline() {
+        $("steps").replaceChildren();
+        buttons = [];
+
+        activeData().stages.forEach((entry, index) => {
+          const button = document.createElement("button");
+          button.className = "step";
+
+          button.addEventListener("click", () => {
+            playing = false;
+            setProgress(index);
+            refresh();
+          });
+
+          $("steps").appendChild(button);
+          buttons.push(button);
+        });
+      }
+
+      function buildLabels() {
+        $("labels").replaceChildren();
+        labelElements = [];
+
+        activeModel().labels.forEach(label => {
+          const element = document.createElement("div");
+          element.className = "label";
+          $("labels").appendChild(element);
+          labelElements.push({ label, element });
+        });
+      }
+
+      function updateHeader() {
+        const data = activeData();
+
+        $("procedureTitle").textContent =
+          language === "en" ? data.en : data.zh;
+
+        $("procedureSubtitle").textContent =
+          localized(data.subtitleZh, data.subtitleEn);
+
+        $("procedureWarning").textContent =
+          localized(data.warningZh, data.warningEn, "\n\n");
+
+        $("legend").replaceChildren();
+
+        data.legend.forEach(([color, zh, en]) => {
+          const row = document.createElement("div");
+          row.className = "legend-row";
+
+          const dot = document.createElement("i");
+          dot.className = "dot";
+          dot.style.background = color;
+
+          const text = document.createElement("span");
+          text.textContent = localized(zh, en);
+
+          row.append(dot, text);
+          $("legend").appendChild(row);
+        });
+      }
+
+      function updateUI() {
+        const { progress, total, index, fraction } = getStageState();
+        const entry = activeData().stages[index];
+
+        if (index !== lastStage || language !== lastLanguage) {
+          lastStage = index;
+          lastLanguage = language;
+
+          $("stepCount").textContent =
+            `STAGE ${String(index + 1).padStart(2, "0")} / ${total}`;
+
+          $("stageTitle").textContent =
+            language === "en" ? entry.en : entry.zh;
+
+          $("stageSubtitle").textContent =
+            language === "both" ? entry.en : "";
+
+          $("stageTag").textContent = localized(entry.zh, entry.en);
+
+          $("explanation").replaceChildren();
+
+          if (language !== "en") {
+            const paragraph = document.createElement("p");
+            paragraph.lang = "zh-Hant";
+            paragraph.textContent = entry.bodyZh;
+            $("explanation").appendChild(paragraph);
+          }
+
+          if (language !== "zh") {
+            const paragraph = document.createElement("p");
+            paragraph.lang = "en";
+            paragraph.className = "en";
+            paragraph.textContent = entry.bodyEn;
+            $("explanation").appendChild(paragraph);
+          }
+
+          $("clinicalNote").textContent =
+            localized(entry.noteZh, entry.noteEn, "\n\n");
+
+          buttons.forEach((button, i) => {
+            const stepData = activeData().stages[i];
+            button.replaceChildren();
+
+            const number = document.createElement("strong");
+            number.textContent = String(i + 1).padStart(2, "0");
+
+            const title = document.createElement("span");
+            title.textContent =
+              language === "en" ? stepData.en : stepData.zh;
+
+            button.append(number, title);
+
+            if (language === "both") {
+              const secondary = document.createElement("small");
+              secondary.textContent = stepData.en;
+              button.appendChild(secondary);
+            }
+
+            button.classList.toggle("active", i === index);
+            button.classList.toggle("complete", i < index);
+
+            if (i === index) button.setAttribute("aria-current", "step");
+            else button.removeAttribute("aria-current");
+
+            button.setAttribute(
+              "aria-label",
+              `${i + 1}. ${localized(stepData.zh, stepData.en)}`
+            );
+          });
+        }
+
+        $("timeline").max = String(total * 100);
+        $("timeline").value = String(Math.round(progress * 100));
+
+        $("timeline").setAttribute(
+          "aria-valuetext",
+          `${localized(entry.zh, entry.en)} ${Math.round(fraction * 100)}%`
+        );
+
+        $("progressText").textContent =
+          `Stage ${index + 1}/${total} · ` +
+          `${Math.round(progress / total * 100)}%`;
+
+        $("play").textContent = playing
+          ? localized("⏸ 暫停", "⏸ Pause")
+          : localized("▶ 播放", "▶ Play");
+
+        $("previous").disabled = progress <= 0;
+        $("next").disabled = progress >= total;
+      }
+
+      function updateProjectedLabels() {
+        const progress = getProgress();
+        const width = host.clientWidth;
+        const height = host.clientHeight;
+        const enabled = $("showLabels").checked;
+
+        // Needed for labels attached to the everted lid.
+        scene.updateMatrixWorld(true);
+
+        labelElements.forEach(({ label, element }) => {
+          if (label.update) label.update(label.point);
+
+          const projected = label.point.clone().project(camera);
+
+          const onScreen =
+            projected.z > -1 && projected.z < 1 &&
+            Math.abs(projected.x) < .98 &&
+            Math.abs(projected.y) < .98;
+
+          const visible =
+            !label.visible || label.visible(progress);
+
+          element.hidden = !(enabled && visible && onScreen);
+          element.textContent = localized(label.zh, label.en);
+
+          element.style.left =
+            `${(projected.x * .5 + .5) * width}px`;
+
+          element.style.top =
+            `${(-projected.y * .5 + .5) * height}px`;
+        });
+      }
+
+      function refresh() {
+        activeModel().update(getProgress());
+        updateUI();
+      }
+
+      function activateProcedure(id) {
+        if (!Object.hasOwn(PROCEDURES, id)) return;
+
+        playing = false;
+        activeId = id;
+        $("procedure").value = id;
+
+        Object.entries(models).forEach(([modelId, model]) => {
+          model.root.visible = modelId === id;
+        });
+
+        lastStage = -1;
+        lastLanguage = "";
+
+        buildTimeline();
+        buildLabels();
+        updateHeader();
+        setHomeView();
+        refresh();
+      }
+
+      // ============================================================
+      // 7. CONTROLS
+      // ============================================================
+
+      $("procedure").addEventListener("change", event => {
+        activateProcedure(event.target.value);
+      });
+
+      $("language").addEventListener("change", event => {
+        language = event.target.value;
+        document.documentElement.lang =
+          language === "en" ? "en" : "zh-Hant";
+        updateHeader();
+        refresh();
+      });
+
+      $("timeline").addEventListener("input", event => {
+        playing = false;
+        setProgress(Number(event.target.value) / 100);
+        refresh();
+      });
+
+      $("play").addEventListener("click", () => {
+        if (getProgress() >= activeData().stages.length) {
+          setProgress(0);
+        }
+
+        playing = !playing;
+        refresh();
+      });
+
+      $("restart").addEventListener("click", () => {
+        playing = false;
+        setProgress(0);
+        refresh();
+      });
+
+      $("previous").addEventListener("click", () => {
+        const { index, fraction } = getStageState();
+        playing = false;
+
+        setProgress(
+          fraction > .02 ? index : Math.max(0, index - 1)
+        );
+
+        refresh();
+      });
+
+      $("next").addEventListener("click", () => {
+        const { index, total } = getStageState();
+        playing = false;
+        setProgress(Math.min(total, index + 1));
+        refresh();
+      });
+
+      ["outerOpacity", "showOuter"].forEach(id => {
+        $(id).addEventListener("input", refresh);
+      });
+
+      $("resetView").addEventListener("click", () => {
+        controls.reset();
+      });
+
+      $("frontView").addEventListener("click", () => {
+        const target = activeModel().target;
+        camera.position.copy(target).add(V(0, 0, 7.3));
+        controls.target.copy(target);
+        controls.update();
+      });
+
+      $("sideView").addEventListener("click", () => {
+        const target = activeModel().target;
+        camera.position.copy(target).add(V(7.3, .40, .60));
+        controls.target.copy(target);
+        controls.update();
+      });
+
+      window.addEventListener("keydown", event => {
+        const tag = event.target.tagName;
+
+        if (
+          event.code === "Space" &&
+          !["INPUT", "SELECT", "BUTTON", "TEXTAREA"].includes(tag)
+        ) {
+          event.preventDefault();
+          $("play").click();
+        }
+      });
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          playing = false;
+          updateUI();
+        }
+      });
+
+      function resize() {
+        const width = host.clientWidth;
+        const height = host.clientHeight;
+        if (!width || !height) return;
+
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+      }
+
+      const resizeObserver = new ResizeObserver(resize);
+      resizeObserver.observe(host);
+      resize();
+
+      renderer.domElement.addEventListener("webglcontextlost", event => {
+        event.preventDefault();
+        playing = false;
+        $("status").hidden = false;
+        $("status").textContent =
+          "3D 顯示中斷，請重新整理頁面。\n" +
+          "The graphics context was lost. Please reload the page.";
+      });
+
+      activateProcedure(activeId);
+      $("status").hidden = true;
+
+      let previousTime = performance.now();
+
+      function animate(now) {
+        requestAnimationFrame(animate);
+
+        const delta = Math.min((now - previousTime) / 1000, .1);
+        previousTime = now;
+
+        if (playing) {
+          const duration = Number($("stageDuration").value);
+          const speed = Number($("speed").value);
+
+          setProgress(getProgress() + delta * speed / duration);
+
+          if (getProgress() >= activeData().stages.length) {
+            playing = false;
+          }
+
+          refresh();
+        }
+
+        controls.update();
+        updateProjectedLabels();
+        renderer.render(scene, camera);
+      }
+
+      requestAnimationFrame(animate);
+
+      // ============================================================
+      // 8. CURSOR / DEBUGGING API
+      // Available in browser DevTools after initialization.
+      // ============================================================
+
+      window.ophthalmicDemo = {
+        procedures: PROCEDURES,
+        models,
+        scene,
+        camera,
+        renderer,
+
+        selectProcedure(id) {
+          activateProcedure(id);
+        },
+
+        setProgress(value) {
+          playing = false;
+          setProgress(value);
+          refresh();
+        },
+
+        getProgress() {
+          return getProgress();
+        },
+
+        getActiveProcedure() {
+          return activeId;
+        }
+      };
+    }
+
+    main().catch(error => {
+      console.error(error);
+
+      const status = document.getElementById("status");
+      status.hidden = false;
+      status.textContent =
+        "無法載入 3D 模型。\n" +
+        "請檢查網路連線，以本機 HTTP 伺服器開啟，" +
+        "並使用支援 WebGL 2 的瀏覽器。\n\n" +
+        "Unable to initialize the models.\n" +
+        "Check internet access, serve this file over local HTTP, " +
+        "and use a WebGL 2-capable browser.\n\n" +
+        error.message;
+    });
+  </script>
+</body>
+</html>

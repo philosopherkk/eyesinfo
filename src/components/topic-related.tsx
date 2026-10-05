@@ -50,6 +50,11 @@ function localizeRelatedLabel(
   t: (key: UiKey) => string,
   tx: (s: string) => string,
 ): string {
+  const pathOnly = href.split("?")[0]?.split("#")[0] ?? href;
+  if (pathOnly === "/tools/procedures") {
+    if (locale === "en" || locale === "ja") return "Teaching illustration";
+    return tx("教學示意");
+  }
   if (isEduToolHref(href)) {
     const id = toolIdFromHref(href);
     if (id && TOOL_TEXT[locale]?.[id as keyof (typeof TOOL_TEXT)["zh-Hant"]]) {
