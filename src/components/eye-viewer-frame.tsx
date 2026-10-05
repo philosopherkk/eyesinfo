@@ -25,6 +25,10 @@ export function eyeViewerLang(locale: Locale): "zh" | "en" {
 }
 
 function topicsForBranch(branch: AnatomyHomeBranchId): Topic[] {
+  if (branch === "vitreous") {
+    const topic = getTopic("d8");
+    return topic ? [topic] : [];
+  }
   if (branch === "macula") {
     const related = ANATOMY_RELATED.macula;
     if (related.kind !== "topics") return [];
@@ -61,13 +65,17 @@ export function EyeViewerFrame() {
   }, []);
 
   const topics = branch ? topicsForBranch(branch) : [];
+  const viewerTitle =
+    locale === "en" || locale === "ja"
+      ? "Interactive 3D eye anatomy: rotate, zoom, and view layers"
+      : "互動 3D 眼球解剖：旋轉、縮放及查看分層";
 
   return (
     <div>
       <iframe
         id="eyesinfo-eye-viewer"
         src={`/eye-viewer.html?lang=${eyeViewerLang(locale)}`}
-        title="互動 3D 眼球解剖：旋轉、縮放及查看分層"
+        title={viewerTitle}
         className="eye-viewer-frame"
       />
       {topics.length > 0 ? (

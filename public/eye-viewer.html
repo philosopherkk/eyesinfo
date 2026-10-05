@@ -118,13 +118,12 @@
 
   .anatomy-label {
     position: absolute;
-    width: 145px;
+    width: max-content;
+    max-width: calc(50% - 16px);
     padding: 4px 7px;
     font-size: 12px;
     line-height: 20px;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     text-align: left;
     background: rgba(8, 19, 33, .9);
     border-radius: 7px;
@@ -256,10 +255,6 @@
 <div id="app">
   <header>
     <h1 id="title">互動眼球解剖</h1>
-    <select id="language" aria-label="Language / 語言">
-      <option value="zh">繁體中文</option>
-      <option value="en">English</option>
-    </select>
   </header>
 
   <nav class="toolbar" aria-label="Viewer controls">
@@ -286,7 +281,7 @@
       <div id="labels"></div>
       <div id="viewBadge"></div>
       <div id="error" role="alert">
-        Loading 3D viewer… / 正在載入 3D 模型…
+        正在載入 3D 模型…
       </div>
     </div>
 
@@ -316,32 +311,15 @@
     </span>
 
     <details>
-      <summary>Text-only anatomy / 純文字解剖</summary>
-      <p>
-        Main structures / 主要結構:
-        cornea 角膜; anterior chamber 前房; iris 虹膜;
-        pupil 瞳孔; lens 晶體; ciliary body 睫狀體;
-        vitreous 玻璃體; retina 視網膜; choroid 脈絡膜;
-        sclera 鞏膜; macula 黃斑; optic nerve 視神經.
+      <summary id="textOnly">純文字解剖</summary>
+      <p id="textStructures">
+        主要結構：角膜；前房；虹膜；瞳孔；晶體；睫狀體；玻璃體；視網膜；脈絡膜；鞏膜；黃斑；視神經。
       </p>
-      <p>
-        Cornea, outside → inside / 角膜，由外至內:
-        epithelium 上皮層 → Bowman's layer 鮑曼氏層 →
-        stroma 基質層 → Descemet's membrane 後彈力層 →
-        endothelium 內皮層.
+      <p id="textCornea">
+        角膜，由外至內：上皮層 → 鮑曼氏層 → 基質層 → 後彈力層 → 內皮層。
       </p>
-      <p>
-        Retina, vitreous → choroid / 視網膜，由玻璃體側至脈絡膜側:
-        inner limiting membrane 內界膜 →
-        nerve fiber layer 神經纖維層 →
-        ganglion cell layer 神經節細胞層 →
-        inner plexiform layer 內叢狀層 →
-        inner nuclear layer 內核層 →
-        outer plexiform layer 外叢狀層 →
-        outer nuclear layer 外核層 →
-        external limiting membrane 外界膜 →
-        photoreceptor segments 感光細胞節段 →
-        retinal pigment epithelium 視網膜色素上皮.
+      <p id="textRetina">
+        視網膜，由玻璃體側至脈絡膜側：內界膜 → 神經纖維層 → 神經節細胞層 → 內叢狀層 → 內核層 → 外叢狀層 → 外核層 → 外界膜 → 感光細胞節段 → 視網膜色素上皮。
       </p>
     </details>
 
@@ -374,7 +352,13 @@ const UI = {
     corneaOrder: "Top → bottom: tear-film side → anterior-chamber side. Tear film is not included among the five corneal layers.",
     retinaOrder: "Top → bottom: vitreous side → choroid side. Layer thicknesses vary by retinal location; this is a generic schematic.",
     lensOrder: "Nested volumes: capsule → cortex → nucleus. Separation is illustrative, not a physical arrangement.",
-    failure: "The 3D viewer could not load. Check WebGL 2 support, your connection and script permissions. Text-only anatomy remains available below."
+    failure: "The 3D viewer could not load. Check WebGL 2 support, your connection and script permissions. Text-only anatomy remains available below.",
+    loading: "Loading 3D viewer…",
+    canvas: "Interactive 3D eye. Arrow keys rotate, plus and minus zoom, Home resets.",
+    textOnly: "Text-only anatomy",
+    textStructures: "Main structures: cornea; anterior chamber; iris; pupil; lens; ciliary body; vitreous; retina; choroid; sclera; macula; optic nerve.",
+    textCornea: "Cornea, outside → inside: epithelium → Bowman's layer → stroma → Descemet's membrane → endothelium.",
+    textRetina: "Retina, vitreous → choroid: inner limiting membrane → nerve fiber layer → ganglion cell layer → inner plexiform layer → inner nuclear layer → outer plexiform layer → outer nuclear layer → external limiting membrane → photoreceptor segments → retinal pigment epithelium."
   },
   zh: {
     title: "互動眼球解剖",
@@ -394,7 +378,13 @@ const UI = {
     corneaOrder: "由上至下：淚膜側 → 前房側。淚膜不計入角膜的五層。",
     retinaOrder: "由上至下：玻璃體側 → 脈絡膜側。各部位的分層厚度不同，此為一般示意。",
     lensOrder: "由外至內：囊膜 → 皮質 → 核。分離位置只作示意。",
-    failure: "無法載入 3D 模型。請檢查 WebGL 2、網絡及腳本權限；下方仍可閱讀純文字解剖。"
+    failure: "無法載入 3D 模型。請檢查 WebGL 2、網絡及腳本權限；下方仍可閱讀純文字解剖。",
+    loading: "正在載入 3D 模型…",
+    canvas: "互動 3D 眼球。方向鍵旋轉，加號與減號縮放，Home 重設。",
+    textOnly: "純文字解剖",
+    textStructures: "主要結構：角膜；前房；虹膜；瞳孔；晶體；睫狀體；玻璃體；視網膜；脈絡膜；鞏膜；黃斑；視神經。",
+    textCornea: "角膜，由外至內：上皮層 → 鮑曼氏層 → 基質層 → 後彈力層 → 內皮層。",
+    textRetina: "視網膜，由玻璃體側至脈絡膜側：內界膜 → 神經纖維層 → 神經節細胞層 → 內叢狀層 → 內核層 → 外叢狀層 → 外核層 → 外界膜 → 感光細胞節段 → 視網膜色素上皮。"
   }
 };
 
@@ -506,9 +496,20 @@ const LAYERS = {
 let lang = new URLSearchParams(location.search).get("lang") === "en"
   ? "en" : "zh";
 
-$("language").value = lang;
-
 const text = key => UI[lang][key];
+
+function applyStaticCopy() {
+  document.documentElement.lang = lang === "en" ? "en" : "zh-Hant";
+  $("title").textContent = text("title");
+  $("error").textContent = text("loading");
+  $("textOnly").textContent = text("textOnly");
+  $("textStructures").textContent = text("textStructures");
+  $("textCornea").textContent = text("textCornea");
+  $("textRetina").textContent = text("textRetina");
+  $("disclaimer").textContent = text("disclaimer");
+}
+
+applyStaticCopy();
 const nameOf = row => row[lang === "en" ? 1 : 2];
 const grossById = id => GROSS.find(row => row[0] === id);
 
@@ -538,10 +539,7 @@ function startViewer() {
   const canvas = renderer.domElement;
   canvas.tabIndex = 0;
   canvas.setAttribute("role", "img");
-  canvas.setAttribute(
-    "aria-label",
-    "Interactive 3D eye. Arrow keys rotate, plus/minus zoom, Home resets."
-  );
+  canvas.setAttribute("aria-label", text("canvas"));
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(42, 1, .025, 60);
@@ -983,6 +981,11 @@ function startViewer() {
     $("details").textContent = text("detail");
     $("explodeText").textContent = text("gap");
     $("disclaimer").textContent = text("disclaimer");
+    $("textOnly").textContent = text("textOnly");
+    $("textStructures").textContent = text("textStructures");
+    $("textCornea").textContent = text("textCornea");
+    $("textRetina").textContent = text("textRetina");
+    stage.querySelector("canvas")?.setAttribute("aria-label", text("canvas"));
     $("hint").textContent = text(mode === "eye" ? "hint" : "layerHint");
 
     $("back").hidden = mode === "eye";
@@ -1155,40 +1158,60 @@ function startViewer() {
       columns[item.px < width / 2 ? 0 : 1].push(item);
     });
 
+    const pad = 10;
+    const gap = 6;
+
     columns.forEach((items, side) => {
-      const capacity = width < 380 ? 2
-        : Math.max(1, Math.floor((height - 60) / 33));
+      items.forEach(item => {
+        item.label.style.display = "block";
+        item.label.style.maxWidth = Math.max(72, Math.floor((width - pad * 3) / 2)) + "px";
+      });
+
+      const sample = items[0]?.label.offsetHeight || 30;
+      const capacity = Math.max(
+        1,
+        Math.floor((height - pad * 2 + gap) / (sample + gap))
+      );
 
       // Selected annotations are retained when space is limited.
       items.sort((a, b) =>
         Number(b.row[0] === activeId) - Number(a.row[0] === activeId)
       );
-      items = items.slice(0, capacity);
+      const kept = new Set(items.slice(0, capacity));
+      items.forEach(item => {
+        if (!kept.has(item)) {
+          item.label.style.display = "none";
+          item.wire.style.display = "none";
+        }
+      });
+      items = items.filter(item => kept.has(item));
       items.sort((a, b) => a.py - b.py);
 
-      let previous = 45;
+      let cursor = pad;
       items.forEach(item => {
-        item.ly = Math.max(
-          previous, Math.min(height - 22, Math.max(45, item.py))
-        );
-        previous = item.ly + 33;
+        const h = item.label.offsetHeight || sample;
+        const preferred = Math.max(pad, Math.min(item.py - h / 2, height - pad - h));
+        item.top = Math.max(cursor, preferred);
+        cursor = item.top + h + gap;
       });
 
-      let next = height - 22;
-      for (let i = items.length - 1; i >= 0; i--) {
-        items[i].ly = Math.min(items[i].ly, next);
-        next = items[i].ly - 33;
+      const overflow = cursor - gap - (height - pad);
+      if (overflow > 0) {
+        items.forEach(item => { item.top -= overflow; });
       }
 
-      const x = side === 0 ? 8 : width - 153;
-
       items.forEach(item => {
+        const h = item.label.offsetHeight || sample;
+        const w = item.label.offsetWidth || 72;
+        item.top = Math.max(pad, Math.min(item.top, height - pad - h));
+        const x = side === 0 ? pad : Math.max(pad, width - pad - w);
+        item.ly = item.top + h / 2;
         item.label.style.display = "block";
         item.wire.style.display = "block";
         item.label.style.left = x + "px";
-        item.label.style.top = (item.ly - 15) + "px";
+        item.label.style.top = item.top + "px";
 
-        const edge = side === 0 ? x + 145 : x;
+        const edge = side === 0 ? x + w : x;
         const elbow = side === 0 ? edge + 10 : edge - 10;
 
         item.wire.setAttribute("points",
@@ -1298,11 +1321,6 @@ function startViewer() {
   $("explode").oninput = updateSeparation;
   $("showLabels").onchange = () => { dirty = true; };
   $("autoDetail").onchange = () => { dirty = true; };
-
-  $("language").onchange = event => {
-    lang = event.target.value;
-    buildInterface();
-  };
 
   controls.addEventListener("change", () => { dirty = true; });
 

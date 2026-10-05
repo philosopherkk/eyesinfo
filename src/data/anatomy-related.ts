@@ -137,12 +137,16 @@ const VIEWER_STRUCTURE_REGION: Partial<Record<string, AnatomyRegionId>> = {
   optic: "opticNerve",
 };
 
-/** Home-page branch opened when a viewer structure already has topics. */
-export type AnatomyHomeBranchId = AnatomyCatId | "macula";
+/**
+ * Home-page branch opened when a viewer structure already has topics.
+ * `vitreous` is the floater page only (`d8`), not the retina category.
+ */
+export type AnatomyHomeBranchId = AnatomyCatId | "macula" | "vitreous";
 
 /**
- * Map a viewer structure id onto an existing home topic branch.
+ * Map a viewer structure id onto an existing topic branch.
  * Unknown structures, and structures with no topic, return null.
+ * Vitreous stays on 飛蚊症 (`d8`) instead of the retina list.
  */
 export function homeBranchForViewerStructure(
   structureId: string,
@@ -153,6 +157,7 @@ export function homeBranchForViewerStructure(
   if (related.kind === "cat") return related.catId;
   if (related.kind === "topics") return "macula";
   if (related.kind === "topic") {
+    if (related.topicId === "d8") return "vitreous";
     return getTopic(related.topicId)?.category ?? null;
   }
   return null;
