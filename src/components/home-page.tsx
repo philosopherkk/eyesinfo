@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useRouterState } from "@tanstack/react-router";
 import { ChevronRight, Download } from "lucide-react";
 import {
   CATEGORIES,
@@ -25,18 +26,16 @@ import { hrefWithLang } from "@/lib/locale-path";
 import type { Locale } from "@/i18n/locale";
 import {
   ANATOMY_RELATED,
-  homeBranchForViewerStructure,
   type AnatomyHomeBranchId,
 } from "@/data/anatomy-related";
 
-/**
- * KK's viewer is 繁 / EN only (`?lang=zh|en`).
- * ja → en and zh-Hans → zh; this pass does not add Japanese or simplified copy.
- */
-function eyeViewerLang(locale: Locale): "zh" | "en" {
-  if (locale === "en" || locale === "ja") return "en";
-  return "zh";
-}
+/** Shown on their own pages, not as front-page leaflets. */
+const FRONT_PAGE_OMIT = new Set([
+  "t-optic-neuritis",
+  "t-corneal-transplant",
+  "t-nystagmus",
+  "t-ocular-tumours",
+]);
 
 const HOME_TOOLS = TOOLS.filter((t) => t.home);
 
@@ -63,38 +62,17 @@ const HOME_CATEGORY_HUBS: { id: string }[] = [
   { id: "macula" },
 ];
 
-/** Lead leaflets on the home hub — hide the whole block if none resolve. */
-const NEW_SHEET_IDS: { id: string; labelKey: UiKey }[] = [
-  { id: "t-optic-neuritis", labelKey: "leadOpticNeuritis" },
-  { id: "t-corneal-transplant", labelKey: "leadCornealTransplant" },
-  { id: "t-nystagmus", labelKey: "leadNystagmus" },
-  { id: "t-ocular-tumours", labelKey: "leadOcularTumours" },
-];
-
 export function HomePage() {
   const featured = TOPICS.filter((t) => t.featured);
   const { t, locale } = useI18n();
   const tools = TOOL_TEXT[locale];
   const [openBranch, setOpenBranch] = useState<AnatomyHomeBranchId | null>(null);
+  const hash = useRouterState({ select: (s) => s.location.hash });
 
   useEffect(() => {
-    const onMessage = (event: MessageEvent) => {
-      if (event.origin !== window.location.origin) return;
-      const iframe = document.getElementById("eyesinfo-eye-viewer");
-      if (
-        !(iframe instanceof HTMLIFrameElement) ||
-        event.source !== iframe.contentWindow
-      ) {
-        return;
-      }
-      const data = event.data as { type?: unknown; structure?: unknown } | null;
-      if (!data || data.type !== "eyesinfo-eye-select") return;
-      if (typeof data.structure !== "string") return;
-      setOpenBranch(homeBranchForViewerStructure(data.structure));
-    };
-    window.addEventListener("message", onMessage);
-    return () => window.removeEventListener("message", onMessage);
-  }, []);
+    if (hash.replace(/^#/, "") !== "home-topics") return;
+    document.getElementById("home-topics")?.scrollIntoView({ block: "start" });
+  }, [hash]);
 
   useEffect(() => {
     if (!openBranch) return;
@@ -102,14 +80,6 @@ export function HomePage() {
       block: "nearest",
     });
   }, [openBranch]);
-
-  const clinicalNotes = NEW_SHEET_IDS.flatMap(({ id, labelKey }) => {
-    const topic = getTopic(id);
-    if (!topic) return [];
-    const label = t(labelKey).trim() || localizeTopic(topic, locale).title;
-    if (!label) return [];
-    return [{ id, label }];
-  });
 
   return (
     <div>
@@ -182,38 +152,6 @@ export function HomePage() {
         <h2 className="mb-2 text-[0.8rem] font-semibold text-muted">
           {t("byAnatomy")}
         </h2>
-        <iframe
-          id="eyesinfo-eye-viewer"
-          src={`/eye-viewer.html?lang=${eyeViewerLang(locale)}`}
-          title="互動 3D 眼球解剖：旋轉、縮放及查看分層"
-          loading="lazy"
-          className="eye-viewer-frame"
-        />
-        {clinicalNotes.length > 0 ? (
-          <div className="mt-3 overflow-hidden rounded-xl border border-line bg-card">
-            {clinicalNotes.map(({ id, label }) => (
-              <LocaleHrefLink
-                key={id}
-                path={`/t/${id}`}
-                className="flex min-h-11 items-center border-b border-line px-3 py-2 text-[0.85rem] font-semibold text-navy no-underline last:border-b-0"
-              >
-                {label}
-              </LocaleHrefLink>
-            ))}
-          </div>
-        ) : null}
-        <a
-          href="#home-topics"
-          className="mt-2 inline-flex h-11 w-full items-center justify-center rounded-xl border border-line bg-card text-[0.85rem] font-semibold text-navy no-underline"
-          onClick={(event) => {
-            const target = document.getElementById("home-topics");
-            if (!target) return;
-            event.preventDefault();
-            target.scrollIntoView({ block: "start" });
-          }}
-        >
-          {t("homeTopics")}
-        </a>
         <LocaleHrefLink
           path="/tools/map"
           className="mt-3 inline-flex h-11 w-full items-center justify-center rounded-xl border border-line bg-card text-[0.85rem] font-semibold text-navy no-underline"
@@ -274,15 +212,18 @@ export function HomePage() {
 }
 
 function topicsForHub(hubId: string): Topic[] {
-  if (hubId === "macula") {
-    const related = ANATOMY_RELATED.macula;
-    if (related.kind !== "topics") return [];
-    return related.topicIds.flatMap((id) => {
-      const topic = getTopic(id);
-      return topic ? [topic] : [];
-    });
-  }
-  return topicsByCategory(hubId as CategoryId);
+  const topics =
+    hubId === "macula"
+      ? (() => {
+          const related = ANATOMY_RELATED.macula;
+          if (related.kind !== "topics") return [];
+          return related.topicIds.flatMap((id) => {
+            const topic = getTopic(id);
+            return topic ? [topic] : [];
+          });
+        })()
+      : topicsByCategory(hubId as CategoryId);
+  return topics.filter((topic) => !FRONT_PAGE_OMIT.has(topic.id));
 }
 
 function AnatomyBranch({

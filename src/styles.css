@@ -238,7 +238,7 @@ html[data-theme="dark"] .urgent-on-danger {
   pointer-events: all;
 }
 
-/* Home 3D viewer. Desktop matches KK's 860px frame. Under 680px his own
+/* 眼圖 3D viewer. Desktop matches KK's 860px frame. Under 680px his own
    CSS stacks the panel (min-height 760px); do not force 860px there. */
 .eye-viewer-frame {
   display: block;

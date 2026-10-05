@@ -458,10 +458,19 @@ describe("topic structure polish", () => {
 
     assert.match(shell, /ariaCurrentPage/);
     assert.doesNotMatch(home, /newSheets|新單張/);
-    assert.match(home, /t-optic-neuritis/);
-    assert.match(home, /t-corneal-transplant/);
-    assert.match(home, /t-nystagmus/);
-    assert.match(home, /t-ocular-tumours/);
+    assert.doesNotMatch(home, /eye-viewer\.html/);
+    assert.match(home, /FRONT_PAGE_OMIT[\s\S]*t-optic-neuritis/);
+    assert.match(home, /FRONT_PAGE_OMIT[\s\S]*t-corneal-transplant/);
+    assert.match(home, /FRONT_PAGE_OMIT[\s\S]*t-nystagmus/);
+    assert.match(home, /FRONT_PAGE_OMIT[\s\S]*t-ocular-tumours/);
+    assert.doesNotMatch(home, /\/t\/t-optic-neuritis/);
+    assert.doesNotMatch(home, /\/t\/t-corneal-transplant/);
+    assert.doesNotMatch(home, /\/t\/t-nystagmus/);
+    assert.doesNotMatch(home, /\/t\/t-ocular-tumours/);
+    assert.match(extra, /t-optic-neuritis/);
+    assert.match(extra, /t-corneal-transplant/);
+    assert.match(extra, /t-nystagmus/);
+    assert.match(extra, /t-ocular-tumours/);
     assert.match(hkos, /CONTENT_VERSION 1\.69/);
   });
 });

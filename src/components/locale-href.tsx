@@ -15,6 +15,7 @@ type LocaleHrefLinkProps = {
   children: ReactNode;
   "aria-label"?: string;
   "aria-current"?: "page" | undefined;
+  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
 };
 
 function useSpaHrefNavigate() {
@@ -38,6 +39,7 @@ export function LocaleHrefLink({
   children,
   "aria-label": ariaLabel,
   "aria-current": ariaCurrent,
+  onClick,
 }: LocaleHrefLinkProps) {
   const href = useLocaleHref(path);
   const onNavigate = useSpaHrefNavigate();
@@ -47,7 +49,10 @@ export function LocaleHrefLink({
       className={className}
       aria-label={ariaLabel}
       aria-current={ariaCurrent}
-      onClick={(e) => onNavigate(href, e)}
+      onClick={(e) => {
+        onClick?.(e);
+        onNavigate(href, e);
+      }}
     >
       {children}
     </a>
