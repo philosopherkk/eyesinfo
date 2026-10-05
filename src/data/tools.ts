@@ -11,7 +11,8 @@ export type ToolId =
   | "outdoor"
   | "rx"
   | "amsler"
-  | "iol";
+  | "iol"
+  | "procedures";
 
 export type ToolDef = {
   id: ToolId;
@@ -26,6 +27,13 @@ export const TOOLS: ToolDef[] = [
   { id: "amsler", title: "阿姆斯勒方格", blurb: "自我監察中央視力", canto: "遮一眼望中央", href: "/amsler", home: true },
   { id: "iol", title: "晶體視力示意", blurb: "單焦目標度數與多焦光暈", canto: "睇遠睇近差幾多", href: "/iol", home: true },
   { id: "map", title: "眼圖", blurb: "撳部位打開相關專題", canto: "撳眼圖就明", href: "/tools/map", home: true },
+  {
+    id: "procedures",
+    title: "手術教學示意",
+    blurb: "視網膜脫離、玻璃體內注射、霰粒腫（不是檢查）",
+    canto: "三項示意，唔係手術指引",
+    href: "/tools/procedures",
+  },
   { id: "drops", title: "滴藥水步驟", blurb: "洗手、唔好掂睫毛；跟說明書", canto: "跟住步驟滴", href: "/tools/drops", home: true },
   { id: "ask", title: "問醫生清單", blurb: "面診前可帶去的問題", canto: "問清楚先好決定", href: "/tools/ask", home: true },
   { id: "tunnel", title: "隧道視野示意", blurb: "青光眼周邊視野收窄（不是檢查）", canto: "睇下隧道點樣", href: "/tools/tunnel" },
