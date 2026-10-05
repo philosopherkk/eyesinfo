@@ -403,14 +403,17 @@
 
     <div class="selectors">
       <select id="procedure" aria-label="Select procedure / 選擇手術">
+        <option value="cataract" selected>
+          1. 白內障手術 — Phacoemulsification + lens implant
+        </option>
         <option value="rrd">
-          1. 視網膜脫離 — PPV + Endolaser + Gas
+          2. 視網膜脫離 — PPV + Endolaser + Gas
         </option>
         <option value="injection">
-          2. 玻璃體內注射 — Intravitreal injection
+          3. 玻璃體內注射 — Intravitreal injection
         </option>
         <option value="chalazion">
-          3. 霰粒腫切開刮除 — Chalazion I&amp;C
+          4. 霰粒腫切開刮除 — Chalazion I&amp;C
         </option>
       </select>
 
@@ -792,6 +795,71 @@
               "The clamp is removed and the lid returns to its resting position. Aftercare and follow-up are arranged. Swelling may not resolve immediately.",
               "完成畫面仍保留少量腫脹；不表示保證治癒或不會復發。",
               "Some swelling remains in the final illustration; cure and freedom from recurrence are not guaranteed."
+            )
+          ]
+        },
+
+        cataract: {
+          zh: "白內障手術",
+          en: "Cataract surgery",
+          subtitleZh: "超聲波乳化並植入人工晶體（示意）",
+          subtitleEn: "Phacoemulsification with a lens implant (schematic)",
+          warningZh:
+            "此模型示意最常討論的超聲波乳化並植入人工晶體，不是人人都是同一種做法，亦不是手術操作指引。" +
+            "眼痛加劇、視力急降、膿樣分泌或明顯紅腫：立即急症室（需排除眼內炎）；無法自行前往：致電 999。" +
+            "視野簾幕、突然失明或突然劇痛：立即急症室；無法自行前往：致電 999。",
+          warningEn:
+            "This illustrates the commonly discussed phacoemulsification with a lens implant. Not everyone has the same operation, and this is not an operative guide. " +
+            "Worse pain, a sharp vision drop, pus-like discharge, or marked redness and swelling: go to A&E now (to rule out endophthalmitis); if you cannot get there, call 999. " +
+            "A curtain, sudden blindness, or sudden severe pain: go to A&E now; if you cannot get there, call 999.",
+          legend: [
+            ["#e6c36a", "混濁晶狀體", "Cloudy lens"],
+            ["#d7f4ff", "人工晶體", "Lens implant"],
+            ["#f4efe4", "囊袋示意", "Capsular bag"],
+            ["#d5dde6", "眼罩", "Shield"]
+          ],
+          stages: [
+            stage(
+              "混濁的晶狀體", "A cloudy lens",
+              "白內障是自身晶狀體變混。模型用發黃的晶狀體表示混濁，不是病人照片，亦不是術前術後對比。",
+              "A cataract is clouding of the eye’s own lens. The yellow lens is a symbol, not a patient photograph and not a before-and-after picture.",
+              "是否手術由眼科專科醫生按生活影響及檢查決定。不是「等全熟」或「人人即做」的時間表。",
+              "Whether to operate is an ophthalmologist’s decision, based on daily life and the examination. This is not a timetable of waiting until the lens is “ripe”, or of operating on everyone now."
+            ),
+            stage(
+              "滴眼與亮燈", "Drops and a bright light",
+              "當日多數滴散瞳藥和表面麻醉。你躺在很亮的顯微燈下，看見光是預期。",
+              "On the day, most people have dilating drops and surface anaesthetic. You lie under a very bright microscope light. Seeing the light is expected.",
+              "麻醉方式因人而異。本模型不指定藥物或劑量。",
+              "The anaesthetic method varies. This model names no drug and no dose."
+            ),
+            stage(
+              "涼與壓力", "Coolness and pressure",
+              "過程中常感到涼、水或壓力。不應有持續的劇痛。痛要立刻出聲，醫生可以再補麻醉。",
+              "During it you often feel coolness, water, or pressure. There should not be ongoing severe pain. If it hurts, say so at once. The doctor can add more anaesthetic.",
+              "旁邊的器械只表示你會聽見機器聲，不是切口大小，亦不是超聲如何操作的指引。",
+              "The instrument beside the eye only means you may hear the machine. It is not an incision size, and not a guide to how ultrasound is used."
+            ),
+            stage(
+              "混濁晶狀體離開", "The cloudy lens leaves",
+              "混濁的晶狀體被取出。移動的碎片只表示「離開」，不是真實把核拆開的過程。",
+              "The cloudy lens is removed. Moving fragments only mean “leaving”. They are not the real breaking-up of the nucleus.",
+              "不是人人都是同一種做法。較少用的囊外摘除不在此動畫。",
+              "Not everyone has the same operation. The less-used extracapsular operation is not in this animation."
+            ),
+            stage(
+              "透明人工晶體留在囊袋", "A clear implant stays in the bag",
+              "摺疊的人工晶體放入原來的囊袋並展開。你選擇的是光學類別，不是某一商品。散光矯正是可加在類別上的附加，不是另選的一類。",
+              "A folded implant is placed in the original capsular bag and unfolds. What you choose is an optical class, not a particular product. Toric astigmatism correction is an add-on to a class, not a separate class.",
+              "沒有一款適合所有人。類別比較見「人工晶體選擇細節」。本模型不保證不用眼鏡。",
+              "No class suits everyone. The comparison stays on Choosing an intraocular lens — detail. This model does not promise that you will not need glasses."
+            ),
+            stage(
+              "眼罩、當日回家", "A shield, home the same day",
+              "多數即日回家。當日視矇常見，不要用當日的清晰度判斷最終結果。",
+              "Most people go home the same day. Blur that day is common. Do not judge the final result from how clear it is that day.",
+              "眼痛加劇、視力急降、膿樣分泌或明顯紅腫：立即急症室（需排除眼內炎）；無法自行前往：致電 999。視野簾幕、突然失明或突然劇痛：立即急症室；無法自行前往：致電 999。新閃光或大量新飛蚊，沒有簾幕、沒有突然失明、沒有劇痛：盡快（最好當日）眼科評估。",
+              "Worse pain, a sharp vision drop, pus-like discharge, or marked redness and swelling: go to A&E now (to rule out endophthalmitis); if you cannot get there, call 999. A curtain, sudden blindness, or sudden severe pain: go to A&E now; if you cannot get there, call 999. New flashes or many new floaters, without a curtain, without sudden blindness and without severe pain: same-day ophthalmic assessment if possible."
             )
           ]
         }
@@ -1963,9 +2031,167 @@
         };
       }
 
+      // ============================================================
+      // 5b. CATARACT MODEL
+      // Schematic phacoemulsification plus a lens implant.
+      // No incision size, ultrasound settings, or product names.
+      // The handpiece stays outside the eye: it means “you may hear
+      // the machine”, not a path into the lens.
+      // ============================================================
+
+      function buildCataract() {
+        const root = new THREE.Group();
+        scene.add(root);
+        const eye = makeEye(root);
+
+        const cloudy = new THREE.Color(0xe6c36a);
+        const clearLens = new THREE.Color(0xd7f4ff);
+        eye.lens.material.color.copy(cloudy);
+        eye.lens.material.transparent = true;
+        eye.lens.material.opacity = .92;
+        eye.lens.material.depthWrite = false;
+
+        const bag = ring(
+          root, .74, .018, [0, 0, 1.40],
+          mat(0xf4efe4, .7)
+        );
+
+        const implant = ball(
+          root, .62, [1, 1, .12], [0, 0, 1.42],
+          mat(0xd7f4ff, .62, { roughness: .08 })
+        );
+        implant.visible = false;
+
+        const lamp = ball(
+          root, .16, [1, 1, 1], [0, 0, 3.25],
+          mat(0xfff6d0, 1, {
+            emissive: 0xfff1b0,
+            emissiveIntensity: 1.4
+          })
+        );
+
+        const beam = mesh(
+          root,
+          new THREE.ConeGeometry(.42, 1.15, 24, 1, true),
+          mat(0xfff4c8, .16)
+        );
+        beam.position.set(0, 0, 2.55);
+        beam.rotation.x = -Math.PI / 2;
+
+        const drop = ball(
+          root, .07, [1, 1, 1.3], [0, .15, 2.45],
+          mat(0x5bb4f0, .85)
+        );
+
+        const handpiece = makeTool(root, 0x6aa0c8);
+
+        const fragmentGeometry = new THREE.SphereGeometry(.055, 10, 8);
+        const fragmentMaterial = mat(0xe6c36a, .9);
+        const fragments = [];
+
+        for (let i = 0; i < 8; i++) {
+          const object = mesh(root, fragmentGeometry, fragmentMaterial);
+          object.visible = false;
+          fragments.push({
+            object,
+            home: V((i - 3.5) * .07, ((i % 3) - 1) * .05, 1.42),
+            away: V((i - 3.5) * .28, .55 + (i % 3) * .12, 2.55)
+          });
+        }
+
+        const shield = box(
+          root, [2.15, 2.35, .08], [0, 0, 3.1],
+          mat(0xd5dde6, .78)
+        );
+        shield.visible = false;
+
+        const labels = [
+          {
+            zh: "混濁晶狀體", en: "Cloudy lens",
+            point: V(-.15, -.42, 1.48),
+            visible: progress => progress < 4
+          },
+          {
+            zh: "人工晶體", en: "Lens implant",
+            point: V(.2, -.36, 1.5),
+            visible: progress => progress >= 4 && progress < 5.15
+          },
+          {
+            zh: "囊袋示意", en: "Capsular bag",
+            point: V(.95, .2, 1.38),
+            visible: progress => progress < 5.15
+          },
+          {
+            zh: "眼罩", en: "Shield",
+            point: V(0, 1.25, 2.55),
+            visible: progress => progress >= 5
+          }
+        ];
+
+        return {
+          root, labels,
+          target: V(0, 0, 1.15),
+          home: V(2.6, 1.35, 6.9),
+
+          update(progress) {
+            outerSettings(eye);
+
+            const s = Math.min(Math.floor(progress), 5);
+            const p = clamp(progress - s, 0, 1);
+            const cleared = smooth(Math.max(0, progress - 3));
+
+            eye.lens.visible = cleared < .96;
+            eye.lens.material.opacity = lerp(.92, .05, cleared);
+            eye.lens.material.color.copy(cloudy).lerp(clearLens, cleared);
+            const lensWidth = lerp(1.08, .72, cleared);
+            eye.lens.scale.set(lensWidth, lensWidth, .30);
+
+            bag.visible = progress < 5.2;
+
+            drop.visible = s === 1;
+            if (drop.visible) {
+              drop.position.z = lerp(2.7, 2.15, smooth(p));
+            }
+
+            const lightOn = s === 1 || s === 2;
+            lamp.visible = lightOn;
+            beam.visible = lightOn;
+            if (lightOn) {
+              beam.material.opacity = .10 + .10 * Math.sin(p * Math.PI * 2);
+            }
+
+            handpiece.root.visible = s === 2 || s === 3;
+            if (handpiece.root.visible) {
+              const near = s === 2 ? smooth(p) : 1 - .35 * smooth(p);
+              const tip = V(1.55, .85, 2.7).lerp(V(.15, .2, 2.15), near);
+              handpiece.set(tip, V(2.15, 1.25, 3.15));
+            }
+
+            const leaving = smooth(Math.max(0, progress - 3));
+            fragments.forEach((item, i) => {
+              const q = clamp(leaving * 1.25 - i * .05, 0, 1);
+              item.object.visible = q > .02 && q < .97;
+              item.object.position.copy(item.home).lerp(item.away, smooth(q));
+              item.object.scale.setScalar(1 - .4 * q);
+            });
+
+            const unfold = smooth(Math.max(0, progress - 4));
+            implant.visible = unfold > .02 && progress < 5.35;
+            const width = Math.max(.02, unfold);
+            implant.scale.set(width, width, .14);
+
+            shield.visible = progress >= 5;
+            if (shield.visible) {
+              shield.position.z = lerp(3.35, 2.42, s === 5 ? smooth(p) : 1);
+            }
+          }
+        };
+      }
+
       models.rrd = buildRRD();
       models.injection = buildInjection();
       models.chalazion = buildChalazion();
+      models.cataract = buildCataract();
 
       // ============================================================
       // 6. APPLICATION STATE
@@ -1979,7 +2205,7 @@
       let activeId =
         Object.hasOwn(PROCEDURES, requestedProcedure)
           ? requestedProcedure
-          : "rrd";
+          : "cataract";
 
       let language = "both";
       const requestedLanguage = query.get("lang");
@@ -1995,6 +2221,7 @@
       let playing = false;
 
       const progressByProcedure = {
+        cataract: 0,
         rrd: 0,
         injection: 0,
         chalazion: 0
@@ -2253,6 +2480,13 @@
         updateHeader();
         setHomeView();
         refresh();
+
+        if (window.parent !== window) {
+          window.parent.postMessage(
+            { type: "eyesinfo-procedure", procedure: id },
+            location.origin
+          );
+        }
       }
 
       // ============================================================

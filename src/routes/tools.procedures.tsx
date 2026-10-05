@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { ProcedureFrames } from "@/components/procedure-frames";
@@ -30,10 +31,10 @@ function procedureViewerLang(locale: Locale): "zh" | "en" {
 }
 
 const CHOICES: { id: ProcedureId; hant: string; en: string }[] = [
+  { id: "cataract", hant: "白內障手術", en: "Cataract surgery" },
   { id: "rrd", hant: "視網膜脫離", en: "Retinal detachment" },
   { id: "injection", hant: "玻璃體內注射", en: "Intravitreal injection" },
   { id: "chalazion", hant: "霰粒腫", en: "Chalazion" },
-  { id: "cataract", hant: "白內障手術", en: "Cataract surgery" },
 ];
 
 const HANT = {
@@ -41,6 +42,7 @@ const HANT = {
   lead: "四項手術的示意圖。不是模擬器、不是檢查，亦不是手術操作指引。",
   caveat: "不能代替註冊醫生。不提供診斷、處方、預約、購買或轉介。",
   choose: "選擇手術示意",
+  diagrams: "線條結構示意",
 };
 
 const EN = {
@@ -49,6 +51,7 @@ const EN = {
   caveat:
     "This cannot replace a registered doctor. It does not diagnose, prescribe, book, sell, or refer.",
   choose: "Choose a procedure illustration",
+  diagrams: "Line diagrams",
 };
 
 function shellCopy(locale: Locale) {
@@ -59,6 +62,7 @@ function shellCopy(locale: Locale) {
       lead: toHans(HANT.lead),
       caveat: toHans(HANT.caveat),
       choose: toHans(HANT.choose),
+      diagrams: toHans(HANT.diagrams),
     };
   }
   return HANT;
@@ -105,14 +109,34 @@ export const Route = createFileRoute("/tools/procedures")({
   component: ProcedureTeachingPage,
 });
 
+function isProcedureId(value: unknown): value is ProcedureId {
+  return typeof value === "string" && (PROCEDURE_IDS as readonly string[]).includes(value);
+}
+
 function ProcedureTeachingPage() {
   const { procedure } = Route.useSearch();
   const navigate = Route.useNavigate();
   const { locale } = useI18n();
   const copy = shellCopy(locale);
-  const id: ProcedureId = procedure ?? "rrd";
+  const id: ProcedureId = procedure ?? "cataract";
   const cataract = id === "cataract" ? cataractDiagram(locale) : null;
   const src = `/procedures-3d.html?procedure=${id}&lang=${procedureViewerLang(locale)}`;
+
+  useEffect(() => {
+    function onMessage(event: MessageEvent) {
+      if (event.origin !== window.location.origin) return;
+      const data = event.data as { type?: string; procedure?: unknown } | null;
+      if (!data || data.type !== "eyesinfo-procedure") return;
+      if (!isProcedureId(data.procedure) || data.procedure === id) return;
+      const next = data.procedure;
+      void navigate({
+        search: (prev) => ({ ...prev, procedure: next }),
+        replace: true,
+      });
+    }
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
+  }, [id, navigate]);
 
   return (
     <div className="px-4 pb-8 pt-4 layout-lg:px-6">
@@ -151,10 +175,17 @@ function ProcedureTeachingPage() {
           );
         })}
       </div>
+      <iframe
+        id="eyesinfo-procedure-viewer"
+        src={src}
+        title={copy.title}
+        className="procedure-viewer-frame mt-4"
+      />
       {id === "cataract" && cataract ? (
         <div className="mt-4">
+          <h2 className="text-[1rem] font-semibold text-navy">{copy.diagrams}</h2>
           {cataract.note ? (
-            <p className="max-w-prose text-[0.88rem] leading-relaxed text-muted">{cataract.note}</p>
+            <p className="mt-2 max-w-prose text-[0.88rem] leading-relaxed text-muted">{cataract.note}</p>
           ) : null}
           <ProcedureFrames frames={cataract.frames} />
           <p className="mt-3">
@@ -163,14 +194,7 @@ function ProcedureTeachingPage() {
             </LocaleHrefLink>
           </p>
         </div>
-      ) : (
-        <iframe
-          id="eyesinfo-procedure-viewer"
-          src={src}
-          title={copy.title}
-          className="procedure-viewer-frame mt-4"
-        />
-      )}
+      ) : null}
       <EditorialFooter showEdition />
     </div>
   );
