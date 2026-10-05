@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
-import type { FrameDraw, FrameSpec } from "@/data/topics";
-import { useI18n } from "@/i18n";
+import { CATARACT_SIM_RELATED_TOPIC_IDS } from "@/data/cataract-sim-related";
+import { getTopic, topicCardTitle, type FrameDraw, type FrameSpec } from "@/data/topics";
+import { LocaleHrefLink } from "@/components/locale-href";
+import { localizeTopic, useI18n } from "@/i18n";
 
 /**
  * Shared shapes for the procedure-day drawings.
@@ -417,9 +419,15 @@ function Draw({ draw }: { draw: FrameDraw }): ReactNode {
       );
     case "cat-iol":
       return (
-        <svg viewBox="0 0 160 120" role="img" aria-label="透明人工晶體放在原有囊袋內" className="proc-svg">
+        <svg
+          viewBox="0 0 160 120"
+          role="img"
+          aria-label="透明人工晶體放在原有囊袋內，切口在角膜外側"
+          className="proc-svg"
+        >
           <use href="#side" />
           <use href="#irisS" />
+          <CornealIncision />
           <ellipse cx="78" cy="60" rx="10" ry="23" stroke="#e0a45a" fill="#fff6e6" />
           <path d="M78 45Q70 40 72 37M78 75Q70 80 72 83" strokeWidth="2" />
           <ellipse cx="78" cy="60" rx="4" ry="15" fill="#c9f0ff" />
@@ -454,6 +462,58 @@ function Draw({ draw }: { draw: FrameDraw }): ReactNode {
     default:
       return null;
   }
+}
+
+/**
+ * Clear-corneal / limbal entry on the side-view globe.
+ * The stroke starts anterior to the corneal dome (outside the globe) and
+ * stops in the anterior chamber, short of the iris plane (x=64) and the lens.
+ * It does not cross the sclera.
+ */
+function CornealIncision() {
+  return (
+    <g>
+      <path
+        data-incision="clear-corneal"
+        d="M44 36.2L58.6 45.2"
+        stroke="#c43830"
+        strokeWidth="3.2"
+        fill="none"
+      />
+      <circle cx="44" cy="36.2" r="2.3" fill="#c43830" stroke="none" />
+    </g>
+  );
+}
+
+/** Topic pages already on the site, listed under the cataract-day schematic. */
+function CataractSimRelated() {
+  const { t, locale } = useI18n();
+  const topics = CATARACT_SIM_RELATED_TOPIC_IDS.flatMap((id) => {
+    const topic = getTopic(id);
+    return topic ? [topic] : [];
+  });
+  if (topics.length === 0) return null;
+
+  return (
+    <nav className="mt-3" aria-label={t("relatedTopics")}>
+      <p className="mb-2 text-[0.8rem] font-semibold text-muted">{t("relatedTopics")}</p>
+      <ul className="overflow-hidden rounded-xl border border-line bg-card">
+        {topics.map((topic) => {
+          const loc = localizeTopic(topic, locale);
+          return (
+            <li key={topic.id} className="border-b border-line last:border-b-0">
+              <LocaleHrefLink
+                path={`/t/${topic.id}`}
+                className="flex min-h-11 items-center px-3 py-2 text-[0.85rem] font-semibold text-navy no-underline"
+              >
+                {topicCardTitle(loc.title)}
+              </LocaleHrefLink>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  );
 }
 
 /** Four optical classes. Toric is the dashed note under the row, not a fifth class. */
@@ -576,6 +636,7 @@ function ClassRow() {
 }
 
 export function ProcedureFrames({ frames }: { frames: FrameSpec[] }) {
+  const cataractSim = frames.some((frame) => frame.draw.startsWith("cat-"));
   return (
     <div className="proc-strip">
       <SchematicSprite />
@@ -603,6 +664,7 @@ export function ProcedureFrames({ frames }: { frames: FrameSpec[] }) {
           </figure>
         ))}
       </div>
+      {cataractSim ? <CataractSimRelated /> : null}
     </div>
   );
 }
