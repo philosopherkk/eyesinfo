@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { useRouterState } from "@tanstack/react-router";
-import { Bookmark, Home, LayoutGrid, Phone, Search } from "lucide-react";
+import { Bookmark, Home, LayoutGrid, List, Phone, Search } from "lucide-react";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { usePrefs } from "@/lib/prefs";
@@ -36,8 +36,16 @@ export function AppShell({ children }: { children: ReactNode }) {
         isLocaleHomePath(p) || p.startsWith("/c/") || p.startsWith("/t/"),
       ariaCurrentPage: (p: string) => isLocaleHomePath(p),
     },
-    { path: "/search", label: t("search"), icon: Search, match: (p: string) => p.startsWith("/search"), ariaCurrentPage: (p: string) => p.startsWith("/search") },
-    { path: "/tools", label: t("tools"), icon: LayoutGrid, match: (p: string) => p.startsWith("/tools") || p.startsWith("/amsler") || p.startsWith("/iol"), ariaCurrentPage: (p: string) => p.startsWith("/tools") || p.startsWith("/amsler") || p.startsWith("/iol") },
+    { path: "/search", label: t("search"), icon: Search, match: (p: string) => p.startsWith("/search"), ariaCurrentPage: (p: string) => p.startsWith("/search"), scrollId: null },
+    {
+      path: `${homeHref}#home-topics`,
+      label: t("homeTopics"),
+      icon: List,
+      match: () => false,
+      ariaCurrentPage: () => false,
+      scrollId: "home-topics",
+    },
+    { path: "/tools", label: t("tools"), icon: LayoutGrid, match: (p: string) => p.startsWith("/tools") || p.startsWith("/amsler") || p.startsWith("/iol"), ariaCurrentPage: (p: string) => p.startsWith("/tools") || p.startsWith("/amsler") || p.startsWith("/iol"), scrollId: null },
     { path: "/saved", label: t("saved"), icon: Bookmark, match: (p: string) => p.startsWith("/saved"), ariaCurrentPage: (p: string) => p.startsWith("/saved") },
   ] as const;
 
@@ -174,15 +182,26 @@ export function AppShell({ children }: { children: ReactNode }) {
         aria-label={t("navMain")}
         style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       >
-        <ul className="grid grid-cols-4">
+        <ul className="grid grid-cols-5">
           {tabs.map((tab) => {
             const active = tab.match(pathname);
             const Icon = tab.icon;
+            const scrollId = "scrollId" in tab ? tab.scrollId : null;
             return (
               <li key={tab.path}>
                 <LocaleHrefLink
                   path={tab.path}
                   aria-current={tab.ariaCurrentPage(pathname) ? "page" : undefined}
+                  onClick={
+                    scrollId
+                      ? (event) => {
+                          const target = document.getElementById(scrollId);
+                          if (!target) return;
+                          event.preventDefault();
+                          target.scrollIntoView({ block: "start" });
+                        }
+                      : undefined
+                  }
                   className={cn(
                     "flex min-h-[3.65rem] flex-col items-center justify-center gap-0.5 text-[0.7rem] no-underline",
                     active ? "font-semibold text-navy" : "text-muted",

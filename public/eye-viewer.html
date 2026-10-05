@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EyesInfo — Interactive Eye Anatomy</title>
+
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #081321;
+    --panel: #111f31;
+    --text: #edf5ff;
+    --muted: #a9bbd0;
+    --border: #30445e;
+    --accent: #63d5ea;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font: 15px/1.5 system-ui, -apple-system, sans-serif;
+  }
+
+  button, select, input { font: inherit; }
+
+  button, select {
+    color: var(--text);
+    background: #1b3048;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 7px 11px;
+  }
+
+  button { cursor: pointer; }
+  button:hover { background: #29435f; }
+  button:disabled { opacity: .4; cursor: default; }
+
+  button:focus-visible, select:focus-visible,
+  input:focus-visible, canvas:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  [hidden] { display: none !important; }
+
+  #app {
+    height: 100%;
+    min-height: 600px;
+    display: grid;
+    grid-template-rows: auto auto minmax(0, 1fr) auto;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h1 { font-size: 19px; margin: 0; }
+  h2 { font-size: 17px; margin: 0 0 8px; }
+  p { margin: 8px 0; }
+
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .toolbar label {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  #content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 265px;
+    min-height: 0;
+  }
+
+  #stage {
+    position: relative;
+    min-width: 0;
+    min-height: 330px;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 50% 40%, #18324f 0, #081321 75%);
+  }
+
+  #stage canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+
+  #labels, #wires {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  #wires { z-index: 2; }
+  #labels { z-index: 3; }
+
+  .anatomy-label {
+    position: absolute;
+    width: max-content;
+    max-width: calc(50% - 16px);
+    padding: 4px 7px;
+    font-size: 12px;
+    line-height: 20px;
+    white-space: nowrap;
+    text-align: left;
+    background: rgba(8, 19, 33, .9);
+    border-radius: 7px;
+    pointer-events: auto;
+  }
+
+  .anatomy-label.active {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  #viewBadge {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    z-index: 4;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: rgba(8, 19, 33, .88);
+    color: var(--muted);
+    font-size: 12px;
+    pointer-events: none;
+  }
+
+  #error {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    padding: 30px;
+    text-align: center;
+    z-index: 10;
+    background: var(--bg);
+  }
+
+  aside {
+    overflow: auto;
+    padding: 16px;
+    background: var(--panel);
+    border-left: 1px solid var(--border);
+  }
+
+  #description {
+    color: var(--muted);
+    font-size: 14px;
+    min-height: 64px;
+  }
+
+  #structureList {
+    display: grid;
+    gap: 6px;
+    margin: 14px 0;
+  }
+
+  .structure-button {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    text-align: left;
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .structure-button.active {
+    border-color: var(--accent);
+    background: #23405b;
+  }
+
+  .swatch {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    flex: 0 0 auto;
+  }
+
+  #explodeControls {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  #explode { width: 100%; }
+
+  .small {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  footer {
+    padding: 9px 16px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  footer details { margin-top: 5px; }
+  footer summary { cursor: pointer; }
+  footer ol { margin: 5px 0; }
+
+  @media (max-width: 680px) {
+    #app { min-height: 760px; }
+    #content {
+      grid-template-columns: 1fr;
+      grid-template-rows: minmax(330px, 1fr) 240px;
+    }
+    aside {
+      border-left: 0;
+      border-top: 1px solid var(--border);
+    }
+    header { padding: 10px 12px; }
+    h1 { font-size: 16px; }
+    .toolbar { padding: 8px 12px; gap: 6px; }
+    button, select { padding: 6px 9px; }
+  }
+</style>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "/vendor/three/0.170.0/build/three.module.js",
+    "three/addons/": "/vendor/three/0.170.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+
+<body>
+<div id="app">
+  <header>
+    <h1 id="title">互動眼球解剖</h1>
+  </header>
+
+  <nav class="toolbar" aria-label="Viewer controls">
+    <button id="back" hidden>← 返回眼球</button>
+    <button id="cut">完整眼球</button>
+    <button id="zoomIn" aria-label="Zoom in">＋</button>
+    <button id="zoomOut" aria-label="Zoom out">−</button>
+    <button id="reset">重設</button>
+
+    <label>
+      <input id="showLabels" type="checkbox" checked>
+      <span id="labelsText">標籤</span>
+    </label>
+
+    <label>
+      <input id="autoDetail" type="checkbox" checked>
+      <span id="autoText">放大時顯示分層</span>
+    </label>
+  </nav>
+
+  <main id="content">
+    <div id="stage">
+      <svg id="wires" aria-hidden="true"></svg>
+      <div id="labels"></div>
+      <div id="viewBadge"></div>
+      <div id="error" role="alert">
+        正在載入 3D 模型…
+      </div>
+    </div>
+
+    <aside aria-label="Anatomical information">
+      <h2 id="infoTitle">選取結構</h2>
+      <p id="description">
+        點選標籤或下方結構。拖動旋轉，滾輪或雙指縮放。
+      </p>
+
+      <button id="details" disabled>查看分層</button>
+
+      <div id="explodeControls" hidden>
+        <label id="explodeText" for="explode">分層間距</label>
+        <input id="explode" type="range"
+               min="0" max="1" step="0.01" value="0.4">
+        <p id="orientation" class="small"></p>
+      </div>
+
+      <div id="structureList"></div>
+      <p id="hint" class="small"></p>
+    </aside>
+  </main>
+
+  <footer>
+    <span id="disclaimer">
+      教育示意：顏色及厚度經誇大，並非檢查或診斷工具。
+    </span>
+
+    <details>
+      <summary id="textOnly">純文字解剖</summary>
+      <p id="textStructures">
+        主要結構：角膜；前房；虹膜；瞳孔；晶體；睫狀體；玻璃體；視網膜；脈絡膜；鞏膜；黃斑；視神經。
+      </p>
+      <p id="textCornea">
+        角膜，由外至內：上皮層 → 鮑曼氏層 → 基質層 → 後彈力層 → 內皮層。
+      </p>
+      <p id="textRetina">
+        視網膜，由玻璃體側至脈絡膜側：內界膜 → 神經纖維層 → 神經節細胞層 → 內叢狀層 → 內核層 → 外叢狀層 → 外核層 → 外界膜 → 感光細胞節段 → 視網膜色素上皮。
+      </p>
+    </details>
+
+    <noscript>
+      JavaScript is required for the interactive model.
+      Please use the text-only anatomy above.
+    </noscript>
+  </footer>
+</div>
+
+<script type="module">
+const $ = id => document.getElementById(id);
+
+const UI = {
+  en: {
+    title: "Interactive eye anatomy",
+    whole: "Whole eye",
+    cutaway: "Cutaway",
+    reset: "Reset",
+    labels: "Labels",
+    auto: "Zoom reveals layers",
+    back: "← Back to eye",
+    choose: "Select a structure",
+    intro: "Select a label or structure. Drag to rotate; scroll or pinch to zoom.",
+    detail: "Explore layers",
+    gap: "Layer separation",
+    hint: "Select cornea, retina or lens, then zoom closer to reveal its layers. Arrow keys rotate; +/− zoom; Home resets.",
+    layerHint: "Select a layer to learn more. Drag to rotate the tissue block. Zoom far out, or use Back, to return.",
+    disclaimer: "Educational schematic: colors and thicknesses are exaggerated. Not an examination or diagnostic tool.",
+    corneaOrder: "Top → bottom: tear-film side → anterior-chamber side. Tear film is not included among the five corneal layers.",
+    retinaOrder: "Top → bottom: vitreous side → choroid side. Layer thicknesses vary by retinal location; this is a generic schematic.",
+    lensOrder: "Nested volumes: capsule → cortex → nucleus. Separation is illustrative, not a physical arrangement.",
+    failure: "The 3D viewer could not load. Check WebGL 2 support, your connection and script permissions. Text-only anatomy remains available below.",
+    loading: "Loading 3D viewer…",
+    canvas: "Interactive 3D eye. Arrow keys rotate, plus and minus zoom, Home resets.",
+    textOnly: "Text-only anatomy",
+    textStructures: "Main structures: cornea; anterior chamber; iris; pupil; lens; ciliary body; vitreous; retina; choroid; sclera; macula; optic nerve.",
+    textCornea: "Cornea, outside → inside: epithelium → Bowman's layer → stroma → Descemet's membrane → endothelium.",
+    textRetina: "Retina, vitreous → choroid: inner limiting membrane → nerve fiber layer → ganglion cell layer → inner plexiform layer → inner nuclear layer → outer plexiform layer → outer nuclear layer → external limiting membrane → photoreceptor segments → retinal pigment epithelium."
+  },
+  zh: {
+    title: "互動眼球解剖",
+    whole: "完整眼球",
+    cutaway: "剖面",
+    reset: "重設",
+    labels: "標籤",
+    auto: "放大時顯示分層",
+    back: "← 返回眼球",
+    choose: "選取結構",
+    intro: "點選標籤或結構。拖動旋轉，滾輪或雙指縮放。",
+    detail: "查看分層",
+    gap: "分層間距",
+    hint: "選取角膜、視網膜或晶體，再放大以查看分層。方向鍵旋轉；＋／− 縮放；Home 重設。",
+    layerHint: "選取分層以閱讀說明。拖動旋轉；縮小至遠處或按「返回眼球」。",
+    disclaimer: "教育示意：顏色及厚度經誇大，並非檢查或診斷工具。",
+    corneaOrder: "由上至下：淚膜側 → 前房側。淚膜不計入角膜的五層。",
+    retinaOrder: "由上至下：玻璃體側 → 脈絡膜側。各部位的分層厚度不同，此為一般示意。",
+    lensOrder: "由外至內：囊膜 → 皮質 → 核。分離位置只作示意。",
+    failure: "無法載入 3D 模型。請檢查 WebGL 2、網絡及腳本權限；下方仍可閱讀純文字解剖。",
+    loading: "正在載入 3D 模型…",
+    canvas: "互動 3D 眼球。方向鍵旋轉，加號與減號縮放，Home 重設。",
+    textOnly: "純文字解剖",
+    textStructures: "主要結構：角膜；前房；虹膜；瞳孔；晶體；睫狀體；玻璃體；視網膜；脈絡膜；鞏膜；黃斑；視神經。",
+    textCornea: "角膜，由外至內：上皮層 → 鮑曼氏層 → 基質層 → 後彈力層 → 內皮層。",
+    textRetina: "視網膜，由玻璃體側至脈絡膜側：內界膜 → 神經纖維層 → 神經節細胞層 → 內叢狀層 → 內核層 → 外叢狀層 → 外核層 → 外界膜 → 感光細胞節段 → 視網膜色素上皮。"
+  }
+};
+
+// id, English, Traditional Chinese, color, label anchor,
+// English description, Chinese description
+const GROSS = [
+  ["cornea", "Cornea", "角膜", "#79dce9", [0,.42,1.55],
+   "The transparent front surface of the eye. Select it and zoom closer to explore five layers.",
+   "眼球前方的透明結構。選取後再放大，可查看五層構造。"],
+  ["aqueous", "Anterior chamber", "前房", "#63bce7", [0,.52,1.31],
+   "The aqueous-filled space between the cornea and iris.",
+   "角膜與虹膜之間、充滿房水的空間。"],
+  ["iris", "Iris", "虹膜", "#64ad91", [0,.63,1.16],
+   "The colored diaphragm that adjusts the pupil opening.",
+   "調節瞳孔開口大小的有色組織。"],
+  ["pupil", "Pupil", "瞳孔", "#34445c", [0,0,1.165],
+   "An opening in the iris, not a separate tissue layer. The dark disc represents the aperture.",
+   "虹膜中央的開口，並非獨立組織層；深色圓面代表此開口。"],
+  ["lens", "Lens", "晶體", "#b6dceb", [0,.23,.72],
+   "A transparent, biconvex structure behind the iris. Explore capsule, cortex and nucleus.",
+   "虹膜後方的透明雙凸結構。可查看囊膜、皮質及核。"],
+  ["ciliary", "Ciliary body", "睫狀體", "#b67bba", [0,.83,.85],
+   "Associated with accommodation and aqueous production. Zonular fibers connect it to the lens.",
+   "參與調節焦距及產生房水；懸韌帶連接睫狀體與晶體。"],
+  ["vitreous", "Vitreous", "玻璃體", "#87bbd6", [0,-.25,-.35],
+   "The transparent gel occupying much of the posterior eye.",
+   "佔據眼球後方大部分空間的透明凝膠。"],
+  ["retina", "Retina", "視網膜", "#ef927d", [0,.89,-1.00],
+   "The light-sensitive inner lining. Select it and zoom closer to explore retinal layers.",
+   "眼球內側的感光組織。選取後再放大，可查看視網膜分層。"],
+  ["choroid", "Choroid", "脈絡膜", "#914d50", [0,1.14,-.80],
+   "The vascular coat between the retina and sclera.",
+   "位於視網膜與鞏膜之間、富含血管的組織。"],
+  ["sclera", "Sclera", "鞏膜", "#e1e7ed", [0,1.45,-.22],
+   "The strong outer coat of the eyeball.",
+   "眼球外側堅韌的組織層。"],
+  ["macula", "Macula / fovea", "黃斑／中央凹", "#edc15a", [0,0,-1.345],
+   "The central retinal region for detailed vision. Its location and size are schematic here.",
+   "負責精細中央視覺的視網膜區域；此模型的位置及大小為示意。"],
+  ["optic", "Optic nerve", "視神經", "#eac393", [-.34,.10,-1.93],
+   "Carries retinal ganglion-cell signals toward the brain.",
+   "將視網膜神經節細胞的訊號傳向大腦。"]
+];
+
+// id, English, Chinese, color, schematic thickness, descriptions
+const LAYERS = {
+  cornea: [
+    ["epithelium", "Epithelium", "上皮層", "#77d4e8", .12,
+     "The outer cellular barrier, adjacent to the tear film.",
+     "鄰近淚膜、構成外側屏障的細胞層。"],
+    ["bowman", "Bowman's layer", "鮑曼氏層", "#d5edf2", .045,
+     "An acellular collagenous layer beneath the epithelium.",
+     "上皮下方、不含細胞的膠原組織層。"],
+    ["stroma", "Stroma", "基質層", "#5eabc6", .60,
+     "The main bulk of the cornea, with organized collagen lamellae.",
+     "角膜的主要厚度所在，含有規則排列的膠原板層。"],
+    ["descemet", "Descemet's membrane", "後彈力層", "#dec3f1", .045,
+     "The basement membrane of the corneal endothelium.",
+     "角膜內皮細胞的基底膜。"],
+    ["endothelium", "Endothelium", "內皮層", "#8cbba4", .06,
+     "The innermost cellular layer, involved in corneal fluid balance.",
+     "最內側的細胞層，參與維持角膜的水分平衡。"]
+  ],
+  retina: [
+    ["ilm", "Inner limiting membrane", "內界膜", "#dcecf7", .04,
+     "The boundary between vitreous and retina, associated with Müller-cell endfeet.",
+     "視網膜與玻璃體之間的界面，與穆勒細胞末端相關。"],
+    ["nfl", "Nerve fiber layer", "神經纖維層", "#eccd8a", .10,
+     "Contains retinal ganglion-cell axons.",
+     "含有視網膜神經節細胞的軸突。"],
+    ["gcl", "Ganglion cell layer", "神經節細胞層", "#efa27e", .12,
+     "Contains retinal ganglion-cell bodies.",
+     "含有視網膜神經節細胞的胞體。"],
+    ["ipl", "Inner plexiform layer", "內叢狀層", "#c780a6", .17,
+     "A synaptic region involving bipolar, amacrine and ganglion cells.",
+     "雙極、無長突及神經節細胞之間的突觸區域。"],
+    ["inl", "Inner nuclear layer", "內核層", "#9c83c6", .17,
+     "Contains nuclei of bipolar, horizontal, amacrine and Müller cells.",
+     "含雙極、水平、無長突及穆勒細胞的細胞核。"],
+    ["opl", "Outer plexiform layer", "外叢狀層", "#c3a4dc", .10,
+     "A synaptic region connecting photoreceptors with bipolar and horizontal cells.",
+     "感光細胞與雙極及水平細胞連接的突觸區域。"],
+    ["onl", "Outer nuclear layer", "外核層", "#788fca", .22,
+     "Contains rod and cone photoreceptor nuclei.",
+     "含桿狀及錐狀感光細胞的細胞核。"],
+    ["elm", "External limiting membrane", "外界膜", "#c9e6d5", .035,
+     "A junctional boundary involving photoreceptors and Müller cells.",
+     "由感光細胞及穆勒細胞相關連接形成的界面。"],
+    ["photoreceptors", "Photoreceptor segments", "感光細胞節段", "#ddb078", .26,
+     "Inner and outer segments of rods and cones. Cells are not individually reconstructed in this schematic.",
+     "桿狀及錐狀細胞的內、外節段；此示意未逐一重建細胞。"],
+    ["rpe", "Retinal pigment epithelium", "視網膜色素上皮", "#78544a", .09,
+     "The pigmented epithelial layer on the choroidal side of the retina.",
+     "位於視網膜脈絡膜側的色素上皮細胞層。"]
+  ],
+  lens: [
+    ["capsule", "Capsule", "囊膜", "#c4e4f0", .08,
+     "The outer basement-membrane envelope of the lens.",
+     "包圍晶體外側的基底膜。"],
+    ["cortex", "Cortex", "皮質", "#85bfd7", .3,
+     "The peripheral lens substance beneath the capsule.",
+     "囊膜內側、晶體周邊的組織。"],
+    ["nucleus", "Nucleus", "核", "#ead593", .4,
+     "The central lens substance.",
+     "晶體中央的組織。"]
+  ]
+};
+
+let lang = new URLSearchParams(location.search).get("lang") === "en"
+  ? "en" : "zh";
+
+const text = key => UI[lang][key];
+
+function applyStaticCopy() {
+  document.documentElement.lang = lang === "en" ? "en" : "zh-Hant";
+  $("title").textContent = text("title");
+  $("error").textContent = text("loading");
+  $("textOnly").textContent = text("textOnly");
+  $("textStructures").textContent = text("textStructures");
+  $("textCornea").textContent = text("textCornea");
+  $("textRetina").textContent = text("textRetina");
+  $("disclaimer").textContent = text("disclaimer");
+}
+
+applyStaticCopy();
+const nameOf = row => row[lang === "en" ? 1 : 2];
+const grossById = id => GROSS.find(row => row[0] === id);
+
+let THREE, OrbitControls;
+
+try {
+  THREE = await import("three");
+  ({ OrbitControls } =
+    await import("three/addons/controls/OrbitControls.js"));
+
+  startViewer();
+} catch (error) {
+  console.error("Eye viewer failed:", error);
+  $("error").hidden = false;
+  $("error").textContent = text("failure");
+}
+
+function startViewer() {
+  const stage = $("stage");
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+  renderer.setClearColor(0x081321, 0);
+  renderer.localClippingEnabled = true;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  stage.prepend(renderer.domElement);
+
+  const canvas = renderer.domElement;
+  canvas.tabIndex = 0;
+  canvas.setAttribute("role", "img");
+  canvas.setAttribute("aria-label", text("canvas"));
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(42, 1, .025, 60);
+  const controls = new OrbitControls(camera, canvas);
+  controls.enableDamping = true;
+  controls.dampingFactor = .09;
+  controls.enablePan = false;
+  controls.minDistance = 1.1;
+  controls.maxDistance = 12;
+  controls.zoomSpeed = .8;
+
+  scene.add(new THREE.HemisphereLight(0xe7f4ff, 0x334055, 2.1));
+
+  const key = new THREE.DirectionalLight(0xffffff, 2.6);
+  key.position.set(4, 6, 7);
+  scene.add(key);
+
+  const rim = new THREE.DirectionalLight(0x7cb9ff, 1.6);
+  rim.position.set(-5, 2, -4);
+  scene.add(rim);
+
+  const eye = new THREE.Group();
+  scene.add(eye);
+
+  // Positive X is removed in cutaway mode.
+  const cutPlane = new THREE.Plane(new THREE.Vector3(-1, 0, 0), 0);
+  const sections = [];
+  const eyeMeshes = [];
+  const detailCache = new Map();
+
+  let mode = "eye";
+  let cutaway = true;
+  let selected = null;
+  let selectedLayer = null;
+  let focused = false;
+  let detailGroup = null;
+  let labels = [];
+  let dirty = true;
+  let visible = true;
+  let savedView = null;
+
+  function material(color, opacity = 1) {
+    return new THREE.MeshStandardMaterial({
+      color,
+      roughness: .42,
+      metalness: 0,
+      side: THREE.DoubleSide,
+      transparent: opacity < 1,
+      opacity,
+      depthWrite: opacity === 1
+    });
+  }
+
+  function addMesh(id, geometry, color, opacity = 1, parent = eye) {
+    const mesh = new THREE.Mesh(geometry, material(color, opacity));
+    mesh.userData.id = id;
+    parent.add(mesh);
+    if (parent === eye) eyeMeshes.push(mesh);
+    return mesh;
+  }
+
+  // Closed spherical shell, with its anterior opening toward +Z.
+  function shellGeometry(outer, inner, startAngle) {
+    const points = [];
+    const steps = 72;
+    for (let i = 0; i <= steps; i++) {
+      const a = startAngle + (Math.PI - startAngle) * i / steps;
+      points.push(new THREE.Vector2(outer * Math.sin(a),
+                                   outer * Math.cos(a)));
+    }
+    for (let i = steps; i >= 0; i--) {
+      const a = startAngle + (Math.PI - startAngle) * i / steps;
+      points.push(new THREE.Vector2(inner * Math.sin(a),
+                                   inner * Math.cos(a)));
+    }
+    points.push(points[0].clone());
+    const geometry = new THREE.LatheGeometry(points, 96);
+    geometry.rotateX(Math.PI / 2);
+    return geometry;
+  }
+
+  // Colored cut-face strips make the thin coats readable.
+  function sectionGeometry(outer, inner, startAngle) {
+    const positions = [];
+    const steps = 120;
+    const point = (r, a) => [.003, r * Math.sin(a), r * Math.cos(a)];
+
+    for (let i = 0; i < steps; i++) {
+      const a = startAngle + (2 * Math.PI - 2 * startAngle) * i / steps;
+      const b = startAngle + (2 * Math.PI - 2 * startAngle) * (i + 1) / steps;
+      positions.push(
+        ...point(outer, a), ...point(inner, a), ...point(outer, b),
+        ...point(inner, a), ...point(inner, b), ...point(outer, b)
+      );
+    }
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute(
+      "position", new THREE.Float32BufferAttribute(positions, 3)
+    );
+    geometry.computeVertexNormals();
+    return geometry;
+  }
+
+  function addCoat(id, outer, inner, angle, color) {
+    addMesh(id, shellGeometry(outer, inner, angle), color);
+    const face = addMesh(
+      id, sectionGeometry(outer, inner, angle), color
+    );
+    face.userData.noClip = true;
+    sections.push(face);
+  }
+
+  addCoat("sclera", 1.50, 1.425, .58, "#e1e7ed");
+  addCoat("choroid", 1.423, 1.395, .63, "#914d50");
+  addCoat("retina", 1.392, 1.360, .72, "#ef927d");
+
+  // Corneal dome joining the anterior scleral opening.
+  const cornealRadius = 1.05;
+  const cornealAngle = Math.asin(1.5 * Math.sin(.58) / cornealRadius);
+  const cornealCenter =
+    1.5 * Math.cos(.58) - cornealRadius * Math.cos(cornealAngle);
+
+  const cornealGeometry = new THREE.SphereGeometry(
+    cornealRadius, 64, 36, 0, Math.PI * 2, 0, cornealAngle
+  );
+  cornealGeometry.rotateX(Math.PI / 2);
+
+  const cornea = addMesh(
+    "cornea", cornealGeometry, "#9ce9f3", .26
+  );
+  cornea.position.z = cornealCenter;
+  cornea.renderOrder = 5;
+
+  // Aqueous-filled anterior chamber: simplified rotational volume.
+  const aqueousPoints = [new THREE.Vector2(0, 1.16)];
+  const aqRadius = 1.0;
+  for (let i = 40; i >= 0; i--) {
+    const a = cornealAngle * i / 40;
+    aqueousPoints.push(new THREE.Vector2(
+      aqRadius * Math.sin(a),
+      cornealCenter + aqRadius * Math.cos(a)
+    ));
+  }
+  aqueousPoints.push(aqueousPoints[0].clone());
+  const aqGeometry = new THREE.LatheGeometry(aqueousPoints, 64);
+  aqGeometry.rotateX(Math.PI / 2);
+  const aqueous = addMesh("aqueous", aqGeometry, "#63bce7", .055);
+  aqueous.renderOrder = 4;
+
+  const iris = addMesh(
+    "iris", new THREE.RingGeometry(.25, .80, 96), "#64ad91"
+  );
+  iris.position.z = 1.16;
+
+  // A dark aperture marker, not a tissue reconstruction.
+  const pupil = addMesh(
+    "pupil", new THREE.CircleGeometry(.249, 64), "#07111d"
+  );
+  pupil.position.z = 1.157;
+
+  const irisLines = [];
+  for (let i = 0; i < 80; i++) {
+    const a = i / 80 * Math.PI * 2;
+    irisLines.push(
+      .28 * Math.cos(a), .28 * Math.sin(a), 1.164,
+      .78 * Math.cos(a), .78 * Math.sin(a), 1.164
+    );
+  }
+  const irisLineGeometry = new THREE.BufferGeometry();
+  irisLineGeometry.setAttribute(
+    "position", new THREE.Float32BufferAttribute(irisLines, 3)
+  );
+  eye.add(new THREE.LineSegments(
+    irisLineGeometry,
+    new THREE.LineBasicMaterial({ color: "#366f62" })
+  ));
+
+  const lens = addMesh(
+    "lens", new THREE.SphereGeometry(1, 64, 36), "#b6dceb", .72
+  );
+  lens.scale.set(.50, .50, .235);
+  lens.position.z = .75;
+
+  const lensFaceGeometry = new THREE.CircleGeometry(1, 64);
+  lensFaceGeometry.scale(.235, .50, 1);
+  lensFaceGeometry.rotateY(Math.PI / 2);
+  const lensFace = addMesh("lens", lensFaceGeometry, "#a7d0e2");
+  lensFace.position.set(.004, 0, .75);
+  lensFace.userData.noClip = true;
+  sections.push(lensFace);
+
+  const ciliary = addMesh(
+    "ciliary", new THREE.TorusGeometry(.81, .095, 16, 96), "#b67bba"
+  );
+  ciliary.position.z = .86;
+
+  const zonulePositions = [];
+  for (let i = 0; i < 40; i++) {
+    const a = i / 40 * Math.PI * 2;
+    zonulePositions.push(
+      .76 * Math.cos(a), .76 * Math.sin(a), .86,
+      .49 * Math.cos(a), .49 * Math.sin(a), .75
+    );
+  }
+  const zonuleGeometry = new THREE.BufferGeometry();
+  zonuleGeometry.setAttribute(
+    "position", new THREE.Float32BufferAttribute(zonulePositions, 3)
+  );
+  eye.add(new THREE.LineSegments(
+    zonuleGeometry,
+    new THREE.LineBasicMaterial({ color: "#d4c7df" })
+  ));
+
+  const vitreousGeometry = new THREE.SphereGeometry(
+    1.33, 64, 36, 0, Math.PI * 2, .76, Math.PI - .76
+  );
+  vitreousGeometry.rotateX(Math.PI / 2);
+  const vitreous = addMesh(
+    "vitreous", vitreousGeometry, "#87bbd6", .035
+  );
+  vitreous.renderOrder = 3;
+
+  const macula = addMesh(
+    "macula", new THREE.CircleGeometry(.14, 48), "#edc15a"
+  );
+  macula.position.z = -1.348;
+
+  const fovea = addMesh(
+    "macula", new THREE.CircleGeometry(.035, 32), "#d28553"
+  );
+  fovea.position.z = -1.345;
+
+  const optic = addMesh(
+    "optic", new THREE.CylinderGeometry(.16, .20, 1.12, 40), "#eac393"
+  );
+  optic.rotation.x = Math.PI / 2;
+  optic.position.set(-.34, .10, -1.89);
+  optic.userData.noClip = true;
+
+  const disc = addMesh(
+    "optic", new THREE.SphereGeometry(1, 32, 20), "#f0d9aa"
+  );
+  disc.scale.set(.11, .11, .028);
+  disc.position.set(-.34, .10, -1.31);
+
+  function updateCutaway() {
+    eye.traverse(object => {
+      if (!object.material) return;
+      const materials = Array.isArray(object.material)
+        ? object.material : [object.material];
+      for (const mat of materials) {
+        mat.clippingPlanes =
+          cutaway && !object.userData.noClip ? [cutPlane] : [];
+        mat.needsUpdate = true;
+      }
+    });
+    for (const face of sections) face.visible = cutaway;
+    dirty = true;
+  }
+
+  // Curved tissue blocks. All dimensions are schematic.
+  function tissueGeometry(thickness, bend) {
+    const geometry = new THREE.BoxGeometry(
+      2.7, thickness, 1.45, 28, 1, 14
+    );
+    const positions = geometry.attributes.position;
+    for (let i = 0; i < positions.count; i++) {
+      const x = positions.getX(i);
+      const z = positions.getZ(i);
+      positions.setY(
+        i,
+        positions.getY(i) + bend * (1 - x*x/1.83 - z*z/1.05)
+      );
+    }
+    positions.needsUpdate = true;
+    geometry.computeVertexNormals();
+    return geometry;
+  }
+
+  function getDetail(id) {
+    if (detailCache.has(id)) return detailCache.get(id);
+
+    const group = new THREE.Group();
+    group.userData.items = [];
+
+    LAYERS[id].forEach((row, index) => {
+      let geometry;
+      if (id === "lens") {
+        geometry = new THREE.SphereGeometry(1, 64, 32);
+      } else {
+        geometry = tissueGeometry(row[4], id === "cornea" ? .22 : .04);
+      }
+
+      const mesh = addMesh(
+        row[0], geometry, row[3],
+        id === "lens" && index < 2 ? .30 : 1,
+        group
+      );
+
+      if (id === "lens") {
+        const sizes = [
+          [1.12, 1.12, .50],
+          [1.05, 1.05, .46],
+          [.66, .66, .31]
+        ];
+        mesh.scale.set(...sizes[index]);
+        mesh.renderOrder = 3 - index;
+      }
+
+      group.userData.items.push({ mesh, row, index });
+    });
+
+    scene.add(group);
+    group.visible = false;
+    detailCache.set(id, group);
+    return group;
+  }
+
+  function updateSeparation() {
+    if (!detailGroup) return;
+
+    const items = detailGroup.userData.items;
+    const gap = Number($("explode").value) * .26;
+
+    if (mode === "lens") {
+      items.forEach(({ mesh, index }) => {
+        mesh.position.set((index - 1) * gap * 5.5, 0, 0);
+      });
+    } else {
+      const total = items.reduce((sum, item) => sum + item.row[4], 0)
+        + gap * (items.length - 1);
+      let top = total / 2;
+
+      items.forEach(({ mesh, row }) => {
+        mesh.position.set(0, top - row[4] / 2, 0);
+        top -= row[4] + gap;
+      });
+    }
+
+    dirty = true;
+  }
+
+  function activeRows() {
+    return mode === "eye" ? GROSS : LAYERS[mode];
+  }
+
+  function highlight() {
+    for (const mesh of eyeMeshes) {
+      if (mesh.material.emissive) {
+        mesh.material.emissive.set(
+          mode === "eye" && mesh.userData.id === selected
+            ? "#19434d" : "#000000"
+        );
+      }
+    }
+
+    if (detailGroup) {
+      for (const { mesh } of detailGroup.userData.items) {
+        mesh.material.emissive.set(
+          mesh.userData.id === selectedLayer ? "#224650" : "#000000"
+        );
+      }
+    }
+
+    document.querySelectorAll("[data-structure]").forEach(button => {
+      const id = mode === "eye" ? selected : selectedLayer;
+      const active = button.dataset.structure === id;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+
+    dirty = true;
+  }
+
+  function notifyParent(id) {
+    // Optional integration hook. No existing site behavior is assumed.
+    if (parent !== window && location.origin !== "null") {
+      parent.postMessage({
+        type: "eyesinfo-eye-select",
+        structure: id
+      }, location.origin);
+    }
+  }
+
+  function selectStructure(id, focus = true) {
+    if (mode === "eye") {
+      selected = id;
+      selectedLayer = null;
+
+      if (focus) {
+        const row = grossById(id);
+        controls.target.set(...row[4]);
+        const direction = new THREE.Vector3(1, .35, 1).normalize();
+        camera.position.copy(controls.target)
+          .addScaledVector(direction, 3.0);
+        focused = true;
+        controls.update();
+      }
+
+      notifyParent(id);
+    } else {
+      selectedLayer = id;
+    }
+
+    updateInformation();
+    highlight();
+  }
+
+  function updateInformation() {
+    const row = mode === "eye"
+      ? grossById(selected)
+      : LAYERS[mode].find(item => item[0] === selectedLayer);
+
+    $("infoTitle").textContent = row
+      ? nameOf(row)
+      : mode === "eye" ? text("choose") : nameOf(grossById(mode));
+
+    $("description").textContent = row
+      ? row[mode === "eye"
+          ? (lang === "en" ? 5 : 6)
+          : (lang === "en" ? 5 : 6)]
+      : text(mode === "eye" ? "intro" : "layerHint");
+
+    $("details").disabled =
+      mode !== "eye" || !LAYERS[selected];
+
+    $("details").hidden = mode !== "eye";
+  }
+
+  function buildInterface() {
+    document.documentElement.lang = lang === "en" ? "en" : "zh-Hant";
+    $("title").textContent = text("title");
+    $("cut").textContent = text(cutaway ? "whole" : "cutaway");
+    $("reset").textContent = text("reset");
+    $("back").textContent = text("back");
+    $("labelsText").textContent = text("labels");
+    $("autoText").textContent = text("auto");
+    $("details").textContent = text("detail");
+    $("explodeText").textContent = text("gap");
+    $("disclaimer").textContent = text("disclaimer");
+    $("textOnly").textContent = text("textOnly");
+    $("textStructures").textContent = text("textStructures");
+    $("textCornea").textContent = text("textCornea");
+    $("textRetina").textContent = text("textRetina");
+    stage.querySelector("canvas")?.setAttribute("aria-label", text("canvas"));
+    $("hint").textContent = text(mode === "eye" ? "hint" : "layerHint");
+
+    $("back").hidden = mode === "eye";
+    $("cut").disabled = mode !== "eye";
+    $("explodeControls").hidden = mode === "eye";
+    $("orientation").textContent =
+      mode === "eye" ? "" : text(mode + "Order");
+
+    $("viewBadge").textContent = mode === "eye"
+      ? text(cutaway ? "cutaway" : "whole")
+      : nameOf(grossById(mode)) + " · " + text("detail");
+
+    $("structureList").replaceChildren();
+    $("labels").replaceChildren();
+    $("wires").replaceChildren();
+    labels = [];
+
+    activeRows().forEach(row => {
+      const listButton = document.createElement("button");
+      listButton.className = "structure-button";
+      listButton.dataset.structure = row[0];
+
+      const swatch = document.createElement("span");
+      swatch.className = "swatch";
+      swatch.style.background = row[3];
+      swatch.setAttribute("aria-hidden", "true");
+      listButton.append(swatch, document.createTextNode(nameOf(row)));
+      listButton.onclick = () => selectStructure(row[0]);
+      $("structureList").append(listButton);
+
+      const label = document.createElement("button");
+      label.className = "anatomy-label";
+      label.dataset.structure = row[0];
+      label.textContent = nameOf(row);
+      label.title = nameOf(row);
+      label.style.borderColor = row[3];
+      label.onclick = () => selectStructure(row[0]);
+
+      const wire = document.createElementNS(
+        "http://www.w3.org/2000/svg", "polyline"
+      );
+      wire.setAttribute("fill", "none");
+      wire.setAttribute("stroke", row[3]);
+      wire.setAttribute("stroke-width", "1");
+      wire.setAttribute("opacity", ".7");
+
+      $("labels").append(label);
+      $("wires").append(wire);
+      labels.push({ row, label, wire });
+    });
+
+    updateInformation();
+    highlight();
+    dirty = true;
+  }
+
+  function enterDetail(id) {
+    if (!LAYERS[id] || mode !== "eye") return;
+
+    savedView = {
+      position: camera.position.clone(),
+      target: controls.target.clone()
+    };
+
+    selected = id;
+    selectedLayer = null;
+    focused = false;
+    mode = id;
+    eye.visible = false;
+    detailGroup = getDetail(id);
+    detailGroup.visible = true;
+
+    controls.minDistance = 1.8;
+    controls.maxDistance = 12;
+    controls.target.set(0, 0, 0);
+    camera.position.set(3.5, 2.3, 5.0);
+    controls.update();
+
+    updateSeparation();
+    buildInterface();
+  }
+
+  function backToEye(resetView = false) {
+    if (detailGroup) detailGroup.visible = false;
+    detailGroup = null;
+    mode = "eye";
+    selectedLayer = null;
+    eye.visible = true;
+    controls.minDistance = 1.1;
+    controls.maxDistance = 12;
+
+    if (!resetView && savedView) {
+      controls.target.copy(savedView.target);
+      const offset = savedView.position.clone().sub(savedView.target);
+      offset.setLength(Math.max(offset.length(), 3));
+      camera.position.copy(savedView.target).add(offset);
+      focused = Boolean(selected);
+    } else {
+      selected = null;
+      focused = false;
+      controls.target.set(0, 0, 0);
+      camera.position.set(4.8, 2.1, 4.5);
+    }
+
+    controls.update();
+    buildInterface();
+  }
+
+  function zoom(factor) {
+    const offset = camera.position.clone().sub(controls.target);
+    const distance = THREE.MathUtils.clamp(
+      offset.length() * factor,
+      controls.minDistance,
+      controls.maxDistance
+    );
+    offset.setLength(distance);
+    camera.position.copy(controls.target).add(offset);
+    controls.update();
+    dirty = true;
+  }
+
+  function rotate(dx, dy) {
+    const offset = camera.position.clone().sub(controls.target);
+    const spherical = new THREE.Spherical().setFromVector3(offset);
+    spherical.theta += dx;
+    spherical.phi = THREE.MathUtils.clamp(
+      spherical.phi + dy, .08, Math.PI - .08
+    );
+    camera.position.copy(controls.target)
+      .add(new THREE.Vector3().setFromSpherical(spherical));
+    controls.update();
+    dirty = true;
+  }
+
+  // Screen-space label placement, with leader lines.
+  // Labels are educational annotations, not depth-occluded surfaces.
+  function drawLabels() {
+    const enabled = $("showLabels").checked;
+    $("labels").hidden = !enabled;
+    $("wires").hidden = !enabled;
+    if (!enabled) return;
+
+    const width = stage.clientWidth;
+    const height = stage.clientHeight;
+    const columns = [[], []];
+    const activeId = mode === "eye" ? selected : selectedLayer;
+
+    labels.forEach(item => {
+      const anchor = new THREE.Vector3();
+
+      if (mode === "eye") {
+        anchor.set(...item.row[4]);
+      } else {
+        const part = detailGroup.userData.items
+          .find(entry => entry.row[0] === item.row[0]);
+        part.mesh.getWorldPosition(anchor);
+        if (mode !== "lens") anchor.x += 1.35;
+      }
+
+      anchor.project(camera);
+      item.label.style.display = "none";
+      item.wire.style.display = "none";
+
+      if (anchor.z < -1 || anchor.z > 1) return;
+
+      item.px = (anchor.x * .5 + .5) * width;
+      item.py = (-anchor.y * .5 + .5) * height;
+      if (item.px < -width || item.px > width * 2) return;
+
+      columns[item.px < width / 2 ? 0 : 1].push(item);
+    });
+
+    const pad = 10;
+    const gap = 6;
+
+    columns.forEach((items, side) => {
+      items.forEach(item => {
+        item.label.style.display = "block";
+        item.label.style.maxWidth = Math.max(72, Math.floor((width - pad * 3) / 2)) + "px";
+      });
+
+      const sample = items[0]?.label.offsetHeight || 30;
+      const capacity = Math.max(
+        1,
+        Math.floor((height - pad * 2 + gap) / (sample + gap))
+      );
+
+      // Selected annotations are retained when space is limited.
+      items.sort((a, b) =>
+        Number(b.row[0] === activeId) - Number(a.row[0] === activeId)
+      );
+      const kept = new Set(items.slice(0, capacity));
+      items.forEach(item => {
+        if (!kept.has(item)) {
+          item.label.style.display = "none";
+          item.wire.style.display = "none";
+        }
+      });
+      items = items.filter(item => kept.has(item));
+      items.sort((a, b) => a.py - b.py);
+
+      let cursor = pad;
+      items.forEach(item => {
+        const h = item.label.offsetHeight || sample;
+        const preferred = Math.max(pad, Math.min(item.py - h / 2, height - pad - h));
+        item.top = Math.max(cursor, preferred);
+        cursor = item.top + h + gap;
+      });
+
+      const overflow = cursor - gap - (height - pad);
+      if (overflow > 0) {
+        items.forEach(item => { item.top -= overflow; });
+      }
+
+      items.forEach(item => {
+        const h = item.label.offsetHeight || sample;
+        const w = item.label.offsetWidth || 72;
+        item.top = Math.max(pad, Math.min(item.top, height - pad - h));
+        const x = side === 0 ? pad : Math.max(pad, width - pad - w);
+        item.ly = item.top + h / 2;
+        item.label.style.display = "block";
+        item.wire.style.display = "block";
+        item.label.style.left = x + "px";
+        item.label.style.top = item.top + "px";
+
+        const edge = side === 0 ? x + w : x;
+        const elbow = side === 0 ? edge + 10 : edge - 10;
+
+        item.wire.setAttribute("points",
+          `${item.px},${item.py} ${elbow},${item.ly} ${edge},${item.ly}`
+        );
+      });
+    });
+  }
+
+  // Clicking a mesh selects it; dragging must not trigger selection.
+  const raycaster = new THREE.Raycaster();
+  const pointer = new THREE.Vector2();
+  const activePointers = new Set();
+  let pointerStart = null;
+  let multiPointerGesture = false;
+
+  canvas.addEventListener("pointerdown", event => {
+    activePointers.add(event.pointerId);
+    if (activePointers.size === 1) {
+      multiPointerGesture = false;
+      pointerStart = {
+        id: event.pointerId,
+        x: event.clientX,
+        y: event.clientY
+      };
+    } else {
+      multiPointerGesture = true;
+    }
+  });
+
+  canvas.addEventListener("pointercancel", event => {
+    activePointers.delete(event.pointerId);
+    pointerStart = null;
+  });
+
+  canvas.addEventListener("pointerup", event => {
+    activePointers.delete(event.pointerId);
+
+    if (!pointerStart ||
+        pointerStart.id !== event.pointerId ||
+        multiPointerGesture ||
+        Math.hypot(event.clientX - pointerStart.x,
+                   event.clientY - pointerStart.y) > 6) return;
+
+    pointerStart = null;
+    const rect = canvas.getBoundingClientRect();
+    pointer.set(
+      ((event.clientX - rect.left) / rect.width) * 2 - 1,
+      -((event.clientY - rect.top) / rect.height) * 2 + 1
+    );
+
+    scene.updateMatrixWorld(true);
+    camera.updateMatrixWorld(true);
+    raycaster.setFromCamera(pointer, camera);
+
+    const objects = mode === "eye"
+      ? eyeMeshes
+      : detailGroup.userData.items.map(item => item.mesh);
+
+    const hit = raycaster.intersectObjects(objects, false).find(result => {
+      if (!result.object.visible) return false;
+      if (mode === "eye" && cutaway &&
+          !result.object.userData.noClip &&
+          cutPlane.distanceToPoint(result.point) < -.001) return false;
+
+      // Very transparent cavity models should not block solid tissues.
+      return result.object.material.opacity >= .15;
+    });
+
+    if (hit) selectStructure(hit.object.userData.id);
+  });
+
+  canvas.addEventListener("dblclick", () => {
+    if (mode === "eye" && LAYERS[selected]) enterDetail(selected);
+  });
+
+  canvas.addEventListener("keydown", event => {
+    const actions = {
+      ArrowLeft: () => rotate(-.12, 0),
+      ArrowRight: () => rotate(.12, 0),
+      ArrowUp: () => rotate(0, -.12),
+      ArrowDown: () => rotate(0, .12),
+      "+": () => zoom(.82),
+      "=": () => zoom(.82),
+      "-": () => zoom(1.22),
+      Home: () => backToEye(true),
+      Escape: () => mode !== "eye" && backToEye()
+    };
+
+    if (actions[event.key]) {
+      event.preventDefault();
+      actions[event.key]();
+    }
+  });
+
+  $("cut").onclick = () => {
+    cutaway = !cutaway;
+    updateCutaway();
+    buildInterface();
+  };
+
+  $("zoomIn").onclick = () => zoom(.82);
+  $("zoomOut").onclick = () => zoom(1.22);
+  $("reset").onclick = () => backToEye(true);
+  $("back").onclick = () => backToEye();
+  $("details").onclick = () => enterDetail(selected);
+  $("explode").oninput = updateSeparation;
+  $("showLabels").onchange = () => { dirty = true; };
+  $("autoDetail").onchange = () => { dirty = true; };
+
+  controls.addEventListener("change", () => { dirty = true; });
+
+  const resizeObserver = new ResizeObserver(() => {
+    const width = stage.clientWidth;
+    const height = stage.clientHeight;
+    if (!width || !height) return;
+
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+    renderer.setSize(width, height);
+    dirty = true;
+  });
+  resizeObserver.observe(stage);
+
+  const intersectionObserver = new IntersectionObserver(entries => {
+    visible = entries[0].isIntersecting;
+    dirty = true;
+  });
+  intersectionObserver.observe(stage);
+
+  document.addEventListener("visibilitychange", () => { dirty = true; });
+
+  canvas.addEventListener("webglcontextlost", event => {
+    event.preventDefault();
+    $("error").hidden = false;
+    $("error").textContent = text("failure");
+  });
+
+  canvas.addEventListener("webglcontextrestored", () => {
+    $("error").hidden = true;
+    dirty = true;
+  });
+
+  updateCutaway();
+  backToEye(true);
+  $("error").hidden = true;
+
+  renderer.setAnimationLoop(() => {
+    if (!visible || document.hidden) return;
+    controls.update();
+    if (!dirty) return;
+
+    const distance = camera.position.distanceTo(controls.target);
+
+    if (mode === "eye" &&
+        focused &&
+        $("autoDetail").checked &&
+        LAYERS[selected] &&
+        distance < 1.65) {
+      enterDetail(selected);
+    } else if (mode !== "eye" && distance > 9.6) {
+      backToEye();
+    }
+
+    renderer.render(scene, camera);
+    drawLabels();
+    dirty = false;
+  });
+}
+
+</script>
+</body>
+</html>

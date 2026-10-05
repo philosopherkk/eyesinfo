@@ -1,4 +1,5 @@
 import type { Locale } from "@/i18n/locale";
+import { getTopic } from "@/data/topics";
 
 /** Related routes for EyeAnatomyViewer — keep in sync with CATEGORIES / TOPICS. */
 
@@ -120,4 +121,44 @@ export const ANATOMY_CHOOSER_HUB_LABEL: Record<Locale, string> = {
 export function isAnatomyTopicsChooser(id: string): id is AnatomyRegionId {
   const related = ANATOMY_RELATED[id as AnatomyRegionId];
   return Boolean(related && related.kind === "topics");
+}
+
+/**
+ * Gross ids from the 3D viewer (`eyesinfo-eye-select`).
+ * Only ids that already have an anatomy route are listed.
+ */
+const VIEWER_STRUCTURE_REGION: Partial<Record<string, AnatomyRegionId>> = {
+  cornea: "cornea",
+  aqueous: "anteriorChamber",
+  lens: "lens",
+  vitreous: "vitreous",
+  retina: "retina",
+  macula: "macula",
+  optic: "opticNerve",
+};
+
+/**
+ * Home-page branch opened when a viewer structure already has topics.
+ * `vitreous` is the floater page only (`d8`), not the retina category.
+ */
+export type AnatomyHomeBranchId = AnatomyCatId | "macula" | "vitreous";
+
+/**
+ * Map a viewer structure id onto an existing topic branch.
+ * Unknown structures, and structures with no topic, return null.
+ * Vitreous stays on 飛蚊症 (`d8`) instead of the retina list.
+ */
+export function homeBranchForViewerStructure(
+  structureId: string,
+): AnatomyHomeBranchId | null {
+  const region = VIEWER_STRUCTURE_REGION[structureId];
+  if (!region) return null;
+  const related = ANATOMY_RELATED[region];
+  if (related.kind === "cat") return related.catId;
+  if (related.kind === "topics") return "macula";
+  if (related.kind === "topic") {
+    if (related.topicId === "d8") return "vitreous";
+    return getTopic(related.topicId)?.category ?? null;
+  }
+  return null;
 }

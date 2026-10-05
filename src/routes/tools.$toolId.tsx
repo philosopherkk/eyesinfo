@@ -5,8 +5,7 @@ import { SimDisclaimer } from "@/components/sim-disclaimer";
 import { EduToolCaveat } from "@/components/edu-tool-caveat";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { SaveButton } from "@/components/save-button";
-import { EyeMap } from "@/components/eye-map";
-import { EyeAnatomyViewer } from "@/components/eye-anatomy-viewer";
+import { EyeViewerFrame } from "@/components/eye-viewer-frame";
 import { FloaterDemo, HaloDemo, HazeDemo, TunnelDemo } from "@/components/tool-demos";
 import { DropTrainer, OutdoorCard, WarmTimer } from "@/components/care-tools";
 import { AskDoctor, RxDecoder, VisitWalk } from "@/components/ask-visit-rx";
@@ -79,20 +78,9 @@ function ToolPage() {
 }
 
 function Panel({ id }: { id: ToolId }) {
-  const { tx } = useI18n();
   switch (id) {
     case "map":
-      return (
-        <div className="space-y-8">
-          <EyeAnatomyViewer />
-          <div>
-            <h2 className="mb-2 text-[0.85rem] font-semibold text-muted">
-              {tx("正面／側面簡圖")}
-            </h2>
-            <EyeMap />
-          </div>
-        </div>
-      );
+      return <EyeViewerFrame />;
     case "tunnel":
       return <TunnelDemo />;
     case "haze":

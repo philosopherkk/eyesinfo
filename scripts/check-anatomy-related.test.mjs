@@ -48,4 +48,17 @@ describe("anatomy RELATED targets", () => {
       assert.ok(allTopicIds.has(t), `missing topic ${t}`);
     }
   });
+
+  it("vitreous opens the floater page only", () => {
+    const relatedSrc = readFileSync(join(root, "src/data/anatomy-related.ts"), "utf8");
+    const frame = readFileSync(join(root, "src/components/eye-viewer-frame.tsx"), "utf8");
+    assert.match(relatedSrc, /vitreous:\s*\{\s*kind:\s*"topic",\s*topicId:\s*"d8"\s*\}/);
+    assert.match(relatedSrc, /related\.topicId === "d8"\) return "vitreous"/);
+    assert.doesNotMatch(
+      relatedSrc,
+      /kind === "topic"\) \{\s*return getTopic\(related\.topicId\)\?\.category/,
+    );
+    assert.match(frame, /branch === "vitreous"/);
+    assert.match(frame, /getTopic\("d8"\)/);
+  });
 });
