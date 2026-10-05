@@ -238,6 +238,25 @@ html[data-theme="dark"] .urgent-on-danger {
   pointer-events: all;
 }
 
+/* Home 3D viewer. Desktop matches KK's 860px frame. Under 680px his own
+   CSS stacks the panel (min-height 760px); do not force 860px there. */
+.eye-viewer-frame {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 860px;
+  border: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #081321;
+}
+@media (max-width: 679px) {
+  .eye-viewer-frame {
+    height: min(100dvh, 760px);
+    min-height: 32rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   button,
   a {

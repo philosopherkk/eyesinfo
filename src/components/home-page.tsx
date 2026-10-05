@@ -6,7 +6,6 @@ import { ThemeControl } from "@/components/theme-control";
 import { LayoutControl } from "@/components/layout-control";
 import { LangSwitch } from "@/components/lang-switch";
 import { TopicRow } from "@/components/topic-row";
-import { EyeAnatomyViewer } from "@/components/eye-anatomy-viewer";
 import { EmergencyShell } from "@/components/emergency-shell";
 import { LocaleHrefLink, SpaHref } from "@/components/locale-href";
 import { localizeTopic, useI18n, TOOL_TEXT } from "@/i18n";
@@ -14,6 +13,16 @@ import type { UiKey } from "@/i18n/ui";
 import { CONTENT_VERSION } from "@/lib/site";
 import { EDITORIAL } from "@/data/editorial";
 import { hrefWithLang } from "@/lib/locale-path";
+import type { Locale } from "@/i18n/locale";
+
+/**
+ * KK's viewer is 繁 / EN only (`?lang=zh|en`).
+ * ja → en and zh-Hans → zh; this pass does not add Japanese or simplified copy.
+ */
+function eyeViewerLang(locale: Locale): "zh" | "en" {
+  if (locale === "en" || locale === "ja") return "en";
+  return "zh";
+}
 
 const HOME_TOOLS = TOOLS.filter((t) => t.home);
 
@@ -132,7 +141,13 @@ export function HomePage() {
         <h2 className="mb-2 text-[0.8rem] font-semibold text-muted">
           {t("byAnatomy")}
         </h2>
-        <EyeAnatomyViewer />
+        <iframe
+          id="eyesinfo-eye-viewer"
+          src={`/eye-viewer.html?lang=${eyeViewerLang(locale)}`}
+          title="互動 3D 眼球解剖：旋轉、縮放及查看分層"
+          loading="lazy"
+          className="eye-viewer-frame"
+        />
         <LocaleHrefLink
           path="/tools/map"
           className="mt-3 inline-flex h-11 w-full items-center justify-center rounded-xl border border-line bg-card text-[0.85rem] font-semibold text-navy no-underline"
