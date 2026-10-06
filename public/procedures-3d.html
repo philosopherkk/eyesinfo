@@ -121,7 +121,11 @@
     }
 
     #scene { position: absolute; inset: 0; }
-    #scene canvas { display: block; }
+    #scene canvas {
+      display: block;
+      /* One-finger vertical scroll; orbit uses two fingers (see orbit-page-scroll.js). */
+      touch-action: pan-y;
+    }
 
     #labels {
       position: absolute;
@@ -439,8 +443,9 @@
         <div class="viewer-bottom">
           <div id="legend"></div>
           <div class="hint">
-            拖曳旋轉 · 滾輪縮放<br />
-            Drag to rotate · Scroll to zoom<br />
+            單指捲動頁面；雙指旋轉模型<br />
+            One finger scrolls · Two fingers rotate<br />
+            滾輪縮放 · Scroll to zoom<br />
             非等比例 · Not to scale<br />
             教學時間 · Not operative time
           </div>
@@ -537,8 +542,10 @@
       }
 
       const THREE = await import("three");
-      const { OrbitControls } =
-        await import("three/addons/controls/OrbitControls.js");
+      const [{ OrbitControls }, { enablePageScrollOrbit }] = await Promise.all([
+        import("three/addons/controls/OrbitControls.js"),
+        import("/js/orbit-page-scroll.js"),
+      ]);
 
       const $ = id => document.getElementById(id);
       const clamp = THREE.MathUtils.clamp;
@@ -837,6 +844,7 @@
       controls.enablePan = false;
       controls.minDistance = 3.5;
       controls.maxDistance = 13;
+      enablePageScrollOrbit(controls, renderer.domElement);
 
       scene.add(new THREE.HemisphereLight(0xcdeeff, 0x263349, 2.5));
 
