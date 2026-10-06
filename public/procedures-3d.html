@@ -752,8 +752,8 @@
         chalazion: {
           zh: "霰粒腫切開刮除術",
           en: "Chalazion incision and curettage",
-          subtitleZh: "經結膜切開示意：麻醉、夾持、翻瞼、切開及刮除",
-          subtitleEn: "Transconjunctival illustration: anesthesia, clamp, eversion, incision, and curettage",
+          subtitleZh: "下眼瞼經結膜切開示意：麻醉、夾持、翻瞼、切開及刮除",
+          subtitleEn: "Lower-lid transconjunctival illustration: anesthesia, clamp, eversion, incision, and curettage",
           warningZh:
             "此模型示意經結膜手術方式，不代表所有霰粒腫都需要手術。" +
             "復發、位置相同或外觀不典型的病灶應重新評估，並考慮病理檢查。",
@@ -769,8 +769,8 @@
           stages: [
             stage(
               "病灶確認", "Lesion assessment",
-              "確認霰粒腫的位置、症狀及治療計劃。模型顯示眼瞼內的局部發炎性病灶。",
-              "The lesion location, symptoms, and treatment plan are confirmed. The model shows a localized inflammatory lesion within the eyelid.",
+              "確認霰粒腫的位置、症狀及治療計劃。模型顯示下眼瞼內的局部發炎性病灶。",
+              "The lesion location, symptoms, and treatment plan are confirmed. The model shows a localized inflammatory lesion within the lower eyelid.",
               "霰粒腫並非單純膿瘍；內容物顏色與外觀為示意。",
               "A chalazion is not simply an abscess; contents and colors are schematic."
             ),
@@ -790,8 +790,8 @@
             ),
             stage(
               "翻轉眼瞼", "Lid eversion",
-              "翻轉眼瞼，暴露病灶上方的瞼結膜。粉紅色內表面轉向觀察者。",
-              "The eyelid is everted to expose the palpebral conjunctiva over the lesion. The pink inner surface turns toward the viewer.",
+              "翻轉下眼瞼，暴露病灶上方的瞼結膜。粉紅色內表面轉向觀察者。",
+              "The lower eyelid is everted to expose the palpebral conjunctiva over the lesion. The pink inner surface turns toward the viewer.",
               "翻轉是概念性鉸鏈動畫，不模擬真實眼瞼的變形。",
               "Eversion is a conceptual hinge animation, not realistic lid biomechanics."
             ),
@@ -818,8 +818,8 @@
             ),
             stage(
               "解除夾具及術後照護", "Clamp removal and aftercare",
-              "解除夾具並讓眼瞼回到原位，安排適當照護及追蹤。局部腫脹可能不會立即完全消失。",
-              "The clamp is removed and the lid returns to its resting position. Aftercare and follow-up are arranged. Swelling may not resolve immediately.",
+              "解除夾具並讓眼瞼回到原位，安排適當照護及覆診。局部腫脹可能不會立即完全消失。",
+              "The clamp is removed and the lid returns to its resting position. Aftercare and a follow-up visit are arranged. Swelling may not resolve immediately.",
               "完成畫面仍保留少量腫脹；不表示保證治癒或不會復發。",
               "Some swelling remains in the final illustration; cure and freedom from recurrence are not guaranteed."
             )
@@ -1656,19 +1656,23 @@
 
       // ============================================================
       // 5. CHALAZION MODEL
-      // Layered upper-lid flap attached to a conceptual hinge.
-      // Local +Z = skin side; local -Z = conjunctival side.
-      // Eversion turns the conjunctival side toward the camera.
+      // Lower-lid flap: free margin (lashes) on the superior edge of
+      // the plate. Local +Y = toward the free margin; local -Y = toward
+      // the inferior tarsal border. Local +Z = skin; -Z = conjunctiva.
+      // Resting pose sits inferior to the globe. Eversion hinges at the
+      // inferior tarsal border: the lid folds down and out, the margin
+      // ends lowest, the conjunctival surface faces forward, and the
+      // plate stays below the globe (never up over the cornea).
       // ============================================================
 
       function buildChalazion() {
         const root = new THREE.Group();
         scene.add(root);
 
-        // Context globe, intentionally less prominent than the lid.
+        // Context globe, slightly superior so the lower lid reads under it.
         const globe = ball(
           root, 1.20, [1, .90, 1],
-          [0, -.05, -.68],
+          [0, .42, -.48],
           mat(0xe5edf5, .13)
         );
 
@@ -1677,18 +1681,27 @@
           new THREE.RingGeometry(.25, .48, 64),
           mat(0x9d7950, .45)
         );
-        iris.position.set(0, -.12, .45);
+        iris.position.set(0, .34, .64);
 
         const pupil = mesh(
           root,
           new THREE.CircleGeometry(.25, 48),
           mat(0x142333)
         );
-        pupil.position.set(0, -.12, .46);
+        pupil.position.set(0, .34, .65);
+
+        // Teaching hinge at the inferior tarsal border (bottom of the
+        // plate). The flap's own origin stays at the free margin, which
+        // rests inferior to the cornea.
+        const TARSAL_HEIGHT = 1.08;
+        const hingeRest = { x: 0, y: -.48 - TARSAL_HEIGHT, z: .82 };
+        const lidHinge = new THREE.Group();
+        lidHinge.position.set(hingeRest.x, hingeRest.y, hingeRest.z);
+        root.add(lidHinge);
 
         const flap = new THREE.Group();
-        flap.position.set(0, .95, .72);
-        root.add(flap);
+        flap.position.set(0, TARSAL_HEIGHT, 0);
+        lidHinge.add(flap);
 
         const skinMat = mat(0xd89a8f, .12);
         const skin = box(
@@ -1725,13 +1738,14 @@
           );
         }
 
-        // Lash symbols near the conceptual free margin.
+        // Lower-lid lash symbols: roots on the superior free margin;
+        // shafts point forward (skin side) and slightly downward.
         for (let i = 0; i < 22; i++) {
           const x = -1.25 + i * .119;
           segment(
             flap,
-            V(x, -.035, .16),
-            V(x + .015, .09, .23),
+            V(x, -.01, .13),
+            V(x + .01, -.06, .29),
             .007,
             mat(0x443237)
           );
@@ -1917,8 +1931,9 @@
 
         return {
           root, labels,
-          target: V(0, .60, .2),
-          home: V(3.2, 2.6, 6.5),
+          // Frame the lower lid (resting and everted) under the globe.
+          target: V(0, -.70, .50),
+          home: V(3.05, 1.10, 6.60),
 
           update(progress) {
             const s = Math.min(Math.floor(progress), 7);
@@ -1930,7 +1945,16 @@
             let eversion = smooth(progress - 3);
             if (s === 7) eversion = 1 - smooth(p);
 
-            flap.rotation.x = Math.PI * eversion;
+            // Lower-lid eversion about the inferior tarsal border: the lid
+            // is drawn forward away from the globe and folds down and out
+            // (about 145 degrees), so the margin ends lowest and the
+            // conjunctival surface faces forward and slightly upward.
+            lidHinge.rotation.x = Math.PI * .8 * eversion;
+            lidHinge.position.set(
+              hingeRest.x,
+              hingeRest.y + .35 * eversion,
+              hingeRest.z + .45 * eversion
+            );
 
             clampGroup.visible =
               progress >= 2.05 && !(s === 7 && p > .16);
