@@ -413,7 +413,7 @@
           3. 玻璃體內注射 — Intravitreal injection
         </option>
         <option value="chalazion">
-          4. 霰粒腫切開刮除 — Chalazion I&amp;C
+          4. 霰粒腫切開刮除術 — Chalazion I&amp;C
         </option>
       </select>
 
@@ -516,7 +516,7 @@
   <footer>
     <strong>教育用途 / Educational use only.</strong>
     本模型不是完整手術指引、操作訓練或個別醫療建議。
-    器械、解剖、液體、雷射及眼瞼翻轉均經簡化。
+    器械、解剖、液體、激光及眼瞼翻轉均經簡化。
     時間軸不是實際手術時間，亦不保證治療結果。<br />
     This is not an operative guide, competency trainer, or individual medical
     advice. Anatomy and movements are simplified. Timeline pacing is illustrative,
@@ -566,10 +566,11 @@
         rrd: {
           zh: "裂孔性視網膜脫離手術",
           en: "Rhegmatogenous retinal detachment repair",
-          subtitleZh: "經睫狀體平坦部玻璃體切除＋眼內雷射＋氣體填塞",
+          subtitleZh: "經睫狀體平坦部玻璃體切除＋眼內激光＋氣體填充",
           subtitleEn: "Pars plana vitrectomy + endolaser + gas tamponade",
           warningZh:
-            "眼內氣體尚未完全吸收時，不可搭飛機；避免高海拔及笑氣（氧化亞氮）。" +
+            "眼內仍有膨脹氣體時禁止乘搭飛機及禁止氧化亞氮麻醉。" +
+            "高海拔陸上交通同樣可使氣泡膨脹，出發前問醫生。" +
             "任何麻醉或急診處置前，告知醫療人員眼內有氣體。" +
             "姿勢及恢復活動時間須依主診醫生指示。",
           warningEn:
@@ -579,20 +580,20 @@
           legend: [
             ["#ee896a", "視網膜", "Retina"],
             ["#ff454f", "視網膜裂孔", "Retinal break"],
-            ["#ffd17d", "雷射標記", "Laser markers"],
+            ["#ffd17d", "激光標記", "Laser markers"],
             ["#73deff", "氣體界面", "Gas interface"]
           ],
           stages: [
             stage(
               "病變與手術確認", "Assessment and confirmation",
-              "裂孔讓液體進入視網膜下方，使視網膜與眼球後壁分離。確認手術眼、脫離範圍、裂孔及手術計畫。",
+              "裂孔讓液體進入視網膜下方，使視網膜與眼球後壁分離。確認手術眼、脫離範圍、裂孔及手術計劃。",
               "A retinal break allows fluid beneath the retina, separating it from the underlying wall. The operative eye, detachment, breaks, and repair plan are confirmed.",
               "模型僅示意一個裂孔與局部脫離，並非特定患者的影像。",
               "One break and a localized detachment are illustrated; this is not patient-specific imaging."
             ),
             stage(
               "麻醉與無菌準備", "Anesthesia and preparation",
-              "依手術計畫進行麻醉、消毒及鋪單，建立無菌手術區域。",
+              "依手術計劃進行麻醉、消毒及鋪單，建立無菌手術區域。",
               "Anesthesia, antisepsis, and draping establish the operative field according to the clinical plan.",
               "不模擬所有麻醉、消毒或設備準備細節。",
               "Complete anesthesia, antisepsis, and equipment preparation are not simulated."
@@ -633,22 +634,22 @@
               "Buoyancy and fluid dynamics are not physically simulated; exchange and drainage sequencing may differ."
             ),
             stage(
-              "裂孔周圍眼內雷射", "Endolaser around the break",
-              "在裂孔周圍施作雷射，促進之後形成脈絡膜視網膜黏著。黃色點代表治療位置。",
+              "裂孔周圍眼內激光", "Endolaser around the break",
+              "在裂孔周圍施作激光，促進之後形成脈絡膜視網膜黏著。黃色點代表治療位置。",
               "Laser is applied around the break to promote subsequent chorioretinal adhesion. Yellow dots indicate treatment sites.",
               "黃色點不是立即形成的永久黏著；不提供能量、時間或間距設定。",
               "Markers do not represent instant permanent adhesion. No power, duration, or spacing settings are prescribed."
             ),
             stage(
-              "氣體填塞", "Gas tamponade",
-              "依手術計畫使用眼內氣體，支持視網膜及裂孔區域，直到雷射黏著逐漸形成。",
+              "氣體填充", "Gas tamponade",
+              "依手術計劃使用眼內氣體，支持視網膜及裂孔區域，直到激光黏著逐漸形成。",
               "Intraocular gas supports the retina and break region while laser-induced adhesion develops.",
               "未指定氣體種類、濃度、體積或吸收時間；這些須由手術團隊決定。",
               "Gas type, concentration, volume, and absorption duration are not specified."
             ),
             stage(
-              "傷口與術後計畫", "Wound assessment and postoperative plan",
-              "檢查切口、眼內狀態及視網膜。說明姿勢、回診與氣體安全注意事項；氣體不會在手術結束時立即消失。",
+              "傷口與術後計劃", "Wound assessment and postoperative plan",
+              "檢查切口、眼內狀態及視網膜。說明姿勢、覆診與氣體安全注意事項；氣體不會在手術結束時立即消失。",
               "Wounds and intraocular status are assessed. Positioning, follow-up, and gas precautions are explained. Gas does not disappear at the end of surgery.",
               "完成畫面保留氣體；術後吸收並非此手術時間軸的一部分。",
               "Gas remains visible in the final frame; postoperative absorption is not part of this operative timeline."
@@ -669,21 +670,21 @@
             "New flashes, or a clear increase in floaters, without a curtain, without sudden blindness and without severe pain: ophthalmic assessment the same day if possible.",
           legend: [
             ["#bcd5e9", "鞏膜", "Sclera"],
-            ["#eac28a", "水晶體", "Lens"],
+            ["#eac28a", "晶體", "Lens"],
             ["#8be3ba", "藥物示意", "Medication markers"],
             ["#cf9ae9", "消毒區域示意", "Antisepsis symbol"]
           ],
           stages: [
             stage(
               "確認眼別及藥物", "Confirm eye and medication",
-              "確認治療目的、同意、手術眼、藥物及治療計畫。模型顯示藥物將送達的玻璃體腔。",
+              "確認治療目的、同意、手術眼、藥物及治療計劃。模型顯示藥物將送達的玻璃體腔。",
               "The indication, consent, correct eye, medication, and treatment plan are confirmed. The model shows the vitreous cavity receiving treatment.",
               "此模型為一般注射教學，不指定疾病、藥物或劑量。",
               "This generic illustration does not select a disease, medication, or dose."
             ),
             stage(
-              "局部麻醉", "Local anesthesia",
-              "依臨床計畫使用局部麻醉，減少注射時的不適。",
+              "表面麻醉（滴眼）", "Local anesthesia",
+              "依臨床計劃使用表面麻醉（滴眼），減少注射時的不適。",
               "Local anesthesia is provided according to the clinical plan to reduce discomfort.",
               "麻醉方式與等待時間依臨床流程決定。",
               "Anesthetic method and waiting time depend on the clinical protocol."
@@ -697,14 +698,14 @@
             ),
             stage(
               "眼瞼隔離及位置確認", "Lid isolation and site confirmation",
-              "避免睫毛或眼瞼接觸針具與注射區域，並依眼部解剖及臨床計畫確認注射位置。",
+              "避免睫毛或眼瞼接觸針具與注射區域，並依眼部解剖及臨床計劃確認注射位置。",
               "Lids and lashes are kept away from the needle and injection field. The site is confirmed according to anatomy and the clinical plan.",
               "模型不提供注射點距離；通道與位置標記非測量工具。",
               "The model supplies no injection-site distances; markers are not measuring tools."
             ),
             stage(
               "針具進入玻璃體腔", "Needle entry",
-              "無菌針具經眼壁進入玻璃體腔。圖中保留水晶體及視網膜，協助理解目標空間。",
+              "無菌針具經眼壁進入玻璃體腔。圖中保留晶體及視網膜，協助理解目標空間。",
               "A sterile needle passes through the eye wall into the vitreous cavity. The lens and retina remain visible to clarify the target compartment.",
               "路徑及深度經過簡化，不可作為針具操作指引。",
               "The path and depth are schematic, not needle-placement guidance."
@@ -734,7 +735,7 @@
         },
 
         chalazion: {
-          zh: "霰粒腫切開及刮除",
+          zh: "霰粒腫切開刮除術",
           en: "Chalazion incision and curettage",
           subtitleZh: "經結膜切開示意：麻醉、夾持、翻瞼、切開及刮除",
           subtitleEn: "Transconjunctival illustration: anesthesia, clamp, eversion, incision, and curettage",
@@ -753,14 +754,14 @@
           stages: [
             stage(
               "病灶確認", "Lesion assessment",
-              "確認霰粒腫的位置、症狀及治療計畫。模型顯示眼瞼內的局部發炎性病灶。",
+              "確認霰粒腫的位置、症狀及治療計劃。模型顯示眼瞼內的局部發炎性病灶。",
               "The lesion location, symptoms, and treatment plan are confirmed. The model shows a localized inflammatory lesion within the eyelid.",
               "霰粒腫並非單純膿瘍；內容物顏色與外觀為示意。",
               "A chalazion is not simply an abscess; contents and colors are schematic."
             ),
             stage(
               "局部麻醉與準備", "Local anesthesia and preparation",
-              "依計畫進行局部麻醉及手術準備。此動畫用注射器符號表示麻醉，而非完整麻醉操作。",
+              "依計劃進行局部麻醉及手術準備。此動畫用注射器符號表示麻醉，而非完整麻醉操作。",
               "Local anesthesia and preparation are performed according to the plan. A syringe symbol represents anesthesia rather than its complete administration.",
               "年齡及配合程度可能影響麻醉選擇；未指定藥物或劑量。",
               "Age and cooperation can affect anesthesia choice; no drug or dose is specified."
@@ -1268,7 +1269,7 @@
             update: point => point.copy(breakRim.position)
           },
           {
-            zh: "水晶體", en: "Lens",
+            zh: "晶體", en: "Lens",
             point: V(-.43, -.33, 1.44)
           },
           {
@@ -1551,7 +1552,7 @@
             point: V(-1.47, .74, .89)
           },
           {
-            zh: "水晶體", en: "Lens",
+            zh: "晶體", en: "Lens",
             point: V(-.30, -.22, 1.43)
           },
           {

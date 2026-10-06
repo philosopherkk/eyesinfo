@@ -30,7 +30,7 @@ export const TOOLS: ToolDef[] = [
   {
     id: "procedures",
     title: "手術教學示意",
-    blurb: "白內障手術、視網膜脫離、玻璃體內注射、霰粒腫（不是檢查）",
+    blurb: "白內障手術、視網膜脫離、玻璃體內注射、霰粒腫切開刮除術（不是檢查）",
     canto: "四項示意，唔係手術指引",
     href: "/tools/procedures",
   },

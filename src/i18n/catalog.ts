@@ -13,7 +13,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     map: { title: "眼圖", blurb: "教育工具 · 自我察覺解剖部位", canto: "撳眼圖就明" },
     procedures: {
       title: "手術教學示意",
-      blurb: "白內障手術、視網膜脫離、玻璃體內注射、霰粒腫（不是檢查）",
+      blurb: "白內障手術、視網膜脫離、玻璃體內注射、霰粒腫切開刮除術（不是檢查）",
       canto: "四項示意，唔係手術指引",
     },
     drops: { title: "滴藥水步驟", blurb: "教育工具 · 步驟練習（非診斷）", canto: "跟住步驟滴" },
@@ -33,7 +33,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     map: { title: "眼图", blurb: "教育工具 · 自我察觉解剖部位", canto: "点眼图就明白" },
     procedures: {
       title: "手术教学示意",
-      blurb: "白内障手术、视网膜脱离、玻璃体内注射、霰粒肿（不是检查）",
+      blurb: "白内障手术、视网膜脱离、玻璃体内注射、霰粒肿切开刮除术（不是检查）",
       canto: "四项示意，不是手术指引",
     },
     drops: { title: "滴药水步骤", blurb: "教育工具 · 步骤练习（非诊断）", canto: "跟着步骤滴" },
