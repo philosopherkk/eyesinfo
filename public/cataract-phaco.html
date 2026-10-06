@@ -92,7 +92,13 @@
     }
 
     #scene { position: absolute; inset: 0; }
-    #scene canvas { display: block; width: 100%; height: 100%; }
+    #scene canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      /* One-finger vertical scroll; orbit uses two fingers (see orbit-page-scroll.js). */
+      touch-action: pan-y;
+    }
 
     .viewer-top {
       position: absolute;
@@ -339,8 +345,9 @@
             <span><i class="dot" style="background:#4cc6f0"></i>液體示意 / Fluid markers</span>
           </div>
           <div>
-            拖曳旋轉 · 滾輪縮放<br />
-            Drag to rotate · Scroll to zoom<br />
+            單指捲動頁面；雙指旋轉模型<br />
+            One finger scrolls · Two fingers rotate<br />
+            滾輪縮放 · Scroll to zoom<br />
             Not to scale · 非等比例
           </div>
         </div>
@@ -415,8 +422,10 @@
   <script type="module">
     async function main() {
       const THREE = await import("three");
-      const { OrbitControls } =
-        await import("three/addons/controls/OrbitControls.js");
+      const [{ OrbitControls }, { enablePageScrollOrbit }] = await Promise.all([
+        import("three/addons/controls/OrbitControls.js"),
+        import("/js/orbit-page-scroll.js"),
+      ]);
 
       const STAGES = [
         {
@@ -585,6 +594,7 @@
       controls.minDistance = 3;
       controls.maxDistance = 12;
       controls.target.set(0, 0, -.25);
+      enablePageScrollOrbit(controls, renderer.domElement);
       controls.update();
       controls.saveState();
 
