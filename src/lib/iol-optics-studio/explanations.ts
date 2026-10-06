@@ -117,7 +117,7 @@ export const DICTIONARY: Record<StudioLang, Record<UiDictKey, string>> = {
     viewSide: "Side view",
     viewRetina: "Retinal view",
     gesture:
-      "Drag to rotate · Scroll or pinch to zoom · Dashed rays are mathematical extensions, not light passing through the retina.",
+      "One finger scrolls the page; two fingers rotate · Scroll or pinch to zoom · Dashed rays are mathematical extensions, not light passing through the retina.",
     distanceBranch: "Distance branch",
     intermediateBranch: "Intermediate / EDOF range",
     nearBranch: "Near branch",
@@ -155,7 +155,7 @@ export const DICTIONARY: Record<StudioLang, Record<UiDictKey, string>> = {
     contextLost:
       "The graphics context was interrupted. Reload this page to restore the 3D view.",
     phoneTip:
-      "On a small phone screen, the 3D model is easier to explore in landscape or on a wider browser. Controls stay below the viewer.",
+      "On a small phone screen, one finger scrolls the page; two fingers rotate the model. Landscape or a wider browser can help. Controls stay below the viewer.",
     controlsToggle: "Show or hide controls",
     compactMode: "Compact",
     fullMode: "Full",
@@ -197,7 +197,7 @@ export const DICTIONARY: Record<StudioLang, Record<UiDictKey, string>> = {
     viewSide: "側面視角",
     viewRetina: "視網膜視角",
     gesture:
-      "拖曳旋轉・滾輪或雙指縮放・虛線為數學作圖延長線，並非光線穿透視網膜。",
+      "單指捲動頁面；雙指旋轉模型・滾輪或雙指縮放・虛線為數學作圖延長線，並非光線穿透視網膜。",
     distanceBranch: "遠距離分支",
     intermediateBranch: "中距離／延長焦深範圍",
     nearBranch: "近距離分支",
@@ -232,7 +232,7 @@ export const DICTIONARY: Record<StudioLang, Record<UiDictKey, string>> = {
       "無法載入 3D 檢視。請確認瀏覽器支援 WebGL。參數與解說仍可使用。",
     contextLost: "圖形內容中斷。請重新載入本頁以還原 3D 視圖。",
     phoneTip:
-      "小螢幕手機較適合橫放或以較闊瀏覽器使用 3D 模型；控制項固定在檢視器下方，並避免左右橫向捲動。",
+      "小螢幕：單指捲動頁面，雙指旋轉模型。較適合橫放或以較闊瀏覽器使用；控制項固定在檢視器下方，並避免左右橫向捲動。",
     controlsToggle: "顯示或收合控制項",
     compactMode: "精簡",
     fullMode: "完整",

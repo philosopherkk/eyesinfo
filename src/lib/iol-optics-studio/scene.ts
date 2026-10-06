@@ -107,9 +107,41 @@ export type OrbitControlsLike = {
   enableDamping: boolean;
   minDistance: number;
   maxDistance: number;
+  touches?: { ONE: number; TWO: number };
   addEventListener: (type: string, fn: () => void) => void;
   update: () => void;
 };
+
+/** Match public/js/orbit-page-scroll.js — one finger scrolls; two fingers orbit. */
+function enablePageScrollOrbit(
+  controls: OrbitControlsLike,
+  domElement: HTMLElement,
+) {
+  // three TOUCH: ROTATE=0 PAN=1 DOLLY_PAN=2 DOLLY_ROTATE=3 — no NONE sentinel
+  controls.touches = { ONE: -1, TWO: 3 };
+  domElement.style.touchAction = "pan-y";
+  const touchIds = new Set<number>();
+  const forget = (event: PointerEvent) => {
+    if (event.pointerType !== "touch") return;
+    touchIds.delete(event.pointerId);
+  };
+  domElement.addEventListener("pointerdown", (event) => {
+    if (event.pointerType !== "touch") return;
+    touchIds.add(event.pointerId);
+    queueMicrotask(() => {
+      if (touchIds.size !== 1) return;
+      if (domElement.hasPointerCapture(event.pointerId)) {
+        try {
+          domElement.releasePointerCapture(event.pointerId);
+        } catch {
+          /* already released */
+        }
+      }
+    });
+  });
+  domElement.addEventListener("pointerup", forget);
+  domElement.addEventListener("pointercancel", forget);
+}
 
 export type SceneHandle = {
   rebuild: (
@@ -176,6 +208,7 @@ export function createStudioScene(
   orbit.enableDamping = false;
   orbit.minDistance = 18;
   orbit.maxDistance = 105;
+  enablePageScrollOrbit(orbit, renderer.domElement);
   orbit.addEventListener("change", () => renderer.render(scene, camera));
 
   scene.add(new THREE.AmbientLight(0xdce8ef, 1.35));

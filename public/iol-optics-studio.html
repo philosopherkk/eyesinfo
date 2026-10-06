@@ -254,7 +254,8 @@
       display: block;
       width: 100%;
       height: 100%;
-      touch-action: none;
+      /* One-finger vertical scroll; orbit uses two fingers (see orbit-page-scroll.js). */
+      touch-action: pan-y;
     }
 
     .stage-note {
@@ -787,7 +788,7 @@ const dictionary = {
     title: "IOL 3D optics studio",
     subtitle: "Explore how light, eye length, and lens design interact.",
     notice: "Educational schematic only. Not an IOL prescription calculator, visual-acuity prediction, or substitute for a registered doctor’s assessment. 不能代替註冊醫生.",
-    phoneTip: "On a small phone screen, landscape or a wider browser works better for the 3D model. Controls stay below the viewer.",
+    phoneTip: "On a small phone screen, one finger scrolls the page; two fingers rotate the model. Landscape or a wider browser can help. Controls stay below the viewer.",
     parameters: "Optical parameters",
     lensDesign: "IOL design",
     mono: "Monofocal",
@@ -816,7 +817,7 @@ const dictionary = {
     view3D: "3D view",
     viewSide: "Side view",
     viewRetina: "Retinal view",
-    gesture: "Drag to rotate · Scroll or pinch to zoom · Dashed rays are mathematical extensions, not light passing through the retina.",
+    gesture: "One finger scrolls the page; two fingers rotate · Scroll or pinch to zoom · Dashed rays are mathematical extensions, not light passing through the retina.",
     distanceBranch: "Distance branch",
     intermediateBranch: "Intermediate / EDOF range",
     nearBranch: "Near branch",
@@ -851,7 +852,7 @@ const dictionary = {
     title: "人工晶體3D光學教學",
     subtitle: "探索物體距離、眼軸長度及人工水晶體設計如何影響光線聚焦。",
     notice: "本模型僅供教學示意，不可用於人工水晶體度數處方、視力預測，亦不能代替註冊醫生的個別評估。",
-    phoneTip: "小螢幕手機較適合橫放或以較闊瀏覽器使用 3D 模型；控制項在檢視器下方，並避免左右橫向捲動。",
+    phoneTip: "小螢幕：單指捲動頁面，雙指旋轉模型。較適合橫放或以較闊瀏覽器使用；控制項在檢視器下方，並避免左右橫向捲動。",
     parameters: "光學參數",
     lensDesign: "人工水晶體設計",
     mono: "單焦點",
@@ -880,7 +881,7 @@ const dictionary = {
     view3D: "3D 視角",
     viewSide: "側面視角",
     viewRetina: "視網膜視角",
-    gesture: "拖曳旋轉・滾輪或雙指縮放・虛線為數學作圖延長線，並非光線穿透視網膜。",
+    gesture: "單指捲動頁面；雙指旋轉模型・滾輪或雙指縮放・虛線為數學作圖延長線，並非光線穿透視網膜。",
     distanceBranch: "遠距離分支",
     intermediateBranch: "中距離／延長焦深範圍",
     nearBranch: "近距離分支",
@@ -1544,6 +1545,7 @@ function drawRetinalFootprint(branches, models) {
 
 let THREE;
 let OrbitControls;
+let enablePageScrollOrbit;
 let renderer;
 let scene;
 let camera;
@@ -1960,9 +1962,10 @@ function setView(view) {
 
 async function initializeScene() {
   try {
-    [THREE, { OrbitControls }] = await Promise.all([
+    [THREE, { OrbitControls }, { enablePageScrollOrbit }] = await Promise.all([
       import("three"),
-      import("three/addons/controls/OrbitControls.js")
+      import("three/addons/controls/OrbitControls.js"),
+      import("/js/orbit-page-scroll.js"),
     ]);
 
     scene = new THREE.Scene();
@@ -1995,6 +1998,7 @@ async function initializeScene() {
     orbit.enableDamping = false;
     orbit.minDistance = 18;
     orbit.maxDistance = 105;
+    enablePageScrollOrbit(orbit, renderer.domElement);
     orbit.addEventListener("change", renderFrame);
 
     scene.add(new THREE.AmbientLight(0xdce8ef, 1.35));
