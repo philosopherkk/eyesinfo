@@ -403,14 +403,17 @@
 
     <div class="selectors">
       <select id="procedure" aria-label="Select procedure / 選擇手術">
+        <option value="cataract" selected>
+          1. 白內障手術 — Phacoemulsification + lens implant
+        </option>
         <option value="rrd">
-          1. 視網膜脫離 — PPV + Endolaser + Gas
+          2. 視網膜脫離 — PPV + Endolaser + Gas
         </option>
         <option value="injection">
-          2. 玻璃體內注射 — Intravitreal injection
+          3. 玻璃體內注射 — Intravitreal injection
         </option>
         <option value="chalazion">
-          3. 霰粒腫切開刮除 — Chalazion I&amp;C
+          4. 霰粒腫切開刮除 — Chalazion I&amp;C
         </option>
       </select>
 
@@ -522,6 +525,17 @@
 
   <script type="module">
     async function main() {
+      const bootQuery = new URLSearchParams(location.search);
+      if (bootQuery.get("procedure") === "cataract") {
+        const lang = bootQuery.get("lang");
+        location.replace(
+          lang === "en" || lang === "zh"
+            ? `/cataract-phaco.html?lang=${lang}`
+            : "/cataract-phaco.html"
+        );
+        return;
+      }
+
       const THREE = await import("three");
       const { OrbitControls } =
         await import("three/addons/controls/OrbitControls.js");
@@ -2235,6 +2249,20 @@
       }
 
       function activateProcedure(id) {
+        if (id === "cataract") {
+          const lang = language === "en" ? "en" : language === "zh" ? "zh" : "";
+          if (window.parent !== window) {
+            window.parent.postMessage(
+              { type: "eyesinfo-procedure", procedure: "cataract" },
+              location.origin
+            );
+          } else {
+            location.href = lang
+              ? `/cataract-phaco.html?lang=${lang}`
+              : "/cataract-phaco.html";
+          }
+          return;
+        }
         if (!Object.hasOwn(PROCEDURES, id)) return;
 
         playing = false;
@@ -2253,6 +2281,13 @@
         updateHeader();
         setHomeView();
         refresh();
+
+        if (window.parent !== window) {
+          window.parent.postMessage(
+            { type: "eyesinfo-procedure", procedure: id },
+            location.origin
+          );
+        }
       }
 
       // ============================================================

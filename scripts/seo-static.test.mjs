@@ -20,6 +20,7 @@ const REQUIRED_TOOL_PATHS = [
   "/amsler",
   "/iol",
   "/tools/map",
+  "/tools/procedures",
   "/tools/drops",
   "/tools/ask",
   "/tools/tunnel",
