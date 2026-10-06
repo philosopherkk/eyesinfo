@@ -314,11 +314,19 @@ export function weightedRmsMM(
   );
 }
 
+/** Mirrors the on-page teaching-model note in public/iol-optics-studio.html (TC first). */
+export const EXPORT_WARNING = {
+  "zh-Hant":
+    "此模型數字只作光學教學示意，並非確定的臨床結果，亦不可用作人工晶體度數或散光軸位選擇；實際結果須由主診醫生按檢查及量度決定。",
+  en: "These numbers come from a simplified optical teaching model. They are not a definite clinical outcome, not a prescription, and must not be used to choose an IOL power or astigmatism axis; actual results and lens choice depend on your treating doctor’s examination and measurements.",
+  ja: "このモデルの数値は光学教育用に簡略化した図示であり、確定した臨床結果ではありません。処方ではなく、眼内レンズ度数や乱視軸の選択に使うことはできません。実際の結果とレンズの選択は、主治医の検査と測定によって決まります。",
+} as const;
+
 export function exportPayload(state: StudioState) {
   return {
     application: "IOL Optics Studio",
     modelVersion: "educational-paraxial-v1",
-    warning: "Educational settings only. Not a clinical prescription.",
+    warning: { ...EXPORT_WARNING },
     exportedAt: new Date().toISOString(),
     parameters: { ...state },
     constants: { ...OPTICAL_CONSTANTS },

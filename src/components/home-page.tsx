@@ -18,10 +18,9 @@ import { LangSwitch } from "@/components/lang-switch";
 import { TopicRow } from "@/components/topic-row";
 import { EmergencyShell } from "@/components/emergency-shell";
 import { LocaleHrefLink, SpaHref } from "@/components/locale-href";
-import { localizeTopic, useI18n, TOOL_TEXT } from "@/i18n";
+import { editorialBits, localizeTopic, useI18n, TOOL_TEXT } from "@/i18n";
 import type { UiKey } from "@/i18n/ui";
 import { CONTENT_VERSION } from "@/lib/site";
-import { EDITORIAL } from "@/data/editorial";
 import { hrefWithLang } from "@/lib/locale-path";
 import type { Locale } from "@/i18n/locale";
 import {
@@ -88,7 +87,9 @@ export function HomePage() {
           {t("homeKicker")}
         </p>
         <p className="mt-1 text-[0.78rem] text-muted">
-          {t("reviewed")}：{EDITORIAL.reviewedIso}
+          {t("reviewed")}
+            {locale === "en" ? ": " : "："}
+            {editorialBits(locale).reviewed} · {editorialBits(locale).name}
           <span aria-hidden="true"> · </span>
           {t("siteVersionLabel")}：{CONTENT_VERSION}
         </p>

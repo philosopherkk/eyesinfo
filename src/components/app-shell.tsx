@@ -4,13 +4,12 @@ import { Bookmark, Home, LayoutGrid, List, Phone, Search } from "lucide-react";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { usePrefs } from "@/lib/prefs";
-import { useI18n } from "@/i18n";
+import { editorialBits, useI18n } from "@/i18n";
 import { LOCALES } from "@/i18n/locale";
 import { LangSwitch } from "@/components/lang-switch";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { LocaleHrefLink, SpaHref } from "@/components/locale-href";
 import { CONTENT_VERSION, COPYRIGHT_LINE, PUBLIC_ORIGIN } from "@/lib/site";
-import { EDITORIAL } from "@/data/editorial";
 import { LegalBanner } from "@/components/legal-banner";
 import { LegalShortLine } from "@/components/legal-short-line";
 import { ThemeControl } from "@/components/theme-control";
@@ -147,7 +146,9 @@ export function AppShell({ children }: { children: ReactNode }) {
         </div>
         <footer className="px-4 pb-5 pt-4 text-center text-[0.7rem] leading-relaxed text-muted no-print layout-lg:px-6">
           <p>
-            {t("reviewed")}：{EDITORIAL.reviewedIso}
+            {t("reviewed")}
+            {locale === "en" ? ": " : "："}
+            {editorialBits(locale).reviewed} · {editorialBits(locale).name}
           </p>
           <p className="mt-1">
             {t("siteVersionLabel")}：{CONTENT_VERSION}

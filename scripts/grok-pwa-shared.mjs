@@ -215,8 +215,6 @@ export function grokPwaHeadTags(appName = DEFAULT_APP_NAME) {
   ];
 }
 
-export const GROK_EXTENSIONS_SCRIPT_SRC = "https://grok.com/grok-app-builder/extensions.js";
-
 export function readGrokProjectId() {
   const fromProcess = typeof process !== "undefined" ? process.env?.VITE_PROJECT_ID : "";
   return String(fromProcess ?? "").trim();
@@ -242,19 +240,14 @@ export function grokXCreatorHeadTags(creator = readXCreator(), creatorId = readX
   ];
 }
 
-/** Platform "Created with Grok" banner — injected into every HTML document. */
+/**
+ * eyesinfo: the third-party grok.com extensions <script> is intentionally not
+ * injected (it was already blocked by our CSP script-src 'self'). Only the
+ * inert project-id meta remains, when a project id is configured.
+ */
 export function grokExtensionsHeadTags(projectId = readGrokProjectId()) {
-  const id = escapeHtml(projectId);
-  const tags = [];
-  if (projectId) {
-    tags.push(`<meta name="grok-project-id" content="${id}">`);
-  }
-  tags.push(
-    `<script src="${GROK_EXTENSIONS_SCRIPT_SRC}"${
-      projectId ? ` data-project-id="${id}"` : ""
-    } defer></script>`,
-  );
-  return tags;
+  if (!projectId) return [];
+  return [`<meta name="grok-project-id" content="${escapeHtml(projectId)}">`];
 }
 
 export function readOgSite(cwd = process.cwd()) {
@@ -497,10 +490,8 @@ export function injectGrokPwaHead(html, ctx = {}) {
     }).join(""),
   );
 
-  if (!next.includes("/grok-app-builder/extensions.js")) {
+  if (!next.includes('name="grok-project-id"')) {
     missing.push(...grokExtensionsHeadTags(projectId));
-  } else if (projectId && !next.includes('name="grok-project-id"')) {
-    missing.push(`<meta name="grok-project-id" content="${escapeHtml(projectId)}">`);
   }
   if (
     projectId &&

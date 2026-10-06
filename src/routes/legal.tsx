@@ -51,7 +51,9 @@ function LegalPage() {
         <div>
           <h2 className="font-semibold text-navy">{t("reviewH")}</h2>
           <p className="mt-1">
-            {t("reviewed")}：{ed.reviewed}. {ed.name}，{ed.title}（{ed.register}）。
+            {t("reviewed")}
+            {locale === "en" ? ": " : "："}
+            {ed.reviewed} · {ed.name}，{ed.title}（{ed.register}）。
           </p>
           <ul className="mt-2 list-disc space-y-1 pl-5 text-[0.88rem]">
             {ed.quals.map((q) => (

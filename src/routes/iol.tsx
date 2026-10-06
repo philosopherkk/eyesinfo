@@ -441,7 +441,7 @@ function IolPage() {
       </div>
       <div className="px-4">
         <p className="mt-6 text-[0.78rem] leading-relaxed text-faint">{t("iolFoot")}</p>
-        <EditorialFooter lastReviewed="2026-10-01" />
+        <EditorialFooter />
       </div>
     </div>
   );
