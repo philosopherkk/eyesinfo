@@ -102,7 +102,8 @@
     display: block;
     width: 100%;
     height: 100%;
-    touch-action: none;
+    /* One-finger vertical scroll; orbit uses two fingers (see orbit-page-scroll.js). */
+    touch-action: pan-y;
   }
 
   #labels, #wires {
@@ -288,7 +289,7 @@
     <aside aria-label="Anatomical information">
       <h2 id="infoTitle">選取結構</h2>
       <p id="description">
-        點選標籤或下方結構。拖動旋轉，滾輪或雙指縮放。
+        點選標籤或下方結構。拖曳旋轉 · 滾輪縮放。
       </p>
 
       <button id="details" disabled>查看分層</button>
@@ -343,18 +344,22 @@ const UI = {
     auto: "Zoom reveals layers",
     back: "← Back to eye",
     choose: "Select a structure",
-    intro: "Select a label or structure. Drag to rotate; scroll or pinch to zoom.",
+    intro: "Select a label or structure. Drag to rotate · scroll to zoom.",
+    introTouch: "Select a label or structure. One finger scrolls the page · two fingers rotate the model (pinch to zoom).",
     detail: "Explore layers",
     gap: "Layer separation",
-    hint: "Select cornea, retina or lens, then zoom closer to reveal its layers. Arrow keys rotate; +/− zoom; Home resets.",
+    hint: "Select cornea, retina or lens, then zoom closer to reveal its layers. Drag to rotate · scroll to zoom; arrow keys rotate; +/− zoom; Home resets.",
+    hintTouch: "Select cornea, retina or lens, then zoom closer to reveal its layers. One finger scrolls · two fingers rotate (pinch to zoom).",
     layerHint: "Select a layer to learn more. Drag to rotate the tissue block. Zoom far out, or use Back, to return.",
+    layerHintTouch: "Select a layer to learn more. Two fingers rotate the tissue block. Zoom far out, or use Back, to return.",
     disclaimer: "Educational schematic: colors and thicknesses are exaggerated. Not an examination or diagnostic tool.",
     corneaOrder: "Top → bottom: tear-film side → anterior-chamber side. Tear film is not included among the five corneal layers.",
     retinaOrder: "Top → bottom: vitreous side → choroid side. Layer thicknesses vary by retinal location; this is a generic schematic.",
     lensOrder: "Nested volumes: capsule → cortex → nucleus. Separation is illustrative, not a physical arrangement.",
     failure: "The 3D viewer could not load. Check WebGL 2 support, your connection and script permissions. Text-only anatomy remains available below.",
     loading: "Loading 3D viewer…",
-    canvas: "Interactive 3D eye. Arrow keys rotate, plus and minus zoom, Home resets.",
+    canvas: "Interactive 3D eye. Drag to rotate · scroll to zoom. Arrow keys rotate, plus and minus zoom, Home resets.",
+    canvasTouch: "Interactive 3D eye. One finger scrolls the page · two fingers rotate.",
     textOnly: "Text-only anatomy",
     textStructures: "Main structures: cornea; anterior chamber; iris; pupil; lens; ciliary body; vitreous; retina; choroid; sclera; macula; optic nerve.",
     textCornea: "Cornea, outside → inside: epithelium → Bowman's layer → stroma → Descemet's membrane → endothelium.",
@@ -369,18 +374,22 @@ const UI = {
     auto: "放大時顯示分層",
     back: "← 返回眼球",
     choose: "選取結構",
-    intro: "點選標籤或結構。拖動旋轉，滾輪或雙指縮放。",
+    intro: "點選標籤或結構。拖曳旋轉 · 滾輪縮放。",
+    introTouch: "點選標籤或結構。單指捲動頁面；雙指旋轉模型（雙指開合縮放）。",
     detail: "查看分層",
     gap: "分層間距",
-    hint: "選取角膜、視網膜或晶體，再放大以查看分層。方向鍵旋轉；＋／− 縮放；Home 重設。",
-    layerHint: "選取分層以閱讀說明。拖動旋轉；縮小至遠處或按「返回眼球」。",
+    hint: "選取角膜、視網膜或晶體，再放大以查看分層。拖曳旋轉 · 滾輪縮放；方向鍵旋轉；＋／− 縮放；Home 重設。",
+    hintTouch: "選取角膜、視網膜或晶體，再放大以查看分層。單指捲動頁面；雙指旋轉模型（雙指開合縮放）。",
+    layerHint: "選取分層以閱讀說明。拖曳旋轉；縮小至遠處或按「返回眼球」。",
+    layerHintTouch: "選取分層以閱讀說明。雙指旋轉模型；縮小至遠處或按「返回眼球」。",
     disclaimer: "教育示意：顏色及厚度經誇大，並非檢查或診斷工具。",
     corneaOrder: "由上至下：淚膜側 → 前房側。淚膜不計入角膜的五層。",
     retinaOrder: "由上至下：玻璃體側 → 脈絡膜側。各部位的分層厚度不同，此為一般示意。",
     lensOrder: "由外至內：囊膜 → 皮質 → 核。分離位置只作示意。",
     failure: "無法載入 3D 模型。請檢查 WebGL 2、網絡及腳本權限；下方仍可閱讀純文字解剖。",
     loading: "正在載入 3D 模型…",
-    canvas: "互動 3D 眼球。方向鍵旋轉，加號與減號縮放，Home 重設。",
+    canvas: "互動 3D 眼球。拖曳旋轉 · 滾輪縮放。方向鍵旋轉，加號與減號縮放，Home 重設。",
+    canvasTouch: "互動 3D 眼球。單指捲動頁面；雙指旋轉模型。",
     textOnly: "純文字解剖",
     textStructures: "主要結構：角膜；前房；虹膜；瞳孔；晶體；睫狀體；玻璃體；視網膜；脈絡膜；鞏膜；黃斑；視神經。",
     textCornea: "角膜，由外至內：上皮層 → 鮑曼氏層 → 基質層 → 後彈力層 → 內皮層。",
@@ -496,7 +505,14 @@ const LAYERS = {
 let lang = new URLSearchParams(location.search).get("lang") === "en"
   ? "en" : "zh";
 
-const text = key => UI[lang][key];
+// Touch-first devices (phones / tablets without a hovering pointer) get the
+// one-finger-scroll wording; mouse / trackpad devices keep drag-to-rotate.
+const TOUCH_INPUT = typeof matchMedia === "function" &&
+  matchMedia("(hover: none) and (pointer: coarse)").matches;
+const TOUCH_KEYS = new Set(["intro", "hint", "layerHint", "canvas"]);
+const text = key =>
+  (TOUCH_INPUT && TOUCH_KEYS.has(key) && UI[lang][key + "Touch"]) ||
+  UI[lang][key];
 
 function applyStaticCopy() {
   document.documentElement.lang = lang === "en" ? "en" : "zh-Hant";
@@ -513,12 +529,14 @@ applyStaticCopy();
 const nameOf = row => row[lang === "en" ? 1 : 2];
 const grossById = id => GROSS.find(row => row[0] === id);
 
-let THREE, OrbitControls;
+let THREE, OrbitControls, enablePageScrollOrbit;
 
 try {
   THREE = await import("three");
-  ({ OrbitControls } =
-    await import("three/addons/controls/OrbitControls.js"));
+  [{ OrbitControls }, { enablePageScrollOrbit }] = await Promise.all([
+    import("three/addons/controls/OrbitControls.js"),
+    import("/js/orbit-page-scroll.js"),
+  ]);
 
   startViewer();
 } catch (error) {
@@ -550,6 +568,7 @@ function startViewer() {
   controls.minDistance = 1.1;
   controls.maxDistance = 12;
   controls.zoomSpeed = .8;
+  enablePageScrollOrbit(controls, canvas);
 
   scene.add(new THREE.HemisphereLight(0xe7f4ff, 0x334055, 2.1));
 

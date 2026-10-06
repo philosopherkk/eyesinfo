@@ -249,6 +249,8 @@ html[data-theme="dark"] .urgent-on-danger {
   border-radius: 16px;
   overflow: hidden;
   background: #081321;
+  /* Prefer vertical page scroll over trapping one-finger drags on the embed. */
+  touch-action: pan-y;
 }
 @media (max-width: 679px) {
   .eye-viewer-frame {
@@ -268,6 +270,8 @@ html[data-theme="dark"] .urgent-on-danger {
   border-radius: 16px;
   overflow: hidden;
   background: #08111f;
+  /* Prefer vertical page scroll over trapping one-finger drags on the embed. */
+  touch-action: pan-y;
 }
 @media (max-width: 1000px) {
   .procedure-viewer-frame {
