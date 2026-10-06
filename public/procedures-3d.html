@@ -127,6 +127,13 @@
       touch-action: pan-y;
     }
 
+    /* Input-specific hints: mouse / trackpad vs touch-first devices. */
+    .hint-touch { display: none; }
+    @media (hover: none) and (pointer: coarse) {
+      .hint-mouse { display: none; }
+      .hint-touch { display: inline; }
+    }
+
     #labels {
       position: absolute;
       inset: 0;
@@ -443,9 +450,10 @@
         <div class="viewer-bottom">
           <div id="legend"></div>
           <div class="hint">
-            單指捲動頁面；雙指旋轉模型<br />
-            One finger scrolls · Two fingers rotate<br />
-            滾輪縮放 · Scroll to zoom<br />
+            <span class="hint-mouse">拖曳旋轉 · 滾輪縮放<br />
+            Drag to rotate · Scroll to zoom<br /></span>
+            <span class="hint-touch">單指捲動頁面；雙指旋轉模型<br />
+            One finger scrolls · Two fingers rotate<br /></span>
             非等比例 · Not to scale<br />
             教學時間 · Not operative time
           </div>
