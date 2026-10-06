@@ -10,6 +10,7 @@ import { HkosVideoCard } from "@/components/hkos-video-card";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { EmergencyShell } from "@/components/emergency-shell";
 import { SaveButton } from "@/components/save-button";
+import { ShareButton } from "@/components/share-button";
 import { SpaHref } from "@/components/locale-href";
 import { topicSaveKey } from "@/lib/saved";
 import { collectTocEntries } from "@/lib/topic-anchors";
@@ -122,7 +123,10 @@ function TopicPage() {
           <h1 className="min-w-0 flex-1 text-[1.2rem] font-semibold leading-snug text-navy sm:text-[1.35rem] layout-lg:text-[1.5rem]">
             {topic.title}
           </h1>
-          <SaveButton saveId={topicSaveKey(raw.id)} className="mt-0.5" />
+          <div className="mt-0.5 flex shrink-0 items-center gap-1.5">
+            <SaveButton saveId={topicSaveKey(raw.id)} />
+            <ShareButton path={path} pageTitle={topic.title} />
+          </div>
         </div>
         {topic.meta ? (
           <p className="mt-1 text-[0.85rem] text-muted layout-lg:text-[0.9rem]">{topic.meta}</p>
