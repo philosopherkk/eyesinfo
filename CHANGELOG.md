@@ -2,6 +2,11 @@
 
 Git-sourced history for this site. Entries follow commits on `main`, not chat notes.
 
+## [1.80] — 2026-10-06
+
+- **Summary:** Publish #95 mobile single-finger page scroll on 3D teaching canvases (mouse vs touch hints; release-capture cleanup; two-finger rotate); #94 IOL Optics Studio on `/iol-optics` (not-a-clinical-outcome warnings, 人工晶體/厘米 wording, routeTree typecheck, sync touch helper); #96 chalazion 3D lower-lid geometry and eversion (inferior tarsal border; lashes forward-down; 覆診). `CONTENT_VERSION` → **1.80**; `CONTENT_UPDATED` → **2026-10-06**.
+- **Files:** `public/js/orbit-page-scroll.js`, `public/{eye-viewer,cataract-phaco,procedures-3d,iol-optics-studio}.html`, IOL optics studio routes/components/i18n/SEO, chalazion 3D scene + copy, `src/lib/site.ts`, `CHANGELOG.md`
+
 ## chore — procedure-day copy fixes (preview)
 
 - **Summary:** On `feat/procedure-day-pages` — YAG title shortened to 後囊切開當日 with Nd:YAG kept in the lead; remove failure / IOL-exchange lines; toric as add-on in cataract lead and day-sequence (zh/en/ja); barrier spots not a ring; injection title scoped to anti-VEGF; same-day path uses `/urgent` sameDayH wording. `CONTENT_VERSION` unchanged.
