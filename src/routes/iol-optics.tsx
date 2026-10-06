@@ -4,6 +4,7 @@ import { IolOpticsStudio } from "@/components/iol-optics-studio/iol-optics-studi
 import { EduToolCaveat } from "@/components/edu-tool-caveat";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { SaveButton } from "@/components/save-button";
+import { ShareButton } from "@/components/share-button";
 import { toolSaveKey } from "@/lib/saved";
 import { useI18n } from "@/i18n";
 import { pageHead } from "@/lib/page-seo";
@@ -45,7 +46,10 @@ function IolOpticsPage() {
         <h1 className="min-w-0 flex-1 text-[1.25rem] font-semibold text-navy">
           {t("iolOpticsTitle")}
         </h1>
-        <SaveButton saveId={toolSaveKey("iolOptics")} className="mr-2" />
+        <div className="mr-2 flex shrink-0 items-center gap-1.5">
+          <SaveButton saveId={toolSaveKey("iolOptics")} />
+          <ShareButton path="/iol-optics" pageTitle={t("iolOpticsTitle")} />
+        </div>
       </div>
       <p className="px-4 pt-1 text-[0.88rem] leading-relaxed text-muted">
         {t("iolOpticsLead")}

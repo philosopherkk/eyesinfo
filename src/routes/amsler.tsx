@@ -15,6 +15,7 @@ import { EduToolCaveat } from "@/components/edu-tool-caveat";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { LocaleHrefLink, SpaHref } from "@/components/locale-href";
 import { SaveButton } from "@/components/save-button";
+import { ShareButton } from "@/components/share-button";
 import { usePrefs, type AmslerResult } from "@/lib/prefs";
 import { toolSaveKey } from "@/lib/saved";
 import { useI18n } from "@/i18n";
@@ -199,6 +200,7 @@ function AmslerPage() {
           {t("amslerTitle")}
         </h1>
         <SaveButton saveId={toolSaveKey("amsler")} />
+        <ShareButton path="/amsler" pageTitle={t("amslerTitle")} />
         <button
           type="button"
           onClick={() => window.print()}

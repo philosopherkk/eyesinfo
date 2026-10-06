@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { ProcedureFrames } from "@/components/procedure-frames";
 import { EditorialFooter } from "@/components/editorial-footer";
+import { ShareButton } from "@/components/share-button";
 import { LocaleHrefLink } from "@/components/locale-href";
 import { getTopic } from "@/data/topics";
 import type { FrameSpec } from "@/data/topics";
@@ -144,9 +145,20 @@ function ProcedureTeachingPage() {
 
   return (
     <div className="px-4 pb-8 pt-4 layout-lg:px-6">
-      <h1 className="text-[1.2rem] font-semibold text-navy sm:text-[1.35rem]">
-        {copy.title}
-      </h1>
+      <div className="flex items-start gap-2 sm:gap-3">
+        <h1 className="min-w-0 flex-1 text-[1.2rem] font-semibold text-navy sm:text-[1.35rem]">
+          {copy.title}
+        </h1>
+        <ShareButton
+          path={
+            procedure
+              ? `/tools/procedures?procedure=${procedure}`
+              : "/tools/procedures"
+          }
+          pageTitle={copy.title}
+          className="mt-0.5"
+        />
+      </div>
       <p className="mt-2 max-w-prose text-[0.88rem] leading-relaxed text-muted">
         {copy.lead}
       </p>

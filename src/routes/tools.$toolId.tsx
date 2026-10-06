@@ -5,6 +5,7 @@ import { SimDisclaimer } from "@/components/sim-disclaimer";
 import { EduToolCaveat } from "@/components/edu-tool-caveat";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { SaveButton } from "@/components/save-button";
+import { ShareButton } from "@/components/share-button";
 import { EyeViewerFrame } from "@/components/eye-viewer-frame";
 import { FloaterDemo, HaloDemo, HazeDemo, TunnelDemo } from "@/components/tool-demos";
 import { DropTrainer, OutdoorCard, WarmTimer } from "@/components/care-tools";
@@ -63,7 +64,10 @@ function ToolPage() {
           <h1 className="text-[1.2rem] font-semibold text-navy">{text.title}</h1>
           <p className="text-[0.75rem] text-steel">{text.canto}</p>
         </div>
-        <SaveButton saveId={toolSaveKey(tool.id)} className="mr-2 mt-0.5" />
+        <div className="mr-2 mt-0.5 flex shrink-0 items-center gap-1.5">
+          <SaveButton saveId={toolSaveKey(tool.id)} />
+          <ShareButton path={tool.href} pageTitle={text.title} />
+        </div>
       </div>
       <div className="px-4 pt-3">
         {showEduCaveat ? <EduToolCaveat /> : null}

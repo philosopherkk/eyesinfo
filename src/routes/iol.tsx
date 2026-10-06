@@ -4,6 +4,7 @@ import { ArrowLeft, Moon, Sun } from "lucide-react";
 import { IolScene } from "@/components/iol-scene";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { SaveButton } from "@/components/save-button";
+import { ShareButton } from "@/components/share-button";
 import { toolSaveKey } from "@/lib/saved";
 import { useI18n } from "@/i18n";
 import type { UiKey } from "@/i18n/ui";
@@ -123,7 +124,10 @@ function IolPage() {
         <h1 className="min-w-0 flex-1 text-[1.25rem] font-semibold text-navy">
           {t("iolTitle")}
         </h1>
-        <SaveButton saveId={toolSaveKey("iol")} className="mr-2" />
+        <div className="mr-2 flex shrink-0 items-center gap-1.5">
+          <SaveButton saveId={toolSaveKey("iol")} />
+          <ShareButton path="/iol" pageTitle={t("iolTitle")} />
+        </div>
       </div>
       <p className="px-4 pt-1 text-[0.88rem] leading-relaxed text-muted">
         {t("iolLead")}
