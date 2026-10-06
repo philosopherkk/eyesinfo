@@ -6,6 +6,7 @@ Git-sourced history for this site. Entries follow commits on `main`, not chat no
 
 - **Summary:** Publish #95 mobile single-finger page scroll on 3D teaching canvases (mouse vs touch hints; release-capture cleanup; two-finger rotate); #94 IOL Optics Studio on `/iol-optics` (not-a-clinical-outcome warnings, 人工晶體/厘米 wording, routeTree typecheck, sync touch helper); #96 chalazion 3D lower-lid geometry and eversion (inferior tarsal border; lashes forward-down; 覆診). `CONTENT_VERSION` → **1.80**; `CONTENT_UPDATED` → **2026-10-06**.
 - **Files:** `public/js/orbit-page-scroll.js`, `public/{eye-viewer,cataract-phaco,procedures-3d,iol-optics-studio}.html`, IOL optics studio routes/components/i18n/SEO, chalazion 3D scene + copy, `src/lib/site.ts`, `CHANGELOG.md`
+- **Follow-up:** Site-wide 最近覆核 stamp (`EDITORIAL.reviewed` / `reviewedIso` / `DEFAULT_LAST_REVIEWED`) → **2026-10-06** so home/footer match the release (was still 2026-09-24).
 
 ## chore — procedure-day copy fixes (preview)
 
