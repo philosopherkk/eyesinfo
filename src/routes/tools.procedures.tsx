@@ -21,9 +21,9 @@ const searchSchema = z.object({
 });
 
 /**
- * KK's viewer is 繁 / EN only (`?lang=zh|en`).
+ * The procedure viewers are 繁 / EN only (`?lang=zh|en`).
  * ja → en and zh-Hans → zh; this pass does not add Japanese or simplified stage copy.
- * Cataract uses the existing procedure-day line diagrams, which already have EN / JA / 简.
+ * Cataract is KK's phaco page. Its line diagrams are the procedure-day frames, which already have EN / JA / 简.
  */
 function procedureViewerLang(locale: Locale): "zh" | "en" {
   if (locale === "en" || locale === "ja") return "en";
@@ -120,7 +120,11 @@ function ProcedureTeachingPage() {
   const copy = shellCopy(locale);
   const id: ProcedureId = procedure ?? "cataract";
   const cataract = id === "cataract" ? cataractDiagram(locale) : null;
-  const src = `/procedures-3d.html?procedure=${id}&lang=${procedureViewerLang(locale)}`;
+  const viewerLang = procedureViewerLang(locale);
+  const src =
+    id === "cataract"
+      ? `/cataract-phaco.html?lang=${viewerLang}`
+      : `/procedures-3d.html?procedure=${id}&lang=${viewerLang}`;
 
   useEffect(() => {
     function onMessage(event: MessageEvent) {
