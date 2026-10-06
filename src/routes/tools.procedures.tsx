@@ -34,7 +34,7 @@ const CHOICES: { id: ProcedureId; hant: string; en: string }[] = [
   { id: "cataract", hant: "白內障手術", en: "Cataract surgery" },
   { id: "rrd", hant: "視網膜脫離", en: "Retinal detachment" },
   { id: "injection", hant: "玻璃體內注射", en: "Intravitreal injection" },
-  { id: "chalazion", hant: "霰粒腫", en: "Chalazion" },
+  { id: "chalazion", hant: "霰粒腫切開刮除術", en: "Chalazion" },
 ];
 
 const HANT = {

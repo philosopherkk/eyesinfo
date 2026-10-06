@@ -422,7 +422,7 @@ function Draw({ draw }: { draw: FrameDraw }): ReactNode {
         <svg
           viewBox="0 0 160 120"
           role="img"
-          aria-label="透明人工晶體放在原有囊袋內，切口在角膜外側"
+          aria-label="透明人工晶體放在原有囊袋內，切口在角膜邊緣"
           className="proc-svg"
         >
           <use href="#side" />
