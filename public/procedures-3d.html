@@ -803,8 +803,8 @@
             ),
             stage(
               "解除夾具及術後照護", "Clamp removal and aftercare",
-              "解除夾具並讓眼瞼回到原位，安排適當照護及追蹤。局部腫脹可能不會立即完全消失。",
-              "The clamp is removed and the lid returns to its resting position. Aftercare and follow-up are arranged. Swelling may not resolve immediately.",
+              "解除夾具並讓眼瞼回到原位，安排適當照護及覆診。局部腫脹可能不會立即完全消失。",
+              "The clamp is removed and the lid returns to its resting position. Aftercare and a follow-up visit are arranged. Swelling may not resolve immediately.",
               "完成畫面仍保留少量腫脹；不表示保證治癒或不會復發。",
               "Some swelling remains in the final illustration; cure and freedom from recurrence are not guaranteed."
             )
@@ -1641,11 +1641,12 @@
       // ============================================================
       // 5. CHALAZION MODEL
       // Lower-lid flap: free margin (lashes) on the superior edge of
-      // the plate; teaching hinge for eversion is that free margin.
-      // Local +Y = toward the free margin; local -Y = toward the
-      // inferior lid body. Local +Z = skin; local -Z = conjunctiva.
-      // Resting pose sits inferior to the globe; eversion rotates
-      // about the free margin so conjunctiva faces the camera.
+      // the plate. Local +Y = toward the free margin; local -Y = toward
+      // the inferior tarsal border. Local +Z = skin; -Z = conjunctiva.
+      // Resting pose sits inferior to the globe. Eversion hinges at the
+      // inferior tarsal border: the lid folds down and out, the margin
+      // ends lowest, the conjunctival surface faces forward, and the
+      // plate stays below the globe (never up over the cornea).
       // ============================================================
 
       function buildChalazion() {
@@ -1673,11 +1674,18 @@
         );
         pupil.position.set(0, .34, .65);
 
-        // Free-margin hinge at the lower-lid lash line (inferior to cornea).
+        // Teaching hinge at the inferior tarsal border (bottom of the
+        // plate). The flap's own origin stays at the free margin, which
+        // rests inferior to the cornea.
+        const TARSAL_HEIGHT = 1.08;
+        const hingeRest = { x: 0, y: -.48 - TARSAL_HEIGHT, z: .82 };
+        const lidHinge = new THREE.Group();
+        lidHinge.position.set(hingeRest.x, hingeRest.y, hingeRest.z);
+        root.add(lidHinge);
+
         const flap = new THREE.Group();
-        const flapRest = { x: 0, y: -.48, z: .82 };
-        flap.position.set(flapRest.x, flapRest.y, flapRest.z);
-        root.add(flap);
+        flap.position.set(0, TARSAL_HEIGHT, 0);
+        lidHinge.add(flap);
 
         const skinMat = mat(0xd89a8f, .12);
         const skin = box(
@@ -1714,14 +1722,14 @@
           );
         }
 
-        // Lower-lid lash symbols: roots on the superior free margin
-        // (top of the plate as viewed). Shafts read above that margin.
+        // Lower-lid lash symbols: roots on the superior free margin;
+        // shafts point forward (skin side) and slightly downward.
         for (let i = 0; i < 22; i++) {
           const x = -1.25 + i * .119;
           segment(
             flap,
             V(x, -.01, .13),
-            V(x + .01, .14, .24),
+            V(x + .01, -.06, .29),
             .007,
             mat(0x443237)
           );
@@ -1907,9 +1915,9 @@
 
         return {
           root, labels,
-          // Frame the lower lid under the globe rather than an upper-lid hover.
-          target: V(0, -.05, .28),
-          home: V(3.05, 1.75, 6.35),
+          // Frame the lower lid (resting and everted) under the globe.
+          target: V(0, -.70, .50),
+          home: V(3.05, 1.10, 6.60),
 
           update(progress) {
             const s = Math.min(Math.floor(progress), 7);
@@ -1921,14 +1929,15 @@
             let eversion = smooth(progress - 3);
             if (s === 7) eversion = 1 - smooth(p);
 
-            // Lower-lid eversion about the free margin: plate swings up and
-            // slightly forward so conjunctiva faces the camera (clamp
-            // eversion teaching pose), clearing the globe.
-            flap.rotation.x = Math.PI * eversion;
-            flap.position.set(
-              flapRest.x,
-              flapRest.y + .06 * eversion,
-              flapRest.z + .48 * eversion
+            // Lower-lid eversion about the inferior tarsal border: the lid
+            // is drawn forward away from the globe and folds down and out
+            // (about 145 degrees), so the margin ends lowest and the
+            // conjunctival surface faces forward and slightly upward.
+            lidHinge.rotation.x = Math.PI * .8 * eversion;
+            lidHinge.position.set(
+              hingeRest.x,
+              hingeRest.y + .35 * eversion,
+              hingeRest.z + .45 * eversion
             );
 
             clampGroup.visible =
