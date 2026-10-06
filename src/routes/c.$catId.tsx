@@ -21,7 +21,6 @@ import { localeFromMatch, pathForLocale } from "@/lib/locale-path";
 import { uiText } from "@/lib/ui-text";
 import { seoDescriptionFor } from "@/lib/seo-description";
 import { MedicalWebPageJsonLd } from "@/components/medical-webpage-jsonld";
-import { CONTENT_UPDATED } from "@/lib/site";
 
 const CAT_TITLE: Record<string, UiKey> = {
   lens: "cat_lens",
@@ -175,7 +174,6 @@ function AnatomyChooserPage({ regionId }: { regionId: AnatomyRegionId }) {
         locale={locale}
         name={title}
         description={jsonLdDescription}
-        lastReviewed={CONTENT_UPDATED}
       />
       <div className="flex items-center gap-2 px-2 pt-3 layout-lg:px-6">
         <SpaHref
@@ -239,7 +237,6 @@ function CategoryPage() {
         locale={locale}
         name={title}
         description={jsonLdDescription}
-        lastReviewed={CONTENT_UPDATED}
       />
       <div className="flex items-center gap-2 px-2 pt-3 layout-lg:px-6">
         <SpaHref

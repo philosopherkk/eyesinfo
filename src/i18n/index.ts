@@ -174,7 +174,15 @@ export function localizedUrgent(locale: Locale): {
 }
 
 export function editorialBits(locale: Locale) {
-  const name = EDITORIAL.name;
+  // Same name forms as the EN / JA disclosure lines below.
+  const name =
+    locale === "en"
+      ? "Dr Poon Ka Kin"
+      : locale === "ja"
+        ? "潘家健医師"
+        : locale === "zh-Hans"
+          ? toHans(EDITORIAL.name)
+          : EDITORIAL.name;
   const title =
     locale === "en"
       ? "Ophthalmologist"
@@ -191,11 +199,27 @@ export function editorialBits(locale: Locale) {
         : locale === "zh-Hans"
           ? toHans(EDITORIAL.registerNote)
           : EDITORIAL.registerNote;
+  // Site-level review date, derived from EDITORIAL.reviewedIso so EN / JA never drift from TC.
+  const [ry, rm, rd] = EDITORIAL.reviewedIso.split("-").map(Number);
+  const EN_MONTHS = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
   const reviewed =
     locale === "en"
-      ? "24 September 2026"
+      ? `${rd} ${EN_MONTHS[rm - 1]} ${ry}`
       : locale === "ja"
-        ? "2026年9月24日"
+        ? `${ry}年${rm}月${rd}日`
         : EDITORIAL.reviewed;
   const quals =
     locale === "zh-Hans" ? EDITORIAL.quals.map(toHans) : EDITORIAL.quals;

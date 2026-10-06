@@ -1,6 +1,6 @@
 import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
-import { getTopic, topicEditorial, TOPICS } from "@/data/topics";
+import { getTopic, TOPICS } from "@/data/topics";
 import { TOPIC_TOOLS } from "@/data/tools";
 import { TopicBody } from "@/components/topic-body";
 import { TopicRefs } from "@/components/topic-refs";
@@ -85,7 +85,6 @@ function TopicPage() {
   const tools = TOPIC_TOOLS[raw?.id ?? ""] ?? [];
   const { t, legal, locale } = useI18n();
   if (!raw) throw notFound();
-  const { lastReviewed, reviewer } = topicEditorial(raw);
   const tocEntries = collectTocEntries(topic.blocks);
   const hasRefs = (raw.refs?.length ?? 0) > 0;
   const showLocaleFallback = !hasTopicLocalePack(raw.id, locale);
@@ -103,7 +102,6 @@ function TopicPage() {
         locale={locale}
         name={topic.title}
         description={jsonLdDescription}
-        lastReviewed={lastReviewed}
       />
       {/* Desktop: keep icon back; mobile uses collapsed breadcrumb 「返回分類」. */}
       <div className="hidden items-center px-2 pt-3 sm:flex layout-lg:px-6">
@@ -155,7 +153,7 @@ function TopicPage() {
         <p className="mt-5 text-[0.82rem] leading-relaxed text-muted">
           {legal.topicFooter}
         </p>
-        <EditorialFooter lastReviewed={lastReviewed} reviewer={reviewer} />
+        <EditorialFooter />
       </div>
     </article>
   );

@@ -16,20 +16,19 @@ export type MedicalWebPageJsonLdProps = {
   locale: Locale;
   name: string;
   description: string;
-  /** ISO date `YYYY-MM-DD` from 最近覆核 / CONTENT_UPDATED. */
-  lastReviewed: string;
 };
 
 /**
  * Server-rendered MedicalWebPage JSON-LD for `/t/*` and `/c/*`.
  * No Person / Physician / Clinic / review / offer fields.
+ * No per-page `lastReviewed`: the review stamp is site-level (網站最近覆核), not a
+ * per-page review claim.
  */
 export function MedicalWebPageJsonLd({
   path,
   locale,
   name,
   description,
-  lastReviewed,
 }: MedicalWebPageJsonLdProps) {
   const url = canonicalUrl(path);
   const aboutNames = seoAboutNames(path, locale);
@@ -41,7 +40,6 @@ export function MedicalWebPageJsonLd({
     url,
     inLanguage: IN_LANGUAGE[locale],
     isAccessibleForFree: true,
-    lastReviewed,
     audience: {
       "@type": "MedicalAudience",
       audienceType: "Patient",

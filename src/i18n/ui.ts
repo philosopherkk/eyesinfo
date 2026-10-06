@@ -214,7 +214,7 @@ const zhHant = {
   simBesideCaveat: "旁側示意不是診斷；結果正常不能排除眼疾，亦不能代替散瞳眼底或 OCT。",
   toolCaveat:
     "本工具並非診斷工具。結果無論正常或異常，均不能代替眼科檢查。如有新出現的視力變化，請盡快求醫。",
-  reviewed: "最近覆核",
+  reviewed: "網站最近覆核",
   clinicalReviewLabel: "臨床覆核",
   contentVer: "內容版本",
   siteVersionLabel: "網站版本",
@@ -767,7 +767,7 @@ const en: Record<Key, string> = {
     "The demo beside you is not a diagnosis; a normal result does not rule out eye disease and does not replace dilated fundus exam or OCT.",
   toolCaveat:
     "This tool is not a diagnostic tool. Whether results appear normal or abnormal, they cannot replace an eye examination. If you notice new vision changes, seek care promptly.",
-  reviewed: "Last reviewed",
+  reviewed: "Site last reviewed",
   clinicalReviewLabel: "Clinical review",
   contentVer: "Content version",
   siteVersionLabel: "Site version",
@@ -1331,7 +1331,7 @@ const ja: Record<Key, string> = {
     "横の図示は診断ではありません。正常でも病気を否定できず、散瞳眼底やOCTの代わりにもなりません。",
   toolCaveat:
     "本ツールは診断ツールではありません。結果が正常でも異常でも、眼科検査の代わりにはなりません。新たに視力の変化があれば、できるだけ早く受診してください。",
-  reviewed: "最終確認",
+  reviewed: "サイト最終確認",
   clinicalReviewLabel: "臨床確認",
   contentVer: "コンテンツ版",
   siteVersionLabel: "サイト版",

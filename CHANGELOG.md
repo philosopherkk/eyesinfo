@@ -2,6 +2,11 @@
 
 Git-sourced history for this site. Entries follow commits on `main`, not chat notes.
 
+## fix — 1.80 polish (site-level review stamp, grok leftovers, export warning, chalazion wording)
+
+- **Summary:** (1) Review stamp is now explicitly site-level: TC 「網站最近覆核：2026年10月6日 · 潘家健醫生」, EN "Site last reviewed: 6 October 2026 · Dr Poon Ka Kin", JA 「サイト最終確認：2026年10月6日 · 潘家健医師」 (SC auto-converts) on home, shell footer, `EditorialFooter` and `/legal`; EN/JA date now derived from `EDITORIAL.reviewedIso` (was a stale hard-coded 24 Sep); pages no longer pass a per-page date, and `MedicalWebPage` JSON-LD drops per-page `lastReviewed`. (2) Removed the injected `https://grok.com/grok-app-builder/extensions.js` script (PWA head injector) and `https://auth.grok.me` from every CSP `connect-src` in `vercel.json`. (3) IOL Optics Studio JSON export `warning` now carries the on-page teaching-model warning in TC first, then EN / JA (HTML + TS port). (4) Chalazion: 「小型內側切口可不需縫合」 → 「結膜面小切口可不需縫合」 with matching EN. `CONTENT_VERSION` stays **1.80**.
+- **Files:** `src/i18n/{ui,index}.ts`, `src/components/{editorial-footer,app-shell,home-page,medical-webpage-jsonld}.tsx`, `src/routes/{t.$topicId,c.$catId,iol,tools.$toolId,legal}.tsx`, `scripts/grok-pwa-shared.{mjs,d.mts}`, `scripts/grok-pwa-plugin.test.mjs`, `vercel.json`, `public/iol-optics-studio.html`, `src/lib/iol-optics-studio/optics.ts`, `public/procedures-3d.html`, `CHANGELOG.md`
+
 ## [1.80] — 2026-10-06
 
 - **Summary:** Publish #95 mobile single-finger page scroll on 3D teaching canvases (mouse vs touch hints; release-capture cleanup; two-finger rotate); #94 IOL Optics Studio on `/iol-optics` (not-a-clinical-outcome warnings, 人工晶體/厘米 wording, routeTree typecheck, sync touch helper); #96 chalazion 3D lower-lid geometry and eversion (inferior tarsal border; lashes forward-down; 覆診). `CONTENT_VERSION` → **1.80**; `CONTENT_UPDATED` → **2026-10-06**.

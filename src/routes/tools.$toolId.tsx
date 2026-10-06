@@ -73,9 +73,7 @@ function ToolPage() {
         {showEduCaveat ? <EduToolCaveat /> : null}
         <Panel id={tool.id} />
         <SimDisclaimer />
-        <EditorialFooter
-          lastReviewed={tool.id === "map" ? "2026-09-18" : undefined}
-        />
+        <EditorialFooter />
       </div>
     </div>
   );
