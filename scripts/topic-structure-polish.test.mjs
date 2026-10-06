@@ -134,10 +134,10 @@ describe("topic structure polish", () => {
     assert.match(read("src/lib/topic-related.ts"), /PRIMARY_TOPIC_CAP\s*=\s*5/);
   });
 
-  it("CONTENT_VERSION is 1.76", () => {
+  it("CONTENT_VERSION is 1.80", () => {
     const site = read("src/lib/site.ts");
-    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.76"/);
-    assert.match(site, /CONTENT_UPDATED\s*=\s*"2026-09-24"/);
+    assert.match(site, /CONTENT_VERSION\s*=\s*"1\.80"/);
+    assert.match(site, /CONTENT_UPDATED\s*=\s*"2026-10-06"/);
   });
 
   it("ui keys include TOC and related group labels in all locales", () => {
@@ -455,7 +455,7 @@ describe("topic structure polish", () => {
     assert.doesNotMatch(editorial, /法律頁所列更正聯絡方式/);
     assert.match(editorial, /ownership:\s*"本站由潘家健醫生創辦、出資及營運"/);
     assert.match(editorial, /funding:\s*"本站由潘家健醫生自資"/);
-    assert.match(editorial, /reviewedIso:\s*"2026-09-24"/);
+    assert.match(editorial, /reviewedIso:\s*"2026-10-06"/);
     assert.doesNotMatch(banner, /legal\.funding/);
     assert.match(legalPage, /ed\.ownership/);
     assert.match(legalPage, /ed\.funding/);
