@@ -68,6 +68,7 @@ const MENTION_ALIASES: MentionLink[] = [
   { phrase: "偏頭痛與眼科", href: "/t/t-migraine" },
   { phrase: "阿姆斯勒方格", href: "/amsler" },
   { phrase: "晶體視力示意", href: "/iol" },
+  { phrase: "人工晶體3D光學教學", href: "/iol-optics" },
   { phrase: "急症頁", href: "/urgent" },
   { phrase: "結膜炎總論", href: "/t/d7" },
 ];

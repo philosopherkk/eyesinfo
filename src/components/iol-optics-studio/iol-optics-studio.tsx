@@ -21,12 +21,8 @@ export function IolOpticsStudio() {
 
   return (
     <section className="iol-studio" aria-label={dict.title}>
-      <div className="iol-studio__intro">
-        <h2 className="iol-studio__title">{dict.title}</h2>
-        <p className="iol-studio__subtitle">{dict.subtitle}</p>
-        <p className="iol-studio__notice">{dict.notice}</p>
-        <p className="iol-studio__phone-tip">{dict.phoneTip}</p>
-      </div>
+      <p className="iol-studio__notice">{dict.notice}</p>
+      <p className="iol-studio__phone-tip">{dict.phoneTip}</p>
 
       <iframe
         id="eyesinfo-iol-optics-studio"

@@ -3,7 +3,12 @@ export type RelatedItem = { href: string; label: string };
 export const PRIMARY_TOPIC_CAP = 5;
 
 export function isEduToolHref(href: string): boolean {
-  return href.startsWith("/tools/") || href === "/amsler" || href === "/iol";
+  return (
+    href.startsWith("/tools/") ||
+    href === "/amsler" ||
+    href === "/iol" ||
+    href === "/iol-optics"
+  );
 }
 
 export function isTopicSiblingHref(href: string): boolean {

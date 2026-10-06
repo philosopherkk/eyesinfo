@@ -45,7 +45,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       ariaCurrentPage: () => false,
       scrollId: "home-topics",
     },
-    { path: "/tools", label: t("tools"), icon: LayoutGrid, match: (p: string) => p.startsWith("/tools") || p.startsWith("/amsler") || p.startsWith("/iol"), ariaCurrentPage: (p: string) => p.startsWith("/tools") || p.startsWith("/amsler") || p.startsWith("/iol"), scrollId: null },
+    { path: "/tools", label: t("tools"), icon: LayoutGrid, match: (p: string) => p.startsWith("/tools") || p.startsWith("/amsler") || p.startsWith("/iol"), ariaCurrentPage: (p: string) => p.startsWith("/tools") || p.startsWith("/amsler") || p === "/iol" || p.startsWith("/iol-optics"), scrollId: null },
     { path: "/saved", label: t("saved"), icon: Bookmark, match: (p: string) => p.startsWith("/saved"), ariaCurrentPage: (p: string) => p.startsWith("/saved") },
   ] as const;
 

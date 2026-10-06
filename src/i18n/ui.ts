@@ -325,9 +325,12 @@ const zhHant = {
     "本工具只解釋處方常見英文字，不能核對你的處方是否正確，亦不是診斷或驗光建議。數字只在此畫面顯示，不上載。",
   iolTitle: "人工晶體視力示意",
   iolNotGuarantee: "不是術後保證。本站不提供預約或轉介。",
-  iolLead: "以下光學教學與外觀示意，只供公眾教育，不能預測你手術後的視力，亦不是推介任何晶體品牌，不能代替註冊醫生。",
-  iolVisionDemoH: "遠／中／近外觀示意",
-  iolVisionDemoLead: "拖動目標度數，比較遠、中、近看起來差多少。只是光學示意，不是視力預測。",
+  iolLead: "拖動目標度數，比較遠、中、近看起來差多少。只是光學示意，不能預測你手術後的視力，亦不是推介任何晶體品牌。",
+  iolOpticsTitle: "人工晶體3D光學教學",
+  iolOpticsLead:
+    "以近軸光線示意眼軸、物體距離與人工晶體設計如何影響聚焦。只供教學，不是度數計算器，不能代替註冊醫生。",
+  iolOpticsFoot:
+    "示意不能代替散瞳眼底、生物測量或手術規劃。本工具結果正常不能排除眼疾。不是術後保證。本站不提供預約或轉介。",
   iolOpticsH: "光學設計",
   iolTargetH: "單焦／預留目標度數",
   iolTargetHint: "由遠視 +3.00（晶體度數明顯不夠）拖到近視 −3.00（預留更近）。每格 0.25 D（25 度）。多焦通常以正視為目標；偏離會令各個焦點一齊移位。",
@@ -886,9 +889,12 @@ const en: Record<Key, string> = {
     "This tool only explains common English abbreviations on a written Rx. It cannot verify that your prescription is correct and is not a diagnosis or refraction advice. Numbers stay on this screen only and are not uploaded.",
   iolTitle: "Intraocular lens vision demo",
   iolNotGuarantee: "Not a post-operative guarantee. This site does not book or refer.",
-  iolLead: "The optics studio and appearance demo below are public education only — they cannot predict your post-operative vision, recommend a lens brand, or replace a registered doctor.",
-  iolVisionDemoH: "Appearance at far / intermediate / near",
-  iolVisionDemoLead: "Drag the target power to compare far, intermediate and near. Optical illustration only — not a vision prediction.",
+  iolLead: "Drag the target power to compare far, intermediate and near. Optical illustration only — it cannot predict your post-operative vision and does not recommend any lens brand.",
+  iolOpticsTitle: "IOL 3D optics studio",
+  iolOpticsLead:
+    "A paraxial ray schematic of axial length, object distance and IOL design. Education only — not a power calculator, and cannot replace a registered doctor.",
+  iolOpticsFoot:
+    "Illustration cannot replace dilated fundus exam, biometry or surgical planning. A normal tool result cannot rule out disease. Not a post-operative guarantee. This site does not book or refer.",
   iolOpticsH: "Optical design",
   iolTargetH: "Monofocal / target power",
   iolTargetHint: "From hyperopia +3.00 (under-powered lens) to myopia −3.00 (near bias). Steps of 0.25 D (25 degrees). Multifocals usually aim for emmetropia; offset shifts every focus together.",
@@ -1437,9 +1443,12 @@ const ja: Record<Key, string> = {
     "このツールは処方箋によくある英語略語の説明のみです。処方内容の正誤確認はできず、診断や検眼の提案でもありません。数字はこの画面のみで、アップロードしません。",
   iolTitle: "眼内レンズの見え方の図示",
   iolNotGuarantee: "術後の保証ではありません。予約・紹介はしません。",
-  iolLead: "以下の光学スタジオと見え方の図示は市民向け教育です。術後視力の予測やレンズブランドの推介ではなく、登録医師の代わりにもなりません。",
-  iolVisionDemoH: "遠・中・近の見え方の図示",
-  iolVisionDemoLead: "目標度数を動かして遠・中・近の差を比べます。光学の図示であり、視力予測ではありません。",
+  iolLead: "目標度数を動かして遠・中・近の差を比べます。光学の図示であり、術後視力を予測できず、レンズブランドの推介でもありません。",
+  iolOpticsTitle: "眼内レンズ3D光学スタジオ",
+  iolOpticsLead:
+    "近軸光線で眼軸・物体距離・眼内レンズ設計の焦点を示す教育用図示です。度数計算機ではなく、登録医師の代わりにもなりません。",
+  iolOpticsFoot:
+    "図示は散瞳眼底・生体計測・手術計画の代わりになりません。正常でも眼疾患を否定できません。術後保証ではありません。予約・紹介はしません。",
   iolOpticsH: "光学デザイン",
   iolTargetH: "単焦点／目標度数",
   iolTargetHint: "遠視 +3.00（度数が明らかに足りない）から近視 −3.00（より近くを狙う）まで。1目盛 0.25 D（25度）。多焦点は多く正視を目標にし、ずれると各焦点が一緒にずれます。",

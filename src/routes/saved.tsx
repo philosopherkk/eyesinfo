@@ -124,6 +124,13 @@ function SavedToolRow({
       </Link>
     );
   }
+  if (href === "/iol-optics") {
+    return (
+      <Link to="/iol-optics" className={cls}>
+        {inner}
+      </Link>
+    );
+  }
   const id = href.split("/").pop() ?? "map";
   return (
     <Link to="/tools/$toolId" params={{ toolId: id }} className={cls}>

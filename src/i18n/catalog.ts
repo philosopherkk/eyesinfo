@@ -10,6 +10,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
   "zh-Hant": {
     amsler: { title: "阿姆斯勒方格", blurb: "教育工具 · 自我察覺中央視力", canto: "遮一眼望中央" },
     iol: { title: "晶體視力示意", blurb: "單焦目標度數與多焦光暈", canto: "睇遠睇近差幾多" },
+    iolOptics: {
+      title: "人工晶體3D光學教學",
+      blurb: "近軸光線、眼軸與散光矯正示意（不是度數計算器）",
+      canto: "3D 睇光線點聚焦",
+    },
     map: { title: "眼圖", blurb: "教育工具 · 自我察覺解剖部位", canto: "撳眼圖就明" },
     procedures: {
       title: "手術教學示意",
@@ -30,6 +35,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
   "zh-Hans": {
     amsler: { title: "阿姆斯勒方格", blurb: "教育工具 · 自我察觉中央视力", canto: "遮一眼望中央" },
     iol: { title: "晶体视力示意", blurb: "单焦目标度数与多焦光晕", canto: "看远看近差多少" },
+    iolOptics: {
+      title: "人工晶体3D光学教学",
+      blurb: "近轴光线、眼轴与散光矫正示意（不是度数计算器）",
+      canto: "3D 看光线如何聚焦",
+    },
     map: { title: "眼图", blurb: "教育工具 · 自我察觉解剖部位", canto: "点眼图就明白" },
     procedures: {
       title: "手术教学示意",
@@ -50,6 +60,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
   en: {
     amsler: { title: "Amsler grid", blurb: "Education tool · self-awareness of central vision", canto: "Cover one eye · centre" },
     iol: { title: "Lens vision demo", blurb: "Monofocal target and multifocal halos", canto: "Far vs near" },
+    iolOptics: {
+      title: "IOL 3D optics studio",
+      blurb: "Paraxial rays, axial length and toric correction (not a power calculator)",
+      canto: "See how rays focus in 3D",
+    },
     map: { title: "Eye map", blurb: "Education tool · self-awareness of eye parts", canto: "Tap the diagram" },
     procedures: {
       title: "Procedure teaching illustration",
@@ -70,6 +85,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
   ja: {
     amsler: { title: "アムスラーチャート", blurb: "教育ツール · 中心視力の自己観察", canto: "片眼隠し中央を見る" },
     iol: { title: "眼内レンズの見え方", blurb: "単焦点の目標度数と多焦点ハロー", canto: "遠くと近く" },
+    iolOptics: {
+      title: "眼内レンズ3D光学スタジオ",
+      blurb: "近軸光線・眼軸・乱視矯正の図示（度数計算機ではない）",
+      canto: "3Dで光線の焦点を見る",
+    },
     map: { title: "眼の図", blurb: "教育ツール · 部位の自己理解", canto: "図をタップ" },
     procedures: {
       title: "手術の示意図",

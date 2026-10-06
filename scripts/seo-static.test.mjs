@@ -19,6 +19,7 @@ const ROBOTS = join(ROOT, "public/robots.txt");
 const REQUIRED_TOOL_PATHS = [
   "/amsler",
   "/iol",
+  "/iol-optics",
   "/tools/map",
   "/tools/procedures",
   "/tools/drops",

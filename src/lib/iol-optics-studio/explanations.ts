@@ -82,7 +82,7 @@ export type UiDictKey =
 
 export const DICTIONARY: Record<StudioLang, Record<UiDictKey, string>> = {
   en: {
-    title: "IOL Optics Studio",
+    title: "IOL 3D optics studio",
     subtitle: "Explore how light, eye length, and lens design interact.",
     notice:
       "Educational schematic only. Not an IOL prescription calculator, visual-acuity prediction, or substitute for a registered doctor’s assessment. 不能代替註冊醫生.",
@@ -162,7 +162,7 @@ export const DICTIONARY: Record<StudioLang, Record<UiDictKey, string>> = {
     visionDemoH: "Appearance at far / intermediate / near",
   },
   zh: {
-    title: "人工水晶體光學教學",
+    title: "人工晶體3D光學教學",
     subtitle: "探索物體距離、眼軸長度及人工水晶體設計如何影響光線聚焦。",
     notice:
       "本模型僅供教學示意，不可用於人工水晶體度數處方、視力預測，亦不能代替註冊醫生的個別評估。",

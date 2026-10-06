@@ -90,7 +90,12 @@ function groupRelatedItems(items) {
   const tools = [];
   const other = [];
   for (const item of items) {
-    if (item.href.startsWith("/tools/") || item.href === "/amsler" || item.href === "/iol") {
+    if (
+      item.href.startsWith("/tools/") ||
+      item.href === "/amsler" ||
+      item.href === "/iol" ||
+      item.href === "/iol-optics"
+    ) {
       tools.push(item);
     } else if (
       item.href.startsWith("/t/") ||
