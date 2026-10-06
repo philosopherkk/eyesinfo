@@ -100,6 +100,13 @@
       touch-action: pan-y;
     }
 
+    /* Input-specific hints: mouse / trackpad vs touch-first devices. */
+    .hint-touch { display: none; }
+    @media (hover: none) and (pointer: coarse) {
+      .hint-mouse { display: none; }
+      .hint-touch { display: inline; }
+    }
+
     .viewer-top {
       position: absolute;
       top: 16px;
@@ -345,9 +352,10 @@
             <span><i class="dot" style="background:#4cc6f0"></i>液體示意 / Fluid markers</span>
           </div>
           <div>
-            單指捲動頁面；雙指旋轉模型<br />
-            One finger scrolls · Two fingers rotate<br />
-            滾輪縮放 · Scroll to zoom<br />
+            <span class="hint-mouse">拖曳旋轉 · 滾輪縮放<br />
+            Drag to rotate · Scroll to zoom<br /></span>
+            <span class="hint-touch">單指捲動頁面；雙指旋轉模型<br />
+            One finger scrolls · Two fingers rotate<br /></span>
             Not to scale · 非等比例
           </div>
         </div>

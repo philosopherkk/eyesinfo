@@ -82,7 +82,7 @@ function IolOpticsPage() {
         <p className="mt-2 text-[0.7rem] leading-relaxed text-faint">
           {COPYRIGHT_LINE}
         </p>
-        <EditorialFooter lastReviewed="2026-10-01" />
+        <EditorialFooter />
       </div>
     </div>
   );

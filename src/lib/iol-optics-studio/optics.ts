@@ -106,7 +106,7 @@ export function distanceText(vergence: number, lang: "en" | "zh"): string {
   if (vergence < 0.00001) return lang === "zh" ? "無限遠" : "Infinity";
   const cm = 100 / vergence;
   return lang === "zh"
-    ? `${cm.toFixed(cm < 100 ? 0 : 1)} 公分`
+    ? `${cm.toFixed(cm < 100 ? 0 : 1)} 厘米`
     : `${cm.toFixed(cm < 100 ? 0 : 1)} cm`;
 }
 

@@ -30,7 +30,7 @@ export const TOOLS: ToolDef[] = [
   {
     id: "iolOptics",
     title: "人工晶體3D光學教學",
-    blurb: "近軸光線、眼軸與散光矯正示意（不是度數計算器）",
+    blurb: "近軸光線、眼軸與散光矯正示意（不是臨床度數計算器）",
     canto: "3D 睇光線點聚焦",
     href: "/iol-optics",
     home: true,

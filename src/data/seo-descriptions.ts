@@ -729,9 +729,9 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
     ja: "眼内レンズの教育用図示と手順練習。予約・処方・販売・紹介はありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/iol-optics": {
-    zh: "人工晶體3D光學教學：近軸光線、眼軸與散光矯正示意。不是度數計算器，不能代替註冊醫生（公眾教育，不能代替面診。）",
-    en: "IOL 3D optics studio: paraxial rays, axial length and toric correction for education only—not a power calculator, clinic visit, booking or referral.",
-    ja: "眼内レンズ3D光学スタジオ。近軸光線・眼軸・乱視矯正の教育用図示。度数計算機ではなく、予約・処方・販売・紹介はありません。"
+    zh: "人工晶體3D光學教學：近軸光線、眼軸與散光矯正示意。不是臨床度數計算器；數字並非確定的臨床結果，不能代替註冊醫生（公眾教育，不能代替面診。）",
+    en: "IOL 3D optics studio: paraxial rays, axial length and toric correction for education only—numbers are not a clinical outcome; not a clinical power calculator, clinic visit, booking or referral.",
+    ja: "眼内レンズ3D光学スタジオ。近軸光線・眼軸・乱視矯正の教育用図示。臨床用の度数計算機ではなく、数値は確定した臨床結果ではありません。予約・処方・販売・紹介はありません。"
   },
   "/privacy": {
     zh: "本教育網站不經此頁收集姓名、證件、病歷或付款資料；偏好僅存本機（公眾教育，不能代替面診。）",

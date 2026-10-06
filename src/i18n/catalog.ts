@@ -12,7 +12,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     iol: { title: "晶體視力示意", blurb: "單焦目標度數與多焦光暈", canto: "睇遠睇近差幾多" },
     iolOptics: {
       title: "人工晶體3D光學教學",
-      blurb: "近軸光線、眼軸與散光矯正示意（不是度數計算器）",
+      blurb: "近軸光線、眼軸與散光矯正示意（不是臨床度數計算器）",
       canto: "3D 睇光線點聚焦",
     },
     map: { title: "眼圖", blurb: "教育工具 · 自我察覺解剖部位", canto: "撳眼圖就明" },
@@ -37,7 +37,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     iol: { title: "晶体视力示意", blurb: "单焦目标度数与多焦光晕", canto: "看远看近差多少" },
     iolOptics: {
       title: "人工晶体3D光学教学",
-      blurb: "近轴光线、眼轴与散光矫正示意（不是度数计算器）",
+      blurb: "近轴光线、眼轴与散光矫正示意（不是临床度数计算器）",
       canto: "3D 看光线如何聚焦",
     },
     map: { title: "眼图", blurb: "教育工具 · 自我察觉解剖部位", canto: "点眼图就明白" },
@@ -62,7 +62,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     iol: { title: "Lens vision demo", blurb: "Monofocal target and multifocal halos", canto: "Far vs near" },
     iolOptics: {
       title: "IOL 3D optics studio",
-      blurb: "Paraxial rays, axial length and toric correction (not a power calculator)",
+      blurb: "Paraxial rays, axial length and toric correction (not a clinical power calculator)",
       canto: "See how rays focus in 3D",
     },
     map: { title: "Eye map", blurb: "Education tool · self-awareness of eye parts", canto: "Tap the diagram" },
@@ -87,7 +87,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     iol: { title: "眼内レンズの見え方", blurb: "単焦点の目標度数と多焦点ハロー", canto: "遠くと近く" },
     iolOptics: {
       title: "眼内レンズ3D光学スタジオ",
-      blurb: "近軸光線・眼軸・乱視矯正の図示（度数計算機ではない）",
+      blurb: "近軸光線・眼軸・乱視矯正の図示（臨床用の度数計算機ではない）",
       canto: "3Dで光線の焦点を見る",
     },
     map: { title: "眼の図", blurb: "教育ツール · 部位の自己理解", canto: "図をタップ" },

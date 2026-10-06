@@ -43,6 +43,7 @@ export type UiDictKey =
   | "viewSide"
   | "viewRetina"
   | "gesture"
+  | "gestureTouch"
   | "distanceBranch"
   | "intermediateBranch"
   | "nearBranch"
@@ -94,21 +95,21 @@ export const DICTIONARY: Record<StudioLang, Record<UiDictKey, string>> = {
     toric: "Toric monofocal",
     objectVergence: "Object distance",
     cornealCylinder: "Corneal astigmatism",
-    cornealAxis: "Corneal steep meridian",
+    cornealAxis: "Corneal steep meridian (teaching-model value)",
     axialLength: "Axial length",
-    sphere: "Mean IOL power",
-    toricCylinder: "IOL-plane toric cylinder",
-    toricAxis: "Toric compensation meridian",
+    sphere: "Mean IOL power (teaching-model value)",
+    toricCylinder: "IOL-plane toric cylinder (teaching-model value)",
+    toricAxis: "Toric compensation meridian (teaching-model value)",
     far: "Distance ∞",
     intermediate: "80 cm",
     near: "40 cm",
     enableToric: "Enable toric correction",
     axisNote:
       "Angles here are model meridians, not surgical marking instructions. Cylinder is specified at the IOL plane.",
-    fitSphere: "Refit distance power",
-    fitToric: "Match toric in model",
+    fitSphere: "Refit distance power (teaching model)",
+    fitToric: "Match toric in model (teaching model)",
     fixedPowerNote:
-      "Changing axial length does not automatically change IOL power. Use “Refit distance power” to demonstrate recalibration.",
+      "Changing axial length does not automatically change IOL power. Use “Refit distance power (teaching model)” to demonstrate recalibration.",
     extensions: "Show focus-construction extensions",
     reset: "Reset model",
     export: "Export settings",
@@ -117,15 +118,17 @@ export const DICTIONARY: Record<StudioLang, Record<UiDictKey, string>> = {
     viewSide: "Side view",
     viewRetina: "Retinal view",
     gesture:
-      "One finger scrolls the page; two fingers rotate · Scroll or pinch to zoom · Dashed rays are mathematical extensions, not light passing through the retina.",
+      "Drag to rotate · scroll to zoom · Dashed rays are mathematical extensions, not light passing through the retina.",
+    gestureTouch:
+      "One finger scrolls · two fingers rotate (pinch to zoom) · Dashed rays are mathematical extensions, not light passing through the retina.",
     distanceBranch: "Distance branch",
     intermediateBranch: "Intermediate / EDOF range",
     nearBranch: "Near branch",
     objectDistance: "Object distance",
     distanceUnit: "from corneal plane",
-    focusOffset: "Distance-branch principal foci",
+    focusOffset: "Distance-branch principal foci (teaching-model value)",
     focusUnit: "mm relative to retina; − = in front",
-    rmsLabel: "Schematic retinal RMS radius",
+    rmsLabel: "Schematic retinal RMS radius (teaching-model value)",
     rmsUnit: "µm; includes all modeled branches",
     retinalFootprint: "Retinal light footprint",
     footprintNote:
@@ -163,32 +166,32 @@ export const DICTIONARY: Record<StudioLang, Record<UiDictKey, string>> = {
   },
   zh: {
     title: "人工晶體3D光學教學",
-    subtitle: "探索物體距離、眼軸長度及人工水晶體設計如何影響光線聚焦。",
+    subtitle: "探索物體距離、眼軸長度及人工晶體設計如何影響光線聚焦。",
     notice:
-      "本模型僅供教學示意，不可用於人工水晶體度數處方、視力預測，亦不能代替註冊醫生的個別評估。",
+      "本模型僅供教學示意，不可用於人工晶體度數處方、視力預測，亦不能代替註冊醫生的個別評估。",
     parameters: "光學參數",
-    lensDesign: "人工水晶體設計",
+    lensDesign: "人工晶體設計",
     mono: "單焦點",
     edof: "延長焦深 EDOF－示意",
     multi: "多焦點－三焦點示意",
     toric: "散光矯正型單焦點",
     objectVergence: "物體距離",
     cornealCylinder: "角膜散光",
-    cornealAxis: "角膜較陡子午線",
+    cornealAxis: "角膜較陡子午線（教學模型數值）",
     axialLength: "眼軸長度",
-    sphere: "人工水晶體平均屈光力",
-    toricCylinder: "人工水晶體平面散光度數",
-    toricAxis: "散光補償子午線",
+    sphere: "人工晶體平均屈光力（教學模型數值）",
+    toricCylinder: "人工晶體平面散光度數（教學模型數值）",
+    toricAxis: "散光補償子午線（教學模型數值）",
     far: "遠距離 ∞",
-    intermediate: "80 公分",
-    near: "40 公分",
+    intermediate: "80 厘米",
+    near: "40 厘米",
     enableToric: "啟用散光矯正",
     axisNote:
-      "此處角度為模型子午線，並非手術定位標記。散光度數以人工水晶體平面表示。",
-    fitSphere: "重新配合遠距離度數",
-    fitToric: "在模型中匹配散光",
+      "此處角度為模型子午線，並非手術定位標記。散光度數以人工晶體平面表示。",
+    fitSphere: "重新配合遠距離度數（教學模型）",
+    fitToric: "在模型中匹配散光（教學模型）",
     fixedPowerNote:
-      "改變眼軸長度不會自動改變人工水晶體度數。可按「重新配合遠距離度數」示範重新校準。",
+      "改變眼軸長度不會自動改變人工晶體度數。可按「重新配合遠距離度數（教學模型）」示範重新校準。",
     extensions: "顯示焦點作圖延長線",
     reset: "重設模型",
     export: "匯出設定",
@@ -197,15 +200,17 @@ export const DICTIONARY: Record<StudioLang, Record<UiDictKey, string>> = {
     viewSide: "側面視角",
     viewRetina: "視網膜視角",
     gesture:
-      "單指捲動頁面；雙指旋轉模型・滾輪或雙指縮放・虛線為數學作圖延長線，並非光線穿透視網膜。",
+      "拖曳旋轉 · 滾輪縮放・虛線為數學作圖延長線，並非光線穿透視網膜。",
+    gestureTouch:
+      "單指捲動頁面；雙指旋轉模型（雙指開合縮放）・虛線為數學作圖延長線，並非光線穿透視網膜。",
     distanceBranch: "遠距離分支",
     intermediateBranch: "中距離／延長焦深範圍",
     nearBranch: "近距離分支",
     objectDistance: "物體距離",
     distanceUnit: "由角膜平面起計",
-    focusOffset: "遠距離分支的主焦點",
+    focusOffset: "遠距離分支的主焦點（教學模型數值）",
     focusUnit: "相對視網膜的毫米位置；負值＝前方",
-    rmsLabel: "示意視網膜光斑 RMS 半徑",
+    rmsLabel: "示意視網膜光斑 RMS 半徑（教學模型數值）",
     rmsUnit: "微米；包含所有模型分支",
     retinalFootprint: "視網膜光線分布",
     footprintNote:
@@ -224,7 +229,7 @@ export const DICTIONARY: Record<StudioLang, Record<UiDictKey, string>> = {
     limitations: "模型假設與限制",
     footer: "教學示意・本工具不收集患者資料。不能代替註冊醫生。",
     cornea: "角膜",
-    iol: "人工水晶體",
+    iol: "人工晶體",
     retina: "視網膜",
     scale: "顯示半徑",
     loading: "正在載入 3D 模型…",
@@ -275,13 +280,13 @@ export function modelNotesHtml(lang: StudioLang): string {
         <li>本模型使用近軸、軸上、等效薄平面光線追跡。
         3D 眼球為示意圖，並非精確解剖模型。</li>
         <li>角膜平均屈光力固定為 43 D，折射率為 1.336，
-        人工水晶體等效平面固定在角膜後方 5 毫米。</li>
+        人工晶體等效平面固定在角膜後方 5 毫米。</li>
         <li>角膜平面的入射光束直徑為 3 毫米，
         並未完整模擬實際瞳孔或虹膜。</li>
         <li>角膜散光代表規則性的等效角膜散光；
         未獨立模擬角膜後表面散光。</li>
-        <li>人工水晶體度數滑桿表示平均等效屈光力。
-        散光度數以人工水晶體平面表示，
+        <li>人工晶體度數滑桿表示平均等效屈光力。
+        散光度數以人工晶體平面表示，
         不可直接對應廠商標示的處方規格。</li>
         <li>EDOF 以加權的示意屈光力範圍呈現，
         多焦點以三個示意屈光力分支呈現。
@@ -292,8 +297,8 @@ export function modelNotesHtml(lang: StudioLang): string {
         不能預測視力、對比敏感度、光暈、眩光、
         脫鏡率或主觀視覺。</li>
         <li>未模擬調節、繞射、像差、色差、視網膜疾病、
-        神經適應、水晶體傾斜或偏心，以及雙眼視覺。</li>
-        <li>改變眼軸後，人工水晶體度數保持不變，
+        神經適應、人工晶體傾斜或偏心，以及雙眼視覺。</li>
+        <li>改變眼軸後，人工晶體度數保持不變，
         直至按下重新配合按鈕。模型配合僅供教學，不能用於臨床。</li>
       </ul>
     `;
@@ -326,7 +331,7 @@ export function patientParagraphs(
       "A monofocal IOL has one main focusing range. When selected for distance vision, reading glasses are commonly needed for close work. A different target can be chosen clinically, but this model’s refit button targets distance.",
     );
     zh.push(
-      "單焦點人工水晶體主要提供一個聚焦範圍。若以看遠為目標，近距離閱讀通常仍需要閱讀眼鏡。臨床上可選擇其他目標，但本模型的重新配合按鈕以看遠為目標。",
+      "單焦點人工晶體主要提供一個聚焦範圍。若以看遠為目標，近距離閱讀通常仍需要閱讀眼鏡。臨床上可選擇其他目標，但本模型的重新配合按鈕以看遠為目標。",
     );
   }
 
@@ -335,13 +340,13 @@ export function patientParagraphs(
       "An EDOF IOL aims to extend the useful focusing range, particularly from distance toward intermediate tasks such as a computer screen. Fine print may still require glasses. Here, the extended range is represented schematically; it is not the optical design of a particular lens.",
     );
     zh.push(
-      "延長焦深人工水晶體旨在延伸可用的聚焦範圍，特別是由遠距離至電腦螢幕等中距離工作。閱讀細小文字時仍可能需要眼鏡。此處以示意方式呈現延長範圍，並非某款水晶體的實際光學設計。",
+      "延長焦深人工晶體旨在延伸可用的聚焦範圍，特別是由遠距離至電腦螢幕等中距離工作。閱讀細小文字時仍可能需要眼鏡。此處以示意方式呈現延長範圍，並非某款人工晶體的實際光學設計。",
     );
     en.push(
       "Glare, halos, and contrast effects vary with lens design and the individual eye. This ray diagram cannot estimate how much you would notice them.",
     );
     zh.push(
-      "眩光、光暈及對比變化會因水晶體設計與個人眼睛而異。本光線圖無法估計您實際會感受到的程度。",
+      "眩光、光暈及對比變化會因人工晶體設計與個人眼睛而異。本光線圖無法估計您實際會感受到的程度。",
     );
   }
 
@@ -350,13 +355,13 @@ export function patientParagraphs(
       "A multifocal IOL distributes light among more than one focusing range. This example uses distance, intermediate, and near branches. Some light may be focused for the current task while other light forms a broader background.",
     );
     zh.push(
-      "多焦點人工水晶體會將光線分配至多個聚焦範圍。本例顯示遠、中、近三個分支。在目前觀看距離，部分光線可能較集中，其他光線則形成較分散的背景。",
+      "多焦點人工晶體會將光線分配至多個聚焦範圍。本例顯示遠、中、近三個分支。在目前觀看距離，部分光線可能較集中，其他光線則形成較分散的背景。",
     );
     en.push(
       "Multifocal lenses can reduce dependence on glasses, but glasses may still be needed. Halos, glare, or reduced contrast can occur, and suitability depends on eye health and personal priorities.",
     );
     zh.push(
-      "多焦點水晶體可減少對眼鏡的依賴，但仍可能需要眼鏡。可能出現光暈、眩光或對比下降；是否適合需考慮眼睛健康及個人的生活需求。",
+      "多焦點人工晶體可減少對眼鏡的依賴，但仍可能需要眼鏡。可能出現光暈、眩光或對比下降；是否適合需考慮眼睛健康及個人的生活需求。",
     );
   }
 
@@ -375,7 +380,7 @@ export function patientParagraphs(
       `Toric correction is enabled at ${state.toricCylinder.toFixed(2)} D at the IOL plane. Its compensation meridian is ${error.toFixed(0)}° from the corneal steep meridian. Both cylinder amount and alignment matter; alignment alone does not guarantee complete correction.`,
     );
     zh.push(
-      `已啟用人工水晶體平面 ${state.toricCylinder.toFixed(2)} D 的散光矯正。補償子午線與角膜較陡子午線相差 ${error.toFixed(0)}°。散光度數及軸位均很重要；僅軸位一致並不保證完全矯正。`,
+      `已啟用人工晶體平面 ${state.toricCylinder.toFixed(2)} D 的散光矯正。補償子午線與角膜較陡子午線相差 ${error.toFixed(0)}°。散光度數及軸位均很重要；僅軸位一致並不保證完全矯正。`,
     );
     if (error >= 10 && state.cornealCylinder >= 0.1) {
       en.push(
@@ -407,7 +412,7 @@ export function patientParagraphs(
     zh.push(
       `與上次遠距離度數校準相比，目前眼軸${
         longer ? "較長" : "較短"
-      } ${Math.abs(deltaAL).toFixed(1)} 毫米，而人工水晶體度數保持不變。視網膜${
+      } ${Math.abs(deltaAL).toFixed(1)} 毫米，而人工晶體度數保持不變。視網膜${
         longer ? "向後移動" : "向前移動"
       }會改變它與焦點的相對位置。在此簡化模型中，重新選擇合適度數可作補償。`,
     );
@@ -437,7 +442,7 @@ export function patientParagraphs(
     "Your actual lens choice requires measurements and a discussion with your ophthalmologist. This demonstration cannot determine the best IOL for you, and it cannot replace assessment by a registered doctor.",
   );
   zh.push(
-    "實際人工水晶體選擇需經過檢查、量度，並與眼科醫生討論。本示範不能判定哪款水晶體最適合您，亦不能代替註冊醫生的評估。",
+    "實際人工晶體選擇需經過檢查、量度，並與眼科醫生討論。本示範不能判定哪款人工晶體最適合您，亦不能代替註冊醫生的評估。",
   );
 
   return { en, zh };

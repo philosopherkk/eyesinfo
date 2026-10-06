@@ -1,6 +1,5 @@
 import { useI18n } from "@/i18n";
 import type { Locale } from "@/i18n/locale";
-import { COPYRIGHT_LINE } from "@/lib/site";
 import { DICTIONARY } from "@/lib/iol-optics-studio/explanations";
 import { studioLangFromLocale } from "@/lib/iol-optics-studio/scene";
 import "./iol-optics-studio.css";
@@ -12,7 +11,7 @@ export function iolStudioLang(locale: Locale): "zh" | "en" {
 
 /**
  * Embeds KK’s IOL Optics Studio (vendored Three.js, educational-paraxial-v1)
- * on the existing /iol tool page — not a second competing tool route.
+ * on its own /iol-optics tool page. /iol stays the simpler appearance demo.
  */
 export function IolOpticsStudio() {
   const { locale } = useI18n();
@@ -33,11 +32,7 @@ export function IolOpticsStudio() {
         referrerPolicy="same-origin"
       />
 
-      <p className="iol-studio__copyright">
-        {dict.footer}
-        <br />
-        {COPYRIGHT_LINE}
-      </p>
+      <p className="iol-studio__copyright">{dict.footer}</p>
     </section>
   );
 }

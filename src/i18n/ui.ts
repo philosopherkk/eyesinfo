@@ -328,7 +328,7 @@ const zhHant = {
   iolLead: "拖動目標度數，比較遠、中、近看起來差多少。只是光學示意，不能預測你手術後的視力，亦不是推介任何晶體品牌。",
   iolOpticsTitle: "人工晶體3D光學教學",
   iolOpticsLead:
-    "以近軸光線示意眼軸、物體距離與人工晶體設計如何影響聚焦。只供教學，不是度數計算器，不能代替註冊醫生。",
+    "以近軸光線示意眼軸、物體距離與人工晶體設計如何影響聚焦。只供教學，不是臨床度數計算器，不能代替註冊醫生。此模型數字只作光學教學示意，並非確定的臨床結果，亦不可用作人工晶體度數或散光軸位選擇；實際結果須由主診醫生按檢查及量度決定。",
   iolOpticsFoot:
     "示意不能代替散瞳眼底、生物測量或手術規劃。本工具結果正常不能排除眼疾。不是術後保證。本站不提供預約或轉介。",
   iolOpticsH: "光學設計",
@@ -892,7 +892,7 @@ const en: Record<Key, string> = {
   iolLead: "Drag the target power to compare far, intermediate and near. Optical illustration only — it cannot predict your post-operative vision and does not recommend any lens brand.",
   iolOpticsTitle: "IOL 3D optics studio",
   iolOpticsLead:
-    "A paraxial ray schematic of axial length, object distance and IOL design. Education only — not a power calculator, and cannot replace a registered doctor.",
+    "A paraxial ray schematic of axial length, object distance and IOL design. Education only — not a clinical power calculator, and cannot replace a registered doctor. These numbers come from a simplified optical teaching model. They are not a definite clinical outcome, not a prescription, and must not be used to choose an IOL power or astigmatism axis; actual results and lens choice depend on your treating doctor’s examination and measurements.",
   iolOpticsFoot:
     "Illustration cannot replace dilated fundus exam, biometry or surgical planning. A normal tool result cannot rule out disease. Not a post-operative guarantee. This site does not book or refer.",
   iolOpticsH: "Optical design",
@@ -1446,7 +1446,7 @@ const ja: Record<Key, string> = {
   iolLead: "目標度数を動かして遠・中・近の差を比べます。光学の図示であり、術後視力を予測できず、レンズブランドの推介でもありません。",
   iolOpticsTitle: "眼内レンズ3D光学スタジオ",
   iolOpticsLead:
-    "近軸光線で眼軸・物体距離・眼内レンズ設計の焦点を示す教育用図示です。度数計算機ではなく、登録医師の代わりにもなりません。",
+    "近軸光線で眼軸・物体距離・眼内レンズ設計の焦点を示す教育用図示です。臨床用の度数計算機ではなく、登録医師の代わりにもなりません。このモデルの数値は光学教育用に簡略化した図示であり、確定した臨床結果ではありません。処方ではなく、眼内レンズ度数や乱視軸の選択に使うことはできません。実際の結果とレンズの選択は、主治医の検査と測定によって決まります。",
   iolOpticsFoot:
     "図示は散瞳眼底・生体計測・手術計画の代わりになりません。正常でも眼疾患を否定できません。術後保証ではありません。予約・紹介はしません。",
   iolOpticsH: "光学デザイン",
