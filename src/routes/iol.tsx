@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { ArrowLeft, Moon, Sun } from "lucide-react";
 import { IolScene } from "@/components/iol-scene";
+import { IolOpticsStudio } from "@/components/iol-optics-studio/iol-optics-studio";
+import { EduToolCaveat } from "@/components/edu-tool-caveat";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { SaveButton } from "@/components/save-button";
 import { toolSaveKey } from "@/lib/saved";
@@ -11,6 +13,7 @@ import { cn } from "@/lib/utils";
 import { pageHead } from "@/lib/page-seo";
 import { localeFromMatch } from "@/lib/locale-path";
 import { uiText } from "@/lib/ui-text";
+import { COPYRIGHT_LINE } from "@/lib/site";
 import {
   DISTANCES,
   OPTICS,
@@ -128,6 +131,21 @@ function IolPage() {
       <p className="px-4 pt-1 text-[0.88rem] leading-relaxed text-muted">
         {t("iolLead")}
       </p>
+
+      <div className="mt-3 px-4">
+        <EduToolCaveat />
+      </div>
+
+      <div className="mt-2 px-4">
+        <IolOpticsStudio />
+      </div>
+
+      <section className="mt-8 px-4">
+        <h2 className="text-[1.05rem] font-semibold text-navy">{t("iolVisionDemoH")}</h2>
+        <p className="mt-1 text-[0.82rem] leading-relaxed text-muted">
+          {t("iolVisionDemoLead")}
+        </p>
+      </section>
 
       <section className="mt-4 px-4">
         <h2 className="text-[0.8rem] font-semibold text-muted">{t("iolOpticsH")}</h2>
@@ -431,6 +449,7 @@ function IolPage() {
       </div>
       <div className="px-4">
         <p className="mt-6 text-[0.78rem] leading-relaxed text-faint">{t("iolFoot")}</p>
+        <p className="mt-2 text-[0.7rem] leading-relaxed text-faint">{COPYRIGHT_LINE}</p>
         <EditorialFooter lastReviewed="2026-10-01" />
       </div>
     </div>
