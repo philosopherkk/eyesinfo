@@ -1,0 +1,2305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
+  <meta name="theme-color" content="#003153" />
+  <title>IOL 3D optics studio — 護眼學堂</title>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "/vendor/three/0.180.0/build/three.module.js",
+      "three/addons/": "/vendor/three/0.180.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f3f0e9;
+      --panel: #fffdf8;
+      --panel-light: #f3f0e9;
+      --border: #d8d2c6;
+      --text: #1a2433;
+      --muted: #5c6b7a;
+      --accent: #003153;
+      --accent-2: #0a4468;
+      --gold: #b8860b;
+      --pink: #b54a6a;
+      --dist: #0a7ea4;
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", ui-sans-serif, system-ui, sans-serif;
+      line-height: 1.5;
+    }
+
+    button, select, input { font: inherit; }
+
+    button, select {
+      min-height: 44px;
+      color: var(--text);
+      border: 1px solid var(--border);
+      background: var(--panel-light);
+      border-radius: 10px;
+    }
+
+    button {
+      padding: 9px 13px;
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+    }
+
+    button:hover { border-color: var(--accent); }
+
+    button:focus-visible, select:focus-visible, input:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    button.active {
+      background: #16414d;
+      border-color: var(--accent);
+      color: #c9ffff;
+    }
+
+    select {
+      width: 100%;
+      padding: 9px 11px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+      min-height: 34px;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+      accent-color: var(--accent);
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+    }
+
+    .app {
+      max-width: 1530px;
+      margin: auto;
+      padding: 24px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: .16em;
+      font-weight: 750;
+    }
+
+    h1 {
+      font-size: clamp(24px, 3vw, 36px);
+      margin: 5px 0;
+      letter-spacing: -.04em;
+    }
+
+    h2 { margin: 0 0 12px; font-size: 18px; }
+    h3 { margin: 0 0 9px; font-size: 16px; }
+
+    p { margin: 8px 0; }
+
+    .subtitle, .muted {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .language-switch {
+      display: flex;
+      gap: 7px;
+      flex-shrink: 0;
+    }
+
+    .notice {
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      background: #dce8ef;
+      color: var(--muted);
+      font-size: 13px;
+      border-radius: 12px;
+      margin-bottom: 18px;
+    }
+
+    .model-warning {
+      margin: 0 0 14px;
+      padding: 10px 12px;
+      border: 1px solid #c98a1a;
+      border-left: 5px solid #c98a1a;
+      background: #fff4dc;
+      color: #4a3410;
+      border-radius: 10px;
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+    .model-warning p { margin: 0 0 4px; }
+    .model-warning p:last-child { margin-bottom: 0; }
+    .model-warning .mw-zh { font-weight: 700; font-size: 13px; }
+    .stats-warning { margin: 12px 0 0; }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: 310px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .controls { padding: 20px; }
+
+    .control { margin-bottom: 17px; }
+
+    .control-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 5px;
+      font-size: 13px;
+    }
+
+    .control-head output {
+      color: var(--accent);
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .small {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 18px 0;
+    }
+
+    .check-row {
+      display: flex;
+      gap: 9px;
+      align-items: center;
+      font-size: 13px;
+      margin: 12px 0;
+      cursor: pointer;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .button-row button {
+      flex: 1 1 auto;
+      font-size: 12px;
+    }
+
+    .primary {
+      background: #dce8ef;
+      border-color: var(--accent-2);
+      color: var(--accent);
+    }
+
+    .stage-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 18px;
+      gap: 12px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stage-head h2 { margin: 0; }
+
+    .stage-tools {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .stage-tools button {
+      font-size: 12px;
+      min-height: 36px;
+    }
+
+    #viewport {
+      position: relative;
+      height: min(490px, 62vw);
+      min-height: 280px;
+      background:
+        radial-gradient(ellipse at center, #dce8ef 0, #f3f0e9 75%);
+      overflow: hidden;
+    }
+
+    #viewport > canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      /* One-finger vertical scroll; orbit uses two fingers (see orbit-page-scroll.js). */
+      touch-action: pan-y;
+    }
+
+    .stage-note {
+      position: absolute;
+      left: 15px;
+      right: 15px;
+      bottom: 12px;
+      pointer-events: none;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    #loading {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      display: grid;
+      place-items: center;
+      padding: 30px;
+      background: #f3f0e9;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .legend {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      padding: 10px 18px;
+      font-size: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .dot {
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .stat {
+      padding: 14px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      min-width: 0;
+    }
+
+    .stat .label {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      min-height: 32px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: clamp(16px, 2vw, 23px);
+      margin-top: 5px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stat .unit {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .lower-grid {
+      display: grid;
+      grid-template-columns: minmax(220px, .8fr) minmax(0, 1.2fr);
+      gap: 14px;
+    }
+
+    .pad { padding: 18px; }
+
+    #spot {
+      width: 100%;
+      height: 240px;
+      display: block;
+      border-radius: 10px;
+      background: #0c1a28;
+      max-width: 100%;
+    }
+
+    .scenario-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .scenario-buttons button {
+      text-align: left;
+      font-size: 12px;
+    }
+
+    .patient {
+      margin-top: 18px;
+      padding: 22px;
+    }
+
+    .patient-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .patient-copy {
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .patient-copy p + p { margin-top: 12px; }
+
+    .pill {
+      display: inline-block;
+      border-radius: 20px;
+      background: #dce8ef;
+      color: var(--accent);
+      padding: 4px 10px;
+      font-size: 11px;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    details {
+      margin-top: 18px;
+      padding: 17px 20px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    summary {
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 650;
+    }
+
+    details li { margin: 8px 0; }
+
+    footer {
+      padding: 20px 0 5px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    @media (max-width: 1000px) {
+      .workspace { grid-template-columns: 270px minmax(0, 1fr); }
+      .lower-grid { grid-template-columns: 1fr; }
+      #viewport { height: 440px; }
+    }
+
+    @media (max-width: 740px) {
+      .app { padding: 12px; }
+      header { align-items: flex-start; gap: 10px; }
+      .language-switch { flex-direction: column; }
+      .language-switch button {
+        min-height: 36px;
+        padding: 6px 10px;
+        font-size: 12px;
+      }
+      .workspace { grid-template-columns: 1fr; }
+      .controls { order: 2; }
+      .visuals { order: 1; }
+      #viewport { height: 370px; }
+      .stats { gap: 7px; }
+      .stat { padding: 10px; }
+      .stat .label { min-height: 44px; }
+      .patient-grid { grid-template-columns: 1fr; gap: 18px; }
+      .patient { padding: 18px; }
+      .control { margin-bottom: 15px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+
+    html, body { max-width: 100%; overflow-x: hidden; }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      pointer-events: none;
+      opacity: 0.055;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='520' height='340'><text x='40' y='200' fill='%23003153' font-size='20' font-family='Noto Sans TC, PingFang TC, Microsoft JhengHei, sans-serif' transform='rotate(-28 260 170)'>護眼學堂 · 公眾教育 · eyesinfo.org</text></svg>");
+      background-repeat: repeat;
+    }
+
+    .phone-tip {
+      display: none;
+      margin: -6px 0 14px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--panel-light);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .density-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .density-bar button { font-size: 12px; }
+
+    .copyright-line {
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    body[data-density="compact"] .workspace {
+      grid-template-columns: 1fr;
+    }
+    body[data-density="compact"] .controls {
+      display: none;
+    }
+    body[data-density="compact"] .controls.is-open {
+      display: block;
+    }
+
+    @media (max-width: 740px) {
+      .phone-tip { display: block; }
+      .workspace { grid-template-columns: 1fr; }
+      .controls { order: 2; }
+      .visuals { order: 1; }
+      #viewport { height: 340px; }
+      .app { padding: 12px; max-width: 100%; }
+      .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .scenario-buttons { grid-template-columns: 1fr; }
+    }
+
+  </style>
+</head>
+
+<body>
+<div class="app">
+  <header>
+    <div>
+      <div class="eyebrow">護眼學堂 · eyesinfo.org</div>
+      <h1 data-i18n="title">IOL 3D optics studio</h1>
+      <div class="subtitle" data-i18n="subtitle">
+        Explore how light, eye length, and lens design interact.
+      </div>
+    </div>
+    <div class="language-switch" aria-label="Interface language">
+      <button id="langEN" class="active">English</button>
+      <button id="langZH">繁體中文</button>
+    </div>
+  </header>
+
+  <div class="density-bar" aria-label="Layout">
+      <button type="button" id="densityCompact">Compact</button>
+      <button type="button" id="densityFull" class="active">Full</button>
+      <button type="button" id="toggleControls">Controls</button>
+    </div>
+    <p class="phone-tip" data-i18n="phoneTip">
+      On a small phone screen, landscape or a wider browser works better for the 3D model. Controls stay below the viewer.
+    </p>
+    <div class="notice" data-i18n="notice">
+    Educational schematic only. Not an IOL prescription calculator,
+    visual-acuity prediction, or substitute for an ophthalmologist’s assessment.
+  </div>
+
+  <main class="workspace">
+    <aside class="panel controls">
+      <h2 data-i18n="parameters">Optical parameters</h2>
+
+      <div class="model-warning" role="note" aria-label="教學模型數值 · Teaching-model values · 教育用モデルの数値">
+        <p class="mw-zh" lang="zh-Hant">⚠ 此模型數字只作光學教學示意，並非確定的臨床結果，亦不可用作人工晶體度數或散光軸位選擇；實際結果須由主診醫生按檢查及量度決定。</p>
+        <p lang="en">These numbers come from a simplified optical teaching model. They are not a definite clinical outcome, not a prescription, and must not be used to choose an IOL power or astigmatism axis; actual results and lens choice depend on your treating doctor’s examination and measurements.</p>
+        <p lang="ja">このモデルの数値は光学教育用に簡略化した図示であり、確定した臨床結果ではありません。処方ではなく、眼内レンズ度数や乱視軸の選択に使うことはできません。実際の結果とレンズの選択は、主治医の検査と測定によって決まります。</p>
+      </div>
+
+      <div class="control">
+        <label class="control-head" for="design">
+          <span data-i18n="lensDesign">IOL design</span>
+        </label>
+        <select id="design">
+          <option value="mono" data-i18n="mono">Monofocal</option>
+          <option value="edof" data-i18n="edof">EDOF — schematic</option>
+          <option value="multi" data-i18n="multi">Multifocal — schematic trifocal</option>
+          <option value="toric" data-i18n="toric">Toric monofocal</option>
+        </select>
+      </div>
+
+      <div id="sliders"></div>
+
+      <div class="button-row">
+        <button id="far" data-i18n="far">Distance ∞</button>
+        <button id="intermediate" data-i18n="intermediate">80 cm</button>
+        <button id="near" data-i18n="near">40 cm</button>
+      </div>
+
+      <div class="divider"></div>
+
+      <label class="check-row">
+        <input type="checkbox" id="toricEnabled" />
+        <span data-i18n="enableToric">Enable toric correction</span>
+      </label>
+
+      <div id="toricSliders"></div>
+
+      <p class="small" data-i18n="axisNote">
+        Angles here are model meridians, not surgical marking instructions.
+        Cylinder is specified at the IOL plane.
+      </p>
+
+      <div class="button-row">
+        <button id="fitSphere" class="primary" data-i18n="fitSphere">
+          Refit distance power
+        </button>
+        <button id="fitToric" data-i18n="fitToric">
+          Match toric in model
+        </button>
+      </div>
+
+      <p class="small" data-i18n="fixedPowerNote">
+        Changing axial length does not automatically change IOL power.
+        Use “Refit distance power (teaching model)” to demonstrate recalibration.
+      </p>
+
+      <div class="divider"></div>
+
+      <label class="check-row">
+        <input type="checkbox" id="showExtensions" checked />
+        <span data-i18n="extensions">Show focus-construction extensions</span>
+      </label>
+
+      <div class="button-row">
+        <button id="reset" data-i18n="reset">Reset model</button>
+        <button id="export" data-i18n="export">Export settings</button>
+      </div>
+    </aside>
+
+    <section class="visuals">
+      <div class="panel">
+        <div class="stage-head">
+          <h2 data-i18n="threeD">3D light convergence</h2>
+          <div class="stage-tools">
+            <button id="view3D" data-i18n="view3D">3D view</button>
+            <button id="viewSide" data-i18n="viewSide">Side view</button>
+            <button id="viewRetina" data-i18n="viewRetina">Retinal view</button>
+          </div>
+        </div>
+
+        <div id="viewport" aria-label="Interactive 3D optical eye model">
+          <div id="loading">
+            Loading 3D model…
+          </div>
+          <div class="stage-note" data-i18n="gesture">
+            Drag to rotate · scroll to zoom · Dashed rays are
+            mathematical extensions, not light passing through the retina.
+          </div>
+        </div>
+
+        <div class="legend">
+          <span>
+            <i class="dot" style="background:#0a7ea4"></i>
+            <span data-i18n="distanceBranch">Distance branch</span>
+          </span>
+          <span>
+            <i class="dot" style="background:#b8860b"></i>
+            <span data-i18n="intermediateBranch">Intermediate / EDOF range</span>
+          </span>
+          <span>
+            <i class="dot" style="background:#b54a6a"></i>
+            <span data-i18n="nearBranch">Near branch</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="model-warning stats-warning" role="note" aria-label="教學模型數值 · Teaching-model values · 教育用モデルの数値">
+        <p class="mw-zh" lang="zh-Hant">⚠ 此模型數字只作光學教學示意，並非確定的臨床結果，亦不可用作人工晶體度數或散光軸位選擇；實際結果須由主診醫生按檢查及量度決定。</p>
+        <p lang="en">These numbers come from a simplified optical teaching model. They are not a definite clinical outcome, not a prescription, and must not be used to choose an IOL power or astigmatism axis; actual results and lens choice depend on your treating doctor’s examination and measurements.</p>
+        <p lang="ja">このモデルの数値は光学教育用に簡略化した図示であり、確定した臨床結果ではありません。処方ではなく、眼内レンズ度数や乱視軸の選択に使うことはできません。実際の結果とレンズの選択は、主治医の検査と測定によって決まります。</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <span class="label" data-i18n="objectDistance">Object distance</span>
+          <strong id="distanceStat">∞</strong>
+          <span class="unit" data-i18n="distanceUnit">from corneal plane</span>
+        </div>
+        <div class="stat">
+          <span class="label" data-i18n="focusOffset">
+            Distance-branch principal foci
+          </span>
+          <strong id="focusStat">—</strong>
+          <span class="unit" data-i18n="focusUnit">
+            mm relative to retina; − = in front
+          </span>
+        </div>
+        <div class="stat">
+          <span class="label" data-i18n="rmsLabel">
+            Schematic retinal RMS radius
+          </span>
+          <strong id="rmsStat">—</strong>
+          <span class="unit" data-i18n="rmsUnit">
+            µm; includes all modeled branches
+          </span>
+        </div>
+      </div>
+
+      <div class="lower-grid">
+        <div class="panel pad">
+          <h3 data-i18n="retinalFootprint">Retinal light footprint</h3>
+          <canvas id="spot" aria-label="Schematic retinal ray footprint"></canvas>
+          <p class="small" id="spotScale"></p>
+          <p class="small" data-i18n="footprintNote">
+            Ray-intersection diagram, not a simulated photograph,
+            point-spread function, or predicted patient vision.
+          </p>
+        </div>
+
+        <div class="panel pad">
+          <h3 data-i18n="scenarios">Teaching scenarios</h3>
+          <div class="scenario-buttons">
+            <button data-scenario="distance" data-i18n="scenarioDistance">
+              1. Monofocal / distance
+            </button>
+            <button data-scenario="near" data-i18n="scenarioNear">
+              2. Monofocal / reading
+            </button>
+            <button data-scenario="astig" data-i18n="scenarioAstig">
+              3. Uncorrected astigmatism
+            </button>
+            <button data-scenario="corrected" data-i18n="scenarioCorrected">
+              4. Aligned toric correction
+            </button>
+            <button data-scenario="rotated" data-i18n="scenarioRotated">
+              5. Rotated toric correction
+            </button>
+            <button data-scenario="long" data-i18n="scenarioLong">
+              6. Longer eye / fixed IOL
+            </button>
+            <button data-scenario="edof" data-i18n="scenarioEDOF">
+              7. EDOF / intermediate
+            </button>
+            <button data-scenario="multi" data-i18n="scenarioMulti">
+              8. Multifocal / near
+            </button>
+          </div>
+          <p class="small" data-i18n="scenarioNote">
+            Presets isolate teaching concepts. They are not treatment recommendations.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="panel patient" aria-live="polite">
+    <h2 data-i18n="patientExplanation">Patient explanation</h2>
+    <div class="patient-grid">
+      <article>
+        <div class="pill">ENGLISH</div>
+        <div id="patientEN" class="patient-copy" lang="en"></div>
+      </article>
+      <article>
+        <div class="pill">繁體中文</div>
+        <div id="patientZH" class="patient-copy" lang="zh-Hant"></div>
+      </article>
+    </div>
+  </section>
+
+  <details>
+    <summary data-i18n="limitations">Model assumptions and limitations</summary>
+    <div id="modelNotes"></div>
+  </details>
+
+  <footer>
+    <div data-i18n="footer">Educational illustration · No patient data is collected. 不能代替註冊醫生.</div>
+    <div class="copyright-line">© 2026 護眼學堂 · 公眾教育 https://www.eyesinfo.org （保留版權；不得改作後作診所推廣）</div>
+  </footer>
+</div>
+<script type="module">
+/*
+  IOL OPTICS STUDIO
+  ----------------
+  Educational paraxial model. NOT a clinical calculator.
+
+  References for clinical concepts:
+  https://www.escrs.org/escrs-recommendations-for-cataract-surgery
+  https://www.escrs.org/patient-portal/cataract-surgery/
+  https://eyewiki.aao.org/Toric_IOLs
+
+  Architecture:
+  - state: editable model parameters
+  - Optics: pure matrix/ray calculations
+  - UI: bilingual controls and patient explanations
+  - Scene: Three.js visualization
+  - retinal canvas: ray-intersection footprint
+
+  Units:
+  - distances in calculations: meters
+  - geometry and transverse ray heights: millimeters
+  - optical powers: diopters (1/m)
+  - q: reduced ray slope in numerically scaled mm/m
+
+  Cornea:
+  - one equivalent thin refracting plane
+  - mean power fixed at 43 D
+  - regular astigmatism only
+
+  IOL:
+  - effective lens plane fixed at 5 mm behind cornea
+  - sphere control = mean equivalent IOL power, not labeled sphere
+    in a manufacturer's toric lens prescription
+  - toric cylinder is at the IOL plane
+
+  EDOF:
+  - a continuous range is approximated by weighted power branches
+  - NOT a physical wave-optical model of an EDOF product
+
+  Multifocal:
+  - three illustrative simultaneous power branches
+  - NOT manufacturer-specific powers or light allocations
+*/
+
+const $ = id => document.getElementById(id);
+const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
+
+const dictionary = {
+  en: {
+    title: "IOL 3D optics studio",
+    subtitle: "Explore how light, eye length, and lens design interact.",
+    notice: "Educational schematic only. Not an IOL prescription calculator, visual-acuity prediction, or substitute for a registered doctor’s assessment. 不能代替註冊醫生.",
+    phoneTip: "On a small phone screen, one finger scrolls the page; two fingers rotate the model. Landscape or a wider browser can help. Controls stay below the viewer.",
+    parameters: "Optical parameters",
+    lensDesign: "IOL design",
+    mono: "Monofocal",
+    edof: "EDOF — schematic",
+    multi: "Multifocal — schematic trifocal",
+    toric: "Toric monofocal",
+    objectVergence: "Object distance",
+    cornealCylinder: "Corneal astigmatism",
+    cornealAxis: "Corneal steep meridian (teaching-model value)",
+    axialLength: "Axial length",
+    sphere: "Mean IOL power (teaching-model value)",
+    toricCylinder: "IOL-plane toric cylinder (teaching-model value)",
+    toricAxis: "Toric compensation meridian (teaching-model value)",
+    far: "Distance ∞",
+    intermediate: "80 cm",
+    near: "40 cm",
+    enableToric: "Enable toric correction",
+    axisNote: "Angles here are model meridians, not surgical marking instructions. Cylinder is specified at the IOL plane.",
+    fitSphere: "Refit distance power (teaching model)",
+    fitToric: "Match toric in model (teaching model)",
+    fixedPowerNote: "Changing axial length does not automatically change IOL power. Use “Refit distance power (teaching model)” to demonstrate recalibration.",
+    extensions: "Show focus-construction extensions",
+    reset: "Reset model",
+    export: "Export settings",
+    threeD: "3D light convergence",
+    view3D: "3D view",
+    viewSide: "Side view",
+    viewRetina: "Retinal view",
+    gesture: "Drag to rotate · scroll to zoom · Dashed rays are mathematical extensions, not light passing through the retina.",
+    gestureTouch: "One finger scrolls · two fingers rotate (pinch to zoom) · Dashed rays are mathematical extensions, not light passing through the retina.",
+    distanceBranch: "Distance branch",
+    intermediateBranch: "Intermediate / EDOF range",
+    nearBranch: "Near branch",
+    objectDistance: "Object distance",
+    distanceUnit: "from corneal plane",
+    focusOffset: "Distance-branch principal foci (teaching-model value)",
+    focusUnit: "mm relative to retina; − = in front",
+    rmsLabel: "Schematic retinal RMS radius (teaching-model value)",
+    rmsUnit: "µm; includes all modeled branches",
+    retinalFootprint: "Retinal light footprint",
+    footprintNote: "Ray-intersection diagram, not a simulated photograph, point-spread function, or predicted patient vision.",
+    scenarios: "Teaching scenarios",
+    scenarioDistance: "1. Monofocal / distance",
+    scenarioNear: "2. Monofocal / reading",
+    scenarioAstig: "3. Uncorrected astigmatism",
+    scenarioCorrected: "4. Aligned toric correction",
+    scenarioRotated: "5. Rotated toric correction",
+    scenarioLong: "6. Longer eye / fixed IOL",
+    scenarioEDOF: "7. EDOF / intermediate",
+    scenarioMulti: "8. Multifocal / near",
+    scenarioNote: "Presets isolate teaching concepts. They are not treatment recommendations.",
+    patientExplanation: "Patient explanation",
+    limitations: "Model assumptions and limitations",
+    footer: "Educational illustration · No patient data is collected. 不能代替註冊醫生.",
+    cornea: "CORNEA",
+    iol: "IOL",
+    retina: "RETINA",
+    scale: "Display radius"
+  },
+
+  zh: {
+    title: "人工晶體3D光學教學",
+    subtitle: "探索物體距離、眼軸長度及人工晶體設計如何影響光線聚焦。",
+    notice: "本模型僅供教學示意，不可用於人工晶體度數處方、視力預測，亦不能代替註冊醫生的個別評估。",
+    phoneTip: "小螢幕：單指捲動頁面，雙指旋轉模型。較適合橫放或以較闊瀏覽器使用；控制項在檢視器下方，並避免左右橫向捲動。",
+    parameters: "光學參數",
+    lensDesign: "人工晶體設計",
+    mono: "單焦點",
+    edof: "延長焦深 EDOF－示意",
+    multi: "多焦點－三焦點示意",
+    toric: "散光矯正型單焦點",
+    objectVergence: "物體距離",
+    cornealCylinder: "角膜散光",
+    cornealAxis: "角膜較陡子午線（教學模型數值）",
+    axialLength: "眼軸長度",
+    sphere: "人工晶體平均屈光力（教學模型數值）",
+    toricCylinder: "人工晶體平面散光度數（教學模型數值）",
+    toricAxis: "散光補償子午線（教學模型數值）",
+    far: "遠距離 ∞",
+    intermediate: "80 厘米",
+    near: "40 厘米",
+    enableToric: "啟用散光矯正",
+    axisNote: "此處角度為模型子午線，並非手術定位標記。散光度數以人工晶體平面表示。",
+    fitSphere: "重新配合遠距離度數（教學模型）",
+    fitToric: "在模型中匹配散光（教學模型）",
+    fixedPowerNote: "改變眼軸長度不會自動改變人工晶體度數。可按「重新配合遠距離度數（教學模型）」示範重新校準。",
+    extensions: "顯示焦點作圖延長線",
+    reset: "重設模型",
+    export: "匯出設定",
+    threeD: "3D 光線聚焦",
+    view3D: "3D 視角",
+    viewSide: "側面視角",
+    viewRetina: "視網膜視角",
+    gesture: "拖曳旋轉 · 滾輪縮放・虛線為數學作圖延長線，並非光線穿透視網膜。",
+    gestureTouch: "單指捲動頁面；雙指旋轉模型（雙指開合縮放）・虛線為數學作圖延長線，並非光線穿透視網膜。",
+    distanceBranch: "遠距離分支",
+    intermediateBranch: "中距離／延長焦深範圍",
+    nearBranch: "近距離分支",
+    objectDistance: "物體距離",
+    distanceUnit: "由角膜平面起計",
+    focusOffset: "遠距離分支的主焦點（教學模型數值）",
+    focusUnit: "相對視網膜的毫米位置；負值＝前方",
+    rmsLabel: "示意視網膜光斑 RMS 半徑（教學模型數值）",
+    rmsUnit: "微米；包含所有模型分支",
+    retinalFootprint: "視網膜光線分布",
+    footprintNote: "此為光線落點圖，並非模擬照片、點擴散函數或患者實際視覺預測。",
+    scenarios: "教學情境",
+    scenarioDistance: "1. 單焦點／看遠",
+    scenarioNear: "2. 單焦點／閱讀",
+    scenarioAstig: "3. 未矯正的散光",
+    scenarioCorrected: "4. 正確對位的散光矯正",
+    scenarioRotated: "5. 散光矯正軸位旋轉",
+    scenarioLong: "6. 較長眼軸／固定度數",
+    scenarioEDOF: "7. 延長焦深／中距離",
+    scenarioMulti: "8. 多焦點／看近",
+    scenarioNote: "預設情境用於展示個別光學概念，並非治療建議。",
+    patientExplanation: "給患者的解說",
+    limitations: "模型假設與限制",
+    footer: "教學示意・本工具不收集患者資料。不能代替註冊醫生。",
+    cornea: "角膜",
+    iol: "人工晶體",
+    retina: "視網膜",
+    scale: "顯示半徑"
+  }
+};
+
+let language = "en";
+// Touch-first devices get one-finger-scroll wording; mouse keeps drag-to-rotate.
+const TOUCH_INPUT = typeof matchMedia === "function" &&
+  matchMedia("(hover: none) and (pointer: coarse)").matches;
+const t = key =>
+  (TOUCH_INPUT && dictionary[language][key + "Touch"]) ||
+  dictionary[language][key] || key;
+
+const defaults = {
+  design: "mono",
+  objectVergence: 0,
+  cornealCylinder: 0,
+  cornealAxis: 90,
+  axialLength: 24,
+  sphere: 19,
+  toricEnabled: false,
+  toricCylinder: 0,
+  toricAxis: 90,
+  showExtensions: true,
+  referenceAL: 24
+};
+
+const state = { ...defaults };
+
+const constants = {
+  n: 1.336,
+  meanCornea: 43,
+  lensDepth: 0.005,
+  entranceRadiusMM: 1.5
+};
+
+const COLORS = {
+  distance: "#0a7ea4",
+  intermediate: "#b8860b",
+  near: "#b54a6a"
+};
+
+/* ---------- Pure optical calculations ---------- */
+
+const Mat = {
+  I: () => [1, 0, 0, 1],
+
+  add: (a, b) => a.map((x, i) => x + b[i]),
+
+  sub: (a, b) => a.map((x, i) => x - b[i]),
+
+  scale: (a, s) => a.map(x => x * s),
+
+  mul: (a, b) => [
+    a[0] * b[0] + a[1] * b[2],
+    a[0] * b[1] + a[1] * b[3],
+    a[2] * b[0] + a[3] * b[2],
+    a[2] * b[1] + a[3] * b[3]
+  ],
+
+  vec: (a, v) => [
+    a[0] * v[0] + a[1] * v[1],
+    a[2] * v[0] + a[3] * v[1]
+  ],
+
+  inverse: a => {
+    const det = a[0] * a[3] - a[1] * a[2];
+    if (Math.abs(det) < 1e-12) throw new Error("Singular ray matrix");
+    return [
+      a[3] / det, -a[1] / det,
+      -a[2] / det, a[0] / det
+    ];
+  },
+
+  symmetricEigenvalues: a => {
+    const mean = (a[0] + a[3]) / 2;
+    const off = (a[1] + a[2]) / 2;
+    const delta = Math.hypot((a[0] - a[3]) / 2, off);
+    return [mean - delta, mean + delta];
+  }
+};
+
+function powerMatrix(mean, cylinder, axisDegrees, sign = 1) {
+  const angle = axisDegrees * Math.PI / 180;
+  const c = Math.cos(angle);
+  const s = Math.sin(angle);
+  const h = sign * cylinder / 2;
+
+  return [
+    mean + h * (c * c - s * s),
+    2 * h * c * s,
+    2 * h * c * s,
+    mean - h * (c * c - s * s)
+  ];
+}
+
+function distanceText(vergence, lang = language) {
+  if (vergence < 0.00001) return lang === "zh" ? "無限遠" : "Infinity";
+  const cm = 100 / vergence;
+  return lang === "zh"
+    ? `${cm.toFixed(cm < 100 ? 0 : 1)} 厘米`
+    : `${cm.toFixed(cm < 100 ? 0 : 1)} cm`;
+}
+
+function angularDifference(a, b) {
+  const difference = Math.abs(a - b) % 180;
+  return Math.min(difference, 180 - difference);
+}
+
+const Optics = {
+  branches() {
+    if (state.design === "multi") {
+      return [
+        { add: 0, weight: .50, color: COLORS.distance },
+        { add: 1.75, weight: .20, color: COLORS.intermediate },
+        { add: 3.50, weight: .30, color: COLORS.near }
+      ];
+    }
+
+    if (state.design === "edof") {
+      // Illustrative continuum sampling, not physical EDOF lens zones.
+      const weights = [.24, .20, .17, .14, .11, .08, .06];
+      return weights.map((weight, i) => ({
+        add: i * 2.0 / 6,
+        weight,
+        color: i === 0 ? COLORS.distance : COLORS.intermediate
+      }));
+    }
+
+    return [{ add: 0, weight: 1, color: COLORS.distance }];
+  },
+
+  distanceFit() {
+    const { n, lensDepth: d, meanCornea: K } = constants;
+    const L = state.axialLength / 1000 - d;
+    const highK = K + state.cornealCylinder / 2;
+    const lowK = K - state.cornealCylinder / 2;
+
+    const highP = n / L - highK / (1 - d * highK / n);
+    const lowP = n / L - lowK / (1 - d * lowK / n);
+
+    return {
+      mean: (highP + lowP) / 2,
+      cylinder: lowP - highP
+    };
+  },
+
+  matrices(add = 0) {
+    const { n, lensDepth: d, meanCornea } = constants;
+
+    const C = powerMatrix(
+      meanCornea,
+      state.cornealCylinder,
+      state.cornealAxis,
+      +1
+    );
+
+    const initialQ = Mat.scale(Mat.I(), state.objectVergence);
+    const afterCorneaQ = Mat.sub(initialQ, C);
+    const Y = Mat.add(Mat.I(), Mat.scale(afterCorneaQ, d / n));
+
+    // Toric power is lower along the compensation meridian.
+    const P = powerMatrix(
+      state.sphere + add,
+      state.toricEnabled ? state.toricCylinder : 0,
+      state.toricAxis,
+      -1
+    );
+
+    const Q = Mat.sub(afterCorneaQ, Mat.mul(P, Y));
+    const L = state.axialLength / 1000 - d;
+    const retinaMap = Mat.add(Y, Mat.scale(Q, L / n));
+
+    const localSlopeMatrix = Mat.mul(Q, Mat.inverse(Y));
+    const eig = Mat.symmetricEigenvalues(localSlopeMatrix);
+
+    const fociMM = eig.map(value => {
+      if (value >= -1e-10) return null;
+      return (d - n / value) * 1000;
+    });
+
+    const r = constants.entranceRadiusMM;
+    const rmsMM = r / 2 * Math.sqrt(
+      retinaMap.reduce((sum, value) => sum + value * value, 0)
+    );
+
+    return { C, Y, Q, retinaMap, fociMM, rmsMM };
+  },
+
+  atPosition(model, entrance, xMM) {
+    const atLens = Mat.vec(model.Y, entrance);
+    const q = Mat.vec(model.Q, entrance);
+    const travelM = xMM / 1000 - constants.lensDepth;
+
+    return [
+      atLens[0] + travelM * q[0] / constants.n,
+      atLens[1] + travelM * q[1] / constants.n
+    ];
+  },
+
+  sampleDisc(count = 280) {
+    const points = [];
+    const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+
+    for (let i = 0; i < count; i++) {
+      const r = constants.entranceRadiusMM * Math.sqrt((i + .5) / count);
+      const theta = i * goldenAngle;
+      points.push([r * Math.cos(theta), r * Math.sin(theta)]);
+    }
+
+    return points;
+  }
+};
+/* ---------- Controls ---------- */
+
+const sliderSpecs = [
+  {
+    id: "objectVergence", min: 0, max: 4, step: .05,
+    format: v => v === 0 ? "∞" : distanceText(v)
+  },
+  {
+    id: "cornealCylinder", min: 0, max: 4, step: .1,
+    format: v => `${v.toFixed(1)} D`
+  },
+  {
+    id: "cornealAxis", min: 0, max: 180, step: 1,
+    format: v => `${v.toFixed(0)}°`
+  },
+  {
+    id: "axialLength", min: 20, max: 30, step: .1,
+    format: v => `${v.toFixed(1)} mm`
+  },
+  {
+    id: "sphere", min: 0, max: 40, step: .05,
+    format: v => `${v.toFixed(2)} D`
+  }
+];
+
+const toricSpecs = [
+  {
+    id: "toricCylinder", min: 0, max: 8, step: .05,
+    format: v => `${v.toFixed(2)} D`
+  },
+  {
+    id: "toricAxis", min: 0, max: 180, step: 1,
+    format: v => `${v.toFixed(0)}°`
+  }
+];
+
+function makeSliders(specs, parentID) {
+  for (const spec of specs) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "control";
+    wrapper.innerHTML = `
+      <div class="control-head">
+        <label for="${spec.id}" data-i18n="${spec.id}"></label>
+        <output id="${spec.id}Output" for="${spec.id}"></output>
+      </div>
+      <input
+        id="${spec.id}"
+        type="range"
+        min="${spec.min}"
+        max="${spec.max}"
+        step="${spec.step}"
+      />
+    `;
+
+    $(parentID).appendChild(wrapper);
+
+    $(spec.id).addEventListener("input", event => {
+      state[spec.id] = Number(event.target.value);
+      update();
+    });
+  }
+}
+
+makeSliders(sliderSpecs, "sliders");
+makeSliders(toricSpecs, "toricSliders");
+
+function syncControls() {
+  for (const spec of [...sliderSpecs, ...toricSpecs]) {
+    $(spec.id).value = state[spec.id];
+    $(spec.id + "Output").textContent = spec.format(state[spec.id]);
+  }
+
+  $("design").value = state.design;
+  $("toricEnabled").checked = state.toricEnabled;
+  $("showExtensions").checked = state.showExtensions;
+
+  for (const spec of toricSpecs) {
+    $(spec.id).disabled = !state.toricEnabled;
+  }
+
+  $("toricSliders").style.opacity = state.toricEnabled ? "1" : ".45";
+}
+
+function setLanguage(next) {
+  language = next;
+  document.documentElement.lang = next === "zh" ? "zh-Hant" : "en";
+
+  document.querySelectorAll("[data-i18n]").forEach(element => {
+    element.textContent = t(element.dataset.i18n);
+  });
+
+  $("langEN").classList.toggle("active", next === "en");
+  $("langZH").classList.toggle("active", next === "zh");
+
+  renderModelNotes();
+  update();
+}
+
+function renderModelNotes() {
+  $("modelNotes").innerHTML = language === "en"
+    ? `
+      <ul>
+        <li>Paraxial, on-axis, equivalent thin-plane ray tracing.
+        The 3D eye is schematic rather than anatomically exact.</li>
+
+        <li>Mean corneal power is 43 D, refractive index is 1.336,
+        and the effective IOL plane is fixed 5 mm behind the cornea.</li>
+
+        <li>The entrance beam is 3 mm across at the corneal plane.
+        This is not a full anatomical pupil or iris model.</li>
+
+        <li>Corneal cylinder represents regular equivalent corneal
+        astigmatism. Posterior corneal astigmatism is not independently modeled.</li>
+
+        <li>The power slider represents mean equivalent IOL power.
+        Toric cylinder is specified at the IOL plane.
+        These values do not correspond directly to a manufacturer’s labeled prescription.</li>
+
+        <li>EDOF is shown as a weighted range of illustrative powers.
+        Multifocal is shown using three illustrative power branches.
+        Neither is a product-specific diffractive or wave-optical simulation.</li>
+
+        <li>Dashed segments beyond the retinal plane are mathematical
+        constructions showing where a focus would occur if propagation continued.</li>
+
+        <li>The retinal diagram and RMS radius describe geometric ray
+        intersections only. They do not predict acuity, contrast,
+        halos, glare, spectacle independence, or subjective vision.</li>
+
+        <li>No accommodation, diffraction, aberration analysis,
+        chromatic effects, retinal disease, neural adaptation,
+        lens tilt/decentration, or binocular vision is modeled.</li>
+
+        <li>Changing eye length leaves IOL power fixed until a refit button
+        is pressed. Model fitting is for demonstration only, not clinical use.</li>
+      </ul>
+    `
+    : `
+      <ul>
+        <li>本模型使用近軸、軸上、等效薄平面光線追跡。
+        3D 眼球為示意圖，並非精確解剖模型。</li>
+
+        <li>角膜平均屈光力固定為 43 D，折射率為 1.336，
+        人工晶體等效平面固定在角膜後方 5 毫米。</li>
+
+        <li>角膜平面的入射光束直徑為 3 毫米，
+        並未完整模擬實際瞳孔或虹膜。</li>
+
+        <li>角膜散光代表規則性的等效角膜散光；
+        未獨立模擬角膜後表面散光。</li>
+
+        <li>人工晶體度數滑桿表示平均等效屈光力。
+        散光度數以人工晶體平面表示，
+        不可直接對應廠商標示的處方規格。</li>
+
+        <li>EDOF 以加權的示意屈光力範圍呈現，
+        多焦點以三個示意屈光力分支呈現。
+        兩者均非特定產品的繞射或波動光學模擬。</li>
+
+        <li>視網膜後方的虛線為數學作圖，
+        用於顯示假設光線繼續傳播時的焦點位置。</li>
+
+        <li>光斑及 RMS 半徑僅描述幾何光線落點，
+        不能預測視力、對比敏感度、光暈、眩光、
+        脫鏡率或主觀視覺。</li>
+
+        <li>未模擬調節、繞射、像差、色差、視網膜疾病、
+        神經適應、人工晶體傾斜或偏心，以及雙眼視覺。</li>
+
+        <li>改變眼軸後，人工晶體度數保持不變，
+        直至按下重新配合按鈕。模型配合僅供教學，不能用於臨床。</li>
+      </ul>
+    `;
+}
+
+/* ---------- Patient explanations ---------- */
+
+function renderPatientExplanation(models) {
+  const en = [];
+  const zh = [];
+
+  const distanceEN = distanceText(state.objectVergence, "en");
+  const distanceZH = distanceText(state.objectVergence, "zh");
+
+  en.push(
+    `You are viewing light from an object at ${
+      state.objectVergence === 0 ? "a very long distance" : distanceEN
+    }. The colored lines show how the model eye bends that light toward the retina.`
+  );
+
+  zh.push(
+    `目前顯示的是來自${
+      state.objectVergence === 0 ? "很遠處" : distanceZH + "處"
+    }物體的光線。彩色線條用來示範模型眼睛如何將光線折射向視網膜。`
+  );
+
+  if (state.design === "mono" || state.design === "toric") {
+    en.push(
+      "A monofocal IOL has one main focusing range. When selected for distance vision, reading glasses are commonly needed for close work. A different target can be chosen clinically, but this model’s refit button targets distance."
+    );
+
+    zh.push(
+      "單焦點人工晶體主要提供一個聚焦範圍。若以看遠為目標，近距離閱讀通常仍需要閱讀眼鏡。臨床上可選擇其他目標，但本模型的重新配合按鈕以看遠為目標。"
+    );
+  }
+
+  if (state.design === "edof") {
+    en.push(
+      "An EDOF IOL aims to extend the useful focusing range, particularly from distance toward intermediate tasks such as a computer screen. Fine print may still require glasses. Here, the extended range is represented schematically; it is not the optical design of a particular lens."
+    );
+
+    zh.push(
+      "延長焦深人工晶體旨在延伸可用的聚焦範圍，特別是由遠距離至電腦螢幕等中距離工作。閱讀細小文字時仍可能需要眼鏡。此處以示意方式呈現延長範圍，並非某款人工晶體的實際光學設計。"
+    );
+
+    en.push(
+      "Glare, halos, and contrast effects vary with lens design and the individual eye. This ray diagram cannot estimate how much you would notice them."
+    );
+
+    zh.push(
+      "眩光、光暈及對比變化會因人工晶體設計與個人眼睛而異。本光線圖無法估計您實際會感受到的程度。"
+    );
+  }
+
+  if (state.design === "multi") {
+    en.push(
+      "A multifocal IOL distributes light among more than one focusing range. This example uses distance, intermediate, and near branches. Some light may be focused for the current task while other light forms a broader background."
+    );
+
+    zh.push(
+      "多焦點人工晶體會將光線分配至多個聚焦範圍。本例顯示遠、中、近三個分支。在目前觀看距離，部分光線可能較集中，其他光線則形成較分散的背景。"
+    );
+
+    en.push(
+      "Multifocal lenses can reduce dependence on glasses, but glasses may still be needed. Halos, glare, or reduced contrast can occur, and suitability depends on eye health and personal priorities."
+    );
+
+    zh.push(
+      "多焦點人工晶體可減少對眼鏡的依賴，但仍可能需要眼鏡。可能出現光暈、眩光或對比下降；是否適合需考慮眼睛健康及個人的生活需求。"
+    );
+  }
+
+  if (state.cornealCylinder >= .1) {
+    en.push(
+      `The model has ${state.cornealCylinder.toFixed(1)} D of regular corneal astigmatism. Different meridians bend light differently, so an uncorrected point can form separated principal foci rather than one compact focus.`
+    );
+
+    zh.push(
+      `本模型設定了 ${state.cornealCylinder.toFixed(1)} D 的規則性角膜散光。不同子午線的折光能力不同，因此未矯正時，一個物點可能形成分離的主焦點，而非單一集中的焦點。`
+    );
+  }
+
+  if (state.toricEnabled && state.toricCylinder > 0) {
+    const error = angularDifference(state.cornealAxis, state.toricAxis);
+
+    en.push(
+      `Toric correction is enabled at ${state.toricCylinder.toFixed(2)} D at the IOL plane. Its compensation meridian is ${error.toFixed(0)}° from the corneal steep meridian. Both cylinder amount and alignment matter; alignment alone does not guarantee complete correction.`
+    );
+
+    zh.push(
+      `已啟用人工晶體平面 ${state.toricCylinder.toFixed(2)} D 的散光矯正。補償子午線與角膜較陡子午線相差 ${error.toFixed(0)}°。散光度數及軸位均很重要；僅軸位一致並不保證完全矯正。`
+    );
+
+    if (error >= 10 && state.cornealCylinder >= .1) {
+      en.push(
+        "In this scenario, rotational mismatch can leave residual astigmatism. The model angle is a teaching convention and must not be used as a surgical axis instruction."
+      );
+
+      zh.push(
+        "此情境中，旋轉角度不匹配可留下殘餘散光。本模型角度僅屬教學慣例，不可用作手術軸位指示。"
+      );
+    }
+  } else if (state.cornealCylinder >= .5) {
+    en.push(
+      "Toric correction is currently off. Changing from monofocal to EDOF or multifocal alone does not remove the corneal astigmatism shown here."
+    );
+
+    zh.push(
+      "目前未啟用散光矯正。單純由單焦點改為延長焦深或多焦點，並不會消除這裡顯示的角膜散光。"
+    );
+  }
+
+  const deltaAL = state.axialLength - state.referenceAL;
+
+  if (Math.abs(deltaAL) >= .15) {
+    const longer = deltaAL > 0;
+
+    en.push(
+      `The eye is now ${Math.abs(deltaAL).toFixed(1)} mm ${
+        longer ? "longer" : "shorter"
+      } than at the last distance-power calibration, while IOL power remains fixed. Moving the retina ${
+        longer ? "farther back" : "forward"
+      } changes its relationship to the focus. Appropriate power selection can compensate in this simplified model.`
+    );
+
+    zh.push(
+      `與上次遠距離度數校準相比，目前眼軸${
+        longer ? "較長" : "較短"
+      } ${Math.abs(deltaAL).toFixed(1)} 毫米，而人工晶體度數保持不變。視網膜${
+        longer ? "向後移動" : "向前移動"
+      }會改變它與焦點的相對位置。在此簡化模型中，重新選擇合適度數可作補償。`
+    );
+  }
+
+  const base = models[0];
+  const finiteFoci = base.fociMM.filter(value => Number.isFinite(value));
+
+  if (finiteFoci.length) {
+    const offsets = finiteFoci.map(value => value - state.axialLength);
+    const allAhead = offsets.every(value => value < -.15);
+    const allBehind = offsets.every(value => value > .15);
+
+    if (allAhead || allBehind) {
+      en.push(
+        `The distance branch’s principal foci are ${
+          allAhead ? "in front of" : "behind"
+        } the retinal plane in this setting. This describes model geometry, not a measured prescription or predicted visual acuity.`
+      );
+
+      zh.push(
+        `此設定中，遠距離分支的主焦點位於視網膜平面的${
+          allAhead ? "前方" : "後方"
+        }。這只描述模型幾何位置，並非實測處方或視力預測。`
+      );
+    }
+  }
+
+  en.push(
+    "Your actual lens choice requires measurements and a discussion with your ophthalmologist. This demonstration cannot determine the best IOL for you, and it cannot replace assessment by a registered doctor."
+  );
+
+  zh.push(
+    "實際人工晶體選擇需經過檢查、量度，並與眼科醫生討論。本示範不能判定哪款人工晶體最適合您，亦不能代替註冊醫生的評估。"
+  );
+
+  // All content is application-authored; no user HTML is inserted.
+  $("patientEN").innerHTML = en.map(text => `<p>${text}</p>`).join("");
+  $("patientZH").innerHTML = zh.map(text => `<p>${text}</p>`).join("");
+}
+
+/* ---------- Retinal canvas ---------- */
+
+function drawRetinalFootprint(branches, models) {
+  const canvas = $("spot");
+  const rect = canvas.getBoundingClientRect();
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  canvas.width = Math.round(rect.width * dpr);
+  canvas.height = Math.round(rect.height * dpr);
+
+  const ctx = canvas.getContext("2d");
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  const width = rect.width;
+  const height = rect.height;
+  const cx = width / 2;
+  const cy = height / 2;
+
+  ctx.fillStyle = "#0c1a28";
+  ctx.fillRect(0, 0, width, height);
+
+  const samples = Optics.sampleDisc();
+  const clouds = models.map(model =>
+    samples.map(point => Mat.vec(model.retinaMap, point))
+  );
+
+  let maxRadiusMM = .03;
+  for (const cloud of clouds) {
+    for (const point of cloud) {
+      maxRadiusMM = Math.max(maxRadiusMM, Math.hypot(...point));
+    }
+  }
+
+  const displayRadiusMM = maxRadiusMM * 1.18;
+  const pixelsPerMM = Math.min(width, height) * .41 / displayRadiusMM;
+
+  ctx.strokeStyle = "#2a4054";
+  ctx.lineWidth = 1;
+
+  for (const fraction of [.25, .5, .75, 1]) {
+    ctx.beginPath();
+    ctx.arc(
+      cx, cy,
+      fraction * displayRadiusMM * pixelsPerMM,
+      0, Math.PI * 2
+    );
+    ctx.stroke();
+  }
+
+  ctx.beginPath();
+  ctx.moveTo(10, cy);
+  ctx.lineTo(width - 10, cy);
+  ctx.moveTo(cx, 10);
+  ctx.lineTo(cx, height - 10);
+  ctx.stroke();
+
+  clouds.forEach((cloud, index) => {
+    ctx.fillStyle = branches[index].color;
+    ctx.globalAlpha = clamp(
+      branches[index].weight * 1.7,
+      .12,
+      .75
+    );
+
+    for (const [y, z] of cloud) {
+      ctx.beginPath();
+      ctx.arc(
+        cx + z * pixelsPerMM,
+        cy - y * pixelsPerMM,
+        1.6, 0, Math.PI * 2
+      );
+      ctx.fill();
+    }
+  });
+
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = "#9aabba";
+  ctx.font = "11px system-ui";
+  ctx.fillText("y", cx + 6, 15);
+  ctx.fillText("z", width - 15, cy - 6);
+
+  $("spotScale").textContent =
+    `${t("scale")}: ±${(displayRadiusMM * 1000).toFixed(0)} µm`;
+}
+
+/* ---------- Three.js scene ---------- */
+
+let THREE;
+let OrbitControls;
+let enablePageScrollOrbit;
+let renderer;
+let scene;
+let camera;
+let orbit;
+let dynamicGroup;
+let sceneReady = false;
+let rebuildPending = false;
+
+function disposeGroup(group) {
+  const geometries = new Set();
+  const materials = new Set();
+  const textures = new Set();
+
+  group.traverse(object => {
+    if (object.geometry) geometries.add(object.geometry);
+
+    const entries = Array.isArray(object.material)
+      ? object.material
+      : object.material ? [object.material] : [];
+
+    for (const material of entries) {
+      materials.add(material);
+      if (material.map) textures.add(material.map);
+    }
+  });
+
+  geometries.forEach(item => item.dispose());
+  materials.forEach(item => item.dispose());
+  textures.forEach(item => item.dispose());
+
+  group.clear();
+}
+
+function line(points, color, opacity = 1, dashed = false) {
+  const geometry = new THREE.BufferGeometry().setFromPoints(
+    points.map(point => new THREE.Vector3(...point))
+  );
+
+  const material = dashed
+    ? new THREE.LineDashedMaterial({
+        color,
+        transparent: true,
+        opacity,
+        dashSize: .6,
+        gapSize: .4,
+        depthWrite: false
+      })
+    : new THREE.LineBasicMaterial({
+        color,
+        transparent: true,
+        opacity,
+        depthWrite: false
+      });
+
+  const result = new THREE.Line(geometry, material);
+  if (dashed) result.computeLineDistances();
+
+  dynamicGroup.add(result);
+  return result;
+}
+
+function textSprite(text, position, color = "#003153") {
+  const canvas = document.createElement("canvas");
+  canvas.width = 768;
+  canvas.height = 128;
+
+  const ctx = canvas.getContext("2d");
+  ctx.font = "600 42px system-ui, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillStyle = color;
+  ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  const material = new THREE.SpriteMaterial({
+    map: texture,
+    transparent: true,
+    depthTest: false,
+    depthWrite: false
+  });
+
+  const sprite = new THREE.Sprite(material);
+  sprite.position.set(...position);
+  sprite.scale.set(12, 2, 1);
+  dynamicGroup.add(sprite);
+}
+
+function disk(x, radius, color, opacity) {
+  const geometry = new THREE.CircleGeometry(radius, 80);
+  const material = new THREE.MeshBasicMaterial({
+    color,
+    transparent: true,
+    opacity,
+    side: THREE.DoubleSide,
+    depthWrite: false
+  });
+
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.rotation.y = Math.PI / 2;
+  mesh.position.x = x;
+  dynamicGroup.add(mesh);
+  return mesh;
+}
+
+function ring(x, radius, color, opacity = .7) {
+  const points = [];
+  for (let i = 0; i <= 100; i++) {
+    const angle = i / 100 * Math.PI * 2;
+    points.push([x, radius * Math.cos(angle), radius * Math.sin(angle)]);
+  }
+  line(points, color, opacity);
+}
+
+function buildAnatomy() {
+  const AL = state.axialLength;
+  const lensX = constants.lensDepth * 1000;
+
+  const shell = new THREE.Mesh(
+    new THREE.SphereGeometry(1, 36, 24),
+    new THREE.MeshBasicMaterial({
+      color: "#4d6d86",
+      transparent: true,
+      opacity: .12,
+      wireframe: true,
+      depthWrite: false
+    })
+  );
+
+  shell.position.x = AL / 2;
+  shell.scale.set(AL / 2, 10.5, 10.5);
+  dynamicGroup.add(shell);
+
+  disk(0, 5.7, "#7eb8d4", .14);
+  ring(0, 5.7, "#0a4468", .8);
+
+  const lens = new THREE.Mesh(
+    new THREE.SphereGeometry(1, 48, 32),
+    new THREE.MeshPhongMaterial({
+      color: "#9ec5dd",
+      transparent: true,
+      opacity: .28,
+      shininess: 100,
+      side: THREE.DoubleSide,
+      depthWrite: false
+    })
+  );
+
+  lens.position.x = lensX;
+  lens.scale.set(.65, 3, 3);
+  dynamicGroup.add(lens);
+  ring(lensX, 3, "#003153", .75);
+
+  // Stylized haptics; not manufacturer-specific geometry.
+  line([
+    [lensX, 2.4, 1.7],
+    [lensX, 4.3, 2.4],
+    [lensX, 5.1, 1.7],
+    [lensX, 5.3, .3]
+  ], "#4d6d86", .65);
+
+  line([
+    [lensX, -2.4, -1.7],
+    [lensX, -4.3, -2.4],
+    [lensX, -5.1, -1.7],
+    [lensX, -5.3, -.3]
+  ], "#4d6d86", .65);
+
+  if (state.design === "multi") {
+    // Decorative schematic rings; not actual diffractive zones.
+    for (const radius of [.8, 1.3, 1.8, 2.3]) {
+      ring(lensX - .7, radius, COLORS.intermediate, .22);
+    }
+  }
+
+  if (state.design === "edof") {
+    ring(lensX - .7, 1.7, COLORS.intermediate, .32);
+  }
+
+  disk(AL, 6, "#c788aa", .12);
+  ring(AL, 6, "#b54a6a", .8);
+
+  for (const offset of [-4, -2, 0, 2, 4]) {
+    const edge = Math.sqrt(36 - offset * offset);
+    line(
+      [[AL, offset, -edge], [AL, offset, edge]],
+      "#845f7d", .25
+    );
+    line(
+      [[AL, -edge, offset], [AL, edge, offset]],
+      "#845f7d", .25
+    );
+  }
+
+  line([[-13, 0, 0], [36, 0, 0]], "#60748c", .3, true);
+
+  textSprite(t("cornea"), [0, -7.2, 0], "#0a4468");
+  textSprite(t("iol"), [lensX, 7.1, 0], "#003153");
+  textSprite(t("retina"), [AL, -7.2, 0], "#b54a6a");
+
+  if (state.cornealCylinder > .05) {
+    const angle = state.cornealAxis * Math.PI / 180;
+    const y = 5.3 * Math.cos(angle);
+    const z = 5.3 * Math.sin(angle);
+    line([[0, -y, -z], [0, y, z]], COLORS.intermediate, .9);
+  }
+
+  if (state.toricEnabled && state.toricCylinder > .01) {
+    const angle = state.toricAxis * Math.PI / 180;
+    const y = 2.8 * Math.cos(angle);
+    const z = 2.8 * Math.sin(angle);
+    line(
+      [[lensX - .75, -y, -z], [lensX - .75, y, z]],
+      COLORS.near, .95
+    );
+  }
+}
+
+function buildRays(branches, models) {
+  const lensX = constants.lensDepth * 1000;
+  const AL = state.axialLength;
+  const rayCount = state.design === "edof" ? 12 : 20;
+
+  branches.forEach((branch, branchIndex) => {
+    const model = models[branchIndex];
+
+    for (let i = 0; i < rayCount; i++) {
+      const angle = i / rayCount * Math.PI * 2;
+      const radius = constants.entranceRadiusMM *
+        (i % 2 === 0 ? 1 : .6);
+
+      const entrance = [
+        radius * Math.cos(angle),
+        radius * Math.sin(angle)
+      ];
+
+      const atLens = Mat.vec(model.Y, entrance);
+      const atRetina = Mat.vec(model.retinaMap, entrance);
+
+      // Local external segment. The actual distant object is not drawn
+      // to scale; object vergence is used in the optical calculation.
+      const externalX = -12;
+      const externalFactor =
+        1 + externalX / 1000 * state.objectVergence;
+
+      const opacity = state.design === "edof"
+        ? .16 + branch.weight * 1.1
+        : .2 + branch.weight * .6;
+
+      line([
+        [
+          externalX,
+          entrance[0] * externalFactor,
+          entrance[1] * externalFactor
+        ],
+        [0, ...entrance],
+        [lensX, ...atLens],
+        [AL, ...atRetina]
+      ], branch.color, opacity);
+
+      if (state.showExtensions) {
+        const finiteFoci = model.fociMM.filter(Number.isFinite);
+        const furthestFocus = finiteFoci.length
+          ? Math.max(...finiteFoci)
+          : AL;
+
+        const endX = Math.min(38, Math.max(AL + 2, furthestFocus + 1));
+        const endPoint = Optics.atPosition(model, entrance, endX);
+
+        line(
+          [[AL, ...atRetina], [endX, ...endPoint]],
+          branch.color,
+          opacity * .45,
+          true
+        );
+      }
+    }
+
+    if (state.showExtensions) {
+      const uniqueFoci = [];
+
+      for (const focusX of model.fociMM) {
+        if (
+          !Number.isFinite(focusX) ||
+          focusX < lensX ||
+          focusX > 38 ||
+          uniqueFoci.some(value => Math.abs(value - focusX) < .02)
+        ) continue;
+
+        uniqueFoci.push(focusX);
+
+        const focalCurve = [];
+
+        for (let i = 0; i <= 60; i++) {
+          const angle = i / 60 * Math.PI * 2;
+          const entrance = [
+            constants.entranceRadiusMM * Math.cos(angle),
+            constants.entranceRadiusMM * Math.sin(angle)
+          ];
+          focalCurve.push([
+            focusX,
+            ...Optics.atPosition(model, entrance, focusX)
+          ]);
+        }
+
+        line(focalCurve, branch.color, .55);
+
+        const marker = new THREE.Mesh(
+          new THREE.SphereGeometry(.1, 12, 8),
+          new THREE.MeshBasicMaterial({
+            color: branch.color,
+            transparent: true,
+            opacity: .7
+          })
+        );
+
+        marker.position.set(focusX, 0, 0);
+        dynamicGroup.add(marker);
+      }
+    }
+
+    const cloud = Optics.sampleDisc(130);
+    const vertices = [];
+
+    for (const entrance of cloud) {
+      const [y, z] = Mat.vec(model.retinaMap, entrance);
+      vertices.push(AL - .015, y, z);
+    }
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute(
+      "position",
+      new THREE.Float32BufferAttribute(vertices, 3)
+    );
+
+    const points = new THREE.Points(
+      geometry,
+      new THREE.PointsMaterial({
+        color: branch.color,
+        size: .055,
+        transparent: true,
+        opacity: clamp(branch.weight * 1.5, .12, .8),
+        depthWrite: false
+      })
+    );
+
+    dynamicGroup.add(points);
+  });
+}
+
+function rebuildScene() {
+  if (!sceneReady) return;
+
+  disposeGroup(dynamicGroup);
+  buildAnatomy();
+
+  const branches = Optics.branches();
+  const models = branches.map(branch => Optics.matrices(branch.add));
+  buildRays(branches, models);
+
+  renderFrame();
+}
+
+function requestSceneRebuild() {
+  if (!sceneReady || rebuildPending) return;
+
+  rebuildPending = true;
+
+  requestAnimationFrame(() => {
+    rebuildPending = false;
+    rebuildScene();
+  });
+}
+
+function renderFrame() {
+  if (sceneReady) renderer.render(scene, camera);
+}
+
+function resizeScene() {
+  if (!sceneReady) return;
+
+  const viewport = $("viewport");
+  const width = viewport.clientWidth;
+  const height = viewport.clientHeight;
+
+  renderer.setSize(width, height, false);
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+  renderFrame();
+
+  const branches = Optics.branches();
+  const models = branches.map(branch => Optics.matrices(branch.add));
+  drawRetinalFootprint(branches, models);
+}
+
+function setView(view) {
+  if (!sceneReady) return;
+
+  const targetX = state.axialLength / 2 - 2;
+
+  if (view === "side") {
+    camera.position.set(targetX, 0, 57);
+    orbit.target.set(targetX, 0, 0);
+  } else if (view === "retina") {
+    camera.position.set(state.axialLength + 42, .01, .01);
+    orbit.target.set(state.axialLength, 0, 0);
+  } else {
+    camera.position.set(-15, 22, 48);
+    orbit.target.set(targetX, 0, 0);
+  }
+
+  orbit.update();
+  renderFrame();
+}
+
+async function initializeScene() {
+  try {
+    [THREE, { OrbitControls }, { enablePageScrollOrbit }] = await Promise.all([
+      import("three"),
+      import("three/addons/controls/OrbitControls.js"),
+      import("/js/orbit-page-scroll.js"),
+    ]);
+
+    scene = new THREE.Scene();
+
+    camera = new THREE.PerspectiveCamera(42, 1, .1, 300);
+    camera.position.set(-15, 22, 48);
+
+    renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      alpha: true
+    });
+
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setClearColor(0xf3f0e9, 0);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+    $("viewport").prepend(renderer.domElement);
+
+    renderer.domElement.addEventListener("webglcontextlost", event => {
+      event.preventDefault();
+      $("loading").style.display = "grid";
+      $("loading").textContent =
+        language === "zh"
+          ? "圖形內容中斷。請重新載入本頁以還原 3D 視圖。"
+          : "The graphics context was interrupted. Reload this page to restore the 3D view.";
+    });
+
+    orbit = new OrbitControls(camera, renderer.domElement);
+    orbit.target.set(10, 0, 0);
+    orbit.enableDamping = false;
+    orbit.minDistance = 18;
+    orbit.maxDistance = 105;
+    enablePageScrollOrbit(orbit, renderer.domElement);
+    orbit.addEventListener("change", renderFrame);
+
+    scene.add(new THREE.AmbientLight(0xdce8ef, 1.35));
+
+    const light = new THREE.DirectionalLight(0xffffff, 2.1);
+    light.position.set(-10, 20, 30);
+    scene.add(light);
+
+    dynamicGroup = new THREE.Group();
+    scene.add(dynamicGroup);
+
+    sceneReady = true;
+    $("loading").style.display = "none";
+
+    const observer = new ResizeObserver(resizeScene);
+    observer.observe($("viewport"));
+
+    resizeScene();
+    rebuildScene();
+    orbit.update();
+
+  } catch (error) {
+    console.error(error);
+    $("loading").textContent =
+      language === "zh"
+        ? "無法載入 3D 檢視。請確認瀏覽器支援 WebGL。參數與解說仍可使用。"
+        : "Unable to load the 3D viewer. Check WebGL support and the browser console. Controls and explanations remain available.";
+  }
+}
+
+/* ---------- Statistics and application updates ---------- */
+
+function update() {
+  syncControls();
+
+  const branches = Optics.branches();
+  const models = branches.map(branch => Optics.matrices(branch.add));
+
+  $("distanceStat").textContent = state.objectVergence === 0
+    ? "∞"
+    : distanceText(state.objectVergence);
+
+  const offsets = models[0].fociMM.map(value =>
+    Number.isFinite(value)
+      ? value - state.axialLength
+      : null
+  );
+
+  const signed = value => {
+    if (value === null) return "—";
+    const rounded = Math.abs(value) < .005 ? 0 : value;
+    return `${rounded > 0 ? "+" : ""}${rounded.toFixed(2)}`;
+  };
+
+  $("focusStat").textContent =
+    `${signed(offsets[0])} / ${signed(offsets[1])}`;
+
+  const weightedRMS = Math.sqrt(
+    models.reduce(
+      (sum, model, index) =>
+        sum + branches[index].weight * model.rmsMM ** 2,
+      0
+    )
+  );
+
+  $("rmsStat").textContent = (weightedRMS * 1000).toFixed(0);
+
+  drawRetinalFootprint(branches, models);
+  renderPatientExplanation(models);
+  requestSceneRebuild();
+}
+
+function fitSphere() {
+  const fit = Optics.distanceFit();
+  state.sphere = clamp(fit.mean, 0, 40);
+  state.referenceAL = state.axialLength;
+}
+
+function fitToric() {
+  const fit = Optics.distanceFit();
+
+  state.sphere = clamp(fit.mean, 0, 40);
+  state.toricCylinder = clamp(fit.cylinder, 0, 8);
+  state.toricAxis = state.cornealAxis;
+  state.toricEnabled = true;
+  state.referenceAL = state.axialLength;
+
+  if (state.design === "mono") state.design = "toric";
+}
+
+function resetModel() {
+  Object.assign(state, defaults);
+  fitSphere();
+  update();
+}
+
+function applyScenario(name) {
+  Object.assign(state, defaults);
+  fitSphere();
+
+  if (name === "near") {
+    state.objectVergence = 2.5;
+  }
+
+  if (name === "astig") {
+    state.cornealCylinder = 2;
+    fitSphere();
+  }
+
+  if (name === "corrected" || name === "rotated") {
+    state.cornealCylinder = 2;
+    fitToric();
+
+    if (name === "rotated") {
+      state.toricAxis = (state.cornealAxis + 30) % 180;
+    }
+  }
+
+  if (name === "long") {
+    // Keep the lens calibrated for the original 24 mm eye.
+    state.axialLength = 27;
+  }
+
+  if (name === "edof") {
+    state.design = "edof";
+    state.objectVergence = 1.25;
+  }
+
+  if (name === "multi") {
+    state.design = "multi";
+    state.objectVergence = 2.5;
+  }
+
+  update();
+}
+
+$("design").addEventListener("change", event => {
+  state.design = event.target.value;
+
+  if (state.design === "toric") {
+    state.toricEnabled = true;
+  } else if (state.design === "mono") {
+    state.toricEnabled = false;
+  }
+
+  // EDOF and multifocal can retain optional toric correction.
+  update();
+});
+
+$("toricEnabled").addEventListener("change", event => {
+  state.toricEnabled = event.target.checked;
+
+  if (state.design === "toric" && !state.toricEnabled) {
+    state.design = "mono";
+  } else if (state.design === "mono" && state.toricEnabled) {
+    state.design = "toric";
+  }
+
+  update();
+});
+
+$("showExtensions").addEventListener("change", event => {
+  state.showExtensions = event.target.checked;
+  update();
+});
+
+$("far").onclick = () => {
+  state.objectVergence = 0;
+  update();
+};
+
+$("intermediate").onclick = () => {
+  state.objectVergence = 1.25;
+  update();
+};
+
+$("near").onclick = () => {
+  state.objectVergence = 2.5;
+  update();
+};
+
+$("fitSphere").onclick = () => {
+  fitSphere();
+  update();
+};
+
+$("fitToric").onclick = () => {
+  fitToric();
+  update();
+};
+
+$("reset").onclick = resetModel;
+
+$("langEN").onclick = () => setLanguage("en");
+$("langZH").onclick = () => setLanguage("zh");
+
+$("view3D").onclick = () => setView("3d");
+$("viewSide").onclick = () => setView("side");
+$("viewRetina").onclick = () => setView("retina");
+
+document.querySelectorAll("[data-scenario]").forEach(button => {
+  button.onclick = () => applyScenario(button.dataset.scenario);
+});
+
+$("export").onclick = () => {
+  const payload = {
+    application: "IOL Optics Studio",
+    modelVersion: "educational-paraxial-v1",
+    warning: "Educational settings only. Not a clinical prescription.",
+    exportedAt: new Date().toISOString(),
+    parameters: { ...state },
+    constants: { ...constants },
+    assumptions: {
+      regularAstigmatismOnly: true,
+      fixedEffectiveLensPlane: true,
+      schematicEDOF: true,
+      schematicMultifocal: true,
+      predictsVisualAcuity: false
+    }
+  };
+
+  const blob = new Blob(
+    [JSON.stringify(payload, null, 2)],
+    { type: "application/json" }
+  );
+
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = "iol-educational-model.json";
+  anchor.click();
+
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+};
+
+// Keep footprint responsive even when the 3D library is unavailable.
+new ResizeObserver(() => {
+  const branches = Optics.branches();
+  const models = branches.map(branch => Optics.matrices(branch.add));
+  drawRetinalFootprint(branches, models);
+}).observe($("spot"));
+
+const params = new URLSearchParams(location.search);
+const bootLang = params.get("lang") === "zh" || params.get("lang") === "zh-Hant" ? "zh" : "en";
+
+document.getElementById("densityCompact").onclick = () => {
+  document.body.dataset.density = "compact";
+  document.getElementById("densityCompact").classList.add("active");
+  document.getElementById("densityFull").classList.remove("active");
+  document.querySelector(".controls").classList.remove("is-open");
+};
+document.getElementById("densityFull").onclick = () => {
+  document.body.dataset.density = "full";
+  document.getElementById("densityFull").classList.add("active");
+  document.getElementById("densityCompact").classList.remove("active");
+  document.querySelector(".controls").classList.add("is-open");
+};
+document.getElementById("toggleControls").onclick = () => {
+  document.querySelector(".controls").classList.toggle("is-open");
+};
+document.body.dataset.density = "full";
+document.querySelector(".controls").classList.add("is-open");
+
+fitSphere();
+setLanguage(bootLang);
+initializeScene();
+</script>
+</body>
+</html>

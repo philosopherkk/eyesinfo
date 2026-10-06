@@ -44,6 +44,7 @@ const STATIC_LABEL: Record<string, UiKey> = {
   "/qr": "qrSub",
   "/amsler": "amslerTitle",
   "/iol": "iolTitle",
+  "/iol-optics": "iolOpticsTitle",
 };
 
 function buildCrumbs(pathname: string, t: (k: UiKey) => string, locale: Locale): Crumb[] | null {
@@ -98,10 +99,16 @@ function buildCrumbs(pathname: string, t: (k: UiKey) => string, locale: Locale):
     return trail;
   }
 
-  if (pathname === "/amsler" || pathname === "/iol") {
+  if (pathname === "/amsler" || pathname === "/iol" || pathname === "/iol-optics") {
     trail.push({ label: t("toolsTitle"), href: hrefWithLang("/tools", locale) });
     trail.push({
-      label: t(pathname === "/amsler" ? "amslerTitle" : "iolTitle"),
+      label: t(
+        pathname === "/amsler"
+          ? "amslerTitle"
+          : pathname === "/iol-optics"
+            ? "iolOpticsTitle"
+            : "iolTitle",
+      ),
     });
     return trail;
   }

@@ -213,6 +213,23 @@ export const SEARCH_SYNONYMS: SearchEntry[] = [
     keywords: ["晶體", "人工晶體", "iol", "多焦", "單焦", "intraocular lens"],
   },
   {
+    id: "iolOptics",
+    kind: "tool",
+    href: "/iol-optics",
+    titleFallback: "人工晶體3D光學教學",
+    keywords: [
+      "晶體",
+      "人工晶體",
+      "iol",
+      "光學",
+      "3D",
+      "散光",
+      "眼軸",
+      "optics studio",
+      "paraxial",
+    ],
+  },
+  {
     id: "haze",
     kind: "tool",
     href: "/tools/haze",

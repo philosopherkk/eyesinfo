@@ -16,6 +16,7 @@ import { Route as ClinicRouteImport } from './routes/clinic'
 import { Route as EnRouteImport } from './routes/en'
 import { Route as InstallRouteImport } from './routes/install'
 import { Route as IolRouteImport } from './routes/iol'
+import { Route as IolOpticsRouteImport } from './routes/iol-optics'
 import { Route as JaRouteImport } from './routes/ja'
 import { Route as LegalRouteImport } from './routes/legal'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -74,6 +75,11 @@ const InstallRoute = InstallRouteImport.update({
 const IolRoute = IolRouteImport.update({
   id: '/iol',
   path: '/iol',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IolOpticsRoute = IolOpticsRouteImport.update({
+  id: '/iol-optics',
+  path: '/iol-optics',
   getParentRoute: () => rootRouteImport,
 } as any)
 const JaRoute = JaRouteImport.update({
@@ -205,6 +211,7 @@ export interface FileRoutesByFullPath {
   '/en': typeof EnRouteWithChildren
   '/install': typeof InstallRoute
   '/iol': typeof IolRoute
+  '/iol-optics': typeof IolOpticsRoute
   '/ja': typeof JaRouteWithChildren
   '/legal': typeof LegalRoute
   '/privacy': typeof PrivacyRoute
@@ -237,6 +244,7 @@ export interface FileRoutesByTo {
   '/clinic': typeof ClinicRoute
   '/install': typeof InstallRoute
   '/iol': typeof IolRoute
+  '/iol-optics': typeof IolOpticsRoute
   '/legal': typeof LegalRoute
   '/privacy': typeof PrivacyRoute
   '/qr': typeof QrRoute
@@ -267,6 +275,7 @@ export interface FileRoutesById {
   '/en': typeof EnRouteWithChildren
   '/install': typeof InstallRoute
   '/iol': typeof IolRoute
+  '/iol-optics': typeof IolOpticsRoute
   '/ja': typeof JaRouteWithChildren
   '/legal': typeof LegalRoute
   '/privacy': typeof PrivacyRoute
@@ -302,6 +311,7 @@ export interface FileRouteTypes {
     | '/en'
     | '/install'
     | '/iol'
+    | '/iol-optics'
     | '/ja'
     | '/legal'
     | '/privacy'
@@ -334,6 +344,7 @@ export interface FileRouteTypes {
     | '/clinic'
     | '/install'
     | '/iol'
+    | '/iol-optics'
     | '/legal'
     | '/privacy'
     | '/qr'
@@ -363,6 +374,7 @@ export interface FileRouteTypes {
     | '/en'
     | '/install'
     | '/iol'
+    | '/iol-optics'
     | '/ja'
     | '/legal'
     | '/privacy'
@@ -397,6 +409,7 @@ export interface RootRouteChildren {
   EnRoute: typeof EnRouteWithChildren
   InstallRoute: typeof InstallRoute
   IolRoute: typeof IolRoute
+  IolOpticsRoute: typeof IolOpticsRoute
   JaRoute: typeof JaRouteWithChildren
   LegalRoute: typeof LegalRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -461,6 +474,13 @@ declare module '@tanstack/react-router' {
       path: '/iol'
       fullPath: '/iol'
       preLoaderRoute: typeof IolRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/iol-optics': {
+      id: '/iol-optics'
+      path: '/iol-optics'
+      fullPath: '/iol-optics'
+      preLoaderRoute: typeof IolOpticsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ja': {
@@ -705,6 +725,7 @@ const rootRouteChildren: RootRouteChildren = {
   EnRoute: EnRouteWithChildren,
   InstallRoute: InstallRoute,
   IolRoute: IolRoute,
+  IolOpticsRoute: IolOpticsRoute,
   JaRoute: JaRouteWithChildren,
   LegalRoute: LegalRoute,
   PrivacyRoute: PrivacyRoute,

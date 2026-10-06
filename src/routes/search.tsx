@@ -94,6 +94,7 @@ function SearchPage() {
         .map((h) => {
           if (h.href === "/amsler") return "amsler";
           if (h.href === "/iol") return "iol";
+          if (h.href === "/iol-optics") return "iolOptics";
           return h.href.split("/").pop() ?? "";
         }),
     );
@@ -171,6 +172,7 @@ function ToolHit({
   );
   if (href === "/amsler") return <Link to="/amsler" className={cls}>{body}</Link>;
   if (href === "/iol") return <Link to="/iol" className={cls}>{body}</Link>;
+  if (href === "/iol-optics") return <Link to="/iol-optics" className={cls}>{body}</Link>;
   return (
     <EduLink href={href} className={cls}>
       {body}

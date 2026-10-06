@@ -12,6 +12,7 @@ export type ToolId =
   | "rx"
   | "amsler"
   | "iol"
+  | "iolOptics"
   | "procedures";
 
 export type ToolDef = {
@@ -26,6 +27,14 @@ export type ToolDef = {
 export const TOOLS: ToolDef[] = [
   { id: "amsler", title: "阿姆斯勒方格", blurb: "自我監察中央視力", canto: "遮一眼望中央", href: "/amsler", home: true },
   { id: "iol", title: "晶體視力示意", blurb: "單焦目標度數與多焦光暈", canto: "睇遠睇近差幾多", href: "/iol", home: true },
+  {
+    id: "iolOptics",
+    title: "人工晶體3D光學教學",
+    blurb: "近軸光線、眼軸與散光矯正示意（不是臨床度數計算器）",
+    canto: "3D 睇光線點聚焦",
+    href: "/iol-optics",
+    home: true,
+  },
   { id: "map", title: "眼圖", blurb: "撳部位打開相關專題", canto: "撳眼圖就明", href: "/tools/map", home: true },
   {
     id: "procedures",
@@ -55,6 +64,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   d3: [
     { href: "/tools/haze", label: "白內障日夜示意" },
     { href: "/iol", label: "晶體視力示意" },
+    { href: "/iol-optics", label: "人工晶體3D光學教學" },
     { href: "/t/t-cataract", label: "超聲波乳化與併發症" },
     { href: "/t/t-yag", label: "後囊混濁（不是白內障復發）" },
   ],
@@ -133,8 +143,16 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-yag", label: "後囊混濁（不是白內障復發）" },
     { href: "/t/t-cataract-day", label: "白內障手術與人工晶體植入當日過程" },
   ],
-  "t-iol": [{ href: "/iol", label: "晶體視力示意" }, { href: "/tools/halo", label: "夜間光暈比較" }],
-  "t-mfiol": [{ href: "/tools/halo", label: "夜間光暈比較" }, { href: "/iol", label: "晶體視力示意" }],
+  "t-iol": [
+    { href: "/iol", label: "晶體視力示意" },
+    { href: "/iol-optics", label: "人工晶體3D光學教學" },
+    { href: "/tools/halo", label: "夜間光暈比較" },
+  ],
+  "t-mfiol": [
+    { href: "/tools/halo", label: "夜間光暈比較" },
+    { href: "/iol", label: "晶體視力示意" },
+    { href: "/iol-optics", label: "人工晶體3D光學教學" },
+  ],
   "t-dry": [{ href: "/tools/drops", label: "滴藥水步驟" }, { href: "/t/t-lube", label: "潤眼液與潤滑劑" }, { href: "/tools/warm", label: "熱敷計時" }],
   "t-lube": [
     { href: "/tools/drops", label: "滴藥水步驟" },

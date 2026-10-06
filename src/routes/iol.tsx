@@ -408,6 +408,12 @@ function IolPage() {
 
       <div className="mt-5 flex flex-wrap gap-2 px-4">
         <Link
+          to="/iol-optics"
+          className="inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy no-underline"
+        >
+          {t("iolOpticsTitle")}
+        </Link>
+        <Link
           to="/t/$topicId"
           params={{ topicId: "t-iol" }}
           className="inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy no-underline"
