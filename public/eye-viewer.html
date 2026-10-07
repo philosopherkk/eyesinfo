@@ -1679,6 +1679,9 @@ function startViewer() {
     dirty = true;
   }
 
+  // The lens layers open stacked; cornea and retina keep the markup default.
+  const LAYER_GAP_DEFAULT = { lens: 0 };
+
   function enterDetail(id) {
     if (!LAYERS[id] || mode !== "eye") return;
 
@@ -1694,6 +1697,8 @@ function startViewer() {
     eye.visible = false;
     detailGroup = getDetail(id);
     detailGroup.visible = true;
+
+    $("explode").value = LAYER_GAP_DEFAULT[id] ?? $("explode").defaultValue;
 
     setZoomFloor();
     controls.maxDistance = 12;
