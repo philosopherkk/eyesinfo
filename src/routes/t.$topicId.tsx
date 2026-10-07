@@ -19,7 +19,7 @@ import type { UiKey } from "@/i18n/ui";
 import { pageHead } from "@/lib/page-seo";
 import { hrefWithLang, localeFromMatch } from "@/lib/locale-path";
 import { uiText } from "@/lib/ui-text";
-import { seoDescriptionFor } from "@/lib/seo-description";
+import { seoDescriptionFor, seoTitleFor } from "@/lib/seo-description";
 import { MedicalWebPageJsonLd } from "@/components/medical-webpage-jsonld";
 
 /** Retired stub IA: former hubs → merged / filled topics. */
@@ -53,18 +53,21 @@ export const Route = createFileRoute("/t/$topicId")({
     const resolved = TOPIC_ALIASES[params.topicId] ?? params.topicId;
     const raw = getTopic(resolved);
     const topic = raw ? localizeTopic(raw, locale) : null;
-    const title = topic?.title ?? uiText(locale, "relatedTopics");
+    const path = `/t/${resolved}`;
+    const seoTitle = seoTitleFor(path, locale);
+    const title = seoTitle ?? topic?.title ?? uiText(locale, "relatedTopics");
     const fallback =
       topic?.meta ||
       topic?.tag ||
-      `${uiText(locale, "homeKicker")}：${title}`;
-    const path = `/t/${resolved}`;
+      `${uiText(locale, "homeKicker")}：${topic?.title ?? title}`;
     const description = seoDescriptionFor(path, locale, fallback);
     return pageHead({
       title,
       description,
       path,
       locale,
+      // Locked SEO titles must match published copy exactly (no brand suffix).
+      verbatimTitle: Boolean(seoTitle),
     });
   },
   component: TopicPage,

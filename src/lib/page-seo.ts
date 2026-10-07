@@ -25,6 +25,11 @@ export type PageSeoInput = {
   path: string;
   /** Drives localized brand in the document title. Defaults to zh-Hant. */
   locale?: Locale;
+  /**
+   * When true, use `title` as `<title>` / og:title verbatim (no `｜brand` suffix).
+   * For locked SEO titles that must match copy exactly.
+   */
+  verbatimTitle?: boolean;
 };
 
 /** Absolute canonical URL on the public www origin (matches PUBLIC_ORIGIN). */
@@ -40,10 +45,19 @@ export function canonicalUrl(path: string): string {
  * Canonical is omitted from `__root` so it is not duplicated (links are not deduped).
  * TC (zh-Hant) is the standing canonical; hreflang lists all locales + x-default → TC.
  */
-export function pageHead({ title, description, path, locale = "zh-Hant" }: PageSeoInput) {
+export function pageHead({
+  title,
+  description,
+  path,
+  locale = "zh-Hant",
+  verbatimTitle = false,
+}: PageSeoInput) {
   const brand = seoSiteName(locale);
-  const fullTitle =
-    title === brand || title === SEO_SITE_NAME ? brand : `${title}｜${brand}`;
+  const fullTitle = verbatimTitle
+    ? title
+    : title === brand || title === SEO_SITE_NAME
+      ? brand
+      : `${title}｜${brand}`;
   const barePath = path.split("?")[0] || "/";
   const canonical = canonicalUrl(barePath);
   const hreflang: Locale[] = ["zh-Hant", "zh-Hans", "en", "ja"];

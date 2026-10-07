@@ -5,6 +5,7 @@ import {
   Scripts,
   useRouterState,
 } from "@tanstack/react-router";
+import { Analytics } from "@vercel/analytics/react";
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { AppShell } from "@/components/app-shell";
@@ -112,6 +113,8 @@ function Root() {
             <Outlet />
           </AppShell>
         </AuthProvider>
+        {/* Vercel Web Analytics only — cookieless, same-origin /_vercel/insights */}
+        <Analytics />
         <Scripts />
       </body>
     </html>

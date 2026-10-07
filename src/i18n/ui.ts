@@ -128,7 +128,7 @@ const zhHant = {
   privacyTitle: "私隱與本機資料",
   privacyCap486H: "個人資料（私隱）條例（第486章）",
   privacyCap486:
-    "本教育網站不經此頁收集姓名、身份證號碼、病歷、聯絡電話或付款資料，亦沒有會員帳戶或伺服器端病歷／問診紀錄。本站目前沒有 Google Analytics／同類第三方分析追蹤。頁面可能載入 Google Fonts 字型，以及建置環境相關腳本（若存在）。字型大小、外觀、收藏、阿姆斯勒自記及戶外時間僅存於本機 localStorage，不上載伺服器。可用下方「清除本機資料」或瀏覽器網站資料刪除本機紀錄。",
+    "本教育網站不經此頁收集姓名、身份證號碼、病歷、聯絡電話或付款資料，亦沒有會員帳戶或伺服器端病歷／問診紀錄。本站使用 Vercel 不設 cookie 的匿名瀏覽統計（只記頁面及來源），不使用 Google Analytics 或廣告追蹤，亦不儲存可識別個人的資料。頁面可能載入 Google Fonts 字型。字型大小、外觀、收藏、阿姆斯勒自記及戶外時間僅存於本機 localStorage，不上載伺服器。可用下方「清除本機資料」或瀏覽器網站資料刪除本機紀錄。",
   privacyP2:
     "本站沒有會員帳戶，不經此網站收集身份證、病歷或付款資料。請勿在任何表格上傳送敏感個人資料——本站亦沒有此類表格。問醫生清單等工具只在你裝置上顯示，不會上載問答內容。",
   privacyClearH: "清除本機資料",
@@ -675,7 +675,7 @@ const en: Record<Key, string> = {
   privacyTitle: "Privacy and on-device data",
   privacyCap486H: "Personal Data (Privacy) Ordinance (Cap. 486)",
   privacyCap486:
-    "This education site does not collect names, ID numbers, medical records, phone numbers or payment data through this page. There is no account and no server-side medical Q&A log. There is currently no Google Analytics or similar third-party analytics tracking. The page may load Google Fonts, and build-environment scripts if present. Type size, appearance, bookmarks, Amsler notes and outdoor time stay in on-device localStorage only and are not uploaded. Use “Clear local data” below or clear site data in the browser to delete local records.",
+    "This education site does not collect names, ID numbers, medical records, phone numbers or payment data through this page. There is no account and no server-side medical Q&A log. This site uses Vercel's cookie-free anonymous visit statistics (pages and referrers only). It does not use Google Analytics or advertising trackers and does not store personally identifiable data. The page may load Google Fonts. Type size, appearance, bookmarks, Amsler notes and outdoor time stay in on-device localStorage only and are not uploaded. Use “Clear local data” below or clear site data in the browser to delete local records.",
   privacyP2:
     "There is no account. This site does not collect ID numbers, medical records or payment data. Do not send sensitive personal data — there is no form for that. Tools such as the questions checklist stay on your device and are not uploaded.",
   privacyClearH: "Clear local data",
@@ -1242,7 +1242,7 @@ const ja: Record<Key, string> = {
   privacyTitle: "プライバシーと端末内データ",
   privacyCap486H: "個人資料（私隱）条例（第486章）",
   privacyCap486:
-    "本教育サイトでは、氏名・身分証番号・病歴・電話・決済情報をこの頁で集めません。会員登録も、サーバー側の病歴／問診記録もありません。現時点で Google Analytics や同種の第三者分析トラッキングはありません。ページは Google Fonts を読み込むことがあり、構築環境の関連スクリプトがある場合も読み込みます。文字サイズ、外観、保存、アムスラー自己記録、屋外時間は端末の localStorage のみで、サーバーへは上げません。下の「端末内データを消す」またはブラウザのサイトデータ削除で端末内記録を消せます。",
+    "本教育サイトでは、氏名・身分証番号・病歴・電話・決済情報をこの頁で集めません。会員登録も、サーバー側の病歴／問診記録もありません。本サイトはVercelのCookieを使わない匿名アクセス統計（ページと参照元のみ）を使用しています。Google Analyticsや広告トラッカーは使用せず、個人を特定できるデータは保存しません。ページは Google Fonts を読み込むことがあります。文字サイズ、外観、保存、アムスラー自己記録、屋外時間は端末の localStorage のみで、サーバーへは上げません。下の「端末内データを消す」またはブラウザのサイトデータ削除で端末内記録を消せます。",
   privacyP2:
     "会員登録はありません。身分証番号・病歴・決済情報は集めません。機密情報を送らないでください。その種のフォームもありません。医師に聞くリストなどのツールは端末上のみで、内容はアップロードしません。",
   privacyClearH: "端末内データを消す",
