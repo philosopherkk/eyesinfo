@@ -118,6 +118,20 @@ test("platform chrome overwrites share-card metas and always sets og:title", () 
   assert.doesNotMatch(out, /property="og:image"/);
 });
 
+test("preserves pageHead og:url (self-canonical) through share-meta rewrite", () => {
+  const html =
+    '<html><head><title>Squint</title><meta property="og:url" content="https://www.eyesinfo.org/t/t-strab?lang=en"><meta property="og:title" content="Old"></head></html>';
+  const out = injectGrokPwaHead(html, {
+    host: "www.eyesinfo.org",
+    appName: "護眼學堂",
+  });
+  assert.match(
+    out,
+    /property="og:url" content="https:\/\/www\.eyesinfo\.org\/t\/t-strab\?lang=en"/,
+  );
+  assert.equal(out.split('property="og:url"').length - 1, 1);
+});
+
 test("does not duplicate twitter:card or og:title", () => {
   const once = injectGrokPwaHead("<html><head><title>Hello World</title></head></html>");
   const twice = injectGrokPwaHead(once);

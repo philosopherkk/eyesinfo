@@ -17,7 +17,7 @@ const SHARE_META_KEYS = new Set([
   "og:image:width",
   "og:image:height",
   "og:type",
-  "og:url",
+  // og:url is owned by pageHead (self-canonical per locale) — do not strip.
   "og:site_name",
   "twitter:card",
   "twitter:title",
