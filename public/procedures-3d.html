@@ -634,10 +634,12 @@
         { OrbitControls },
         { enablePageScrollOrbit },
         { bindTeachingFullscreen },
+        kit,
       ] = await Promise.all([
         import("three/addons/controls/OrbitControls.js"),
         import("/js/orbit-page-scroll.js"),
         import("/js/teaching-fullscreen.js"),
+        import("/js/surgery-kit.js"),
       ]);
 
       const $ = id => document.getElementById(id);
@@ -936,6 +938,7 @@
       renderer.outputColorSpace = THREE.SRGBColorSpace;
       renderer.localClippingEnabled = true;
       host.appendChild(renderer.domElement);
+      kit.installEnvironment(renderer);
 
       const controls = new OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
@@ -1033,82 +1036,64 @@
         );
       }
 
-      function makeTool(parent, color = 0x528ab0) {
-        const root = new THREE.Group();
-        parent.add(root);
-
-        const shaft = mesh(
-          root,
-          new THREE.CylinderGeometry(.023, .023, 1, 16),
-          mat(0xc8d6e3, 1, { metalness: .65, roughness: .2 })
-        );
-
-        const handle = mesh(
-          root,
-          new THREE.CylinderGeometry(.09, .07, .62, 20),
-          mat(color)
-        );
-
-        const tipDot = ball(
-          root, .033, [1, 1, 1], [0, 0, 0],
-          mat(0xe1f4ff)
-        );
-
-        return {
-          root, shaft, handle,
-          set(tip, entry, width = 1) {
-            const direction = entry.clone().sub(tip).normalize();
-            const end = entry.clone().addScaledVector(direction, .72);
-
-            shaft.position.copy(tip).add(end).multiplyScalar(.5);
-            shaft.scale.set(width, tip.distanceTo(end), width);
-            shaft.quaternion.setFromUnitVectors(V(0, 1, 0), direction);
-
-            handle.position.copy(end).addScaledVector(direction, .20);
-            handle.quaternion.copy(shaft.quaternion);
-
-            tipDot.position.copy(tip);
-          }
-        };
+      function makeToolSet(parent, kinds, options = {}) {
+        const set = {};
+        kinds.forEach(kind => {
+          set[kind] = kit.createInstrument(kind, options[kind]);
+          set[kind].root.visible = false;
+          parent.add(set[kind].root);
+        });
+        return set;
       }
 
-      function makeEye(root) {
-        const outerMat = mat(0xdce9f5, .12);
-        const shell = ball(
-          root, 2, [1, 1, 1], [0, 0, 0], outerMat
-        );
+      function showOnly(set, activeKind) {
+        Object.entries(set).forEach(([kind, tool]) => {
+          tool.root.visible = kind === activeKind;
+        });
+      }
 
-        // Anterior cornea is schematic, offset in front of globe.
-        const cornea = ball(
-          root, 1,
-          [1.04, 1.04, .23],
-          [0, 0, 1.86],
-          mat(0x8edcff, .10, { roughness: .12 })
-        );
+      // Anterior segment sits at +Z. Radius-2 globe, schematic anterior
+      // segment (not to scale), shared kit eye.
+      const GLOBE_R = 2;
+      const LIMBUS_R = 1.04;
 
-        const limbus = ring(
-          root, 1.04, .025, [0, 0, 1.84],
-          mat(0xaec9df, .6)
-        );
-
-        const iris = mesh(
-          root,
-          new THREE.RingGeometry(.46, .96, 80),
-          mat(0xa78052, .26)
-        );
-        iris.position.z = 1.68;
-
-        const lens = ball(
-          root, .69, [1, 1, .30], [0, 0, 1.40],
-          mat(0xeac28a, .45)
-        );
-
-        return { shell, outerMat, cornea, limbus, iris, lens };
+      function makeEye(root, scale = 1) {
+        const limbusZ = Math.sqrt(GLOBE_R ** 2 - LIMBUS_R ** 2);
+        const eye = kit.buildEye({
+          postR: GLOBE_R,
+          postZ: 0,
+          arcEnd: Math.PI - Math.asin(LIMBUS_R / GLOBE_R),
+          limbus: [LIMBUS_R, limbusZ],
+          apexZ: 2.12,
+          irisOuter: .96,
+          irisZMargin: 1.60,
+          irisZOuter: 1.69,
+          pupil: .46,
+          irisOpacity: .26,
+          scleraOpacity: .12,
+          corneaOpacity: .10,
+          lens: { r: .69, z: 1.40, front: .15, back: .21 }
+        });
+        eye.group.scale.setScalar(scale);
+        root.add(eye.group);
+        return { ...eye, shell: eye.sclera, outerMat: eye.scleraMat };
       }
 
       function outerSettings(eye) {
         eye.shell.visible = $("showOuter").checked;
         eye.outerMat.opacity = Number($("outerOpacity").value);
+      }
+
+      // Pars plana access: roughly 49 degrees from the optical axis.
+      // Geometry only; no distances are printed anywhere.
+      const PARS_PLANA_ANGLE = 49 * Math.PI / 180;
+      function parsPlanaDirection(azimuthDegrees) {
+        const a = azimuthDegrees * Math.PI / 180;
+        return V(
+          Math.sin(PARS_PLANA_ANGLE) * Math.cos(a),
+          Math.sin(PARS_PLANA_ANGLE) * Math.sin(a),
+          Math.cos(PARS_PLANA_ANGLE)
+        );
       }
 
       const models = {};
@@ -1124,16 +1109,22 @@
         scene.add(root);
 
         const eye = makeEye(root);
-        const breakCenter = V(.72, .57, 0);
+
+        // Cutaway default: the anterior segment is ghosted so the lens and
+        // cornea do not cover the retina.
+        eye.corneaMat.opacity = .035;
+        eye.irisMat.opacity = .07;
+        eye.lens.material.opacity = .06;
+        eye.limbus.material.opacity = .2;
+        eye.pupilEdge.material.opacity = .2;
+
         const retinaRadius = 1.91;
-
-        const columns = 64;
-        const rows = 64;
-        const span = 1.68;
-
-        const positions = [];
-        const records = [];
-        const indices = [];
+        const breakXY = [.72, .57];
+        const breakDir = V(
+          breakXY[0], breakXY[1],
+          -Math.sqrt(retinaRadius ** 2 - breakXY[0] ** 2 - breakXY[1] ** 2)
+        ).normalize();
+        const breakCenter = V(breakXY[0], breakXY[1], 0);
 
         function baseZ(x, y) {
           return -Math.sqrt(
@@ -1141,75 +1132,85 @@
           );
         }
 
-        for (let row = 0; row <= rows; row++) {
-          for (let col = 0; col <= columns; col++) {
-            const x = -span + 2 * span * col / columns;
-            const y = -span + 2 * span * row / rows;
-            const valid = x * x + y * y < span * span;
+        // Polar retinal bowl: round edge at the ora, no saw-tooth.
+        const rings = 44;
+        const sectors = 96;
+        const thetaMax = 100 * Math.PI / 180;
+        const records = [];
+        const positions = [];
+        const indices = [];
 
-            positions.push(x, y, baseZ(x, y));
-
-            records.push({
-              x, y,
-              z: baseZ(x, y),
-              valid,
-              lift:
-                .56 * Math.exp(
-                  -((x - breakCenter.x) ** 2 +
-                    (y - breakCenter.y) ** 2) / .42
-                )
-            });
+        for (let ring = 0; ring <= rings; ring++) {
+          const theta = thetaMax * ring / rings;
+          for (let sector = 0; sector <= sectors; sector++) {
+            const phi = sector / sectors * Math.PI * 2;
+            const dir = V(
+              Math.sin(theta) * Math.cos(phi),
+              Math.sin(theta) * Math.sin(phi),
+              -Math.cos(theta)
+            );
+            const angle = Math.acos(clamp(dir.dot(breakDir), -1, 1));
+            const lift = .56 * Math.exp(
+              -((angle * retinaRadius) ** 2) / .42
+            );
+            records.push({ dir, lift });
+            positions.push(
+              dir.x * retinaRadius, dir.y * retinaRadius, dir.z * retinaRadius
+            );
           }
         }
 
-        for (let row = 0; row < rows; row++) {
-          for (let col = 0; col < columns; col++) {
-            const a = row * (columns + 1) + col;
+        const centroid = V();
+        for (let ring = 0; ring < rings; ring++) {
+          for (let sector = 0; sector < sectors; sector++) {
+            const a = ring * (sectors + 1) + sector;
             const b = a + 1;
-            const c = a + columns + 1;
+            const c = a + sectors + 1;
             const d = c + 1;
-
-            const centerX = (records[a].x + records[d].x) / 2;
-            const centerY = (records[a].y + records[d].y) / 2;
-
-            const inBreak =
-              (centerX - breakCenter.x) ** 2 +
-              (centerY - breakCenter.y) ** 2 < .13 ** 2;
-
-            if (
-              records[a].valid && records[b].valid &&
-              records[c].valid && records[d].valid &&
-              !inBreak
-            ) {
-              indices.push(a, b, c, b, d, c);
-            }
+            centroid.copy(records[a].dir).add(records[d].dir).normalize();
+            const chord = retinaRadius * Math.acos(
+              clamp(centroid.dot(breakDir), -1, 1)
+            );
+            if (chord > .13) indices.push(a, b, c, b, d, c);
           }
         }
 
+        const retinaColors = new Float32Array(records.length * 3);
         const retinaGeometry = new THREE.BufferGeometry();
         retinaGeometry.setAttribute(
           "position",
           new THREE.Float32BufferAttribute(positions, 3)
         );
+        retinaGeometry.setAttribute(
+          "color", new THREE.BufferAttribute(retinaColors, 3)
+        );
         retinaGeometry.setIndex(indices);
         retinaGeometry.computeVertexNormals();
 
+        const retinaBase = new THREE.Color(0xee896a);
+        const retinaPale = new THREE.Color(0xcdb7b0);
+        const retinaTmp = new THREE.Color();
+
         const retina = mesh(
           root, retinaGeometry,
-          mat(0xee896a, .87, { roughness: .65 })
+          mat(0xffffff, .88, { roughness: .65, vertexColors: true })
         );
+        retina.frustumCulled = false;
 
         const breakRim = ring(
-          root, .13, .018,
-          [breakCenter.x, breakCenter.y, -1.1],
+          root, .15, .02,
+          [0, 0, 0],
           mat(0xff454f)
         );
 
         const fluid = ball(
           root, .55, [1.05, .80, .30],
-          [breakCenter.x, breakCenter.y, -1.35],
+          [0, 0, 0],
           mat(0x66bddd, .20)
         );
+        const zAxis = V(0, 0, 1);
+        fluid.quaternion.setFromUnitVectors(zAxis, breakDir);
+        breakRim.quaternion.setFromUnitVectors(zAxis, breakDir);
 
         // Traction symbols.
         const tractionGroup = new THREE.Group();
@@ -1247,47 +1248,93 @@
           vitreousMarkers.push(object);
         }
 
-        const portPositions = [
-          V(1.64, .78, .67),
-          V(-1.64, .78, .67),
-          V(1.54, -.94, .68)
-        ];
-
-        const ports = portPositions.map(position => {
-          const object = ring(
-            root, .08, .018, position.toArray(),
-            mat(0x74cfff)
-          );
-          object.lookAt(position.clone().multiplyScalar(2));
-          return object;
+        // Pars plana ports: working instrument (index 0), light pipe (1) and
+        // infusion (2), each with a trocar cannula.
+        const portDirs = [154.6, 25.4, -31.4].map(parsPlanaDirection);
+        const portPositions = portDirs.map(d => d.clone().multiplyScalar(GLOBE_R));
+        const trocars = portPositions.map((position, i) => {
+          const trocar = kit.createTrocar({
+            inner: i === 2 ? .42 : .14, outer: .22, tubing: i === 2
+          });
+          trocar.quaternion.setFromUnitVectors(V(0, 1, 0), portDirs[i]);
+          trocar.visible = false;
+          root.add(trocar);
+          return trocar;
         });
 
-        const infusion = segment(
-          root,
-          portPositions[2],
-          V(1.23, -.73, .45),
-          .026,
-          mat(0x64d7f0)
-        );
+        // Illumination: light pipe + soft cone + local retinal highlight.
+        const lightPipe = kit.createInstrument("lightPipe");
+        root.add(lightPipe.root);
+        // The pipe points at the break, so the cone lights the work area.
+        const lightTip = breakDir.clone().multiplyScalar(retinaRadius)
+          .sub(portPositions[1]).normalize()
+          .multiplyScalar(1.9).add(portPositions[1]);
+        const lightParked = portPositions[1].clone()
+          .addScaledVector(portDirs[1], 1.1);
+        const lightAxis = V();
+        const lightDir = V();
+        const lightPos = V();
 
-        const lightPipe = segment(
-          root,
-          portPositions[1],
-          V(-.56, .28, -.27),
-          .016,
-          mat(0xbfe9ff)
-        );
+        kit.fulcrumAxis(lightAxis, lightTip, portPositions[1], portDirs[1]);
+        lightDir.copy(lightAxis).negate();
+        const beamB = lightTip.dot(lightDir);
+        const beamC = lightTip.lengthSq() - (retinaRadius - .02) ** 2;
+        const beamLength = -beamB + Math.sqrt(beamB * beamB - beamC);
+        const beamHit = lightTip.clone().addScaledVector(lightDir, beamLength);
+        const beamRadius = beamLength * Math.tan(25 * Math.PI / 180);
 
-        const lightTip = ball(
-          root, .06, [1, 1, 1],
-          [-.56, .28, -.27],
-          mat(0xd9f7ff, 1, {
-            emissive: 0x71d8ff,
-            emissiveIntensity: 1
-          })
+        const beamGeometry = new THREE.ConeGeometry(
+          beamRadius, beamLength, 48, 1, true
         );
+        beamGeometry.translate(0, -beamLength / 2, 0);
+        const beamMat = new THREE.MeshBasicMaterial({
+          color: 0xfff1bd,
+          transparent: true,
+          opacity: 0,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false,
+          side: THREE.DoubleSide
+        });
+        const beam = new THREE.Mesh(beamGeometry, beamMat);
+        beam.position.copy(lightTip);
+        beam.quaternion.setFromUnitVectors(V(0, -1, 0), lightDir);
+        beam.renderOrder = 7;
+        root.add(beam);
 
-        const tool = makeTool(root);
+        const spotMat = new THREE.MeshBasicMaterial({
+          map: kit.glowTexture(),
+          transparent: true,
+          opacity: 0,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false,
+          side: THREE.DoubleSide
+        });
+        const spot = new THREE.Mesh(
+          new THREE.CircleGeometry(beamRadius * 1.15, 48), spotMat
+        );
+        spot.position.copy(beamHit);
+        spot.quaternion.setFromUnitVectors(zAxis, beamHit.clone().normalize());
+        spot.renderOrder = 7;
+        root.add(spot);
+
+        // Working instruments (one rig, swapped at the port between stages).
+        const TOOL_BY_STAGE = {
+          3: "cutter", 4: "cutter", 5: "softTip", 6: "softTip", 7: "laser"
+        };
+        const TOOL_WINDOWS = {
+          3: [.16, .14], 4: [.20, .20], 5: [.20, .20],
+          6: [.20, .20], 7: [.12, .24]
+        };
+        const tools = makeToolSet(root, ["cutter", "softTip", "laser"]);
+        const toolParked = portPositions[0].clone()
+          .addScaledVector(portDirs[0], 1.1);
+        const toolFar = portPositions[0].clone()
+          .addScaledVector(portDirs[0], 4.8);
+        const toolTip = V();
+        const toolAxis = V();
+        const breakPosition = V();
+        let activeTool = tools.cutter;
+        let toolVisible = false;
 
         const laserGroup = new THREE.Group();
         root.add(laserGroup);
@@ -1386,10 +1433,41 @@
           }
         ];
 
+        const WORK = {
+          3: (q, out) => out.set(
+            .40 * Math.cos(q * Math.PI * 2),
+            .35 * Math.sin(q * Math.PI * 2),
+            -.25 - .45 * q
+          ),
+          4: (q, out) => out.copy(breakPosition).add(
+            V(.03, .04, .25 + .03 * Math.sin(Math.PI * 6 * q))
+          ),
+          5: (q, out) => out.copy(breakPosition).add(V(0, 0, .08)),
+          6: (q, out) => out.set(
+            .15 + .02 * Math.sin(Math.PI * 8 * q), -.25, -.70
+          ),
+          7: (q, out) => {
+            const f = q * (laserSpots.length - 1);
+            const i = Math.min(laserSpots.length - 2, Math.floor(f));
+            return out
+              .lerpVectors(
+                laserSpots[i].position, laserSpots[i + 1].position, f - i
+              )
+              .add(V(.02, 0, .32));
+          }
+        };
+
         return {
           root, labels,
           target: V(0, 0, -.20),
           home: V(3.4, 2.2, 6.7),
+          weights: kit.normalizeWeights(
+            [.8, .45, 1, 1.5, 1, 1.1, 1, 1.5, .9, .9]
+          ),
+
+          toolTipWorld() {
+            return toolVisible ? toolTip : null;
+          },
 
           update(progress) {
             outerSettings(eye);
@@ -1403,22 +1481,38 @@
               const attribute = retinaGeometry.attributes.position;
 
               records.forEach((record, i) => {
-                attribute.setZ(
+                const radius = retinaRadius - record.lift * (1 - flatten);
+                attribute.setXYZ(
                   i,
-                  record.z + record.lift * (1 - flatten)
+                  record.dir.x * radius,
+                  record.dir.y * radius,
+                  record.dir.z * radius
                 );
+
+                retinaTmp.copy(retinaBase).lerp(
+                  retinaPale,
+                  clamp(record.lift / .56 * (1 - flatten) * .85, 0, 1)
+                );
+                retinaColors[i * 3] = retinaTmp.r;
+                retinaColors[i * 3 + 1] = retinaTmp.g;
+                retinaColors[i * 3 + 2] = retinaTmp.b;
               });
 
               attribute.needsUpdate = true;
+              retinaGeometry.attributes.color.needsUpdate = true;
               retinaGeometry.computeVertexNormals();
               retinaGeometry.computeBoundingSphere();
             }
 
-            breakRim.position.z =
-              baseZ(breakCenter.x, breakCenter.y) +
-              .56 * (1 - flatten) + .018;
+            breakPosition.copy(breakDir).multiplyScalar(
+              retinaRadius - .56 * (1 - flatten) - .02
+            );
+            breakRim.position.copy(breakPosition);
 
             fluid.visible = flatten < .995;
+            fluid.position.copy(breakDir).multiplyScalar(
+              retinaRadius - .28 * (1 - flatten)
+            );
             fluid.scale.set(
               1.05, .80, Math.max(.005, .30 * (1 - flatten))
             );
@@ -1434,57 +1528,73 @@
                 i / vitreousMarkers.length < vitreousRemaining;
             });
 
-            ports.forEach((object, i) => {
-              object.visible =
-                progress >= 2 + i * .22 &&
-                !(s === 9 && p > .45 + i * .15);
+            trocars.forEach((trocar, i) => {
+              const appearAt = 2 + i * .22;
+              const slideIn = smooth((progress - appearAt) / .2);
+              const slideOut = s === 9
+                ? smooth((p - (.45 + i * .15)) / .12) : 0;
+
+              trocar.visible =
+                progress >= appearAt && !(s === 9 && p > .6 + i * .15);
+              trocar.position.copy(portPositions[i]).addScaledVector(
+                portDirs[i], .45 * (1 - slideIn) + .5 * slideOut
+              );
+              trocar.scale.setScalar(Math.max(
+                .01, smooth((progress - appearAt) / .08) * (1 - slideOut)
+              ));
             });
 
-            infusion.visible = progress >= 2.5 && progress < 9.4;
-            lightPipe.visible = progress >= 2.25 && progress < 9.35;
-            lightTip.visible = lightPipe.visible;
+            const lightIn = kit.phase(progress, 2.28, 2.62);
+            const lightOut = kit.phase(progress, 9.1, 9.4);
+            const lightAmount = lightIn * (1 - lightOut);
+            lightPipe.root.visible = progress >= 2.28 && progress < 9.45;
+            lightPos.lerpVectors(lightParked, lightTip, lightAmount);
+            kit.fulcrumAxis(lightAxis, lightPos, portPositions[1], portDirs[1]);
+            kit.placeInstrument(lightPipe, lightPos, lightAxis);
+            beamMat.opacity = .07 * lightAmount;
+            spotMat.opacity = .38 * lightAmount;
+            beam.visible = spot.visible = lightAmount > .01;
 
-            tool.root.visible = s >= 3 && s <= 7;
+            const kind = TOOL_BY_STAGE[s];
+            toolVisible = !!kind && !(s === 7 && p > .995);
+            Object.values(tools).forEach(tool => {
+              tool.root.visible = false;
+            });
 
-            let target = V(.10, -.12, -.45);
-
-            if (s === 3) {
-              target.set(
-                .40 * Math.cos(p * Math.PI * 2),
-                .35 * Math.sin(p * Math.PI * 2),
-                -.25 - .45 * p
-              );
-            } else if (s === 4) {
-              target.copy(breakRim.position).add(V(.03, .04, .25));
-            } else if (s === 5) {
-              target.copy(breakRim.position).add(V(0, 0, .08));
-            } else if (s === 6) {
-              target.set(.15, -.25, -.70);
-            } else if (s === 7) {
-              const index = Math.min(
-                laserSpots.length - 1,
-                Math.floor(p * laserSpots.length)
-              );
-              target.copy(laserSpots[index].position).add(V(.02, 0, .32));
+            let wq = 0;
+            if (toolVisible) {
+              activeTool = tools[kind];
+              activeTool.root.visible = true;
+              const [a, r] = TOOL_WINDOWS[s];
+              wq = kit.workProgress(p, a, r);
+              kit.pathTip(toolTip, p, {
+                a, r,
+                from: s === 3 ? toolFar : toolParked,
+                to: s === 7 ? toolFar : toolParked,
+                fulcrum: portPositions[0],
+                work: WORK[s]
+              });
+              kit.fulcrumAxis(toolAxis, toolTip, portPositions[0], portDirs[0]);
+              kit.placeInstrument(activeTool, toolTip, toolAxis);
             }
-
-            if (tool.root.visible) tool.set(target, portPositions[0]);
 
             const laserAmount = clamp(progress - 7, 0, 1);
             laserSpots.forEach((object, i) => {
               object.visible =
-                i < Math.floor(laserAmount * laserSpots.length);
+                i < Math.floor(
+                  (s === 7 ? kit.smooth(wq) : laserAmount) * laserSpots.length
+                );
             });
 
-            laserBeam.visible = s === 7 && p > .02 && p < .98;
+            laserBeam.visible = toolVisible && s === 7 && wq > .02 && wq < .98;
             if (laserBeam.visible) {
               const index = Math.min(
                 laserSpots.length - 1,
-                Math.floor(p * laserSpots.length)
+                Math.floor(wq * laserSpots.length)
               );
 
               const attribute = laserBeamGeometry.attributes.position;
-              attribute.setXYZ(0, target.x, target.y, target.z);
+              attribute.setXYZ(0, toolTip.x, toolTip.y, toolTip.z);
 
               const end = laserSpots[index].position;
               attribute.setXYZ(1, end.x, end.y, end.z);
@@ -1513,10 +1623,10 @@
             gasInterface.material.color.copy(gasMat.color);
 
             drainageMarkers.forEach((object, i) => {
-              object.visible = s === 5 && p > .03 && p < .97;
+              object.visible = s === 5 && wq > .03 && wq < .97;
               if (!object.visible) return;
 
-              const q = (p * 3 + i / drainageMarkers.length) % 1;
+              const q = (wq * 3 + i / drainageMarkers.length) % 1;
               const a = i * 2.399963;
 
               const origin = V(
@@ -1525,7 +1635,7 @@
                 baseZ(breakCenter.x, breakCenter.y) + .20
               );
 
-              object.position.copy(origin).lerp(target, q);
+              object.position.copy(origin).lerp(toolTip, q);
             });
           }
         };
@@ -1555,9 +1665,14 @@
           mat(0x80bfdc, .065)
         );
 
-        const entry = V(1.73, .28, .70);
-        const innerTarget = V(.73, .12, .12);
-        const direction = entry.clone().sub(innerTarget).normalize();
+        // Pars plana site (about 49 degrees from the axis), aimed at the
+        // centre of the vitreous cavity. Geometry only; no distances shown.
+        const axis = parsPlanaDirection(9.2);
+        const entry = axis.clone().multiplyScalar(GLOBE_R);
+        const innerTarget = entry.clone().multiplyScalar(.5);
+        const INSERT_DEPTH = entry.distanceTo(innerTarget);
+        const HOLD_OUTSIDE = .30;
+        const FAR_OUTSIDE = 3.4;
 
         const entryMarker = ring(
           root, .07, .013, entry.toArray(),
@@ -1572,63 +1687,47 @@
         antisepsisSymbol.lookAt(entry.clone().multiplyScalar(2));
 
         const anesthesiaSymbol = ring(
-          root, .72, .008, [0, 0, 2.10],
+          root, .72, .008, [0, 0, 2.24],
           mat(0x8ee9ff, .4)
         );
 
         const speculum = new THREE.Group();
         root.add(speculum);
         const steel = mat(0xbacbdc, 1, {
-          metalness: .6, roughness: .22
+          metalness: 1, roughness: .24
         });
+        steel.envMapIntensity = 1;
 
         curveTube(speculum, [
-          [-1.12, .76, 1.72],
-          [-.55, 1.04, 1.91],
-          [.55, 1.04, 1.91],
-          [1.12, .76, 1.72]
+          [-1.12, .76, 1.86],
+          [-.55, 1.04, 2.05],
+          [.55, 1.04, 2.05],
+          [1.12, .76, 1.86]
         ], .025, steel);
 
         curveTube(speculum, [
-          [-1.12, -.76, 1.72],
-          [-.55, -1.04, 1.91],
-          [.55, -1.04, 1.91],
-          [1.12, -.76, 1.72]
+          [-1.12, -.76, 1.86],
+          [-.55, -1.04, 2.05],
+          [.55, -1.04, 2.05],
+          [1.12, -.76, 1.86]
         ], .025, steel);
 
-        const syringe = new THREE.Group();
-        root.add(syringe);
-
-        const needle = mesh(
-          syringe,
-          new THREE.CylinderGeometry(.012, .012, 1, 12),
-          steel
-        );
-
-        const barrel = mesh(
-          syringe,
-          new THREE.CylinderGeometry(.09, .09, .68, 24),
-          mat(0xc2e4f3, .58)
-        );
-
-        const plunger = mesh(
-          syringe,
-          new THREE.CylinderGeometry(.025, .025, .50, 16),
-          mat(0xc7d9e8)
-        );
-
-        const plungerCap = mesh(
-          syringe,
-          new THREE.CylinderGeometry(.12, .12, .04, 20),
-          mat(0x5d97b6)
-        );
-
-        const syringeQuaternion = new THREE.Quaternion()
-          .setFromUnitVectors(V(0, 1, 0), direction);
-
-        [needle, barrel, plunger, plungerCap].forEach(object => {
-          object.quaternion.copy(syringeQuaternion);
+        const needle = kit.createInstrument("needle", {
+          length: INSERT_DEPTH + .25, barrel: .5
         });
+        needle.root.visible = false;
+        root.add(needle.root);
+
+        const needleTip = V();
+        const holdTip = entry.clone().addScaledVector(axis, HOLD_OUTSIDE);
+        const side = V(1, 0, 0).cross(axis).normalize();
+        const framePoints = [
+          holdTip.clone().addScaledVector(axis, INSERT_DEPTH + 1.55),
+          holdTip.clone().addScaledVector(axis, INSERT_DEPTH + 1.0)
+            .addScaledVector(side, .22),
+          holdTip.clone().addScaledVector(axis, INSERT_DEPTH + 1.0)
+            .addScaledVector(side, -.22)
+        ];
 
         const drugGroup = new THREE.Group();
         root.add(drugGroup);
@@ -1672,10 +1771,21 @@
           }
         ];
 
+        let needleVisible = false;
+
         return {
           root, labels,
           target: V(0, 0, .1),
           home: V(3.7, 2.0, 6.5),
+          weights: kit.normalizeWeights([.7, .55, .55, .9, 1.4, 1.5, 1.2, .8]),
+
+          toolTipWorld() {
+            return needleVisible ? needleTip : null;
+          },
+
+          framePoints() {
+            return needleVisible ? framePoints : [];
+          },
 
           update(progress) {
             outerSettings(eye);
@@ -1695,35 +1805,34 @@
             speculum.visible = progress >= 3 && progress < 7.35;
             entryMarker.visible = progress >= 3 && progress < 7;
 
-            syringe.visible = s >= 4 && s <= 6;
+            needleVisible = s >= 4 && s <= 6 && !(s === 6 && p > .995);
+            needle.root.visible = needleVisible;
 
-            let insertion = 0;
-            if (s === 4) insertion = smooth(p);
-            else if (s === 5) insertion = 1;
-            else if (s === 6) insertion = 1 - smooth(p);
+            // Distance of the needle tip along the entry axis
+            // (positive = outside the eye): approach, pause, entry,
+            // hold at depth, quick withdrawal, then clear of the frame.
+            let along;
+            if (s === 4) {
+              along = p < .3
+                ? lerp(FAR_OUTSIDE, HOLD_OUTSIDE, smooth(p / .3))
+                : lerp(HOLD_OUTSIDE, -INSERT_DEPTH, kit.phase(p, .3, .95));
+            } else if (s === 5) {
+              along = -INSERT_DEPTH;
+            } else if (s === 6) {
+              along = p < .45
+                ? lerp(-INSERT_DEPTH, HOLD_OUTSIDE, kit.phase(p, .12, .4))
+                : lerp(HOLD_OUTSIDE, FAR_OUTSIDE, kit.phase(p, .5, 1));
+            } else {
+              along = FAR_OUTSIDE;
+            }
 
-            const outsideTip = entry.clone()
-              .addScaledVector(direction, .53);
+            needleTip.copy(entry).addScaledVector(axis, along);
+            kit.placeInstrument(needle, needleTip, axis);
 
-            const tip = outsideTip.clone().lerp(innerTarget, insertion);
-            const needleEnd = entry.clone()
-              .addScaledVector(direction, .79);
-
-            needle.position.copy(tip).add(needleEnd).multiplyScalar(.5);
-            needle.scale.y = tip.distanceTo(needleEnd);
-
-            const barrelCenter = needleEnd.clone()
-              .addScaledVector(direction, .34);
-            barrel.position.copy(barrelCenter);
-
-            const delivery = smooth(progress - 5);
-
-            const plungerCenter = barrelCenter.clone()
-              .addScaledVector(direction, .63 - .32 * delivery);
-            plunger.position.copy(plungerCenter);
-
-            plungerCap.position.copy(plungerCenter)
-              .addScaledVector(direction, .25);
+            let delivery = 0;
+            if (s === 5) delivery = kit.phase(p, .15, .85);
+            else if (s > 5) delivery = 1;
+            needle.setPlunger(delivery);
 
             drugGroup.visible = delivery > .005;
 
@@ -1746,227 +1855,51 @@
 
       // ============================================================
       // 5. CHALAZION MODEL
-      // Lower-lid flap: free margin (lashes) on the superior edge of
-      // the plate. Local +Y = toward the free margin; local -Y = toward
-      // the inferior tarsal border. Local +Z = skin; -Z = conjunctiva.
-      // Resting pose sits inferior to the globe. Eversion hinges at the
-      // inferior tarsal border: the lid folds down and out, the margin
-      // ends lowest, the conjunctival surface faces forward, and the
-      // plate stays below the globe (never up over the cornea).
+      // Lower lid on a curved globe. Eversion is a rolling bend of the
+      // lid (not a rigid hinge): the clamped middle stays stiff, the
+      // base and the free margin roll. Lid-local frame (lesion frame):
+      // +X lateral, +Y toward the margin, +Z skin, -Z conjunctiva.
       // ============================================================
 
       function buildChalazion() {
         const root = new THREE.Group();
         scene.add(root);
 
-        // Context globe, slightly superior so the lower lid reads under it.
-        const globe = ball(
-          root, 1.20, [1, .90, 1],
-          [0, .42, -.48],
-          mat(0xe5edf5, .13)
-        );
+        const globeCenter = V(0, .42, -.48);
+        const eye = makeEye(root, .6);
+        eye.group.position.copy(globeCenter);
+        eye.scleraMat.opacity = .22;
+        eye.corneaMat.opacity = .14;
+        eye.irisMat.opacity = .6;
 
-        const iris = mesh(
-          root,
-          new THREE.RingGeometry(.25, .48, 64),
-          mat(0x9d7950, .45)
-        );
-        iris.position.set(0, .34, .64);
+        const lid = kit.createRollingLid({
+          globeCenter, globeRadius: GLOBE_R * .6
+        });
+        root.add(lid.group);
 
-        const pupil = mesh(
-          root,
-          new THREE.CircleGeometry(.25, 48),
-          mat(0x142333)
-        );
-        pupil.position.set(0, .34, .65);
-
-        // Teaching hinge at the inferior tarsal border (bottom of the
-        // plate). The flap's own origin stays at the free margin, which
-        // rests inferior to the cornea.
-        const TARSAL_HEIGHT = 1.08;
-        const hingeRest = { x: 0, y: -.48 - TARSAL_HEIGHT, z: .82 };
-        const lidHinge = new THREE.Group();
-        lidHinge.position.set(hingeRest.x, hingeRest.y, hingeRest.z);
-        root.add(lidHinge);
-
-        const flap = new THREE.Group();
-        flap.position.set(0, TARSAL_HEIGHT, 0);
-        lidHinge.add(flap);
-
-        const skinMat = mat(0xd89a8f, .12);
-        const skin = box(
-          flap, [2.70, 1.08, .10],
-          [0, -.54, .12],
-          skinMat
-        );
-
-        const tarsus = box(
-          flap, [2.58, 1.00, .10],
-          [0, -.54, 0],
-          mat(0xd4bda6, .42)
-        );
-
-        const conjunctiva = box(
-          flap, [2.68, 1.07, .035],
-          [0, -.54, -.13],
-          mat(0xef9cad, .35)
-        );
-
-        const lidMargin = box(
-          flap, [2.73, .055, .17],
-          [0, -.025, 0],
-          mat(0xc98680)
-        );
-
-        // Meibomian-gland symbols.
-        for (let i = 0; i < 12; i++) {
-          const x = -1.13 + i * .205;
-          box(
-            flap, [.045, .76, .025],
-            [x, -.57, -.08],
-            mat(0xf0ce8d, .75)
-          );
-        }
-
-        // Lower-lid lash symbols: roots on the superior free margin;
-        // shafts point forward (skin side) and slightly downward.
-        for (let i = 0; i < 22; i++) {
-          const x = -1.25 + i * .119;
-          segment(
-            flap,
-            V(x, -.01, .13),
-            V(x + .01, -.06, .29),
-            .007,
-            mat(0x443237)
-          );
-        }
-
-        const lesionCenter = V(.35, -.55, -.13);
+        const lesionFrame = lid.lesionFrame;
 
         const swelling = ball(
-          flap, .34, [1.05, .88, .58],
-          [.35, -.55, .12],
-          mat(0xcb7c77, .70)
+          lesionFrame, .30, [.90, .78, .30],
+          [0, 0, .03],
+          mat(0xcb7c77, .5)
         );
 
         const contentMat = mat(0xefbf72, .9);
         const contents = ball(
-          flap, .26, [1, .9, .55],
-          lesionCenter.toArray(),
+          lesionFrame, .24, [1, .9, .38],
+          [0, 0, -.02],
           contentMat
         );
 
-        const clampGroup = new THREE.Group();
-        flap.add(clampGroup);
+        const clampKit = kit.createChalazionClamp({ ringRadius: .27 });
+        lesionFrame.add(clampKit.root);
 
-        const steel = mat(0xc6d1dc, 1, {
-          metalness: .65, roughness: .22
-        });
-
-        const clampRing = ring(
-          clampGroup, .42, .035,
-          [.35, -.55, -.28],
-          steel
-        );
-
-        const clampPlate = mesh(
-          clampGroup,
-          new THREE.CylinderGeometry(.40, .40, .055, 48),
-          steel
-        );
-        clampPlate.rotation.x = Math.PI / 2;
-        clampPlate.position.set(.35, -.55, .30);
-
-        segment(
-          clampGroup,
-          V(.75, -.55, -.28),
-          V(1.75, -.55, -.28),
-          .030, steel
-        );
-
-        segment(
-          clampGroup,
-          V(.75, -.55, .30),
-          V(1.75, -.55, .30),
-          .030, steel
-        );
-
-        segment(
-          clampGroup,
-          V(1.75, -.55, -.28),
-          V(1.75, -.55, .30),
-          .035, steel
-        );
-
-        const incision = box(
-          flap, [.028, .45, .012],
-          [.35, -.55, -.305],
-          mat(0x842e43)
-        );
-
-        const bladeGroup = new THREE.Group();
-        flap.add(bladeGroup);
-
-        const bladeGeometry = new THREE.BufferGeometry();
-        bladeGeometry.setAttribute(
-          "position",
-          new THREE.Float32BufferAttribute([
-            -.06, -.12, 0,
-             .06, -.12, 0,
-              0,  .20, 0
-          ], 3)
-        );
-        bladeGeometry.computeVertexNormals();
-
-        const blade = mesh(bladeGroup, bladeGeometry, steel);
-        box(
-          bladeGroup,
-          [.09, .55, .055],
-          [0, -.35, 0],
-          mat(0x5d819d)
-        );
-
-        const curetteGroup = new THREE.Group();
-        flap.add(curetteGroup);
-
-        ring(
-          curetteGroup, .065, .016, [0, 0, 0],
-          steel
-        );
-
-        segment(
-          curetteGroup,
-          V(.065, 0, 0),
-          V(.98, 0, -.05),
-          .017, steel
-        );
-
-        segment(
-          curetteGroup,
-          V(.98, 0, -.05),
-          V(1.38, 0, -.05),
-          .06, mat(0x6990aa)
-        );
-
-        const anesthesia = new THREE.Group();
-        flap.add(anesthesia);
-
-        segment(
-          anesthesia,
-          V(.02, -.56, .32),
-          V(-.48, -.56, 1.02),
-          .012, steel
-        );
-
-        segment(
-          anesthesia,
-          V(-.48, -.56, 1.02),
-          V(-.75, -.56, 1.40),
-          .075, mat(0xbcdcea, .75)
-        );
+        const toolKinds = ["needle", "scalpel", "curette"];
+        const tools = makeToolSet(lesionFrame, toolKinds);
 
         const debrisGroup = new THREE.Group();
-        flap.add(debrisGroup);
+        lesionFrame.add(debrisGroup);
         const debris = [];
 
         for (let i = 0; i < 18; i++) {
@@ -1974,132 +1907,225 @@
 
           const object = ball(
             debrisGroup, .025, [1, .8, .6],
-            [.35, -.55, -.31],
+            [0, 0, -.2],
             mat(0xefbf72)
           );
 
           debris.push({
             object,
             destination: V(
-              .85 + .35 * Math.cos(a),
-              -.55 + .20 * Math.sin(a),
-              -.47
+              .60 + .25 * Math.cos(a),
+              .14 * Math.sin(a),
+              -.42
             )
           });
         }
 
-        const labelPoint = (localPoint) => {
-          const point = V();
-          return {
-            point,
-            update(target) {
-              target.copy(localPoint);
-              flap.localToWorld(target);
-            }
-          };
+        const toolTip = V();
+        const toolPoint = V();
+        const toolAxis = V();
+        let activeTool = tools.needle;
+        let toolVisible = false;
+
+        // Per-tool pose in lesion-local coordinates.
+        const TOOLS = {
+          1: {
+            kind: "needle",
+            axis: V(-.6, .15, .78).normalize(),
+            from: V(-5.2, .5, 1.3), to: V(-5.2, .5, 1.3),
+            windows: [.28, .28],
+            work: (q, out) => out.set(-.04, 0, .13)
+          },
+          4: {
+            kind: "scalpel",
+            axis: V(-.45, .75, -.5).normalize(),
+            from: V(-5.2, 1.0, -.9), to: V(-5.2, 1.0, -.9),
+            windows: [.22, .22],
+            work: (q, out) => out.set(0, .22 - .44 * q, -.21)
+          },
+          5: {
+            kind: "curette",
+            axis: V(-.3, .8, -.5).normalize(),
+            from: V(-5.2, 1.0, -.8), to: V(-5.2, 1.0, -.8),
+            windows: [.14, .14],
+            work: (q, out) => out.set(
+              .07 * Math.sin(Math.PI * 6 * q),
+              .08 * Math.sin(Math.PI * 4 * q),
+              -.17 + .07 * Math.sin(Math.PI * 3 * q) ** 2
+            )
+          }
+        };
+
+        const anchor = (xFrac, vFrac, normalSign, lift) => ({
+          point: V(),
+          normal: V(),
+          update(target) {
+            const node = lid.nodeAt(xFrac, vFrac);
+            this.normal.copy(node.normal).multiplyScalar(normalSign);
+            target.copy(node.point).addScaledVector(node.normal, lift);
+            root.localToWorld(target);
+          },
+          facing(cameraPosition) {
+            this.update(this.point);
+            return this.normal.dot(cameraPosition.clone().sub(this.point)) > .15;
+          }
+        });
+
+        const skinAnchor = anchor(.20, .62, 1, .07);
+        const tarsalAnchor = anchor(.20, .30, 1, 0);
+        const conjAnchor = anchor(.20, .68, -1, -.06);
+        const lesionAnchor = {
+          point: V(),
+          update(target) {
+            target.set(0, 0, -.3);
+            lesionFrame.localToWorld(target);
+          }
         };
 
         const labels = [
           {
             zh: "眼瞼皮膚", en: "Lid skin",
-            ...labelPoint(V(-.84, -.48, .19))
+            point: skinAnchor.point,
+            update: point => skinAnchor.update(point),
+            visible: () => skinAnchor.facing(camera.position)
           },
           {
             zh: "瞼板", en: "Tarsal plate",
-            ...labelPoint(V(-.90, -.79, -.02))
+            point: tarsalAnchor.point,
+            update: point => tarsalAnchor.update(point)
           },
           {
             zh: "瞼結膜", en: "Palpebral conjunctiva",
-            ...labelPoint(V(-.78, -.35, -.17)),
-            visible: progress => progress >= 3.4 && progress < 7.7
+            point: conjAnchor.point,
+            update: point => conjAnchor.update(point),
+            visible: progress =>
+              progress >= 3.4 && progress < 7.7 &&
+              conjAnchor.facing(camera.position)
           },
           {
             zh: "霰粒腫", en: "Chalazion",
-            ...labelPoint(V(.35, -.55, -.25))
+            point: lesionAnchor.point,
+            update: point => lesionAnchor.update(point)
           }
         ];
+
+        const skinOpacity = () => {
+          const v = Number($("outerOpacity").value);
+          return lerp(.30, .9, clamp((v - .02) / .88, 0, 1));
+        };
 
         return {
           root, labels,
           // Frame the lower lid (resting and everted) under the globe.
           target: V(0, -.70, .50),
           home: V(3.05, 1.10, 6.60),
+          weights: kit.normalizeWeights([.7, .9, 1.1, 1.5, 1.1, 1.6, .8, 1.2]),
+
+          toolTipWorld() {
+            return toolVisible ? toolTip : null;
+          },
 
           update(progress) {
             const s = Math.min(Math.floor(progress), 7);
             const p = clamp(progress - s, 0, 1);
 
-            skin.visible = $("showOuter").checked;
-            skinMat.opacity = Number($("outerOpacity").value);
+            lid.skin.mesh.visible = $("showOuter").checked;
+            lid.skinMat.opacity = skinOpacity();
 
             let eversion = smooth(progress - 3);
             if (s === 7) eversion = 1 - smooth(p);
 
-            // Lower-lid eversion about the inferior tarsal border: the lid
-            // is drawn forward away from the globe and folds down and out
-            // (about 145 degrees), so the margin ends lowest and the
-            // conjunctival surface faces forward and slightly upward.
-            lidHinge.rotation.x = Math.PI * .8 * eversion;
-            lidHinge.position.set(
-              hingeRest.x,
-              hingeRest.y + .35 * eversion,
-              hingeRest.z + .45 * eversion
-            );
+            // Clamp: slides in from the side, closes on the lesion,
+            // is released and slides away in the last stage.
+            let closed = 0;
+            let slideX = 0;
+            let showClamp = false;
+            if (s === 2) {
+              slideX = 5 * (1 - kit.phase(p, 0, .3));
+              closed = kit.phase(p, .3, .8);
+              showClamp = progress >= 1.99;
+            } else if (s > 2 && s < 7) {
+              closed = 1;
+              showClamp = true;
+            } else if (s === 7) {
+              closed = 1 - kit.phase(p, .04, .28);
+              slideX = 5 * kit.phase(p, .12, .55);
+              showClamp = p < .56;
+            }
+            clampKit.root.visible = showClamp;
+            clampKit.root.position.x = slideX;
+            clampKit.setClosed(closed);
 
-            clampGroup.visible =
-              progress >= 2.05 && !(s === 7 && p > .16);
+            // Tool poses depend on the lesion frame, so update the lid first.
+            const toolInfo = TOOLS[s];
+            let wq = 0;
+            const curettePhase = s === 5
+              ? kit.workProgress(p, TOOLS[5].windows[0], TOOLS[5].windows[1])
+              : (s > 5 ? 1 : 0);
+            const removed = smooth(curettePhase);
 
-            anesthesia.visible = s === 1;
+            lid.update({
+              eversion,
+              clamp: closed,
+              lesion: 1 - .55 * removed,
+              cavity: removed,
+              incision: smooth(progress - 4),
+              gape: smooth(progress - 5)
+            });
+            lid.setLayerOrder(eversion > .5);
 
-            incision.visible = progress >= 4;
-            incision.scale.y = Math.max(.01, smooth(progress - 4));
-            incision.scale.x =
-              1 + .85 * smooth(progress - 5);
+            toolVisible = !!toolInfo && !(p > .995);
+            Object.values(tools).forEach(tool => {
+              tool.root.visible = false;
+            });
+            if (toolVisible) {
+              activeTool = tools[toolInfo.kind];
+              activeTool.root.visible = true;
+              const [a, r] = toolInfo.windows;
+              wq = kit.workProgress(p, a, r);
+              kit.pathTip(toolPoint, p, {
+                a, r,
+                from: toolInfo.from,
+                to: toolInfo.to,
+                work: toolInfo.work
+              });
+              kit.placeInstrument(activeTool, toolPoint, toolInfo.axis);
+              if (s === 1) tools.needle.setPlunger(kit.phase(wq, .25, .8));
+              lesionFrame.updateWorldMatrix(true, false);
+              toolTip.copy(toolPoint);
+              lesionFrame.localToWorld(toolTip);
+            } else {
+              tools.needle.setPlunger(s > 1 ? 1 : 0);
+            }
 
-            bladeGroup.visible = s === 4 && p > .03 && p < .97;
-            bladeGroup.position.set(
-              .35,
-              -.36 - .35 * smooth(p),
-              -.36
-            );
-
-            curetteGroup.visible = s === 5 && p > .02 && p < .98;
-            curetteGroup.position.set(
-              .35 + .13 * Math.cos(p * Math.PI * 6),
-              -.55 + .10 * Math.sin(p * Math.PI * 6),
-              -.35 - .025 * Math.sin(p * Math.PI * 4)
-            );
-
-            const removed = smooth(progress - 5);
+            contents.visible = 1 - removed > .005;
             const remaining = 1 - removed;
-
-            contents.visible = remaining > .005;
             contents.scale.set(
               Math.max(.001, remaining),
               .9 * Math.max(.001, remaining),
-              .55 * Math.max(.001, remaining)
+              .38 * Math.max(.001, remaining)
             );
 
             // Retain some residual swelling rather than instant cure.
             const residualSwelling = 1 - .55 * removed;
             swelling.scale.set(
-              1.05 * residualSwelling,
-              .88 * residualSwelling,
-              .58 * residualSwelling
+              .9 * residualSwelling,
+              .78 * residualSwelling,
+              .30 * residualSwelling
             );
 
             debrisGroup.visible = s === 5;
 
             debris.forEach((item, i) => {
               const q = clamp(
-                p * 1.45 - i / debris.length * .45,
+                wq * 1.45 - i / debris.length * .45,
                 0, 1
               );
 
-              item.object.visible = q > .02 && q < .98;
+              item.object.visible = s === 5 && q > .02 && q < .98;
 
               item.object.position
-                .set(.35, -.55, -.32)
+                .set(0, 0, -.22)
                 .lerp(item.destination, smooth(q));
 
               item.object.scale.setScalar(1 - .65 * q);
@@ -2350,7 +2376,7 @@
         // Needed for labels attached to the everted lid.
         scene.updateMatrixWorld(true);
 
-        labelElements.forEach(({ label, element }) => {
+        const entries = labelElements.map(({ label, element }, index) => {
           if (label.update) label.update(label.point);
 
           const projected = label.point.clone().project(camera);
@@ -2363,15 +2389,30 @@
           const visible =
             !label.visible || label.visible(progress);
 
-          element.hidden = !(enabled && visible && onScreen);
           element.textContent = localized(label.zh, label.en);
 
-          element.style.left =
-            `${(projected.x * .5 + .5) * width}px`;
-
-          element.style.top =
-            `${(-projected.y * .5 + .5) * height}px`;
+          return {
+            element,
+            x: (projected.x * .5 + .5) * width,
+            y: (-projected.y * .5 + .5) * height,
+            show: enabled && visible && onScreen,
+            priority: index
+          };
         });
+
+        const avoid = [];
+        const tip = activeModel().toolTipWorld
+          ? activeModel().toolTipWorld() : null;
+        if (tip) {
+          const projectedTip = tip.clone().project(camera);
+          avoid.push({
+            x: (projectedTip.x * .5 + .5) * width,
+            y: (-projectedTip.y * .5 + .5) * height,
+            radius: 74
+          });
+        }
+
+        kit.layoutLabels(entries, avoid);
       }
 
       function refresh() {
@@ -2558,7 +2599,11 @@
           const duration = Number($("stageDuration").value);
           const speed = Number($("speed").value);
 
-          setProgress(getProgress() + delta * speed / duration);
+          setProgress(
+            kit.advanceProgress(
+              getProgress(), delta * speed / duration, activeModel().weights
+            )
+          );
 
           if (getProgress() >= activeData().stages.length) {
             playing = false;
@@ -2568,6 +2613,10 @@
         }
 
         controls.update();
+        const model = activeModel();
+        kit.frameAssist(
+          camera, model.framePoints ? model.framePoints() : []
+        );
         updateProjectedLabels();
         renderer.render(scene, camera);
       }
