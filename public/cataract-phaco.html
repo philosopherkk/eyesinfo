@@ -514,10 +514,12 @@
         { OrbitControls },
         { enablePageScrollOrbit },
         { bindTeachingFullscreen },
+        kit,
       ] = await Promise.all([
         import("three/addons/controls/OrbitControls.js"),
         import("/js/orbit-page-scroll.js"),
         import("/js/teaching-fullscreen.js"),
+        import("/js/surgery-kit.js"),
       ]);
 
       const STAGES = [
@@ -638,6 +640,12 @@
         maxPixelRatio: 2
       };
 
+      // Teaching emphasis: quick prep and OVD steps, longer rhexis / phaco / IOL.
+      // Progress stays stage-indexed; only the play loop uses these weights.
+      const STAGE_WEIGHTS = kit.normalizeWeights(
+        [.7, .85, .85, 1.5, .9, 1.8, 1.2, .8, 1.3, .8, .9]
+      );
+
       const $ = id => document.getElementById(id);
       bindTeachingFullscreen({
         target: $("teachingChrome"),
@@ -685,6 +693,7 @@
       renderer.setClearColor(0x08111e, 0);
       renderer.outputColorSpace = THREE.SRGBColorSpace;
       host.appendChild(renderer.domElement);
+      kit.installEnvironment(renderer);
 
       const controls = new OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
@@ -748,70 +757,27 @@
         );
       }
 
-      const shellMat = material(0xe5efff, .075);
-      const shell = mesh(
-        new THREE.SphereGeometry(
-          2.05, 56, 32, 0, Math.PI * 2, 0, Math.PI / 2
-        ),
-        shellMat
-      );
-      shell.rotation.x = -Math.PI / 2;
-      shell.position.z = -.45;
-
-      const corneaMat = material(0x8ad9ff, .09, { roughness: .12 });
-      const cornea = mesh(
-        new THREE.SphereGeometry(
-          1.42, 64, 32, 0, Math.PI * 2, 0, Math.PI / 2
-        ),
-        corneaMat
-      );
-      cornea.rotation.x = Math.PI / 2;
-      cornea.scale.set(1, .43, 1);
-      cornea.position.z = .83;
-      cornea.renderOrder = 6;
-
-      const limbus = mesh(
-        new THREE.TorusGeometry(1.42, .035, 12, 80),
-        material(0xa8c4db, .45)
-      );
-      limbus.position.z = .83;
-
-      const irisMat = material(0x99734a, .32);
-      const iris = mesh(
-        new THREE.RingGeometry(.68, 1.38, 96),
-        irisMat
-      );
-      iris.position.z = .66;
-
-      const pupilEdge = mesh(
-        new THREE.TorusGeometry(.68, .018, 8, 80),
-        material(0xdeb67b, .7)
-      );
-      pupilEdge.position.z = .665;
-
-      const irisLinesGeometry = new THREE.BufferGeometry();
-      const irisVertices = [];
-      for (let i = 0; i < 96; i++) {
-        const a = i / 96 * Math.PI * 2;
-        irisVertices.push(
-          .70 * Math.cos(a), .70 * Math.sin(a), .67,
-          1.35 * Math.cos(a), 1.35 * Math.sin(a), .67
-        );
-      }
-      irisLinesGeometry.setAttribute(
-        "position",
-        new THREE.Float32BufferAttribute(irisVertices, 3)
-      );
-      const irisLinesMat = new THREE.LineBasicMaterial({
-        color: 0xd8aa6d,
-        transparent: true,
-        opacity: .22,
-        depthWrite: false
+      const kitEye = kit.buildEye({
+        postR: 2.05,
+        postZ: -.45,
+        arcEnd: Math.PI / 2,
+        bridge: [[2.05, -.45], [2.05, .25], [1.62, .70], [1.42, .83]],
+        limbus: [1.42, .83],
+        apexZ: 1.44,
+        irisOuter: 1.38,
+        irisZMargin: .56,
+        irisZOuter: .66,
+        pupil: .40,
+        irisOpacity: .32,
+        scleraOpacity: .075,
+        corneaOpacity: .09
       });
-      const irisLines = new THREE.LineSegments(
-        irisLinesGeometry, irisLinesMat
-      );
-      eye.add(irisLines);
+      eye.add(kitEye.group);
+      const shell = kitEye.sclera;
+      const corneaMat = kitEye.corneaMat;
+      const irisMat = kitEye.irisMat;
+      const PUPIL_CONSTRICTED = .40;
+      const PUPIL_DILATED = .68;
 
       const capsuleMat = material(0xbecbff, .20, { roughness: .12 });
       const posteriorCapsule = mesh(
@@ -951,11 +917,16 @@
         [-.63, -.67, .025]
       ], .025, hapticMat, iol);
 
+      const entry = new THREE.Vector3(1.334, .136, .99);
+      // Outward from the corneal centre through the clear-corneal site,
+      // a shallow axis close to the iris plane.
+      const incisionOutward = new THREE.Vector3(1.334, .136, .28).normalize();
+
       const mainIncision = mesh(
         new THREE.TorusGeometry(.085, .016, 8, 32),
         material(0xff9b70, .95)
       );
-      mainIncision.position.set(1.27, .13, 1.03);
+      mainIncision.position.copy(entry);
       mainIncision.rotation.y = .75;
 
       const sideIncision = mesh(
@@ -967,70 +938,113 @@
 
       const hydrationGlow = ellipsoid(
         .16, [1, .65, .65],
-        [1.27, .13, 1.03],
+        entry.toArray(),
         material(0x6bdfff, .30)
       );
 
       const instrument = new THREE.Group();
       eye.add(instrument);
 
-      const shaftMat = material(0xb9cbdc, 1, {
-        metalness: .65, roughness: .22
-      });
-
-      const shaft = mesh(
-        new THREE.CylinderGeometry(.035, .035, 1, 16),
-        shaftMat, instrument
-      );
-
-      const handle = mesh(
-        new THREE.CylinderGeometry(.12, .085, .8, 24),
-        material(0x3c7196, 1, { metalness: .3 }),
-        instrument
-      );
-
-      const tipMarker = ellipsoid(
-        .055, [1, 1, 1], [0, 0, 0],
-        material(0xd7f1ff), instrument
-      );
-
-      const entry = new THREE.Vector3(1.27, .13, 1.03);
-      const toolTip = new THREE.Vector3();
-      const instrumentDirection = new THREE.Vector3();
-      const yAxis = new THREE.Vector3(0, 1, 0);
-      const temporary = new THREE.Vector3();
-      // Outward from the corneal centre through the clear-corneal site.
-      // Stage 1 keeps the keratome outside and approaches along this axis.
-      const incisionOutward = new THREE.Vector3(1.27, .13, .20).normalize();
-      const incisionExterior = entry.clone().addScaledVector(incisionOutward, 1.35);
-
-      function positionKeratome(target) {
-        toolTip.copy(target);
-        instrumentDirection.copy(incisionOutward);
-        const end = target.clone().addScaledVector(instrumentDirection, 1.05);
-        const length = Math.max(target.distanceTo(end), .2);
-        shaft.position.copy(target).add(end).multiplyScalar(.5);
-        shaft.scale.set(1, length, 1);
-        shaft.quaternion.setFromUnitVectors(yAxis, instrumentDirection);
-        handle.position.copy(end).addScaledVector(instrumentDirection, .25);
-        handle.quaternion.copy(shaft.quaternion);
-        tipMarker.position.copy(target);
+      const TOOL_BY_STAGE = {
+        1: "keratome", 2: "cannula", 3: "cystitome", 4: "cannula",
+        5: "phaco", 6: "ia", 7: "cannula", 8: "injector",
+        9: "ia", 10: "cannula"
+      };
+      const tools = {};
+      for (const kind of new Set(Object.values(TOOL_BY_STAGE))) {
+        tools[kind] = kit.createInstrument(kind);
+        tools[kind].root.visible = false;
+        instrument.add(tools[kind].root);
       }
 
-      function positionInstrument(target) {
-        toolTip.copy(target);
+      const toolTip = new THREE.Vector3();
+      const toolAxis = new THREE.Vector3();
+      const temporary = new THREE.Vector3();
+      const parkPoint = entry.clone().addScaledVector(incisionOutward, 1.15);
+      const farPoint = entry.clone().addScaledVector(incisionOutward, 2.9);
+      let activeTool = tools.keratome;
 
-        instrumentDirection.copy(entry).sub(target).normalize();
-        const end = entry.clone().addScaledVector(instrumentDirection, .9);
-        const length = target.distanceTo(end);
+      // Approach / retreat share of each stage; the rest is the work phase.
+      const TOOL_WINDOWS = {
+        1: [.28, .22], 2: [.20, .20], 3: [.16, .16], 4: [.18, .18],
+        5: [.14, .14], 6: [.14, .14], 7: [.18, .18], 8: [.15, .20],
+        9: [.15, .16], 10: [.14, .32]
+      };
+      const windowFor = s => TOOL_WINDOWS[s] || [.16, .16];
+      const OPENING_MAX = .56;
+      const aspirationTarget = new THREE.Vector3(.16, .04, .18);
+      const iolTarget = new THREE.Vector3(.25, .09, .30);
+      const inwardTip = new THREE.Vector3();
 
-        shaft.position.copy(target).add(end).multiplyScalar(.5);
-        shaft.scale.set(1, length, 1);
-        shaft.quaternion.setFromUnitVectors(yAxis, instrumentDirection);
+      const rhexisZ = opening =>
+        .336 * Math.sqrt(Math.max(0, 1 - (opening / 1.12) ** 2));
 
-        handle.position.copy(end).addScaledVector(instrumentDirection, .25);
-        handle.quaternion.copy(shaft.quaternion);
-        tipMarker.position.copy(target);
+      const WORK = {
+        1: (q, out) => out.copy(entry).addScaledVector(
+          incisionOutward, -.38 * Math.pow(Math.sin(Math.PI * q), .8)
+        ),
+        2: (q, out) => out.set(
+          .50 - .22 * Math.sin(Math.PI * q),
+          .09 + .04 * Math.sin(Math.PI * q * 2),
+          .87
+        ),
+        3: (q, out) => {
+          const opening = OPENING_MAX * smooth(q);
+          const r = Math.max(.03, opening);
+          const angle = q * Math.PI * 2;
+          return out.set(
+            r * Math.cos(angle), r * Math.sin(angle), rhexisZ(opening) + .025
+          );
+        },
+        4: (q, out) => out.set(
+          .57 + .008 * Math.sin(Math.PI * 20 * q), .08, .23
+        ),
+        5: (q, out) => out.copy(aspirationTarget).add(
+          inwardTip.set(
+            .02 * Math.sin(Math.PI * 16 * q),
+            .015 * Math.sin(Math.PI * 12 * q), 0
+          )
+        ),
+        6: (q, out) => {
+          const angle = q * Math.PI * 2;
+          return out.set(.48 * Math.cos(angle), .48 * Math.sin(angle), .18);
+        },
+        7: (q, out) => out.set(
+          .20 + .01 * Math.sin(Math.PI * 10 * q), .06, .25
+        ),
+        8: (q, out) => out.copy(entry).lerp(iolTarget, smooth(q)),
+        9: (q, out) => out.set(
+          .12 + .05 * Math.sin(Math.PI * 12 * q), .03, .50
+        ),
+        10: (q, out) => out.copy(entry).addScaledVector(incisionOutward, -.22)
+      };
+
+      function driveInstrument(s, p) {
+        const kind = TOOL_BY_STAGE[s];
+        const show = !!kind && !(s === 10 && p > .995);
+        instrument.visible = show;
+        if (!kind) return 0;
+
+        activeTool = tools[kind];
+        Object.values(tools).forEach(tool => {
+          tool.root.visible = tool === activeTool;
+        });
+
+        const [a, r] = windowFor(s);
+        const wq = kit.workProgress(p, a, r);
+
+        kit.pathTip(toolTip, p, {
+          a, r,
+          from: s === 1 ? farPoint : parkPoint,
+          to: s === 10 ? farPoint : parkPoint,
+          fulcrum: entry,
+          work: WORK[s]
+        });
+
+        toolTip.x += kit.tremor(progress * 40, .004) * Math.sin(Math.PI * wq);
+        kit.fulcrumAxis(toolAxis, toolTip, entry, incisionOutward);
+        kit.placeInstrument(activeTool, toolTip, toolAxis);
+        return wq;
       }
 
       const ultrasound = mesh(
@@ -1079,27 +1093,27 @@
       const LABELS = [
         {
           zh: "角膜", en: "Cornea",
-          point: new THREE.Vector3(-.95, .45, 1.14),
+          point: new THREE.Vector3(-.95, .62, 1.18),
           visible: () => true
         },
         {
           zh: "虹膜", en: "Iris",
-          point: new THREE.Vector3(-1.08, -.50, .67),
+          point: new THREE.Vector3(-1.08, -.62, .64),
           visible: () => true
         },
         {
           zh: "囊袋", en: "Capsular bag",
-          point: new THREE.Vector3(.93, -.57, -.12),
+          point: new THREE.Vector3(.80, -.80, -.10),
           visible: () => true
         },
         {
           zh: "晶體核", en: "Lens nucleus",
-          point: new THREE.Vector3(-.18, .25, .19),
+          point: new THREE.Vector3(-.62, .38, .20),
           visible: () => progress < 5.8
         },
         {
           zh: "人工晶體", en: "IOL",
-          point: new THREE.Vector3(-.25, .31, .09),
+          point: new THREE.Vector3(-.55, .35, .12),
           visible: () => progress >= 8.5
         }
       ];
@@ -1115,24 +1129,42 @@
           language === "en" ? en : `${zh} / ${en}`;
       }
 
+      const labelScratch = new THREE.Vector3();
+
       function updateLabels() {
         const rect = host.getBoundingClientRect();
         const enabled = $("showLabels").checked;
 
-        for (const label of LABELS) {
+        const entries = LABELS.map((label, index) => {
           const projected = label.point.clone().project(camera);
           const onScreen =
             projected.z > -1 && projected.z < 1 &&
             Math.abs(projected.x) < .98 &&
             Math.abs(projected.y) < .98;
-
-          label.element.hidden = !(enabled && label.visible() && onScreen);
           label.element.textContent = localized(label.zh, label.en);
-          label.element.style.left =
-            `${(projected.x * .5 + .5) * rect.width}px`;
-          label.element.style.top =
-            `${(-projected.y * .5 + .5) * rect.height}px`;
+          return {
+            element: label.element,
+            x: (projected.x * .5 + .5) * rect.width,
+            y: (-projected.y * .5 + .5) * rect.height,
+            show: enabled && label.visible() && onScreen,
+            priority: index
+          };
+        });
+
+        const avoid = [];
+        if (instrument.visible) {
+          instrument.updateWorldMatrix(true, false);
+          labelScratch.copy(toolTip);
+          eye.localToWorld(labelScratch);
+          labelScratch.project(camera);
+          avoid.push({
+            x: (labelScratch.x * .5 + .5) * rect.width,
+            y: (-labelScratch.y * .5 + .5) * rect.height,
+            radius: 78
+          });
         }
+
+        kit.layoutLabels(entries, avoid);
       }
 
       function updateModel() {
@@ -1144,31 +1176,38 @@
 
         shell.visible = $("showShell").checked;
         irisMat.opacity = Number($("irisOpacity").value);
-        irisLinesMat.opacity = irisMat.opacity * .65;
         corneaMat.opacity = Number($("corneaOpacity").value);
+
+        // Stage 1: pupil dilation (schematic; no timing or outcome implied).
+        kitEye.setPupil(
+          PUPIL_CONSTRICTED +
+          (PUPIL_DILATED - PUPIL_CONSTRICTED) * smooth(Math.min(progress, 1) * 1.15)
+        );
+
+        const wq = driveInstrument(s, p);
+        // Work-phase progress of every stage: finished = 1, upcoming = 0.
+        const stageProgress = index =>
+          index < s ? 1 : index === s ? wq : 0;
 
         mainIncision.visible = progress > 1.15;
         sideIncision.visible = progress > 1.55;
 
-        const opening = .56 * smooth(stageProgress(3));
+        const opening = OPENING_MAX * smooth(stageProgress(3));
         updateCapsuleOpening(opening);
 
         rhexisEdge.visible = opening > .015;
-        rhexisEdge.scale.setScalar(Math.max(.001, opening / .56));
-        rhexisEdge.position.z = .336 * Math.sqrt(
-          Math.max(0, 1 - (opening / 1.12) ** 2)
-        );
+        rhexisEdge.scale.setScalar(Math.max(.001, opening / OPENING_MAX));
+        rhexisEdge.position.z = rhexisZ(opening);
 
-        nucleus.visible = s < 5 || (s === 5 && p < .12);
+        nucleus.visible = s < 5 || (s === 5 && wq < .12);
         nucleus.scale.set(1, 1, .36);
 
-        fragments.visible = s === 5 && p >= .12;
-        const aspirationTarget = new THREE.Vector3(.16, .04, .18);
+        fragments.visible = s === 5 && wq >= .12;
 
         for (let i = 0; i < fragmentData.length; i++) {
           const { object, origin } = fragmentData[i];
           const q = smooth(
-            ((p - .12) / .88) * 1.38 - i / fragmentData.length * .38
+            ((wq - .12) / .88) * 1.38 - i / fragmentData.length * .38
           );
 
           object.position.copy(origin).lerp(aspirationTarget, q);
@@ -1188,17 +1227,17 @@
         let fluidAmount = 0;
         let useBagPositions = false;
 
-        if (s === 2) fluidAmount = smooth(p);
+        if (s === 2) fluidAmount = smooth(wq);
         else if (s === 3 || s === 4) fluidAmount = 1;
-        else if (s === 5) fluidAmount = 1 - smooth(p);
+        else if (s === 5) fluidAmount = 1 - smooth(wq);
         else if (s === 7) {
-          fluidAmount = smooth(p);
+          fluidAmount = smooth(wq);
           useBagPositions = true;
         } else if (s === 8) {
           fluidAmount = 1;
           useBagPositions = true;
         } else if (s === 9) {
-          fluidAmount = 1 - smooth(p);
+          fluidAmount = 1 - smooth(wq);
           useBagPositions = true;
         }
 
@@ -1212,28 +1251,28 @@
           );
 
           if (s === 9) {
-            const q = smooth(p);
+            const q = smooth(wq);
             item.object.position.lerp(
               new THREE.Vector3(.12, .03, .5), q * .6
             );
           }
         });
 
-        hydroWave.visible = s === 4 && p > .04 && p < .97;
+        hydroWave.visible = s === 4 && wq > .04 && wq < .97;
         if (s === 4) {
-          const theta = .20 + smooth(p) * (Math.PI - .40);
+          const theta = .20 + smooth(wq) * (Math.PI - .40);
           const radius = 1.09 * Math.sin(theta);
           hydroWave.scale.setScalar(Math.max(.02, radius));
           hydroWave.position.z = .30 * Math.cos(theta);
         }
 
-        iol.visible = progress >= 8;
+        iol.visible = s > 8 || (s === 8 && wq > .005);
         const insertion = smooth(stageProgress(8));
 
         iol.position.set(
-          1.38 * (1 - insertion),
-          .13 * (1 - insertion),
-          .98 * (1 - insertion)
+          entry.x * (1 - insertion),
+          entry.y * (1 - insertion),
+          (entry.z - .01) * (1 - insertion)
         );
         iol.scale.set(
           .22 + .78 * insertion,
@@ -1242,62 +1281,16 @@
         );
         iol.rotation.z = -.35 * (1 - insertion);
 
-        instrument.visible = s >= 1 && s <= 10 && p < .98;
-
-        if (s === 1) {
-          temporary.copy(incisionExterior).lerp(entry, p);
-          if (instrument.visible) positionKeratome(temporary);
-        } else if (s === 2) {
-          temporary.set(.40, .09, .87);
-        } else if (s === 3) {
-          const angle = p * Math.PI * 2;
-          temporary.set(
-            Math.max(.03, opening) * Math.cos(angle),
-            Math.max(.03, opening) * Math.sin(angle),
-            rhexisEdge.position.z + .025
-          );
-        } else if (s === 4) {
-          temporary.set(.57, .08, .23);
-        } else if (s === 5) {
-          temporary.copy(aspirationTarget);
-          temporary.x += Math.sin(p * 120) * .008;
-        } else if (s === 6) {
-          const angle = p * Math.PI * 2;
-          temporary.set(
-            .48 * Math.cos(angle),
-            .48 * Math.sin(angle),
-            .18
-          );
-        } else if (s === 7) {
-          temporary.set(.20, .06, .25);
-        } else if (s === 8) {
-          temporary.set(
-            .90 * (1 - insertion) + .25,
-            .09,
-            .69 * (1 - insertion) + .30
-          );
-        } else if (s === 9) {
-          temporary.set(.12, .03, .50);
-        } else if (s === 10) {
-          temporary.copy(mainIncision.position);
-        }
-
-        if (instrument.visible && s !== 1) positionInstrument(temporary);
-
-        const toolWidth = s === 8 ? 2.2 : 1;
-        shaft.scale.x = toolWidth;
-        shaft.scale.z = toolWidth;
-
-        ultrasound.visible = s === 5 && p > .03 && p < .97;
+        ultrasound.visible = s === 5 && wq > .03 && wq < .97;
         ultrasound.position.copy(toolTip);
-        ultrasound.scale.setScalar(1 + .25 * Math.sin(p * 100));
+        ultrasound.scale.setScalar(1 + .25 * Math.sin(wq * 100));
 
         const showAspiration = s === 5 || s === 6 || s === 9;
         aspirationMarkers.forEach((object, i) => {
-          object.visible = showAspiration && p > .02 && p < .98;
+          object.visible = showAspiration && wq > .02 && wq < .98;
           if (!object.visible) return;
 
-          const q = (p * 4 + i / aspirationMarkers.length) % 1;
+          const q = (wq * 4 + i / aspirationMarkers.length) % 1;
           const angle = i * 2.399963;
           const origin = new THREE.Vector3(
             .65 * Math.cos(angle),
@@ -1308,15 +1301,15 @@
           object.scale.setScalar(.6 + .4 * (1 - q));
         });
 
-        hydrationGlow.visible = s === 10 && p > .1;
-        hydrationGlow.material.opacity = .32 * smooth(p);
+        hydrationGlow.visible = s === 10 && wq > .1;
+        hydrationGlow.material.opacity = .32 * smooth(wq);
         hydrationGlow.scale.set(
-          1 + .35 * smooth(p), .65, .65
+          1 + .35 * smooth(wq), .65, .65
         );
 
         if (s === 10) {
           mainIncision.material.color.set(
-            p < .65 ? 0xff9b70 : 0x6bdfff
+            wq < .65 ? 0xff9b70 : 0x6bdfff
           );
         } else {
           mainIncision.material.color.set(0xff9b70);
@@ -1546,8 +1539,11 @@
         previousTime = now;
 
         if (playing) {
-          progress +=
-            delta * Number($("speed").value) / CONFIG.secondsPerStage;
+          progress = kit.advanceProgress(
+            progress,
+            delta * Number($("speed").value) / CONFIG.secondsPerStage,
+            STAGE_WEIGHTS
+          );
 
           if (progress >= STAGES.length) {
             progress = STAGES.length;
@@ -1575,12 +1571,14 @@
         },
         getProgress() { return progress; },
         getInstrument() {
-          const tip = tipMarker.getWorldPosition(new THREE.Vector3());
-          const grip = handle.getWorldPosition(new THREE.Vector3());
+          eye.updateWorldMatrix(true, true);
+          const tip = activeTool.root.getWorldPosition(new THREE.Vector3());
+          const grip = activeTool.root.localToWorld(new THREE.Vector3(0, 1.5, 0));
           return {
             stage: currentStage,
             fraction: currentFraction,
             visible: instrument.visible,
+            tool: TOOL_BY_STAGE[currentStage] || null,
             tip: { x: tip.x, y: tip.y, z: tip.z },
             handle: { x: grip.x, y: grip.y, z: grip.z }
           };
