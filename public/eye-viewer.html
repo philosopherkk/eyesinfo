@@ -409,13 +409,13 @@ const GROSS = [
   ["iris", "Iris", "虹膜", "#64ad91", [0,.63,1.16],
    "The colored diaphragm that adjusts the pupil opening.",
    "調節瞳孔開口大小的有色組織。"],
-  ["pupil", "Pupil", "瞳孔", "#34445c", [0,0,1.165],
+  ["pupil", "Pupil", "瞳孔", "#34445c", [0,0,1.125],
    "An opening in the iris, not a separate tissue layer. The dark disc represents the aperture.",
    "虹膜中央的開口，並非獨立組織層；深色圓面代表此開口。"],
-  ["lens", "Lens", "晶體", "#b6dceb", [0,.23,.72],
+  ["lens", "Lens", "晶體", "#b6dceb", [0,.23,.92],
    "A transparent, biconvex structure behind the iris. Explore capsule, cortex and nucleus.",
    "虹膜後方的透明雙凸結構。可查看囊膜、皮質及核。"],
-  ["ciliary", "Ciliary body", "睫狀體", "#b67bba", [0,.83,.85],
+  ["ciliary", "Ciliary body", "睫狀體", "#b67bba", [0,.87,1.03],
    "Associated with accommodation and aqueous production. Zonular fibers connect it to the lens.",
    "參與調節焦距及產生房水；懸韌帶連接睫狀體與晶體。"],
   ["vitreous", "Vitreous", "玻璃體", "#87bbd6", [0,-.25,-.35],
@@ -565,26 +565,36 @@ function startViewer() {
   controls.enableDamping = true;
   controls.dampingFactor = .09;
   controls.enablePan = false;
-  controls.minDistance = 1.1;
+  controls.minDistance = 1.9;
   controls.maxDistance = 12;
   controls.zoomSpeed = .8;
   enablePageScrollOrbit(controls, canvas);
 
-  scene.add(new THREE.HemisphereLight(0xe7f4ff, 0x334055, 2.1));
+  scene.add(new THREE.HemisphereLight(0xeaf3ff, 0x2a3548, 1.0));
 
-  const key = new THREE.DirectionalLight(0xffffff, 2.6);
-  key.position.set(4, 6, 7);
-  scene.add(key);
+  const keyLight = new THREE.DirectionalLight(0xfff0dc, 2.2);
+  keyLight.position.set(4, 6, 7);
+  scene.add(keyLight);
 
-  const rim = new THREE.DirectionalLight(0x7cb9ff, 1.6);
-  rim.position.set(-5, 2, -4);
-  scene.add(rim);
+  const fillLight = new THREE.DirectionalLight(0x9cc3ff, .75);
+  fillLight.position.set(-6, -1.5, 5);
+  scene.add(fillLight);
+
+  const rimLight = new THREE.DirectionalLight(0x7cb9ff, 1.5);
+  rimLight.position.set(-5, 2, -4);
+  scene.add(rimLight);
+
+  const bounceLight = new THREE.DirectionalLight(0xffd8bd, .5);
+  bounceLight.position.set(1, -7, 2);
+  scene.add(bounceLight);
 
   const eye = new THREE.Group();
   scene.add(eye);
 
-  // Positive X is removed in cutaway mode.
-  const cutPlane = new THREE.Plane(new THREE.Vector3(-1, 0, 0), 0);
+  // Positive X is removed in cutaway mode. The plane sits just off-centre
+  // so the macula (x within ±.14) is not bisected by the cut.
+  const CUT_X = .15;
+  const cutPlane = new THREE.Plane(new THREE.Vector3(-1, 0, 0), CUT_X);
   const sections = [];
   const eyeMeshes = [];
   const detailCache = new Map();
@@ -613,156 +623,705 @@ function startViewer() {
   }
 
   function addMesh(id, geometry, color, opacity = 1, parent = eye) {
-    const mesh = new THREE.Mesh(geometry, material(color, opacity));
+    const mat = color && color.isMaterial ? color : material(color, opacity);
+    const mesh = new THREE.Mesh(geometry, mat);
     mesh.userData.id = id;
     parent.add(mesh);
     if (parent === eye) eyeMeshes.push(mesh);
     return mesh;
   }
 
-  // Closed spherical shell, with its anterior opening toward +Z.
-  function shellGeometry(outer, inner, startAngle) {
+  // ---- Procedural assets (no external files) -------------------------------
+
+  function seeded(seed) {
+    let s = seed >>> 0;
+    return () => {
+      s = (s + 0x6D2B79F5) >>> 0;
+      let t = s;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function canvasTexture(canvas) {
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.colorSpace = THREE.SRGBColorSpace;
+    texture.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
+    return texture;
+  }
+
+  // Generic schematic iris, planar-mapped over x,y in [-IRIS_SPAN, IRIS_SPAN].
+  const IRIS_SPAN = .82;
+  function makeIrisTexture() {
+    const size = 512;
+    const canvas = document.createElement("canvas");
+    canvas.width = canvas.height = size;
+    const ctx = canvas.getContext("2d");
+    const rand = seeded(11);
+    const half = size / 2;
+    const k = half / IRIS_SPAN;
+    const rIn = .25 * k;
+    const rOut = .80 * k;
+
+    ctx.fillStyle = "#16241f";
+    ctx.fillRect(0, 0, size, size);
+
+    const base = ctx.createRadialGradient(half, half, rIn, half, half, rOut);
+    base.addColorStop(0, "#b08a3c");
+    base.addColorStop(.26, "#8d8d3e");
+    base.addColorStop(.45, "#4f9a62");
+    base.addColorStop(.8, "#2f8a6e");
+    base.addColorStop(1, "#1c5a50");
+    ctx.fillStyle = base;
+    ctx.beginPath();
+    ctx.arc(half, half, rOut + 2, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.lineCap = "round";
+    for (let i = 0; i < 1500; i++) {
+      const angle = rand() * Math.PI * 2;
+      const r0 = rIn * (1 + rand() * .18);
+      const r1 = rIn + (rOut - rIn) * (.5 + rand() * .5);
+      const wobble = (rand() - .5) * .07;
+      const light = rand() > .45;
+      ctx.strokeStyle = light
+        ? `rgba(235,224,170,${.05 + rand() * .13})`
+        : `rgba(14,32,28,${.07 + rand() * .16})`;
+      ctx.lineWidth = .5 + rand() * 1.5;
+      ctx.beginPath();
+      ctx.moveTo(half + r0 * Math.cos(angle), half + r0 * Math.sin(angle));
+      ctx.quadraticCurveTo(
+        half + (r0 + r1) * .5 * Math.cos(angle + wobble),
+        half + (r0 + r1) * .5 * Math.sin(angle + wobble),
+        half + r1 * Math.cos(angle + wobble * 1.6),
+        half + r1 * Math.sin(angle + wobble * 1.6)
+      );
+      ctx.stroke();
+    }
+
+    for (let i = 0; i < 18; i++) {
+      const angle = rand() * Math.PI * 2;
+      const r = rIn + (rOut - rIn) * (.55 + rand() * .35);
+      ctx.save();
+      ctx.translate(half + r * Math.cos(angle), half + r * Math.sin(angle));
+      ctx.rotate(angle);
+      ctx.fillStyle = `rgba(10,24,20,${.22 + rand() * .2})`;
+      ctx.beginPath();
+      ctx.ellipse(0, 0, 7 + rand() * 9, 2.5 + rand() * 3, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    const collarette = rIn + (rOut - rIn) * .36;
+    ctx.strokeStyle = "rgba(240,226,170,.38)";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    for (let i = 0; i <= 120; i++) {
+      const angle = i / 120 * Math.PI * 2;
+      const r = collarette + Math.sin(angle * 9) * 4 + (rand() - .5) * 5;
+      const x = half + r * Math.cos(angle);
+      const y = half + r * Math.sin(angle);
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+    ctx.stroke();
+
+    const ruff = ctx.createRadialGradient(half, half, rIn - 1, half, half, rIn + 14);
+    ruff.addColorStop(0, "rgba(28,16,8,.95)");
+    ruff.addColorStop(.45, "rgba(40,26,12,.55)");
+    ruff.addColorStop(1, "rgba(40,26,12,0)");
+    ctx.fillStyle = ruff;
+    ctx.beginPath();
+    ctx.arc(half, half, rIn + 14, 0, Math.PI * 2);
+    ctx.arc(half, half, rIn - 1, 0, Math.PI * 2, true);
+    ctx.fill("evenodd");
+
+    const limbal = ctx.createRadialGradient(half, half, rOut - 22, half, half, rOut);
+    limbal.addColorStop(0, "rgba(10,28,26,0)");
+    limbal.addColorStop(1, "rgba(10,28,26,.65)");
+    ctx.fillStyle = limbal;
+    ctx.beginPath();
+    ctx.arc(half, half, rOut, 0, Math.PI * 2);
+    ctx.fill();
+
+    return canvasTexture(canvas);
+  }
+
+  // Equirectangular: u = azimuth, v = polar angle from the front (+Z).
+  const LIMBUS_ANGLE = .58;
+  function makeScleraTexture() {
+    const w = 512;
+    const h = 256;
+    const canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext("2d");
+    const rand = seeded(23);
+    const yOf = v => (1 - v) * h;
+    const limbusV = LIMBUS_ANGLE / Math.PI;
+
+    const base = ctx.createLinearGradient(0, 0, 0, h);
+    base.addColorStop(0, "#d9dde0");
+    base.addColorStop(1 - limbusV - .02, "#e8e6e0");
+    base.addColorStop(1 - limbusV + .05, "#efece4");
+    base.addColorStop(1, "#e2e1dc");
+    ctx.fillStyle = base;
+    ctx.fillRect(0, 0, w, h);
+
+    for (let i = 0; i < 2600; i++) {
+      ctx.fillStyle = `rgba(${rand() > .5 ? "255,255,250" : "150,150,145"},${rand() * .045})`;
+      ctx.fillRect(rand() * w, rand() * h, 2 + rand() * 6, 1 + rand() * 2);
+    }
+
+    ctx.lineCap = "round";
+    for (let i = 0; i < 70; i++) {
+      let x = rand() * w;
+      let y = yOf(limbusV + .03 + rand() * .08);
+      ctx.strokeStyle = `rgba(190,70,70,${.05 + rand() * .075})`;
+      ctx.lineWidth = .6 + rand() * 1.1;
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      const length = 10 + rand() * 24;
+      for (let s = 0; s < 4; s++) {
+        x += (rand() - .5) * 9;
+        y += length / 4;
+        ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    }
+
+    const ring = ctx.createLinearGradient(0, yOf(limbusV - .005), 0, yOf(limbusV + .05));
+    ring.addColorStop(0, "rgba(125,135,150,.55)");
+    ring.addColorStop(1, "rgba(125,135,150,0)");
+    ctx.fillStyle = ring;
+    ctx.fillRect(0, yOf(limbusV + .05), w, yOf(limbusV - .005) - yOf(limbusV + .05));
+
+    return canvasTexture(canvas);
+  }
+
+  // Small gradient + soft-box scene baked into a PMREM for glints.
+  function makeEnvironment() {
+    const envScene = new THREE.Scene();
+
+    const dome = new THREE.SphereGeometry(30, 32, 16);
+    const colors = [];
+    const position = dome.attributes.position;
+    for (let i = 0; i < position.count; i++) {
+      const t = THREE.MathUtils.clamp(position.getY(i) / 30 * .5 + .5, 0, 1);
+      const low = new THREE.Color(.04, .055, .08);
+      const mid = new THREE.Color(.22, .3, .4);
+      const high = new THREE.Color(.62, .72, .86);
+      const c = t < .5
+        ? low.lerp(mid, t * 2)
+        : mid.lerp(high, (t - .5) * 2);
+      colors.push(c.r, c.g, c.b);
+    }
+    dome.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
+    envScene.add(new THREE.Mesh(
+      dome,
+      new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.BackSide })
+    ));
+
+    const panels = [
+      { size: [16, 9], at: [7, 13, 11], color: [7, 6.6, 6] },
+      { size: [5, 18], at: [-20, 3, 9], color: [2.4, 3, 4] },
+      { size: [5, 14], at: [19, 2, -5], color: [1.6, 2, 2.6] },
+      { size: [12, 3], at: [0, -9, 12], color: [1.2, 1, .9] }
+    ];
+    for (const panel of panels) {
+      const mesh = new THREE.Mesh(
+        new THREE.PlaneGeometry(...panel.size),
+        new THREE.MeshBasicMaterial({
+          color: new THREE.Color(...panel.color),
+          side: THREE.DoubleSide
+        })
+      );
+      mesh.position.set(...panel.at);
+      mesh.lookAt(0, 0, 0);
+      envScene.add(mesh);
+    }
+
+    const generator = new THREE.PMREMGenerator(renderer);
+    const target = generator.fromScene(envScene, .04);
+    generator.dispose();
+    envScene.traverse(object => {
+      object.geometry?.dispose();
+      object.material?.dispose();
+    });
+    return target.texture;
+  }
+
+  let envMap = null;
+  try {
+    envMap = makeEnvironment();
+  } catch (error) {
+    console.warn("Environment map unavailable:", error);
+  }
+
+  function irisTextureSafe() {
+    try { return makeIrisTexture(); } catch { return null; }
+  }
+  function scleraTextureSafe() {
+    try { return makeScleraTexture(); } catch { return null; }
+  }
+  const irisTexture = irisTextureSafe();
+  const scleraTexture = scleraTextureSafe();
+
+  // Alpha boost at grazing angles and on specular glints, without
+  // `transmission` or a second scene pass.
+  function glassy(mat, rim, glint, key) {
+    mat.onBeforeCompile = shader => {
+      shader.fragmentShader = shader.fragmentShader.replace(
+        "#include <opaque_fragment>",
+        `float fres = pow(1.0 - clamp(abs(dot(normalize(normal), normalize(vViewPosition))), 0.0, 1.0), 3.0);
+         float glow = dot(totalSpecular, vec3(0.3333));
+         diffuseColor.a = clamp(diffuseColor.a + fres * ${rim.toFixed(2)} + glow * ${glint.toFixed(2)}, 0.0, 1.0);
+         #include <opaque_fragment>`
+      );
+    };
+    mat.customProgramCacheKey = () => key;
+    return mat;
+  }
+
+  function tissue(color, options = {}) {
+    const opacity = options.opacity ?? 1;
+    const Material = options.physical
+      ? THREE.MeshPhysicalMaterial : THREE.MeshStandardMaterial;
+    const mat = new Material({
+      color,
+      roughness: options.roughness ?? .5,
+      metalness: 0,
+      side: THREE.DoubleSide,
+      transparent: opacity < 1,
+      opacity,
+      depthWrite: opacity === 1,
+      map: options.map ?? null,
+      vertexColors: Boolean(options.vertexColors),
+      ...(options.extra || {})
+    });
+    if (envMap) {
+      mat.envMap = envMap;
+      mat.envMapIntensity = options.env ?? .5;
+    }
+    return mat;
+  }
+
+  // ---- Profile geometry ----------------------------------------------------
+  // Everything is a closed (r, z) polygon revolved around the optical (Z) axis,
+  // so neighbouring parts share the same wall coordinates.
+
+  const V2 = (r, z) => new THREE.Vector2(r, z);
+  const polar = (R, a) => {
+    const r = R * Math.sin(a);
+    return V2(Math.abs(r) < 1e-9 ? 0 : r, R * Math.cos(a));
+  };
+  const arc = (R, a0, a1, n) => {
     const points = [];
-    const steps = 72;
-    for (let i = 0; i <= steps; i++) {
-      const a = startAngle + (Math.PI - startAngle) * i / steps;
-      points.push(new THREE.Vector2(outer * Math.sin(a),
-                                   outer * Math.cos(a)));
+    for (let i = 0; i <= n; i++) points.push(polar(R, a0 + (a1 - a0) * i / n));
+    return points;
+  };
+  const coatPolygon = (outer, inner, start, n = 72) => [
+    ...arc(outer, start, Math.PI, n),
+    ...arc(inner, Math.PI, start, n)
+  ];
+
+  function revolve(polygon, segments, options = {}) {
+    const pts = [];
+    for (const p of polygon) {
+      const last = pts[pts.length - 1];
+      if (!last || last.distanceTo(p) > 1e-6) pts.push(p.clone());
     }
-    for (let i = steps; i >= 0; i--) {
-      const a = startAngle + (Math.PI - startAngle) * i / steps;
-      points.push(new THREE.Vector2(inner * Math.sin(a),
-                                   inner * Math.cos(a)));
+    if (pts.length > 1 && pts[0].distanceTo(pts[pts.length - 1]) < 1e-6) {
+      pts.pop();
     }
-    points.push(points[0].clone());
-    const geometry = new THREE.LatheGeometry(points, 96);
-    geometry.rotateX(Math.PI / 2);
+    const n = pts.length;
+
+    let area = 0;
+    for (let i = 0; i < n; i++) {
+      const a = pts[i];
+      const b = pts[(i + 1) % n];
+      area += a.x * b.y - b.x * a.y;
+    }
+    const sign = area >= 0 ? 1 : -1;
+    const segmentNormals = pts.map((a, i) => {
+      const b = pts[(i + 1) % n];
+      const dx = b.x - a.x;
+      const dz = b.y - a.y;
+      const length = Math.hypot(dx, dz) || 1;
+      return V2(sign * dz / length, -sign * dx / length);
+    });
+
+    const creaseLimit = Math.cos(
+      THREE.MathUtils.degToRad(options.crease ?? 40)
+    );
+    const nodes = [];
+    const nodeIn = [];
+    const nodeOut = [];
+    for (let k = 0; k < n; k++) {
+      const previous = segmentNormals[(k + n - 1) % n];
+      const next = segmentNormals[k];
+      const p = pts[k];
+      const make = (normal, seg) => {
+        nodes.push({ r: p.x, z: p.y, nr: normal.x, nz: normal.y, seg, k });
+        return nodes.length - 1;
+      };
+      if (previous.dot(next) >= creaseLimit) {
+        const id = make(previous.clone().add(next).normalize(), k);
+        nodeIn[k] = nodeOut[k] = id;
+      } else {
+        nodeIn[k] = make(previous, (k + n - 1) % n);
+        nodeOut[k] = make(next, k);
+      }
+    }
+
+    const ring = segments + 1;
+    const positions = new Float32Array(nodes.length * ring * 3);
+    const normals = new Float32Array(nodes.length * ring * 3);
+    const uvs = new Float32Array(nodes.length * ring * 2);
+    const colors = options.segColor
+      ? new Float32Array(nodes.length * ring * 3) : null;
+
+    nodes.forEach((node, index) => {
+      for (let j = 0; j <= segments; j++) {
+        const phi = j / segments * Math.PI * 2;
+        const cos = Math.cos(phi);
+        const sin = Math.sin(phi);
+        let r = node.r;
+        let z = node.z;
+        if (options.displace) [r, z] = options.displace(r, z, phi);
+        const at = index * ring + j;
+        positions.set([r * cos, r * sin, z], at * 3);
+        normals.set([node.nr * cos, node.nr * sin, node.nz], at * 3);
+        uvs.set(
+          options.uv ? options.uv(node, j / segments, r, z, cos, sin)
+                     : [j / segments, node.k / n],
+          at * 2
+        );
+        if (colors) colors.set(options.segColor(node.seg), at * 3);
+      }
+    });
+
+    const indices = [];
+    for (let k = 0; k < n; k++) {
+      const a = pts[k];
+      const b = pts[(k + 1) % n];
+      if (a.x < 1e-6 && b.x < 1e-6) continue;
+      const start = nodeOut[k] * ring;
+      const end = nodeIn[(k + 1) % n] * ring;
+      for (let j = 0; j < segments; j++) {
+        indices.push(
+          start + j, end + j, start + j + 1,
+          start + j + 1, end + j, end + j + 1
+        );
+      }
+    }
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute("normal", new THREE.BufferAttribute(normals, 3));
+    geometry.setAttribute("uv", new THREE.BufferAttribute(uvs, 2));
+    if (colors) {
+      geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+    }
+    geometry.setIndex(indices);
+
+    if (options.displace) {
+      geometry.computeVertexNormals();
+      const normal = geometry.attributes.normal;
+      const tmp = new THREE.Vector3();
+      nodes.forEach((_, index) => {
+        const first = index * ring;
+        const last = first + segments;
+        tmp.fromBufferAttribute(normal, first)
+          .add(new THREE.Vector3().fromBufferAttribute(normal, last))
+          .normalize();
+        normal.setXYZ(first, tmp.x, tmp.y, tmp.z);
+        normal.setXYZ(last, tmp.x, tmp.y, tmp.z);
+      });
+    }
     return geometry;
   }
 
-  // Colored cut-face strips make the thin coats readable.
-  function sectionGeometry(outer, inner, startAngle) {
-    const positions = [];
-    const steps = 120;
-    const point = (r, a) => [.003, r * Math.sin(a), r * Math.cos(a)];
-
-    for (let i = 0; i < steps; i++) {
-      const a = startAngle + (2 * Math.PI - 2 * startAngle) * i / steps;
-      const b = startAngle + (2 * Math.PI - 2 * startAngle) * (i + 1) / steps;
-      positions.push(
-        ...point(outer, a), ...point(inner, a), ...point(outer, b),
-        ...point(inner, a), ...point(inner, b), ...point(outer, b)
-      );
+  // Flat cut face of a revolved solid on the plane x = cutX. A point at
+  // radius r lies at y = ±sqrt(r² − cutX²) on that plane.
+  function clipMinRadius(polygon, minR) {
+    const out = [];
+    const n = polygon.length;
+    for (let i = 0; i < n; i++) {
+      const a = polygon[i];
+      const b = polygon[(i + 1) % n];
+      const aIn = a.x >= minR;
+      const bIn = b.x >= minR;
+      if (aIn) out.push(a);
+      if (aIn !== bIn) {
+        const t = (minR - a.x) / (b.x - a.x);
+        out.push(V2(minR, a.y + (b.y - a.y) * t));
+      }
     }
+    return out;
+  }
 
+  function capGeometry(polygon, displace) {
+    const clipped = clipMinRadius(polygon, CUT_X);
+    const mapped = [];
+    for (const p of clipped) {
+      let r = p.x;
+      let z = p.y;
+      if (displace) {
+        const phi = Math.atan2(Math.sqrt(Math.max(r * r - CUT_X * CUT_X, 0)), CUT_X);
+        [r, z] = displace(r, z, phi);
+      }
+      const y = Math.sqrt(Math.max(r * r - CUT_X * CUT_X, 0));
+      const last = mapped[mapped.length - 1];
+      if (!last || Math.hypot(last.x - y, last.y - z) > 1e-5) {
+        mapped.push(V2(y, z));
+      }
+    }
+    if (mapped.length > 2 &&
+        Math.hypot(mapped[0].x - mapped.at(-1).x,
+                   mapped[0].y - mapped.at(-1).y) < 1e-5) mapped.pop();
+
+    const positions = [];
+    const indices = [];
+    if (mapped.length >= 3) {
+      for (const side of [1, -1]) {
+        const base = positions.length / 3;
+        const contour = mapped.map(p => V2(side * p.x, p.y));
+        const faces = THREE.ShapeUtils.triangulateShape(contour, []);
+        contour.forEach(p => positions.push(CUT_X + .002, p.x, p.y));
+        faces.forEach(face => indices.push(
+          base + face[0], base + face[1], base + face[2]
+        ));
+      }
+    }
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute(
       "position", new THREE.Float32BufferAttribute(positions, 3)
     );
-    geometry.computeVertexNormals();
+    geometry.setAttribute("normal", new THREE.Float32BufferAttribute(
+      positions.map((_, i) => (i % 3 === 0 ? 1 : 0)), 3
+    ));
+    geometry.setIndex(indices);
     return geometry;
   }
 
-  function addCoat(id, outer, inner, angle, color) {
-    addMesh(id, shellGeometry(outer, inner, angle), color);
+  function addCap(id, polygon, color, options = {}) {
+    const mat = tissue(color, {
+      roughness: options.roughness ?? .6,
+      opacity: options.opacity ?? 1,
+      env: .25
+    });
     const face = addMesh(
-      id, sectionGeometry(outer, inner, angle), color
+      id, capGeometry(polygon, options.displace), mat
     );
     face.userData.noClip = true;
+    if (options.renderOrder) face.renderOrder = options.renderOrder;
     sections.push(face);
+    return face;
   }
 
-  addCoat("sclera", 1.50, 1.425, .58, "#e1e7ed");
-  addCoat("choroid", 1.423, 1.395, .63, "#914d50");
-  addCoat("retina", 1.392, 1.360, .72, "#ef927d");
+  // ---- Wall coats: sclera, choroid, retina ---------------------------------
 
-  // Corneal dome joining the anterior scleral opening.
-  const cornealRadius = 1.05;
-  const cornealAngle = Math.asin(1.5 * Math.sin(.58) / cornealRadius);
-  const cornealCenter =
-    1.5 * Math.cos(.58) - cornealRadius * Math.cos(cornealAngle);
+  const scleraMaterial = tissue("#d9d8d6", {
+    map: scleraTexture, roughness: .4, env: .75
+  });
+  const scleraPolygon = coatPolygon(1.50, 1.425, LIMBUS_ANGLE);
+  addMesh("sclera", revolve(scleraPolygon, 80, {
+    uv: (node, u) => [u, Math.atan2(node.r, node.z) / Math.PI]
+  }), scleraMaterial);
+  addCap("sclera", scleraPolygon, "#f1f2f3");
 
-  const cornealGeometry = new THREE.SphereGeometry(
-    cornealRadius, 64, 36, 0, Math.PI * 2, 0, cornealAngle
-  );
-  cornealGeometry.rotateX(Math.PI / 2);
+  const ORA_ANGLE = .99;
+  const choroidPolygon = coatPolygon(1.423, 1.395, ORA_ANGLE);
+  addMesh("choroid", revolve(choroidPolygon, 80),
+    tissue("#914d50", { roughness: .62, env: .3 }));
+  addCap("choroid", choroidPolygon, "#914d50");
 
-  const cornea = addMesh(
-    "cornea", cornealGeometry, "#9ce9f3", .26
-  );
-  cornea.position.z = cornealCenter;
+  const retinaPolygon = coatPolygon(1.392, 1.360, ORA_ANGLE + .01);
+  addMesh("retina", revolve(retinaPolygon, 80),
+    tissue("#ef927d", { roughness: .66, env: .3 }));
+  addCap("retina", retinaPolygon, "#ef927d");
+
+  // ---- Cornea: aspheric front and back surfaces ----------------------------
+
+  const asphere = (R, k) => r =>
+    r * r / (R * (1 + Math.sqrt(Math.max(0, 1 - (1 + k) * r * r / (R * R)))));
+  const limbusOuter = polar(1.5, LIMBUS_ANGLE);
+  const limbusInner = polar(1.425, LIMBUS_ANGLE);
+  const sagOuter = asphere(.98, -.25);
+  const sagInner = asphere(.90, -.25);
+  const apexOuter = limbusOuter.y + sagOuter(limbusOuter.x);
+  const apexInner = limbusInner.y + sagInner(limbusInner.x);
+  const corneaOuter = [];
+  const corneaInner = [];
+  for (let i = 0; i <= 48; i++) {
+    const f = i / 48;
+    const ro = limbusOuter.x * f;
+    corneaOuter.push(V2(ro, apexOuter - sagOuter(ro)));
+    const ri = limbusInner.x * (1 - f);
+    corneaInner.push(V2(ri, apexInner - sagInner(ri)));
+  }
+  const corneaPolygon = [...corneaOuter, ...corneaInner];
+
+  const corneaMaterial = glassy(tissue("#bdeff6", {
+    opacity: .13, roughness: .05, physical: true, env: 2.2,
+    extra: { clearcoat: .6, clearcoatRoughness: .04, ior: 1.376 }
+  }), .4, 1.3, "cornea");
+  const cornea = addMesh("cornea", revolve(corneaPolygon, 80), corneaMaterial);
+  cornea.userData.pick = true;
   cornea.renderOrder = 5;
+  addCap("cornea", corneaPolygon, "#9fdbe6");
 
-  // Aqueous-filled anterior chamber: simplified rotational volume.
-  const aqueousPoints = [new THREE.Vector2(0, 1.16)];
-  const aqRadius = 1.0;
-  for (let i = 40; i >= 0; i--) {
-    const a = cornealAngle * i / 40;
-    aqueousPoints.push(new THREE.Vector2(
-      aqRadius * Math.sin(a),
-      cornealCenter + aqRadius * Math.cos(a)
-    ));
+  // ---- Lens: flatter front curve, steeper back curve -----------------------
+
+  const LENS_EQUATOR_Z = .92;
+  const LENS_RADIUS = .50;
+  const LENS_FRONT = .20;
+  const LENS_BACK = .30;
+  const lensFront = r =>
+    LENS_EQUATOR_Z + LENS_FRONT * Math.sqrt(Math.max(0, 1 - (r / LENS_RADIUS) ** 2));
+  const lensPolygon = [];
+  for (let i = 0; i <= 28; i++) {
+    const t = i / 28 * Math.PI / 2;
+    lensPolygon.push(V2(LENS_RADIUS * Math.sin(t),
+                        LENS_EQUATOR_Z + LENS_FRONT * Math.cos(t)));
   }
-  aqueousPoints.push(aqueousPoints[0].clone());
-  const aqGeometry = new THREE.LatheGeometry(aqueousPoints, 64);
-  aqGeometry.rotateX(Math.PI / 2);
-  const aqueous = addMesh("aqueous", aqGeometry, "#63bce7", .055);
+  for (let i = 1; i <= 28; i++) {
+    const t = Math.PI / 2 + i / 28 * Math.PI / 2;
+    lensPolygon.push(V2(LENS_RADIUS * Math.sin(t),
+                        LENS_EQUATOR_Z + LENS_BACK * Math.cos(t)));
+  }
+  const lensMaterial = glassy(tissue("#b6dceb", {
+    opacity: .72, roughness: .12, env: 1.1
+  }), .28, .6, "lens");
+  const lens = addMesh("lens", revolve(lensPolygon, 72), lensMaterial);
+  lens.renderOrder = 1;
+  addCap("lens", lensPolygon, "#a9d3e4");
+  addCap("lens", lensPolygon.map(p =>
+    V2(p.x * .58, LENS_EQUATOR_Z + (p.y - LENS_EQUATOR_Z) * .58)
+  ), "#e6d89e").position.x = .001;
+
+  // ---- Iris: sloped diaphragm with thickness and a real pupil opening ------
+
+  const PUPIL_RADIUS = .25;
+  const irisFront = r => 1.150 + (.80 - r) / .55 * .022;
+  const irisBack = r => irisFront(r) - .045;
+  const irisPolygon = [
+    V2(.81, irisFront(.80)),
+    V2(PUPIL_RADIUS, irisFront(PUPIL_RADIUS)),
+    V2(PUPIL_RADIUS, irisBack(PUPIL_RADIUS)),
+    V2(.81, irisBack(.80))
+  ];
+  const irisSegmentColors = [
+    [1, 1, 1], [.2, .12, .08], [.045, .03, .025], [.09, .06, .045]
+  ];
+  const irisMaterial = tissue("#ffffff", {
+    map: irisTexture, vertexColors: true, roughness: .55, env: .35
+  });
+  const iris = addMesh("iris", revolve(irisPolygon, 128, {
+    uv: (node, u, r, z, cos, sin) =>
+      [r * cos / (2 * IRIS_SPAN) + .5, r * sin / (2 * IRIS_SPAN) + .5],
+    segColor: seg => irisSegmentColors[seg]
+  }), irisMaterial);
+  addCap("iris", irisPolygon, "#6f9a84");
+
+  // The aperture: a dark skin hugging the lens front, so the lens is seen
+  // through the opening. It is the pick target for 瞳孔 / Pupil.
+  const pupilPolygon = [];
+  for (let i = 0; i <= 10; i++) {
+    const r = PUPIL_RADIUS * i / 10;
+    pupilPolygon.push(V2(r, lensFront(r) + .008));
+  }
+  for (let i = 10; i >= 0; i--) {
+    const r = PUPIL_RADIUS * i / 10;
+    pupilPolygon.push(V2(r, lensFront(r) + .004));
+  }
+  const pupil = addMesh("pupil", revolve(pupilPolygon, 48),
+    tissue("#050a12", { opacity: .74, roughness: .3, env: .1 }));
+  pupil.userData.pick = true;
+  pupil.renderOrder = 6;
+
+  // ---- Aqueous: anterior chamber bounded by cornea, iris and lens ----------
+
+  const aqueousPolygon = [];
+  for (let i = 0; i <= 40; i++) {
+    const r = limbusInner.x * i / 40;
+    aqueousPolygon.push(V2(r, apexInner - sagInner(r)));
+  }
+  aqueousPolygon.push(V2(.80, irisFront(.80)));
+  aqueousPolygon.push(V2(PUPIL_RADIUS, irisFront(PUPIL_RADIUS)));
+  for (let i = 0; i <= 8; i++) {
+    const r = PUPIL_RADIUS * (1 - i / 8);
+    aqueousPolygon.push(V2(r, lensFront(r)));
+  }
+  const aqueous = addMesh("aqueous",
+    revolve(aqueousPolygon, 64), "#63bce7", .055);
   aqueous.renderOrder = 4;
 
-  const iris = addMesh(
-    "iris", new THREE.RingGeometry(.25, .80, 96), "#64ad91"
-  );
-  iris.position.z = 1.16;
+  // ---- Ciliary body: wedge lining the inner scleral wall -------------------
+  // Pars plicata (ridged processes) in front, tapering pars plana behind,
+  // ending at the ora serrata where choroid and retina begin.
 
-  // A dark aperture marker, not a tissue reconstruction.
-  const pupil = addMesh(
-    "pupil", new THREE.CircleGeometry(.249, 64), "#07111d"
-  );
-  pupil.position.z = 1.157;
-
-  const irisLines = [];
-  for (let i = 0; i < 80; i++) {
-    const a = i / 80 * Math.PI * 2;
-    irisLines.push(
-      .28 * Math.cos(a), .28 * Math.sin(a), 1.164,
-      .78 * Math.cos(a), .78 * Math.sin(a), 1.164
-    );
+  const CILIARY_FRONT = .60;
+  const CILIARY_WALL = 1.422;
+  const CILIARY_PROCESSES = 48;
+  const ciliaryThickness = [
+    [.600, .120], [.630, .172], [.700, .166], [.780, .120],
+    [.860, .066], [.930, .042], [ORA_ANGLE, .027]
+  ];
+  const thicknessAt = a => {
+    for (let i = 1; i < ciliaryThickness.length; i++) {
+      const [a0, t0] = ciliaryThickness[i - 1];
+      const [a1, t1] = ciliaryThickness[i];
+      if (a <= a1) {
+        const f = (a - a0) / (a1 - a0);
+        const s = f * f * (3 - 2 * f);
+        return t0 + (t1 - t0) * s;
+      }
+    }
+    return ciliaryThickness.at(-1)[1];
+  };
+  const ciliaryInner = a => polar(CILIARY_WALL - thicknessAt(a), a);
+  const ciliaryPolygon = [];
+  for (let i = 0; i <= 12; i++) {
+    ciliaryPolygon.push(polar(CILIARY_WALL,
+      CILIARY_FRONT + (ORA_ANGLE - CILIARY_FRONT) * i / 12));
   }
-  const irisLineGeometry = new THREE.BufferGeometry();
-  irisLineGeometry.setAttribute(
-    "position", new THREE.Float32BufferAttribute(irisLines, 3)
-  );
-  eye.add(new THREE.LineSegments(
-    irisLineGeometry,
-    new THREE.LineBasicMaterial({ color: "#366f62" })
-  ));
+  for (let i = 0; i <= 28; i++) {
+    ciliaryPolygon.push(ciliaryInner(
+      ORA_ANGLE - (ORA_ANGLE - CILIARY_FRONT) * i / 28
+    ));
+  }
+  const processRidge = phi =>
+    Math.pow(.5 + .5 * Math.cos(CILIARY_PROCESSES * phi), 1.4);
+  const ciliaryDisplace = (r, z, phi) => {
+    const R = Math.hypot(r, z);
+    if (R > CILIARY_WALL - .012) return [r, z];
+    const a = Math.atan2(r, z);
+    const weight = THREE.MathUtils.clamp((.80 - a) / .12, 0, 1);
+    const lift = weight * (1 - processRidge(phi)) * .055;
+    const scale = (R + lift) / R;
+    return [r * scale, z * scale];
+  };
+  addMesh("ciliary", revolve(ciliaryPolygon, 192, {
+    displace: ciliaryDisplace, crease: 50
+  }), tissue("#b67bba", { roughness: .5, env: .45 }));
+  addCap("ciliary", ciliaryPolygon, "#b67bba", { displace: ciliaryDisplace });
 
-  const lens = addMesh(
-    "lens", new THREE.SphereGeometry(1, 64, 36), "#b6dceb", .72
-  );
-  lens.scale.set(.50, .50, .235);
-  lens.position.z = .75;
-
-  const lensFaceGeometry = new THREE.CircleGeometry(1, 64);
-  lensFaceGeometry.scale(.235, .50, 1);
-  lensFaceGeometry.rotateY(Math.PI / 2);
-  const lensFace = addMesh("lens", lensFaceGeometry, "#a7d0e2");
-  lensFace.position.set(.004, 0, .75);
-  lensFace.userData.noClip = true;
-  sections.push(lensFace);
-
-  const ciliary = addMesh(
-    "ciliary", new THREE.TorusGeometry(.81, .095, 16, 96), "#b67bba"
-  );
-  ciliary.position.z = .86;
-
+  // Zonules run from the process tips to the lens equator.
+  const tip = ciliaryInner(.66);
   const zonulePositions = [];
-  for (let i = 0; i < 40; i++) {
-    const a = i / 40 * Math.PI * 2;
-    zonulePositions.push(
-      .76 * Math.cos(a), .76 * Math.sin(a), .86,
-      .49 * Math.cos(a), .49 * Math.sin(a), .75
-    );
+  for (let i = 0; i < CILIARY_PROCESSES; i++) {
+    const phi = i / CILIARY_PROCESSES * Math.PI * 2;
+    const cos = Math.cos(phi);
+    const sin = Math.sin(phi);
+    for (const dz of [.035, -.035]) {
+      zonulePositions.push(
+        tip.x * cos, tip.x * sin, tip.y,
+        LENS_RADIUS * .98 * cos, LENS_RADIUS * .98 * sin, LENS_EQUATOR_Z + dz
+      );
+    }
   }
   const zonuleGeometry = new THREE.BufferGeometry();
   zonuleGeometry.setAttribute(
@@ -770,17 +1329,29 @@ function startViewer() {
   );
   eye.add(new THREE.LineSegments(
     zonuleGeometry,
-    new THREE.LineBasicMaterial({ color: "#d4c7df" })
+    new THREE.LineBasicMaterial({ color: "#d9cde4", transparent: true, opacity: .75 })
   ));
 
-  const vitreousGeometry = new THREE.SphereGeometry(
-    1.33, 64, 36, 0, Math.PI * 2, .76, Math.PI - .76
-  );
-  vitreousGeometry.rotateX(Math.PI / 2);
-  const vitreous = addMesh(
-    "vitreous", vitreousGeometry, "#87bbd6", .035
-  );
+  // ---- Vitreous: fills the cavity behind the lens --------------------------
+
+  const vitreousPolygon = [
+    ...arc(1.358, ORA_ANGLE, Math.PI, 48),
+    V2(0, LENS_EQUATOR_Z - LENS_BACK)
+  ];
+  for (let i = 1; i <= 24; i++) {
+    const t = Math.PI - i / 24 * Math.PI / 2;
+    vitreousPolygon.push(V2(LENS_RADIUS * Math.sin(t),
+                            LENS_EQUATOR_Z + LENS_BACK * Math.cos(t)));
+  }
+  for (let i = 1; i <= 14; i++) {
+    vitreousPolygon.push(ciliaryInner(.74 + (ORA_ANGLE - .74) * i / 14));
+  }
+  const vitreous = addMesh("vitreous",
+    revolve(vitreousPolygon, 72), "#87bbd6", .045);
   vitreous.renderOrder = 3;
+  addCap("vitreous", vitreousPolygon, "#87bbd6", { opacity: .13, renderOrder: 3 });
+
+  // ---- Posterior pole: macula, optic nerve and disc (unchanged) ------------
 
   const macula = addMesh(
     "macula", new THREE.CircleGeometry(.14, 48), "#edc15a"
@@ -944,6 +1515,51 @@ function startViewer() {
     }
   }
 
+  // The globe (radius 1.5) and corneal apex (about 1.66) must never swallow
+  // the camera. With the target at the origin the zoom floor sits outside the
+  // globe; once a structure is focused the floor relaxes so layer views can
+  // still open, and a hard radial floor takes over for everything else.
+  const CAMERA_FLOOR = 1.85;
+  const ZOOM_FLOOR_CUTAWAY = 1.9;
+  const ZOOM_FLOOR_WHOLE = 2.4;
+  const ZOOM_FLOOR_FOCUSED = 1.1;
+  const DEFAULT_DIRECTION = new THREE.Vector3(4.8, 2.1, 4.5).normalize();
+  let atDefaultView = true;
+
+  // Aspect-aware framing: the eye (with its nerve) must fit both the vertical
+  // and the horizontal field of view, which matters on narrow phone stages.
+  function defaultDistance() {
+    const width = stage.clientWidth || 800;
+    const height = stage.clientHeight || 500;
+    const tan = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+    const extent = 2.35;
+    const fitHeight = extent / tan;
+    const fitWidth = extent / (tan * (width / height));
+    return THREE.MathUtils.clamp(Math.max(fitHeight, fitWidth), 5.6, 10);
+  }
+
+  function frameDefaultView() {
+    controls.target.set(0, 0, 0);
+    camera.position.copy(DEFAULT_DIRECTION).multiplyScalar(defaultDistance());
+    atDefaultView = true;
+  }
+
+  function setZoomFloor() {
+    controls.minDistance = mode !== "eye"
+      ? 1.8
+      : focused ? ZOOM_FLOOR_FOCUSED
+      : cutaway ? ZOOM_FLOOR_CUTAWAY : ZOOM_FLOOR_WHOLE;
+  }
+
+  function keepCameraOutsideGlobe() {
+    if (mode !== "eye") return;
+    if (focused && $("autoDetail").checked && LAYERS[selected]) return;
+    const length = camera.position.length();
+    if (length >= CAMERA_FLOOR) return;
+    camera.position.multiplyScalar(CAMERA_FLOOR / Math.max(length, 1e-4));
+    camera.lookAt(controls.target);
+  }
+
   function selectStructure(id, focus = true) {
     if (mode === "eye") {
       selected = id;
@@ -956,6 +1572,8 @@ function startViewer() {
         camera.position.copy(controls.target)
           .addScaledVector(direction, 3.0);
         focused = true;
+        atDefaultView = false;
+        setZoomFloor();
         controls.update();
       }
 
@@ -1077,7 +1695,7 @@ function startViewer() {
     detailGroup = getDetail(id);
     detailGroup.visible = true;
 
-    controls.minDistance = 1.8;
+    setZoomFloor();
     controls.maxDistance = 12;
     controls.target.set(0, 0, 0);
     camera.position.set(3.5, 2.3, 5.0);
@@ -1093,7 +1711,6 @@ function startViewer() {
     mode = "eye";
     selectedLayer = null;
     eye.visible = true;
-    controls.minDistance = 1.1;
     controls.maxDistance = 12;
 
     if (!resetView && savedView) {
@@ -1102,13 +1719,14 @@ function startViewer() {
       offset.setLength(Math.max(offset.length(), 3));
       camera.position.copy(savedView.target).add(offset);
       focused = Boolean(selected);
+      atDefaultView = false;
     } else {
       selected = null;
       focused = false;
-      controls.target.set(0, 0, 0);
-      camera.position.set(4.8, 2.1, 4.5);
+      frameDefaultView();
     }
 
+    setZoomFloor();
     controls.update();
     buildInterface();
   }
@@ -1122,6 +1740,7 @@ function startViewer() {
     );
     offset.setLength(distance);
     camera.position.copy(controls.target).add(offset);
+    atDefaultView = false;
     controls.update();
     dirty = true;
   }
@@ -1135,6 +1754,7 @@ function startViewer() {
     );
     camera.position.copy(controls.target)
       .add(new THREE.Vector3().setFromSpherical(spherical));
+    atDefaultView = false;
     controls.update();
     dirty = true;
   }
@@ -1297,7 +1917,8 @@ function startViewer() {
           cutPlane.distanceToPoint(result.point) < -.001) return false;
 
       // Very transparent cavity models should not block solid tissues.
-      return result.object.material.opacity >= .15;
+      return result.object.userData.pick === true ||
+        result.object.material.opacity >= .15;
     });
 
     if (hit) selectStructure(hit.object.userData.id);
@@ -1328,6 +1949,8 @@ function startViewer() {
 
   $("cut").onclick = () => {
     cutaway = !cutaway;
+    setZoomFloor();
+    controls.update();
     updateCutaway();
     buildInterface();
   };
@@ -1342,6 +1965,7 @@ function startViewer() {
   $("autoDetail").onchange = () => { dirty = true; };
 
   controls.addEventListener("change", () => { dirty = true; });
+  controls.addEventListener("start", () => { atDefaultView = false; });
 
   const resizeObserver = new ResizeObserver(() => {
     const width = stage.clientWidth;
@@ -1351,6 +1975,10 @@ function startViewer() {
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
+    if (atDefaultView && mode === "eye" && !focused) {
+      frameDefaultView();
+      controls.update();
+    }
     dirty = true;
   });
   resizeObserver.observe(stage);
@@ -1376,6 +2004,7 @@ function startViewer() {
 
   updateCutaway();
   backToEye(true);
+  renderer.compile(scene, camera);
   $("error").hidden = true;
 
   renderer.setAnimationLoop(() => {
@@ -1395,6 +2024,7 @@ function startViewer() {
       backToEye();
     }
 
+    keepCameraOutsideGlobe();
     renderer.render(scene, camera);
     drawLabels();
     dirty = false;
