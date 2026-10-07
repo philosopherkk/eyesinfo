@@ -7,6 +7,11 @@ export type SeoDescription = {
   zh: string;
   en: string;
   ja: string;
+  /**
+   * Optional head-only `<title>` / og:title overrides (no page-body H1 change).
+   * zh-Hans is derived via toHans(zh) at read time when zh is set.
+   */
+  title?: { zh?: string; en?: string; ja?: string };
   /** Optional MedicalCondition names for JSON-LD about (when clearly applicable). */
   about?: { zh: string[]; en: string[]; ja: string[] };
 };
@@ -188,7 +193,10 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
     ja: "ブルーライトと画面の誤解、デジタル眼精疲労の要点（製品推介ではありません）。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/t/t-cataract": {
-    zh: "介紹白內障超聲波乳化與人工晶體的手術類別教育，以及何時與專科醫生討論手術時機（公眾教育，不能代替面診。）",
+    title: {
+      zh: "白內障超聲波乳化手術：步驟、復原、風險（教育資料）",
+    },
+    zh: "了解白內障超聲波乳化手術的步驟、人工晶體類別、術後護理及可能風險；一般教育資料，不能代替醫生評估。",
     en: "Educational overview of phacoemulsification and intraocular lenses, and when surgery timing is discussed with a specialist.",
     ja: "白内障の超音波乳化吸引と眼内レンズの種類、手術時期を専門医と相談する目安を紹介します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
     about: {
