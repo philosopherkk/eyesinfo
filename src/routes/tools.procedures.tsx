@@ -196,6 +196,8 @@ function ProcedureTeachingPage() {
         src={src}
         title={copy.title}
         className="procedure-viewer-frame mt-4"
+        allow="fullscreen"
+        allowFullScreen
       />
       {id === "cataract" && cataract ? (
         <div className="mt-4">
