@@ -2,6 +2,11 @@
 
 Git-sourced history for this site. Entries follow commits on `main`, not chat notes.
 
+## [1.82] — 2026-10-07
+
+- **Summary:** SEO canonical/hreflang alignment — self-referencing canonical + `og:url` per locale (`?lang=` for non-TC deep routes; locale homes `/` `/en` `/zh-Hans` `/ja`); `vercel.json` `trailingSlash: false` so trailing-slash redirects are permanent (308); sitemap locs stay final www 200 URLs with `xhtml:link` hreflang alternates (no `?lang=` as separate locs). `CONTENT_VERSION` → **1.82**; review stamp unchanged.
+- **Files:** `src/lib/page-seo.ts`, `src/lib/page-seo.test.ts`, `src/lib/site.ts`, `src/components/{medical-webpage-jsonld,breadcrumbs}.tsx`, `vercel.json`, `public/sitemap.xml`, `scripts/seo-static.test.mjs`, `package.json`, `CHANGELOG.md`
+
 ## fix — 1.80 polish (site-level review stamp, grok leftovers, export warning, chalazion wording)
 
 - **Summary:** (1) Review stamp is now explicitly site-level: TC 「網站最近覆核：2026年10月6日 · 潘家健醫生」, EN "Site last reviewed: 6 October 2026 · Dr Poon Ka Kin", JA 「サイト最終確認：2026年10月6日 · 潘家健医師」 (SC auto-converts) on home, shell footer, `EditorialFooter` and `/legal`; EN/JA date now derived from `EDITORIAL.reviewedIso` (was a stale hard-coded 24 Sep); pages no longer pass a per-page date, and `MedicalWebPage` JSON-LD drops per-page `lastReviewed`. (2) Removed the injected `https://grok.com/grok-app-builder/extensions.js` script (PWA head injector) and `https://auth.grok.me` from every CSP `connect-src` in `vercel.json`. (3) IOL Optics Studio JSON export `warning` now carries the on-page teaching-model warning in TC first, then EN / JA (HTML + TS port). (4) Chalazion: 「小型內側切口可不需縫合」 → 「結膜面小切口可不需縫合」 with matching EN. `CONTENT_VERSION` stays **1.80**.

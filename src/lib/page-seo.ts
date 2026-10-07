@@ -1,5 +1,5 @@
 import type { Locale } from "@/i18n/locale";
-import { hrefWithLang } from "@/lib/locale-path";
+import { hrefWithLang, pathForLocale } from "@/lib/locale-path";
 import { PUBLIC_ORIGIN } from "@/lib/site";
 
 /** Brand in document titles (zh-Hant primary for SSR / crawlers). */
@@ -32,6 +32,33 @@ export type PageSeoInput = {
   verbatimTitle?: boolean;
 };
 
+const HREFLANG_LOCALES: Locale[] = ["zh-Hant", "zh-Hans", "en", "ja"];
+
+/** Bare pathname: drop query/hash and trailing slash (keep `/`). */
+export function barePathname(path: string): string {
+  const noHash = path.split("#")[0] || "/";
+  const noQuery = noHash.split("?")[0] || "/";
+  const normalized = noQuery.startsWith("/") ? noQuery : `/${noQuery}`;
+  if (normalized !== "/" && normalized.endsWith("/")) {
+    return normalized.replace(/\/+$/, "") || "/";
+  }
+  return normalized || "/";
+}
+
+/**
+ * Path (+ optional `?lang=`) for a locale alternate — shared by canonical,
+ * og:url, and hreflang. Locale entry homes (`/`, `/en`, `/ja`, `/zh-Hans`) use
+ * `pathForLocale`. Deep routes: zh-Hant bare; other langs `path?lang=<code>`
+ * (lang only; other query params stripped).
+ */
+export function hreflangPath(path: string, locale: Locale): string {
+  const bare = barePathname(path);
+  if (bare === "/" || bare === "/en" || bare === "/ja" || bare === "/zh-Hans") {
+    return pathForLocale(locale);
+  }
+  return hrefWithLang(bare, locale);
+}
+
 /** Absolute canonical URL on the public www origin (matches PUBLIC_ORIGIN). */
 export function canonicalUrl(path: string): string {
   if (!path || path === "/") return `${PUBLIC_ORIGIN}/`;
@@ -39,11 +66,20 @@ export function canonicalUrl(path: string): string {
   return `${PUBLIC_ORIGIN}${normalized}`;
 }
 
+/** Self-referencing absolute canonical for a page locale. */
+export function canonicalUrlForLocale(
+  path: string,
+  locale: Locale = "zh-Hant",
+): string {
+  return canonicalUrl(hreflangPath(path, locale));
+}
+
 /**
  * Per-route document head: unique title, description, og tags, and canonical.
  * Child route meta overrides the root defaults (TanStack dedupes by name/property).
  * Canonical is omitted from `__root` so it is not duplicated (links are not deduped).
- * TC (zh-Hant) is the standing canonical; hreflang lists all locales + x-default → TC.
+ * Canonical is self-referencing per locale (matches that locale’s hreflang href);
+ * hreflang lists all locales + x-default → TC.
  */
 export function pageHead({
   title,
@@ -58,9 +94,9 @@ export function pageHead({
     : title === brand || title === SEO_SITE_NAME
       ? brand
       : `${title}｜${brand}`;
-  const barePath = path.split("?")[0] || "/";
-  const canonical = canonicalUrl(barePath);
-  const hreflang: Locale[] = ["zh-Hant", "zh-Hans", "en", "ja"];
+  const bare = barePathname(path);
+  const canonical = canonicalUrlForLocale(bare, locale);
+  const xDefault = canonicalUrlForLocale(bare, "zh-Hant");
   return {
     meta: [
       { title: fullTitle },
@@ -71,12 +107,13 @@ export function pageHead({
     ],
     links: [
       { rel: "canonical", href: canonical },
-      ...hreflang.map((loc) => ({
+      ...HREFLANG_LOCALES.map((loc) => ({
         rel: "alternate",
-        hrefLang: loc === "zh-Hant" ? "zh-Hant" : loc === "zh-Hans" ? "zh-Hans" : loc,
-        href: canonicalUrl(hrefWithLang(barePath, loc)),
+        hrefLang:
+          loc === "zh-Hant" ? "zh-Hant" : loc === "zh-Hans" ? "zh-Hans" : loc,
+        href: canonicalUrlForLocale(bare, loc),
       })),
-      { rel: "alternate", hrefLang: "x-default", href: canonical },
+      { rel: "alternate", hrefLang: "x-default", href: xDefault },
     ],
   };
 }
