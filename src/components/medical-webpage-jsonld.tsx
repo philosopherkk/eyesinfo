@@ -1,5 +1,5 @@
 import type { Locale } from "@/i18n/locale";
-import { canonicalUrl } from "@/lib/page-seo";
+import { canonicalUrlForLocale } from "@/lib/page-seo";
 import { COPYRIGHT_HOLDER, PUBLIC_ORIGIN } from "@/lib/site";
 import { seoAboutNames } from "@/lib/seo-description";
 
@@ -30,7 +30,7 @@ export function MedicalWebPageJsonLd({
   name,
   description,
 }: MedicalWebPageJsonLdProps) {
-  const url = canonicalUrl(path);
+  const url = canonicalUrlForLocale(path, locale);
   const aboutNames = seoAboutNames(path, locale);
   const data: Record<string, unknown> = {
     "@context": "https://schema.org",

@@ -46,9 +46,14 @@ test("robots.txt allows crawl and points at www sitemap", () => {
   assert.match(text, /Sitemap:\s*https:\/\/www\.eyesinfo\.org\/sitemap\.xml/);
 });
 
-test("vercel.json redirects apex host to www", () => {
+test("vercel.json redirects apex host to www and disables trailing slash", () => {
   const raw = readFileSync(join(ROOT, "vercel.json"), "utf8");
   const conf = JSON.parse(raw);
+  assert.equal(
+    conf.trailingSlash,
+    false,
+    "trailingSlash:false makes /path/ → /path a permanent redirect (308)",
+  );
   assert.ok(Array.isArray(conf.redirects), "vercel.json must declare redirects");
   const apex = conf.redirects.find(
     (r) =>
@@ -64,13 +69,33 @@ test("vercel.json redirects apex host to www", () => {
 test("sitemap.xml is a valid urlset covering edu tools including outdoor", () => {
   const xml = readFileSync(SITEMAP, "utf8");
   assert.match(xml, /^<\?xml version="1\.0" encoding="UTF-8"\?>/);
-  assert.match(xml, /<urlset xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9">/);
+  assert.match(
+    xml,
+    /<urlset xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9"\s+xmlns:xhtml="http:\/\/www\.w3\.org\/1999\/xhtml">/,
+  );
   assert.match(xml, /<\/urlset>\s*$/);
   assert.doesNotMatch(xml, /\/qr[<\s]/, "/qr is Lattice-only and must stay off the public sitemap");
   assert.doesNotMatch(
     xml,
     /<loc>https:\/\/eyesinfo\.org\//,
     "sitemap locs must use www host (apex redirects to www)",
+  );
+  assert.doesNotMatch(
+    xml,
+    /<loc>[^<]*\?lang=/,
+    "sitemap must not list ?lang= URLs as separate loc entries",
+  );
+  assert.match(
+    xml,
+    /<xhtml:link rel="alternate" hreflang="en" href="https:\/\/www\.eyesinfo\.org\/t\/t-strab\?lang=en"\/>/,
+  );
+  assert.match(
+    xml,
+    /<xhtml:link rel="alternate" hreflang="x-default" href="https:\/\/www\.eyesinfo\.org\/t\/t-strab"\/>/,
+  );
+  assert.match(
+    xml,
+    /<xhtml:link rel="alternate" hreflang="en" href="https:\/\/www\.eyesinfo\.org\/en"\/>/,
   );
 
   for (const path of REQUIRED_TOOL_PATHS) {

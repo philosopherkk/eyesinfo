@@ -16,6 +16,7 @@ import type { UiKey } from "@/i18n/ui";
 import { EduLink } from "@/components/edu-link";
 import { SpaHref } from "@/components/locale-href";
 import { hrefWithLang, isLocaleHomePath, pathForLocale } from "@/lib/locale-path";
+import { hreflangPath } from "@/lib/page-seo";
 
 export type Crumb = {
   label: string;
@@ -134,15 +135,10 @@ function absoluteUrl(href: string): string {
 }
 
 /**
- * Breadcrumb item URL matching pageHead hreflang alternates for `locale`:
- * zh-Hant → bare path; en/ja/zh-Hans → `path?lang=…`.
- * Locale entry homes (`/en`, `/ja`, `/zh-Hans`) normalize to `/` first.
+ * Breadcrumb item URL matching pageHead hreflang / canonical for `locale`.
  */
 function breadcrumbItemUrl(hrefOrPath: string, locale: Locale): string {
-  const bare = (hrefOrPath.split("?")[0] || "/").replace(/\/$/, "") || "/";
-  const normalized =
-    bare === "/en" || bare === "/ja" || bare === "/zh-Hans" ? "/" : bare;
-  return absoluteUrl(hrefWithLang(normalized, locale));
+  return absoluteUrl(hreflangPath(hrefOrPath, locale));
 }
 
 /**
