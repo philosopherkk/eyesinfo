@@ -609,6 +609,7 @@ function startViewer() {
   let dirty = true;
   let visible = true;
   let savedView = null;
+  let viewerStarted = false;
 
   function material(color, opacity = 1) {
     return new THREE.MeshStandardMaterial({
@@ -1510,7 +1511,8 @@ function startViewer() {
     if (parent !== window && location.origin !== "null") {
       parent.postMessage({
         type: "eyesinfo-eye-select",
-        structure: id
+        structure: id,
+        label: id ? nameOf(grossById(id)) : null
       }, location.origin);
     }
   }
@@ -1728,6 +1730,7 @@ function startViewer() {
     } else {
       selected = null;
       focused = false;
+      if (viewerStarted) notifyParent(null);
       frameDefaultView();
     }
 
@@ -2009,6 +2012,7 @@ function startViewer() {
 
   updateCutaway();
   backToEye(true);
+  viewerStarted = true;
   renderer.compile(scene, camera);
   $("error").hidden = true;
 
