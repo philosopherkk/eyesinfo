@@ -188,7 +188,11 @@ export const CITE: Record<string, Citation> = {
       "Comparison of glaucomatous progression between untreated patients with normal-tension glaucoma and patients with therapeutically reduced intraocular pressures",
     source: "Am J Ophthalmol. 1998;126(4):487-497",
     pmid: "9780093",
-    note: "CNTGS：降低 30% 眼壓，達終點眼睛治療組 12%，對照組 35%。白內障因素令意向治療分析另見 PMID 9780094。",
+    note: "CNTGS：降低 30% 眼壓，達終點眼睛治療組 12%，對照組 35%。意向治療分析（PMID 9780094）未見顯著分別；剔除白內障影響後差異才出現。群體結果，不是個人預後。",
+    noteEn:
+      "CNTGS: pressure lowered by 30%; eyes reaching the endpoint 12% in the treated group vs 35% in controls. The intention-to-treat analysis (PMID 9780094) showed no significant difference; the difference only appeared after cataract effects were removed. Group result, not a personal prognosis.",
+    noteJa:
+      "CNTGS：眼圧を 30% 下げ、エンドポイントに達した眼は治療群 12%、対照群 35%。intention-to-treat 解析（PMID 9780094）では有意差はなく、白内障の影響を除いて初めて差が現れました。集団の結果であり、個人の予後ではありません。",
   },
   ukgts2015: {
     id: "ukgts2015",
