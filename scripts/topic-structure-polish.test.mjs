@@ -134,7 +134,7 @@ describe("topic structure polish", () => {
     assert.match(read("src/lib/topic-related.ts"), /PRIMARY_TOPIC_CAP\s*=\s*5/);
   });
 
-  it("CONTENT_VERSION is 1.84", () => {
+  it("CONTENT_VERSION is 1.85", () => {
     const site = read("src/lib/site.ts");
     assert.match(site, /CONTENT_VERSION\s*=\s*"1\.84"/);
     assert.match(site, /CONTENT_UPDATED\s*=\s*"2026-10-06"/);
