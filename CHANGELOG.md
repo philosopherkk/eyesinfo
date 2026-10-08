@@ -2,6 +2,11 @@
 
 Git-sourced history for this site. Entries follow commits on `main`, not chat notes.
 
+## [1.83] — 2026-10-08
+
+- **Summary:** 三個空殼專題路徑（`/t/parent-gaps`、`/t/water-acanthamoeba`、`/t/ok-hygiene`）永久導向母專題錨點；sitemap 改為依 git 內容最後變更日寫入 per-URL lastmod。`CONTENT_VERSION` → **1.83**；網站最近覆核不變。
+- **Files:** `vercel.json`, `src/routes/t.$topicId.tsx`, `src/data/seo-descriptions.ts`, `public/sitemap.xml`, `public/sitemap-lastmod.json`, `scripts/generate-sitemap.mjs`, `scripts/{seo-static,topic-structure-polish}.test.mjs`, `src/lib/site.ts`, `RELEASE.md`, `package.json`, `CHANGELOG.md`
+
 ## [1.82] — 2026-10-07
 
 - **Summary:** SEO canonical/hreflang alignment — self-referencing canonical + `og:url` per locale (`?lang=` for non-TC deep routes; locale homes `/` `/en` `/zh-Hans` `/ja`); `vercel.json` `trailingSlash: false` so trailing-slash redirects are permanent (308); sitemap locs stay final www 200 URLs with `xhtml:link` hreflang alternates (no `?lang=` as separate locs). `CONTENT_VERSION` → **1.82**; review stamp unchanged.

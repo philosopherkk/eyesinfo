@@ -157,16 +157,6 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
       ja: ["眼瞼炎", "麦粒腫", "霰粒腫"],
     }
   },
-  "/t/ok-hygiene": {
-    zh: "介紹角膜塑型（OK 鏡）護理衛生的教育要點，整理減少感染風險討論中常見的清潔與保存疏漏（公眾教育，不能代替面診。）",
-    en: "Hygiene education for orthokeratology (OK) lenses, covering common cleaning and storage gaps in infection-risk discussions.",
-    ja: "オルソケラトロジー（OKレンズ）の衛生管理教育。感染リスクを減らす話し合いでよく出る洗浄・保存の抜けを整理します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
-  },
-  "/t/parent-gaps": {
-    zh: "介紹家長常問的視力發展與求醫空隙課題，屬示意教育而非發育測驗分數，並提醒有疑問應接受正式檢查（公眾教育，不能代替面診。）",
-    en: "Educational notes on common parent questions about vision development and care gaps—illustrative only, not a developmental score.",
-    ja: "保護者がよく抱く視力発達や受診のすき間についての教育メモ。発達検査の点数ではなく、疑問があれば正式な検査を受けるよう促します。"
-  },
   "/t/t-allergy": {
     zh: "介紹過敏性結膜炎的類型概念、藥物類別討論方向，以及較重過敏須醫生評估而非自行用藥（公眾教育，不能代替面診。）",
     en: "Covers allergic conjunctivitis types, drug classes doctors may discuss, and why heavier allergy needs medical review.",
@@ -654,16 +644,6 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
     zh: "說明白內障手術與人工晶體植入當日的感受次序、類別線條圖、風險與術後急症分界（公眾教育，不能代替面診。）",
     en: "What cataract surgery and lens implantation feel like on the day, with class diagrams, risks, and which symptoms mean A&E.",
     ja: "白内障手術と眼内レンズ挿入の当日に感じる順番、種類の線画、リスク、救急へ行く症状を説明します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
-  },
-  "/t/water-acanthamoeba": {
-    zh: "介紹隱形眼鏡與水源相關的棘阿米巴角膜炎風險教育，以及出現疼痛畏光時須盡快接受眼科專科評估（公眾教育，不能代替面診。）",
-    en: "Education on Acanthamoeba keratitis risk linked to contact lenses and water, and why pain with photophobia needs prompt review.",
-    ja: "コンタクトレンズと水源に関連するアカントアメーバ角膜炎のリスク教育。痛みや羞明があるときは早めの眼科専門評価が必要です。",
-    about: {
-      zh: ["棘阿米巴角膜炎"],
-      en: ["Acanthamoeba keratitis"],
-      ja: ["アカントアメーバ角膜炎"],
-    }
   },
   "/tools/ask": {
     zh: "面診前可思考的問題清單示意，幫助整理病情描述；不能代替面診或診斷（公眾教育，不能代替面診。）詳見內文。",

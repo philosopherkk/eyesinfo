@@ -17,7 +17,7 @@ import { collectTocEntries } from "@/lib/topic-anchors";
 import { useI18n, useLocalizedTopic, hasTopicLocalePack, localizeTopic } from "@/i18n";
 import type { UiKey } from "@/i18n/ui";
 import { pageHead } from "@/lib/page-seo";
-import { hrefWithLang, localeFromMatch } from "@/lib/locale-path";
+import { hrefWithLang, localeFromMatch, localeFromSearch } from "@/lib/locale-path";
 import { uiText } from "@/lib/ui-text";
 import { seoDescriptionFor, seoTitleFor } from "@/lib/seo-description";
 import { MedicalWebPageJsonLd } from "@/components/medical-webpage-jsonld";
@@ -37,8 +37,27 @@ const TOPIC_ALIASES: Record<string, string> = {
   "t-mh": "t-macular-hole",
 };
 
+/**
+ * Heading section ids that were never real topics (empty /t/* shells in GSC).
+ * Edge 308s live in vercel.json; this covers SPA / SSR beforeLoad too.
+ */
+const SECTION_REDIRECTS: Record<string, { topicId: string; hash: string }> = {
+  "parent-gaps": { topicId: "t-strab", hash: "parent-gaps" },
+  "water-acanthamoeba": { topicId: "t-cl", hash: "water-acanthamoeba" },
+  "ok-hygiene": { topicId: "t-cl", hash: "ok-hygiene" },
+};
+
 export const Route = createFileRoute("/t/$topicId")({
-  beforeLoad: ({ params }) => {
+  // beforeLoad notFound → real HTTP 404 (component-only notFound → hollow 200).
+  beforeLoad: ({ params, location }) => {
+    const section = SECTION_REDIRECTS[params.topicId];
+    if (section) {
+      const locale = localeFromSearch(location.search) ?? "zh-Hant";
+      throw redirect({
+        href: hrefWithLang(`/t/${section.topicId}#${section.hash}`, locale),
+        replace: true,
+      });
+    }
     const alias = TOPIC_ALIASES[params.topicId];
     if (alias) {
       throw redirect({
@@ -47,6 +66,7 @@ export const Route = createFileRoute("/t/$topicId")({
         replace: true,
       });
     }
+    if (!getTopic(params.topicId)) throw notFound();
   },
   head: ({ params, match }) => {
     const locale = localeFromMatch(match);
