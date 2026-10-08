@@ -9,6 +9,9 @@ export type Citation = {
   /** Official public-education HTTPS outlink when there is no PMID. */
   url?: string;
   note: string;
+  /** Optional EN / JA notes; other locales fall back to the 繁 note. */
+  noteEn?: string;
+  noteJa?: string;
 };
 
 export const CITE: Record<string, Citation> = {
@@ -129,7 +132,11 @@ export const CITE: Record<string, Citation> = {
       "The effectiveness of intraocular pressure reduction in the treatment of normal-tension glaucoma",
     source: "Am J Ophthalmol. 1998;126(4):498-505",
     pmid: "9780094",
-    note: "正常眼壓性青光眼：把眼壓再降約 30% 可減慢部分人惡化。",
+    note: "意向治療分析未見顯著分別；剔除白內障影響後，降眼壓約 30% 組惡化較少。手術引致白內障較多，故是否積極降壓須個別評估。",
+    noteEn:
+      "The intention-to-treat analysis showed no significant difference; after censoring cataract effects, the group with pressure lowered by about 30% worsened less. Surgery caused more cataract, so whether to lower pressure aggressively needs individual assessment.",
+    noteJa:
+      "intention-to-treat 解析では有意差はありませんでした。白内障の影響を除いて解析すると、眼圧を約 30% 下げた群で悪化が少ない結果でした。手術では白内障が多く生じたため、積極的に眼圧を下げるかどうかは個別の評価が必要です。",
   },
   emgt2002: {
     id: "emgt2002",
