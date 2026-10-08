@@ -45,7 +45,7 @@ export const TOOLS: ToolDef[] = [
   },
   { id: "drops", title: "滴藥水步驟", blurb: "洗手、唔好掂睫毛；跟說明書", canto: "跟住步驟滴", href: "/tools/drops", home: true },
   { id: "ask", title: "問醫生清單", blurb: "面診前可帶去的問題", canto: "問清楚先好決定", href: "/tools/ask", home: true },
-  { id: "tunnel", title: "隧道視野示意", blurb: "青光眼周邊視野收窄（不是檢查）", canto: "睇下隧道點樣", href: "/tools/tunnel" },
+  { id: "tunnel", title: "青光眼視野示意", blurb: "輕度至末期視野缺損示意（不是檢查）", canto: "揀階段睇下", href: "/tools/tunnel" },
   { id: "haze", title: "白內障日夜示意", blurb: "顏色變淡、霧、車燈眩光", canto: "夜晚開車矇唔矇", href: "/tools/haze" },
   { id: "floaters", title: "飛蚊與簾幕", blurb: "會飄的飛蚊 vs 唔郁的簾幕", canto: "有簾幕去急症；新飛蚊同日散瞳眼底（不是只散瞳便足夠）", href: "/tools/floaters" },
   { id: "halo", title: "夜間光暈比較", blurb: "單焦、延伸景深、三焦點示意", canto: "唔係術後保證", href: "/tools/halo" },
@@ -69,7 +69,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-yag", label: "後囊混濁（不是白內障復發）" },
   ],
   d4: [
-    { href: "/tools/tunnel", label: "隧道視野示意" },
+    { href: "/tools/tunnel", label: "青光眼視野示意" },
     { href: "/t/t-glaucoma-monitor", label: "青光眼監察：目標眼壓、OCT／視野與報告解讀" },
     { href: "/t/t-gldrops", label: "青光眼眼藥水" },
     { href: "/t/t-early", label: "遠視、淺前房與閉角" },
@@ -222,7 +222,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-glaucoma-monitor", label: "青光眼監察：目標眼壓、OCT／視野與報告解讀" },
     { href: "/t/t-drops", label: "正確使用眼藥水" },
     { href: "/tools/drops", label: "滴藥水步驟" },
-    { href: "/tools/tunnel", label: "隧道視野示意" },
+    { href: "/tools/tunnel", label: "青光眼視野示意" },
   ],
   "t-uveitis": [
     { href: "/urgent", label: "急症與同日評估" },

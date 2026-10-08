@@ -7,7 +7,8 @@ import { EditorialFooter } from "@/components/editorial-footer";
 import { SaveButton } from "@/components/save-button";
 import { ShareButton } from "@/components/share-button";
 import { EyeViewerFrame } from "@/components/eye-viewer-frame";
-import { FloaterDemo, HaloDemo, HazeDemo, TunnelDemo } from "@/components/tool-demos";
+import { FloaterDemo, HaloDemo, HazeDemo } from "@/components/tool-demos";
+import { GlaucomaFieldSim } from "@/components/glaucoma-field-sim";
 import { DropTrainer, OutdoorCard, WarmTimer } from "@/components/care-tools";
 import { AskDoctor, RxDecoder, VisitWalk } from "@/components/ask-visit-rx";
 import { SpaHref } from "@/components/locale-href";
@@ -21,14 +22,10 @@ import { seoDescriptionFor } from "@/lib/seo-description";
 export const Route = createFileRoute("/tools/$toolId")({
   head: ({ params, match }) => {
     const locale = localeFromMatch(match);
-    const tool = TOOLS.find(
-      (item) => item.id === params.toolId && item.href.startsWith("/tools/"),
-    );
+    const tool = TOOLS.find((item) => item.id === params.toolId && item.href.startsWith("/tools/"));
     const pack = tool ? TOOL_TEXT[locale]?.[tool.id] : undefined;
     const title = pack?.title ?? tool?.title ?? uiText(locale, "toolsTitle");
-    const fallback = pack?.blurb
-      ? `${pack.blurb} · ${pack.canto}`
-      : uiText(locale, "toolsLead");
+    const fallback = pack?.blurb ? `${pack.blurb} · ${pack.canto}` : uiText(locale, "toolsLead");
     const path = `/tools/${params.toolId}`;
     return pageHead({
       title,
@@ -84,7 +81,7 @@ function Panel({ id }: { id: ToolId }) {
     case "map":
       return <EyeViewerFrame />;
     case "tunnel":
-      return <TunnelDemo />;
+      return <GlaucomaFieldSim />;
     case "haze":
       return <HazeDemo />;
     case "floaters":
