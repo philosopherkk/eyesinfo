@@ -191,8 +191,10 @@ input[type="text"] {
 }
 textarea {
   resize: vertical;
-  min-height: 150px;
   line-height: 1.5;
+}
+#notes {
+  min-height: 150px;
 }
 textarea.has-issue {
   border-color: var(--bad);
