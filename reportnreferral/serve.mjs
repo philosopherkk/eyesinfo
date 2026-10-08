@@ -25,11 +25,10 @@ createServer((req, res) => {
     res.writeHead(404, { "content-type": "text/plain" }).end("Not found. Try /reportnreferral/");
     return;
   }
-  let rel = normalize(decodeURIComponent(pathname.slice("/reportnreferral/".length))).replace(
-    /^([/\\])+/,
-    "",
-  );
-  if (!rel || rel.endsWith("/")) rel += "index.html";
+  let rel = decodeURIComponent(pathname.slice("/reportnreferral/".length));
+  if (!rel || rel.endsWith("/")) rel = `${rel}index.html`;
+  rel = normalize(rel).replace(/^\.\//, "").replace(/^([/\\])+/, "");
+  if (rel === "." || rel === "") rel = "index.html";
   const file = join(root, rel);
   const allowed = /^(index\.html|styles\.css|src\/[\w.-]+\.js)$/.test(rel.replace(/\\/g, "/"));
   if (!allowed || !file.startsWith(root) || !existsSync(file) || !statSync(file).isFile()) {
