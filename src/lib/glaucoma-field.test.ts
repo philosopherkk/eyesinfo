@@ -54,6 +54,36 @@ test("arcuate mild: superior arc band, spared centre and spared lower field", ()
   assert.ok(lossAt("arcuate", 0, -10, -8) < 0.05);
 });
 
+test("arcuate: arcs stop at the horizontal midline (mild is superior only)", () => {
+  for (const x of [-30, -20, -10, 0, 10]) {
+    assert.ok(lossAt("arcuate", 0, x, -2) < 0.05, `x=${x}`);
+  }
+  assert.ok(lossAt("arcuate", 0, -10, 10) > 0.3);
+  assert.ok(Math.abs(lossAt("arcuate", 1, -30, 0.9) - lossAt("arcuate", 1, -30, -0.9)) > 0.15);
+  assert.ok(lossAt("arcuate", 1, -20, -8) > 0.2);
+  for (const sev of [1, 2] as const) {
+    assert.ok(lossAt("arcuate", sev, 8, 0) < lossAt("arcuate", sev, -20, 6));
+  }
+});
+
+test("arcuate moderate/severe: nasal step (upper deeper than lower) and temporal side clearest", () => {
+  assert.ok(lossAt("arcuate", 1, -22, 3) > lossAt("arcuate", 1, -22, -3) + 0.15);
+  for (const sev of [1, 2] as const) {
+    const nasal = lossAt("arcuate", sev, -22, 6) + lossAt("arcuate", sev, -22, -6);
+    const temporal = lossAt("arcuate", sev, 30, 6) + lossAt("arcuate", sev, 30, -6);
+    assert.ok(temporal < nasal * 0.5, `sev ${sev}`);
+  }
+});
+
+test("arcuate severe is not a round ring: horizontal corridor beside fixation stays clearer than the arcs", () => {
+  const corridor = lossAt("arcuate", 2, 12, 0);
+  const arcAbove = lossAt("arcuate", 2, -4, 13);
+  assert.ok(corridor < arcAbove - 0.2);
+  const ringE = lossAt("arcuate", 2, 13, 0);
+  const ringN = lossAt("arcuate", 2, 0, 13);
+  assert.ok(ringN > ringE + 0.2);
+});
+
 test("end stage: central island plus temporal island, nasal field gone, all patterns converge", () => {
   for (const p of PATTERNS) {
     assert.ok(lossAt(p, 3, -30, 0) > 0.9);

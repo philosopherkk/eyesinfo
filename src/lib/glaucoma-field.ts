@@ -25,16 +25,21 @@ export function sstep(e0: number, e1: number, x: number): number {
 
 const union = (a: number, b: number) => 1 - (1 - a) * (1 - b);
 
-function arc(x: number, y: number, sign: 1 | -1, rc: number, w: number, depth: number): number {
-  const r = Math.hypot(x, y);
-  const nasal = sstep(4, -6, x);
-  const ww = w * (1 + 0.45 * nasal);
-  const ring = 1 - sstep(0.55, 1, Math.abs(r - rc) / ww);
-  const sharp = sstep(-0.6, 0.6, sign * y);
-  const soft = sstep(-2.5, 4, sign * y);
-  const half = soft + (sharp - soft) * nasal;
-  const taper = 0.6 + 0.4 * sstep(10, -10, x);
-  return depth * ring * half * taper;
+/**
+ * Bjerrum-type arcuate band following the retinal nerve-fibre layout: it arches from
+ * the blind-spot region over (or under) fixation and ends at the nasal horizontal
+ * midline (nasal step). The temporal side is faded so it stays clearest.
+ */
+function arc(x: number, y: number, sign: 1 | -1, H: number, w: number, depth: number): number {
+  const u = (x + 6) / 24;
+  const h = H * Math.sqrt(Math.max(0, 1 - u * u));
+  const nasal = sstep(6, -8, x);
+  const ww = w * (1 + 0.6 * nasal);
+  const band = 1 - sstep(0.5, 1, Math.abs(y - sign * h) / ww);
+  const tF = sstep(0, 15, x);
+  const half = sstep(-0.5 - 0.8 * tF, 0.5 + 0.8 * tF, sign * y);
+  const temporalClear = sstep(26, 10, x);
+  return depth * (0.75 + 0.25 * nasal) * band * half * temporalClear;
 }
 
 function nasalHalf(x: number, y: number, sign: 1 | -1, xin: number, depth: number): number {
@@ -75,12 +80,12 @@ export function lossAt(
 
   if (pattern === "arcuate") {
     if (severity === 0) {
-      L = arc(x, y, 1, 13, 5, 0.42);
+      L = arc(x, y, 1, 12, 4.5, 0.5);
     } else if (severity === 1) {
-      L = union(arc(x, y, 1, 12.5, 7, 0.78), arc(x, y, -1, 13, 5, 0.42));
+      L = union(arc(x, y, 1, 12.5, 6, 0.85), arc(x, y, -1, 12.5, 5, 0.5));
     } else {
-      L = union(arc(x, y, 1, 13, 7.5, 0.92), arc(x, y, -1, 13, 7, 0.85));
-      L = union(L, periph(x, y, 24, 36, 0.85, 4));
+      L = union(arc(x, y, 1, 13, 8.5, 0.95), arc(x, y, -1, 13, 8, 0.9));
+      L = union(L, periph(x, y, 20, 52, 0.75, 4) * sstep(10, -6, x));
       keepK = 0.85;
     }
   } else if (pattern === "nasal") {
