@@ -11,7 +11,6 @@ Personal information is screened before anything can be generated.
 
 ```bash
 npm run reportnreferral     # http://127.0.0.1:5174/reportnreferral/  (local static server)
-# or after sync + vite: http://localhost:8080/reportnreferral/
 npm test                    # includes reportnreferral/test/*.test.mjs
 node scripts/sync-reportnreferral.mjs   # refresh public/reportnreferral/
 ```
@@ -73,13 +72,21 @@ doctor decides.
 - Chinese patient text was written for Hong Kong readers and should be read by a clinician before wider use.
 - This is **not** a medical device and gives no diagnosis. A registered doctor must review every document.
 
-## Relationship to eyesinfo.org
+## Live host
 
-Source of truth is this folder. `scripts/sync-reportnreferral.mjs` (also run from `prebuild`) copies the shippable
-files into `public/reportnreferral/`, so Vercel serves the tool at **`/reportnreferral/`**.
+**Public URL:** https://philosopherkk.github.io/reportnreferral/
 
-It is **not** listed on the home page, patient tools list, or sitemap (same pattern as `/qr`). After editing
-files here, run `node scripts/sync-reportnreferral.mjs` before committing so `public/reportnreferral/` stays in sync.
+This folder is the development / test source in the eyesinfo repo. The GitHub Pages hub
+(`philosopherkk/philosopherkk.github.io`) is the public host. After editing here, refresh the
+hub publish bundle and apply it:
+
+```bash
+node scripts/bundle-reportnreferral-for-hub.mjs   # if present
+# or copy shippable files into docs/hub-publish/reportnreferral/app/
+bash docs/hub-publish/reportnreferral/apply-to-github-io.sh /path/to/philosopherkk.github.io
+```
+
+Do **not** serve this tool from eyesinfo.org (education site; no 轉介 shopfront).
 
 ## Extending
 
