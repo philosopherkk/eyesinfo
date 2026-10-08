@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** Minimal static file server for local use: `npm run reportnreferral`. */
+/** Minimal static file server: `npm run reportnreferral` → http://127.0.0.1:5174/reportnreferral/ */
 import { createReadStream, existsSync, statSync } from "node:fs";
 import { createServer } from "node:http";
 import { dirname, extname, join, normalize } from "node:path";
@@ -16,7 +16,19 @@ const types = {
 
 createServer((req, res) => {
   const url = new URL(req.url, "http://localhost");
-  let rel = normalize(decodeURIComponent(url.pathname)).replace(/^([/\\])+/, "");
+  const pathname = url.pathname;
+  if (pathname === "/" || pathname === "/reportnreferral") {
+    res.writeHead(302, { Location: "/reportnreferral/" }).end();
+    return;
+  }
+  if (!pathname.startsWith("/reportnreferral/")) {
+    res.writeHead(404, { "content-type": "text/plain" }).end("Not found. Try /reportnreferral/");
+    return;
+  }
+  let rel = normalize(decodeURIComponent(pathname.slice("/reportnreferral/".length))).replace(
+    /^([/\\])+/,
+    "",
+  );
   if (!rel || rel.endsWith("/")) rel += "index.html";
   const file = join(root, rel);
   const allowed = /^(index\.html|styles\.css|src\/[\w.-]+\.js)$/.test(rel.replace(/\\/g, "/"));
@@ -31,5 +43,5 @@ createServer((req, res) => {
   });
   createReadStream(file).pipe(res);
 }).listen(port, "127.0.0.1", () => {
-  console.log(`ReportNReferral running at http://127.0.0.1:${port}/`);
+  console.log(`ReportNReferral running at http://127.0.0.1:${port}/reportnreferral/`);
 });

@@ -10,7 +10,7 @@ Personal information is screened before anything can be generated.
 ## Run it
 
 ```bash
-npm run reportnreferral     # http://127.0.0.1:5174/  (local static server)
+npm run reportnreferral     # http://127.0.0.1:5174/reportnreferral/  (local static server)
 # or after sync + vite: http://localhost:8080/reportnreferral/
 npm test                    # includes reportnreferral/test/*.test.mjs
 node scripts/sync-reportnreferral.mjs   # refresh public/reportnreferral/
