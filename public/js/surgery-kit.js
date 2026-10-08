@@ -42,6 +42,32 @@ export function normalizeWeights(weights) {
   return weights.map((w) => w / mean);
 }
 
+/** Tab-session key for the shared surgery timeline speed select. */
+const PLAYBACK_SPEED_KEY = "eyesinfo.surgery.playbackSpeed";
+
+/**
+ * Restore / persist the speed select for this tab session.
+ * Options stay in the HTML (0.5×–4×); this only remembers the choice.
+ */
+export function bindPlaybackSpeed(select) {
+  if (!(select instanceof HTMLSelectElement)) return;
+  try {
+    const saved = sessionStorage.getItem(PLAYBACK_SPEED_KEY);
+    if (saved && [...select.options].some((option) => option.value === saved)) {
+      select.value = saved;
+    }
+  } catch {
+    /* private mode / blocked storage */
+  }
+  select.addEventListener("change", () => {
+    try {
+      sessionStorage.setItem(PLAYBACK_SPEED_KEY, select.value);
+    } catch {
+      /* ignore */
+    }
+  });
+}
+
 /**
  * Advance stage-indexed progress by `stages` base-stage units, giving each
  * stage `weights[s]` times the base duration. Progress stays stage-indexed,
