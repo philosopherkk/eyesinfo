@@ -23,6 +23,15 @@ Bump **only** when KK says this is a release (`CONTENT_VERSION` in `src/lib/site
 
 Open https://www.eyesinfo.org (canonical host). Homepage **最近覆核** and **網站版本** must match the deployed commit. If not, say so. Apex `eyesinfo.org` must 301/308 to www.
 
+## Sitemap lastmod
+
+`public/sitemap.xml` `<lastmod>` values are **per-URL content dates** (Asia/Hong_Kong `YYYY-MM-DD`), derived from git history of that page’s body/data sources — not one date for all pages, and not the build date. Shared chrome (header, disclaimer, CSP, `CONTENT_VERSION`) is excluded from the source map so layout-only commits do not bump every URL.
+
+- **Regenerate after content edits** (full git history required): `npm run sitemap:regen`
+  - Writes `public/sitemap-lastmod.json` (committed mapping) and `public/sitemap.xml`.
+- **Vercel / shallow clone:** the committed mapping is the source of truth at build time. If you need to rebuild XML without git history: `npm run sitemap:from-map`.
+- Do not list redirect-only section stubs (`/t/parent-gaps`, `/t/water-acanthamoeba`, `/t/ok-hygiene`) in the sitemap — they 308 to parent topic anchors.
+
 ## Normal content update flow
 
 1. Draft 繁 → KK approve

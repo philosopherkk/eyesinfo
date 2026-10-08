@@ -11,6 +11,21 @@
       ],
       "destination": "https://www.eyesinfo.org/:path*",
       "permanent": true
+    },
+    {
+      "source": "/t/parent-gaps",
+      "destination": "/t/t-strab#parent-gaps",
+      "permanent": true
+    },
+    {
+      "source": "/t/water-acanthamoeba",
+      "destination": "/t/t-cl#water-acanthamoeba",
+      "permanent": true
+    },
+    {
+      "source": "/t/ok-hygiene",
+      "destination": "/t/t-cl#ok-hygiene",
+      "permanent": true
     }
   ],
   "headers": [
