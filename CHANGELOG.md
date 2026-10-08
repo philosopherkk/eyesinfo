@@ -2,6 +2,11 @@
 
 Git-sourced history for this site. Entries follow commits on `main`, not chat notes.
 
+## [1.85] — 2026-10-08
+
+- **Summary:** (1) `/tools/tunnel` 街景圖 `public/iol/street.jpg` 改用 Wikimedia Commons CC0 相片（來源、作者、授權與取得日期見 `public/iol/CREDITS.md`），取代來源不明的舊圖。(2) 青光眼專題「2. 正常眼壓性青光眼」CNTGS 句改為：剔除白內障影響後再降約三成眼壓的一組惡化較少；意向治療分析未見顯著分別；不少未治療者亦未見惡化；是否積極降壓由醫生個別評估（繁／EN／JA）。`cntgs1998a`（PMID 9780093）備註第二句同步改為意向治療分析未見顯著分別、剔除白內障影響後差異才出現（並補 EN／JA）。目標眼壓段落未改。(3) 未知 `/tools/*` 路徑（包括 `/tools/report`、`/tools/referral`）改為真正 HTTP 404，不再回傳空殼 200；不設任何導向。(4) sitemap `/t/d4`、`/tools/tunnel` lastmod 更新。`CONTENT_VERSION` → **1.85**；網站最近覆核不變。
+- **Files:** `public/iol/street.jpg`, `public/iol/CREDITS.md`, `src/data/{topics,citations}.ts`, `src/i18n/{topics-en,topics-ja}.ts`, `src/routes/tools.$toolId.tsx`, `public/sitemap.xml`, `public/sitemap-lastmod.json`, `scripts/generate-sitemap.mjs`, `scripts/topic-structure-polish.test.mjs`, `src/lib/site.ts`, `CHANGELOG.md`
+
 ## [1.84] — 2026-10-08
 
 - **Summary:** `/tools/tunnel` 改為互動式青光眼視野示意（輕度／中度／重度／末期、弓形／鼻側階梯／周邊收窄三種形態、「模擬示意」標籤、兩眼補償說明、折疊式眼壓研究群體數字）；`/iol` 與 `/tools/tunnel` 共用街景圖 `street.jpg` 內可辨認的商舖招牌已模糊處理；sitemap 的 `/tools/tunnel`、`/iol` lastmod 更新。`CONTENT_VERSION` → **1.84**；網站最近覆核不變。

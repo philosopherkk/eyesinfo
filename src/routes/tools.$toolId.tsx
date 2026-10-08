@@ -19,7 +19,15 @@ import { hrefWithLang, localeFromMatch } from "@/lib/locale-path";
 import { uiText } from "@/lib/ui-text";
 import { seoDescriptionFor } from "@/lib/seo-description";
 
+function isKnownToolPath(toolId: string): boolean {
+  return TOOLS.some((item) => item.id === toolId && item.href === `/tools/${toolId}`);
+}
+
 export const Route = createFileRoute("/tools/$toolId")({
+  // Throw in beforeLoad so SSR returns HTTP 404 (component-only notFound → hollow 200).
+  beforeLoad: ({ params }) => {
+    if (!isKnownToolPath(params.toolId)) throw notFound();
+  },
   head: ({ params, match }) => {
     const locale = localeFromMatch(match);
     const tool = TOOLS.find((item) => item.id === params.toolId && item.href.startsWith("/tools/"));

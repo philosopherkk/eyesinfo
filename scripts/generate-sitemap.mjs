@@ -78,7 +78,6 @@ const STATIC_SOURCES = {
     "src/routes/iol.tsx",
     "src/components/iol-scene.tsx",
     "src/lib/iol-optics.ts",
-    "public/iol/street.jpg",
   ],
   "/iol-optics": [
     "src/routes/iol-optics.tsx",
