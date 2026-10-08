@@ -2,6 +2,11 @@
 
 Git-sourced history for this site. Entries follow commits on `main`, not chat notes.
 
+## [1.84] — 2026-10-08
+
+- **Summary:** `/tools/tunnel` 改為互動式青光眼視野示意（輕度／中度／重度／末期、弓形／鼻側階梯／周邊收窄三種形態、「模擬示意」標籤、兩眼補償說明、折疊式眼壓研究群體數字）；`/iol` 與 `/tools/tunnel` 共用街景圖 `street.jpg` 內可辨認的商舖招牌已模糊處理；sitemap 的 `/tools/tunnel`、`/iol` lastmod 更新。`CONTENT_VERSION` → **1.84**；網站最近覆核不變。
+- **Files:** `src/components/glaucoma-field-sim.tsx`, `src/lib/glaucoma-field.ts`, `src/lib/glaucoma-field.test.ts`, `src/i18n/glaucoma-field-sim-text.ts`, `src/data/{citations,tools,search-index,seo-descriptions}.ts`, `src/i18n/catalog.ts`, `src/components/tool-demos.tsx`, `src/routes/tools.$toolId.tsx`, `public/iol/street.jpg`, `public/sitemap.xml`, `public/sitemap-lastmod.json`, `scripts/generate-sitemap.mjs`, `scripts/topic-structure-polish.test.mjs`, `src/lib/site.ts`, `package.json`, `CHANGELOG.md`
+
 ## [1.83] — 2026-10-08
 
 - **Summary:** 三個空殼專題路徑（`/t/parent-gaps`、`/t/water-acanthamoeba`、`/t/ok-hygiene`）永久導向母專題錨點；sitemap 改為依 git 內容最後變更日寫入 per-URL lastmod。`CONTENT_VERSION` → **1.83**；網站最近覆核不變。
