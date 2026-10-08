@@ -10,8 +10,10 @@ Personal information is screened before anything can be generated.
 ## Run it
 
 ```bash
-npm run reportnreferral     # http://127.0.0.1:5174/
+npm run reportnreferral     # http://127.0.0.1:5174/  (local static server)
+# or after sync + vite: http://localhost:8080/reportnreferral/
 npm test                    # includes reportnreferral/test/*.test.mjs
+node scripts/sync-reportnreferral.mjs   # refresh public/reportnreferral/
 ```
 
 It is plain static HTML, CSS and ES modules (no build step), so any static host works. Browsers block ES modules
@@ -73,9 +75,11 @@ doctor decides.
 
 ## Relationship to eyesinfo.org
 
-This folder is deliberately separate from the education site (`src/`, `public/`). The education site is public,
-education-only and forbids referral and clinical-report content, so ReportNReferral is not routed, linked or built
-by the site. Decide where to host it separately (for example an access-controlled static host) before any use.
+Source of truth is this folder. `scripts/sync-reportnreferral.mjs` (also run from `prebuild`) copies the shippable
+files into `public/reportnreferral/`, so Vercel serves the tool at **`/reportnreferral/`**.
+
+It is **not** listed on the home page, patient tools list, or sitemap (same pattern as `/qr`). After editing
+files here, run `node scripts/sync-reportnreferral.mjs` before committing so `public/reportnreferral/` stays in sync.
 
 ## Extending
 
