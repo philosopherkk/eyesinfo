@@ -11,6 +11,8 @@ export type GfsText = {
   simBox: string[];
   urgent: string;
   eye: string;
+  simBadge: string;
+  bothEyes: string;
   sevGroup: string;
   sevs: { name: string; look: string; stage: string; note: string }[];
   patternGroup: string;
@@ -25,6 +27,7 @@ export type GfsText = {
   compareOn: string;
   compareBadge: string;
   lookLabel: string;
+  stageLabel: string;
   chartTitle: string;
   chartCaption: string;
   perceptionTitle: string;
@@ -61,27 +64,28 @@ const zhHant: GfsText = {
     "本站不能代替註冊醫生。",
   ],
   urgent: "突然視力下降、劇烈眼痛或頭痛噁心 → 急症頁",
-  eye: "右眼視角",
+  eye: "右眼",
+  simBadge: "模擬示意",
+  bothEyes: "兩眼一齊睇時，另一隻眼常會補返缺口，所以好多人完全唔覺——要靠檢查先發現。",
   sevGroup: "選擇程度",
   sevs: [
     {
       name: "輕度",
       look: "只有局部、較淺的模糊或暗淡區（常在鼻側，或上方、下方呈弓形），中央視力通常仍然清楚。大腦會把缺口「補」起來，所以多數人察覺不到。",
-      stage:
-        "分級參考（HPA 早期）：視野報告的平均偏差（MD）約好過 −6 dB，中央約 5° 內測試點仍正常。",
+      stage: "HPA 早期——視野報告的平均偏差（MD）約好過 −6 dB，中央約 5° 內測試點仍正常。",
       note: "常常沒有任何徵狀，要靠眼科檢查（眼壓、視神經 OCT、視野）才發現。小型組織學研究（17 隻捐贈眼）指出，視野檢查出現統計異常時，通常已有約 25–35% 視網膜神經節細胞流失（Kerrigan-Baumrind 2000）。",
     },
     {
       name: "中度",
       look: "缺損範圍擴大、更深，鼻側及上下弓形缺損較明顯；一邊旁邊的人或物件可能變得模糊或「消失」。視力表視力仍可以很好。",
-      stage: "分級參考（HPA 中度）：MD 約 −6 至 −12 dB；中央約 5° 內未出現完全失去敏感度的測試點。",
+      stage: "HPA 中度——MD 約 −6 至 −12 dB；中央約 5° 內未出現完全失去敏感度的測試點。",
       note: "開始可能覺得要更多光線、易碰到旁邊的物件，但不少人仍未察覺。",
     },
     {
       name: "重度",
       look: "大部分周邊視野缺失或非常模糊，只剩較窄的中央範圍加小部分周邊。行路易碰到側邊的人或物件，需要更多光線，讀字或看清環境較吃力。",
       stage:
-        "分級參考（HPA 重度）：符合其中一項即屬重度——MD 差過約 −12 dB、超過一半測試點明顯下降、或中央約 5° 內已有嚴重缺損。",
+        "HPA 重度——符合其中一項即屬重度：MD 差過約 −12 dB、超過一半測試點明顯下降、或中央約 5° 內已有嚴重缺損。",
       note: "此階段視野缺損已明顯影響日常活動，醫生會按個別情況討論監察與處理。",
     },
     {
@@ -118,13 +122,14 @@ const zhHant: GfsText = {
   compareOn: "已顯示正常視野（再按返回示意）",
   compareBadge: "正常視野（對照）",
   lookLabel: "看起來像",
+  stageLabel: "分級參考",
   chartTitle: "視野報告灰階圖（示意）",
   chartCaption:
     "越深＝這一區敏感度越低。視野報告也有類似灰階圖，但真正的報告由儀器測出，並非這個畫面；右側小暗方塊是人人都有的正常盲點。",
   perceptionTitle: "病人真的見到黑色嗎？",
   perception:
     "多數人形容為模糊、朦朧、需要更多光線，或某些部分「不見了」；亦有人完全察覺不到。雙眼同時使用時，大腦常會互相補償，單眼缺損更不易察覺（常見現象，非本站所創）。",
-  iopTitle: "眼壓與青光眼：公開研究的群體結果（示意）",
+  iopTitle: "研究怎樣講眼壓（群體數字）",
   iopBig:
     "這不是你的預後，也不是預測。拖動滑桿只會顯示公開研究在這個眼壓範圍講過甚麼；不會計算你的風險，也不能代替眼科醫生為你訂目標眼壓。",
   iopSlider: "示意眼壓",
@@ -138,7 +143,7 @@ const zhHant: GfsText = {
       range: "約 17 mmHg 或以下",
       lines: [
         "AGIS 第 7 報（已做過手術的開角型青光眼，追蹤 6 年或以上）：每次覆診眼壓都低於 18 mmHg 的眼，視野缺損分數（0–20 分）平均變化接近 0；不足一半覆診低於 18 mmHg 的眼，估計平均惡化 0.63 分（統計上未達顯著，p＝0.083），7 年時約 1.93 分。",
-        "CNTGS（正常眼壓性青光眼，已有進展或視野威脅注視點）：把眼壓較基線降低 30%，到達終點（視盤或視野惡化）的眼睛：治療組 12%，未治療對照組 35%。",
+        "CNTGS（正常眼壓性青光眼）：意向治療分析未見顯著分別；剔除白內障影響後，降眼壓約 30% 組惡化較少。手術引致白內障較多，故是否積極降壓須個別評估。",
         "這些是群體結果：較低眼壓與較少惡化相關，但不代表壓到某個數字便保證不惡化。",
       ],
     },
@@ -177,7 +182,6 @@ const zhHant: GfsText = {
   barsTitle: "公開研究報告的事件比例（對照組 vs 治療組）",
   bars: [
     { label: "EMGT：中位約 6 年有進展", a: "對照", av: 62, b: "治療", bv: 45 },
-    { label: "CNTGS：達到惡化終點", a: "對照", av: 35, b: "治療", bv: 12 },
     { label: "OHTS：5 年發展成開角型青光眼", a: "觀察", av: 9.5, b: "用藥", bv: 4.4 },
   ],
   barsNote:
@@ -200,28 +204,31 @@ const en: GfsText = {
     "This site cannot replace a registered doctor.",
   ],
   urgent: "Sudden vision loss, severe eye pain, or headache with nausea → urgent page",
-  eye: "Right-eye view",
+  eye: "Right eye",
+  simBadge: "Simulation",
+  bothEyes:
+    "When both eyes are open, the other eye often fills in the gap, so many people notice nothing at all — it takes an eye examination to find it.",
   sevGroup: "Choose a stage",
   sevs: [
     {
       name: "Mild",
       look: "Small, shallow patches of blur or dimming (often nasal, or arch-shaped above or below fixation). Central vision is usually still sharp. The brain fills the gaps in, so most people do not notice.",
       stage:
-        "Staging reference (HPA early): mean deviation (MD) on a field report better than about −6 dB, with central 5° test points still normal.",
+        "HPA early — mean deviation (MD) on a field report better than about −6 dB, with central 5° test points still normal.",
       note: "Often no symptoms at all; found by an eye examination (pressure, optic-nerve OCT, visual field). A small histology study (17 donor eyes) found that by the time automated field testing is statistically abnormal, roughly 25–35% of retinal ganglion cells are typically already lost (Kerrigan-Baumrind 2000).",
     },
     {
       name: "Moderate",
       look: "Larger and deeper defects; nasal and upper/lower arch-shaped loss is more obvious. A person at the side may look blurred or “disappear”. Chart acuity can still be good.",
       stage:
-        "Staging reference (HPA moderate): MD about −6 to −12 dB; no completely insensitive test point within the central 5°.",
+        "HPA moderate — MD about −6 to −12 dB; no completely insensitive test point within the central 5°.",
       note: "People may start to need more light or bump into things at the side, but many still do not notice.",
     },
     {
       name: "Severe",
       look: "Most of the peripheral field is missing or very blurred, leaving a narrower central area and a small part of the periphery. Easy to bump into people or objects at the side; more light is needed; reading and taking in a scene is harder.",
       stage:
-        "Staging reference (HPA severe): any one of — MD worse than about −12 dB, more than half of test points clearly depressed, or serious loss within the central 5°.",
+        "HPA severe — any one of: MD worse than about −12 dB, more than half of test points clearly depressed, or serious loss within the central 5°.",
       note: "Field loss now clearly affects daily activities; the doctor discusses monitoring and management case by case.",
     },
     {
@@ -260,13 +267,14 @@ const en: GfsText = {
   compareOn: "Normal field shown (press again to go back)",
   compareBadge: "Normal field (comparison)",
   lookLabel: "What it can look like",
+  stageLabel: "Staging reference",
   chartTitle: "Grey-scale field chart (illustration)",
   chartCaption:
     "Darker = lower sensitivity in that area. Field reports have a similar grey-scale chart, but a real report is measured by an instrument and is not this picture. The small dark square on the right is the normal blind spot everyone has.",
   perceptionTitle: "Do patients really see black?",
   perception:
     "Most describe blur, haze, needing more light, or parts “missing”; some notice nothing. With both eyes open the brain often compensates, so a one-eye defect is even harder to notice (a common observation, not specific to this site).",
-  iopTitle: "Eye pressure and glaucoma: published study results at group level (illustration)",
+  iopTitle: "What studies say about eye pressure (group-level figures)",
   iopBig:
     "This is not your prognosis and not a prediction. The slider only shows what published studies reported around that pressure; it does not calculate your risk and cannot replace an ophthalmologist setting your target pressure.",
   iopSlider: "Illustrative eye pressure",
@@ -281,7 +289,7 @@ const en: GfsText = {
       range: "About 17 mmHg or below",
       lines: [
         "AGIS report 7 (open-angle glaucoma after surgery, 6+ years): eyes with pressure below 18 mmHg at every visit had a mean change in field-defect score (0–20) close to zero; eyes below 18 mmHg at fewer than half of visits had an estimated mean worsening of 0.63 units (not statistically significant, p = 0.083), about 1.93 units at 7 years.",
-        "CNTGS (normal-tension glaucoma with progression or field threatening fixation): lowering pressure 30% from baseline — endpoint reached in 12% of treated eyes vs 35% of untreated control eyes.",
+        "CNTGS (normal-tension glaucoma): the intention-to-treat analysis showed no significant difference; after censoring cataract effects, the group with pressure lowered by about 30% worsened less. Surgery caused more cataract, so whether to lower pressure aggressively needs individual assessment.",
         "These are group results: lower pressure is associated with less worsening, but this does not mean reaching a given number guarantees no progression.",
       ],
     },
@@ -320,7 +328,6 @@ const en: GfsText = {
   barsTitle: "Event rates reported by the studies (control vs treated)",
   bars: [
     { label: "EMGT: progression at median about 6 y", a: "Control", av: 62, b: "Treated", bv: 45 },
-    { label: "CNTGS: reached worsening endpoint", a: "Control", av: 35, b: "Treated", bv: 12 },
     { label: "OHTS: open-angle glaucoma by 5 y", a: "Observed", av: 9.5, b: "Medication", bv: 4.4 },
   ],
   barsNote:
@@ -343,28 +350,30 @@ const ja: GfsText = {
     "本サイトは登録医師の代わりにはなりません。",
   ],
   urgent: "突然の視力低下・強い眼痛・頭痛と吐き気 → 緊急ページ",
-  eye: "右眼の見え方",
+  eye: "右眼",
+  simBadge: "シミュレーション",
+  bothEyes:
+    "両眼で見ているときは、もう片方の眼が欠けを補うことが多く、多くの人はまったく気づきません。見つけるには眼科検査が必要です。",
   sevGroup: "段階を選ぶ",
   sevs: [
     {
       name: "軽度",
       look: "小さく浅いぼやけや暗がり（鼻側、または注視点の上下に弓状）が出ます。中心視力は通常まだ鮮明です。脳が欠けを「補う」ため、ほとんどの人は気づきません。",
       stage:
-        "分類の目安（HPA 早期）：視野検査報告の平均偏差（MD）が約 −6 dB より良好で、中心約 5° 内の測定点は正常。",
+        "HPA 早期——視野検査報告の平均偏差（MD）が約 −6 dB より良好で、中心約 5° 内の測定点は正常。",
       note: "自覚症状がないことが多く、眼科検査（眼圧・視神経OCT・視野）で見つかります。小規模な組織学研究（提供眼17眼）では、自動視野検査で統計的な異常が出る時点で、すでに網膜神経節細胞の約 25〜35% が失われていることが示されています（Kerrigan-Baumrind 2000）。",
     },
     {
       name: "中等度",
       look: "欠損が広がり深くなり、鼻側や上下の弓状欠損がはっきりします。横にいる人がぼやけたり「消えたり」することがあります。視力表の視力は良好なこともあります。",
-      stage:
-        "分類の目安（HPA 中等度）：MD 約 −6〜−12 dB。中心約 5° 内に感度が完全に失われた測定点はない。",
+      stage: "HPA 中等度——MD 約 −6〜−12 dB。中心約 5° 内に感度が完全に失われた測定点はない。",
       note: "もっと明るさが必要になったり、横の物にぶつかりやすくなる人もいますが、気づかない人も多いです。",
     },
     {
       name: "重度",
       look: "周辺視野の大部分が欠けるか非常にぼやけ、狭い中心部と周辺の一部だけが残ります。横の人や物にぶつかりやすく、明るさが必要で、読書や周囲の把握が難しくなります。",
       stage:
-        "分類の目安（HPA 重度）：次のいずれかで重度——MD が約 −12 dB より悪い、半数を超える測定点が明らかに低下、または中心約 5° 内に重い欠損。",
+        "HPA 重度——次のいずれかで重度：MD が約 −12 dB より悪い、半数を超える測定点が明らかに低下、または中心約 5° 内に重い欠損。",
       note: "視野欠損が日常生活に明らかに影響する段階で、医師が個別に経過観察と対応を相談します。",
     },
     {
@@ -401,13 +410,14 @@ const ja: GfsText = {
   compareOn: "正常な視野を表示中（もう一度押すと戻ります）",
   compareBadge: "正常な視野（比較）",
   lookLabel: "見え方の例",
+  stageLabel: "分類の目安",
   chartTitle: "視野のグレースケール図（図示）",
   chartCaption:
     "濃いほどその部分の感度が低いことを示します。実際の視野検査報告にも似た図がありますが、報告は機器で測定したものでこの画面ではありません。右側の小さな濃い四角は、誰にでもある正常な盲点です。",
   perceptionTitle: "患者さんは本当に黒く見えているのか？",
   perception:
     "多くの人は、ぼやけ、かすみ、明るさが必要、一部が「ない」と表現し、まったく気づかない人もいます。両眼で見ると脳が補うことが多く、片眼の欠損はさらに気づきにくくなります（一般的な現象で、本サイト独自の主張ではありません）。",
-  iopTitle: "眼圧と緑内障：公表された研究の集団レベルの結果（図示）",
+  iopTitle: "研究は眼圧について何と言っているか（集団の数字）",
   iopBig:
     "これはあなたの予後でも予測でもありません。スライダーは、その眼圧付近で公表研究が報告した内容を表示するだけで、あなたのリスクは計算せず、眼科医が決める目標眼圧の代わりにもなりません。",
   iopSlider: "図示用の眼圧",
@@ -421,7 +431,7 @@ const ja: GfsText = {
       range: "約 17 mmHg 以下",
       lines: [
         "AGIS 第7報（手術後の開放隅角緑内障、6年以上追跡）：毎回の受診で眼圧が 18 mmHg 未満だった眼は、視野欠損スコア（0〜20）の平均変化がほぼ 0。18 mmHg 未満が受診の半分未満だった眼は、平均で 0.63 の悪化と推定（統計的に有意でない、p＝0.083）、7年時点で約 1.93。",
-        "CNTGS（進行または注視点を脅かす視野欠損のある正常眼圧緑内障）：ベースラインから眼圧を 30% 下げた場合、悪化の終点に達したのは治療群の眼で 12%、未治療の対照群で 35%。",
+        "CNTGS（正常眼圧緑内障）：intention-to-treat 解析では有意差はありませんでした。白内障の影響を除いて解析すると、眼圧を約 30% 下げた群で悪化が少ない結果でした。手術では白内障が多く生じたため、積極的に眼圧を下げるかどうかは個別の評価が必要です。",
         "これらは集団の結果です。眼圧が低いほど悪化が少ない傾向はありますが、ある数値にすれば悪化しないという保証ではありません。",
       ],
     },
@@ -460,7 +470,6 @@ const ja: GfsText = {
   barsTitle: "研究が報告したイベント割合（対照 対 治療）",
   bars: [
     { label: "EMGT：追跡中央値 約6年で進行", a: "対照", av: 62, b: "治療", bv: 45 },
-    { label: "CNTGS：悪化の終点に到達", a: "対照", av: 35, b: "治療", bv: 12 },
     { label: "OHTS：5年で開放隅角緑内障を発症", a: "観察", av: 9.5, b: "薬物", bv: 4.4 },
   ],
   barsNote:

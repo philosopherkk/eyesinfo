@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { ChevronDown } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/i18n";
@@ -253,14 +254,15 @@ function IopPanel({ text }: { text: GfsText }) {
   const pos = (v: number) => `${IOP_FRAC(v) * 100}%`;
 
   return (
-    <section
-      className="mt-8 rounded-xl border border-line bg-card px-3.5 py-4"
-      aria-labelledby="gfs-iop"
-    >
-      <h2 id="gfs-iop" className="text-[1rem] font-semibold leading-snug text-navy">
-        {text.iopTitle}
-      </h2>
-      <p className="mt-3 rounded-lg border-2 border-danger bg-danger-bg px-3 py-2.5 text-[0.88rem] font-semibold leading-relaxed text-danger">
+    <details className="group mt-8 rounded-xl border border-line bg-card px-3.5 py-1">
+      <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 py-2 text-[1rem] font-semibold leading-snug text-navy [&::-webkit-details-marker]:hidden">
+        <span>{text.iopTitle}</span>
+        <ChevronDown
+          className="size-5 shrink-0 transition-transform group-open:rotate-180"
+          aria-hidden
+        />
+      </summary>
+      <p className="mt-1 rounded-lg border-2 border-danger bg-danger-bg px-3 py-2.5 text-[0.88rem] font-semibold leading-relaxed text-danger">
         {text.iopBig}
       </p>
       <p className="mt-3 text-[0.82rem] leading-relaxed text-muted">{text.iopNoLink}</p>
@@ -396,7 +398,7 @@ function IopPanel({ text }: { text: GfsText }) {
       <p className="mt-3 border-t border-line pt-3 text-[0.75rem] leading-relaxed text-muted">
         {text.iopLimits}
       </p>
-    </section>
+    </details>
   );
 }
 
@@ -410,7 +412,9 @@ export function GlaucomaFieldSim() {
 
   const sev = text.sevs[severity];
   const pat = text.patterns[PATTERNS.indexOf(pattern)];
-  const badge = compare ? text.compareBadge : `${text.eye} · ${sev.name} · ${pat.name}`;
+  const badge = `${text.simBadge} · ${
+    compare ? text.compareBadge : `${text.eye} · ${sev.name} · ${pat.name}`
+  }`;
 
   return (
     <div>
@@ -455,6 +459,8 @@ export function GlaucomaFieldSim() {
           {badge}
         </span>
       </div>
+
+      <p className="mt-2 text-[0.8rem] leading-relaxed text-muted">{text.bothEyes}</p>
 
       <div className="mt-2 grid grid-cols-1 gap-2">
         <button
