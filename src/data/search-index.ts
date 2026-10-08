@@ -169,8 +169,8 @@ export const SEARCH_SYNONYMS: SearchEntry[] = [
     id: "tunnel",
     kind: "tool",
     href: "/tools/tunnel",
-    titleFallback: "隧道視野示意",
-    keywords: ["隧道視野", "青光眼", "視野收窄", "glaucoma tunnel"],
+    titleFallback: "青光眼視野示意",
+    keywords: ["青光眼視野", "隧道視野", "視野缺損", "視野收窄", "眼壓", "glaucoma visual field", "tunnel vision", "緑内障 視野"],
   },
   // —— AMD / macula ——
   {

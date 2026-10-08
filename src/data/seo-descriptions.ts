@@ -686,9 +686,9 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
     ja: "眼鏡処方せんの球面・円柱・軸・加入などの読み方教育。検眼の代わりにはなりません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/tools/tunnel": {
-    zh: "青光眼周邊視野收窄的示意動畫，幫助理解「隧道視野」概念；不是視野檢查（公眾教育，不能代替面診。）詳見內文。",
-    en: "Animation suggesting tunnel-like peripheral field loss for glaucoma education. Not a visual-field test or diagnosis.",
-    ja: "緑内障で周辺視野が狭く感じる様子の図示。視野検査そのものではありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
+    zh: "可選輕度、中度、重度、末期的青光眼視野缺損示意，並附眼壓與研究結果對照；只是模擬，不是視野檢查（公眾教育，不能代替面診。）詳見內文。",
+    en: "Interactive mild to end-stage glaucoma visual-field illustration with population-level eye-pressure study figures. Simulation only; not a visual-field test or diagnosis.",
+    ja: "緑内障の軽度から末期までの視野欠損の図示と、眼圧に関する集団研究の数値。シミュレーションであり視野検査ではありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/tools/visit": {
     zh: "散瞳診症流程示意：說明檢查後為何不宜自行開車，方便預先安排接載；此為教育說明而非診症服務，詳見專題正文。",

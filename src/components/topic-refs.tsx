@@ -10,7 +10,7 @@ function citeHost(url: string): string {
 }
 
 export function TopicRefs({ ids }: { ids?: string[] }) {
-  const { t } = useI18n();
+  const { t, tx, locale } = useI18n();
   const list = citationsFor(ids ?? []);
   if (list.length === 0) return null;
   return (
@@ -25,8 +25,7 @@ export function TopicRefs({ ids }: { ids?: string[] }) {
       <ol className="mt-3 list-decimal space-y-3 pl-5 text-[0.78rem] leading-snug text-ink">
         {list.map((c) => (
           <li key={c.id}>
-            <span className="font-medium">{c.authors}</span> {c.title}.{" "}
-            <em>{c.source}</em>.{" "}
+            <span className="font-medium">{c.authors}</span> {c.title}. <em>{c.source}</em>.{" "}
             {c.pmid ? (
               <a
                 href={`https://pubmed.ncbi.nlm.nih.gov/${c.pmid}/`}
@@ -48,7 +47,13 @@ export function TopicRefs({ ids }: { ids?: string[] }) {
                 {citeHost(c.url)}
               </a>
             ) : null}
-            <span className="mt-0.5 block text-muted">{c.note}</span>
+            <span className="mt-0.5 block text-muted">
+              {locale === "en"
+                ? (c.noteEn ?? c.note)
+                : locale === "ja"
+                  ? (c.noteJa ?? c.note)
+                  : tx(c.note)}
+            </span>
           </li>
         ))}
       </ol>

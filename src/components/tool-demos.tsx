@@ -4,95 +4,6 @@ import { cn } from "@/lib/utils";
 import { useI18n } from "@/i18n";
 import { HaloOverlay } from "@/components/halo-overlay";
 
-export function TunnelDemo() {
-  const [stage, setStage] = useState(0);
-  const { tx, locale } = useI18n();
-  const labels =
-    locale === "en"
-      ? ["Early (often no warning)", "Arcuate loss", "Late central island"]
-      : locale === "ja"
-        ? ["早期（気づきにくい）", "弓状欠損", "後期の中心島"]
-        : [tx("早期（常無感覺）"), tx("中期弓形缺損"), tx("晚期中央島")];
-  const intro =
-    locale === "en"
-      ? "Glaucomatous damage removes field: the missing part is not blur, it is simply not there. Remaining central vision can still be sharp early on. Lost field does not return. This is not your field report and is not a score."
-      : locale === "ja"
-        ? "緑内障の視神経損傷は視野欠損です。欠けた部分は「ぼけ」ではなく、そこに像がありません。早期は残った中心視力が良いこともあります。失った視野は戻りません。これはあなたの視野検査ではなく、点数でもありません。"
-        : tx("青光眼視神經損傷造成的是視野缺損：缺了的部分不是「矇」，而是那裡沒有影像；中央剩餘視力早期可以仍然清楚。已損失的視野不能還原。這不是你的視野報告，也不能打分。");
-  const caption =
-    locale === "en"
-      ? [
-          "Early loss is often superior and inferior arcuate dimming that people do not notice.",
-          "Later, nasal and arcuate defects enlarge. Pedestrians at the side can “disappear”. The centre can still be relatively clear.",
-          "Late disease may leave a central island. A pipe-like tunnel is a late, simplified picture — not how every glaucoma patient starts.",
-        ][stage]
-      : locale === "ja"
-        ? [
-            "早期は上下の弓状の相対的な暗みで、自分では気づきにくいことが多いです。",
-            "中期は鼻側と上下の弓状欠損が広がり、端の歩行者が「消える」ことがあります。中心は比較的はっきり残ることがあります。",
-            "後期は中心の島が残ります。管状視野は後期の単純化した説明で、最初から水道管のぞきのような人ばかりではありません。",
-          ][stage]
-        : [
-            tx("早期常是上下弓形相對暗區，病人自己很難發現。"),
-            tx("中期鼻側及上下弓形缺損擴大，路邊行人可以「消失」。剩餘中央仍可相對清楚。"),
-            tx("晚期剩下中央島。管狀視野是晚期簡化描述，不是每一個青光眼病人一開始就像從水管看出去。"),
-          ][stage];
-
-  return (
-    <div>
-      <p className="text-[0.88rem] leading-relaxed text-muted">{intro}</p>
-      <div className="relative mt-4 overflow-hidden rounded-xl bg-navy">
-        <img src="/iol/street.jpg" alt="" className="aspect-video w-full object-cover" />
-        {stage === 0 ? (
-          <svg className="pointer-events-none absolute inset-0 size-full" viewBox="0 0 100 56" preserveAspectRatio="none" aria-hidden>
-            <path d="M12,18 Q50,8 88,18 Q70,22 50,20 Q30,22 12,18" fill="rgba(12,16,22,0.42)" />
-            <path d="M14,40 Q50,50 86,40 Q68,36 50,38 Q32,36 14,40" fill="rgba(12,16,22,0.38)" />
-          </svg>
-        ) : null}
-        {stage === 1 ? (
-          <svg className="pointer-events-none absolute inset-0 size-full" viewBox="0 0 100 56" preserveAspectRatio="none" aria-hidden>
-            <path d="M0,0 H38 V56 H0 Z" fill="rgba(10,14,20,0.72)" />
-            <path d="M8,6 Q50,0 92,8 Q78,18 50,16 Q22,18 8,6" fill="rgba(10,14,20,0.82)" />
-            <path d="M10,50 Q50,58 90,48 Q74,40 50,42 Q26,40 10,50" fill="rgba(10,14,20,0.82)" />
-          </svg>
-        ) : null}
-        {stage === 2 ? (
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(circle at 50% 46%, transparent 16%, rgba(8,12,18,0.15) 18%, rgba(8,12,18,0.96) 28%)",
-            }}
-          />
-        ) : null}
-      </div>
-      <div className="mt-3 grid grid-cols-3 gap-2">
-        {labels.map((l, i) => (
-          <button
-            key={l}
-            type="button"
-            onClick={() => setStage(i)}
-            className={cn(
-              "min-h-11 rounded-xl border px-2 text-[0.72rem] font-semibold",
-              stage === i ? "border-navy bg-navy text-paper" : "border-line bg-card text-navy",
-            )}
-          >
-            {l}
-          </button>
-        ))}
-      </div>
-      <p className="mt-3 text-[0.82rem] leading-relaxed text-muted">{caption}</p>
-      <Link
-        to="/t/$topicId"
-        params={{ topicId: "d4" }}
-        className="mt-4 inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy no-underline"
-      >
-        {tx("青光眼專題")}
-      </Link>
-    </div>
-  );
-}
-
 export function HazeDemo() {
   const [time, setTime] = useState<"day" | "night">("day");
   const { tx, locale } = useI18n();
@@ -103,7 +14,9 @@ export function HazeDemo() {
       ? "Side-by-side day and night illustration: normal view versus a cataract-like haze. Educational only — not a cataract grade and not a push for surgery."
       : locale === "ja"
         ? "昼と夜の並置示意：正常と白内障様のかすみ。教育用であり、白内障の分級でも手術の勧誘でもありません。"
-        : tx("日間與夜間並排示意：正常對比白內障樣霧感。只是教育示意／非診斷，不能為白內障分級，亦不是叫你接受手術。");
+        : tx(
+            "日間與夜間並排示意：正常對比白內障樣霧感。只是教育示意／非診斷，不能為白內障分級，亦不是叫你接受手術。",
+          );
   const timeLabels =
     locale === "en"
       ? { day: "Day", night: "Night" }
@@ -215,7 +128,9 @@ export function FloaterDemo() {
           onClick={() => setMode("curtain")}
           className={cn(
             "h-11 rounded-xl border text-[0.82rem] font-semibold",
-            mode === "curtain" ? "border-danger bg-danger text-paper" : "border-line bg-card text-navy",
+            mode === "curtain"
+              ? "border-danger bg-danger text-paper"
+              : "border-line bg-card text-navy",
           )}
         >
           {tx("固定簾幕")}
@@ -230,7 +145,12 @@ export function FloaterDemo() {
           onPointer(e);
         }}
       >
-        <img src="/iol/far.jpg" alt="" className="aspect-video w-full object-cover" draggable={false} />
+        <img
+          src="/iol/far.jpg"
+          alt=""
+          className="aspect-video w-full object-cover"
+          draggable={false}
+        />
         {mode === "drift" ? (
           <svg
             className="floater-layer pointer-events-none absolute inset-0 size-full"
@@ -243,7 +163,13 @@ export function FloaterDemo() {
               <ellipse cx="118" cy="62" rx="10" ry="6" />
               <path d="M188 88 c 22 8 26 26 10 32 c -20 5 -32 -12 -26 -26 c 3 -10 10 -12 16 -6" />
               <ellipse cx="96" cy="118" rx="5" ry="3.2" />
-              <path d="M210 48 q 20 12 10 34 q -12 10 -22 -4 q -6 -14 12 -30" fill="none" stroke="#0b1320" strokeWidth="3.2" strokeLinecap="round" />
+              <path
+                d="M210 48 q 20 12 10 34 q -12 10 -22 -4 q -6 -14 12 -30"
+                fill="none"
+                stroke="#0b1320"
+                strokeWidth="3.2"
+                strokeLinecap="round"
+              />
               <circle cx="152" cy="132" r="4" />
               <ellipse cx="248" cy="96" rx="8" ry="4.4" />
             </g>
@@ -277,7 +203,9 @@ export function FloaterDemo() {
               ? "A few long-standing floaters should still have been checked with dilation. A sudden increase or new flashes without a curtain: urgent ophthalmic assessment (same day if possible) — dilation alone is not enough."
               : locale === "ja"
                 ? "長年変わらない少量の飛蚊でも、散瞳で確認されたことが望ましいです。カーテンがなくても急増や新しい光視は緊急の眼科評価（できれば当日）。散瞳だけでは足りません。"
-                : tx("少量多年不變的飛蚊仍應曾由眼科專科醫生散瞳確認。突然增多或新閃光、但沒有簾幕：須緊急眼科評估（當日儘快）；不是「只散瞳」便足夠。")}
+                : tx(
+                    "少量多年不變的飛蚊仍應曾由眼科專科醫生散瞳確認。突然增多或新閃光、但沒有簾幕：須緊急眼科評估（當日儘快）；不是「只散瞳」便足夠。",
+                  )}
           </p>
           <Link
             to="/urgent"
@@ -305,9 +233,19 @@ export function FloaterDemo() {
 export function HaloDemo() {
   const { tx, locale } = useI18n();
   const kinds = [
-    { id: "mono" as const, title: locale === "en" ? "Monofocal" : locale === "ja" ? "単焦点" : tx("單焦點") },
-    { id: "edof" as const, title: locale === "en" ? "EDOF" : locale === "ja" ? "焦点深度延長" : tx("延伸景深") },
-    { id: "mf" as const, title: locale === "en" ? "Trifocal / MF" : locale === "ja" ? "3焦点／多焦点" : tx("三焦點／多焦") },
+    {
+      id: "mono" as const,
+      title: locale === "en" ? "Monofocal" : locale === "ja" ? "単焦点" : tx("單焦點"),
+    },
+    {
+      id: "edof" as const,
+      title: locale === "en" ? "EDOF" : locale === "ja" ? "焦点深度延長" : tx("延伸景深"),
+    },
+    {
+      id: "mf" as const,
+      title:
+        locale === "en" ? "Trifocal / MF" : locale === "ja" ? "3焦点／多焦点" : tx("三焦點／多焦"),
+    },
   ];
   const [k, setK] = useState<(typeof kinds)[number]["id"]>("mono");
   const [showHalo, setShowHalo] = useState(true);
@@ -317,7 +255,9 @@ export function HaloDemo() {
       ? "Halo = soft ring(s) around lamps. Starburst = spikes from the same lights. Intensity rises monofocal → EDOF → trifocal/MF as a teaching ladder only — pupil and design matter. Not a post-op promise."
       : locale === "ja"
         ? "ハロー＝光源まわりのやわらかい環。スターバースト＝同じ光源からの放射状の筋。単焦点→EDOF→3焦点／多焦点で強さだけ示します。瞳孔と光学設計で変わり、術後保証ではありません。"
-        : tx("光暈＝燈外一圈／多圈柔邊；星芒＝同一光源向外的放射線。單焦→延伸景深→三焦／多焦只調強度示意，實際因瞳孔與光學設計而異，唔係術後保證。");
+        : tx(
+            "光暈＝燈外一圈／多圈柔邊；星芒＝同一光源向外的放射線。單焦→延伸景深→三焦／多焦只調強度示意，實際因瞳孔與光學設計而異，唔係術後保證。",
+          );
   const haloLabel = locale === "en" ? "Halo" : locale === "ja" ? "ハロー" : tx("光暈");
   const starLabel = locale === "en" ? "Starburst" : locale === "ja" ? "スターバースト" : tx("星芒");
 
@@ -341,7 +281,11 @@ export function HaloDemo() {
         </div>
       </div>
       <p className="mt-3 text-[0.75rem] font-semibold text-steel">
-        {locale === "en" ? "Show on this night scene" : locale === "ja" ? "この夜景で表示" : tx("呢個夜景顯示")}
+        {locale === "en"
+          ? "Show on this night scene"
+          : locale === "ja"
+            ? "この夜景で表示"
+            : tx("呢個夜景顯示")}
       </p>
       <div className="mt-1.5 grid grid-cols-2 gap-2">
         <button
@@ -366,7 +310,11 @@ export function HaloDemo() {
         </button>
       </div>
       <p className="mt-3 text-[0.75rem] font-semibold text-steel">
-        {locale === "en" ? "Intensity ladder (illustration)" : locale === "ja" ? "強さの段階（図示）" : tx("強度示意（唔係術後保證）")}
+        {locale === "en"
+          ? "Intensity ladder (illustration)"
+          : locale === "ja"
+            ? "強さの段階（図示）"
+            : tx("強度示意（唔係術後保證）")}
       </p>
       <div className="mt-1.5 grid grid-cols-3 gap-2">
         {kinds.map((item) => (
@@ -386,4 +334,3 @@ export function HaloDemo() {
     </div>
   );
 }
-

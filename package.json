@@ -20,7 +20,7 @@
     "check:auth": "node scripts/check-auth-invariant.mjs",
     "sitemap:regen": "node scripts/generate-sitemap.mjs",
     "sitemap:from-map": "node scripts/generate-sitemap.mjs --from-map",
-    "test": "node --test 'scripts/**/*.test.mjs' 'reportnreferral/test/*.test.mjs' && node --experimental-strip-types --test src/lib/app-data/app-data.test.ts src/lib/auth/gate-identity.test.ts src/lib/theme.test.ts src/lib/layout-mode.test.ts src/lib/iol-optics.test.ts src/lib/iol-optics-studio/optics.test.ts src/lib/share.test.ts",
+    "test": "node --test 'scripts/**/*.test.mjs' 'reportnreferral/test/*.test.mjs' && node --experimental-strip-types --test src/lib/app-data/app-data.test.ts src/lib/auth/gate-identity.test.ts src/lib/theme.test.ts src/lib/layout-mode.test.ts src/lib/iol-optics.test.ts src/lib/iol-optics-studio/optics.test.ts src/lib/share.test.ts src/lib/glaucoma-field.test.ts",
     "lint": "eslint .",
     "reportnreferral": "node reportnreferral/serve.mjs",
     "format": "prettier --write ."

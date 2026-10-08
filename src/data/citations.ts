@@ -9,6 +9,9 @@ export type Citation = {
   /** Official public-education HTTPS outlink when there is no PMID. */
   url?: string;
   note: string;
+  /** Optional EN / JA notes; other locales fall back to the 繁 note. */
+  noteEn?: string;
+  noteJa?: string;
 };
 
 export const CITE: Record<string, Citation> = {
@@ -24,7 +27,8 @@ export const CITE: Record<string, Citation> = {
   lamp2020: {
     id: "lamp2020",
     authors: "Yam JC, Li FF, Zhang X, et al.",
-    title: "Two-year clinical trial of the Low-Concentration Atropine for Myopia Progression (LAMP) Study: phase 2 report",
+    title:
+      "Two-year clinical trial of the Low-Concentration Atropine for Myopia Progression (LAMP) Study: phase 2 report",
     source: "Ophthalmology. 2020;127(7):910-919",
     pmid: "32019700",
     note: "LAMP 第二年。濃度、是否繼續須由醫生決定。",
@@ -64,7 +68,8 @@ export const CITE: Record<string, Citation> = {
   zhang2023: {
     id: "zhang2023",
     authors: "Zhang XJ, Zhang Y, Kam KW, et al.",
-    title: "Prevalence of myopia in children before, during, and after COVID-19 restrictions in Hong Kong",
+    title:
+      "Prevalence of myopia in children before, during, and after COVID-19 restrictions in Hong Kong",
     source: "JAMA Netw Open. 2023;6(3):e234080. DOI 10.1001/jamanetworkopen.2023.4080",
     pmid: "36947037",
     note: "本港 6–8 歲散瞳調查：疫情前約 23–25%，2021 年約 36%。與中學篩查數字不可直接比較。",
@@ -123,18 +128,141 @@ export const CITE: Record<string, Citation> = {
   cntgs1998: {
     id: "cntgs1998",
     authors: "Collaborative Normal-Tension Glaucoma Study Group",
-    title: "The effectiveness of intraocular pressure reduction in the treatment of normal-tension glaucoma",
+    title:
+      "The effectiveness of intraocular pressure reduction in the treatment of normal-tension glaucoma",
     source: "Am J Ophthalmol. 1998;126(4):498-505",
     pmid: "9780094",
-    note: "正常眼壓性青光眼：把眼壓再降約 30% 可減慢部分人惡化。",
+    note: "意向治療分析未見顯著分別；剔除白內障影響後，降眼壓約 30% 組惡化較少。手術引致白內障較多，故是否積極降壓須個別評估。",
+    noteEn:
+      "The intention-to-treat analysis showed no significant difference; after censoring cataract effects, the group with pressure lowered by about 30% worsened less. Surgery caused more cataract, so whether to lower pressure aggressively needs individual assessment.",
+    noteJa:
+      "intention-to-treat 解析では有意差はありませんでした。白内障の影響を除いて解析すると、眼圧を約 30% 下げた群で悪化が少ない結果でした。手術では白内障が多く生じたため、積極的に眼圧を下げるかどうかは個別の評価が必要です。",
   },
   emgt2002: {
     id: "emgt2002",
     authors: "Heijl A, Leske MC, Bengtsson B, et al.",
-    title: "Reduction of intraocular pressure and glaucoma progression: results from the Early Manifest Glaucoma Trial",
+    title:
+      "Reduction of intraocular pressure and glaucoma progression: results from the Early Manifest Glaucoma Trial",
     source: "Arch Ophthalmol. 2002;120(10):1268-1279",
     pmid: "12365904",
     note: "早期開角型青光眼：降眼壓減慢惡化。已失視野不能還原。",
+  },
+  emgt2003: {
+    id: "emgt2003",
+    authors: "Leske MC, Heijl A, Hussein M, et al.",
+    title:
+      "Factors for glaucoma progression and the effect of treatment: the early manifest glaucoma trial",
+    source: "Arch Ophthalmol. 2003;121(1):48-56",
+    pmid: "12523884",
+    note: "EMGT：隨訪平均眼壓每高 1 mmHg，進展 HR 1.13；治療組進展風險約為對照一半。群體結果，不是個人預後。",
+  },
+  emgt2007: {
+    id: "emgt2007",
+    authors: "Leske MC, Heijl A, Hyman L, et al.",
+    title: "Predictors of long-term progression in the early manifest glaucoma trial",
+    source: "Ophthalmology. 2007;114(11):1965-1972",
+    pmid: "17628686",
+    note: "EMGT 長期隨訪（至 11 年）：治療及隨訪眼壓持續影響進展；年齡、雙眼、剝脫、視盤出血等亦有關。",
+  },
+  agis7: {
+    id: "agis7",
+    authors: "AGIS Investigators.",
+    title:
+      "The Advanced Glaucoma Intervention Study (AGIS): 7. The relationship between control of intraocular pressure and visual field deterioration",
+    source: "Am J Ophthalmol. 2000;130(4):429-440",
+    pmid: "11024415",
+    note: "手術後開角型青光眼：每次覆診眼壓 <18 mmHg 的眼，視野分數平均變化接近 0；不足一半覆診 <18 的估計平均惡化 0.63 分（p=0.083）。關聯性分析，不是個人預後。",
+  },
+  agis2: {
+    id: "agis2",
+    authors: "AGIS Investigators.",
+    title: "Advanced Glaucoma Intervention Study. 2. Visual field test scoring and reliability",
+    source: "Ophthalmology. 1994;101(8):1445-1455",
+    pmid: "7741836",
+    note: "AGIS 視野缺損分數 0–20 的定義。",
+  },
+  cntgs1998a: {
+    id: "cntgs1998a",
+    authors: "Collaborative Normal-Tension Glaucoma Study Group.",
+    title:
+      "Comparison of glaucomatous progression between untreated patients with normal-tension glaucoma and patients with therapeutically reduced intraocular pressures",
+    source: "Am J Ophthalmol. 1998;126(4):487-497",
+    pmid: "9780093",
+    note: "CNTGS：降低 30% 眼壓，達終點眼睛治療組 12%，對照組 35%。白內障因素令意向治療分析另見 PMID 9780094。",
+  },
+  ukgts2015: {
+    id: "ukgts2015",
+    authors: "Garway-Heath DF, Crabb DP, Bunce C, et al.",
+    title:
+      "Latanoprost for open-angle glaucoma (UKGTS): a randomised, multicentre, placebo-controlled trial",
+    source: "Lancet. 2015;385(9975):1295-1304",
+    pmid: "25533656",
+    note: "新診斷開角型青光眼，24 個月視野惡化：降眼壓滴眼藥對安慰劑 HR 0.44。群體結果，不是個人預後。",
+  },
+  heijl2013: {
+    id: "heijl2013",
+    authors: "Heijl A, Buchholz P, Norrgren G, Bengtsson B.",
+    title: "Rates of visual field progression in clinical glaucoma care",
+    source: "Acta Ophthalmol. 2013;91(5):406-412",
+    pmid: "23066646",
+    note: "583 人臨床常規照顧：MD 平均每年 −0.80 dB，個別差異大；較高平均眼壓與較快進展相關。",
+  },
+  crabb2013: {
+    id: "crabb2013",
+    authors: "Crabb DP, Smith ND, Glen FC, Burton R, Garway-Heath DF.",
+    title: "How does glaucoma look?: patient perception of visual field loss",
+    source: "Ophthalmology. 2013;120(6):1120-1126",
+    pmid: "23415421",
+    note: "50 位患者：無人選黑色隧道／黑色斑塊；54% 選模糊斑塊、16% 選缺失斑塊；26% 完全不知道。小型橫斷面研究。",
+  },
+  hu2014: {
+    id: "hu2014",
+    authors: "Hu CX, Zangalli C, Hsieh M, et al.",
+    title: "What do patients with glaucoma see? Visual symptoms reported by patients with glaucoma",
+    source: "Am J Med Sci. 2014;348(5):403-409",
+    pmid: "24992392",
+    note: "99 位患者問卷：最常見是需要更多光線及視物模糊；視野損失較多者較難看到兩側。",
+  },
+  kerrigan2000: {
+    id: "kerrigan2000",
+    authors: "Kerrigan-Baumrind LA, Quigley HA, Pease ME, Kerrigan DF, Mitchell RS.",
+    title:
+      "Number of ganglion cells in glaucoma eyes compared with threshold visual field tests in the same persons",
+    source: "Invest Ophthalmol Vis Sci. 2000;41(3):741-748",
+    pmid: "10711689",
+    note: "17 隻捐贈眼：自動視野出現統計異常時，已有約 25–35% 視網膜神經節細胞流失。小型組織學研究。",
+  },
+  mills2006: {
+    id: "mills2006",
+    authors: "Mills RP, Budenz DL, Lee PP, et al.",
+    title: "Categorizing the stage of glaucoma from pre-diagnosis to end-stage disease",
+    source: "Am J Ophthalmol. 2006;141(1):24-30",
+    pmid: "16386972",
+    note: "以 Hodapp–Parrish–Anderson 為基礎、由前期至末期共六級的視野分期系統。",
+  },
+  brusini2007: {
+    id: "brusini2007",
+    authors: "Brusini P, Johnson CA.",
+    title: "Staging functional damage in glaucoma: review of different classification methods",
+    source: "Surv Ophthalmol. 2007;52(2):156-179",
+    pmid: "17355855",
+    note: "視野分級方法綜述（含 Hodapp–Parrish–Anderson 準則）。",
+  },
+  kastner2020: {
+    id: "kastner2020",
+    authors: "Kastner A, King AJ.",
+    title: "Advanced glaucoma at diagnosis: current perspectives",
+    source: "Eye (Lond). 2020;34(1):116-128",
+    pmid: "31740802",
+    note: "HPA 準則表（MD 約 −6／−12 dB）及「晚期」常用定義；部分外科文獻以 MD 差過約 −20 dB 為晚期。",
+  },
+  garwayheath2000: {
+    id: "garwayheath2000",
+    authors: "Garway-Heath DF, Poinoosawmy D, Fitzke FW, Hitchings RA.",
+    title: "Mapping the visual field to the optic disc in normal tension glaucoma eyes",
+    source: "Ophthalmology. 2000;107(10):1809-1815",
+    pmid: "11013178",
+    note: "視野位置與視盤扇區的對應，解釋弓形缺損沿神經纖維走向。",
   },
   eagle2016: {
     id: "eagle2016",
@@ -159,8 +287,7 @@ export const CITE: Record<string, Citation> = {
     authors: "Montesano G, Crabb DP, Garway-Heath DF, et al.",
     title:
       "Six-Year Rate of Visual Field Progression in the Laser in Glaucoma and Ocular Hypertension Trial",
-    source:
-      "Ophthalmology. 2026;133(2):169-177. DOI 10.1016/j.ophtha.2025.09.023",
+    source: "Ophthalmology. 2026;133(2):169-177. DOI 10.1016/j.ophtha.2025.09.023",
     pmid: "41043781",
     note: "LiGHT 六年視野進展公開分析（事後／次級分析）。長期約數不是個人預後／不是品牌比較／不是人人必須；已失去的視野不能還原。",
   },
@@ -178,8 +305,7 @@ export const CITE: Record<string, Citation> = {
     authors: "He M, Jiang Y, Huang S, et al.",
     title:
       "Laser peripheral iridotomy for the prevention of angle closure: a single-centre, randomised controlled trial",
-    source:
-      "Lancet. 2019;393(10181):1609-1618. https://doi.org/10.1016/S0140-6736(18)32607-2",
+    source: "Lancet. 2019;393(10181):1609-1618. https://doi.org/10.1016/S0140-6736(18)32607-2",
     pmid: "30878226",
     note: "ZAP：社區雙側 PACS 一眼 LPI。可降低進展風險，但整體進展及急性發作仍相對少見。是否預防性激光由醫生個別決定。",
   },
@@ -188,8 +314,7 @@ export const CITE: Record<string, Citation> = {
     authors: "Yuan Y, Wang W, Xiong R, et al.",
     title:
       "Fourteen-Year Outcome of Angle-Closure Prevention with Laser Peripheral Iridotomy in the Zhongshan Angle-Closure Prevention Study",
-    source:
-      "Ophthalmology. 2023. https://doi.org/10.1016/j.ophtha.2023.03.024",
+    source: "Ophthalmology. 2023. https://doi.org/10.1016/j.ophtha.2023.03.024",
     pmid: "37030454",
     note: "ZAP 十四年結局。長期約數屬公開研究；不是人人必須／人人不必的保證。",
   },
@@ -230,8 +355,7 @@ export const CITE: Record<string, Citation> = {
   view2012: {
     id: "view2012",
     authors: "Heier JS, Brown DM, Chong V, et al.; VIEW 1 and VIEW 2 Study Groups",
-    title:
-      "Intravitreal aflibercept (VEGF trap-eye) in wet age-related macular degeneration",
+    title: "Intravitreal aflibercept (VEGF trap-eye) in wet age-related macular degeneration",
     source: "Ophthalmology. 2012;119(12):2537-2548. DOI 10.1016/j.ophtha.2012.09.006",
     pmid: "23084240",
     note: "VIEW：aflibercept 與每月 ranibizumab 視力結果相若的給藥策略討論。不是商品比較或本港處方保證。",
@@ -239,17 +363,16 @@ export const CITE: Record<string, Citation> = {
   vividVista2014: {
     id: "vividVista2014",
     authors: "Korobelnik JF, Do DV, Schmidt-Erfurth U, et al.",
-    title:
-      "Intravitreal aflibercept for diabetic macular edema (VIVID-DME and VISTA-DME)",
+    title: "Intravitreal aflibercept for diabetic macular edema (VIVID-DME and VISTA-DME)",
     source: "Ophthalmology. 2014;121(11):2247-2254. DOI 10.1016/j.ophtha.2014.05.006",
     pmid: "25012934",
     note: "VIVID-DME／VISTA-DME：aflibercept 用於糖尿病黃斑水腫。數字是公開試驗結果，不是個人預後或商品比較。",
   },
   protocolT2015: {
     id: "protocolT2015",
-    authors: "Wells JA, Glassman AR, Ayala AR, et al.; Diabetic Retinopathy Clinical Research Network",
-    title:
-      "Aflibercept, bevacizumab, or ranibizumab for diabetic macular edema (Protocol T)",
+    authors:
+      "Wells JA, Glassman AR, Ayala AR, et al.; Diabetic Retinopathy Clinical Research Network",
+    title: "Aflibercept, bevacizumab, or ranibizumab for diabetic macular edema (Protocol T)",
     source: "N Engl J Med. 2015;372(13):1193-1203. DOI 10.1056/NEJMoa1414264",
     pmid: "25692915",
     note: "Protocol T（DRCR）：比較多種抗 VEGF 用於糖尿病黃斑水腫。數字是公開試驗結果，不是個人預後或商品比較。bevacizumab 為試驗對照語境，不是本港選藥表。",
@@ -277,8 +400,7 @@ export const CITE: Record<string, Citation> = {
     authors: "Lim TH, Lai TYY, Takahashi K, et al.; EVEREST II Study Group",
     title:
       "Comparison of Ranibizumab With or Without Verteporfin Photodynamic Therapy for Polypoidal Choroidal Vasculopathy: The EVEREST II Randomized Clinical Trial",
-    source:
-      "JAMA Ophthalmol. 2020;138(9):935-942. DOI 10.1001/jamaophthalmol.2020.2443",
+    source: "JAMA Ophthalmol. 2020;138(9):935-942. DOI 10.1001/jamaophthalmol.2020.2443",
     pmid: "32672800",
     note: "亞洲多中心 EVEREST II：有症狀黃斑 PCV，ranibizumab ± 維替泊芬光動力。試驗約數；不是個人預後或商品比較。",
   },
@@ -294,8 +416,7 @@ export const CITE: Record<string, Citation> = {
     id: "stapleton2008",
     authors: "Stapleton F, Keay L, Edwards K, et al.",
     title: "The incidence of contact lens-related microbial keratitis in Australia",
-    source:
-      "Ophthalmology. 2008;115(10):1655-1662. https://doi.org/10.1016/j.ophtha.2008.04.019",
+    source: "Ophthalmology. 2008;115(10):1655-1662. https://doi.org/10.1016/j.ophtha.2008.04.019",
     pmid: "18538404",
     note: "日戴軟鏡約 1.9/萬人年；過夜軟鏡約 19.5、過夜矽水凝膠約 25.4。不是個人風險或品牌比較。",
   },
@@ -303,8 +424,7 @@ export const CITE: Record<string, Citation> = {
     id: "lam2002mk",
     authors: "Lam DSC, Houang E, Fan DSP, et al.",
     title: "Incidence and risk factors for microbial keratitis in Hong Kong",
-    source:
-      "Eye (Lond). 2002;16(5):608-618. https://doi.org/10.1038/sj.eye.6700151",
+    source: "Eye (Lond). 2002;16(5):608-618. https://doi.org/10.1038/sj.eye.6700151",
     pmid: "12194077",
     note: "本港數列：日戴約 3/萬、延長配戴約 9/萬。教育約數；不是個人風險保證。",
   },
@@ -327,8 +447,7 @@ export const CITE: Record<string, Citation> = {
   watt2005: {
     id: "watt2005",
     authors: "Watt K, Swarbrick HA",
-    title:
-      "Microbial keratitis in overnight orthokeratology: review of the first 50 cases",
+    title: "Microbial keratitis in overnight orthokeratology: review of the first 50 cases",
     source: "Eye Contact Lens. 2005;31(5):201-208",
     pmid: "16163011",
     note: "過夜角膜塑型相關微生物性角膜炎早期病例綜述。用作過夜衛生警覺教育；不引述為療效或本地發生率保證。",
@@ -360,7 +479,8 @@ export const CITE: Record<string, Citation> = {
   repka2006: {
     id: "repka2006",
     authors: "Repka MX, et al. (Pediatric Eye Disease Investigator Group)",
-    title: "A randomized trial of near versus distance activities while patching for amblyopia in children aged 3 to less than 7 years",
+    title:
+      "A randomized trial of near versus distance activities while patching for amblyopia in children aged 3 to less than 7 years",
     source: "Ophthalmology. 2006;113(6):904-912",
     pmid: "16751033",
     note: "PEDIG 每日短時遮蓋相關試驗脈絡。遮蓋時數屬處方；本站只作家長依從教育，不給個人劑量。",
@@ -368,7 +488,8 @@ export const CITE: Record<string, Citation> = {
   pedig2003: {
     id: "pedig2003",
     authors: "Pediatric Eye Disease Investigator Group",
-    title: "A randomized trial of prescribed patching regimens for treatment of severe amblyopia in children",
+    title:
+      "A randomized trial of prescribed patching regimens for treatment of severe amblyopia in children",
     source: "Ophthalmology. 2003;110(11):2075-2087",
     pmid: "14597512",
     note: "嚴重弱視遮蓋方案試驗。時數由醫生按病情訂；不作「愈長愈好」保證。",
@@ -376,8 +497,7 @@ export const CITE: Record<string, Citation> = {
   xu2020pseudo: {
     id: "xu2020pseudo",
     authors: "Xu TT, et al.",
-    title:
-      "Pseudostrabismus in the first year of life and subsequent diagnosis of strabismus",
+    title: "Pseudostrabismus in the first year of life and subsequent diagnosis of strabismus",
     source: "Am J Ophthalmol. 2020;218:242-246",
     pmid: "32533950",
     note: "首年假性斜視其後仍可能診斷真性斜視。曾被說「只是假性」仍要警惕新徵狀或篩查異常。",
@@ -386,7 +506,8 @@ export const CITE: Record<string, Citation> = {
     id: "aaoAaposVision2022",
     authors: "AAO / AAPOS",
     title: "Vision Screening for Infants and Children — 2022",
-    source: "American Academy of Ophthalmology / American Association for Pediatric Ophthalmology and Strabismus consensus guidance",
+    source:
+      "American Academy of Ophthalmology / American Association for Pediatric Ophthalmology and Strabismus consensus guidance",
     note: "嬰幼兒與兒童視力篩查定性共識。實際以本港兒科、母嬰健康或眼科指示為準；不寫死本地百分比。",
   },
   aaposPseudostrabismus: {
@@ -460,7 +581,8 @@ export const CITE: Record<string, Citation> = {
   flitcroft2019: {
     id: "flitcroft2019",
     authors: "Flitcroft DI, He M, Jonas JB, et al.",
-    title: "IMI – Defining and Classifying Myopia: A Proposed Set of Standards for Clinical and Epidemiologic Studies",
+    title:
+      "IMI – Defining and Classifying Myopia: A Proposed Set of Standards for Clinical and Epidemiologic Studies",
     source: "Invest Ophthalmol Vis Sci. 2019;60(3):M20-M30",
     pmid: "30817826",
     note: "國際近視研究所（IMI）對近視／高度近視／病理近視等定義與分類的公開標準。教育用；不作個人診斷。",
@@ -468,8 +590,7 @@ export const CITE: Record<string, Citation> = {
   ohnoMatsui2015: {
     id: "ohnoMatsui2015",
     authors: "Ohno-Matsui K, Kawasaki R, Jonas JB, et al.",
-    title:
-      "International photographic classification and grading system for myopic maculopathy",
+    title: "International photographic classification and grading system for myopic maculopathy",
     source: "Am J Ophthalmol. 2015;159(5):877-883.e7",
     pmid: "25634530",
     note: "META-PM 近視性黃斑病變影像分級。概念進程教育；不可自行對號入座。",
@@ -477,7 +598,8 @@ export const CITE: Record<string, Citation> = {
   cheung2017: {
     id: "cheung2017",
     authors: "Cheung CMG, Arnold JJ, Holz FG, et al.",
-    title: "Myopic Choroidal Neovascularization: Review, Guidance, and Consensus Statement on Management",
+    title:
+      "Myopic Choroidal Neovascularization: Review, Guidance, and Consensus Statement on Management",
     source: "Ophthalmology. 2017;124(11):1690-1711",
     pmid: "28655539",
     note: "近視性脈絡膜新生血管（myopic CNV）共識。抗 VEGF 等屬專科類別討論，本站不列商品名。",
@@ -509,8 +631,7 @@ export const CITE: Record<string, Citation> = {
   gomes2015: {
     id: "gomes2015",
     authors: "Gomes JAP, Tan D, Rapuano CJ, et al.",
-    title:
-      "Global Consensus on Keratoconus and Ectatic Diseases",
+    title: "Global Consensus on Keratoconus and Ectatic Diseases",
     source: "Cornea. 2015;34(4):359-369",
     pmid: "25738235",
     note: "圓錐角膜／擴張性疾病全球共識。定義、進展與管理原則屬教育層次；其後亦有第二輪共識材料（Gomes／Hafezi／Ambrósio 等），本站不另造條目。",
@@ -551,8 +672,7 @@ export const CITE: Record<string, Citation> = {
   yuen2007: {
     id: "yuen2007",
     authors: "Yuen APW, et al.",
-    title:
-      "Skin prick testing and serum specific IgE in chronic rhinitis in Hong Kong",
+    title: "Skin prick testing and serum specific IgE in chronic rhinitis in Hong Kong",
     source: "Hong Kong Med J. 2007;13(2):103-108",
     pmid: "17406040",
     note: "本港慢性鼻炎門診皮膚點刺試驗樣本結果；不能解讀為全港人口眼過敏率或花粉感敏人口百分比。",
@@ -561,8 +681,7 @@ export const CITE: Record<string, Citation> = {
     id: "leung1998",
     authors: "Leung R, et al.",
     title: "Indoor environment and respiratory health in Hong Kong residences",
-    source:
-      "Clin Exp Allergy. 1998;28(8):1020-1026. DOI 10.1046/j.1365-2222.1998.00281.x",
+    source: "Clin Exp Allergy. 1998;28(8):1020-1026. DOI 10.1046/j.1365-2222.1998.00281.x",
     note: "本港住屋室內環境與呼吸道健康相關討論。誘因教育；非療效承諾。",
   },
   katelaris2011: {
@@ -601,8 +720,7 @@ export const CITE: Record<string, Citation> = {
     authors: "Singh S, et al.",
     title:
       "Blue-light filtering spectacle lenses for visual performance, sleep, and macular health in adults",
-    source:
-      "Cochrane Database Syst Rev. 2023;(8):CD013244. DOI 10.1002/14651858.CD013244.pub2",
+    source: "Cochrane Database Syst Rev. 2023;(8):CD013244. DOI 10.1002/14651858.CD013244.pub2",
     note: "相對非過濾鏡片：短期內大概很少或不能減輕電腦相關視疲勞；對最佳矯正視力大概很少或無影響；睡眠證據不清；納入試驗沒有可據以下結論的黃斑健康結果。本站不自製 nm／lux 截止表。",
   },
   simunovic2016: {
@@ -631,8 +749,7 @@ export const CITE: Record<string, Citation> = {
     id: "ng2023asean",
     authors: "Ng JY, et al.",
     title: "Colour vision restrictions for driving in ASEAN countries",
-    source:
-      "Lancet Reg Health Southeast Asia. 2023. DOI 10.1016/j.lansea.2023.100171",
+    source: "Lancet Reg Health Southeast Asia. 2023. DOI 10.1016/j.lansea.2023.100171",
     note: "東盟地區駕駛色覺限制比較。各地規管不一；本站不寫死本地分數線。",
   },
   leonardi2016sansika: {
@@ -691,8 +808,7 @@ export const CITE: Record<string, Citation> = {
     id: "faricimabFda2022",
     authors: "U.S. Food and Drug Administration",
     title: "Faricimab-svoa injection — Prescribing Information (label)",
-    source:
-      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/761235s000lbl.pdf",
+    source: "https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/761235s000lbl.pdf",
     note: "美國 FDA 公開標籤描述 VEGF-A 與 Ang-2 機制。不作商品比較、療效保證或本港適應症推介；本地註冊以香港為準。",
   },
   ontt1992: {
@@ -760,7 +876,8 @@ export const CITE: Record<string, Citation> = {
   acgr1992: {
     id: "acgr1992",
     authors: "Williams KA, et al.",
-    title: "Factors predictive of corneal graft survival. Report from the Australian Corneal Graft Registry",
+    title:
+      "Factors predictive of corneal graft survival. Report from the Australian Corneal Graft Registry",
     source: "Ophthalmology. 1992;99:403-414. DOI 10.1016/s0161-6420(92)31960-8",
     pmid: "1565452",
     note: "澳洲角膜移植登記預測因素教育。不是個人預後。",
@@ -793,8 +910,7 @@ export const CITE: Record<string, Citation> = {
   bertsch2017: {
     id: "bertsch2017",
     authors: "Bertsch M, et al.",
-    title:
-      "The clinical evaluation of infantile nystagmus: What to do first and why",
+    title: "The clinical evaluation of infantile nystagmus: What to do first and why",
     source: "Ophthalmic Genet. 2017;38:22-33. DOI 10.1080/13816810.2016.1266667",
     pmid: "28177849",
     note: "嬰幼兒眼震評估次序／CEMAS 取向討論。不是自行診斷工具。",
@@ -811,8 +927,7 @@ export const CITE: Record<string, Citation> = {
   hertle2010: {
     id: "hertle2010",
     authors: "Hertle RW",
-    title:
-      "Nystagmus in Infancy and Childhood: Characteristics and Evidence for Treatment",
+    title: "Nystagmus in Infancy and Childhood: Characteristics and Evidence for Treatment",
     source: "Am Orthopt J. 2010;60:48-58. DOI 10.3368/aoj.60.1.48",
     pmid: "21061884",
     note: "嬰幼兒／兒童眼震特徵與治療證據綜述。不是個人療效保證。",
@@ -872,7 +987,8 @@ export const CITE: Record<string, Citation> = {
   gass1995: {
     id: "gass1995",
     authors: "Gass JD",
-    title: "Reappraisal of biomicroscopic classification of stages of development of a macular hole",
+    title:
+      "Reappraisal of biomicroscopic classification of stages of development of a macular hole",
     source: "Am J Ophthalmol. 1995;119:752-759. DOI 10.1016/s0002-9394(14)72781-3",
     pmid: "7785690",
     note: "黃斑裂孔分期再評估。不是自行對號入座。",
@@ -966,7 +1082,8 @@ export const CITE: Record<string, Citation> = {
   mitchell1997: {
     id: "mitchell1997",
     authors: "Mitchell P, et al.",
-    title: "Prevalence and associations of epiretinal membranes. The Blue Mountains Eye Study, Australia",
+    title:
+      "Prevalence and associations of epiretinal membranes. The Blue Mountains Eye Study, Australia",
     source: "Ophthalmology. 1997;104:1033-1040. DOI 10.1016/s0161-6420(97)30190-0",
     pmid: "9186446",
     note: "Blue Mountains：任何前膜徵象約 7%。不是個人風險／不是品牌比較。",
@@ -991,7 +1108,8 @@ export const CITE: Record<string, Citation> = {
   ng2011: {
     id: "ng2011",
     authors: "Ng CH, et al.",
-    title: "Prevalence and risk factors for epiretinal membranes in a multi-ethnic United States population",
+    title:
+      "Prevalence and risk factors for epiretinal membranes in a multi-ethnic United States population",
     source: "Ophthalmology. 2011;118:694-699. DOI 10.1016/j.ophtha.2010.08.009",
     pmid: "21035863",
     note: "MESA 多種族照相研究。種族比較屬該研究結果，不是香港個人風險保證。",
@@ -1028,8 +1146,7 @@ export const CITE: Record<string, Citation> = {
     title: "Multifocal Intraocular Lenses and Extended Depth of Focus Intraocular Lenses",
     source: "Asia Pac J Ophthalmol (Phila). 2017 Jul-Aug;6(4):339-351",
     pmid: "28780781",
-    note:
-      "綜述單焦、多焦及延伸景深人工晶體；說明離焦量度在功能性視力評估中的角色。不是品牌推介，曲線示意不複製任何廠商圖。",
+    note: "綜述單焦、多焦及延伸景深人工晶體；說明離焦量度在功能性視力評估中的角色。不是品牌推介，曲線示意不複製任何廠商圖。",
   },
   monaco2017: {
     id: "monaco2017",
@@ -1038,8 +1155,7 @@ export const CITE: Record<string, Citation> = {
       "Visual performance after bilateral implantation of 2 new presbyopia-correcting intraocular lenses: Trifocal versus extended range of vision",
     source: "J Cataract Refract Surg. 2017 Jun;43(6):737-747",
     pmid: "28732606",
-    note:
-      "公開試驗比較繞射式三焦點與延伸景深設計的離焦曲線及視覺功能。屬繞射式比較，不是折射式延伸景深曲線或增強型單焦點曲線的來源。數字是研究結果，不是個人術後預後或品牌排名。",
+    note: "公開試驗比較繞射式三焦點與延伸景深設計的離焦曲線及視覺功能。屬繞射式比較，不是折射式延伸景深曲線或增強型單焦點曲線的來源。數字是研究結果，不是個人術後預後或品牌排名。",
   },
   savini2026: {
     id: "savini2026",
@@ -1048,8 +1164,7 @@ export const CITE: Record<string, Citation> = {
       "Functional Classification of a New IOL Into the Category of Partial Depth of Field: Enhanced IOLs According to the ESCRS Criteria",
     source: "J Refract Surg. 2026 Apr;42(4):e359-e366",
     pmid: "41945698",
-    note:
-      "以離焦曲線及 ESCRS 準則說明「增強型單焦點／部分景深」分類示例。僅作分類方法引用，不是本頁離焦曲線示意之繪線形狀依據，亦非型號推介。",
+    note: "以離焦曲線及 ESCRS 準則說明「增強型單焦點／部分景深」分類示例。僅作分類方法引用，不是本頁離焦曲線示意之繪線形狀依據，亦非型號推介。",
   },
   tarib2019: {
     id: "tarib2019",
@@ -1058,17 +1173,16 @@ export const CITE: Record<string, Citation> = {
       "Comparison of Visual Outcomes and Patient Satisfaction After Bilateral Implantation of an EDOF IOL and a Mix-and-Match Approach",
     source: "J Refract Surg. 2019 Jul 1;35(7):408-416",
     pmid: "31298720",
-    note:
-      "繞射式延伸景深人工晶體術後視覺功能及離焦表現的公開比較。屬繞射式比較，不是折射式延伸景深或增強型單焦點曲線的來源。不是個人預後，亦不是哪一種較好。",
+    note: "繞射式延伸景深人工晶體術後視覺功能及離焦表現的公開比較。屬繞射式比較，不是折射式延伸景深或增強型單焦點曲線的來源。不是個人預後，亦不是哪一種較好。",
   },
   wanniarachchi2025: {
     id: "wanniarachchi2025",
     authors: "Wanniarachchi K, Mehta JS, et al.",
-    title: "Management of positive and negative dysphotopsia postcataract surgery - A literature review",
+    title:
+      "Management of positive and negative dysphotopsia postcataract surgery - A literature review",
     source: "Taiwan J Ophthalmol. 2025 Oct-Dec;15(4):572-579",
     pmid: "41523122",
-    note:
-      "術後光學現象（含光暈、條紋及正／負向光視）文獻回顧。夜景示意不是術後預測或測量。",
+    note: "術後光學現象（含光暈、條紋及正／負向光視）文獻回顧。夜景示意不是術後預測或測量。",
   },
 };
 

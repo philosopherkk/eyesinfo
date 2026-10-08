@@ -74,7 +74,12 @@ const STATIC_SOURCES = {
   "/accessibility": ["src/routes/accessibility.tsx"],
   "/resources": ["src/routes/resources.tsx", "src/data/resources.ts"],
   "/amsler": ["src/routes/amsler.tsx", "src/components/amsler-grid.tsx"],
-  "/iol": ["src/routes/iol.tsx", "src/components/iol-scene.tsx", "src/lib/iol-optics.ts"],
+  "/iol": [
+    "src/routes/iol.tsx",
+    "src/components/iol-scene.tsx",
+    "src/lib/iol-optics.ts",
+    "public/iol/street.jpg",
+  ],
   "/iol-optics": [
     "src/routes/iol-optics.tsx",
     "src/lib/iol-optics-studio/optics.ts",
@@ -88,7 +93,12 @@ const STATIC_SOURCES = {
   ],
   "/tools/drops": ["src/components/tool-demos.tsx", "src/components/care-tools.tsx"],
   "/tools/ask": ["src/components/ask-visit-rx.tsx"],
-  "/tools/tunnel": ["src/components/tool-demos.tsx"],
+  "/tools/tunnel": [
+    "src/components/glaucoma-field-sim.tsx",
+    "src/lib/glaucoma-field.ts",
+    "src/i18n/glaucoma-field-sim-text.ts",
+    "public/iol/street.jpg",
+  ],
   "/tools/haze": ["src/components/tool-demos.tsx"],
   "/tools/floaters": ["src/components/tool-demos.tsx"],
   "/tools/halo": ["src/components/tool-demos.tsx", "src/components/halo-overlay.tsx"],
