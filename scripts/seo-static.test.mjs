@@ -140,8 +140,61 @@ test("sitemap.xml is a valid urlset covering edu tools including outdoor", () =>
 
   // Canonical INN slug only — old Protopic alias must not be listed.
   assert.doesNotMatch(xml, /\/t\/t-protopic[<\s]/);
+  // Section heading stubs (never real topics) — 308 to parent anchors; keep off sitemap.
+  for (const orphan of ["/t/parent-gaps", "/t/water-acanthamoeba", "/t/ok-hygiene"]) {
+    assert.doesNotMatch(
+      xml,
+      new RegExp(`<loc>https://www\\.eyesinfo\\.org${orphan.replaceAll("/", "\\/")}</loc>`),
+      `sitemap must not list orphan section route ${orphan}`,
+    );
+  }
   const urlCount = (xml.match(/<url>/g) || []).length;
-  assert.ok(urlCount > 50, `sitemap too thin (${urlCount} urls); expected full topic+tools map`);
+  assert.equal(urlCount, 98, `sitemap expected 98 canonical urls, got ${urlCount}`);
+
+  const lastmods = [...xml.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((m) => m[1]);
+  assert.equal(lastmods.length, urlCount);
+  for (const d of lastmods) {
+    assert.match(d, /^\d{4}-\d{2}-\d{2}$/, `bad lastmod ${d}`);
+  }
+  const distinct = new Set(lastmods);
+  assert.ok(
+    distinct.size >= 5,
+    `lastmod should vary by page content (got ${distinct.size} distinct dates)`,
+  );
+});
+
+test("vercel.json permanently redirects orphan section /t/* stubs to parent anchors", () => {
+  const conf = JSON.parse(readFileSync(join(ROOT, "vercel.json"), "utf8"));
+  const expected = {
+    "/t/parent-gaps": "/t/t-strab#parent-gaps",
+    "/t/water-acanthamoeba": "/t/t-cl#water-acanthamoeba",
+    "/t/ok-hygiene": "/t/t-cl#ok-hygiene",
+  };
+  for (const [source, destination] of Object.entries(expected)) {
+    const rule = conf.redirects.find((r) => r.source === source);
+    assert.ok(rule, `missing redirect for ${source}`);
+    assert.equal(rule.destination, destination);
+    assert.equal(rule.permanent, true, `${source} must be permanent (308)`);
+  }
+});
+
+test("sitemap-lastmod.json covers every sitemap loc and excludes orphans", () => {
+  const mapPath = join(ROOT, "public/sitemap-lastmod.json");
+  assert.ok(existsSync(mapPath), "public/sitemap-lastmod.json missing");
+  const payload = JSON.parse(readFileSync(mapPath, "utf8"));
+  const lastmod = payload.lastmod ?? payload;
+  const xml = readFileSync(SITEMAP, "utf8");
+  const locs = [...xml.matchAll(/<loc>https:\/\/www\.eyesinfo\.org([^<]*)<\/loc>/g)].map(
+    (m) => m[1],
+  );
+  assert.equal(Object.keys(lastmod).length, locs.length);
+  for (const path of locs) {
+    assert.equal(typeof lastmod[path], "string", `missing lastmod for ${path}`);
+    assert.match(lastmod[path], /^\d{4}-\d{2}-\d{2}$/);
+  }
+  for (const orphan of ["/t/parent-gaps", "/t/water-acanthamoeba", "/t/ok-hygiene"]) {
+    assert.equal(lastmod[orphan], undefined, `mapping must not keep orphan ${orphan}`);
+  }
 });
 
 test("PWA middleware treats .xml and .txt as non-document paths", () => {
