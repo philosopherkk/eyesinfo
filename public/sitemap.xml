@@ -48,7 +48,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/search</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/search"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/search?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/search?lang=en"/>
@@ -57,7 +57,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/tools</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools?lang=en"/>
@@ -138,7 +138,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/iol</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-10-07</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/iol"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/iol?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/iol?lang=en"/>
@@ -165,7 +165,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/tools/procedures</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/procedures"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/procedures?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/procedures?lang=en"/>
@@ -174,7 +174,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/tools/drops</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/drops"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/drops?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/drops?lang=en"/>
@@ -201,7 +201,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/tools/haze</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/haze"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/haze?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/haze?lang=en"/>
@@ -210,7 +210,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/tools/floaters</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/floaters"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/floaters?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/floaters?lang=en"/>
@@ -219,7 +219,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/tools/halo</loc>
-    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/halo"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/halo?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/halo?lang=en"/>
@@ -318,7 +318,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/d1</loc>
-    <lastmod>2026-09-08</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/d1"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/d1?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/d1?lang=en"/>
@@ -327,7 +327,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/d10</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/d10"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/d10?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/d10?lang=en"/>
@@ -336,7 +336,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/d2</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/d2"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/d2?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/d2?lang=en"/>
@@ -345,7 +345,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/d3</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/d3"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/d3?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/d3?lang=en"/>
@@ -354,7 +354,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/d4</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/d4"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/d4?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/d4?lang=en"/>
@@ -363,7 +363,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/d5</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/d5"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/d5?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/d5?lang=en"/>
@@ -372,7 +372,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/d6</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/d6"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/d6?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/d6?lang=en"/>
@@ -381,7 +381,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/d7</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/d7"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/d7?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/d7?lang=en"/>
@@ -390,7 +390,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/d8</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/d8"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/d8?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/d8?lang=en"/>
@@ -399,7 +399,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/d9</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/d9"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/d9?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/d9?lang=en"/>
@@ -408,7 +408,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-allergy</loc>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-allergy"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-allergy?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-allergy?lang=en"/>
@@ -417,7 +417,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-allergy-hk</loc>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-allergy-hk"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-allergy-hk?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-allergy-hk?lang=en"/>
@@ -426,7 +426,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-bluelight</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-bluelight"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-bluelight?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-bluelight?lang=en"/>
@@ -435,7 +435,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-cataract</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-cataract"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-cataract?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-cataract?lang=en"/>
@@ -444,7 +444,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-chalazion</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-chalazion"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-chalazion?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-chalazion?lang=en"/>
@@ -453,7 +453,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-chem</loc>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-chem"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-chem?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-chem?lang=en"/>
@@ -462,7 +462,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-child</loc>
-    <lastmod>2026-09-24</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-child"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-child?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-child?lang=en"/>
@@ -471,7 +471,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-cl</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-cl"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-cl?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-cl?lang=en"/>
@@ -480,7 +480,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-colour-vision</loc>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-colour-vision"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-colour-vision?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-colour-vision?lang=en"/>
@@ -489,7 +489,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-corneal-transplant</loc>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-corneal-transplant"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-corneal-transplant?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-corneal-transplant?lang=en"/>
@@ -498,7 +498,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-demodex</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-demodex"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-demodex?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-demodex?lang=en"/>
@@ -507,7 +507,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-dilate</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-dilate"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-dilate?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-dilate?lang=en"/>
@@ -516,7 +516,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-drops</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-drops"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-drops?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-drops?lang=en"/>
@@ -525,7 +525,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-dry</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-dry"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-dry?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-dry?lang=en"/>
@@ -534,7 +534,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-early</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-early"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-early?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-early?lang=en"/>
@@ -543,7 +543,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-entropion</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-entropion"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-entropion?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-entropion?lang=en"/>
@@ -552,7 +552,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-epiblepharon</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-epiblepharon"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-epiblepharon?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-epiblepharon?lang=en"/>
@@ -561,7 +561,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-erm</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-erm"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-erm?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-erm?lang=en"/>
@@ -570,7 +570,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-gca</loc>
-    <lastmod>2026-09-06</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-gca"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-gca?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-gca?lang=en"/>
@@ -579,7 +579,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-glaucoma-monitor</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-glaucoma-monitor"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-glaucoma-monitor?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-glaucoma-monitor?lang=en"/>
@@ -588,7 +588,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-gldrops</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-gldrops"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-gldrops?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-gldrops?lang=en"/>
@@ -597,7 +597,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-high-myopia-pathology</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-high-myopia-pathology"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-high-myopia-pathology?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-high-myopia-pathology?lang=en"/>
@@ -606,7 +606,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-iol</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-iol"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-iol?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-iol?lang=en"/>
@@ -615,7 +615,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-keratoconus</loc>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-keratoconus"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-keratoconus?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-keratoconus?lang=en"/>
@@ -624,7 +624,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-lasik</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-lasik"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-lasik?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-lasik?lang=en"/>
@@ -633,7 +633,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-lube</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-lube"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-lube?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-lube?lang=en"/>
@@ -642,7 +642,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-macular-hole</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-macular-hole"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-macular-hole?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-macular-hole?lang=en"/>
@@ -651,7 +651,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-mfiol</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-mfiol"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-mfiol?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-mfiol?lang=en"/>
@@ -660,7 +660,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-migraine</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-migraine"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-migraine?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-migraine?lang=en"/>
@@ -669,7 +669,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-myopia</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-myopia"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-myopia?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-myopia?lang=en"/>
@@ -678,7 +678,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-nldo</loc>
-    <lastmod>2026-09-24</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-nldo"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-nldo?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-nldo?lang=en"/>
@@ -687,7 +687,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-nystagmus</loc>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-nystagmus"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-nystagmus?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-nystagmus?lang=en"/>
@@ -696,7 +696,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-octm</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-octm"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-octm?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-octm?lang=en"/>
@@ -705,7 +705,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-ocular-tumours</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-ocular-tumours"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-ocular-tumours?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-ocular-tumours?lang=en"/>
@@ -714,7 +714,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-optic-neuritis</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-optic-neuritis"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-optic-neuritis?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-optic-neuritis?lang=en"/>
@@ -723,7 +723,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-presbyopia</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-presbyopia"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-presbyopia?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-presbyopia?lang=en"/>
@@ -732,7 +732,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-pterygium</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-pterygium"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-pterygium?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-pterygium?lang=en"/>
@@ -741,7 +741,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-ptk</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-ptk"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-ptk?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-ptk?lang=en"/>
@@ -750,7 +750,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-ptosis</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-ptosis"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-ptosis?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-ptosis?lang=en"/>
@@ -759,7 +759,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-rd</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-rd"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-rd?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-rd?lang=en"/>
@@ -768,7 +768,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-roles</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-roles"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-roles?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-roles?lang=en"/>
@@ -777,7 +777,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-rvo</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-rvo"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-rvo?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-rvo?lang=en"/>
@@ -786,7 +786,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-scleritis</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-scleritis"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-scleritis?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-scleritis?lang=en"/>
@@ -795,7 +795,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-steroid</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-steroid"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-steroid?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-steroid?lang=en"/>
@@ -804,7 +804,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-steroid-sparing</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-steroid-sparing"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-steroid-sparing?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-steroid-sparing?lang=en"/>
@@ -813,7 +813,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-strab</loc>
-    <lastmod>2026-09-24</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-strab"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-strab?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-strab?lang=en"/>
@@ -822,7 +822,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-strabsx</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-strabsx"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-strabsx?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-strabsx?lang=en"/>
@@ -831,7 +831,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-tacrolimus-eyelid</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-tacrolimus-eyelid"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-tacrolimus-eyelid?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-tacrolimus-eyelid?lang=en"/>
@@ -840,7 +840,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-ted</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-ted"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-ted?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-ted?lang=en"/>
@@ -849,7 +849,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-uveitis</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-uveitis"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-uveitis?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-uveitis?lang=en"/>
@@ -858,7 +858,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-vegf</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-vegf"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-vegf?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-vegf?lang=en"/>
@@ -867,7 +867,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-warm</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-warm"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-warm?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-warm?lang=en"/>
@@ -876,7 +876,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-yag</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-yag"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-yag?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-yag?lang=en"/>
