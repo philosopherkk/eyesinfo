@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>philosopherkk — hub</title>
+  <meta name="description" content="Hub of links only: EyesInfo, HK Transit, Purple Sectors, Apex Trace (pending), Outflow, Waiting, Market Desk, Scan De-identifier, ReportNReferral, and Fit. Each app stays in its own folder or external site." />
+  <meta name="theme-color" content="#0e1116" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <style>
+    :root {
+      --bg: #0e1116;
+      --card: #161b22;
+      --line: #2b3444;
+      --text: #e8edf5;
+      --muted: #8b97a8;
+      --accent: #6ee7b7;
+      --pending: #9aa3b2;
+      --pending-bg: #12161c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(900px 420px at 12% -10%, #1a2433 0%, transparent 55%),
+        radial-gradient(700px 380px at 95% 8%, #182018 0%, transparent 50%),
+        var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      padding: 28px 18px 64px;
+    }
+    h1 { font-size: 1.7rem; margin: 0 0 6px; letter-spacing: -0.02em; }
+    .sub { color: var(--muted); margin: 0 0 26px; max-width: 44rem; line-height: 1.5; }
+    .sub code {
+      font-size: 0.86em;
+      background: #1b2230;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 0.08em 0.35em;
+    }
+    .grid {
+      display: grid;
+      gap: 16px;
+      max-width: 720px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+    }
+    .card.pending {
+      background: var(--pending-bg);
+      border-style: dashed;
+      opacity: 0.92;
+    }
+    .k {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .t {
+      font-size: 1.28rem;
+      font-weight: 700;
+      margin: 5px 0 7px;
+      letter-spacing: -0.01em;
+    }
+    .d {
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.45;
+      margin: 0 0 14px;
+    }
+    .meta {
+      display: grid;
+      gap: 8px;
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+    .meta dt {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .meta dd { margin: 2px 0 0; }
+    .meta a {
+      color: var(--accent);
+      text-decoration: none;
+      word-break: break-all;
+    }
+    .meta a:hover { text-decoration: underline; }
+    .pending-live {
+      color: var(--pending);
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <h1>philosopherkk</h1>
+  <p class="sub">
+    Ten projects — links only. Root <code>index.html</code> is this hub;
+    never publish an app into root. Each GitHub Pages app stays in its own folder
+    (<code>transit/</code>, <code>purple/</code>, <code>outflow/</code>, <code>waiting/</code>, <code>marketdesk/</code>, <code>deid/</code>, <code>reportnreferral/</code>).
+  </p>
+  <div class="grid">
+    <article class="card">
+      <div class="k">1 · Patient education</div>
+      <div class="t">EyesInfo</div>
+      <p class="d">護眼學堂 — patient education site. Hub links out only; not hosted on github.io.</p>
+      <dl class="meta">
+        <div>
+          <dt>Work repo</dt>
+          <dd><a href="https://github.com/philosopherkk/eyesinfo">github.com/philosopherkk/eyesinfo</a></dd>
+        </div>
+        <div>
+          <dt>Live</dt>
+          <dd><a href="https://eyesinfo.org">eyesinfo.org</a></dd>
+        </div>
+      </dl>
+    </article>
+
+    <article class="card">
+      <div class="k">2 · Hong Kong</div>
+      <div class="t">HK Transit</div>
+      <p class="d">MTR / bus / minibus planner — shortest vs cheapest, live ETA.</p>
+      <dl class="meta">
+        <div>
+          <dt>Work repo</dt>
+          <dd><a href="https://github.com/philosopherkk/hk-transit">github.com/philosopherkk/hk-transit</a></dd>
+        </div>
+        <div>
+          <dt>Live</dt>
+          <dd><a href="https://philosopherkk.github.io/transit/">philosopherkk.github.io/transit/</a></dd>
+        </div>
+      </dl>
+    </article>
+
+    <article class="card">
+      <div class="k">3 · Sim racing · board</div>
+      <div class="t">Purple Sectors</div>
+      <p class="d">Weekly sim-racing board for Gran Turismo 7 &amp; iRacing.</p>
+      <dl class="meta">
+        <div>
+          <dt>Work repo</dt>
+          <dd><a href="https://github.com/philosopherkk/purple-sectors">github.com/philosopherkk/purple-sectors</a></dd>
+        </div>
+        <div>
+          <dt>Live</dt>
+          <dd><a href="https://philosopherkk.github.io/purple/">philosopherkk.github.io/purple/</a></dd>
+        </div>
+      </dl>
+    </article>
+
+    <article class="card pending">
+      <div class="k">4 · Sim racing · telemetry</div>
+      <div class="t">Simracing web — Apex Trace</div>
+      <p class="d">iRacing / SimHub telemetry. Not Purple Sectors. Awaiting KK handoff — do not scaffold.</p>
+      <dl class="meta">
+        <div>
+          <dt>Work repo</dt>
+          <dd><span class="pending-live">PENDING — no repo linked until handoff</span></dd>
+        </div>
+        <div>
+          <dt>Live</dt>
+          <dd><span class="pending-live">PENDING</span></dd>
+        </div>
+      </dl>
+    </article>
+
+    <article class="card">
+      <div class="k">5 · Budget</div>
+      <div class="t">Outflow</div>
+      <p class="d">On-device income and outflow ledger (empty public shell; vault stays on device).</p>
+      <dl class="meta">
+        <div>
+          <dt>Work repo</dt>
+          <dd><a href="https://github.com/philosopherkk/outflow-app">github.com/philosopherkk/outflow-app</a> <span class="pending-live">(private; may 404)</span></dd>
+        </div>
+        <div>
+          <dt>Live</dt>
+          <dd><a href="https://philosopherkk.github.io/outflow/">philosopherkk.github.io/outflow/</a></dd>
+        </div>
+      </dl>
+    </article>
+
+    <article class="card">
+      <div class="k">6 · Hong Kong · waiting</div>
+      <div class="t">Waiting</div>
+      <p class="d">Hospital Authority specialist outpatient waiting times (and related waits) — EN / 繁</p>
+      <dl class="meta">
+        <div>
+          <dt>Work repo</dt>
+          <dd><a href="https://github.com/philosopherkk/hk-hospital-waiting-times">github.com/philosopherkk/hk-hospital-waiting-times</a></dd>
+        </div>
+        <div>
+          <dt>Live</dt>
+          <dd><a href="https://philosopherkk.github.io/waiting/">philosopherkk.github.io/waiting/</a></dd>
+        </div>
+      </dl>
+    </article>
+
+    <article class="card">
+      <div class="k">7 · Trading</div>
+      <div class="t">Market Desk</div>
+      <p class="d">US trading desk / charts &amp; journal (native Lightweight Charts; no TradingView).</p>
+      <dl class="meta">
+        <div>
+          <dt>Work repo</dt>
+          <dd><a href="https://github.com/philosopherkk/marketdesk">github.com/philosopherkk/marketdesk</a></dd>
+        </div>
+        <div>
+          <dt>Live</dt>
+          <dd><a href="https://philosopherkk.github.io/marketdesk/">philosopherkk.github.io/marketdesk/</a></dd>
+        </div>
+      </dl>
+    </article>
+
+    <article class="card">
+      <div class="k">8 · Clinical · privacy</div>
+      <div class="t">影像去識別化 · Scan De-identifier</div>
+      <p class="d">影像去識別化 Scan De-identifier — on-device, nothing uploaded.</p>
+      <dl class="meta">
+        <div>
+          <dt>Folder</dt>
+          <dd><code>deid/</code></dd>
+        </div>
+        <div>
+          <dt>Live</dt>
+          <dd><a href="https://philosopherkk.github.io/deid/">philosopherkk.github.io/deid/</a></dd>
+        </div>
+      </dl>
+    </article>
+
+    <article class="card">
+      <div class="k">9 · Clinical · drafting</div>
+      <div class="t">ReportNReferral</div>
+      <p class="d">Patient-friendly reports (繁 / EN) and HA referral letters — offline, nothing uploaded.</p>
+      <dl class="meta">
+        <div>
+          <dt>Folder</dt>
+          <dd><code>reportnreferral/</code></dd>
+        </div>
+        <div>
+          <dt>Live</dt>
+          <dd><a href="https://philosopherkk.github.io/reportnreferral/">philosopherkk.github.io/reportnreferral/</a></dd>
+        </div>
+      </dl>
+    </article>
+
+    <article class="card">
+      <div class="k">10 · Local AI</div>
+      <div class="t">Fit</div>
+      <p class="d">Reads this computer&rsquo;s processor, memory, and graphics card, then recommends an open-source language model that fits — with context length and tokens per second.</p>
+      <dl class="meta">
+        <div>
+          <dt>Work repo</dt>
+          <dd><a href="https://github.com/philosopherkk/fit">github.com/philosopherkk/fit</a></dd>
+        </div>
+        <div>
+          <dt>Live</dt>
+          <dd><a href="https://fit-llm.vercel.app">fit-llm.vercel.app</a></dd>
+        </div>
+      </dl>
+    </article>
+  </div>
+</body>
+</html>
