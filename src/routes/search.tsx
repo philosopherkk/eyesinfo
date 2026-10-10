@@ -72,15 +72,24 @@ function SearchPage() {
   const results = useMemo(() => {
     const needle = q.trim().toLowerCase();
     if (!needle) return localized;
-    const fromIndex = new Set(
-      indexed.filter((h) => h.kind === "topic").map((h) => h.href.replace(/^\/t\//, "")),
+    const scoreById = new Map(
+      indexed
+        .filter((h) => h.kind === "topic")
+        .map((h) => [h.href.replace(/^\/t\//, ""), h.score] as const),
     );
-    return localized.filter((topic) => {
-      if (fromIndex.has(topic.id)) return true;
+    const matched = localized.filter((topic) => {
+      if (scoreById.has(topic.id)) return true;
       const hay = [topic.title, topic.tag, topic.meta, topic.num]
         .join(" ")
         .toLowerCase();
       return hay.includes(needle);
+    });
+    // Prefer searchSite ranking (exact title > title includes > synonyms > partial).
+    return matched.sort((a, b) => {
+      const sa = scoreById.get(a.id) ?? 0;
+      const sb = scoreById.get(b.id) ?? 0;
+      if (sb !== sa) return sb - sa;
+      return a.title.localeCompare(b.title, "zh-Hant");
     });
   }, [q, localized, indexed]);
 

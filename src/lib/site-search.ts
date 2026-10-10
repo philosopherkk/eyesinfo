@@ -5,6 +5,12 @@ import { localizeTopic } from "@/i18n";
 import { TOOL_TEXT } from "@/i18n/catalog";
 import type { Locale } from "@/i18n/locale";
 import type { UiKey } from "@/i18n/ui";
+import {
+  normalizeSearchText,
+  scoreFieldRank,
+  scoreSynonymRank,
+  scoreTitleRank,
+} from "@/lib/search-rank";
 
 export type SiteSearchHit = {
   id: string;
@@ -22,28 +28,6 @@ const CAT_UI: Record<string, UiKey> = {
   retina: "cat_retina",
   surface: "cat_surface",
 };
-
-function norm(s: string): string {
-  return s.trim().toLowerCase().replace(/\s+/g, " ");
-}
-
-function scoreMatch(hay: string, needle: string): number {
-  const h = norm(hay);
-  const n = needle;
-  if (!n) return 0;
-  if (h === n) return 100;
-  if (h.startsWith(n)) return 80;
-  if (h.includes(n)) return 50;
-  return 0;
-}
-
-function bestKeywordScore(keywords: string[], needle: string): number {
-  let best = 0;
-  for (const k of keywords) {
-    best = Math.max(best, scoreMatch(k, needle));
-  }
-  return best;
-}
 
 function topicTitle(id: string, locale: Locale): string {
   const raw = getTopic(id);
@@ -80,8 +64,9 @@ function resolveBlurb(entry: SearchEntry, locale: Locale, t: (k: UiKey) => strin
 }
 
 /**
- * Client-side education search. Synonym index first, then topic title/tag/meta
- * (not full body — avoids pulling brand-like strings from dense copy).
+ * Client-side education search. Ranking:
+ * exact title > title includes > SEARCH_SYNONYMS boost > keyword / field partial.
+ * Synonym index still drives discovery; title matches outrank synonym-only hits.
  */
 export function searchSite(
   query: string,
@@ -89,7 +74,7 @@ export function searchSite(
   t: (k: UiKey) => string,
   limit = 12,
 ): SiteSearchHit[] {
-  const needle = norm(query);
+  const needle = normalizeSearchText(query);
   if (!needle) return [];
 
   const byId = new Map<string, SiteSearchHit>();
@@ -100,7 +85,9 @@ export function searchSite(
   };
 
   for (const entry of SEARCH_SYNONYMS) {
-    const score = bestKeywordScore(entry.keywords, needle);
+    const synonymScore = scoreSynonymRank(entry.keywords, needle);
+    const titleScore = scoreTitleRank(resolveTitle(entry, locale, t), needle);
+    const score = Math.max(synonymScore, titleScore);
     if (score <= 0) continue;
     upsert({
       id: `${entry.kind}:${entry.id}`,
@@ -114,9 +101,15 @@ export function searchSite(
 
   for (const topic of TOPICS) {
     const loc = localizeTopic(topic, locale);
-    const fields = [loc.title, loc.tag, loc.meta, topic.title, topic.tag, topic.meta];
-    let score = 0;
-    for (const f of fields) score = Math.max(score, scoreMatch(f, needle));
+    const titleScore = Math.max(
+      scoreTitleRank(loc.title, needle),
+      scoreTitleRank(topic.title, needle),
+    );
+    const fieldScore = scoreFieldRank(
+      [loc.tag, loc.meta, topic.tag, topic.meta],
+      needle,
+    );
+    const score = Math.max(titleScore, fieldScore);
     if (score <= 0) continue;
     upsert({
       id: `topic:${topic.id}`,
@@ -124,15 +117,21 @@ export function searchSite(
       href: `/t/${topic.id}`,
       title: loc.title,
       blurb: loc.meta || loc.tag,
-      score: score - 5, // slight preference for curated synonym hits
+      score,
     });
   }
 
   for (const tool of TOOLS) {
     const pack = TOOL_TEXT[locale][tool.id];
-    const fields = [pack.title, pack.blurb, pack.canto, tool.title, tool.blurb, tool.canto, tool.id];
-    let score = 0;
-    for (const f of fields) score = Math.max(score, scoreMatch(f, needle));
+    const titleScore = Math.max(
+      scoreTitleRank(pack.title, needle),
+      scoreTitleRank(tool.title, needle),
+    );
+    const fieldScore = scoreFieldRank(
+      [pack.blurb, pack.canto, tool.blurb, tool.canto, tool.id],
+      needle,
+    );
+    const score = Math.max(titleScore, fieldScore);
     if (score <= 0) continue;
     upsert({
       id: `tool:${tool.id}`,
@@ -140,13 +139,18 @@ export function searchSite(
       href: tool.href,
       title: pack.title,
       blurb: pack.blurb,
-      score: score - 5,
+      score,
     });
   }
 
   for (const cat of CATEGORIES) {
     const title = t(CAT_UI[cat.id]);
-    const score = Math.max(scoreMatch(title, needle), scoreMatch(cat.title, needle), scoreMatch(cat.subtitle, needle));
+    const titleScore = Math.max(
+      scoreTitleRank(title, needle),
+      scoreTitleRank(cat.title, needle),
+    );
+    const fieldScore = scoreFieldRank([cat.subtitle], needle);
+    const score = Math.max(titleScore, fieldScore);
     if (score <= 0) continue;
     upsert({
       id: `page:c-${cat.id}`,
@@ -154,7 +158,7 @@ export function searchSite(
       href: `/c/${cat.id}`,
       title,
       blurb: t(`${CAT_UI[cat.id]}_sub` as UiKey) || cat.subtitle,
-      score: score - 10,
+      score,
     });
   }
 
@@ -170,8 +174,10 @@ export function searchSite(
   ];
   for (const page of pages) {
     const title = t(page.titleKey);
-    let score = scoreMatch(title, needle);
-    for (const e of page.extra) score = Math.max(score, scoreMatch(e, needle));
+    let score = scoreTitleRank(title, needle);
+    for (const e of page.extra) {
+      score = Math.max(score, scoreFieldRank([e], needle));
+    }
     if (score <= 0) continue;
     upsert({
       id: `page:${page.id}`,
@@ -179,7 +185,7 @@ export function searchSite(
       href: page.href,
       title,
       blurb: "",
-      score: score - 15,
+      score,
     });
   }
 
@@ -187,3 +193,5 @@ export function searchSite(
     .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title, "zh-Hant"))
     .slice(0, limit);
 }
+
+export { normalizeSearchText } from "@/lib/search-rank";

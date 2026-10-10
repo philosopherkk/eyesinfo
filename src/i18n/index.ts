@@ -98,7 +98,15 @@ export function localizeTopic(topic: Topic, locale: Locale): Topic {
   const pack = locale === "en" ? EN_PACKS[topic.id] : JA_PACKS[topic.id];
   // No pack: keep Traditional Chinese body — never ship a half-translated stub.
   if (!pack) return topic;
-  return { ...topic, title: pack.title, tag: pack.tag, meta: pack.meta, blocks: pack.blocks };
+  return {
+    ...topic,
+    title: pack.title,
+    tag: pack.tag,
+    meta: pack.meta,
+    blocks: pack.blocks,
+    // Prefer pack bullets; omit TC bullets when the pack has none (avoid mixed-language UI).
+    keyPoints: pack.keyPoints,
+  };
 }
 
 export function useLocalizedTopic(topic: Topic): Topic {

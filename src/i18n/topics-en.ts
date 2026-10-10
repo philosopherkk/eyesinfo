@@ -1,7 +1,14 @@
 import type { Block } from "@/data/topics";
 import { PROCEDURE_DAY_EN } from "./procedure-day-en";
 
-export type TopicPack = { title: string; tag: string; meta: string; blocks: Block[] };
+export type TopicPack = {
+  title: string;
+  tag: string;
+  meta: string;
+  blocks: Block[];
+  /** Optional scannable bullets — keep in sync with TC topic.keyPoints when set. */
+  keyPoints?: string[];
+};
 
 const w = (text: string): Block => ({ type: "warn", text });
 const note = (text: string): Block => ({ type: "note", text });
@@ -16,6 +23,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Refractive error",
     tag: "Common in Hong Kong",
     meta: "Myopia · hyperopia · astigmatism · presbyopia",
+    keyPoints: [
+      "Myopia, hyperopia, astigmatism and presbyopia are refractive / accommodative problems; high myopia usually means ≥ 600 degrees.",
+      "High myopia raises risks such as retinal detachment (relative risk, not personal absolute probability).",
+      "New flashes or a clear increase in floaters: prompt dilated assessment; a curtain or sudden vision drop: go to A&E now.",
+      "Childhood myopia management aims to slow progression — not to shorten the eye axis or “cure” the degree.",
+    ],
     blocks: [
       h("What it is"),
       p("Light does not focus on the retina. Myopia blurs distance; hyperopia makes near work effortful; astigmatism distorts. Presbyopia is loss of lens focusing with age — strictly a decline in accommodation, not a classic refractive error, grouped here because the optical approaches overlap. In Hong Kong, 100 degrees = 1.00 D; high myopia is usually ≥ 600 degrees (−6.00 D). Myopia is often axial. About 1 mm of extra axial length is roughly 2.5–3.00 D. Myopia is very common in local schoolchildren. Earlier school screening reports could exceed 80% in secondary school; more recent larger questionnaire surveys are about 60–70%. Figures differ by method (dilated refraction screening ≠ self-report questionnaire); the two sets cannot be compared directly, and neither is your child’s personal prognosis."),
