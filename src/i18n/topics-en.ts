@@ -69,6 +69,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Dry eye",
     tag: "Very common",
     meta: "Gritty dryness · do not dismiss severe cases as “just dry eye”",
+    keyPoints: [
+      "Dry eye is usually an unstable or insufficient tear film; evaporative dry eye (often with meibomian gland dysfunction) is common in Hong Kong.",
+      "Grit, burning and fluctuating blur can be dry eye; tearing can still be “dry eye.”",
+      "Sudden vision drop or sudden blindness, or severe pain with headache and vomiting: go to A&E now.",
+      "Severe pain and light sensitivity, a very red swollen eye with heavy discharge, or dry mouth / joint pain / rash as well: do not treat as ordinary dry eye — same-day assessment when possible.",
+    ],
     blocks: [
       h("What it is"),
       p("The tear film (oil, water, mucus) is unstable or insufficient. Evaporative dry eye from meibomian gland dysfunction is common in Hong Kong. It can coexist with blepharitis and Demodex."),
@@ -82,6 +88,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Cataract",
     tag: "Age-related",
     meta: "Gradual blur and glare · discuss surgery with an ophthalmologist when daily life is affected",
+    keyPoints: [
+      "Cataract is clouding of the lens — not a peelable surface film; drops do not dissolve cataract.",
+      "Slow blur, glare and faded colour are common; discuss surgery with an ophthalmologist when daily life or driving is affected.",
+      "“Wait until it is ripe” is not the usual rule in the phaco era — timing follows function, not waiting for a “fully ripe” lens.",
+      "Sudden pain, nausea and a steamy cornea: consider acute angle closure — go to A&E now.",
+    ],
     blocks: [
       h("What it is"),
       p("Lens proteins break down and cloud with age, steroids, trauma or diabetes. It is not a film on the surface that can be peeled off with drops."),
@@ -95,6 +107,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Glaucoma",
     tag: "Lost nerve fibres and field do not return",
     meta: "Open-angle · normal-tension · ocular hypertension · angle-closure attack",
+    keyPoints: [
+      "Glaucoma can damage the optic nerve; open-angle disease is often painless with slow field loss — high pressure is not required for the label.",
+      "Acute angle-closure attack: red painful eye, headache and vomiting, rainbows, sudden vision drop — A&E now; if you cannot travel: call 999.",
+      "Known narrow angles or prior attack: tell the examiner before dilation / some medicines; do not self-buy dilating drops to “clear the eye.”",
+      "Chronic closure can be painless; target IOP and OCT / field monitoring are on the glaucoma-monitoring page.",
+    ],
     blocks: [
       h("What it is"),
       p("A group of optic-nerve diseases, typically related to pressure, but damage can occur at statistically “normal” pressure. Lost field and nerve fibres do not return. The aim is to slow worsening, not to cure. Angle-closure is more common in Chinese people than in many Western groups."),
@@ -137,6 +155,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Age-related macular degeneration",
     tag: "Central vision",
     meta: "Bent lines or a central dark patch: same-day ophthalmic assessment",
+    keyPoints: [
+      "Age-related macular degeneration affects central vision; dry and wet forms are distinguished after examination.",
+      "An Amsler grid can help self-monitor; a normal screen result does not rule out disease.",
+      "New distortion or a central dark patch: same-day dilated fundus exam when possible.",
+      "Sudden blindness or a clear curtain: go to A&E now.",
+    ],
     blocks: [
       h("What it is"),
       p("The macula serves fine central vision. Dry AMD is more common (drusen, geographic atrophy). Wet AMD is driven by choroidal neovascular leakage and can steal vision quickly. Polypoidal choroidal vasculopathy (PCV) is not rare among Chinese patients with wet disease. Wet macular neovascularisation / leakage involves several signals: vascular endothelial growth factor A (VEGF-A) drives endothelial proliferation, new vessels and higher permeability and is one main clinical anti-VEGF target; angiopoietin-2 (Ang-2) can weaken vessel stability via Tie-2 and make vessels more VEGF-sensitive (literature reviews; dual-pathway drug labelling also describes this mechanism, but the independent contribution of Ang-2 inhibition to clinical efficacy is still being established). Related family factors such as PlGF and PDGF are also discussed in vessel maturation and fibrosis-related processes — no single molecule explains every patient. Whether to inject, and which registered class, is decided only by an ophthalmologist against the indication; this page does not compare products."),
@@ -151,6 +175,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Diabetic retinopathy",
     tag: "Needs regular checks",
     meta: "Often silent early · needs regular dilated fundus exams",
+    keyPoints: [
+      "Diabetes can damage the retina; early disease can be silent — do not wait until you “cannot see.”",
+      "Follow an ophthalmologist’s schedule for dilated exams; the interval depends on stage.",
+      "A sudden increase in floaters without a curtain or sudden blindness: same-day dilated exam when possible.",
+      "A curtain, a blocking shadow or sudden vision drop: go to A&E now.",
+    ],
     blocks: [
       h("What it is"),
       p("Long-term high blood sugar damages retinal capillaries: leakage, macular oedema, ischaemia and new vessels, which can bleed or pull the retina off. Early disease can be silent. This is an ocular complication of endocrine disease and needs a registered doctor coordinating medical and eye care."),
@@ -172,6 +202,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Conjunctivitis",
     tag: "Red eye",
     meta: "Red itchy eye · do not self-buy steroids for heavier allergy; needs a doctor's assessment",
+    keyPoints: [
+      "Conjunctivitis is inflammation of the white of the eye; red itchy eyes are common; causes include infection and allergy.",
+      "Do not self-buy steroid eye drops for heavier allergy — a doctor must assess.",
+      "Severe pain with headache and vomiting, or sudden vision drop / sudden blindness: go to A&E now.",
+      "Severe photophobia and pain, or contact-lens-related pain and light sensitivity that persists after lens removal: same-day ophthalmic assessment.",
+    ],
     blocks: [
       h("What it is"),
       p("Inflammation of the conjunctiva. Teaching buckets below: infectious, allergic (including heavier VKC / AKC), and medication-related — not every red eye belongs in the same leftover drop bottle."),
@@ -191,6 +227,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Floaters and retinal detachment risk",
     tag: "Do not ignore flashes",
     meta: "New flashes or more floaters: same-day dilated assessment",
+    keyPoints: [
+      "Floaters are often vitreous opacities; new or suddenly more floaters are not for self-diagnosis as “just floaters.”",
+      "New flashes or a clear increase in floaters: same-day dilated exam when possible.",
+      "A curtain or sudden blindness: go to A&E now.",
+      "Whether a tear needs laser is decided after dilation; detachment is not “go home and wait for laser.”",
+    ],
     blocks: [
       h("What it is"),
       p("The vitreous liquefies and collagen clumps cast shadows (floaters). Most are posterior vitreous detachment. A few warn of a retinal tear or bleed. High myopia (≥ 600 degrees) can bring this on in the 20s–30s, with higher tear/detachment risk."),
@@ -208,6 +250,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Blepharitis, stye and chalazion",
     tag: "Eyelid problems",
     meta: "Red lid lumps · do not squeeze yourself",
+    keyPoints: [
+      "Blepharitis is lid-margin inflammation; a stye is usually an acute painful infection; a chalazion is often a blocked meibomian gland lump.",
+      "Do not squeeze lid lumps hard yourself.",
+      "Warm compresses are common home care; if they fail or the lump persists, a doctor may discuss incision and curettage.",
+      "Marked red painful swelling, fever, vision affected or a rapidly enlarging lump: see a doctor promptly; if severe or you cannot travel: 999 / A&E.",
+    ],
     blocks: [
       h("What it is"),
       p("Blepharitis is chronic lash-line inflammation, often with meibomian dysfunction, Demodex or seborrhoea. A stye is an acute painful infection. A chalazion is a blocked meibomian granuloma, usually less painful. Incision is considered only if home care fails, and only after a doctor decides."),
@@ -219,6 +267,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Pterygium",
     tag: "Sun and wind",
     meta: "A triangular growth on the white · protect from UV",
+    keyPoints: [
+      "A pterygium is conjunctival tissue growing onto the cornea, often nasal, linked with long-term UV and wind/dust.",
+      "It can cause foreign-body sensation and astigmatism; larger ones may cover the pupil.",
+      "Sun protection and reducing chronic UV exposure are the education focus (not a product pitch).",
+      "Surgery is decided after examination and symptoms; this page does not compare clinics.",
+    ],
     blocks: [
       h("What it is"),
       p("A fibrovascular growth onto the cornea, linked to UV. Hats and sunglasses are lifestyle measures, not a shop."),
@@ -230,6 +284,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Allergic conjunctivitis — principles",
     tag: "Needs medical assessment",
     meta: "Seasonal · heavier allergy (vernal / atopic keratoconjunctivitis)",
+    keyPoints: [
+      "Allergic conjunctivitis includes seasonal forms and heavier types (e.g. vernal / atopic keratoconjunctivitis).",
+      "Care principles focus on trigger avoidance and doctor-guided drug classes — not brand pitches.",
+      "Do not self-extend steroid eye drops; long use raises IOP and cataract risk and needs review.",
+      "Off-label eyelid tacrolimus is covered on related pages; red-flag paths are on the steroid-sparing page.",
+    ],
     blocks: [
       p(
         "Allergic conjunctivitis includes seasonal/perennial disease, vernal keratoconjunctivitis (VKC) and atopic keratoconjunctivitis (AKC). This page outlines drug classes and known risks a doctor may discuss — it does not recommend buying any product. Prescription medicines need a registered doctor; off-label use needs informed consent.",
@@ -261,6 +321,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Intravitreal anti-VEGF injection",
     tag: "Doctor’s decision",
     meta: "Often called 打眼底針 in Hong Kong",
+    keyPoints: [
+      "Intravitreal anti-VEGF injections are used for some macular neovascularisation or oedema; suitability is decided after examination.",
+      "This page covers consent classes and the day-of visit — no sales, no product ranking, no vision guarantee.",
+      "Worse pain, worse redness or a sudden vision drop after injection: A&E now (rule out endophthalmitis).",
+      "New flashes or many more floaters without a curtain / sudden blindness: same-day dilated exam when possible.",
+    ],
     blocks: [
       p("Anti-VEGF medicine is given into the vitreous for some macular neovascular or oedematous diseases. Whether it is suitable, which Hong Kong-registered product, how often and at what interval, is decided by an ophthalmologist after examination and OCT. This page does not sell or promote any injection and cannot promise better vision."),
       h("Anti-VEGF agents discussed in Hong Kong (INN only)"),
@@ -338,6 +404,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Incision and curettage of a chalazion",
     tag: "Consent summary",
     meta: "Conjunctival-side incision",
+    keyPoints: [
+      "Chalazion incision and curettage is usually a day-case procedure via the conjunctival side — consent points, not a DIY cut.",
+      "Do not squeeze; warm compresses before/after follow the doctor’s advice.",
+      "Recurrent lumps with ulceration, lash loss or in older adults may prompt pathology to exclude sebaceous carcinoma — not every recurrence is sent automatically.",
+      "Marked lid redness and pain, fever, vision affected or a rapidly growing lump: see a doctor promptly; if severe: 999 / A&E.",
+    ],
     blocks: [
       p("If a doctor recommends incision, consent may cover the steps below. Many chalazia shrink with weeks of warm compress and lid hygiene — not every lump needs surgery."),
       p("The order of the day, and the diagrams, are on The day of chalazion incision and curettage. The lines below are consent points, not instructions to cut or squeeze it yourself."),
@@ -380,6 +452,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Childhood myopia: options a doctor may discuss",
     tag: "Children and teens",
     meta: "Outdoors · atropine · optical defocus",
+    keyPoints: [
+      "Childhood myopia care aims to slow progression — not to shorten the axis or “cure” the degree.",
+      "Outdoor daylight is associated with slower onset (public-health guidance, not a personal prescription).",
+      "A doctor may discuss low-dose atropine, orthokeratology or defocus optics — individual assessment; no product pitch.",
+      "Myopia control does not remove existing fundus risk; new flashes / many new floaters: same-day dilation; curtain or sudden blindness: A&E.",
+    ],
     blocks: [
       p("This summarises published research and classes of options often discussed in Hong Kong. It is not a pitch to buy drops, lenses or devices, and it cannot promise slower progression — nor is it a cure for myopia. Any medicine needs a prescription. Orthokeratology and contact lenses must be fitted by a qualified person."),
       h("Outdoor time (public-health measure)"),
@@ -416,6 +494,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Phacoemulsification and intraocular lenses",
     tag: "Consent summary",
     meta: "Cataract surgery as a class of care",
+    keyPoints: [
+      "Phacoemulsification removes the cloudy lens and places an IOL; optical class is individual — no brand names here.",
+      "Worse pain, sudden vision drop, pus-like discharge or marked redness after surgery: A&E now (rule out endophthalmitis).",
+      "New flashes or many new floaters need same-day dilation; a curtain or sudden blindness: A&E.",
+      "Blur years later is often posterior capsule opacity; YAG is decided after assessment — see the day-of page.",
+    ],
     blocks: [
       h("When it is worth discussing surgery"),
       ul(["Reading, driving or TV limited by blur or glare", "Oncoming headlights at night affecting driving safety", "High hyperopia with a narrow angle", "Cataract blocking monitoring of diabetic retinopathy or macular disease"]),
@@ -493,6 +577,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Warm compress and lid massage",
     tag: "Home care",
     meta: "Meibomian dysfunction · blepharitis · chalazion",
+    keyPoints: [
+      "Warm compress and lid massage are common home-care ideas for MGD, blepharitis and chalazion.",
+      "Keep heat moderate; follow clinician / page guidance — do not burn the skin.",
+      "Stop and seek care for acute red hot painful lids with fever, a rapidly growing lump, vision drop or unusual discharge.",
+      "After chalazion surgery, when to restart compresses follows the wound and the doctor — not a self-schedule.",
+    ],
     blocks: [
       p("Heat can soften stagnant oil. This page explains the idea, not a treatment plan and not a product sale. Temperature, minutes and massage — if used — follow the doctor who examined you, not a webpage protocol."),
       ul(["Warm, not hot; stop if it hurts. Extra care for children, older people or reduced sensation.", "Do not put a hot-water bag on the eye, do not compress over contact lenses, and do not use a raw egg or a scalding towel.", "After chalazion surgery, when to restart is the doctor’s instruction. The order of the day is on The day of chalazion incision and curettage. When to restart warm compresses still follows the wound and the doctor’s instruction."]),
@@ -502,6 +592,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Demodex-related blepharitis",
     tag: "Lash mites",
     meta: "Cylindrical dandruff",
+    keyPoints: [
+      "Demodex can live in lash follicles and meibomian glands; collarettes are a commonly mentioned sign — excess is a clinical decision.",
+      "The life cycle is about two weeks, so courses often last weeks — this page does not pitch mite products.",
+      "Home care is non-drug education; medicines need Hong Kong registration and clinician guidance.",
+      "This cannot replace a visit; worse red pain or vision change needs care.",
+    ],
     blocks: [
       p("Demodex on lashes can drive chronic blepharitis. Cylindrical dandruff at the lash roots is a clue. Treatment classes a doctor may discuss include lid hygiene and, where appropriate, prescription agents. This page does not name consumer brands as a shopfront."),
     ],
@@ -510,6 +606,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Dry-eye types and a care ladder",
     tag: "International consensus summary",
     meta: "Evaporative · aqueous-deficient · mixed",
+    keyPoints: [
+      "Dry eye includes evaporative, aqueous-deficient and mixed types; stepped care follows examination.",
+      "This page is classification and care concepts — not a personal prescription or brand ranking.",
+      "Sudden vision drop, severe pain and photophobia, asymmetric red swelling with heavy discharge, or dry mouth / joints / rash — not “ordinary dry eye.”",
+      "Lubricant classes are on the lubricants page; this cannot replace a registered doctor visit.",
+    ],
     blocks: [
       p(
         "Per TFOS DEWS II, evaporative dry eye is the majority and is driven mainly by meibomian gland dysfunction; aqueous-deficient disease is less common (including Sjögren syndrome); mixed disease is what clinics see most often. Vicious cycle: hyperosmolarity → inflammatory mediators and matrix metalloproteinases → goblet-cell and epithelial injury → a less stable tear film. This ladder is an international consensus framework, not a shopping list.",
@@ -555,6 +657,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Glaucoma monitoring: target IOP, OCT / visual field and reports",
     tag: "Long-term monitoring education",
     meta: "Target IOP · OCT RNFL / GCL · Humphrey-class field · colour maps are not a verdict",
+    keyPoints: [
+      "Glaucoma monitoring covers target IOP, OCT (RNFL/GCL) and fields — report colours are not verdicts.",
+      "No booking, referral or report scoring; no cure or guarantee claims.",
+      "Acute angle-closure attack or sudden vision drop/blindness: A&E now (call 999 if needed).",
+      "New clear field-cut sensation without emergency red flags: see an ophthalmologist promptly.",
+    ],
     blocks: [
       h("What it is"),
       p("Public education on long-term glaucoma monitoring: teaching figures for target pressure, how structure (OCT) and function (visual field) are read together, and what colour maps on reports mean. This page does not score your report and does not teach DIY dose changes or stopping drops. Disease types (open-angle, normal-tension, ocular hypertension, angle closure) are on the glaucoma overview; five pressure-lowering drop classes are on the glaucoma drops page."),
@@ -600,6 +708,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "How to use eye drops",
     tag: "Technique",
     meta: "Follow the label and the demonstration",
+    keyPoints: [
+      "This page teaches technique after a prescription — not a pitch to buy drops.",
+      "Timing, order, storage and in-use life follow the label and the doctor.",
+      "Missed drops can destabilise pressure control — one improvable factor, not the only one.",
+      "Glaucoma drop classes and lubricant ingredients are on related pages.",
+    ],
     blocks: [
       p("Education after a prescription, not a product pitch. Missed doses can make pressure control less stable — one factor among others, not the only cause."),
       ol(["Wash hands. Shake if that product’s label says so.", "Tilt the head; pull down the lower lid to make a pocket.", "Do not let the tip touch the eye or lashes. How much to instil follows the demonstration.", "Close gently; do not squeeze-blink.", "Whether to press the inner corner, how long to wait between drops, and how long a bottle keeps after opening: follow that product’s label and the doctor. This page is not your regimen."]),
@@ -609,6 +723,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Choosing an intraocular lens — detail",
     tag: "No lens fits everyone",
     meta: "Monofocal · toric · EDOF · multifocal",
+    keyPoints: [
+      "IOL optical classes include monofocal, toric, EDOF and multifocal — individual preoperative discussion.",
+      "No brand names here; newer or costlier models are not automatically best.",
+      "Macular disease, severe dry eye or clear glaucomatous field loss usually argue against multifocal and many EDOF designs.",
+      "Day-of implant sequence is on the cataract day-of page.",
+    ],
     blocks: [
       {
         type: "table",
@@ -628,6 +748,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Hyperopia, shallow anterior chamber and the lens",
     tag: "Angle-closure education",
     meta: "Anterior chamber · angle · emergency signs",
+    keyPoints: [
+      "Hyperopic eyes are shorter with a shallower chamber and narrower angle; angle closure is discussed more often in Chinese populations.",
+      "This page is not a call for every hyperope to have cataract surgery.",
+      "Acute angle-closure attack: severe pain, vomiting, rainbows, steamy cornea — A&E now; do not self-dilate.",
+      "Lens thickening and the angle are teaching concepts; individual care is specialist-led.",
+    ],
     blocks: [
       p("Hyperopic eyes are shorter, with a shallower chamber and narrower angle. The lens thickens with age. Angle-closure glaucoma is more common in Chinese people than in many Western populations. This is not a call for every hyperope to have cataract surgery."),
       w("Acute angle closure: pressure can rise to tens of mmHg — severe pain, vomiting, rainbow haloes, steamy cornea, a mid-dilated fixed pupil. Untreated hours can permanently damage the optic nerve. Go to A&E. Do not put in dilating drops or wait for a private clinic."),
@@ -639,6 +765,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "YAG capsulotomy and retinal barrier laser",
     tag: "Consent summary",
     meta: "PCO · sealing a tear",
+    keyPoints: [
+      "YAG capsulotomy treats posterior capsule opacity — not “cataract coming back,” and not every blur needs it.",
+      "Barrier laser scars around selected tears; it cannot reattach a detached retina.",
+      "After YAG, new flashes or many new floaters without curtain / sudden blindness / severe pain: same-day dilation.",
+      "A curtain, sudden blindness or severe pain: go to A&E now.",
+    ],
     blocks: [
       h("YAG posterior capsulotomy"),
       p("Not a “returning cataract”. Lens epithelial cells cloud the posterior capsule. Over years this is not uncommon; rates in the literature vary and are not your personal odds. Outpatient laser, no incision. Not every blur needs YAG; a doctor judges whether it affects function. Short pressure rise and extra floaters can occur; retinal tear is uncommon. After YAG: new flashes or many new floaters, without a curtain, sudden blindness or severe pain — dilated fundus exam the same day (required). A curtain, sudden blindness or severe pain: go to A&E now. The order of the day and the diagrams are on The day of posterior capsulotomy."),
@@ -650,6 +782,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Multifocal lens — who may not be suitable",
     tag: "Informed choice",
     meta: "Aberration · pupil · fundus",
+    keyPoints: [
+      "Multifocal IOL screening looks at aberrations, pupil, fundus and lifestyle — no single absolute cut-off.",
+      "Irregular cornea, wet AMD, clear ERM/oedema or clear glaucomatous field loss usually argue against multifocals.",
+      "High night-driving demand also needs caution.",
+      "Final choice needs an in-person visit and consent — not a model pitch.",
+    ],
     blocks: [
       p("A readable summary of why a doctor may advise against a multifocal lens. No single measurement is an absolute cut-off. The choice still needs an in-person visit and consent. This is not a pitch for any model."),
       h("Situations that need extra caution or where multifocals are not suitable (qualitative)"),
@@ -660,6 +798,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Macular OCT: wet AMD / diabetic macular oedema / retinal vein occlusion",
     tag: "Imaging",
     meta: "Central retinal thickness · fluid",
+    keyPoints: [
+      "Macular OCT quantifies change; it does not replace a dilated exam.",
+      "Wet AMD: new distortion needs prompt care; injections are specialist decisions.",
+      "Retinal vein occlusion also means thinking about blood pressure and systemic factors.",
+      "Severe pain or sudden vision drop after injection: rule out endophthalmitis — A&E now.",
+    ],
     blocks: [
       p("The macula governs fine vision. Optical coherence tomography is used for quantitative comparison and does not replace a dilated fundus exam. Central retinal thickness is often about 250–300 μm in health; machines cannot be compared directly with each other."),
       ul([
@@ -677,6 +821,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "What presbyopia is, and how it can be managed",
     tag: "Five classes of options",
     meta: "Glasses · contacts · miotic drops · corneal laser · lens surgery",
+    keyPoints: [
+      "Presbyopia is age-related loss of accommodation — strictly not classic refractive error, often grouped with it for optics.",
+      "Options discussed can include readers, progressives, contacts, miotic drops (overseas approval ≠ HK registration), corneal laser or lens options.",
+      "No single method fits everyone, and there is no “cure” for presbyopia.",
+      "Curtain or sudden vision drop: A&E; new flashes / clearly more floaters: same-day dilation when possible.",
+    ],
     blocks: [
       h("What it is"),
       p("Presbyopia is the lens stiffening so near focus fails, usually from the forties. It is declining accommodation, not a classic refractive error. Nothing restores a twenty-year-old lens. Any option will need review as presbyopia progresses."),
@@ -698,6 +848,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Tacrolimus on the eyelids (off-label)",
     tag: "Off-label",
     meta: "Atopic keratoconjunctivitis · see steroid-sparing hub",
+    keyPoints: [
+      "Tacrolimus ointment is mainly registered for dermatology in Hong Kong; eyelid use for AKC is often off-label.",
+      "Not as eye drops; do not self-buy for the eye; this page states no strength, frequency or course.",
+      "Worse pain, sudden vision drop, clustered blisters or yellow-green pus: stop and seek care now.",
+      "Full red flags and myths are on the steroid-sparing page.",
+    ],
     blocks: [
       p(
         "Tacrolimus ointment is registered in Hong Kong mainly for dermatology. Use on eyelids for atopic keratoconjunctivitis is off-label. Do not buy it to put in the eye as a drop. An ophthalmologist must assess suitability. Full mechanism, red flags, myths and references are on the steroid-sparing medicines page — this page is only a short pointer.",
@@ -711,6 +867,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Recurrent corneal erosion and PTK",
     tag: "Morning pain",
     meta: "RCE · epithelial basement-membrane dystrophy",
+    keyPoints: [
+      "Recurrent corneal erosion can cause severe morning pain, photophobia and tearing that eases then returns.",
+      "Therapeutic keratectomy (PTK) is a specialist discussion — not a home laser.",
+      "This page covers mechanism and care concepts — no device brands, no “never again” promise.",
+      "Sudden vision drop or severe red painful photophobia: follow A&E / same-day paths — do not wait it out alone.",
+    ],
     blocks: [
       p("The epithelium can tear on waking. Night lubricant or hypertonic ointment is a direction doctors often try first; how well it works varies, and basement-membrane dystrophy tends to recur. How long to use it, and whether a bandage lens is needed, is the doctor’s decision. Later procedures such as diamond burr or PTK are selected cases. This is not a cure promise."),
     ],
@@ -719,6 +881,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Retinal detachment, membrane, tear and vitrectomy",
     tag: "Emergency education",
     meta: "Whether the macula is still on drives urgency",
+    keyPoints: [
+      "Retinal detachment with a curtain, large field cut or sudden vision drop: go to A&E now.",
+      "Macula-on detachment is an emergency aiming for prompt surgery — do not wait to “see if it settles.”",
+      "New flashes or clearly more floaters without curtain / sudden blindness: same-day dilated exam when possible.",
+      "After surgery, new curtain, severe pain, sudden vision drop or pus-like discharge: A&E; do not book flights yourself while gas remains.",
+    ],
     blocks: [
       {
         type: "table",
@@ -788,6 +956,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "True involutional entropion",
     tag: "Eyelid turning in",
     meta: "Lashes rub the cornea",
+    keyPoints: [
+      "True entropion is an abnormal lid-margin position with lashes rubbing the cornea; involutional entropion is common in older adults.",
+      "Unlike epiblepharon, the lid margin itself is malpositioned.",
+      "Severe pain, sudden vision drop or a white cornea needs prompt ophthalmology care.",
+      "Surgery is an examination decision — no booking or clinic comparison here.",
+    ],
     blocks: [
       h("What it is"),
       p("Ageing lid tissues let the margin turn in so lashes rub the cornea. It is not the same as childhood epiblepharon."),
@@ -799,6 +973,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Epiblepharon (false entropion)",
     tag: "Children",
     meta: "An extra skin fold",
+    keyPoints: [
+      "Epiblepharon pushes lashes toward the cornea with a skin fold while the lid margin position stays normal.",
+      "It is common in East Asian children’s lower lids; some improve with facial growth.",
+      "Gently lifting the fold with a cotton bud can let lashes point forward — a teaching contrast with true entropion, not home diagnosis.",
+      "Ongoing irritation, photophobia or corneal involvement needs ophthalmology assessment.",
+    ],
     blocks: [
       p("A fold of skin pushes lashes inward, common in East Asian children. Many improve with growth. A doctor may discuss lubricant, taping or, if the cornea is damaged, surgery. No success-rate claims here."),
     ],
@@ -807,6 +987,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Ptosis (drooping upper lid)",
     tag: "Lid position",
     meta: "Levator · aponeurosis",
+    keyPoints: [
+      "Ptosis often involves the levator or its aponeurosis; causes need examination.",
+      "New ptosis with a dilated pupil, double vision or headache — A&E now to exclude third-nerve palsy and other emergencies.",
+      "Tumour, myasthenia or neurologic emergency come first — not “always do a lid job.”",
+      "This cannot replace a visit with a registered doctor.",
+    ],
     blocks: [
       h("What it is"),
       p("The upper lid sits too low. Causes include ageing aponeurosis, nerve palsy, muscle disease and childhood ptosis."),
@@ -817,6 +1003,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Nasolacrimal duct obstruction and watering",
     tag: "Tears overflow",
     meta: "Infants · adults",
+    keyPoints: [
+      "Nasolacrimal duct obstruction can cause watering; congenital and acquired causes differ.",
+      "Acute dacryocystitis: local red hot painful swelling needs prompt care — do not squeeze hard yourself.",
+      "Infant watering and adult acquired blockage are assessed differently by specialists.",
+      "No booking or surgical success-rate comparison on this page.",
+    ],
     blocks: [
       p("Tears cannot drain. Infants often improve in the first year; probing is a later option if a doctor advises. Adults may have inflammation or stone. Surgery classes include DCR. This page lists no branded tubes and no success rates."),
     ],
@@ -825,6 +1017,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Squint (strabismus) and amblyopia",
     tag: "Common alignment problems",
     meta: "Esotropia · exotropia · double vision · when it is urgent",
+    keyPoints: [
+      "Strabismus is ocular misalignment; amblyopia is impaired visual development — related but not the same.",
+      "Sudden double vision with headache, a dilated pupil or limb weakness: A&E now (call 999 if you cannot travel).",
+      "A white pupil at any age: A&E now, or same-day dilated exam to exclude retinoblastoma and other causes.",
+      "This page cannot tell true strabismus from pseudoesotropia; “looking straight” does not exclude amblyopia.",
+    ],
     blocks: [
       h("What it is"),
       p("Squint (strabismus) means the two eyes do not point at the same target — one may turn in, out, up or down. It can be constant or intermittent (tiredness, fever, near or distance). Amblyopia is a developing brain that never received a clear image; even with the right glasses one eye stays weaker. Squint can cause amblyopia and amblyopia can make a squint more obvious. Progress can still occur after age 6; evidence is clearer at about 7–12. In the teens, especially after previous patching, further gain is often smaller. Assess earlier rather than decide at home that a birthday has closed the door."),
@@ -985,6 +1183,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Children’s vision milestones",
     tag: "For parents",
     meta: "A guide, not a score",
+    keyPoints: [
+      "Child vision milestones are rough guides with wide variation — not a test score substitute.",
+      "A persistent turn after about 3–4 months needs prompt specialist assessment — usually not same-day emergency, but do not wait until school.",
+      "A white pupil at any age: A&E now or same-day dilated exam.",
+      "Children often need cycloplegic refraction; without it hyperopia can be underestimated.",
+    ],
     blocks: [
       p("Rough public-education timing only. Babies start regarding faces in the first weeks. Alignment should settle around 2–3 months. Persistent squint after 3–4 months: see an ophthalmologist promptly. Usually not a same-day emergency, but do not wait until school. A white pupil (leukocoria) at any age: go to A&E now, or same-day dilated exam by an ophthalmologist to exclude retinoblastoma and other causes. Do not wait and watch at home. New nystagmus that is asymmetric, or with diplopia, severe vertigo or neurological signs: A&E / 999; new nystagmus without those red flags: same-day ophthalmic assessment. Known stable, long-standing congenital or infantile nystagmus alone is not automatic “go to A&E now”. Preschool is an important window for amblyopia, strabismus and high refractive error."),
     ],
@@ -993,6 +1197,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Contact lenses: hygiene and complications",
     tag: "Keratitis can cost vision",
     meta: "Types · hygiene · serious vs milder problems · when to remove and seek care",
+    keyPoints: [
+      "Contact-lens hygiene follows Hong Kong registered labels — no brand pitch here.",
+      "Water exposure while wearing lenses (including tap-water environments) is a key Acanthamoeba keratitis education point.",
+      "Red painful photophobia: remove lenses at once; if pain persists, do not delay — same-day assessment.",
+      "“Not very red” does not exclude keratitis; photos cannot diagnose infection on this page.",
+    ],
     blocks: [
       h("What they are"),
       p("Contact lenses sit on the cornea. Poor care can cause microbial keratitis (MK), scarring or the need for a transplant. This page is public education — it does not sell, fit or rank brands."),
@@ -1120,6 +1330,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Steroid eye drops",
     tag: "Prescription only",
     meta: "Pressure · cataract · infection",
+    keyPoints: [
+      "Steroid eye drops are prescription medicines for clinician-diagnosed inflammation.",
+      "Long self-use can raise IOP, speed cataract and mask infection.",
+      "Do not reuse leftover “white-of-eye drops” or share them.",
+      "Worse red pain, vision drop or suspected infection on treatment: stop and seek care.",
+    ],
     blocks: [
       p("Steroid drops can raise eye pressure, speed cataract and worsen infection. They are not for unsupervised long-term use from a leftover bottle. A doctor must prescribe, taper and check pressure when needed."),
       p("When longer ocular-surface control is needed, a doctor may discuss steroid-sparing options (cyclosporine / tacrolimus) — see the dedicated steroid-sparing medicines page."),
@@ -1129,6 +1345,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Thyroid eye disease",
     tag: "Orbit and endocrine",
     meta: "Proptosis · diplopia · optic nerve compression",
+    keyPoints: [
+      "Thyroid eye disease can cause proptosis and double vision; a minority threaten vision via optic-nerve compression.",
+      "Suspected dysthyroid optic neuropathy (vision drop, poor colour, asymmetric pupils, field cut, etc.): A&E now.",
+      "Lids that will not close with a white painful cornea: do not wait for clinic hours.",
+      "After emergency care, specialists decide steroid or decompression paths — not self-selection.",
+    ],
     blocks: [
       h("What it is"),
       p("Thyroid eye disease (thyroid-associated orbitopathy) is autoimmune orbital disease. TRAb act mainly on TSH receptors on orbital fibroblasts; there is cross-talk with IGF-1 receptors, expanding glycosaminoglycan, fat and extraocular muscle. The mechanism is still under study — it is not that one antibody always directly activates both receptors together. Hence proptosis, limited motility, diplopia and, when severe, apical crowding. Endocrinology and ophthalmology share care. This page is education, not self-diagnosis or a prescription."),
@@ -1162,6 +1384,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Ophthalmologist, optometrist and dispensing",
     tag: "Who does what",
     meta: "Specialist register",
+    keyPoints: [
+      "Ophthalmologists, optometrists and dispensing roles differ — education, not a ranking ad.",
+      "Eye pain, sudden vision drop, flashes, curtain, double vision, trauma or chemical splash: emergency / specialist paths.",
+      "Childhood strabismus, amblyopia or abnormal screening needing cycloplegic refraction: ophthalmology assessment.",
+      "Changing glasses regularly is not the same as a dilated fundus exam.",
+    ],
     blocks: [
       p("Eye symptoms should be assessed by a suitably qualified registered healthcare professional. An ophthalmologist in Hong Kong is a Medical Council-registered doctor on the specialist register in ophthalmology, and handles diagnosis, prescription, laser and surgery. Optometrists are registered under the Supplementary Medical Professions Ordinance and mainly test vision, fit glasses/contacts and screen within their scope; they refer eye disease. Dispensing opticians make glasses to a prescription. Only those on the specialist register may use the title 眼科專科醫生. Diagnosis of organic eye disease is not a substitute for an in-person ophthalmologist visit when that is needed."),
     ],
@@ -1170,6 +1398,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "After dilation",
     tag: "The day of the exam",
     meta: "Glare and near blur for hours",
+    keyPoints: [
+      "Dilation widens the pupil and temporarily reduces focusing so the fundus can be examined; children often need stronger cycloplegia.",
+      "Expect hours of light sensitivity and near blur; arrange a lift if you cannot drive safely.",
+      "Tell staff about known narrow angles; rare acute pressure rises (pain, foggy vision, headache/vomiting) need A&E now.",
+      "Do not refuse needed dilation just to rush to a meeting — fundus disease can be missed.",
+    ],
     blocks: [
       p("Dilating drops enlarge the pupil and reduce focusing so the lens periphery, vitreous and retina can be seen. Do not drive yourself afterwards. Near work is blurry and light is harsh for hours. If the angle is narrow, a doctor may check it is safe to dilate."),
     ],
@@ -1178,6 +1412,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Pterygium — lifestyle notes",
     tag: "UV",
     meta: "Hats and sunglasses as habits, not a shop",
+    keyPoints: [
+      "Pterygium links to long-term UV and wind/dust; it can cause foreign-body sensation, astigmatism or cover the visual axis.",
+      "Everyday sun protection is the education focus — not a product pitch.",
+      "Surgery follows symptoms and examination.",
+      "This cannot replace a registered doctor visit.",
+    ],
     blocks: [
       p("UV, wind and dust associate with pterygium. A hat and sunglasses are daily habits, not a product pitch on this site. Surgery is individual if the growth threatens sight or comfort."),
     ],
@@ -1186,6 +1426,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Lubricating drops and ocular surface lubricants",
     tag: "Symptom relief, not a cure",
     meta: "Three-layer tear film · ingredient classes · preservatives · link to dry eye",
+    keyPoints: [
+      "Lubricating drops are taught by ingredient class — no brands or price ranking.",
+      "Lubricants do not replace prescription drugs and are not treatment for cataract, glaucoma or infection.",
+      "Sudden vision drop or sudden blindness, or severe pain with headache and vomiting: A&E now.",
+      "Severe pain, photophobia or vision drop after weeks of use needs examination to exclude inflammation or infection.",
+    ],
     blocks: [
       h("What they are"),
       p("Lubricating drops (artificial tears), gels and ointments ease dryness, grit and intermittent blur. They support the tear film; they do not cure meibomian dysfunction or Sjögren syndrome, and this page is not a medicine advertisement. See the dry-eye overview and the dry-eye care ladder. Product names are not listed."),
@@ -1240,6 +1486,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Retinal vascular occlusion",
     tag: "Sudden vision change",
     meta: "Vein · artery · when it is urgent",
+    keyPoints: [
+      "Retinal vein or artery occlusion can suddenly affect vision; think also of blood pressure, glucose and lipids.",
+      "A sudden black-out or severe vision loss: A&E now (call 999 if you cannot travel).",
+      "Age ≥50 with temple pain, jaw claudication, shoulder-girdle pain or a curtain-like vision drop: exclude giant-cell arteritis now.",
+      "Vein occlusion without those red flags: same-day dilation and OCT when possible; severe pain / sudden drop after injection: A&E.",
+    ],
     blocks: [
       p("Arteries feed the retina; veins drain it. A blockage is a vascular event. Think blood pressure, diabetes, lipids, arrhythmia, glaucoma — and, for arterial occlusion, the carotids and giant-cell arteritis. This page does not promote any injection. If a doctor arranges an intravitreal anti-VEGF injection, the order of the day is on The day of an intravitreal anti-VEGF injection."),
       h("Vein occlusions"),
@@ -1253,6 +1505,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Laser refractive surgery: LASIK and SMILE",
     tag: "Elective",
     meta: "Excimer · femtosecond · does not treat the fundus",
+    keyPoints: [
+      "Laser refractive surgery reshapes the cornea to reduce spectacle dependence — it does not shorten the axis or remove high-myopia fundus risk.",
+      "Suitability needs thickness, topography, ocular surface and dilated exam — no brands here.",
+      "Sudden vision drop or sudden blindness: go to A&E now.",
+      "Red painful photophobia without sudden blindness / severe pain and vomiting: same-day assessment; highly myopic eyes still need regular dilated exams after surgery.",
+    ],
     blocks: [
       p("Laser changes corneal shape so light focuses on the retina. It does not shorten the eye or remove the fundus risks of high myopia. Suitability needs thickness, topography, the ocular surface and a dilated exam. Platform brand names are not listed."),
       h("LASIK"),
@@ -1267,6 +1525,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Uveitis",
     tag: "Uveal inflammation",
     meta: "SUN anatomy · infectious vs non-infectious · specialist treatment ladder",
+    keyPoints: [
+      "Uveitis is grouped by anatomy and infectious vs non-infectious causes; do not immunosuppress before infection is excluded.",
+      "Do not self-use leftover steroids or repurpose other specialties’ drugs as eye drops.",
+      "Sudden vision drop, curtain, severe pain with headache/vomiting, or suspected endophthalmitis after surgery/injection: A&E now.",
+      "Other new red painful photophobia: same-day specialist dilated exam when possible.",
+    ],
     blocks: [
       h("What it is"),
       p("The uvea is the iris, ciliary body and choroid. Uveitis is inflammation of these tissues and may involve the vitreous, retina or optic nerve. SUN anatomical classes help communication; only an ophthalmologist can diagnose after examination. This page is education — not a DIY lab panel or prescription."),
@@ -1311,6 +1575,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Glaucoma eye drops",
     tag: "Pressure-lowering classes",
     meta: "Five mechanisms · adherence · drop technique · no brand names",
+    keyPoints: [
+      "Glaucoma drops are taught by mechanism class — no brand names; adherence matters.",
+      "Do not self-change dose, stop, or share leftover bottles.",
+      "Severe pain with headache/vomiting, rainbows or sudden vision drop: A&E now (rule out acute angle closure).",
+      "Drop technique is on the drops page; target-IOP monitoring is on the glaucoma-monitoring page.",
+    ],
     blocks: [
       h("What they are"),
       p("Long-term care for most open-angle glaucoma and ocular hypertension relies on lowering eye pressure to slow optic-nerve damage. Aqueous humour is made by the ciliary body and leaves via the trabecular meshwork and uveoscleral pathway. Pressure-lowering drops are prescription medicines chosen by an ophthalmologist. This page explains classes only — no product names. See also the glaucoma-monitoring hub (target IOP, OCT / visual field and reports) and the glaucoma overview."),
@@ -1346,6 +1616,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Migraine and the eye",
     tag: "Visual aura vs must-not-miss emergencies",
     meta: "Scintillating scotoma · retinal migraine · cluster · GCA · IIH",
+    keyPoints: [
+      "Migraine can have visual aura; eye care separates typical reversible aura from sight- or life-threatening emergencies.",
+      "Sudden monocular blur or vision loss: do not assume migraine first — A&E now.",
+      "New ptosis and double vision with a dilated pupil: A&E now (exclude posterior communicating aneurysm, etc.).",
+      "Age ≥50 with visual red flags plus new headache / jaw claudication: do not miss giant-cell arteritis (see that page).",
+    ],
     blocks: [
       h("What it is"),
       p("Migraine is a neurological condition; some people have visual aura. Ophthalmology’s job is to separate typical reversible binocular aura from blinding or life-threatening vascular emergencies. This page is education — not a neurology or ophthalmology visit, and not booking."),
@@ -1389,6 +1665,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Strabismus surgery",
     tag: "Surgery to realign the eyes",
     meta: "Pre-op assessment · indications education · post-op red flags",
+    keyPoints: [
+      "Strabismus surgery adjusts extraocular-muscle insertion or force — education, not a success-rate chart.",
+      "Preoperative assessment is specialist-led; amblyopia and emergency flags are on the strabismus page.",
+      "Sudden severe pain, vision drop, heavy pus-like discharge or fever after surgery: A&E now (call 999 if needed).",
+      "Do not self-add leftover steroid drops.",
+    ],
     blocks: [
       h("What it is"),
       p("Strabismus surgery adjusts extraocular muscle insertion or pull to improve alignment and some diplopia. This page is public education about surgery — not a booking menu or success-rate comparison. When to seek care, amblyopia and emergency flags are on the strabismus-and-amblyopia page; TED rehab order is on the thyroid-eye-disease page."),
@@ -1430,6 +1712,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Episcleritis and scleritis",
     tag: "Ocular surface and scleral inflammation",
     meta: "Episclera milder · sclera more painful · no immunosuppression before infection is excluded",
+    keyPoints: [
+      "Episcleritis is usually milder; scleritis is more painful and may link to systemic inflammation.",
+      "Necrotising scleritis or severe boring pain that wakes you: A&E now or same-day emergency eye care.",
+      "Sudden vision drop or severe pain with headache/vomiting: A&E — do not self-label conjunctivitis.",
+      "Do not immunosuppress before infection is excluded; post-op/trauma red pain with pus needs specialist exclusion of infection.",
+    ],
     blocks: [
       h("What it is"),
       p("The episclera sits under the conjunctiva, above the sclera. Episcleritis is usually milder, often idiopathic, and many episodes are self-limiting. Scleritis is deeper, typically more painful, more often linked to systemic rheumatic or vasculitic disease, and can threaten sight. Neither is a home label for “ordinary red-eye drops”. Related uveitis is covered on the uveitis page."),
@@ -1465,6 +1753,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Giant-cell arteritis",
     tag: "Large-vessel vasculitis and vision emergencies",
     meta: "New headache · jaw claudication · sudden blindness · go to A&E now",
+    keyPoints: [
+      "Giant-cell arteritis almost only affects adults about ≥50 and can cause irreversible vision loss quickly.",
+      "Any new visual symptom (sudden drop, curtain, amaurosis fugax, new double vision, etc.): A&E now.",
+      "Do not wait for a booked temporal-artery biopsy before starting the emergency path.",
+      "Suspicious systemic clues without visual symptoms: same-day specialist assessment when possible; any later visual symptom still means A&E.",
+    ],
     blocks: [
       h("Vision red flags: go to A&E now"),
       w("Suspected GCA with any new visual symptom (sudden vision drop, sudden blindness, a field curtain, transient monocular black-out, new double vision): go to A&E now. Lost vision is often permanent; urgent care is to protect remaining vision and the fellow eye. Do not wait for temporal-artery biopsy or ultrasound scheduling before the urgent path starts."),
@@ -1516,6 +1810,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Chemical eye injury",
     tag: "Irrigate first · go to A&E while irrigating",
     meta: "Immediate irrigation · A&E · specialty staging and class discussion",
+    keyPoints: [
+      "Chemical splash: first priority is immediate copious irrigation, then A&E.",
+      "Irrigate while going to A&E; if you cannot travel: call 999.",
+      "Do not delay irrigation waiting for a private clinic; do not attempt acid–base neutralisation experiments at home.",
+      "Bring photos of the container/label and timing of irrigation to A&E.",
+    ],
     blocks: [
       h("Do this first: copious irrigation"),
       ol([
@@ -1569,6 +1869,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
       "Long-term risks of high myopia: pathologic myopia, myopic maculopathy & retinal breaks",
     tag: "Structural risks in depth",
     meta: "Pathologic myopia · myopic maculopathy · tear / detachment",
+    keyPoints: [
+      "This page deepens pathologic myopia, myopic maculopathy and tear/detachment risk — relative-risk education, not personal absolute odds.",
+      "Early disease can be silent; distortion, central shadow, or many new floaters/flashes raise concern.",
+      "An expanding curtain: A&E now (call 999 if needed).",
+      "New flashes or clearly more floaters: same-day dilated exam when possible — not a substitute for regular checks.",
+    ],
     blocks: [
       h("What it is"),
       p("High myopia usually means a deeper refractive error or a clearly longer eye (axial length). Most people with high myopia see well with spectacles or contact lenses day to day, but some eyes develop structural change over time. International literature calls the state with associated structural complications pathologic myopia; the cluster of degenerative changes at the macula is myopic maculopathy."),
@@ -1645,6 +1951,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Keratoconus: progression, acute hydrops, and care concepts",
     tag: "Corneal ectasia",
     meta: "Progression monitoring · acute hydrops · optics / CXL classes",
+    keyPoints: [
+      "Keratoconus is corneal thinning and protrusion; progression monitoring and optics/CXL are specialist class discussions — no brand ranking.",
+      "Acute hydrops: sudden vision drop, markedly white cloudy cornea, severe pain or photophobia — emergency path.",
+      "Contact-lens-related severe red pain with discharge: do not delay after lens removal — exclude infectious keratitis.",
+      "Other progression or optical problems: same-day specialist assessment when possible.",
+    ],
     blocks: [
       h("What it is"),
       p("Keratoconus is a corneal ectatic disease: the central or paracentral cornea gradually thins and bulges forward in a cone shape, causing irregular astigmatism and deepening myopia. Vision blurs and spectacles often cannot fully correct it."),
@@ -1730,6 +2042,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
       "Eye allergy and the Hong Kong environment: triggers, infection red flags, and when not to self-buy steroids",
     tag: "Hong Kong environment triggers",
     meta: "Dust mites · air-con indoors · do not self-buy steroids",
+    keyPoints: [
+      "Hong Kong triggers (dust mites, sealed air-con, etc.) can worsen ocular allergy; environment steps do not replace red-flag care.",
+      "Do not self-buy steroid eye drops to “stop the itch.”",
+      "Severe pain with headache/vomiting or sudden vision drop/blindness: A&E now.",
+      "Severe photophobia and pain, or contact-lens red pain that persists after removal: same-day ophthalmic assessment.",
+    ],
     blocks: [
       h("What it is"),
       p("Ocular allergy (including allergic conjunctivitis) is conjunctival inflammation to allergens, often alongside nasal allergy. Versus viral/bacterial “red eye”, allergy highlights intense itch, usually watery discharge, often both eyes together or in sequence, and may recur with the environment. Milder seasonal/perennial disease is not the same severity as VKC/AKC (which can injure the cornea) — the latter must not be treated as ordinary red eye with self-bought drops (see the conjunctivitis overview; drug-class risks on the allergy treatment-principles page). This page does not replace the conjunctivitis overview; it covers Hong Kong environment triggers and when not to treat everything as ordinary eye allergy."),
@@ -1824,6 +2142,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Blue light and screens: common myths",
     tag: "Myth-bust",
     meta: "Digital eye strain · not a product pitch · AAO / Cochrane",
+    keyPoints: [
+      "Screen-related discomfort is often digital eye strain; this page clears blue-light myths — not a pitch for blue-blocking products.",
+      "Public reviews do not support “must buy blue-blocking glasses” as a routine conclusion (see on-page framing).",
+      "Sudden vision drop, field loss, many new floaters or flashes: A&E now — unrelated to buying blue-blocking products.",
+      "This cannot replace a registered doctor visit.",
+    ],
     blocks: [
       p("Public education; does not replace a visit; no booking, purchase or referral. No spectacle, film, supplement or device brands."),
       h("Separate two things first"),
@@ -1862,6 +2186,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Colour vision deficiency: congenital vs acquired",
     tag: "Colour vision education",
     meta: "Stable congenital vs acquired warning · no fitness-to-drive ruling",
+    keyPoints: [
+      "Most congenital colour-vision anomalies are stable; acquired change can warn of fundus, optic-nerve or drug toxicity issues.",
+      "This site does not rule on individual job or driving fitness.",
+      "Sudden colour change with vision drop, field loss, double vision or severe headache/eye pain with nausea: A&E now.",
+      "Other new acquired colour change: same-day assessment when possible.",
+    ],
     blocks: [
       h("What it is"),
       p("Colour vision is the ability of the eyes and brain to tell colours apart. Colour vision deficiency (CVD; often called colour weakness / colour blindness) is broadly congenital or acquired. This page does not quote “X% of males” prevalence figures."),
@@ -1950,6 +2280,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Steroid-sparing medicines: cyclosporine drops and tacrolimus",
     tag: "Prescription / off-label education",
     meta: "Ocular-surface immunomodulation · prescription-class education · not a purchase pitch",
+    keyPoints: [
+      "Steroid-sparing education covers classes such as ciclosporin drops and tacrolimus — not a purchase pitch.",
+      "Eyelid tacrolimus is often off-label: not as eye drops; generally not used under age two.",
+      "Sudden vision drop or severe pain with headache/vomiting: A&E now.",
+      "Worse pain, sudden vision drop or pus-like discharge on treatment: stop and seek same-day care when possible.",
+    ],
     blocks: [
       h("What it is"),
       p(
@@ -2057,6 +2393,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Optic neuritis: what it is, when to seek care, and what a doctor may discuss",
     tag: "Optic-nerve inflammation",
     meta: "Monocular vision drop · pain on movement · ONTT education",
+    keyPoints: [
+      "Optic neuritis often brings sudden monocular vision loss and pain on eye movement — education, not personal prognosis.",
+      "With severe headache, vomiting, limb weakness, double vision or altered consciousness: A&E / 999.",
+      "Sudden uni- or binocular vision drop, marked colour washout or pain on movement: see an ophthalmologist promptly.",
+      "ONTT and similar trial figures are literature education — not your personal prescription.",
+    ],
     blocks: [
       h("What it is"),
       p("Optic neuritis is inflammation of the optic nerve (the nerve that carries retinal signals to the brain). Common features include monocular (or occasionally binocular) vision loss over days to weeks, pain on eye movement, washed-out or grey colours, and reduced contrast sensitivity. Ordinary “eye strain” often improves with rest; if vision, colour or movement-pain changes accompany it, do not treat it as fatigue alone — seek assessment."),
@@ -2111,6 +2453,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Corneal transplant: full-thickness vs lamellar concepts, aftercare and RSVP",
     tag: "Corneal replacement",
     meta: "PK · lamellar · rejection alerts · registry survival education",
+    keyPoints: [
+      "Corneal transplant includes full-thickness and lamellar concepts; aftercare and RSVP warning signs are the education focus.",
+      "RSVP symptoms: do not self-escalate drops — contact the surgeon promptly or go to A&E.",
+      "Severe pain, heavy discharge or sudden vision drop: A&E / 999.",
+      "Registry survival figures are not your personal prognosis or a clinic success rate.",
+    ],
     blocks: [
       h("What it is"),
       p("Corneal transplant (keratoplasty) replaces damaged, cloudy or under-functioning cornea with donor tissue, usually to improve vision, ease pain or restore structure. Public education often groups surgery as:"),
@@ -2166,6 +2514,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Nystagmus: infantile vs acquired types, and when to seek care",
     tag: "Involuntary eye movements",
     meta: "Infantile · acquired · head posture / surgery-goal hedges",
+    keyPoints: [
+      "Nystagmus includes infantile and acquired forms; head posture / surgery goals are specialist discussions.",
+      "New nystagmus with asymmetry, double vision, severe vertigo, vomiting, unsteady gait or weakness: A&E / 999.",
+      "New nystagmus without those red flags: see an ophthalmologist promptly.",
+      "Long-standing stable congenital/infantile nystagmus alone is not automatically “A&E now.”",
+    ],
     blocks: [
       h("What it is"),
       p("Nystagmus is involuntary, repetitive swinging or jerking of the eyes (horizontal, vertical, torsional or mixed). When fixating a steady target, the eyes should not keep shaking uncontrollably. It may:"),
@@ -2220,6 +2574,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Eye tumours: eyelid, orbit and intraocular (public education)",
     tag: "Mass education",
     meta: "Eyelid / orbit / intraocular · COMS · retinoblastoma · soft urgency",
+    keyPoints: [
+      "Eye tumours may involve lid, orbit or intraocular structures — public education, not a personal prognosis promise.",
+      "Childhood white-pupil warnings need prompt paediatric ophthalmology / dilated exam; teaching order is life, then eye, then vision.",
+      "Severe eye pain with nausea/vomiting, sudden severe vision loss or systemic instability: A&E / 999.",
+      "Other new suspicious lumps or vision change: same-day ophthalmic assessment when possible.",
+    ],
     blocks: [
       h("What it is"),
       p("“Eye tumours” in public education often cover several sites (benign and malignant both occur):"),
@@ -2277,6 +2637,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Macular hole",
     tag: "Macula topic",
     meta: "Full-thickness / lamellar / pseudo-hole · OCT · closure not guaranteed",
+    keyPoints: [
+      "Macular holes include full-thickness, lamellar and pseudo-hole ideas; OCT and dilation are central to assessment.",
+      "New clear central vision drop, distortion or central scotoma: prompt (usually same-day) ophthalmic assessment.",
+      "Curtain, large field cut or sudden blindness: A&E / 999 (see retinal-detachment page).",
+      "New flashes or clearly more floaters without curtain / sudden blindness: same-day dilated exam when possible.",
+    ],
     blocks: [
       { type: "h", text: "What it is" },
       {
@@ -2403,6 +2769,12 @@ export const EN_PACKS: Record<string, TopicPack> = {
     title: "Epiretinal membrane (macular pucker / ERM)",
     tag: "Macula topic",
     meta: "ERM · not surgery just because it is found · OCT",
+    keyPoints: [
+      "Epiretinal membrane (ERM) is not automatically surgery on discovery; OCT and dilation guide assessment.",
+      "Outpatient reasons include distortion, gradual central blur and reading difficulty.",
+      "Curtain or sudden blindness: A&E / 999 (see retinal-detachment page).",
+      "New flashes or clearly more floaters: same-day dilation when possible — also exclude peripheral tear/detachment.",
+    ],
     blocks: [
       { type: "h", text: "What it is" },
       {

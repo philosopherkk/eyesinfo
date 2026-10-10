@@ -19,6 +19,12 @@ export const PROCEDURE_DAY_EN: Record<string, TopicPack> = {
     title: "The day of an intravitreal anti-VEGF injection",
     tag: "The day itself",
     meta: "Anti-VEGF class · what you feel",
+    keyPoints: [
+      "This page only describes the day-of anti-VEGF injection sequence and sensations; suitability is specialist-led.",
+      "Expect mild foreign-body feeling, a small dark speck, a white-of-eye bruise, or same-day mild blur.",
+      "Worse pain, worse redness or sudden vision drop after injection, or curtain / sudden blindness: A&E now (call 999 if needed).",
+      "New flashes or clearly more floaters without those red flags: same-day ophthalmic assessment when possible.",
+    ],
     blocks: [
       p("Anti-VEGF medicine is placed into the vitreous for some macular new vessels or macular oedema, such as wet age-related macular degeneration, diabetic macular oedema, macular oedema from retinal vein occlusion, or myopic choroidal neovascularisation. Whether it suits you, which Hong Kong-registered product, how many injections and how far apart, must be decided by an ophthalmologist after a dilated fundus exam and optical coherence tomography. This page only describes what you feel, in order, on the day. It does not sell a medicine, compare products, or promise that vision will improve or that lost vision will return. The international nonproprietary-name table is on Intravitreal anti-VEGF injection."),
       p("If you take a blood thinner, are allergic to the antiseptic or to anaesthetic, or are pregnant or planning pregnancy: say so before it starts. This page does not tell you to stop a medicine yourself."),
@@ -70,6 +76,12 @@ export const PROCEDURE_DAY_EN: Record<string, TopicPack> = {
     title: "The day of chalazion incision and curettage",
     tag: "The day itself",
     meta: "Incision and curettage · what you feel",
+    keyPoints: [
+      "This page is the day-of chalazion incision experience — not the same as an acute stye.",
+      "Sudden severe pain or sudden vision drop: A&E now (call 999 if needed) — not “just a bruise.”",
+      "Marked lid redness and pain, fever or a rapidly enlarging lump: same-day review; if severe: 999 / A&E.",
+      "New flashes or clearly more floaters without curtain / sudden blindness: same-day assessment when possible.",
+    ],
     blocks: [
       p("Many chalazia shrink after weeks of warm compresses and lid cleaning. A lump does not automatically need incision. Whether to do it is decided after an examination. This page does not teach you to cut, squeeze or drain it yourself."),
       p("A chalazion is a lump after a meibomian gland blocks. It is often not very painful. A stye is an acute, painful infection. They are not the same thing. Incision is discussed when home heat has not helped and the lump remains. This page is what you feel once you are lying down."),
@@ -119,6 +131,12 @@ export const PROCEDURE_DAY_EN: Record<string, TopicPack> = {
     title: "The day of argon retinal barrier laser",
     tag: "The day itself",
     meta: "Tear or lattice · outpatient laser",
+    keyPoints: [
+      "This page is the day-of outpatient barrier laser for selected tears or lattice that are not yet detached.",
+      "Laser cannot reattach a detached retina; not every tear needs laser.",
+      "Curtain, large field cut or sudden blindness: A&E now (call 999 if needed).",
+      "New flashes or clearly more floaters: same-day ophthalmic assessment when possible.",
+    ],
     blocks: [
       p("This page is only about barrier laser after dilation, for a retinal tear that has not detached, or for selected lattice degeneration, so the surrounding tissue slowly scars and less fluid passes under the retina. Argon laser is commonly used; a doctor may choose another retinal laser. This page names no machine model."),
       p("This page is not scatter laser for proliferative diabetic retinopathy, not macular laser, not a way to put a detached retina back, and not a treatment recipe. Not every tear and not every patch of lattice needs laser. A symptomatic tear with traction is not the same risk as an asymptomatic atrophic hole. Whether to do it is decided after a dilated exam."),
@@ -167,6 +185,12 @@ export const PROCEDURE_DAY_EN: Record<string, TopicPack> = {
     title: "The day of posterior capsulotomy",
     tag: "The day itself",
     meta: "Posterior capsule opacity · outpatient laser",
+    keyPoints: [
+      "This page is the day-of outpatient YAG for posterior capsule opacity — not every blur needs it.",
+      "Expect near blur after dilation, light sensitivity and a few more floaters.",
+      "New flashes or many new floaters without curtain / sudden blindness / severe pain: same-day assessment when possible.",
+      "Curtain, sudden blindness, or worse pain with sudden vision drop: A&E now (call 999 if needed).",
+    ],
     blocks: [
       p("This is Nd:YAG laser opening of the cloudy membrane behind the capsular bag after cataract surgery (posterior capsule opacification, sometimes called a secondary cataract). The implant is still there. The cataract has not “grown back”. Not every later blur needs this laser. The macula, cornea and other causes must be excluded first."),
       p("This page is not YAG vitreolysis for floaters. Evidence and indications for that are limited. See Floaters and retinal detachment risk. Do not mix the two."),
@@ -213,6 +237,12 @@ export const PROCEDURE_DAY_EN: Record<string, TopicPack> = {
     title: "The day of cataract surgery and lens implantation",
     tag: "The day itself",
     meta: "Phacoemulsification · lens class",
+    keyPoints: [
+      "This page is the day-of phaco and IOL sequence; refractive aims are discussed before surgery — no “glasses-free” promise.",
+      "Same-day blur, light sensitivity, foreign-body feeling and redness are common; vision often settles over days to weeks.",
+      "Worse pain, sudden vision drop, pus-like discharge or marked redness: A&E now (rule out endophthalmitis).",
+      "Curtain or sudden blindness: A&E now (call 999 if needed).",
+    ],
     blocks: [
       p("What is most often discussed in Hong Kong is phacoemulsification together with a lens implant. Whether to operate depends on how daily life is affected (reading, driving, night glare, falls) and on the examination, and an ophthalmologist decides. It is not an advertisement, and it is not a timetable of “wait until it is fully ripe” or “everyone must have it now”. Education about a hypermature lens, and about “not needed yet”, stays on the existing cataract page."),
       p("The implant is named only by class: monofocal, enhanced monofocal, extended depth of focus (EDOF), multifocal. Toric for astigmatism is an add-on that can sit on any of those four classes, not a fifth class you pick instead. No product names. No class suits everyone. The comparison stays on Choosing an intraocular lens — detail. The optical demo stays on Lens vision demo. This page does not change that tool."),

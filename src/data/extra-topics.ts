@@ -11,6 +11,13 @@ export const EXTRA_TOPICS: Topic[] = [
     meta: "退化性內翻最常見於長者",
     category: "lid",
     featured: false,
+    seekCareLevel: "same-day",
+    keyPoints: [
+      "真性眼瞼內翻是瞼緣位置異常，睫毛摩擦角膜；長者退化性內翻較常見。",
+      "與假性內翻（下瞼贅皮）不同：真性內翻瞼緣本身位置不正常。",
+      "劇痛、視力急降或角膜發白：須盡快由眼科專科醫生處理。",
+      "手術與否由檢查決定；本頁不作預約或診所比較。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -46,6 +53,13 @@ export const EXTRA_TOPICS: Topic[] = [
     meta: "瞼緣位置正常，皮褶推睫毛",
     category: "lid",
     featured: false,
+    seekCareLevel: "routine",
+    keyPoints: [
+      "假性內翻（下瞼贅皮）是皮褶推睫毛向角膜，但瞼緣位置正常。",
+      "東亞兒童下瞼較常見；部分隨面部發育減輕。",
+      "用棉棒輕輕推開皮褶，睫毛可恢復向前——用來和真性內翻鑑別（教育，不是家用診斷）。",
+      "持續刺激、畏光或角膜受累：應由眼科專科醫生評估。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -81,6 +95,13 @@ export const EXTRA_TOPICS: Topic[] = [
     meta: "提上瞼肌或腱膜問題",
     category: "lid",
     featured: false,
+    seekCareLevel: "immediate",
+    keyPoints: [
+      "上瞼下垂多與提上瞼肌或腱膜問題有關；原因須檢查分辨。",
+      "新發下垂兼瞳孔散大、複視或頭痛——立即急症室，須排除第三腦神經麻痺等急症。",
+      "先處理腫瘤、重症肌無力或神經急症，不是一律「做眼皮」。",
+      "內容不能代替註冊醫生面診。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -117,6 +138,13 @@ export const EXTRA_TOPICS: Topic[] = [
     meta: "先天 Hasner 瓣 · 後天纖維化",
     category: "lid",
     featured: false,
+    seekCareLevel: "same-day",
+    keyPoints: [
+      "鼻淚管阻塞可致溢淚；先天與後天原因不同。",
+      "急性淚囊炎：局部紅腫熱痛，須盡快求醫；不要自行大力擠壓。",
+      "嬰兒溢淚處理概念與成人後天阻塞不同，由專科評估。",
+      "本頁不作預約或手術成功率比較。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -159,6 +187,13 @@ export const EXTRA_TOPICS: Topic[] = [
       "xu2020pseudo",
       "aaoAaposVision2022",
       "aaposPseudostrabismus",
+    ],
+    seekCareLevel: "immediate",
+    keyPoints: [
+      "斜視是眼位偏斜；弱視是視覺發育期視力發育受阻——兩者相關但不是同一件事。",
+      "突然複視兼頭痛、瞳孔散大或肢體無力：立即急症室（無法前往：999）。",
+      "任何年齡白瞳：立即急症室，或當日散瞳檢查排除視網膜母細胞瘤等。",
+      "本頁不能分辨真性斜視與假性內斜；「看起來不斜」不能排除弱視。",
     ],
     blocks: [
       { type: "h", text: "是甚麼" },
@@ -379,6 +414,13 @@ export const EXTRA_TOPICS: Topic[] = [
     meta: "示意，不是發育測驗分數",
     category: "lens",
     featured: false,
+    seekCareLevel: "same-day",
+    keyPoints: [
+      "兒童視力里程碑是粗略參考，個別差異大，不能代替檢查。",
+      "約 3–4 個月後仍持續偏斜：應盡快專科評估；多數不是當日急症，但不宜拖到入學。",
+      "任何年齡白瞳：立即急症室或當日散瞳檢查。",
+      "兒童常需散瞳驗光；不散瞳會低估遠視／漏診。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -424,6 +466,13 @@ export const EXTRA_TOPICS: Topic[] = [
       "watt2005",
       "ranzcoOrthoK",
       "cdcAcanthamoebaCL",
+    ],
+    seekCareLevel: "same-day",
+    keyPoints: [
+      "隱形眼鏡衛生與護理以本港註冊說明為準；本頁不推介品牌。",
+      "戴鏡時接觸水（包括自來水相關環境）可增加棘阿米巴角膜炎等風險教育重點。",
+      "紅痛畏光：立即除鏡；除後仍痛不要拖——盡快同日評估。",
+      "「不太紅」不能排除角膜炎；本頁不能從照片判斷是否感染。",
     ],
     blocks: [
       { type: "h", text: "是甚麼" },
@@ -604,6 +653,13 @@ export const EXTRA_TOPICS: Topic[] = [
     meta: "眼壓 · 白內障 · 感染擴散",
     category: "surface",
     featured: false,
+    seekCareLevel: "routine",
+    keyPoints: [
+      "類固醇眼藥水是處方藥物，用於醫生確診的炎症。",
+      "自行長期點可令眼壓升高、加速白內障，並掩蓋感染徵狀。",
+      "不要把剩餘「眼白啲」自行重用或借給別人。",
+      "用藥後紅痛加重、視力下降或疑感染：停用並求診。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -639,6 +695,13 @@ export const EXTRA_TOPICS: Topic[] = [
     meta: "凸眼 · 複視 · 視神經受壓",
     category: "lid",
     featured: false,
+    seekCareLevel: "immediate",
+    keyPoints: [
+      "甲狀腺眼疾可致凸眼、複視；少數可壓迫視神經威脅視力。",
+      "懷疑視神經受壓（視力跌、色覺差、瞳孔對光不對稱、視野缺等）：立即急症室。",
+      "眼皮合不攏兼角膜發白、劇痛：不要等門診。",
+      "急症之後由專科決定類固醇或減壓等路徑，不是自行挑選。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -700,6 +763,13 @@ export const EXTRA_TOPICS: Topic[] = [
     meta: "分工教育，不是比較廣告",
     category: "surface",
     featured: false,
+    seekCareLevel: "routine",
+    keyPoints: [
+      "眼科專科醫生、視光師與配鏡分工不同；本頁是教育，不是比較廣告。",
+      "眼痛、突然視力下降、閃光、簾幕、複視、外傷、化學濺入：走急症／專科路徑。",
+      "兒童斜視、弱視、需散瞳驗光而篩查異常：應由眼科專科醫生評估。",
+      "定期換眼鏡不等於已經做過散瞳眼底。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -734,6 +804,13 @@ export const EXTRA_TOPICS: Topic[] = [
     meta: "四至六小時畏光 · 近距離模糊",
     category: "surface",
     featured: false,
+    seekCareLevel: "routine",
+    keyPoints: [
+      "散瞳令瞳孔擴大、暫時減少調節，以便看清楚眼底；兒童驗光常用較強睫狀肌麻痺劑。",
+      "當日常見畏光與近距離模糊數小時；安排接送，不要自行駕駛若視力未恢復。",
+      "已知窄房角須先告知；極少數眼壓急升（眼痛、霧視、頭痛嘔吐）須即去急症室。",
+      "不要為了「趕開會」而拒絕必要散瞳，否則眼底病可被漏掉。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -765,6 +842,13 @@ export const EXTRA_TOPICS: Topic[] = [
     meta: "生活上遮陽，不是賣產品",
     category: "surface",
     featured: false,
+    seekCareLevel: "routine",
+    keyPoints: [
+      "翼狀胬肉與長期紫外線、風沙有關；可造成異物感、散光或遮蓋視軸。",
+      "生活上遮陽是教育重點，不是賣產品。",
+      "是否手術由症狀與檢查決定。",
+      "內容不能代替註冊醫生面診。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -799,6 +883,13 @@ export const EXTRA_TOPICS: Topic[] = [
     category: "lid",
     featured: false,
     refs: ["dews2", "dews2mgmt"],
+    seekCareLevel: "routine",
+    keyPoints: [
+      "潤眼液屬眼表潤滑劑類別教育；本頁不推介品牌、不比較價錢。",
+      "潤滑劑不能代替處方藥物，也不能當作白內障、青光眼或感染的治療。",
+      "突然視力下降或突然失明、劇痛兼頭痛嘔吐：立即急症室。",
+      "用了數週仍劇痛、畏光、視力下降：須檢查排除炎症或感染。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -881,6 +972,13 @@ export const EXTRA_TOPICS: Topic[] = [
     lastReviewed: "2026-10-03",
     refs: ["hayreh2005"],
     isAcuteEmergency: true,
+    seekCareLevel: "immediate",
+    keyPoints: [
+      "視網膜靜脈或動脈阻塞可突然影響視力；須同時想到血壓、血糖、血脂等全身因素。",
+      "突然一片黑或嚴重視力下降：立即急症室（無法前往：999）。",
+      "五十歲以上兼太陽穴痛、咬嚼痛、肩帶痛或窗簾樣視力掉下：須即時排除巨細胞動脈炎。",
+      "無紅旗的靜脈阻塞路徑：盡快同日散瞳眼底及 OCT；注射後劇痛視力急降：急症室。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -936,6 +1034,13 @@ export const EXTRA_TOPICS: Topic[] = [
     meta: "準分子 · 飛秒 · 不是治療眼底",
     category: "lens",
     featured: false,
+    seekCareLevel: "same-day",
+    keyPoints: [
+      "激光矯視改變角膜弧度減少對眼鏡依賴；不能縮短眼軸，也不能消除高度近視眼底風險。",
+      "是否適合須角膜厚度、地形圖、眼表及散瞳眼底後由專科決定；本頁不列品牌。",
+      "突然視力下降或突然失明：立即急症室。",
+      "紅痛畏光但無突然失明／無劇痛嘔吐：盡快同日眼科評估；高度近視術後仍須定期散瞳眼底。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -1008,6 +1113,13 @@ export const EXTRA_TOPICS: Topic[] = [
     meta: "SUN 解剖分類 · 感染性與非感染性 · 專科處理梯階",
     category: "retina",
     featured: false,
+    seekCareLevel: "same-day",
+    keyPoints: [
+      "葡萄膜炎按解剖與感染性／非感染性分類；未排除感染不做免疫抑制。",
+      "切勿自行點剩餘類固醇或把其他科藥物當眼藥水。",
+      "突然視力下降、簾幕、劇痛兼頭痛嘔吐，或術後／注射後疑眼內炎：立即急症室。",
+      "其餘新發眼紅痛、畏光：盡快（最好當日）專科散瞳檢查。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -1097,6 +1209,13 @@ export const EXTRA_TOPICS: Topic[] = [
     meta: "五類機制 · 依從性 · 點藥技巧 · 本頁不列商品名",
     category: "glaucoma",
     featured: false,
+    seekCareLevel: "routine",
+    keyPoints: [
+      "青光眼藥水按機制分多類；本頁不列商品名，只講教育類別與依從性。",
+      "不要自行改劑量、停藥或把剩餘藥水借給別人。",
+      "眼球劇痛兼頭痛嘔吐、虹視、視力急降：立即急症室（需排除急性閉角）。",
+      "點藥技巧見正確使用眼藥水專題；目標眼壓監察見青光眼監察專題。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -1154,6 +1273,13 @@ export const EXTRA_TOPICS: Topic[] = [
     meta: "閃輝暗點 · 視網膜偏頭痛 · 叢集性頭痛 · 巨細胞動脈炎 · 顱內高壓",
     category: "retina",
     featured: false,
+    seekCareLevel: "immediate",
+    keyPoints: [
+      "偏頭痛可有視覺先兆；眼科要把可逆先兆與可致盲／危及生命的急症分開。",
+      "單眼突然視矇或突然視力下降：不要先當偏頭痛——立即急症室。",
+      "新發上瞼下垂、複視合併瞳孔散大：立即急症室（須排除後交通動脈瘤等）。",
+      "五十歲以上視覺紅旗兼新頭痛／顎跛行等：勿漏巨細胞動脈炎（見專題）。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -1235,6 +1361,13 @@ export const EXTRA_TOPICS: Topic[] = [
     meta: "術前評估 · 適應教育 · 術後急症紅旗",
     category: "lens",
     featured: false,
+    seekCareLevel: "same-day",
+    keyPoints: [
+      "斜視手術調整眼外肌附著或拉力，改善眼位與部分複視——教育頁，不是成功率比較。",
+      "術前評估與適應由專科決定；弱視與急症紅旗見斜視專題。",
+      "術後突發劇痛、視力急降、大量膿性分泌或發燒：立即急症室（無法前往：999）。",
+      "不要自行加點剩餘類固醇。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -1310,6 +1443,13 @@ export const EXTRA_TOPICS: Topic[] = [
     meta: "表層較輕 · 鞏膜較痛 · 感染未排除不做免疫抑制",
     category: "surface",
     featured: false,
+    seekCareLevel: "immediate",
+    keyPoints: [
+      "表層鞏膜炎相對較輕；鞏膜炎較痛，可與全身炎症有關。",
+      "壞死性鞏膜炎或劇烈鑽痛痛到醒：立即急症室或同日急症眼科。",
+      "突然視力下降或劇痛兼頭痛嘔吐：立即急症室；不要自行當結膜炎。",
+      "感染未排除不做免疫抑制；術後／外傷後再紅痛膿樣分泌須專科排除感染。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -1377,6 +1517,13 @@ export const EXTRA_TOPICS: Topic[] = [
     featured: false,
     isAcuteEmergency: true,
     lastReviewed: "2026-09-06",
+    seekCareLevel: "immediate",
+    keyPoints: [
+      "巨細胞動脈炎幾乎只見於約 50 歲或以上；可在短時間造成不可逆視力喪失。",
+      "任何新的視覺徵狀（突然視力下降、簾幕、短暫單眼黑矇、新發複視等）：立即急症室。",
+      "不要等顳動脈活檢「先排期再算」才啟動急症路徑。",
+      "有可疑全身線索但暫無視覺徵狀：盡快（最好當日）專科評估；其後一旦有視覺徵狀仍走急症室。",
+    ],
     blocks: [
       { type: "h", text: "視力紅旗：立即急症室" },
       {
@@ -1481,6 +1628,13 @@ export const EXTRA_TOPICS: Topic[] = [
     featured: false,
     isAcuteEmergency: true,
     lastReviewed: "2026-09-05",
+    seekCareLevel: "immediate",
+    keyPoints: [
+      "化學物濺入眼：第一優先是即時大量沖洗，然後急症室。",
+      "邊沖邊去急症室；無法自行前往：致電 999。",
+      "不要等私家診所開門而延誤沖洗；不要自行做酸鹼中和實驗。",
+      "帶化學物容器／標籤相片與已沖時間資料去急症室。",
+    ],
     blocks: [
       { type: "h", text: "立即做：大量沖洗" },
       {
@@ -1586,6 +1740,13 @@ export const EXTRA_TOPICS: Topic[] = [
       "haarman2020",
       "ueta2020",
       "akduman2023",
+    ],
+    seekCareLevel: "same-day",
+    keyPoints: [
+      "本頁深化病理近視、近視性黃斑病變與視網膜裂孔／脫離風險——相對風險教育，不是個人絕對機率。",
+      "早期可無症狀；視物變形、中央暗影、大量新飛蚊／閃光須提高警覺。",
+      "視野簾幕逐步擴大：立即急症室（無法前往：999）。",
+      "新閃光或飛蚊明顯增多：應盡快（最好當日）散瞳眼底；不能代替定期檢查。",
     ],
     blocks: [
       { type: "h", text: "是甚麼" },
@@ -1701,6 +1862,13 @@ export const EXTRA_TOPICS: Topic[] = [
     featured: false,
     lastReviewed: "2026-09-07",
     refs: ["gomes2015", "deshmukh2023", "wollensak2003", "wittigSilva2014"],
+    seekCareLevel: "same-day",
+    keyPoints: [
+      "圓錐角膜是角膜變薄前突；進展監測與光學／交聯屬專科類別討論，不比較品牌。",
+      "急性角膜水腫：視力驟降、角膜明顯混濁發白、劇痛或嚴重畏光——立即急症室路徑。",
+      "隱形眼鏡相關劇烈紅痛、分泌物多：除鏡後仍痛勿拖延，排除感染性角膜炎。",
+      "其餘進展或光學問題：盡快（最好當日）專科評估。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -1820,6 +1988,13 @@ export const EXTRA_TOPICS: Topic[] = [
     featured: false,
     lastReviewed: "2026-09-07",
     refs: ["thong2017", "yuen2007", "leung1998", "katelaris2011"],
+    seekCareLevel: "same-day",
+    keyPoints: [
+      "香港環境（塵蟎、冷氣密閉等）可加重眼部過敏；環境措施不能代替紅旗求醫。",
+      "不要自行購買類固醇眼藥水「止癢」。",
+      "劇痛兼頭痛嘔吐或突然視力下降／失明：立即急症室。",
+      "嚴重畏光劇痛、隱形眼鏡相關紅痛：除鏡後仍痛——盡快同日眼科評估。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -1967,6 +2142,13 @@ export const EXTRA_TOPICS: Topic[] = [
     featured: false,
     lastReviewed: "2026-09-07",
     refs: ["aaoBlueGlasses", "aaoBlueWorry", "aaoDigitalDevices", "singh2023cochrane"],
+    seekCareLevel: "routine",
+    keyPoints: [
+      "屏幕相關不適多屬數碼視疲勞；本頁澄清常見藍光誤解，不是推介防藍光產品。",
+      "公開文獻綜述並不支持「一定要買防藍光鏡」作為常規結論（見頁內引用框架）。",
+      "突然視力下降、視野缺損、大量新飛蚊或閃光：立即急症室——與是否購買防藍光產品無關。",
+      "內容不能代替註冊醫生面診。",
+    ],
     blocks: [
       {
         type: "p",
@@ -2046,6 +2228,13 @@ export const EXTRA_TOPICS: Topic[] = [
     featured: false,
     lastReviewed: "2026-09-07",
     refs: ["simunovic2016", "hasrod2016", "austroadsColour", "ng2023asean"],
+    seekCareLevel: "same-day",
+    keyPoints: [
+      "先天色覺異常多數穩定；後天色覺改變可以是眼底／視神經／藥物等警號。",
+      "本站不作個別職業或駕駛資格裁決。",
+      "色覺驟變合併突然視力下降、視野缺損、複視或劇烈頭痛眼痛伴噁心：立即急症室。",
+      "其餘新出現的後天色覺改變：應盡快（最好當日）評估。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -2176,6 +2365,13 @@ export const EXTRA_TOPICS: Topic[] = [
       "nivenius2007",
       "freeman2004",
     ],
+    seekCareLevel: "same-day",
+    keyPoints: [
+      "類固醇節約用藥討論環孢素滴眼液與他克莫司等處方藥類別——非推介購買。",
+      "眼瞼他克莫司多屬標籤外：不可當眼藥水滴入；兩歲以下一般不用。",
+      "突然視力下降或劇痛兼頭痛嘔吐：立即急症室。",
+      "用藥後劇痛加劇、視力驟降或膿樣分泌：停用並盡快（最好當日）求診。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -2303,6 +2499,13 @@ export const EXTRA_TOPICS: Topic[] = [
     featured: false,
     lastReviewed: "2026-09-07",
     refs: ["ohts2002", "cntgs1998", "emgt2002"],
+    seekCareLevel: "routine",
+    keyPoints: [
+      "青光眼監察包括目標眼壓、OCT（RNFL／GCL）與視野；報告顏色不是判詞。",
+      "本頁不提供預約、轉介或報告打分；不宣稱根治或保證。",
+      "急性閉角發作或突然視力下降／失明：立即急症室（無法前往：999）。",
+      "新出現明顯視野缺損感但無急症紅旗：儘快睇眼科醫生。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -2396,6 +2599,13 @@ export const EXTRA_TOPICS: Topic[] = [
       "ontt2003ms",
       "ontt2008ms",
       "ontt2008vision",
+    ],
+    seekCareLevel: "same-day",
+    keyPoints: [
+      "視神經炎常見單眼視力驟降與轉動痛；本頁是教育，不是個人預後。",
+      "伴隨劇烈頭痛、嘔吐、肢體無力、複視或意識改變：急症室／999。",
+      "單眼或雙眼視力急降、顏色明顯變淡、眼球轉動劇痛：儘快睇眼科醫生。",
+      "ONTT 等試驗結果屬文獻教育，不是你的個人處方。",
     ],
     blocks: [
       { type: "h", text: "是甚麼" },
@@ -2498,6 +2708,13 @@ export const EXTRA_TOPICS: Topic[] = [
     featured: false,
     lastReviewed: "2026-09-17",
     refs: ["acgr2008", "acgr1992", "ctfs1997", "ctfs1996"],
+    seekCareLevel: "same-day",
+    keyPoints: [
+      "角膜移植可分全層與層狀等概念；術後護理與排斥警示（RSVP）是教育重點。",
+      "出現 RSVP 徵狀：不要自行加大劑量滴藥，應盡快聯絡手術醫生或往急症室。",
+      "伴隨劇痛、大量分泌物、視力驟降：急症室／999。",
+      "登記存活數字不是你的個人預後，亦不是診所成功率。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -2611,6 +2828,13 @@ export const EXTRA_TOPICS: Topic[] = [
     featured: false,
     lastReviewed: "2026-09-17",
     refs: ["ehrt2012", "bertsch2017", "chang2023aao", "hertle2010"],
+    seekCareLevel: "same-day",
+    keyPoints: [
+      "眼球震顫可分嬰幼兒型與後天型；頭位／手術目標屬專科討論。",
+      "新出現眼震兼不對稱、複視、劇烈眩暈、嘔吐、步態不穩或肢體無力：急症室／999。",
+      "新出現眼震而沒有上述紅旗：儘快睇眼科醫生。",
+      "已知穩定、長期不變的先天性／嬰幼兒型震顫單獨出現，不是自動「立即急症室」。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -2712,6 +2936,13 @@ export const EXTRA_TOPICS: Topic[] = [
     featured: false,
     lastReviewed: "2026-09-15",
     refs: ["coms18", "coms28", "dimaras2012", "murphree2005"],
+    seekCareLevel: "same-day",
+    keyPoints: [
+      "眼睛腫瘤可涉及眼瞼、眼眶與眼內；本頁是公眾教育，不作個人預後保證。",
+      "兒童白瞳等警示：盡快小兒眼科／散瞳檢查；原則上優先生命安全，其次保眼，再談視力。",
+      "劇烈眼痛伴噁心嘔吐、突發嚴重視力喪失或全身情況不穩：急症室／999。",
+      "其餘新出現可疑腫塊或視力改變：應盡快（最好當日）眼科評估。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {
@@ -2841,6 +3072,13 @@ export const EXTRA_TOPICS: Topic[] = [
       "ezra2004",
       "michalewska2010",
       "steel2013",
+    ],
+    seekCareLevel: "same-day",
+    keyPoints: [
+      "黃斑裂孔可分全層／板層／假性裂孔等；OCT 與散瞳檢查是評估核心。",
+      "新出現中央視力明顯下降、視物變形、中央暗點：盡快（通常當日）眼科評估。",
+      "視野簾幕、大片缺損或突然失明：急症室／999（見視網膜脫離專題）。",
+      "新閃光或飛蚊明顯增多但無簾幕／無突然失明：應盡快（最好當日）散瞳眼底。",
     ],
     blocks: [
       { type: "h", text: "是甚麼" },
@@ -2981,6 +3219,13 @@ export const EXTRA_TOPICS: Topic[] = [
       "xiao2017",
       "bu2014",
       "scheerlinck2015",
+    ],
+    seekCareLevel: "routine",
+    keyPoints: [
+      "黃斑前膜（ERM）不一定一發現就必須手術；評估靠 OCT 與散瞳檢查。",
+      "門診評估常見視物變形、中央視力逐漸下降、閱讀困難。",
+      "視野簾幕或突然失明：急症室／999（見視網膜脫離專題）。",
+      "新閃光或飛蚊明顯增多：盡快（最好當日）散瞳——排查周邊裂孔／脫離。",
     ],
     blocks: [
       { type: "h", text: "是甚麼" },
