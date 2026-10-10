@@ -22,6 +22,13 @@ export const PROCEDURE_DAY_TOPICS: Topic[] = [
     category: "retina",
     featured: false,
     lastReviewed: REVIEWED,
+    seekCareLevel: "same-day",
+    keyPoints: [
+      "本頁只說明抗血管內皮生長因子注射當日次序與感受；是否注射由專科決定。",
+      "預期可有輕微異物感、小黑影、眼白出血斑、當日視力稍矇。",
+      "注射後眼痛加劇、眼紅惡化或視力急降，或簾幕／突然失明：立即急症室（無法前往：999）。",
+      "新閃光或飛蚊明顯增多但無上述紅旗：盡快（最好當日）眼科評估。",
+    ],
     blocks: [
       {
         type: "p",
@@ -127,6 +134,13 @@ export const PROCEDURE_DAY_TOPICS: Topic[] = [
     category: "lid",
     featured: false,
     lastReviewed: REVIEWED,
+    seekCareLevel: "same-day",
+    keyPoints: [
+      "本頁講霰粒腫切開刮除當日感受；與急性痛的麥粒腫不是同一件事。",
+      "突然劇痛或視力急降：立即急症室（無法前往：999）——不要當成普通瘀腫。",
+      "眼瞼紅腫劇痛、發燒或硬粒迅速擴大：盡快同日檢查；嚴重：999／急症室。",
+      "新閃光或飛蚊明顯增多但無簾幕／無突然失明：盡快（最好當日）評估。",
+    ],
     blocks: [
       {
         type: "p",
@@ -238,6 +252,13 @@ export const PROCEDURE_DAY_TOPICS: Topic[] = [
     category: "retina",
     featured: false,
     lastReviewed: REVIEWED,
+    seekCareLevel: "same-day",
+    keyPoints: [
+      "本頁講尚未脫離的裂孔或選定柵狀變性的門診屏障光凝當日過程。",
+      "激光不能修復已經脫離的視網膜；不是每一個裂孔都要激光。",
+      "視野簾幕、大片缺損或突然失明：立即急症室（無法前往：999）。",
+      "新閃光或飛蚊明顯增多：盡快（最好當日）眼科評估。",
+    ],
     blocks: [
       {
         type: "p",
@@ -343,6 +364,13 @@ export const PROCEDURE_DAY_TOPICS: Topic[] = [
     category: "lens",
     featured: false,
     lastReviewed: REVIEWED,
+    seekCareLevel: "same-day",
+    keyPoints: [
+      "本頁講後囊混濁門診 YAG 切開當日次序；並非所有視矇都需要。",
+      "預期可有散瞳後視近矇、畏光、飛蚊稍多。",
+      "新閃光或大量新飛蚊（無簾幕／無突然失明／無劇痛）：盡快（最好當日）評估。",
+      "簾幕、突然失明或眼痛加劇合併視力急降：立即急症室（無法前往：999）。",
+    ],
     blocks: [
       {
         type: "p",
@@ -444,6 +472,13 @@ export const PROCEDURE_DAY_TOPICS: Topic[] = [
     category: "lens",
     featured: false,
     lastReviewed: REVIEWED,
+    seekCareLevel: "same-day",
+    keyPoints: [
+      "本頁講白內障超聲波乳化與人工晶體植入當日次序；度數目標術前討論，不保證不用眼鏡。",
+      "當日可有視矇、畏光、異物感、眼紅；視力數日至數週逐步變化屬常見過程。",
+      "眼痛加劇、視力急降、膿樣分泌或明顯紅腫：立即急症室（需排除眼內炎）。",
+      "視野簾幕或突然失明：立即急症室（無法前往：999）。",
+    ],
     blocks: [
       {
         type: "p",
