@@ -87,6 +87,19 @@ export type Topic = {
    * Set only for clearly emergency-oriented factsheets — be conservative.
    */
   isAcuteEmergency?: boolean;
+  /**
+   * Optional scannable bullets near the top of the topic page (TC canonical).
+   * Prefer short, already-approved on-page facts — do not invent PMIDs or claims.
+   */
+  keyPoints?: string[];
+  /**
+   * Optional care-timing callout. When omitted, topic UI may still treat
+   * `isAcuteEmergency` as `"immediate"`.
+   * - immediate: A&E now (簾幕／突然視力下降等)
+   * - same-day: 應盡快（最好當日）散瞳眼底
+   * - routine: non-urgent education; still follow in-page red flags
+   */
+  seekCareLevel?: "immediate" | "same-day" | "routine";
   blocks: Block[];
 };
 
@@ -166,6 +179,13 @@ export const CORE_TOPICS: Topic[] = [
     category: "lens",
     featured: true,
     refs: ["lam2004", "eddatax2021", "haarman2020"],
+    seekCareLevel: "routine",
+    keyPoints: [
+      "近視、遠視、散光、老花屬屈光／調節問題；高度近視通常指 ≥ 600 度。",
+      "高度近視增加視網膜脫離等風險（相對風險，非個人絕對機率）。",
+      "新閃光或飛蚊明顯增多：盡快散瞳評估；簾幕或突然視力下降：立即急症室。",
+      "兒童近視管理目標是減慢進展，不是縮短眼軸或「治癒度數」。",
+    ],
     blocks: [
       { type: "h", text: "是甚麼" },
       {

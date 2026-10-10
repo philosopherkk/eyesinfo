@@ -1,6 +1,6 @@
 import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
-import { getTopic, TOPICS } from "@/data/topics";
+import { getTopic, topicEditorial, TOPICS } from "@/data/topics";
 import { TOPIC_TOOLS } from "@/data/tools";
 import { TopicBody } from "@/components/topic-body";
 import { TopicRefs } from "@/components/topic-refs";
@@ -9,6 +9,8 @@ import { TopicToc } from "@/components/topic-toc";
 import { HkosVideoCard } from "@/components/hkos-video-card";
 import { EditorialFooter } from "@/components/editorial-footer";
 import { EmergencyShell } from "@/components/emergency-shell";
+import { KeyPointsCard } from "@/components/key-points-card";
+import { SeekCareCallout } from "@/components/seek-care-callout";
 import { SaveButton } from "@/components/save-button";
 import { ShareButton } from "@/components/share-button";
 import { SpaHref } from "@/components/locale-href";
@@ -117,6 +119,10 @@ function TopicPage() {
     locale,
     topic.meta || topic.tag || topic.title,
   );
+  const editorial = topicEditorial(raw);
+  const seekCareLevel =
+    topic.seekCareLevel ?? (raw.isAcuteEmergency ? "immediate" : undefined);
+  const keyPoints = topic.keyPoints ?? [];
 
   return (
     <article className="min-w-0">
@@ -152,6 +158,13 @@ function TopicPage() {
         {topic.meta ? (
           <p className="mt-1 text-[0.85rem] text-muted layout-lg:text-[0.9rem]">{topic.meta}</p>
         ) : null}
+        <p className="mt-1.5 text-[0.75rem] leading-snug text-faint">
+          {t("topicLastReviewed")}
+          {locale === "en" ? ": " : "："}
+          {editorial.lastReviewed}
+          {" · "}
+          {editorial.reviewer.name}
+        </p>
         {showLocaleFallback ? (
           <p
             className="mt-2 rounded-lg border border-line bg-line/30 px-3 py-2 text-[0.8rem] leading-snug text-muted"
@@ -162,12 +175,19 @@ function TopicPage() {
         ) : null}
         <TopicToc entries={tocEntries} includeRefs={hasRefs} />
       </header>
+      {/* Exact A&E banner for acute topics (shared with home /urgent). */}
       {raw.isAcuteEmergency ? (
         <div className="mx-4 mb-4 layout-lg:mx-6">
           <EmergencyShell />
         </div>
       ) : null}
       <div className="min-w-0 px-4 pb-6 layout-lg:px-6">
+        {/* Skip duplicate immediate callout when EmergencyShell already covers A&E. */}
+        {seekCareLevel &&
+        !(raw.isAcuteEmergency && seekCareLevel === "immediate") ? (
+          <SeekCareCallout level={seekCareLevel} />
+        ) : null}
+        {keyPoints.length > 0 ? <KeyPointsCard points={keyPoints} /> : null}
         <TopicBody blocks={topic.blocks} topicId={raw.id} />
         <HkosVideoCard topicId={raw.id} />
         {/* Related chips before bibliography so siblings are reachable without scrolling past refs. */}

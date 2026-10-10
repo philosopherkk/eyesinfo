@@ -216,6 +216,18 @@ const zhHant = {
     "本工具並非診斷工具。結果無論正常或異常，均不能代替眼科檢查。如有新出現的視力變化，請盡快求醫。",
   reviewed: "網站最近覆核",
   clinicalReviewLabel: "臨床覆核",
+  topicLastReviewed: "最近覆核",
+  keyPointsTitle: "重點",
+  seekCareImmediateTitle: "立即急症室",
+  seekCareImmediateBody:
+    "突然失明、簾幕、劇痛兼嘔吐、穿通傷或化學濺入：立即急症室。不要自行駕駛；無法自行前往：致電 999。",
+  seekCareSameDayTitle: "應盡快（最好當日）求醫",
+  seekCareSameDayBody:
+    "新閃光、飛蚊明顯增多、視物變形或中央暗點等：應盡快（最好當日）散瞳眼底檢查。若同時簾幕或突然視力下降：立即急症室。",
+  seekCareRoutineTitle: "一般教育專題",
+  seekCareRoutineBody:
+    "本頁屬非急症教育。若出現文內紅旗徵狀，仍須按指示立即急症室或盡快散瞳評估。內容不能代替註冊醫生面診。",
+  seekCareUrgentLink: "急症頁",
   contentVer: "內容版本",
   siteVersionLabel: "網站版本",
   contentUpdated: "更新日期",
@@ -769,6 +781,18 @@ const en: Record<Key, string> = {
     "This tool is not a diagnostic tool. Whether results appear normal or abnormal, they cannot replace an eye examination. If you notice new vision changes, seek care promptly.",
   reviewed: "Site last reviewed",
   clinicalReviewLabel: "Clinical review",
+  topicLastReviewed: "Last reviewed",
+  keyPointsTitle: "Key points",
+  seekCareImmediateTitle: "Go to A&E now",
+  seekCareImmediateBody:
+    "Sudden vision loss, a curtain, severe pain with vomiting, penetrating injury or chemical splash: go to A&E now. Do not drive yourself; if you cannot get there: call 999.",
+  seekCareSameDayTitle: "Seek care promptly (same day if possible)",
+  seekCareSameDayBody:
+    "New flashes, a clear increase in floaters, distortion or a central dark patch: same-day dilated fundus exam when possible. A curtain or sudden vision drop: go to A&E now.",
+  seekCareRoutineTitle: "General education topic",
+  seekCareRoutineBody:
+    "This page is non-urgent education. If in-page red-flag symptoms appear, still follow the instructions for A&E or prompt dilated assessment. Content cannot replace a visit with a registered doctor.",
+  seekCareUrgentLink: "Urgent care page",
   contentVer: "Content version",
   siteVersionLabel: "Site version",
   contentUpdated: "Updated",
@@ -1333,6 +1357,18 @@ const ja: Record<Key, string> = {
     "本ツールは診断ツールではありません。結果が正常でも異常でも、眼科検査の代わりにはなりません。新たに視力の変化があれば、できるだけ早く受診してください。",
   reviewed: "サイト最終確認",
   clinicalReviewLabel: "臨床確認",
+  topicLastReviewed: "最終確認",
+  keyPointsTitle: "要点",
+  seekCareImmediateTitle: "直ちに救急外来へ",
+  seekCareImmediateBody:
+    "突然の視力低下・カーテン・激痛と嘔吐・穿孔外傷・化学物質の飛入：直ちに救急外来へ。自分で運転しないでください。行けない場合は999番に電話。",
+  seekCareSameDayTitle: "できるだけ当日に受診",
+  seekCareSameDayBody:
+    "新しい光視、飛蚊の明らかな増加、ゆがみや中心暗点など：できるだけ当日の散瞳眼底。同時にカーテンや突然の視力低下がある場合は直ちに救急外来へ。",
+  seekCareRoutineTitle: "一般向け教育ページ",
+  seekCareRoutineBody:
+    "このページは非救急の教育です。本文の危険徴候が出た場合は、救急外来または早めの散瞳評価の指示に従ってください。内容は登録医の対面診察の代わりにはなりません。",
+  seekCareUrgentLink: "救急ページ",
   contentVer: "コンテンツ版",
   siteVersionLabel: "サイト版",
   contentUpdated: "更新日",
