@@ -1317,7 +1317,6 @@ export const CORE_TOPICS: Topic[] = [
     category: "lid",
     featured: false,
     refs: ["dews2", "dews2mgmt", "dream2018"],
-    seekCareLevel: "same-day",
     keyPoints: [
       "乾眼可分蒸發型、水液不足與混合型等；梯階處理由檢查決定。",
       "本頁是分類與處理概念，不是個人處方或品牌比較。",
@@ -1713,7 +1712,6 @@ export const CORE_TOPICS: Topic[] = [
     category: "surface",
     featured: false,
     lastReviewed: "2026-09-07",
-    seekCareLevel: "same-day",
     keyPoints: [
       "他克莫司軟膏本港主要皮膚科註冊；用於眼瞼控制異位性角結膜炎多屬標籤外。",
       "不可當眼藥水滴入；不可自行購買用於眼睛；本頁不寫濃度／次數／療程。",
