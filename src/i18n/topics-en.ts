@@ -1400,7 +1400,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
     meta: "Glare and near blur for hours",
     keyPoints: [
       "Dilation widens the pupil and temporarily reduces focusing so the fundus can be examined; children often need stronger cycloplegia.",
-      "Expect hours of light sensitivity and near blur; arrange a lift if you cannot drive safely.",
+      "Expect light sensitivity and temporary near blur (reading / phone); children’s stronger cycloplegia can last longer. Arrange a lift — do not drive yourself.",
       "Tell staff about known narrow angles; rare acute pressure rises (pain, foggy vision, headache/vomiting) need A&E now.",
       "Do not refuse needed dilation just to rush to a meeting — fundus disease can be missed.",
     ],
