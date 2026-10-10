@@ -223,7 +223,7 @@ const zhHant = {
     "突然失明、簾幕、劇痛兼嘔吐、穿通傷或化學濺入：立即急症室。不要自行駕駛；無法自行前往：致電 999。",
   seekCareSameDayTitle: "應盡快（最好當日）求醫",
   seekCareSameDayBody:
-    "新閃光、飛蚊明顯增多、視物變形或中央暗點等：應盡快（最好當日）散瞳眼底檢查。若同時簾幕或突然視力下降：立即急症室。",
+    "若出現文內須當日處理的紅旗徵狀：應盡快（最好當日）由眼科專科醫生評估（常包括散瞳眼底）。若同時簾幕或突然視力下降：立即急症室。具體徵狀以本頁重點及正文為準。",
   seekCareRoutineTitle: "一般教育專題",
   seekCareRoutineBody:
     "本頁屬非急症教育。若出現文內紅旗徵狀，仍須按指示立即急症室或盡快散瞳評估。內容不能代替註冊醫生面診。",
@@ -788,7 +788,7 @@ const en: Record<Key, string> = {
     "Sudden vision loss, a curtain, severe pain with vomiting, penetrating injury or chemical splash: go to A&E now. Do not drive yourself; if you cannot get there: call 999.",
   seekCareSameDayTitle: "Seek care promptly (same day if possible)",
   seekCareSameDayBody:
-    "New flashes, a clear increase in floaters, distortion or a central dark patch: same-day dilated fundus exam when possible. A curtain or sudden vision drop: go to A&E now.",
+    "If in-page red-flag symptoms call for same-day care: seek ophthalmology assessment promptly (same day if possible; often includes a dilated fundus exam). A curtain or sudden vision drop: go to A&E now. Use this page’s key points and body for the specific symptoms.",
   seekCareRoutineTitle: "General education topic",
   seekCareRoutineBody:
     "This page is non-urgent education. If in-page red-flag symptoms appear, still follow the instructions for A&E or prompt dilated assessment. Content cannot replace a visit with a registered doctor.",
@@ -1364,7 +1364,7 @@ const ja: Record<Key, string> = {
     "突然の視力低下・カーテン・激痛と嘔吐・穿孔外傷・化学物質の飛入：直ちに救急外来へ。自分で運転しないでください。行けない場合は999番に電話。",
   seekCareSameDayTitle: "できるだけ当日に受診",
   seekCareSameDayBody:
-    "新しい光視、飛蚊の明らかな増加、ゆがみや中心暗点など：できるだけ当日の散瞳眼底。同時にカーテンや突然の視力低下がある場合は直ちに救急外来へ。",
+    "本文で当日対応とある危険徴候が出た場合：できるだけ当日に眼科専門医の評価を（散瞳眼底を含むことが多い）。カーテンや突然の視力低下がある場合は直ちに救急外来へ。具体的な徴候は本頁の要点と本文に従ってください。",
   seekCareRoutineTitle: "一般向け教育ページ",
   seekCareRoutineBody:
     "このページは非救急の教育です。本文の危険徴候が出た場合は、救急外来または早めの散瞳評価の指示に従ってください。内容は登録医の対面診察の代わりにはなりません。",

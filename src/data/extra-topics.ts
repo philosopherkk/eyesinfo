@@ -1361,7 +1361,7 @@ export const EXTRA_TOPICS: Topic[] = [
     meta: "術前評估 · 適應教育 · 術後急症紅旗",
     category: "lens",
     featured: false,
-    seekCareLevel: "same-day",
+    seekCareLevel: "immediate",
     keyPoints: [
       "斜視手術調整眼外肌附著或拉力，改善眼位與部分複視——教育頁，不是成功率比較。",
       "術前評估與適應由專科決定；弱視與急症紅旗見斜視專題。",

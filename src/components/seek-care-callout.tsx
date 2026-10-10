@@ -14,6 +14,10 @@ type Props = {
  * Care-timing callout for topic pages.
  * immediate → A&E / 999; same-day → 應盡快（最好當日）; routine → non-urgent education.
  * Links only to this site’s 急症頁 — no clinic booking.
+ *
+ * Same-day / routine bodies stay topic-agnostic and point to in-page red flags
+ * (keyPoints + body). Do not list vitreous/macula symptoms here — that dumps
+ * floaters/flashes onto unrelated topics (e.g. dry eye).
  */
 export function SeekCareCallout({ level, className }: Props) {
   const { t } = useI18n();
