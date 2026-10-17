@@ -676,11 +676,41 @@ function resolve(findings) {
   return kept.map((f, i) => ({ ...f, id: `${f.type}-${f.start}-${i}`, key: dismissKey(f) }));
 }
 
+/**
+ * Unscreened paste. Only `asRawPaste` creates this.
+ * @typedef {string & { readonly __brand: "RawPaste" }} RawPaste
+ */
+
+/**
+ * Text that has been through `redact`. Not interchangeable with `RawPaste`.
+ * @typedef {string & { readonly __brand: "RedactedText" }} RedactedText
+ */
+
+/**
+ * @typedef {{
+ *   id: string,
+ *   key: string,
+ *   type: string,
+ *   label: string,
+ *   severity: string,
+ *   start: number,
+ *   end: number,
+ *   text: string,
+ *   replacement: string,
+ * }} Finding
+ */
+
+/** @param {string} value @returns {RawPaste} */
+export function asRawPaste(value) {
+  return /** @type {RawPaste} */ (value);
+}
+
+/** @param {Finding} f */
 export function dismissKey(f) {
   return `${f.type}|${f.text.trim().toLowerCase()}`;
 }
 
-/** @returns {Array<{id,key,type,label,severity,start,end,text,replacement}>} */
+/** @param {string} text @returns {Finding[]} */
 export function screen(text) {
   if (!text) return [];
   const folded = foldWidth(text);
@@ -689,17 +719,32 @@ export function screen(text) {
   return resolve(raw);
 }
 
+/**
+ * @param {string} text
+ * @param {Set<string>} [dismissed]
+ * @returns {Finding[]}
+ */
 export function activeFindings(text, dismissed = new Set()) {
   return screen(text).filter((f) => !dismissed.has(f.key));
 }
 
-/** Replace the given findings with neutral placeholders. */
+/**
+ * Replace the given findings with neutral placeholders.
+ * @param {RawPaste} text
+ * @param {ReadonlyArray<Pick<Finding, "start" | "end" | "replacement">>} findings
+ * @returns {RedactedText}
+ */
 export function redact(text, findings) {
   let out = text;
   for (const f of [...findings].sort((a, b) => b.start - a.start)) {
     out = out.slice(0, f.start) + f.replacement + out.slice(f.end);
   }
-  return out;
+  return /** @type {RedactedText} */ (out);
+}
+
+/** @param {RedactedText} text */
+export function logSafe(text) {
+  void text;
 }
 
 export function contextSnippet(text, f, radius = 24) {

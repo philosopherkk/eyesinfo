@@ -4,4 +4,4 @@ Drafting aid for Hong Kong ophthalmologists: patient-friendly reports (繁 / EN)
 
 **Live:** https://philosopherkk.github.io/reportnreferral/
 
-Offline by design (no uploads). Tests live under `reportnreferral/` in https://github.com/philosopherkk/eyesinfo; this folder is the public GitHub Pages publish path.
+Offline by design (no uploads). Tests live under `reportnreferral/` in https://github.com/philosopherkk/eyesinfo; this folder is the public GitHub Pages publish path. The redaction module is copied from that repo at build time and is not stored here.

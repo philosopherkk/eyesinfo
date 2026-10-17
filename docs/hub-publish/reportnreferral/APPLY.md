@@ -10,7 +10,7 @@ git checkout -b feat/reportnreferral
 # From the eyesinfo repo (this PR / main after merge):
 EYESINFO=/path/to/eyesinfo
 rm -rf reportnreferral
-cp -a "$EYESINFO/docs/hub-publish/reportnreferral/app" reportnreferral
+node "$EYESINFO/scripts/bundle-reportnreferral-for-hub.mjs" --dest reportnreferral
 cp "$EYESINFO/docs/hub-publish/reportnreferral/hub-root/index.html" index.html
 cp "$EYESINFO/docs/hub-publish/reportnreferral/hub-root/AGENTS.md" AGENTS.md
 cp "$EYESINFO/docs/hub-publish/reportnreferral/hub-root/README.md" README.md

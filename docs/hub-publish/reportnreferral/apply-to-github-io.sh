@@ -8,7 +8,8 @@ if [[ -z "$TARGET" || ! -d "$TARGET/.git" ]]; then
   exit 1
 fi
 rm -rf "$TARGET/reportnreferral"
-cp -a "$BUNDLE_ROOT/app" "$TARGET/reportnreferral"
+REPO_ROOT="$(cd "$BUNDLE_ROOT/../../.." && pwd)"
+node "$REPO_ROOT/scripts/bundle-reportnreferral-for-hub.mjs" --dest "$TARGET/reportnreferral"
 cp "$BUNDLE_ROOT/hub-root/index.html" "$TARGET/index.html"
 cp "$BUNDLE_ROOT/hub-root/AGENTS.md" "$TARGET/AGENTS.md"
 cp "$BUNDLE_ROOT/hub-root/README.md" "$TARGET/README.md"

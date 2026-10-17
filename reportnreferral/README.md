@@ -81,8 +81,8 @@ This folder is the development / test source in the eyesinfo repo. The GitHub Pa
 hub publish bundle and apply it:
 
 ```bash
-node scripts/bundle-reportnreferral-for-hub.mjs   # if present
-# or copy shippable files into docs/hub-publish/reportnreferral/app/
+# Build output includes src/pii.js. The committed hub snapshot does not store a second copy.
+node scripts/bundle-reportnreferral-for-hub.mjs --dest /path/to/philosopherkk.github.io/reportnreferral
 bash docs/hub-publish/reportnreferral/apply-to-github-io.sh /path/to/philosopherkk.github.io
 ```
 

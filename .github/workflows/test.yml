@@ -1,0 +1,32 @@
+# Redaction boundary and the existing test script.
+# IndexNow stays in indexnow.yml.
+name: Test
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Redaction boundary
+        run: node scripts/check-redaction.mjs
+      - name: Raw paste is not redacted text
+        run: npx tsc -p reportnreferral/tsconfig.json --pretty false --noEmit
+      - name: Hub build copies the redaction module
+        run: |
+          node scripts/bundle-reportnreferral-for-hub.mjs --dest "$RUNNER_TEMP/reportnreferral"
+          test -f "$RUNNER_TEMP/reportnreferral/src/pii.js"
+          node scripts/check-redaction.mjs
+      - run: npm test

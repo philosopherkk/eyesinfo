@@ -1,5 +1,5 @@
 import { extract } from "./extract.js";
-import { activeFindings, contextSnippet, redact, screen } from "./pii.js";
+import { activeFindings, asRawPaste, contextSnippet, redact, screen } from "./pii.js";
 import { buildPatientReport } from "./report.js";
 import {
   buildReferral,
@@ -18,12 +18,6 @@ VA OD 6/12, OS 6/9 (PH 6/7.5). IOP OD 14, OS 22 mmHg.
 SLE: mild nuclear sclerosis cataract OD. OS: POAG, CDR 0.8 with thinning of the inferior rim.
 Gonioscopy: open angles OU. OCT RNFL and visual field ordered. No retinal detachment.
 Plan: start latanoprost nocte OS. Review in 3 months.`;
-
-const EXAMPLE_PII = `Name: CHAN Tai Man   HKID: A123456(7)   Tel: 9123 4567
-DOB 05/06/1958 (65M). Address: Flat 5, 12/F, Happy Court, Kwun Tong.
-Seen on 12/03/2024. Mr Chan complains of blurred vision.
-VA OD 6/12, OS 6/9. IOP 14/22. Cataract OD, POAG OS.
-Review in 3 months.`;
 
 /* ---------- tiny DOM helper ---------- */
 
@@ -100,7 +94,7 @@ function screenedField({ id, label, hint, rows, placeholder, onChange }) {
             type: "button",
             class: "btn sm",
             onclick: () => {
-              ta.value = redact(ta.value, findings);
+              ta.value = redact(asRawPaste(ta.value), findings);
               refresh();
             },
           },
@@ -146,7 +140,7 @@ function screenedField({ id, label, hint, rows, placeholder, onChange }) {
                 type: "button",
                 class: "btn sm",
                 onclick: () => {
-                  ta.value = redact(ta.value, [f]);
+                  ta.value = redact(asRawPaste(ta.value), [f]);
                   refresh();
                 },
               },
@@ -173,7 +167,7 @@ function screenedField({ id, label, hint, rows, placeholder, onChange }) {
   }
 
   function refresh() {
-    findings = activeFindings(ta.value, dismissed);
+    findings = activeFindings(asRawPaste(ta.value), dismissed);
     renderStatus();
     onChange?.();
   }
@@ -197,7 +191,7 @@ function screenedField({ id, label, hint, rows, placeholder, onChange }) {
       return findings;
     },
     recheck() {
-      findings = activeFindings(ta.value, dismissed);
+      findings = activeFindings(asRawPaste(ta.value), dismissed);
       renderStatus();
       return findings;
     },
@@ -660,7 +654,7 @@ function toast(msg) {
 
 function checkOutputForPii() {
   const withoutPlaceholders = outputText().replace(/\[[^\]]*\]/g, (m) => " ".repeat(m.length));
-  const found = screen(withoutPlaceholders);
+  const found = screen(asRawPaste(withoutPlaceholders));
   const warn = $("#out-warn");
   if (found.length) {
     warn.textContent = `The text now contains ${found.length} possible identifier${found.length === 1 ? "" : "s"} (for example "${found[0].text.trim()}"). Please review before sharing.`;
@@ -770,10 +764,6 @@ function init() {
   $("#ex-clean").addEventListener("click", () => {
     resetEdits();
     notes.value = EXAMPLE_CLEAN;
-  });
-  $("#ex-pii").addEventListener("click", () => {
-    resetEdits();
-    notes.value = EXAMPLE_PII;
   });
   $("#clear-all").addEventListener("click", () => {
     resetEdits();
