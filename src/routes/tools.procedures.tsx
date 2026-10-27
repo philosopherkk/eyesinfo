@@ -13,7 +13,16 @@ import { localizeTopic, useI18n } from "@/i18n";
 import { pageHead } from "@/lib/page-seo";
 import { localeFromMatch } from "@/lib/locale-path";
 
-const PROCEDURE_IDS = ["rrd", "injection", "chalazion", "cataract"] as const;
+const PROCEDURE_IDS = [
+  "rrd",
+  "injection",
+  "chalazion",
+  "cataract",
+  "mlt",
+  "lpi",
+  "yag",
+  "retinopexy",
+] as const;
 type ProcedureId = (typeof PROCEDURE_IDS)[number];
 
 const searchSchema = z.object({
@@ -36,11 +45,15 @@ const CHOICES: { id: ProcedureId; hant: string; en: string }[] = [
   { id: "rrd", hant: "視網膜脫離", en: "Retinal detachment" },
   { id: "injection", hant: "玻璃體內注射", en: "Intravitreal injection" },
   { id: "chalazion", hant: "霰粒腫切開刮除術", en: "Chalazion" },
+  { id: "mlt", hant: "微脈衝雷射小樑成形術", en: "Micropulse laser trabeculoplasty" },
+  { id: "lpi", hant: "雷射周邊虹膜切開術", en: "Laser peripheral iridotomy" },
+  { id: "yag", hant: "Nd:YAG 雷射後囊切開術", en: "Nd:YAG posterior capsulotomy" },
+  { id: "retinopexy", hant: "氬雷射視網膜固定術", en: "Argon laser retinopexy" },
 ];
 
 const HANT = {
   title: "手術教學示意",
-  lead: "四項手術的示意圖。不是模擬器、不是檢查，亦不是手術操作指引。",
+  lead: "白內障、視網膜脫離、注射、霰粒腫與四項雷射的示意圖。不是模擬器、不是檢查，亦不是手術操作指引。",
   caveat: "不能代替註冊醫生。不提供診斷、處方、預約、購買或轉介。",
   choose: "選擇手術示意",
   diagrams: "線條結構示意",
@@ -48,7 +61,7 @@ const HANT = {
 
 const EN = {
   title: "Procedure teaching illustration",
-  lead: "A schematic illustration of four procedures. Not a simulator, not a test, and not an operative guide.",
+  lead: "Schematic illustrations of cataract, retinal detachment, injection, chalazion, and four laser procedures. Not a simulator, not a test, and not an operative guide.",
   caveat:
     "This cannot replace a registered doctor. It does not diagnose, prescribe, book, sell, or refer.",
   choose: "Choose a procedure illustration",
