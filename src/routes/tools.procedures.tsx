@@ -220,17 +220,49 @@ function ProcedureTeachingPage() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const shellRef = useRef<ViewerShell>(shell);
   const langRef = useRef(viewerLang);
+  // Latest bundle procedure the iframe should show (survives loads / late listeners).
+  const pendingBundleIdRef = useRef<ProcedureId | null>(
+    id === "cataract" ? null : id
+  );
   // Remount only when crossing cataract ↔ bundle (or language changes).
   // Bundle↔bundle procedure swaps stay in-viewer so fullscreen is preserved.
   const [frameSrc, setFrameSrc] = useState(() => buildViewerSrc(id, viewerLang));
+
+  function postSelectToBundle(procedureId: ProcedureId) {
+    if (procedureId === "cataract") return;
+    pendingBundleIdRef.current = procedureId;
+    iframeRef.current?.contentWindow?.postMessage(
+      { type: "eyesinfo-select-procedure", procedure: procedureId },
+      window.location.origin
+    );
+  }
+
+  /** Re-send the chip selection after iframe load / viewer-ready (drops no longer lost). */
+  function flushPendingBundleSelect() {
+    const pending = pendingBundleIdRef.current;
+    if (!pending || pending === "cataract") return;
+    if (viewerShellFor(pending) !== "bundle") return;
+    iframeRef.current?.contentWindow?.postMessage(
+      { type: "eyesinfo-select-procedure", procedure: pending },
+      window.location.origin
+    );
+  }
 
   useEffect(() => {
     function onMessage(event: MessageEvent) {
       if (event.origin !== window.location.origin) return;
       const data = event.data as { type?: string; procedure?: unknown } | null;
-      if (!data || data.type !== "eyesinfo-procedure") return;
+      if (!data) return;
+      if (data.type === "eyesinfo-procedure-ready") {
+        flushPendingBundleSelect();
+        return;
+      }
+      if (data.type !== "eyesinfo-procedure") return;
       if (!isProcedureId(data.procedure) || data.procedure === id) return;
       const next = data.procedure;
+      if (next !== "cataract") {
+        pendingBundleIdRef.current = next;
+      }
       void navigate({
         search: (prev) => ({ ...prev, procedure: next }),
         replace: true,
@@ -246,23 +278,30 @@ function ProcedureTeachingPage() {
     shellRef.current = shell;
     langRef.current = viewerLang;
 
+    if (shell === "bundle" && id !== "cataract") {
+      pendingBundleIdRef.current = id;
+    } else if (shell === "cataract") {
+      pendingBundleIdRef.current = null;
+    }
+
     if (shellChanged || langChanged) {
       setFrameSrc(buildViewerSrc(id, viewerLang));
       return;
     }
 
     // Same shell: ask the live iframe to swap the clip (keeps #teachingChrome FS).
+    // Also recorded in pendingBundleIdRef so a mid-load click is flushed on ready.
     if (shell === "bundle") {
-      iframeRef.current?.contentWindow?.postMessage(
-        { type: "eyesinfo-select-procedure", procedure: id },
-        window.location.origin
-      );
+      postSelectToBundle(id);
     }
   }, [id, shell, viewerLang]);
 
   function chooseProcedure(next: ProcedureId) {
     if (next === id) return;
     const nextShell = viewerShellFor(next);
+    if (nextShell === "bundle") {
+      pendingBundleIdRef.current = next;
+    }
     // Document remount tears down native FS — mark persist synchronously.
     if (nextShell !== shell) {
       markPersistIfViewerFullscreen(iframeRef.current);
@@ -327,6 +366,9 @@ function ProcedureTeachingPage() {
         className="procedure-viewer-frame mt-4"
         allow="fullscreen"
         allowFullScreen
+        onLoad={() => {
+          flushPendingBundleSelect();
+        }}
       />
       {id === "cataract" && cataract ? (
         <div className="mt-4">

@@ -190,13 +190,34 @@ describe("surgery teaching fullscreen chrome", () => {
     // Bundle↔bundle must postMessage, not rebuild src from every procedure id.
     assert.match(page, /setFrameSrc\(buildViewerSrc/);
     assert.match(page, /shellChanged \|\| langChanged/);
+    // Mid-load chip clicks are recorded and flushed on load / viewer-ready.
+    assert.match(page, /pendingBundleIdRef/);
+    assert.match(page, /flushPendingBundleSelect/);
+    assert.match(page, /eyesinfo-procedure-ready/);
+    assert.match(page, /onLoad=\{/);
   });
 
-  it("procedures-3d listens for parent select messages (in-viewer swap)", () => {
+  it("procedures-3d queues parent select messages before activator is ready", () => {
     const html = readFileSync(join(root, "public/procedures-3d.html"), "utf8");
     assert.match(html, /eyesinfo-select-procedure/);
     assert.match(html, /fromParent:\s*true/);
     assert.match(html, /eyesinfo-prepare-procedure-nav/);
+    assert.match(html, /parentProcedureBridge/);
+    assert.match(html, /eyesinfo-procedure-ready/);
+    assert.match(html, /queuedFromParent/);
+  });
+
+  it("helper does not clear persist on fullscreenchange (remount-safe)", () => {
+    const helper = readFileSync(join(root, "public/js/teaching-fullscreen.js"), "utf8");
+    // fullscreenchange must sync only — clearTeachingFullscreenPersist belongs to exit/restore.
+    const changeHandler = helper.match(
+      /doc\.addEventListener\("fullscreenchange",[\s\S]*?\}\);/
+    );
+    assert.ok(changeHandler, "fullscreenchange listener present");
+    assert.doesNotMatch(
+      changeHandler[0],
+      /clearTeachingFullscreenPersist/
+    );
   });
 
   it("parks the same procedure select into the exit bar on fullscreen", async () => {
@@ -258,6 +279,15 @@ describe("surgery teaching fullscreen chrome", () => {
     markTeachingFullscreenPersist();
     assert.equal(sessionStorage.getItem(TEACHING_FS_PERSIST_KEY), "1");
 
+    // Remount tears down native FS (fires fullscreenchange) — must NOT clear persist.
+    first.doc.fullscreenElement = null;
+    first.doc.dispatch("fullscreenchange");
+    assert.equal(
+      sessionStorage.getItem(TEACHING_FS_PERSIST_KEY),
+      "1",
+      "persist survives remount-driven fullscreenchange"
+    );
+
     // Simulate document remount: new chrome, persist key still set.
     const second = makeParkHarness();
     let requestCount = 0;
@@ -282,6 +312,35 @@ describe("surgery teaching fullscreen chrome", () => {
     assert.equal(api2.active(), true, "fullscreen active after restore");
     assert.equal(sessionStorage.getItem(TEACHING_FS_PERSIST_KEY), null);
     assert.equal(second.procedure.parentNode, second.exitBar);
+  });
+
+  it("explicit exit clears persist so a later remount does not re-enter", async () => {
+    const helperUrl = pathToFileURL(
+      join(root, "public/js/teaching-fullscreen.js")
+    ).href;
+    const {
+      bindTeachingFullscreen,
+      markTeachingFullscreenPersist,
+      TEACHING_FS_PERSIST_KEY,
+    } = await import(`${helperUrl}?exitclear=${Date.now()}`);
+
+    const h = makeParkHarness();
+    const api = bindTeachingFullscreen({
+      target: h.chrome,
+      enterButton: h.enterButton,
+      exitButton: h.exitButton,
+      parkElements: [h.procedure],
+      restorePersist: false,
+    });
+    h.enterButton.click();
+    await Promise.resolve();
+    await Promise.resolve();
+    markTeachingFullscreenPersist();
+    h.exitButton.click();
+    await Promise.resolve();
+    await Promise.resolve();
+    assert.equal(api.active(), false);
+    assert.equal(sessionStorage.getItem(TEACHING_FS_PERSIST_KEY), null);
   });
 
   it("falls back to CSS fullscreen when native restore is blocked", async () => {

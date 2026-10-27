@@ -251,18 +251,14 @@ export function bindTeachingFullscreen({
     if (fsElement() === target) {
       cssFallback = false;
     }
-    // Native Esc exit: drop persist so a later remount does not re-enter.
-    if (!fsElement() && !cssFallback) {
-      clearTeachingFullscreenPersist();
-    }
+    // Do NOT clear persist here. A cataract↔bundle src remount exits native
+    // FS and fires this event; clearing would drop the intentional restore
+    // intent. Explicit exit() clears; restorePersistedFullscreen consumes.
     sync();
   });
   doc.addEventListener("webkitfullscreenchange", () => {
     if (fsElement() === target) {
       cssFallback = false;
-    }
-    if (!fsElement() && !cssFallback) {
-      clearTeachingFullscreenPersist();
     }
     sync();
   });

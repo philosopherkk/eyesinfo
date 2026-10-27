@@ -667,6 +667,51 @@
   </footer>
 
   <script type="module">
+    // Queue parent chip swaps that arrive before Three.js / activateProcedure
+    // are ready, so a click during load is not dropped or overwritten by URL boot.
+    const parentProcedureBridge = {
+      queued: null,
+      /** @type {null | ((id: string) => void)} */
+      apply: null,
+    };
+
+    window.addEventListener("message", event => {
+      if (event.origin !== location.origin) return;
+      const data = event.data;
+      if (!data || typeof data !== "object") return;
+      if (data.type === "eyesinfo-prepare-procedure-nav") {
+        try {
+          const chrome = document.getElementById("teachingChrome");
+          const native =
+            document.fullscreenElement ||
+            document.webkitFullscreenElement;
+          if (
+            native === chrome ||
+            chrome?.classList.contains("is-fullscreen")
+          ) {
+            sessionStorage.setItem("eyesinfo-teaching-fs-persist", "1");
+          }
+        } catch (e) {}
+        return;
+      }
+      if (data.type !== "eyesinfo-select-procedure") return;
+      if (typeof data.procedure !== "string") return;
+      if (parentProcedureBridge.apply) {
+        parentProcedureBridge.apply(data.procedure);
+      } else {
+        parentProcedureBridge.queued = data.procedure;
+        const el = document.getElementById("procedure");
+        if (el) {
+          for (let i = 0; i < el.options.length; i++) {
+            if (el.options[i].value === data.procedure) {
+              el.value = data.procedure;
+              break;
+            }
+          }
+        }
+      }
+    });
+
     async function main() {
       const bootQuery = new URLSearchParams(location.search);
       if (bootQuery.get("procedure") === "cataract") {
@@ -3925,11 +3970,16 @@
 
       const query = new URLSearchParams(location.search);
       const requestedProcedure = query.get("procedure");
+      // Prefer a parent chip selection queued during load over the stale iframe URL.
+      const queuedFromParent = parentProcedureBridge.queued;
+      if (queuedFromParent) parentProcedureBridge.queued = null;
 
       let activeId =
-        Object.hasOwn(PROCEDURES, requestedProcedure)
-          ? requestedProcedure
-          : "rrd";
+        queuedFromParent && Object.hasOwn(PROCEDURES, queuedFromParent)
+          ? queuedFromParent
+          : Object.hasOwn(PROCEDURES, requestedProcedure)
+            ? requestedProcedure
+            : "rrd";
 
       let language = "both";
       const requestedLanguage = query.get("lang");
@@ -4275,19 +4325,24 @@
         }
       }
 
-      // Parent chip clicks / stable-iframe sync (same-origin tools/procedures).
+      // Hand off queued/live parent selects to activateProcedure (bridge registered early).
+      parentProcedureBridge.apply = id => {
+        if (id === activeId) return;
+        activateProcedure(id, { fromParent: true });
+      };
+      if (parentProcedureBridge.queued) {
+        const late = parentProcedureBridge.queued;
+        parentProcedureBridge.queued = null;
+        parentProcedureBridge.apply(late);
+      }
+      // prepare-nav after bind: also cover CSS/native FS via helper.
       window.addEventListener("message", event => {
         if (event.origin !== location.origin) return;
         const data = event.data;
         if (!data || typeof data !== "object") return;
         if (data.type === "eyesinfo-prepare-procedure-nav") {
           markFsPersist();
-          return;
         }
-        if (data.type !== "eyesinfo-select-procedure") return;
-        if (typeof data.procedure !== "string") return;
-        if (data.procedure === activeId) return;
-        activateProcedure(data.procedure, { fromParent: true });
       });
 
       // ============================================================
@@ -4414,8 +4469,17 @@
           "The graphics context was lost. Please reload the page.";
       });
 
-      activateProcedure(activeId);
+      activateProcedure(activeId, { fromParent: true });
       $("status").hidden = true;
+
+      // Tell the React shell the viewer can accept eyesinfo-select-procedure
+      // (flushes any chip click that raced the Three.js boot).
+      if (window.parent !== window) {
+        window.parent.postMessage(
+          { type: "eyesinfo-procedure-ready", procedure: activeId },
+          location.origin
+        );
+      }
 
       let previousTime = performance.now();
 
