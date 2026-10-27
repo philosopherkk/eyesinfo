@@ -370,6 +370,11 @@
       backdrop-filter: blur(6px);
     }
 
+    .fs-exit-bar > select {
+      margin-right: auto;
+      max-width: min(100%, 28rem);
+    }
+
     #teachingChrome:fullscreen .fs-exit-bar,
     #teachingChrome:-webkit-full-screen .fs-exit-bar,
     #teachingChrome.is-fullscreen .fs-exit-bar {
@@ -496,6 +501,21 @@
         </option>
         <option value="chalazion">
           4. 霰粒腫切開刮除術 — Chalazion I&amp;C
+        </option>
+        <option value="mlt">
+          5. 微脈衝小樑成形術 — Micropulse trabeculoplasty
+        </option>
+        <option value="lpi">
+          6. 周邊虹膜切開術 — Laser peripheral iridotomy
+        </option>
+        <option value="yag">
+          7. 後囊切開術 — Nd:YAG capsulotomy
+        </option>
+        <option value="retinopexy">
+          8. 氬雷射視網膜固定術 — Argon retinopexy
+        </option>
+        <option value="elt">
+          9. 準分子雷射小樑造孔術 — Excimer laser trabeculostomy
         </option>
       </select>
 
@@ -652,6 +672,7 @@
         target: $("teachingChrome"),
         enterButton: $("enterFullscreen"),
         exitButton: $("exitFullscreen"),
+        parkElements: [$("procedure")],
       });
       kit.bindPlaybackSpeed($("speed"));
       const clamp = THREE.MathUtils.clamp;
