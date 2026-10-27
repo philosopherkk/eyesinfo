@@ -499,10 +499,11 @@
         </option>
       </select>
 
-      <select id="language" aria-label="Language / 語言">
+      <select id="language" aria-label="Language / 語言 / 言語">
         <option value="both">繁體中文 + English</option>
         <option value="zh">繁體中文</option>
         <option value="en">English</option>
+        <option value="ja">日本語</option>
       </select>
 
       <button type="button" id="enterFullscreen" aria-pressed="false">
@@ -624,7 +625,7 @@
       if (bootQuery.get("procedure") === "cataract") {
         const lang = bootQuery.get("lang");
         location.replace(
-          lang === "en" || lang === "zh"
+          lang === "en" || lang === "zh" || lang === "ja"
             ? `/cataract-phaco.html?lang=${lang}`
             : "/cataract-phaco.html"
         );
@@ -637,11 +638,13 @@
         { enablePageScrollOrbit },
         { bindTeachingFullscreen },
         kit,
+        { PROCEDURES_JA, LABEL_JA },
       ] = await Promise.all([
         import("three/addons/controls/OrbitControls.js"),
         import("/js/orbit-page-scroll.js"),
         import("/js/teaching-fullscreen.js"),
         import("/js/surgery-kit.js"),
+        import("/js/procedures-3d-ja.js"),
       ]);
 
       const $ = id => document.getElementById(id);
@@ -2451,30 +2454,64 @@
 
       // A transparent contact-lens symbol, external source,
       // schematic beam, and transient target glow.
+      // Thin anterior contact-lens dome (not a flat/box disc).
+      function laserAddonContactLens(parent, z = 2.05) {
+        const geometry = new THREE.SphereGeometry(
+          .98, 48, 20, 0, Math.PI * 2, 0, .72
+        );
+        const contact = mesh(
+          parent,
+          geometry,
+          mat(0x9cdcf2, .13, { roughness: .1 })
+        );
+        // Default sphere dome opens along +Y; face anterior (+Z).
+        contact.rotation.x = Math.PI / 2;
+        contact.position.set(0, 0, z);
+        ring(
+          parent, .86, .018, [0, 0, z + .02],
+          mat(0x91bfd6, .42)
+        );
+        return contact;
+      }
+
+      // Open-loop IOL optic + haptics (pseudophakic teaching symbol).
+      function laserAddonPseudophakicIol(root, opticZ = 1.42) {
+        const iol = ball(
+          root,
+          .70,
+          [1, 1, .11],
+          [0, 0, opticZ],
+          mat(0x91d9f5, .30, { roughness: .10 })
+        );
+        const hapticMaterial = mat(0x91d9f5, .65);
+        // Match cataract-phaco open-loop layout (not mirrored hooks).
+        curveTube(root, [
+          [.58, .08, opticZ], [.85, .12, opticZ],
+          [1.00, .36, opticZ], [.88, .61, opticZ],
+          [.63, .67, opticZ]
+        ], .018, hapticMaterial);
+        curveTube(root, [
+          [-.58, -.08, opticZ], [-.85, -.12, opticZ],
+          [-1.00, -.36, opticZ], [-.88, -.61, opticZ],
+          [-.63, -.67, opticZ]
+        ], .018, hapticMaterial);
+        return iol;
+      }
+
       function laserAddonRig(root, color = 0x93edb2) {
         const group = new THREE.Group();
         root.add(group);
 
-        const contact = ball(
-          group,
-          1,
-          [.92, .92, .14],
-          [0, 0, 2.20],
-          mat(0x9cdcf2, .10, { roughness: .12 })
-        );
+        const contact = laserAddonContactLens(group, 2.05);
 
-        ring(
-          group, .92, .025, [0, 0, 2.20],
-          mat(0x91bfd6, .45)
-        );
-
-        // External device symbol, not an intraocular instrument.
-        box(
+        // External handpiece symbol (cylinder), not a box contact lens.
+        const handpiece = mesh(
           group,
-          [.28, .28, .40],
-          [.12, .10, 3.28],
+          new THREE.CylinderGeometry(.075, .095, .48, 16),
           mat(0x557993)
         );
+        handpiece.rotation.x = Math.PI / 2;
+        handpiece.position.set(.12, .10, 3.22);
 
         const beamGeometry = new THREE.BufferGeometry();
         beamGeometry.setAttribute(
@@ -2767,13 +2804,15 @@
         const eye = makeEye(root);
         eye.iris.visible = false;
 
-        const holeCenter = V(.61, .58, 1.62);
+        const irisZ = 1.60;
+        const holeCenter = V(.61, .58, irisZ);
 
         const iris = mesh(
           root,
           laserAddonSheet(1.04, .35),
           mat(0xd7ad76, .88, { roughness: .65 })
         );
+        iris.position.z = irisZ;
 
         const openingRim = ring(
           root,
@@ -2834,61 +2873,26 @@
         return laserAddonModel(root, eye, labels, progress => {
           const opening = smooth(progress - 3);
 
-          // Partial relaxation only: no guarantee of a normal angle.
-          const relaxation = smooth(progress - 4);
-          const bow = lerp(.19, .075, relaxation);
-
-          // Quantization reduces geometry reallocations.
+          // Flat iris sheet: peripheral opening only — no bowing distortion.
           const radius = Math.round(opening * .09 * 500) / 500;
-          const quantizedBow = Math.round(bow * 500) / 500;
-          const key = `${radius}:${quantizedBow}`;
+          const key = `${radius}`;
 
           if (key !== lastGeometryKey) {
             lastGeometryKey = key;
 
-            const geometry = laserAddonSheet(
-              1.04,
-              .35,
-              radius > .002
-                ? { x: holeCenter.x, y: holeCenter.y, radius }
-                : null
+            laserAddonReplaceGeometry(
+              iris,
+              laserAddonSheet(
+                1.04,
+                .35,
+                radius > .002
+                  ? { x: holeCenter.x, y: holeCenter.y, radius }
+                  : null
+              )
             );
-
-            // ShapeGeometry is intentionally a thin schematic sheet.
-            // Deform it slightly to suggest anterior bowing.
-            const positions = geometry.attributes.position;
-
-            for (let i = 0; i < positions.count; i++) {
-              const x = positions.getX(i);
-              const y = positions.getY(i);
-              const radial = Math.sqrt(x * x + y * y);
-
-              const normalized = clamp(
-                (radial - .35) / (1.04 - .35),
-                0, 1
-              );
-
-              positions.setZ(
-                i,
-                1.60 + quantizedBow * Math.sin(normalized * Math.PI)
-              );
-            }
-
-            positions.needsUpdate = true;
-            geometry.computeVertexNormals();
-            geometry.computeBoundingSphere();
-
-            laserAddonReplaceGeometry(iris, geometry);
           }
 
-          const holeRadial = Math.hypot(holeCenter.x, holeCenter.y);
-          const holeNormalized = clamp(
-            (holeRadial - .35) / (1.04 - .35),
-            0, 1
-          );
-
-          const holeZ =
-            1.60 + bow * Math.sin(holeNormalized * Math.PI);
+          const holeZ = irisZ;
 
           openingRim.visible = opening > .03;
           openingRim.position.set(
@@ -2942,33 +2946,9 @@
 
         const eye = makeEye(root);
 
-        // This eye is pseudophakic: replace the natural lens symbol.
+        // Pseudophakic eye: intact open-loop IOL + haptics.
         eye.lens.visible = false;
-
-        const iol = ball(
-          root,
-          .70,
-          [1, 1, .11],
-          [0, 0, 1.42],
-          mat(0x91d9f5, .30, { roughness: .10 })
-        );
-
-        // Haptic symbols, unchanged throughout the animation.
-        const hapticMaterial = mat(0x91d9f5, .65);
-
-        curveTube(root, [
-          [.55, .12, 1.42],
-          [.86, .38, 1.42],
-          [.98, .02, 1.42],
-          [.81, -.27, 1.42]
-        ], .018, hapticMaterial);
-
-        curveTube(root, [
-          [-.55, -.12, 1.42],
-          [-.86, -.38, 1.42],
-          [-.98, -.02, 1.42],
-          [-.81, .27, 1.42]
-        ], .018, hapticMaterial);
+        const iol = laserAddonPseudophakicIol(root, 1.42);
 
         // Capsule is posterior to IOL: smaller Z in this app.
         const capsuleZ = 1.16;
@@ -3450,8 +3430,11 @@
 
         // Keep the same eye orientation as the existing animations:
         // positive Z = anterior.
+        // ELT is usually performed in a pseudophakic eye.
         eye.iris.material.color.set(0xd7ad76);
         eye.iris.material.opacity = .55;
+        eye.lens.visible = false;
+        laserAddonPseudophakicIol(root, 1.42);
 
         const tmZ = 1.52;
         const canalZ = 1.43;
@@ -3867,6 +3850,26 @@
       // Deterministic state allows reverse scrubbing and replay.
       // ============================================================
 
+      // Japanese education copy (merged after all procedure registrations).
+      Object.entries(PROCEDURES_JA).forEach(([id, ja]) => {
+        const data = PROCEDURES[id];
+        if (!data) return;
+        data.ja = ja.title;
+        data.subtitleJa = ja.subtitle;
+        data.warningJa = ja.warning;
+        if (Array.isArray(ja.legend)) {
+          data.legend = data.legend.map((row, i) => {
+            const next = row.slice();
+            if (ja.legend[i]) next[3] = ja.legend[i];
+            return next;
+          });
+        }
+        (ja.stages || []).forEach((stageJa, i) => {
+          if (!data.stages[i]) return;
+          Object.assign(data.stages[i], stageJa);
+        });
+      });
+
       const query = new URLSearchParams(location.search);
       const requestedProcedure = query.get("procedure");
 
@@ -3877,15 +3880,21 @@
 
       let language = "both";
       const requestedLanguage = query.get("lang");
-      if (requestedLanguage === "zh" || requestedLanguage === "en") {
+      if (
+        requestedLanguage === "zh" ||
+        requestedLanguage === "en" ||
+        requestedLanguage === "ja"
+      ) {
         language = requestedLanguage;
         $("language").value = requestedLanguage;
         document.documentElement.lang =
-          requestedLanguage === "en" ? "en" : "zh-Hant";
+          requestedLanguage === "en" ? "en" :
+          requestedLanguage === "ja" ? "ja" : "zh-Hant";
       }
-      document.title = language === "en"
-        ? "Ophthalmic procedures"
-        : "眼科手術 3D 教學";
+      document.title =
+        language === "en" ? "Ophthalmic procedures" :
+        language === "ja" ? "眼科手術の3D示意" :
+        "眼科手術 3D 教學";
       let playing = false;
 
       const progressByProcedure = Object.fromEntries(
@@ -3909,10 +3918,28 @@
         );
       }
 
-      function localized(zh, en, separator = " / ") {
+      function localized(zh, en, ja = "", separator = " / ") {
         if (language === "zh") return zh;
         if (language === "en") return en;
+        if (language === "ja") return ja || en || zh;
         return zh + separator + en;
+      }
+
+      function procedureTitle(data) {
+        if (language === "en") return data.en;
+        if (language === "ja") return data.ja || data.en;
+        return data.zh;
+      }
+
+      function stageTitle(entry) {
+        if (language === "en") return entry.en;
+        if (language === "ja") return entry.ja || entry.en;
+        return entry.zh;
+      }
+
+      function labelCopy(label) {
+        const ja = label.ja || LABEL_JA[label.zh] || label.en;
+        return localized(label.zh, label.en, ja);
       }
 
       function getStageState() {
@@ -3970,18 +3997,17 @@
       function updateHeader() {
         const data = activeData();
 
-        $("procedureTitle").textContent =
-          language === "en" ? data.en : data.zh;
+        $("procedureTitle").textContent = procedureTitle(data);
 
         $("procedureSubtitle").textContent =
-          localized(data.subtitleZh, data.subtitleEn);
+          localized(data.subtitleZh, data.subtitleEn, data.subtitleJa);
 
         $("procedureWarning").textContent =
-          localized(data.warningZh, data.warningEn, "\n\n");
+          localized(data.warningZh, data.warningEn, data.warningJa, "\n\n");
 
         $("legend").replaceChildren();
 
-        data.legend.forEach(([color, zh, en]) => {
+        data.legend.forEach(([color, zh, en, ja]) => {
           const row = document.createElement("div");
           row.className = "legend-row";
 
@@ -3990,7 +4016,7 @@
           dot.style.background = color;
 
           const text = document.createElement("span");
-          text.textContent = localized(zh, en);
+          text.textContent = localized(zh, en, ja);
 
           row.append(dot, text);
           $("legend").appendChild(row);
@@ -4008,33 +4034,40 @@
           $("stepCount").textContent =
             `STAGE ${String(index + 1).padStart(2, "0")} / ${total}`;
 
-          $("stageTitle").textContent =
-            language === "en" ? entry.en : entry.zh;
+          $("stageTitle").textContent = stageTitle(entry);
 
           $("stageSubtitle").textContent =
             language === "both" ? entry.en : "";
 
-          $("stageTag").textContent = localized(entry.zh, entry.en);
+          $("stageTag").textContent =
+            localized(entry.zh, entry.en, entry.ja);
 
           $("explanation").replaceChildren();
 
-          if (language !== "en") {
+          if (language === "ja") {
             const paragraph = document.createElement("p");
-            paragraph.lang = "zh-Hant";
-            paragraph.textContent = entry.bodyZh;
+            paragraph.lang = "ja";
+            paragraph.textContent = entry.bodyJa || entry.bodyEn;
             $("explanation").appendChild(paragraph);
-          }
+          } else {
+            if (language !== "en") {
+              const paragraph = document.createElement("p");
+              paragraph.lang = "zh-Hant";
+              paragraph.textContent = entry.bodyZh;
+              $("explanation").appendChild(paragraph);
+            }
 
-          if (language !== "zh") {
-            const paragraph = document.createElement("p");
-            paragraph.lang = "en";
-            paragraph.className = "en";
-            paragraph.textContent = entry.bodyEn;
-            $("explanation").appendChild(paragraph);
+            if (language !== "zh") {
+              const paragraph = document.createElement("p");
+              paragraph.lang = "en";
+              paragraph.className = "en";
+              paragraph.textContent = entry.bodyEn;
+              $("explanation").appendChild(paragraph);
+            }
           }
 
           $("clinicalNote").textContent =
-            localized(entry.noteZh, entry.noteEn, "\n\n");
+            localized(entry.noteZh, entry.noteEn, entry.noteJa, "\n\n");
 
           buttons.forEach((button, i) => {
             const stepData = activeData().stages[i];
@@ -4044,8 +4077,7 @@
             number.textContent = String(i + 1).padStart(2, "0");
 
             const title = document.createElement("span");
-            title.textContent =
-              language === "en" ? stepData.en : stepData.zh;
+            title.textContent = stageTitle(stepData);
 
             button.append(number, title);
 
@@ -4063,7 +4095,7 @@
 
             button.setAttribute(
               "aria-label",
-              `${i + 1}. ${localized(stepData.zh, stepData.en)}`
+              `${i + 1}. ${localized(stepData.zh, stepData.en, stepData.ja)}`
             );
           });
         }
@@ -4073,7 +4105,7 @@
 
         $("timeline").setAttribute(
           "aria-valuetext",
-          `${localized(entry.zh, entry.en)} ${Math.round(fraction * 100)}%`
+          `${localized(entry.zh, entry.en, entry.ja)} ${Math.round(fraction * 100)}%`
         );
 
         $("progressText").textContent =
@@ -4081,8 +4113,8 @@
           `${Math.round(progress / total * 100)}%`;
 
         $("play").textContent = playing
-          ? localized("⏸ 暫停", "⏸ Pause")
-          : localized("▶ 播放", "▶ Play");
+          ? localized("⏸ 暫停", "⏸ Pause", "⏸ 一時停止")
+          : localized("▶ 播放", "▶ Play", "▶ 再生");
 
         $("previous").disabled = progress <= 0;
         $("next").disabled = progress >= total;
@@ -4110,7 +4142,7 @@
           const visible =
             !label.visible || label.visible(progress);
 
-          element.textContent = localized(label.zh, label.en);
+          element.textContent = labelCopy(label);
 
           return {
             element,
@@ -4143,7 +4175,10 @@
 
       function activateProcedure(id) {
         if (id === "cataract") {
-          const lang = language === "en" ? "en" : language === "zh" ? "zh" : "";
+          const lang =
+            language === "en" || language === "zh" || language === "ja"
+              ? language
+              : "";
           if (window.parent !== window) {
             window.parent.postMessage(
               { type: "eyesinfo-procedure", procedure: "cataract" },
@@ -4194,10 +4229,12 @@
       $("language").addEventListener("change", event => {
         language = event.target.value;
         document.documentElement.lang =
-          language === "en" ? "en" : "zh-Hant";
-        document.title = language === "en"
-          ? "Ophthalmic procedures"
-          : "眼科手術 3D 教學";
+          language === "en" ? "en" :
+          language === "ja" ? "ja" : "zh-Hant";
+        document.title =
+          language === "en" ? "Ophthalmic procedures" :
+          language === "ja" ? "眼科手術の3D示意" :
+          "眼科手術 3D 教學";
         updateHeader();
         refresh();
       });
