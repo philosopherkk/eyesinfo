@@ -39,7 +39,7 @@ export const TOOLS: ToolDef[] = [
   {
     id: "procedures",
     title: "手術教學示意",
-    blurb: "白內障、視網膜脫離、注射、霰粒腫與四項雷射示意（不是檢查）",
+    blurb: "白內障、視網膜脫離、注射、霰粒腫與五項雷射示意（不是檢查）",
     canto: "手術示意，唔係手術指引",
     href: "/tools/procedures",
   },
@@ -214,6 +214,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   ],
   "t-glaucoma-monitor": [
     { href: "/tools/procedures?procedure=mlt", label: "微脈衝小樑成形示意" },
+    { href: "/tools/procedures?procedure=elt", label: "準分子小樑造孔示意" },
     { href: "/tools/procedures?procedure=lpi", label: "周邊虹膜切開示意" },
     { href: "/t/d4", label: "青光眼總論" },
     { href: "/t/t-gldrops", label: "青光眼眼藥水" },

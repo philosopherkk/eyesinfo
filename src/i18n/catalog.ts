@@ -18,7 +18,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     map: { title: "眼圖", blurb: "教育工具 · 自我察覺解剖部位", canto: "撳眼圖就明" },
     procedures: {
       title: "手術教學示意",
-      blurb: "白內障、視網膜脫離、注射、霰粒腫與四項雷射示意（不是檢查）",
+      blurb: "白內障、視網膜脫離、注射、霰粒腫與五項雷射示意（不是檢查）",
       canto: "手術示意，唔係手術指引",
     },
     drops: { title: "滴藥水步驟", blurb: "教育工具 · 步驟練習（非診斷）", canto: "跟住步驟滴" },
@@ -43,7 +43,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     map: { title: "眼图", blurb: "教育工具 · 自我察觉解剖部位", canto: "点眼图就明白" },
     procedures: {
       title: "手术教学示意",
-      blurb: "白内障、视网膜脱离、注射、霰粒肿与四项雷射示意（不是检查）",
+      blurb: "白内障、视网膜脱离、注射、霰粒肿与五项雷射示意（不是检查）",
       canto: "手术示意，不是手术指引",
     },
     drops: { title: "滴药水步骤", blurb: "教育工具 · 步骤练习（非诊断）", canto: "跟着步骤滴" },
@@ -68,7 +68,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     map: { title: "Eye map", blurb: "Education tool · self-awareness of eye parts", canto: "Tap the diagram" },
     procedures: {
       title: "Procedure teaching illustration",
-      blurb: "Cataract, retinal detachment, injection, chalazion, and four laser illustrations (not a test)",
+      blurb: "Cataract, retinal detachment, injection, chalazion, and five laser illustrations (not a test)",
       canto: "Illustration, not an operative guide",
     },
     drops: { title: "Drop technique", blurb: "Education tool · practice steps (not diagnosis)", canto: "Follow the steps" },
@@ -93,7 +93,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     map: { title: "眼の図", blurb: "教育ツール · 部位の自己理解", canto: "図をタップ" },
     procedures: {
       title: "手術の示意図",
-      blurb: "白内障・網膜剥離・注射・霰粒腫と四つのレーザー示意（検査ではない）",
+      blurb: "白内障・網膜剥離・注射・霰粒腫と五つのレーザー示意（検査ではない）",
       canto: "図示であり、手術の手順ではない",
     },
     drops: { title: "点眼の手順", blurb: "教育ツール · 手順練習（診断ではない）", canto: "手順どおりに" },

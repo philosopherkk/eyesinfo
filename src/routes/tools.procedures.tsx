@@ -22,6 +22,7 @@ const PROCEDURE_IDS = [
   "lpi",
   "yag",
   "retinopexy",
+  "elt",
 ] as const;
 type ProcedureId = (typeof PROCEDURE_IDS)[number];
 
@@ -49,11 +50,12 @@ const CHOICES: { id: ProcedureId; hant: string; en: string }[] = [
   { id: "lpi", hant: "雷射周邊虹膜切開術", en: "Laser peripheral iridotomy" },
   { id: "yag", hant: "Nd:YAG 雷射後囊切開術", en: "Nd:YAG posterior capsulotomy" },
   { id: "retinopexy", hant: "氬雷射視網膜固定術", en: "Argon laser retinopexy" },
+  { id: "elt", hant: "準分子雷射小樑造孔術", en: "Excimer laser trabeculostomy" },
 ];
 
 const HANT = {
   title: "手術教學示意",
-  lead: "白內障、視網膜脫離、注射、霰粒腫與四項雷射的示意圖。不是模擬器、不是檢查，亦不是手術操作指引。",
+  lead: "白內障、視網膜脫離、注射、霰粒腫與五項雷射的示意圖。不是模擬器、不是檢查，亦不是手術操作指引。",
   caveat: "不能代替註冊醫生。不提供診斷、處方、預約、購買或轉介。",
   choose: "選擇手術示意",
   diagrams: "線條結構示意",
@@ -61,7 +63,7 @@ const HANT = {
 
 const EN = {
   title: "Procedure teaching illustration",
-  lead: "Schematic illustrations of cataract, retinal detachment, injection, chalazion, and four laser procedures. Not a simulator, not a test, and not an operative guide.",
+  lead: "Schematic illustrations of cataract, retinal detachment, injection, chalazion, and five laser procedures. Not a simulator, not a test, and not an operative guide.",
   caveat:
     "This cannot replace a registered doctor. It does not diagnose, prescribe, book, sell, or refer.",
   choose: "Choose a procedure illustration",

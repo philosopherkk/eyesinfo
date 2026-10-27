@@ -3316,6 +3316,550 @@
 
       // END LASER PROCEDURES ADD-ON
 
+      // ============================================================
+      // ELT — EXCIMER LASER TRABECULOSTOMY
+      //
+      // Paste inside main(), AFTER the previous laser add-on,
+      // BEFORE query parsing / initial procedure selection.
+      //
+      // Requires the previous add-on's:
+      //   laserAddonModel()
+      //   laserAddonReplaceGeometry()
+      //
+      // Uses existing application helpers:
+      //   THREE, $, V, mat, mesh, ball, ring,
+      //   clamp, smooth, stage, makeEye,
+      //   scene, models, PROCEDURES
+      //
+      // Educational schematic only.
+      // Channel count, size, spacing, timing, probe dimensions,
+      // and access location are illustrative—not surgical guidance.
+      // ============================================================
+
+
+      // ------------------------------------------------------------
+      // 1. BILINGUAL CONTENT
+      // ------------------------------------------------------------
+
+      PROCEDURES.elt = {
+        zh: "準分子雷射小樑造孔術",
+        en: "Excimer laser trabeculostomy",
+
+        subtitleZh:
+          "眼內光纖探頭、小樑網造孔及 Schlemm 管引流路徑示意",
+
+        subtitleEn:
+          "Intraocular fiber-optic probe, trabecular channels, and Schlemm’s canal outflow",
+
+        warningZh:
+          "本模型為 ELT 眼內雷射造孔示意，不是 MLT、SLT 或眼外雷射治療。" +
+          "造孔不保證眼壓正常，也不代表可自行停藥；需依眼科醫師指示追蹤。",
+
+        warningEn:
+          "This illustrates intraocular ELT, not MLT, SLT, or external laser treatment. " +
+          "Channels do not guarantee normal pressure or justify stopping medication. " +
+          "Follow-up remains necessary.",
+
+        legend: [
+          ["#d7ad76", "虹膜", "Iris"],
+          ["#75dbc5", "小樑網", "Trabecular meshwork"],
+          ["#8edfff", "Schlemm 管", "Schlemm’s canal"],
+          ["#d5e4ee", "眼內光纖探頭", "Intraocular fiber-optic probe"],
+          ["#b4f5ff", "房水路徑符號", "Aqueous pathway"]
+        ],
+
+        stages: [
+          stage(
+            "評估與治療計畫",
+            "Assessment and treatment planning",
+
+            "評估青光眼、眼壓及房角結構，確認是否適合此眼內治療。",
+            "Glaucoma, pressure, and angle anatomy are assessed to determine suitability.",
+
+            "不顯示病人專屬的治療位置、造孔數量或雷射設定。",
+            "No patient-specific treatment locations, channel count, or laser settings are supplied."
+          ),
+
+          stage(
+            "手術準備與角膜入口",
+            "Preparation and corneal access",
+
+            "以入口符號表示眼內器械的進入位置；麻醉及手術準備依臨床計畫進行。",
+            "An access marker represents entry for the intraocular instrument. Anesthesia and preparation follow the clinical plan.",
+
+            "入口大小、位置及形成方式均經簡化；本動畫不是操作教學。",
+            "Access size, position, and formation are simplified. This is not an operative tutorial."
+          ),
+
+          stage(
+            "探頭進入前房與房角定位",
+            "Probe entry and angle targeting",
+
+            "光纖探頭進入前房，並在房角觀察下定位於小樑網。",
+            "The fiber-optic probe enters the anterior chamber and is positioned at the trabecular meshwork under angle visualization.",
+
+            "透明角膜與標籤用於教學；未模擬完整房角鏡光學。",
+            "Corneal transparency and labels support teaching; complete gonioscopic optics are not simulated."
+          ),
+
+          stage(
+            "雷射建立微小通道",
+            "Laser channel creation",
+
+            "探頭在小樑網依序定位，動畫以逐漸形成的孔洞表示通往 Schlemm 管的通道。",
+            "The probe moves between trabecular targets. Progressively appearing openings represent channels into Schlemm’s canal.",
+
+            "閃光是可視化提示，不是實際雷射顏色；孔數、尺寸及節奏不是治療參數。",
+            "The glow is a visualization cue, not the actual laser color. Count, dimensions, and timing are not treatment parameters."
+          ),
+
+          stage(
+            "移除探頭與引流路徑示意",
+            "Probe withdrawal and outflow pathway",
+
+            "探頭退出後，房水粒子示意穿過通道進入 Schlemm 管，再通往集液管區域。",
+            "After probe withdrawal, particles illustrate passage through the channels into Schlemm’s canal and toward collector channels.",
+
+            "粒子不是流量或眼壓測量；不表示直接排到眼表或形成濾過泡。",
+            "Particles are not flow or pressure measurements. They do not represent drainage onto the eye surface or a filtering bleb."
+          ),
+
+          stage(
+            "術後評估與追蹤",
+            "Postoperative assessment and follow-up",
+
+            "評估眼壓及眼部狀態，依臨床指示安排用藥與追蹤。",
+            "Pressure and ocular status are assessed, with medication and follow-up directed by the clinician.",
+
+            "造孔保持可見，但不保證永久通暢或特定降眼壓效果。",
+            "The channels remain visible without implying permanent patency or a specific pressure reduction."
+          )
+        ]
+      };
+
+
+      // ------------------------------------------------------------
+      // 2. BUILD ELT ANIMATION
+      // ------------------------------------------------------------
+
+      function buildLaserAddonELT() {
+        const root = new THREE.Group();
+        scene.add(root);
+
+        const eye = makeEye(root);
+
+        // Keep the same eye orientation as the existing animations:
+        // positive Z = anterior.
+        eye.iris.material.color.set(0xd7ad76);
+        eye.iris.material.opacity = .55;
+
+        const tmZ = 1.52;
+        const canalZ = 1.43;
+
+        const tmInnerRadius = 1.04;
+        const tmOuterRadius = 1.24;
+        const canalRadius = 1.14;
+
+        // Arbitrary teaching count—not a prescribed channel count.
+        const illustrativeChannelCount = 7;
+
+        const sites = Array.from(
+          { length: illustrativeChannelCount },
+          (_, i) => {
+            const angle =
+              -.48 + (i / (illustrativeChannelCount - 1)) * .96;
+
+            return {
+              angle,
+              x: canalRadius * Math.cos(angle),
+              y: canalRadius * Math.sin(angle)
+            };
+          }
+        );
+
+        // Build an annular sheet with actual geometric openings.
+        function createTrabecularGeometry(channelProgress) {
+          const shape = new THREE.Shape();
+
+          shape.absarc(
+            0, 0, tmOuterRadius,
+            0, Math.PI * 2, false
+          );
+
+          const centralOpening = new THREE.Path();
+
+          centralOpening.absarc(
+            0, 0, tmInnerRadius,
+            0, Math.PI * 2, true
+          );
+
+          shape.holes.push(centralOpening);
+
+          sites.forEach((site, index) => {
+            const local = smooth(
+              channelProgress * illustrativeChannelCount - index
+            );
+
+            const radius = .037 * local;
+
+            if (radius <= .001) return;
+
+            const opening = new THREE.Path();
+
+            opening.absarc(
+              site.x, site.y, radius,
+              0, Math.PI * 2, true
+            );
+
+            shape.holes.push(opening);
+          });
+
+          const geometry = new THREE.ShapeGeometry(shape, 96);
+          geometry.computeVertexNormals();
+
+          return geometry;
+        }
+
+        const trabecular = mesh(
+          root,
+          createTrabecularGeometry(0),
+          mat(0x75dbc5, .88, { roughness: .65 })
+        );
+
+        trabecular.position.z = tmZ;
+
+        // Enlarged schematic canal behind the trabecular sheet.
+        ring(
+          root,
+          canalRadius,
+          .039,
+          [0, 0, canalZ],
+          mat(0x8edfff, .50)
+        );
+
+        // A reusable cylinder between two points.
+        // Used instead of rebuilding geometry every frame.
+        function makeRod(radius, material) {
+          return mesh(
+            root,
+            new THREE.CylinderGeometry(
+              radius, radius, 1, 12
+            ),
+            material
+          );
+        }
+
+        const cylinderAxis = V(0, 1, 0);
+        const direction = V(0, 0, 0);
+
+        function positionRod(object, start, end) {
+          direction.copy(end).sub(start);
+
+          const length = direction.length();
+
+          object.position.copy(start).add(end).multiplyScalar(.5);
+          object.scale.set(1, Math.max(length, .0001), 1);
+
+          if (length > .0001) {
+            object.quaternion.setFromUnitVectors(
+              cylinderAxis,
+              direction.normalize()
+            );
+          }
+        }
+
+        // Access marker only; no incision dimensions are prescribed.
+        const accessPoint = V(-1.08, .02, 1.99);
+
+        const accessMarker = ring(
+          root,
+          .075,
+          .011,
+          accessPoint.toArray(),
+          mat(0xc5eaff, .80)
+        );
+
+        const probeShaft = makeRod(
+          .024,
+          mat(0xd5e4ee, .95, { roughness: .25 })
+        );
+
+        const probeHandle = makeRod(
+          .060,
+          mat(0x557993, .95)
+        );
+
+        const probeTip = ball(
+          root,
+          .030,
+          [1, 1, 1],
+          [0, 0, 0],
+          mat(0xe8f8ff, .95)
+        );
+
+        // Visualization cue only—not a visible UV beam.
+        const activationGlow = ball(
+          root,
+          .050,
+          [1, 1, .7],
+          [0, 0, 0],
+          mat(0xc6b7ff, .85, {
+            emissive: 0x9d87ff,
+            emissiveIntensity: .75
+          })
+        );
+
+        // Illustrative collector routes remain inside the model.
+        const collectorRoutes = [];
+
+        sites.forEach(site => {
+          const start = V(site.x, site.y, canalZ);
+
+          const end = V(
+            1.43 * Math.cos(site.angle),
+            1.43 * Math.sin(site.angle),
+            canalZ - .08
+          );
+
+          const geometry =
+            new THREE.BufferGeometry().setFromPoints([start, end]);
+
+          const line = new THREE.Line(
+            geometry,
+            new THREE.LineBasicMaterial({
+              color: 0x8edfff,
+              transparent: true,
+              opacity: .30
+            })
+          );
+
+          root.add(line);
+          collectorRoutes.push(line);
+        });
+
+        const flowMarkers = [];
+
+        sites.forEach((site, siteIndex) => {
+          for (let i = 0; i < 3; i++) {
+            const object = ball(
+              root,
+              .014,
+              [1, 1, 1],
+              [0, 0, 0],
+              mat(0xb4f5ff, .90)
+            );
+
+            flowMarkers.push({
+              object,
+              site,
+              phase: i / 3 + siteIndex * .07
+            });
+          }
+        });
+
+        const labels = [
+          {
+            zh: "角膜入口符號",
+            en: "Corneal access marker",
+            point: accessPoint.clone(),
+            visible: p => p >= 1 && p < 4.8
+          },
+          {
+            zh: "眼內光纖探頭",
+            en: "Intraocular fiber-optic probe",
+            point: V(-.15, .12, 1.84),
+            visible: p => p >= 2 && p < 4.6
+          },
+          {
+            zh: "小樑網（放大示意）",
+            en: "Trabecular meshwork—enlarged",
+            point: V(-.70, .91, tmZ)
+          },
+          {
+            zh: "Schlemm 管（放大示意）",
+            en: "Schlemm’s canal—enlarged",
+            point: V(-.76, -.85, canalZ)
+          },
+          {
+            zh: "通往 Schlemm 管的造孔",
+            en: "Channels into Schlemm’s canal",
+            point: V(sites[3].x, sites[3].y, tmZ),
+            visible: p => p > 3.5
+          }
+        ];
+
+        let lastGeometryStep = -1;
+
+        return laserAddonModel(
+          root,
+          eye,
+          labels,
+
+          progress => {
+            const treatment = clamp(progress - 3, 0, 1);
+
+            // Quantized updates avoid allocating geometry every frame.
+            const geometryStep = Math.round(treatment * 140);
+
+            if (geometryStep !== lastGeometryStep) {
+              lastGeometryStep = geometryStep;
+
+              laserAddonReplaceGeometry(
+                trabecular,
+                createTrabecularGeometry(geometryStep / 140)
+              );
+            }
+
+            accessMarker.visible =
+              progress >= 1 && progress < 4.8;
+
+            // Smoothly move between illustrative target locations.
+            const sitePosition = Math.min(
+              sites.length - 1,
+              treatment * sites.length
+            );
+
+            const firstIndex = Math.floor(sitePosition);
+            const nextIndex = Math.min(
+              sites.length - 1,
+              firstIndex + 1
+            );
+
+            const between = smooth(sitePosition - firstIndex);
+
+            const target = V(
+              THREE.MathUtils.lerp(
+                sites[firstIndex].x,
+                sites[nextIndex].x,
+                between
+              ),
+              THREE.MathUtils.lerp(
+                sites[firstIndex].y,
+                sites[nextIndex].y,
+                between
+              ),
+              tmZ + .018
+            );
+
+            const insertion = smooth(progress - 2);
+            const withdrawal =
+              smooth((progress - 4) / .60);
+
+            const extension = insertion * (1 - withdrawal);
+
+            const currentTip = accessPoint.clone().lerp(
+              target,
+              extension
+            );
+
+            const probeVisible =
+              progress >= 2 && progress < 4.60;
+
+            probeShaft.visible = probeVisible;
+            probeHandle.visible = probeVisible;
+            probeTip.visible = probeVisible;
+
+            positionRod(probeShaft, accessPoint, currentTip);
+
+            const approach = target.clone()
+              .sub(accessPoint)
+              .normalize();
+
+            const handleEnd = accessPoint.clone()
+              .addScaledVector(approach, -.38);
+
+            positionRod(
+              probeHandle,
+              handleEnd,
+              accessPoint
+            );
+
+            probeTip.position.copy(currentTip);
+
+            // Slowed activation cue; not a clinical pulse train.
+            const pulsePhase =
+              (treatment * sites.length * 3) % 1;
+
+            activationGlow.visible =
+              progress >= 3 &&
+              progress < 4 &&
+              pulsePhase < .22;
+
+            activationGlow.position.copy(target);
+
+            collectorRoutes.forEach(route => {
+              route.visible = progress >= 4;
+            });
+
+            // Constant symbolic particle speed:
+            // no simulated pressure or quantitative flow improvement.
+            flowMarkers.forEach(({ object, site, phase }) => {
+              object.visible = progress >= 4;
+
+              const q = (progress * .55 + phase) % 1;
+
+              if (q < .50) {
+                // Anterior chamber -> channel -> canal.
+                const t = q / .50;
+
+                object.position.set(
+                  site.x,
+                  site.y,
+                  THREE.MathUtils.lerp(
+                    tmZ + .24,
+                    canalZ,
+                    t
+                  )
+                );
+              } else {
+                // Canal region -> illustrative collector route.
+                const t = (q - .50) / .50;
+
+                const radius = THREE.MathUtils.lerp(
+                  canalRadius,
+                  1.43,
+                  t
+                );
+
+                object.position.set(
+                  radius * Math.cos(site.angle),
+                  radius * Math.sin(site.angle),
+                  canalZ - .08 * t
+                );
+              }
+            });
+          },
+
+          {
+            target: V(.15, 0, 1.35),
+            home: V(3.2, 2.0, 6.8)
+          }
+        );
+      }
+
+
+      // ------------------------------------------------------------
+      // 3. REGISTER MODEL AND DROPDOWN OPTION
+      // ------------------------------------------------------------
+
+      models.elt = buildLaserAddonELT();
+
+      if (
+        !Array.from($("procedure").options)
+          .some(option => option.value === "elt")
+      ) {
+        const option = document.createElement("option");
+
+        option.value = "elt";
+        option.textContent =
+          "9. 準分子雷射小樑造孔術 — Excimer laser trabeculostomy";
+
+        $("procedure").appendChild(option);
+      }
+
+      // END ELT ADD-ON
+
+
 
       // ============================================================
       // 6. APPLICATION STATE
