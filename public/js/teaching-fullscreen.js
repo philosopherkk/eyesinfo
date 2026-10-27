@@ -3,11 +3,14 @@
  * Prefer wrapping those panels — not canvas-only requestFullscreen.
  *
  * Esc exits via the browser Fullscreen API. Callers supply enter/exit controls.
+ * Optional parkElements move into the exit bar while fullscreen so controls that
+ * normally live outside #teachingChrome (e.g. procedure select) stay available.
  */
 export function bindTeachingFullscreen({
   target,
   enterButton,
   exitButton,
+  parkElements = [],
   onChange,
 }) {
   if (!(target instanceof Element)) {
@@ -15,6 +18,13 @@ export function bindTeachingFullscreen({
   }
 
   const doc = target.ownerDocument;
+  const parks = (Array.isArray(parkElements) ? parkElements : [])
+    .filter((el) => el instanceof Element)
+    .map((el) => ({
+      el,
+      parent: el.parentNode,
+      next: el.nextSibling,
+    }));
 
   const fsElement = () =>
     doc.fullscreenElement ||
@@ -61,9 +71,31 @@ export function bindTeachingFullscreen({
     return fsElement() === target;
   }
 
+  function applyPark(on) {
+    if (!exitButton || parks.length === 0) return;
+    const bar = exitButton.parentElement;
+    if (!bar) return;
+
+    if (on) {
+      for (const { el } of parks) {
+        if (el.parentElement !== bar) {
+          bar.insertBefore(el, exitButton);
+        }
+      }
+      return;
+    }
+
+    for (const { el, parent, next } of parks) {
+      if (!parent) continue;
+      if (el.parentNode === parent && el.nextSibling === next) continue;
+      parent.insertBefore(el, next);
+    }
+  }
+
   function sync() {
     const on = active();
     target.classList.toggle("is-fullscreen", on);
+    applyPark(on);
     if (enterButton) {
       enterButton.setAttribute("aria-pressed", on ? "true" : "false");
       enterButton.hidden = on;
