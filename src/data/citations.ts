@@ -1188,6 +1188,33 @@ export const CITE: Record<string, Citation> = {
     pmid: "41523122",
     note: "術後光學現象（含光暈、條紋及正／負向光視）文獻回顧。夜景示意不是術後預測或測量。",
   },
+  niceCksPoag: {
+    id: "niceCksPoag",
+    authors: "NICE Clinical Knowledge Summaries",
+    title:
+      "Glaucoma: Scenario: Primary open angle glaucoma and ocular hypertension",
+    source:
+      "NICE CKS. https://cks.nice.org.uk/topics/glaucoma/management/primary-open-angle-glaucoma-intraocular-hypertension/",
+    url: "https://cks.nice.org.uk/topics/glaucoma/management/primary-open-angle-glaucoma-intraocular-hypertension/",
+    note: "英國公開臨床知識摘要：把 SLT、ALT、MLT 列為開角／高眼壓路徑的激光類別描述。機制教育，不是個人預後或品牌比較。",
+  },
+  aaoLtpInsight: {
+    id: "aaoLtpInsight",
+    authors: "American Academy of Ophthalmology (AAO)",
+    title: "Laser Trabeculoplasty: Questions in Clinical Practice",
+    source:
+      "AAO Current Insight. https://www.aao.org/education/current-insight/laser-trabeculoplasty-questions-in-clinical-practi",
+    url: "https://www.aao.org/education/current-insight/laser-trabeculoplasty-questions-in-clinical-practi",
+    note: "公開教育把 MLT 列為較新的小梁成形方式之一。不是個人預後或品牌比較。",
+  },
+  durr2020elt: {
+    id: "durr2020elt",
+    authors: "Durr GM, Töteberg-Harms M, Lewis R, Fea A, Marolo P, Ahmed IIK.",
+    title: "Current review of Excimer laser Trabeculostomy",
+    source: "Eye Vis (Lond). 2020;7:24",
+    pmid: "32391398",
+    note: "ELT 公開綜述：準分子激光造通道、不留下植入物。文獻限制包括對照不足。不是個人預後、不是品牌比較、不是療效保證。",
+  },
 };
 
 export function citationsFor(ids: string[]): Citation[] {

@@ -139,8 +139,8 @@ export const EN_PACKS: Record<string, TopicPack> = {
       p("Glaucoma care usually centres on three paths that can be used alone or in sequence. Which fits depends on type (open-angle / angle-closure / normal-tension and so on), target pressure, field and nerve change, side effects, and whether drops can be taken on schedule — only an ophthalmologist decides. This page does not rank “which is best” or quote any clinic’s success rate."),
       ul([
         "Pressure-lowering drops (long-term medicine): the long-term backbone for most open-angle disease and ocular hypertension. Taking them on time and reducing missed doses is one improvable reason for worsening. Mechanisms, cautions and technique for five topical classes are on the glaucoma drops page. No product names here. Do not stop on your own or lend leftover bottles.",
-        "Laser: for open-angle / ocular hypertension, selective laser trabeculoplasty (SLT) and similar — the LiGHT randomised trial (Gazzard et al., Lancet 2019) supports SLT as one first-line option for suitable people; a later six-year visual-field progression analysis (Montesano et al.) also found slower average field worsening in the SLT-first group. Those figures are from public trials / analyses — not your personal prognosis, not a brand comparison, and not something everyone must have; field already lost cannot be restored. Whether it fits and whether drops can be reduced is the doctor’s call. For angle-closure–related care, laser peripheral iridotomy (LPI) and similar — see the angle-closure / ZAP education above; preventive laser is not “everyone must” or “everyone must not.” Drops or further surgery may still be needed after laser.",
-        "Surgery (more often discussed when drops / laser are not enough or not tolerated): conceptually includes traditional filtering surgery (e.g. trabeculectomy-class), aqueous drainage devices, and several minimally invasive glaucoma surgery (MIGS) classes — indications, risks and aftercare differ widely. The aim is still to lower pressure to slow worsening; lost field does not return. This page quotes no success rates, lists no device or implant brand names, and has no DIY postoperative drop timetable.",
+        "Laser: for open-angle / ocular hypertension, selective laser trabeculoplasty (SLT) and similar — the LiGHT randomised trial (Gazzard et al., Lancet 2019) supports SLT as one first-line option for suitable people; a later six-year visual-field progression analysis (Montesano et al.) also found slower average field worsening in the SLT-first group. Those figures are from public trials / analyses — not your personal prognosis, not a brand comparison, and not something everyone must have; field already lost cannot be restored. Whether it fits and whether drops can be reduced is the doctor’s call. Micropulse laser trabeculoplasty (MLT) is in the same trabecular-laser family with a different energy delivery — see the dedicated MLT page; this overview does not rank which is better. For angle-closure–related care, laser peripheral iridotomy (LPI) and similar — see the angle-closure / ZAP education above; preventive laser is not “everyone must” or “everyone must not.” Drops or further surgery may still be needed after laser.",
+        "Surgery (more often discussed when drops / laser are not enough or not tolerated): conceptually includes traditional filtering surgery (e.g. trabeculectomy-class), aqueous drainage devices, and several minimally invasive glaucoma surgery (MIGS) classes — indications, risks and aftercare differ widely. Mechanism comparison of excimer laser trabeculostomy (ELT) versus trabecular-bypass class MIGS is on the dedicated ELT / trabecular-bypass page. The aim is still to lower pressure to slow worsening; lost field does not return. This page quotes no success rates, lists no device or implant brand names, and has no DIY postoperative drop timetable.",
       ]),
       p("Personalised target pressure and how to read OCT / visual-field reports: see the glaucoma-monitoring hub (target IOP, OCT / visual field and reports)."),
       h("Seeking care and what a doctor may discuss"),
@@ -2894,6 +2894,156 @@ export const EN_PACKS: Record<string, TopicPack> = {
         type: "note",
         text: "Public education only—not personal prognosis, and not a substitute for an in-person visit with a registered ophthalmology specialist. This site does not book, prescribe, or sell. Emergencies: A&E / call 999. Cross-read: retinal detachment topic; macular hole topic.",
       },
+    ],
+  },
+  "t-mlt": {
+    title: "Micropulse laser trabeculoplasty (MLT)",
+    tag: "Open-angle / OHT laser",
+    meta: "Micropulse / subthreshold energy · same trabecular-laser family as SLT",
+    keyPoints: [
+      "Micropulse laser trabeculoplasty (MLT) delivers short pulses to the trabecular meshwork — a laser pressure-lowering class that may be discussed in open-angle glaucoma or ocular hypertension.",
+      "It is in the same trabecular-laser family as selective laser trabeculoplasty (SLT), but energy delivery differs; this page does not rank which is better.",
+      "Named trials such as LiGHT support SLT — those figures are not MLT numbers and not your personal prognosis.",
+      "A curtain, sudden vision drop, or severe pain with a sharp vision drop: A&E now (if you cannot travel: call 999).",
+    ],
+    blocks: [
+      h("What it is"),
+      p("Micropulse laser trabeculoplasty (MLT) is an education class of laser aimed at the trabecular meshwork. Energy is sent in very short pulses, with an “off” interval so tissue can cool — a subthreshold / micropulse delivery rather than continuous-wave thermal burns. The aim is still to discuss lowering eye pressure to slow optic-nerve worsening in open-angle glaucoma or ocular hypertension — field already lost cannot be restored. Whether it fits, which laser, and how much of the angle to treat can only be decided by an ophthalmologist after examining the angle, pressure, field and nerve."),
+      p("NICE Clinical Knowledge Summaries (public education) describe MLT as a relatively new trabecular-laser technique: repeated very short pulses deliver energy to the meshwork, and tissue can cool between pulses, so there is little tissue damage. AAO public education also lists MLT as a newer laser-trabeculoplasty modality, using micropulse (short on, long off) to reduce continuous thermal injury. Those are mechanism descriptions — not your personal prognosis, not a brand comparison, and not an outcome promise."),
+      h("How it differs from selective laser trabeculoplasty (SLT)"),
+      p("MLT and selective laser trabeculoplasty (SLT) belong to the same trabecular-laser family: both act on the meshwork when discussing open-angle / ocular-hypertension pressure lowering. The difference is how energy is delivered — SLT uses selective pulses on pigmented meshwork cells; MLT uses micropulse / subthreshold packets. Related, not the same delivery. The glaucoma overview already notes that the LiGHT randomised trial (Gazzard et al., Lancet 2019) supports SLT as one first-line option for suitable people; a later six-year field-progression analysis (Montesano et al.) also found slower average field worsening in the SLT-first group. Those figures belong to SLT trials / analyses — they are not MLT numbers, not your personal prognosis, and not a claim that MLT is better than SLT. This page does not rank them."),
+      {
+        type: "table",
+        rows: [
+          ["Education comparison (not a ranking)", "SLT", "MLT"],
+          ["Target", "Trabecular meshwork (selective pulses)", "Trabecular meshwork (micropulse / subthreshold)"],
+          [
+            "Energy delivery",
+            "Selective short pulses; more named-trial discussion (LiGHT and related)",
+            "Micropulse on/off; public education lists it as a newer technique in the same family",
+          ],
+          [
+            "This page does not say",
+            "Not mandatory for everyone; not a personal guarantee",
+            "Not superior to SLT; not a personal guarantee",
+          ],
+        ],
+      },
+      h("Situations a doctor may discuss"),
+      ul([
+        "Primary open-angle glaucoma or ocular hypertension with an open angle, when the doctor thinks trabecular laser is worth discussing",
+        "Weighed together with pressure-lowering drops, SLT or other surgery classes — sequence is the specialist’s call",
+        "Drops or further procedures may still be needed after laser; one session is not an endpoint",
+        "Angle closure, an acute attack, or an angle unsuitable for trabecular laser follows a different path — see the glaucoma overview’s angle-closure / emergency education; do not self-label",
+      ]),
+      h("When it is an emergency (this page is routine education)"),
+      w("A curtain, a large field cut, sudden vision drop or sudden blindness: go to A&E now. If you cannot get there: call 999. Severe eye pain with headache and vomiting, rainbows, or a sharp vision drop: A&E now (rule out acute angle closure). Do not wait for a routine clinic, and do not put in dilating drops yourself."),
+      p("No red flags, only wanting to understand laser classes: routine education, follow the specialist’s review rhythm. New flashes or a clear increase in floaters without a curtain or sudden blindness: same-day dilated fundus exam if possible — see the urgent page."),
+      h("Common misunderstandings"),
+      {
+        type: "table",
+        rows: [
+          ["Misunderstanding", "Closer wording"],
+          [
+            "“Micropulse is always better / safer than SLT”",
+            "Same trabecular-laser family, different delivery. This page has no named trial proving it is better for everyone; not a brand comparison.",
+          ],
+          [
+            "“LiGHT numbers are my odds if I have MLT”",
+            "LiGHT discusses SLT. Figures are not personal risk and cannot be moved to another delivery method.",
+          ],
+          [
+            "“After laser I can skip reviews and drops”",
+            "Drops or further care may still be needed; pressure, field and nerve still need long-term monitoring.",
+          ],
+          [
+            "“Laser cures glaucoma and restores field”",
+            "Lost field does not return. The aim is to slow worsening, not to cure.",
+          ],
+        ],
+      },
+      note(
+        "Not a substitute for a registered doctor. This page is education — not booking, referral, prescribing or selling, and not an outcome promise. Cross-read: glaucoma overview, glaucoma drops, glaucoma-monitoring hub, and the ELT / trabecular-bypass class MIGS page. Emergencies: urgent page.",
+      ),
+    ],
+  },
+  "t-elt-migs": {
+    title: "Excimer laser trabeculostomy (ELT) and trabecular-bypass class MIGS",
+    tag: "Mechanism comparison",
+    meta: "Ostium vs implant bypass · not a brand comparison",
+    keyPoints: [
+      "This page compares two concepts only: laser openings in the trabecular meshwork, versus an ab-interno trabecular-bypass implant class (trabecular-stent class MIGS).",
+      "Not a brand comparison, not personal prognosis, not an outcome promise, and not a ranking of which is better.",
+      "Some trabecular-bypass class MIGS are often discussed together with cataract surgery; whether that fits is a specialist decision.",
+      "A curtain, sudden vision drop, or severe pain with a sharp vision drop: A&E now (if you cannot travel: call 999).",
+    ],
+    blocks: [
+      h("What this page compares"),
+      p("People often ask how laser “openings” in the meshwork differ from placing a trabecular-bypass device. This page is mechanism education only: excimer laser trabeculostomy (ELT) versus the trabecular-stent class of minimally invasive glaucoma surgery (MIGS) — that is, ab-interno trabecular-bypass devices. It is not a product page, lists no brand names, does not rank which is better, and is not personal prognosis or an outcome promise."),
+      h("Excimer laser trabeculostomy (ELT)"),
+      p("ELT is a laser trabeculostomy class: from inside the front of the eye, an excimer laser makes several channels through the trabecular meshwork and the inner wall of Schlemm’s canal so aqueous can use the conventional outflow path. A public review (Durr et al., Eye and Vision 2020) describes ELT as a micro-invasive path that creates channels with an excimer laser and leaves no implant, and notes that many of those studies lacked controls and washout pressures. That is education about mechanism and study limits — not your personal risk, not a brand comparison, and not an outcome promise."),
+      h("Trabecular-stent class MIGS (ab-interno trabecular-bypass devices)"),
+      p("The concept of trabecular-stent class MIGS is to place a trabecular-bypass device from inside the front of the eye, creating a lasting bypass between the anterior chamber and Schlemm’s canal, with the device remaining inside the eye. It also acts on conventional trabecular / Schlemm outflow, but the method is “implant bypass” rather than “laser ostium.” Some situations are discussed together with cataract surgery — often when the lens is already cloudy and the doctor thinks treating both under one anaesthetic is worth weighing. Whether to combine, and which device class, is a specialist decision after examination. This page lists no brand names."),
+      h("Concept differences (education table, not a ranking)"),
+      {
+        type: "table",
+        rows: [
+          ["Education point", "ELT (laser ostium)", "Trabecular-stent class MIGS (implant bypass)"],
+          [
+            "What is done",
+            "Excimer laser channels through meshwork / inner wall of Schlemm’s canal",
+            "An ab-interno trabecular-bypass device is placed to create a lasting bypass",
+          ],
+          ["Device left behind", "Usually no implant remains", "A trabecular-bypass device remains"],
+          [
+            "With cataract surgery",
+            "Literature discusses standalone or combined with cataract surgery",
+            "Some situations are often discussed together with cataract surgery",
+          ],
+          [
+            "This page does not say",
+            "Not better; not personal prognosis; not an outcome promise",
+            "Not better; not personal prognosis; not an outcome promise",
+          ],
+        ],
+      },
+      p("Neither class is traditional filtering surgery (for example trabeculectomy-class) or an aqueous drainage device; those paths differ widely in indication, risk and aftercare — see the surgery education on the glaucoma overview. The aim is still to lower pressure to slow worsening; lost field does not return."),
+      h("Directions a doctor may discuss"),
+      ul([
+        "Open-angle disease needing an extra pressure-lowering path, when the doctor thinks a micro-invasive trabecular path is worth discussing",
+        "When cataract is already present and lens surgery is being considered, some trabecular-stent class MIGS or ELT may be raised together — not something everyone must combine",
+        "If drops / laser are not enough or not tolerated, traditional surgery classes may still be discussed; this page does not rank them",
+        "Pressure, field and nerve still need monitoring afterwards; drops or further care may still be needed after a device or ostium",
+      ]),
+      h("When it is an emergency (this page is routine education)"),
+      w("A curtain, a large field cut, sudden vision drop or sudden blindness: go to A&E now. If you cannot get there: call 999. Severe eye pain with headache and vomiting, rainbows, or a sharp vision drop: A&E now (rule out acute angle closure). After a procedure, sudden severe pain, a sharp vision drop or clearly worse redness: treat as an emergency too — do not self-label it as “normal irritation.”"),
+      p("No red flags, only comparing mechanisms: routine education, follow the specialist’s review rhythm. See the urgent page."),
+      h("Common misunderstandings"),
+      {
+        type: "table",
+        rows: [
+          ["Misunderstanding", "Closer wording"],
+          [
+            "“A stent is always better than a laser ostium”",
+            "Ostium and implant bypass are different mechanisms. This page does not rank them, and there is no “better” that fits everyone.",
+          ],
+          [
+            "“Afterwards I can stop drops and skip reviews”",
+            "Drops or further care may still be needed; long-term monitoring still matters.",
+          ],
+          [
+            "“This is a brand / product comparison”",
+            "Class language only. No brand names, no purchase pitch, no referral.",
+          ],
+          [
+            "“Minimally invasive means no risk and field comes back”",
+            "Any intraocular path has risks the doctor explains. Lost field does not return.",
+          ],
+        ],
+      },
+      note(
+        "Not a substitute for a registered doctor. This page is education — not booking, referral, prescribing or selling, and not an outcome promise. Cross-read: glaucoma overview, glaucoma drops, glaucoma-monitoring hub, and the MLT page. Emergencies: urgent page.",
+      ),
     ],
   },
   ...PROCEDURE_DAY_EN,
