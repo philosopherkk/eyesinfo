@@ -327,6 +327,17 @@
       flex-direction: column;
     }
 
+    /* After a procedure remount, native requestFullscreen may be blocked;
+       keep teaching chrome covering the viewport from the user's POV. */
+    #teachingChrome.is-fullscreen-css {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      width: 100vw;
+      height: 100vh;
+      max-height: 100dvh;
+    }
+
     /* Keep viewer + stage text + timeline in one teaching panel when possible. */
     #teachingChrome:fullscreen .layout,
     #teachingChrome:-webkit-full-screen .layout,
@@ -518,6 +529,22 @@
           9. 準分子雷射小樑造孔術 — Excimer laser trabeculostomy
         </option>
       </select>
+      <script>
+        /* Keep selected value during first paint (avoid cataract flash). */
+        (function () {
+          try {
+            var id = new URLSearchParams(location.search).get("procedure");
+            var el = document.getElementById("procedure");
+            if (!id || !el) return;
+            for (var i = 0; i < el.options.length; i++) {
+              if (el.options[i].value === id) {
+                el.value = id;
+                break;
+              }
+            }
+          } catch (e) {}
+        })();
+      </script>
 
       <select id="language" aria-label="Language / 語言 / 言語">
         <option value="both">繁體中文 + English</option>
@@ -640,6 +667,51 @@
   </footer>
 
   <script type="module">
+    // Queue parent chip swaps that arrive before Three.js / activateProcedure
+    // are ready, so a click during load is not dropped or overwritten by URL boot.
+    const parentProcedureBridge = {
+      queued: null,
+      /** @type {null | ((id: string) => void)} */
+      apply: null,
+    };
+
+    window.addEventListener("message", event => {
+      if (event.origin !== location.origin) return;
+      const data = event.data;
+      if (!data || typeof data !== "object") return;
+      if (data.type === "eyesinfo-prepare-procedure-nav") {
+        try {
+          const chrome = document.getElementById("teachingChrome");
+          const native =
+            document.fullscreenElement ||
+            document.webkitFullscreenElement;
+          if (
+            native === chrome ||
+            chrome?.classList.contains("is-fullscreen")
+          ) {
+            sessionStorage.setItem("eyesinfo-teaching-fs-persist", "1");
+          }
+        } catch (e) {}
+        return;
+      }
+      if (data.type !== "eyesinfo-select-procedure") return;
+      if (typeof data.procedure !== "string") return;
+      if (parentProcedureBridge.apply) {
+        parentProcedureBridge.apply(data.procedure);
+      } else {
+        parentProcedureBridge.queued = data.procedure;
+        const el = document.getElementById("procedure");
+        if (el) {
+          for (let i = 0; i < el.options.length; i++) {
+            if (el.options[i].value === data.procedure) {
+              el.value = data.procedure;
+              break;
+            }
+          }
+        }
+      }
+    });
+
     async function main() {
       const bootQuery = new URLSearchParams(location.search);
       if (bootQuery.get("procedure") === "cataract") {
@@ -656,7 +728,7 @@
       const [
         { OrbitControls },
         { enablePageScrollOrbit },
-        { bindTeachingFullscreen },
+        teachingFs,
         kit,
         { PROCEDURES_JA, LABEL_JA },
       ] = await Promise.all([
@@ -668,12 +740,17 @@
       ]);
 
       const $ = id => document.getElementById(id);
-      bindTeachingFullscreen({
+      const teachingFullscreen = teachingFs.bindTeachingFullscreen({
         target: $("teachingChrome"),
         enterButton: $("enterFullscreen"),
         exitButton: $("exitFullscreen"),
         parkElements: [$("procedure")],
       });
+      const markFsPersist = () => {
+        if (teachingFullscreen.active()) {
+          teachingFs.markTeachingFullscreenPersist();
+        }
+      };
       kit.bindPlaybackSpeed($("speed"));
       const clamp = THREE.MathUtils.clamp;
       const lerp = THREE.MathUtils.lerp;
@@ -3893,11 +3970,16 @@
 
       const query = new URLSearchParams(location.search);
       const requestedProcedure = query.get("procedure");
+      // Prefer a parent chip selection queued during load over the stale iframe URL.
+      const queuedFromParent = parentProcedureBridge.queued;
+      if (queuedFromParent) parentProcedureBridge.queued = null;
 
       let activeId =
-        Object.hasOwn(PROCEDURES, requestedProcedure)
-          ? requestedProcedure
-          : "rrd";
+        queuedFromParent && Object.hasOwn(PROCEDURES, queuedFromParent)
+          ? queuedFromParent
+          : Object.hasOwn(PROCEDURES, requestedProcedure)
+            ? requestedProcedure
+            : "rrd";
 
       let language = "both";
       const requestedLanguage = query.get("lang");
@@ -4194,8 +4276,10 @@
         updateUI();
       }
 
-      function activateProcedure(id) {
+      function activateProcedure(id, { fromParent = false } = {}) {
         if (id === "cataract") {
+          // Document swap — remember FS so the cataract page can restore it.
+          markFsPersist();
           const lang =
             language === "en" || language === "zh" || language === "ja"
               ? language
@@ -4231,13 +4315,35 @@
         setHomeView();
         refresh();
 
-        if (window.parent !== window) {
+        // In-viewer swap stays on this document (and in fullscreen). Tell the
+        // React shell to update chips/URL without remounting the iframe.
+        if (!fromParent && window.parent !== window) {
           window.parent.postMessage(
             { type: "eyesinfo-procedure", procedure: id },
             location.origin
           );
         }
       }
+
+      // Hand off queued/live parent selects to activateProcedure (bridge registered early).
+      parentProcedureBridge.apply = id => {
+        if (id === activeId) return;
+        activateProcedure(id, { fromParent: true });
+      };
+      if (parentProcedureBridge.queued) {
+        const late = parentProcedureBridge.queued;
+        parentProcedureBridge.queued = null;
+        parentProcedureBridge.apply(late);
+      }
+      // prepare-nav after bind: also cover CSS/native FS via helper.
+      window.addEventListener("message", event => {
+        if (event.origin !== location.origin) return;
+        const data = event.data;
+        if (!data || typeof data !== "object") return;
+        if (data.type === "eyesinfo-prepare-procedure-nav") {
+          markFsPersist();
+        }
+      });
 
       // ============================================================
       // 7. CONTROLS
@@ -4363,8 +4469,17 @@
           "The graphics context was lost. Please reload the page.";
       });
 
-      activateProcedure(activeId);
+      activateProcedure(activeId, { fromParent: true });
       $("status").hidden = true;
+
+      // Tell the React shell the viewer can accept eyesinfo-select-procedure
+      // (flushes any chip click that raced the Three.js boot).
+      if (window.parent !== window) {
+        window.parent.postMessage(
+          { type: "eyesinfo-procedure-ready", procedure: activeId },
+          location.origin
+        );
+      }
 
       let previousTime = performance.now();
 
