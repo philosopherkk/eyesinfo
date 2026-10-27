@@ -397,10 +397,11 @@
           4. 霰粒腫切開刮除術 — Chalazion I&amp;C
         </option>
       </select>
-      <select id="language" aria-label="Language / 語言">
+      <select id="language" aria-label="Language / 語言 / 言語">
         <option value="both">繁體中文 + English</option>
         <option value="zh">繁體中文</option>
         <option value="en">English</option>
+        <option value="ja">日本語</option>
       </select>
       <button type="button" id="enterFullscreen" aria-pressed="false">
         全螢幕 / Fullscreen
@@ -517,11 +518,13 @@
         { enablePageScrollOrbit },
         { bindTeachingFullscreen },
         kit,
+        { STAGES_JA },
       ] = await Promise.all([
         import("three/addons/controls/OrbitControls.js"),
         import("/js/orbit-page-scroll.js"),
         import("/js/teaching-fullscreen.js"),
         import("/js/surgery-kit.js"),
+        import("/js/cataract-phaco-ja.js"),
       ]);
 
       const STAGES = [
@@ -637,6 +640,10 @@
         }
       ];
 
+      STAGES_JA.forEach((ja, i) => {
+        if (STAGES[i]) Object.assign(STAGES[i], ja);
+      });
+
       const CONFIG = {
         secondsPerStage: 8,
         maxPixelRatio: 2
@@ -665,11 +672,16 @@
       let playing = false;
       let language = "both";
       const requestedLanguage = new URLSearchParams(location.search).get("lang");
-      if (requestedLanguage === "zh" || requestedLanguage === "en") {
+      if (
+        requestedLanguage === "zh" ||
+        requestedLanguage === "en" ||
+        requestedLanguage === "ja"
+      ) {
         language = requestedLanguage;
         $("language").value = requestedLanguage;
         document.documentElement.lang =
-          requestedLanguage === "en" ? "en" : "zh-Hant";
+          requestedLanguage === "en" ? "en" :
+          requestedLanguage === "ja" ? "ja" : "zh-Hant";
       }
       let lastUIStage = -1;
       let lastUILanguage = "";
@@ -1127,9 +1139,23 @@
         $("labels").appendChild(label.element);
       }
 
-      function localized(zh, en) {
-        return language === "zh" ? zh :
-          language === "en" ? en : `${zh} / ${en}`;
+      function localized(zh, en, ja = "") {
+        if (language === "zh") return zh;
+        if (language === "en") return en;
+        if (language === "ja") return ja || en || zh;
+        return `${zh} / ${en}`;
+      }
+
+      function stagePrimary(stage) {
+        if (language === "en") return stage.en;
+        if (language === "ja") return stage.ja || stage.en;
+        return stage.zh;
+      }
+
+      function stageShort(stage) {
+        if (language === "en") return stage.shortEn;
+        if (language === "ja") return stage.shortJa || stage.shortEn;
+        return stage.shortZh;
       }
 
       const labelScratch = new THREE.Vector3();
@@ -1144,7 +1170,9 @@
             projected.z > -1 && projected.z < 1 &&
             Math.abs(projected.x) < .98 &&
             Math.abs(projected.y) < .98;
-          label.element.textContent = localized(label.zh, label.en);
+          label.element.textContent = localized(
+            label.zh, label.en, label.ja || label.en
+          );
           return {
             element: label.element,
             x: (projected.x * .5 + .5) * rect.width,
@@ -1342,32 +1370,38 @@
           $("stepCount").textContent =
             `STAGE ${String(index + 1).padStart(2, "0")} / ${STAGES.length}`;
 
-          $("stageTitle").textContent =
-            language === "en" ? stage.en : stage.zh;
+          $("stageTitle").textContent = stagePrimary(stage);
 
           $("stageSubtitle").textContent =
             language === "both" ? stage.en : "";
 
           $("stageTag").textContent =
-            localized(stage.zh, stage.en);
+            localized(stage.zh, stage.en, stage.ja);
 
           $("explanation").replaceChildren();
-          if (language !== "en") {
+          if (language === "ja") {
             const paragraph = document.createElement("p");
-            paragraph.lang = "zh-Hant";
-            paragraph.textContent = stage.bodyZh;
+            paragraph.lang = "ja";
+            paragraph.textContent = stage.bodyJa || stage.bodyEn;
             $("explanation").appendChild(paragraph);
-          }
-          if (language !== "zh") {
-            const paragraph = document.createElement("p");
-            paragraph.lang = "en";
-            paragraph.className = "en";
-            paragraph.textContent = stage.bodyEn;
-            $("explanation").appendChild(paragraph);
+          } else {
+            if (language !== "en") {
+              const paragraph = document.createElement("p");
+              paragraph.lang = "zh-Hant";
+              paragraph.textContent = stage.bodyZh;
+              $("explanation").appendChild(paragraph);
+            }
+            if (language !== "zh") {
+              const paragraph = document.createElement("p");
+              paragraph.lang = "en";
+              paragraph.className = "en";
+              paragraph.textContent = stage.bodyEn;
+              $("explanation").appendChild(paragraph);
+            }
           }
 
           $("clinicalNote").textContent =
-            localized(stage.noteZh, stage.noteEn);
+            localized(stage.noteZh, stage.noteEn, stage.noteJa);
 
           stepButtons.forEach((button, i) => {
             button.replaceChildren();
@@ -1377,8 +1411,7 @@
             button.appendChild(number);
 
             const title = document.createElement("span");
-            title.textContent =
-              language === "en" ? STAGES[i].shortEn : STAGES[i].shortZh;
+            title.textContent = stageShort(STAGES[i]);
             button.appendChild(title);
 
             if (language === "both") {
@@ -1394,7 +1427,7 @@
 
             button.setAttribute(
               "aria-label",
-              `${i + 1}. ${localized(STAGES[i].zh, STAGES[i].en)}`
+              `${i + 1}. ${localized(STAGES[i].zh, STAGES[i].en, STAGES[i].ja)}`
             );
           });
         }
@@ -1402,7 +1435,7 @@
         $("timeline").value = String(Math.round(progress * 100));
         $("timeline").setAttribute(
           "aria-valuetext",
-          `${localized(stage.zh, stage.en)} ${Math.round(currentFraction * 100)}%`
+          `${localized(stage.zh, stage.en, stage.ja)} ${Math.round(currentFraction * 100)}%`
         );
 
         $("progressText").textContent =
@@ -1410,8 +1443,8 @@
           `${Math.round(progress / STAGES.length * 100)}%`;
 
         $("play").textContent = playing
-          ? localized("⏸ 暫停", "⏸ Pause")
-          : localized("▶ 播放", "▶ Play");
+          ? localized("⏸ 暫停", "⏸ Pause", "⏸ 一時停止")
+          : localized("▶ 播放", "▶ Play", "▶ 再生");
 
         $("previous").disabled = progress <= 0;
         $("next").disabled = progress >= STAGES.length;
@@ -1458,14 +1491,18 @@
       $("language").addEventListener("change", event => {
         language = event.target.value;
         document.documentElement.lang =
-          language === "en" ? "en" : "zh-Hant";
+          language === "en" ? "en" :
+          language === "ja" ? "ja" : "zh-Hant";
         refresh();
       });
 
       $("procedure").addEventListener("change", event => {
         const id = event.target.value;
         if (id === "cataract") return;
-        const lang = language === "en" ? "en" : language === "zh" ? "zh" : "";
+        const lang =
+          language === "en" || language === "zh" || language === "ja"
+            ? language
+            : "";
         if (window.parent !== window) {
           window.parent.postMessage(
             { type: "eyesinfo-procedure", procedure: id },

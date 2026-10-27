@@ -13,7 +13,17 @@ import { localizeTopic, useI18n } from "@/i18n";
 import { pageHead } from "@/lib/page-seo";
 import { localeFromMatch } from "@/lib/locale-path";
 
-const PROCEDURE_IDS = ["rrd", "injection", "chalazion", "cataract"] as const;
+const PROCEDURE_IDS = [
+  "rrd",
+  "injection",
+  "chalazion",
+  "cataract",
+  "mlt",
+  "lpi",
+  "yag",
+  "retinopexy",
+  "elt",
+] as const;
 type ProcedureId = (typeof PROCEDURE_IDS)[number];
 
 const searchSchema = z.object({
@@ -22,25 +32,56 @@ const searchSchema = z.object({
 });
 
 /**
- * The procedure viewers are 繁 / EN only (`?lang=zh|en`).
- * ja → en and zh-Hans → zh; this pass does not add Japanese or simplified stage copy.
- * Cataract is KK's phaco page. Its line diagrams are the procedure-day frames, which already have EN / JA / 简.
+ * Procedure viewers accept `?lang=zh|en|ja`.
+ * zh-Hans → zh; JA uses dedicated stage copy in the HTML viewers.
+ * Cataract line diagrams already have EN / JA / 简 via topic localization.
  */
-function procedureViewerLang(locale: Locale): "zh" | "en" {
-  if (locale === "en" || locale === "ja") return "en";
+function procedureViewerLang(locale: Locale): "zh" | "en" | "ja" {
+  if (locale === "en") return "en";
+  if (locale === "ja") return "ja";
   return "zh";
 }
 
-const CHOICES: { id: ProcedureId; hant: string; en: string }[] = [
-  { id: "cataract", hant: "白內障手術", en: "Cataract surgery" },
-  { id: "rrd", hant: "視網膜脫離", en: "Retinal detachment" },
-  { id: "injection", hant: "玻璃體內注射", en: "Intravitreal injection" },
-  { id: "chalazion", hant: "霰粒腫切開刮除術", en: "Chalazion" },
+const CHOICES: { id: ProcedureId; hant: string; en: string; ja: string }[] = [
+  { id: "cataract", hant: "白內障手術", en: "Cataract surgery", ja: "白内障手術" },
+  { id: "rrd", hant: "視網膜脫離", en: "Retinal detachment", ja: "網膜剥離" },
+  { id: "injection", hant: "玻璃體內注射", en: "Intravitreal injection", ja: "硝子体内注射" },
+  { id: "chalazion", hant: "霰粒腫切開刮除術", en: "Chalazion", ja: "霰粒腫切開掻爬" },
+  {
+    id: "mlt",
+    hant: "微脈衝雷射小樑成形術",
+    en: "Micropulse laser trabeculoplasty",
+    ja: "マイクロパルスレーザー線維柱帯形成術",
+  },
+  {
+    id: "lpi",
+    hant: "雷射周邊虹膜切開術",
+    en: "Laser peripheral iridotomy",
+    ja: "レーザー周辺虹彩切開術",
+  },
+  {
+    id: "yag",
+    hant: "Nd:YAG 雷射後囊切開術",
+    en: "Nd:YAG posterior capsulotomy",
+    ja: "Nd:YAGレーザー後嚢切開術",
+  },
+  {
+    id: "retinopexy",
+    hant: "氬雷射視網膜固定術",
+    en: "Argon laser retinopexy",
+    ja: "アルゴンレーザー網膜固定術",
+  },
+  {
+    id: "elt",
+    hant: "準分子雷射小樑造孔術",
+    en: "Excimer laser trabeculostomy",
+    ja: "エキシマレーザー線維柱帯造孔術",
+  },
 ];
 
 const HANT = {
   title: "手術教學示意",
-  lead: "四項手術的示意圖。不是模擬器、不是檢查，亦不是手術操作指引。",
+  lead: "白內障、視網膜脫離、注射、霰粒腫與五項雷射的示意圖。不是模擬器、不是檢查，亦不是手術操作指引。",
   caveat: "不能代替註冊醫生。不提供診斷、處方、預約、購買或轉介。",
   choose: "選擇手術示意",
   diagrams: "線條結構示意",
@@ -48,15 +89,24 @@ const HANT = {
 
 const EN = {
   title: "Procedure teaching illustration",
-  lead: "A schematic illustration of four procedures. Not a simulator, not a test, and not an operative guide.",
+  lead: "Schematic illustrations of cataract, retinal detachment, injection, chalazion, and five laser procedures. Not a simulator, not a test, and not an operative guide.",
   caveat:
     "This cannot replace a registered doctor. It does not diagnose, prescribe, book, sell, or refer.",
   choose: "Choose a procedure illustration",
   diagrams: "Line diagrams",
 };
 
+const JA = {
+  title: "手術の示意図",
+  lead: "白内障、網膜剥離、注射、霰粒腫と五つのレーザー示意。シミュレーターでも検査でも手術手技の指針でもありません。",
+  caveat: "登録医師の代替にはなりません。診断・処方・予約・販売・紹介は行いません。",
+  choose: "示意を選ぶ",
+  diagrams: "線図による構造示意",
+};
+
 function shellCopy(locale: Locale) {
-  if (locale === "en" || locale === "ja") return EN;
+  if (locale === "en") return EN;
+  if (locale === "ja") return JA;
   if (locale === "zh-Hans") {
     return {
       title: toHans(HANT.title),
@@ -70,7 +120,8 @@ function shellCopy(locale: Locale) {
 }
 
 function choiceLabel(locale: Locale, choice: (typeof CHOICES)[number]) {
-  if (locale === "en" || locale === "ja") return choice.en;
+  if (locale === "en") return choice.en;
+  if (locale === "ja") return choice.ja;
   if (locale === "zh-Hans") return toHans(choice.hant);
   return choice.hant;
 }

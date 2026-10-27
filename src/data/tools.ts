@@ -39,8 +39,8 @@ export const TOOLS: ToolDef[] = [
   {
     id: "procedures",
     title: "手術教學示意",
-    blurb: "白內障手術、視網膜脫離、玻璃體內注射、霰粒腫切開刮除術（不是檢查）",
-    canto: "四項示意，唔係手術指引",
+    blurb: "白內障、視網膜脫離、注射、霰粒腫與五項雷射示意（不是檢查）",
+    canto: "手術示意，唔係手術指引",
     href: "/tools/procedures",
   },
   { id: "drops", title: "滴藥水步驟", blurb: "洗手、唔好掂睫毛；跟說明書", canto: "跟住步驟滴", href: "/tools/drops", home: true },
@@ -210,10 +210,14 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-keratoconus", label: "圓錐角膜" },
   ],
   "t-yag": [
+    { href: "/tools/procedures?procedure=yag", label: "教學示意" },
     { href: "/t/t-yag-cap", label: "後囊切開當日" },
     { href: "/t/t-barrier-laser", label: "氬激光視網膜屏障光凝當日過程" },
   ],
   "t-glaucoma-monitor": [
+    { href: "/tools/procedures?procedure=mlt", label: "微脈衝小樑成形示意" },
+    { href: "/tools/procedures?procedure=elt", label: "準分子小樑造孔示意" },
+    { href: "/tools/procedures?procedure=lpi", label: "周邊虹膜切開示意" },
     { href: "/t/d4", label: "青光眼總論" },
     { href: "/t/t-gldrops", label: "青光眼眼藥水" },
     { href: "/t/t-mlt", label: "微脈衝激光小梁成形術（MLT）" },
@@ -341,11 +345,13 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/tools/warm", label: "熱敷計時" },
   ],
   "t-barrier-laser": [
+    { href: "/tools/procedures?procedure=retinopexy", label: "教學示意" },
     { href: "/t/d8", label: "飛蚊症與視網膜脫離風險" },
     { href: "/t/t-rd", label: "視網膜脫離、前膜、裂孔與玻璃體切除" },
     { href: "/urgent", label: "急症與同日評估" },
   ],
   "t-yag-cap": [
+    { href: "/tools/procedures?procedure=yag", label: "教學示意" },
     { href: "/t/t-cataract", label: "超聲波乳化與人工晶體" },
     { href: "/t/t-yag", label: "YAG 後囊切開與視網膜屏障激光" },
   ],

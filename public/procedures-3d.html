@@ -499,10 +499,11 @@
         </option>
       </select>
 
-      <select id="language" aria-label="Language / 語言">
+      <select id="language" aria-label="Language / 語言 / 言語">
         <option value="both">繁體中文 + English</option>
         <option value="zh">繁體中文</option>
         <option value="en">English</option>
+        <option value="ja">日本語</option>
       </select>
 
       <button type="button" id="enterFullscreen" aria-pressed="false">
@@ -624,7 +625,7 @@
       if (bootQuery.get("procedure") === "cataract") {
         const lang = bootQuery.get("lang");
         location.replace(
-          lang === "en" || lang === "zh"
+          lang === "en" || lang === "zh" || lang === "ja"
             ? `/cataract-phaco.html?lang=${lang}`
             : "/cataract-phaco.html"
         );
@@ -637,11 +638,13 @@
         { enablePageScrollOrbit },
         { bindTeachingFullscreen },
         kit,
+        { PROCEDURES_JA, LABEL_JA },
       ] = await Promise.all([
         import("three/addons/controls/OrbitControls.js"),
         import("/js/orbit-page-scroll.js"),
         import("/js/teaching-fullscreen.js"),
         import("/js/surgery-kit.js"),
+        import("/js/procedures-3d-ja.js"),
       ]);
 
       const $ = id => document.getElementById(id);
@@ -2142,10 +2145,1730 @@
       models.chalazion = buildChalazion();
 
       // ============================================================
+      // LASER PROCEDURES ADD-ON
+      //
+      // Requires the existing helpers inside main():
+      // THREE, $, V, mat, mesh, ball, ring, box, segment,
+      // clamp, lerp, smooth, stage, makeEye, outerSettings,
+      // scene, models, PROCEDURES.
+      //
+      // IDs:
+      //   mlt
+      //   lpi
+      //   yag
+      //   retinopexy
+      //
+      // All timing, beam paths, particles, sizes, colors, and tissue
+      // changes are schematic. No treatment settings are prescribed.
+      // ============================================================
+
+
+      // ------------------------------------------------------------
+      // A. BILINGUAL CONTENT
+      // All four additions use six educational stages.
+      // ------------------------------------------------------------
+
+      Object.assign(PROCEDURES, {
+        mlt: {
+          zh: "微脈衝雷射小樑成形術",
+          en: "Micropulse laser trabeculoplasty",
+
+          subtitleZh: "房角觀察、小樑網定位及微脈衝治療示意",
+          subtitleEn:
+            "Angle visualization, trabecular targeting, and micropulse treatment",
+
+          warningZh:
+            "本模型為微脈衝雷射小樑成形術（MLT），不是經鞏膜睫狀體光凝固。" +
+            "降眼壓反應因人而異，不能由動畫預測；原有藥物及回診依眼科醫師指示。",
+
+          warningEn:
+            "This is MLT, not transscleral cyclophotocoagulation. " +
+            "Pressure response varies and cannot be predicted by this animation. " +
+            "Continue medication and follow-up as directed.",
+
+          legend: [
+            ["#d7ad76", "虹膜", "Iris"],
+            ["#75dbc5", "小樑網示意", "Trabecular meshwork"],
+            ["#8edfff", "房水路徑符號", "Aqueous pathway"],
+            ["#b4f99a", "微脈衝定位符號", "Micropulse marker"]
+          ],
+
+          stages: [
+            stage(
+              "確認適應症與房角", "Assessment and angle examination",
+              "評估眼壓、房角及青光眼狀況，確認是否適合小樑網雷射治療。",
+              "Pressure, angle anatomy, and glaucoma status are assessed to determine suitability for trabecular laser treatment.",
+              "這不是睫狀體治療；動畫目標是前房角的小樑網。",
+              "The target is the trabecular meshwork in the anterior chamber angle, not the ciliary body."
+            ),
+            stage(
+              "局部麻醉與準備", "Topical anesthesia and preparation",
+              "依臨床計畫給予局部麻醉及所需的治療前準備。",
+              "Topical anesthesia and any indicated pretreatment are provided according to the clinical plan.",
+              "不指定藥物、劑量或等待時間。",
+              "No medication, dose, or waiting interval is prescribed."
+            ),
+            stage(
+              "房角鏡與目標定位", "Goniolens and target identification",
+              "使用房角接觸鏡觀察並定位小樑網。淡綠色環協助辨識治療區域。",
+              "A gonioscopic contact lens enables visualization and targeting of the trabecular meshwork. A pale-green ring identifies the region.",
+              "鏡片、反射及光線折射均為概念示意，不是光學追跡。",
+              "The lens, reflection, and refraction are conceptual rather than ray-traced optics."
+            ),
+            stage(
+              "微脈衝雷射治療", "Micropulse treatment",
+              "短暫雷射開啟與關閉交替進行。定位符號沿小樑網移動，不留下凝固性燒灼點。",
+              "Laser emission alternates between brief on and off periods. The targeting marker moves along the meshwork without leaving coagulative burn markers.",
+              "閃爍已大幅放慢；顯示範圍、位置數及節奏不是實際治療參數。",
+              "Pulsing is greatly slowed. Displayed coverage, locations, and timing are not treatment parameters."
+            ),
+            stage(
+              "治療區域確認", "Treatment review",
+              "完成計畫中的治療後，檢視眼部狀態。模型不以組織變白、氣泡或疤痕作為完成標記。",
+              "The eye is reviewed after the planned treatment. Blanching, bubbles, and scars are not used as completion markers.",
+              "房水粒子只代表解剖路徑，不表示立即增加流量或保證眼壓下降。",
+              "Aqueous particles illustrate a pathway, not an immediate flow increase or guaranteed pressure reduction."
+            ),
+            stage(
+              "眼壓評估與追蹤", "Pressure assessment and follow-up",
+              "依臨床計畫評估眼壓、發炎及後續反應，決定藥物與追蹤安排。",
+              "Pressure, inflammation, and subsequent response are assessed to guide medication and follow-up.",
+              "動畫不提供眼壓數值或預測療效。",
+              "The animation supplies no pressure value or outcome prediction."
+            )
+          ]
+        },
+
+        lpi: {
+          zh: "雷射周邊虹膜切開術",
+          en: "Laser peripheral iridotomy",
+
+          subtitleZh: "周邊虹膜開口與瞳孔阻滯解除示意",
+          subtitleEn:
+            "Peripheral iris opening and relief of pupillary block",
+
+          warningZh:
+            "虹膜開口不保證房角完全開放，也不代表青光眼已治癒。" +
+            "術後須依指示評估眼壓、開口通暢度及房角。",
+
+          warningEn:
+            "A patent iridotomy does not guarantee a fully open angle or cure glaucoma. " +
+            "Pressure, patency, and angle anatomy require follow-up.",
+
+          legend: [
+            ["#d7ad76", "虹膜", "Iris"],
+            ["#a9e8ff", "周邊開口邊緣", "Peripheral opening rim"],
+            ["#7edfff", "房水路徑符號", "Aqueous pathway"],
+            ["#ead1a2", "水晶體", "Lens"]
+          ],
+
+          stages: [
+            stage(
+              "評估窄房角與阻滯", "Assess narrow angle and block",
+              "確認房角狹窄、瞳孔阻滯成分及治療計畫。虹膜向前隆起用來解釋可能的阻滯機轉。",
+              "Angle narrowing, the pupillary-block component, and the treatment plan are assessed. Anterior iris bowing illustrates a possible block mechanism.",
+              "不是所有窄房角都由瞳孔阻滯造成；形狀為放大示意。",
+              "Not all narrow angles arise from pupillary block. The illustrated shape is exaggerated."
+            ),
+            stage(
+              "局部麻醉與準備", "Anesthesia and preparation",
+              "依臨床計畫進行局部麻醉及所需的治療前準備。",
+              "Topical anesthesia and indicated pretreatment are provided according to the clinical plan.",
+              "不指定藥物或雷射能量。",
+              "No medication or laser energy is prescribed."
+            ),
+            stage(
+              "接觸鏡與周邊定位", "Contact lens and peripheral targeting",
+              "利用接觸鏡觀察周邊虹膜並選擇治療位置。此處只顯示一個教學位置。",
+              "A contact lens assists visualization and selection of a peripheral iris target. One illustrative location is shown.",
+              "位置不是病人專屬建議；某些病例可能需要不同雷射或序列治療。",
+              "The location is not patient-specific guidance. Some cases require different lasers or sequential treatment."
+            ),
+            stage(
+              "建立虹膜開口", "Create the iris opening",
+              "雷射在周邊虹膜建立開口，保留中央瞳孔。動畫以逐漸出現的網格孔洞表示。",
+              "Laser creates an opening in the peripheral iris while preserving the central pupil. A progressively appearing mesh opening represents the result.",
+              "開口形成經過簡化，不模擬完整組織破壞或雷射物理。",
+              "Opening formation is simplified and does not simulate full tissue disruption or laser physics."
+            ),
+            stage(
+              "通暢度與房水路徑", "Patency and aqueous pathway",
+              "開口提供後房通往前房的替代路徑。藍色粒子穿過開口，虹膜隆起稍減。",
+              "The opening provides an alternative route from the posterior to the anterior chamber. Blue particles pass through it as iris bowing partly decreases.",
+              "後房不是玻璃體腔；房水動畫不代表淚液或直接排到眼外。",
+              "The posterior chamber is not the vitreous cavity. These particles are not tears or direct drainage outside the eye."
+            ),
+            stage(
+              "術後評估", "Post-treatment assessment",
+              "確認開口、眼壓及眼部狀態，依指示安排用藥及房角追蹤。",
+              "The opening, pressure, and ocular status are assessed, with medication and angle follow-up as indicated.",
+              "即使開口通暢，仍可能有殘餘房角狹窄或需要其他治療。",
+              "Residual angle narrowing or a need for additional treatment can remain despite a patent opening."
+            )
+          ]
+        },
+
+        yag: {
+          zh: "Nd:YAG 雷射後囊切開術",
+          en: "Nd:YAG posterior capsulotomy",
+
+          subtitleZh: "人工水晶體後方的混濁後囊開口示意",
+          subtitleEn:
+            "Opening an opacified posterior capsule behind the IOL",
+
+          warningZh:
+            "本治療處理後囊混濁，不是再次移除白內障，也不是切開人工水晶體。" +
+            "若出現明顯視力下降、疼痛或新的閃光、飛蚊與黑幕，應立即聯絡眼科團隊。",
+
+          warningEn:
+            "This treats posterior capsule opacification, not a new cataract or the IOL itself. " +
+            "Promptly report reduced vision, pain, or new flashes, floaters, or a curtain-like shadow.",
+
+          legend: [
+            ["#91d9f5", "人工水晶體", "Intraocular lens"],
+            ["#e6dcc7", "混濁後囊", "Opacified posterior capsule"],
+            ["#b2edff", "後囊開口邊緣", "Capsulotomy opening rim"],
+            ["#ffe1a0", "光路符號", "Light-path symbol"]
+          ],
+
+          stages: [
+            stage(
+              "確認後囊混濁", "Confirm posterior capsule opacification",
+              "確認視覺困擾與後囊混濁相關，並評估其他可能限制視力的眼部問題。",
+              "The clinician confirms that posterior capsule opacification contributes to the visual problem and evaluates other causes of reduced vision.",
+              "混濁層位於人工水晶體後方，不是人工水晶體本身變成白內障。",
+              "The cloudy layer is behind the IOL; the implant has not become a cataract."
+            ),
+            stage(
+              "準備與局部麻醉", "Preparation and topical anesthesia",
+              "依臨床計畫進行檢查、瞳孔準備及局部麻醉。",
+              "Examination, pupil preparation, and topical anesthesia are performed according to the clinical plan.",
+              "不指定藥物、瞳孔大小或雷射設定。",
+              "No medication, pupil size, or laser settings are prescribed."
+            ),
+            stage(
+              "聚焦於後囊", "Focus on the posterior capsule",
+              "將目標定位在人工水晶體後方的後囊。模型使用接觸鏡符號協助說明。",
+              "The posterior capsule behind the IOL is targeted. A contact-lens symbol assists the illustration.",
+              "接觸鏡不代表所有病例都必須使用；模型不提供焦點偏移距離。",
+              "A contact lens is not mandatory in every case. No focus-offset distance is supplied."
+            ),
+            stage(
+              "後囊開口形成", "Capsulotomy opening",
+              "雷射使混濁後囊中央形成開口，人工水晶體保持完整。",
+              "Laser creates a central opening in the cloudy posterior capsule while the IOL remains intact.",
+              "圓形開口擴大只是教學轉場，不代表指定的擊發順序或切開圖案。",
+              "An expanding circular opening is a teaching transition, not a prescribed firing sequence or treatment pattern."
+            ),
+            stage(
+              "中央光路示意", "Central light-path illustration",
+              "開口讓中央光路不再被該處混濁後囊阻擋。周邊後囊仍保留。",
+              "The opening removes that central capsular obstruction to the light path. The peripheral posterior capsule remains.",
+              "光線為概念線條，不模擬屈光、視網膜成像或保證視力恢復。",
+              "Light lines are conceptual, not a refraction model, retinal image, or guarantee of visual recovery."
+            ),
+            stage(
+              "眼壓與術後評估", "Pressure and postoperative assessment",
+              "評估眼部狀態與眼壓，說明追蹤及需要立即回報的症狀。",
+              "Ocular status and pressure are assessed, with follow-up and warning symptoms reviewed.",
+              "後囊開口保留至完成畫面；不模擬所有併發症。",
+              "The capsular opening remains in the final frame. Not all complications are simulated."
+            )
+          ]
+        },
+
+        retinopexy: {
+          zh: "氬雷射視網膜固定術",
+          en: "Argon laser retinopexy",
+
+          subtitleZh: "經瞳孔雷射治療視網膜裂孔周圍",
+          subtitleEn:
+            "Transpupillary laser treatment around a retinal break",
+
+          warningZh:
+            "雷射不會讓裂孔立即消失，也不能保證不再發生視網膜剝離。" +
+            "若出現新的或增加的閃光、飛蚊、黑幕或視力下降，應立即接受眼科評估。",
+
+          warningEn:
+            "Laser does not make the break disappear or guarantee prevention of detachment. " +
+            "New or increasing flashes, floaters, a curtain, or reduced vision require prompt ophthalmic assessment.",
+
+          legend: [
+            ["#ee927b", "視網膜", "Retina"],
+            ["#ff6973", "視網膜裂孔", "Retinal break"],
+            ["#ffd17d", "雷射治療位置", "Laser treatment sites"],
+            ["#72e997", "示意雷射光路", "Symbolic laser path"]
+          ],
+
+          stages: [
+            stage(
+              "辨識裂孔與視網膜狀態", "Identify the break and retinal status",
+              "檢查視網膜裂孔、周圍視網膜及是否存在剝離，確認合適的治療計畫。",
+              "The break, surrounding retina, and any detachment are assessed to select an appropriate treatment plan.",
+              "此模型為局部裂孔示意，不代表所有裂孔或剝離都適合單獨雷射。",
+              "This localized break does not imply that every break or detachment can be managed with laser alone."
+            ),
+            stage(
+              "瞳孔準備與麻醉", "Pupil preparation and anesthesia",
+              "依臨床計畫進行瞳孔準備及局部麻醉，以利檢查與治療。",
+              "Pupil preparation and topical anesthesia support examination and treatment according to the clinical plan.",
+              "未指定藥物或等待時間。",
+              "No medication or waiting interval is prescribed."
+            ),
+            stage(
+              "接觸鏡與裂孔定位", "Contact lens and break localization",
+              "此版本示意使用接觸鏡，經瞳孔將外部雷射導向裂孔周圍的視網膜。",
+              "This version illustrates contact-lens-assisted delivery of an external laser through the pupil to retina surrounding the break.",
+              "不是玻璃體手術中的眼內雷射；光線未做實際折射計算。",
+              "This is not intraoperative endolaser. Refraction is not physically calculated."
+            ),
+            stage(
+              "裂孔周圍雷射治療", "Laser around the break",
+              "在裂孔周圍的視網膜施作雷射。黃色點依序出現，表示已治療的位置。",
+              "Laser is applied to retina around the break. Yellow markers appear sequentially to identify treated sites.",
+              "點數、排列、間距與大小為示意，不可當作治療圖。",
+              "Marker count, pattern, spacing, and size are illustrative, not a treatment map."
+            ),
+            stage(
+              "黏著形成概念", "Adhesion-development concept",
+              "雷射治療後，脈絡膜視網膜黏著會隨組織反應逐漸形成。裂孔仍保留可見。",
+              "Chorioretinal adhesion develops through the subsequent tissue response. The break remains visible.",
+              "此步是術後概念轉場，不表示黏著在擊發後立刻成熟。",
+              "This is a postoperative concept transition, not immediate maturation after laser."
+            ),
+            stage(
+              "複查與警訊", "Review and warning symptoms",
+              "安排視網膜複查，確認治療範圍與後續狀態，說明需要立即回報的症狀。",
+              "Retinal follow-up assesses treatment coverage and subsequent status. Warning symptoms are reviewed.",
+              "新裂孔、持續牽引或剝離仍可能需要額外處理。",
+              "New breaks, persistent traction, or detachment may require additional treatment."
+            )
+          ]
+        }
+      });
+
+
+      // ------------------------------------------------------------
+      // B. SHARED LASER HELPERS
+      // ------------------------------------------------------------
+
+      // A transparent contact-lens symbol, external source,
+      // schematic beam, and transient target glow.
+      // Thin anterior contact-lens dome (not a flat/box disc).
+      function laserAddonContactLens(parent, z = 2.05) {
+        const geometry = new THREE.SphereGeometry(
+          .98, 48, 20, 0, Math.PI * 2, 0, .72
+        );
+        const contact = mesh(
+          parent,
+          geometry,
+          mat(0x9cdcf2, .13, { roughness: .1 })
+        );
+        // Default sphere dome opens along +Y; face anterior (+Z).
+        contact.rotation.x = Math.PI / 2;
+        contact.position.set(0, 0, z);
+        ring(
+          parent, .86, .018, [0, 0, z + .02],
+          mat(0x91bfd6, .42)
+        );
+        return contact;
+      }
+
+      // Open-loop IOL optic + haptics (pseudophakic teaching symbol).
+      function laserAddonPseudophakicIol(root, opticZ = 1.42) {
+        const iol = ball(
+          root,
+          .70,
+          [1, 1, .11],
+          [0, 0, opticZ],
+          mat(0x91d9f5, .30, { roughness: .10 })
+        );
+        const hapticMaterial = mat(0x91d9f5, .65);
+        // Match cataract-phaco open-loop layout (not mirrored hooks).
+        curveTube(root, [
+          [.58, .08, opticZ], [.85, .12, opticZ],
+          [1.00, .36, opticZ], [.88, .61, opticZ],
+          [.63, .67, opticZ]
+        ], .018, hapticMaterial);
+        curveTube(root, [
+          [-.58, -.08, opticZ], [-.85, -.12, opticZ],
+          [-1.00, -.36, opticZ], [-.88, -.61, opticZ],
+          [-.63, -.67, opticZ]
+        ], .018, hapticMaterial);
+        return iol;
+      }
+
+      function laserAddonRig(root, color = 0x93edb2) {
+        const group = new THREE.Group();
+        root.add(group);
+
+        const contact = laserAddonContactLens(group, 2.05);
+
+        // External handpiece symbol (cylinder), not a box contact lens.
+        const handpiece = mesh(
+          group,
+          new THREE.CylinderGeometry(.075, .095, .48, 16),
+          mat(0x557993)
+        );
+        handpiece.rotation.x = Math.PI / 2;
+        handpiece.position.set(.12, .10, 3.22);
+
+        const beamGeometry = new THREE.BufferGeometry();
+        beamGeometry.setAttribute(
+          "position",
+          new THREE.Float32BufferAttribute(new Float32Array(9), 3)
+        );
+
+        const beam = new THREE.Line(
+          beamGeometry,
+          new THREE.LineBasicMaterial({
+            color,
+            transparent: true,
+            opacity: .75,
+            depthWrite: false
+          })
+        );
+        group.add(beam);
+
+        const glow = ball(
+          group,
+          .045,
+          [1, 1, 1],
+          [0, 0, 0],
+          mat(color, .85, {
+            emissive: color,
+            emissiveIntensity: .65
+          })
+        );
+
+        return {
+          group,
+          contact,
+          beam,
+          glow,
+
+          update(progress, target, pulseOn, bend = V(0, 0, 2.20)) {
+            // Contact lens/device appears during positioning/treatment.
+            group.visible = progress >= 2 && progress < 4.65;
+
+            const active =
+              progress >= 3 && progress < 4 && pulseOn;
+
+            beam.visible = active;
+            glow.visible = active;
+            glow.position.copy(target);
+
+            const points = [
+              V(.12, .10, 3.05),
+              bend,
+              target
+            ];
+
+            const attribute = beamGeometry.attributes.position;
+
+            points.forEach((point, index) => {
+              attribute.setXYZ(index, point.x, point.y, point.z);
+            });
+
+            attribute.needsUpdate = true;
+            beamGeometry.computeBoundingSphere();
+          }
+        };
+      }
+
+
+      // Circular sheet with optional pupil and an additional opening.
+      // Openings are genuine missing mesh, not black decals.
+      function laserAddonSheet(
+        radius,
+        centralRadius = 0,
+        extraOpening = null
+      ) {
+        const shape = new THREE.Shape();
+
+        shape.absarc(0, 0, radius, 0, Math.PI * 2, false);
+
+        if (centralRadius > .0001) {
+          const pupil = new THREE.Path();
+          pupil.absarc(
+            0, 0, centralRadius, 0, Math.PI * 2, true
+          );
+          shape.holes.push(pupil);
+        }
+
+        if (extraOpening && extraOpening.radius > .0001) {
+          const opening = new THREE.Path();
+          opening.absarc(
+            extraOpening.x,
+            extraOpening.y,
+            extraOpening.radius,
+            0,
+            Math.PI * 2,
+            true
+          );
+          shape.holes.push(opening);
+        }
+
+        const geometry = new THREE.ShapeGeometry(shape, 64);
+        geometry.computeVertexNormals();
+
+        return geometry;
+      }
+
+
+      // Replace changing sheet geometry without retaining old GPU buffers.
+      function laserAddonReplaceGeometry(object, geometry) {
+        const previous = object.geometry;
+        object.geometry = geometry;
+        if (previous) previous.dispose();
+      }
+
+
+      // Shared model contract expected by the existing application.
+      function laserAddonModel(root, eye, labels, update, options = {}) {
+        root.visible = false;
+
+        return {
+          root,
+          labels,
+          target: options.target || V(0, 0, .25),
+          home: options.home || V(3.2, 2.0, 6.8),
+          // Equal stage weights so shared playback advanceProgress works.
+          weights: kit.normalizeWeights([1, 1, 1, 1, 1, 1]),
+
+          update(progress) {
+            outerSettings(eye);
+            update(progress);
+          }
+        };
+      }
+
+
+      // ------------------------------------------------------------
+      // C. MICROPULSE LASER TRABECULOPLASTY
+      // ------------------------------------------------------------
+
+      function buildLaserAddonMLT() {
+        const root = new THREE.Group();
+        scene.add(root);
+
+        const eye = makeEye(root);
+        eye.iris.material.color.set(0xd7ad76);
+        eye.iris.material.opacity = .55;
+
+        // Enlarged schematic anterior-angle landmarks.
+        const trabecular = ring(
+          root,
+          1.12,
+          .045,
+          [0, 0, 1.48],
+          mat(0x75dbc5, .82)
+        );
+
+        const canal = ring(
+          root,
+          1.23,
+          .027,
+          [0, 0, 1.44],
+          mat(0x8edfff, .42)
+        );
+
+        const cursor = ring(
+          root,
+          .065,
+          .010,
+          [0, 0, 0],
+          mat(0xb4f99a, .9)
+        );
+
+        const rig = laserAddonRig(root, 0xb4f99a);
+
+        const flowMarkers = [];
+        for (let i = 0; i < 18; i++) {
+          flowMarkers.push(
+            ball(
+              root, .018,
+              [1, 1, 1],
+              [0, 0, 0],
+              mat(0x8edfff, .75)
+            )
+          );
+        }
+
+        // A visual pulse-train symbol, not a parameter display.
+        const waveformPoints = [];
+        for (let i = 0; i < 10; i++) {
+          const x = -.70 + i * .14;
+          waveformPoints.push(
+            V(x, -1.38, 1.70),
+            V(x + .025, -1.38, 1.70),
+            V(x + .025, -1.22, 1.70),
+            V(x + .065, -1.22, 1.70),
+            V(x + .065, -1.38, 1.70),
+            V(x + .14, -1.38, 1.70)
+          );
+        }
+
+        const waveform = new THREE.Line(
+          new THREE.BufferGeometry().setFromPoints(waveformPoints),
+          new THREE.LineBasicMaterial({
+            color: 0xb4f99a,
+            transparent: true,
+            opacity: .8
+          })
+        );
+        root.add(waveform);
+
+        const labels = [
+          {
+            zh: "小樑網（放大示意）",
+            en: "Trabecular meshwork—enlarged",
+            point: V(-1.05, .36, 1.48)
+          },
+          {
+            zh: "集液管區域示意",
+            en: "Outflow-region symbol",
+            point: V(1.22, -.16, 1.44)
+          },
+          {
+            zh: "虹膜",
+            en: "Iris",
+            point: V(-.58, -.44, 1.68)
+          },
+          {
+            zh: "慢速脈衝符號，非參數",
+            en: "Slowed pulse symbol—not settings",
+            point: V(0, -1.52, 1.70),
+            visible: progress => progress >= 3 && progress < 4
+          }
+        ];
+
+        return laserAddonModel(root, eye, labels, progress => {
+          const treatment = clamp(progress - 3, 0, 1);
+          const angle = treatment * Math.PI * 2;
+
+          const target = V(
+            1.12 * Math.cos(angle),
+            1.12 * Math.sin(angle),
+            1.50
+          );
+
+          // Deliberately slowed pedagogical blinking.
+          // This is NOT a clinical pulse duration or duty cycle.
+          const phase = (treatment * 26) % 1;
+          const on = phase < .26;
+
+          cursor.visible = progress >= 2 && progress < 4;
+          cursor.position.copy(target);
+          cursor.material.opacity =
+            progress >= 3 ? (on ? .95 : .20) : .75;
+
+          waveform.visible = progress >= 3 && progress < 4;
+
+          // Bent segment symbolizes the goniolens mirror.
+          // It is not a calculated optical ray.
+          rig.update(
+            progress,
+            target,
+            on,
+            V(.62, .38, 2.20)
+          );
+
+          // Constant symbolic pathway before and after treatment:
+          // no simulated immediate increase in outflow.
+          flowMarkers.forEach((object, i) => {
+            const a = i / flowMarkers.length * Math.PI * 2;
+            const q = (progress * .45 + i / flowMarkers.length) % 1;
+            const radius = lerp(.78, 1.28, q);
+
+            object.position.set(
+              radius * Math.cos(a),
+              radius * Math.sin(a),
+              lerp(1.80, 1.44, q)
+            );
+
+            object.visible = true;
+          });
+        });
+      }
+
+
+      // ------------------------------------------------------------
+      // D. LASER PERIPHERAL IRIDOTOMY
+      // ------------------------------------------------------------
+
+      function buildLaserAddonLPI() {
+        const root = new THREE.Group();
+        scene.add(root);
+
+        const eye = makeEye(root);
+        eye.iris.visible = false;
+
+        const irisZ = 1.60;
+        const holeCenter = V(.61, .58, irisZ);
+
+        const iris = mesh(
+          root,
+          laserAddonSheet(1.04, .35),
+          mat(0xd7ad76, .88, { roughness: .65 })
+        );
+        iris.position.z = irisZ;
+
+        const openingRim = ring(
+          root,
+          .09,
+          .012,
+          holeCenter.toArray(),
+          mat(0xa9e8ff, .9)
+        );
+
+        const angleRing = ring(
+          root,
+          1.13,
+          .030,
+          [0, 0, 1.52],
+          mat(0x75dbc5, .55)
+        );
+
+        const rig = laserAddonRig(root, 0xb7ddff);
+
+        const aqueousMarkers = [];
+        for (let i = 0; i < 14; i++) {
+          aqueousMarkers.push(
+            ball(
+              root, .020,
+              [1, 1, 1],
+              [0, 0, 0],
+              mat(0x7edfff, .9)
+            )
+          );
+        }
+
+        let lastGeometryKey = "";
+
+        const labels = [
+          {
+            zh: "中央瞳孔",
+            en: "Central pupil",
+            point: V(0, -.12, 1.70)
+          },
+          {
+            zh: "周邊虹膜開口",
+            en: "Peripheral iris opening",
+            point: holeCenter.clone(),
+            visible: progress => progress > 3.05
+          },
+          {
+            zh: "前房",
+            en: "Anterior chamber",
+            point: V(-.65, .36, 1.94)
+          },
+          {
+            zh: "水晶體",
+            en: "Lens",
+            point: V(-.45, -.35, 1.40)
+          }
+        ];
+
+        return laserAddonModel(root, eye, labels, progress => {
+          const opening = smooth(progress - 3);
+
+          // Flat iris sheet: peripheral opening only — no bowing distortion.
+          const radius = Math.round(opening * .09 * 500) / 500;
+          const key = `${radius}`;
+
+          if (key !== lastGeometryKey) {
+            lastGeometryKey = key;
+
+            laserAddonReplaceGeometry(
+              iris,
+              laserAddonSheet(
+                1.04,
+                .35,
+                radius > .002
+                  ? { x: holeCenter.x, y: holeCenter.y, radius }
+                  : null
+              )
+            );
+          }
+
+          const holeZ = irisZ;
+
+          openingRim.visible = opening > .03;
+          openingRim.position.set(
+            holeCenter.x,
+            holeCenter.y,
+            holeZ + .008
+          );
+          openingRim.scale.setScalar(Math.max(.005, opening));
+
+          const target = V(holeCenter.x, holeCenter.y, holeZ);
+          const phase = (clamp(progress - 3, 0, 1) * 12) % 1;
+
+          rig.update(progress, target, phase < .30);
+
+          // Posterior chamber -> iris opening -> anterior chamber.
+          // No particles originate in the vitreous.
+          aqueousMarkers.forEach((object, i) => {
+            object.visible = progress >= 4;
+
+            const q = (progress * .65 + i / aqueousMarkers.length) % 1;
+
+            if (q < .45) {
+              object.position.set(
+                holeCenter.x,
+                holeCenter.y,
+                lerp(1.48, holeZ + .06, q / .45)
+              );
+            } else {
+              const t = (q - .45) / .55;
+
+              object.position.set(
+                lerp(holeCenter.x, .94, t),
+                lerp(holeCenter.y, .37, t),
+                lerp(holeZ + .06, 1.88, t)
+              );
+            }
+          });
+
+          labels[1].point.copy(openingRim.position);
+        });
+      }
+
+
+      // ------------------------------------------------------------
+      // E. Nd:YAG POSTERIOR CAPSULOTOMY
+      // ------------------------------------------------------------
+
+      function buildLaserAddonYAG() {
+        const root = new THREE.Group();
+        scene.add(root);
+
+        const eye = makeEye(root);
+
+        // Pseudophakic eye: intact open-loop IOL + haptics.
+        eye.lens.visible = false;
+        const iol = laserAddonPseudophakicIol(root, 1.42);
+
+        // Capsule is posterior to IOL: smaller Z in this app.
+        const capsuleZ = 1.16;
+
+        const capsule = mesh(
+          root,
+          laserAddonSheet(.79),
+          mat(0xe6dcc7, .72, { roughness: .85 })
+        );
+        capsule.position.z = capsuleZ;
+
+        const openingRim = ring(
+          root,
+          .38,
+          .012,
+          [0, 0, capsuleZ + .006],
+          mat(0xb2edff, .8)
+        );
+
+        const rig = laserAddonRig(root, 0xc7dcff);
+
+        // A conceptual unobstructed central light path.
+        const lightPath = new THREE.Line(
+          new THREE.BufferGeometry().setFromPoints([
+            V(0, 0, 2.30),
+            V(0, 0, 1.42),
+            V(0, 0, capsuleZ),
+            V(0, 0, -1.65)
+          ]),
+          new THREE.LineBasicMaterial({
+            color: 0xffe1a0,
+            transparent: true,
+            opacity: .65,
+            depthWrite: false
+          })
+        );
+        root.add(lightPath);
+
+        let lastRadius = -1;
+
+        const labels = [
+          {
+            zh: "完整人工水晶體",
+            en: "Intact IOL",
+            point: V(-.47, -.33, 1.44)
+          },
+          {
+            zh: "人工水晶體後方的後囊",
+            en: "Posterior capsule behind IOL",
+            point: V(.56, .37, capsuleZ)
+          },
+          {
+            zh: "後囊開口",
+            en: "Capsulotomy opening",
+            point: V(0, -.10, capsuleZ),
+            visible: progress => progress > 3.1
+          }
+        ];
+
+        return laserAddonModel(root, eye, labels, progress => {
+          const opening = smooth(progress - 3);
+          const radius = Math.round(opening * .38 * 400) / 400;
+
+          if (radius !== lastRadius) {
+            lastRadius = radius;
+
+            laserAddonReplaceGeometry(
+              capsule,
+              laserAddonSheet(.79, radius)
+            );
+          }
+
+          openingRim.visible = opening > .025;
+          openingRim.scale.setScalar(Math.max(.005, opening));
+
+          // Teaching target movement only, not a firing pattern.
+          const treatment = clamp(progress - 3, 0, 1);
+          const angle = treatment * Math.PI * 6;
+          const targetRadius = Math.max(.025, radius);
+
+          const target = V(
+            targetRadius * Math.cos(angle),
+            targetRadius * Math.sin(angle),
+            capsuleZ
+          );
+
+          const phase = (treatment * 16) % 1;
+          rig.update(progress, target, phase < .25);
+
+          lightPath.visible = progress >= 4;
+
+          // Explicitly preserve implant geometry.
+          iol.visible = true;
+        });
+      }
+
+
+      // ------------------------------------------------------------
+      // F. ARGON LASER RETINOPEXY
+      // ------------------------------------------------------------
+
+      function buildLaserAddonRetinopexy() {
+        const root = new THREE.Group();
+        scene.add(root);
+
+        const eye = makeEye(root);
+
+        const retinalRadius = 1.91;
+        const patchRadius = 1.64;
+        const breakCenter = V(.87, .54, 0);
+        const breakRadius = .14;
+
+        function retinalZ(x, y) {
+          return -Math.sqrt(
+            Math.max(
+              .01,
+              retinalRadius * retinalRadius - x * x - y * y
+            )
+          );
+        }
+
+        // Curved grid rather than a flat disc.
+        // Cells at the break are omitted to create a real opening.
+        const gridSize = 64;
+        const positions = [];
+        const indices = [];
+        const records = [];
+
+        for (let row = 0; row <= gridSize; row++) {
+          for (let col = 0; col <= gridSize; col++) {
+            const x =
+              -patchRadius + 2 * patchRadius * col / gridSize;
+            const y =
+              -patchRadius + 2 * patchRadius * row / gridSize;
+
+            positions.push(x, y, retinalZ(x, y));
+
+            records.push({
+              x,
+              y,
+              valid: x * x + y * y < patchRadius * patchRadius
+            });
+          }
+        }
+
+        for (let row = 0; row < gridSize; row++) {
+          for (let col = 0; col < gridSize; col++) {
+            const a = row * (gridSize + 1) + col;
+            const b = a + 1;
+            const c = a + gridSize + 1;
+            const d = c + 1;
+
+            const x = (records[a].x + records[d].x) * .5;
+            const y = (records[a].y + records[d].y) * .5;
+
+            const inBreak =
+              (x - breakCenter.x) ** 2 +
+              (y - breakCenter.y) ** 2 <
+              breakRadius * breakRadius;
+
+            if (
+              records[a].valid &&
+              records[b].valid &&
+              records[c].valid &&
+              records[d].valid &&
+              !inBreak
+            ) {
+              indices.push(a, b, c, b, d, c);
+            }
+          }
+        }
+
+        const retinalGeometry = new THREE.BufferGeometry();
+        retinalGeometry.setAttribute(
+          "position",
+          new THREE.Float32BufferAttribute(positions, 3)
+        );
+        retinalGeometry.setIndex(indices);
+        retinalGeometry.computeVertexNormals();
+
+        mesh(
+          root,
+          retinalGeometry,
+          mat(0xee927b, .88, { roughness: .65 })
+        );
+
+        // Curved rim follows the retinal surface.
+        const rimPoints = [];
+        for (let i = 0; i <= 64; i++) {
+          const angle = i / 64 * Math.PI * 2;
+          const x = breakCenter.x + breakRadius * Math.cos(angle);
+          const y = breakCenter.y + breakRadius * Math.sin(angle);
+
+          rimPoints.push(V(x, y, retinalZ(x, y) + .012));
+        }
+
+        const breakRim = new THREE.Line(
+          new THREE.BufferGeometry().setFromPoints(rimPoints),
+          new THREE.LineBasicMaterial({ color: 0xff6973 })
+        );
+        root.add(breakRim);
+
+        const spots = [];
+        const spotGeometry = new THREE.SphereGeometry(.026, 12, 8);
+        const spotMaterial = mat(0xffd17d, 1, {
+          emissive: 0x70421c,
+          emissiveIntensity: .20
+        });
+
+        // Illustrative markers, not prescribed rows or spot counts.
+        for (let row = 0; row < 3; row++) {
+          const radius = .235 + row * .075;
+
+          for (let i = 0; i < 20; i++) {
+            const angle = i / 20 * Math.PI * 2 + row * .06;
+            const x = breakCenter.x + radius * Math.cos(angle);
+            const y = breakCenter.y + radius * Math.sin(angle);
+
+            const object = mesh(root, spotGeometry, spotMaterial);
+            object.position.set(x, y, retinalZ(x, y) + .018);
+            object.scale.set(1, 1, .45);
+
+            spots.push(object);
+          }
+        }
+
+        const rig = laserAddonRig(root, 0x72e997);
+
+        const labels = [
+          {
+            zh: "視網膜",
+            en: "Retina",
+            point: V(-.86, -.56, retinalZ(-.86, -.56))
+          },
+          {
+            zh: "裂孔保留可見",
+            en: "Break remains visible",
+            point: V(
+              breakCenter.x,
+              breakCenter.y,
+              retinalZ(breakCenter.x, breakCenter.y)
+            )
+          },
+          {
+            zh: "裂孔周圍治療標記",
+            en: "Treatment markers around break",
+            point: V(
+              breakCenter.x + .30,
+              breakCenter.y - .23,
+              retinalZ(
+                breakCenter.x + .30,
+                breakCenter.y - .23
+              )
+            ),
+            visible: progress => progress >= 3.1
+          },
+          {
+            zh: "外部雷射經瞳孔進入",
+            en: "External laser through pupil",
+            point: V(0, .12, 2.28),
+            visible: progress => progress >= 2 && progress < 4
+          }
+        ];
+
+        return laserAddonModel(
+          root,
+          eye,
+          labels,
+          progress => {
+            const treatment = clamp(progress - 3, 0, 1);
+            const count = Math.floor(treatment * spots.length);
+
+            spots.forEach((object, i) => {
+              object.visible = i < count;
+            });
+
+            const targetIndex = Math.min(
+              spots.length - 1,
+              Math.floor(treatment * spots.length)
+            );
+
+            const target = spots[targetIndex].position.clone();
+            const phase = (treatment * spots.length) % 1;
+
+            // The external beam passes conceptually through the pupil.
+            // No intraocular laser probe is created.
+            rig.update(
+              progress,
+              target,
+              phase < .55,
+              V(0, 0, 2.20)
+            );
+
+            // Color remains a marker, not a scar-maturity measurement.
+            // No tear closure, retinal reattachment, or gas is animated.
+            breakRim.visible = true;
+          },
+          {
+            target: V(0, 0, -.25),
+            home: V(3.2, 2.1, 6.8)
+          }
+        );
+      }
+
+
+      // ------------------------------------------------------------
+      // G. REGISTER MODELS AND ADD DROPDOWN OPTIONS
+      // ------------------------------------------------------------
+
+      models.mlt = buildLaserAddonMLT();
+      models.lpi = buildLaserAddonLPI();
+      models.yag = buildLaserAddonYAG();
+      models.retinopexy = buildLaserAddonRetinopexy();
+
+      const laserAddonOptions = [
+        [
+          "mlt",
+          "5. 微脈衝小樑成形術 — Micropulse trabeculoplasty"
+        ],
+        [
+          "lpi",
+          "6. 周邊虹膜切開術 — Laser peripheral iridotomy"
+        ],
+        [
+          "yag",
+          "7. 後囊切開術 — Nd:YAG capsulotomy"
+        ],
+        [
+          "retinopexy",
+          "8. 氬雷射視網膜固定術 — Argon retinopexy"
+        ]
+      ];
+
+      laserAddonOptions.forEach(([value, text]) => {
+        const exists = Array.from($("procedure").options)
+          .some(option => option.value === value);
+
+        if (!exists) {
+          const option = document.createElement("option");
+          option.value = value;
+          option.textContent = text;
+          $("procedure").appendChild(option);
+        }
+      });
+
+      // END LASER PROCEDURES ADD-ON
+
+      // ============================================================
+      // ELT — EXCIMER LASER TRABECULOSTOMY
+      //
+      // Paste inside main(), AFTER the previous laser add-on,
+      // BEFORE query parsing / initial procedure selection.
+      //
+      // Requires the previous add-on's:
+      //   laserAddonModel()
+      //   laserAddonReplaceGeometry()
+      //
+      // Uses existing application helpers:
+      //   THREE, $, V, mat, mesh, ball, ring,
+      //   clamp, smooth, stage, makeEye,
+      //   scene, models, PROCEDURES
+      //
+      // Educational schematic only.
+      // Channel count, size, spacing, timing, probe dimensions,
+      // and access location are illustrative—not surgical guidance.
+      // ============================================================
+
+
+      // ------------------------------------------------------------
+      // 1. BILINGUAL CONTENT
+      // ------------------------------------------------------------
+
+      PROCEDURES.elt = {
+        zh: "準分子雷射小樑造孔術",
+        en: "Excimer laser trabeculostomy",
+
+        subtitleZh:
+          "眼內光纖探頭、小樑網造孔及 Schlemm 管引流路徑示意",
+
+        subtitleEn:
+          "Intraocular fiber-optic probe, trabecular channels, and Schlemm’s canal outflow",
+
+        warningZh:
+          "本模型為 ELT 眼內雷射造孔示意，不是 MLT、SLT 或眼外雷射治療。" +
+          "造孔不保證眼壓正常，也不代表可自行停藥；需依眼科醫師指示追蹤。",
+
+        warningEn:
+          "This illustrates intraocular ELT, not MLT, SLT, or external laser treatment. " +
+          "Channels do not guarantee normal pressure or justify stopping medication. " +
+          "Follow-up remains necessary.",
+
+        legend: [
+          ["#d7ad76", "虹膜", "Iris"],
+          ["#75dbc5", "小樑網", "Trabecular meshwork"],
+          ["#8edfff", "Schlemm 管", "Schlemm’s canal"],
+          ["#d5e4ee", "眼內光纖探頭", "Intraocular fiber-optic probe"],
+          ["#b4f5ff", "房水路徑符號", "Aqueous pathway"]
+        ],
+
+        stages: [
+          stage(
+            "評估與治療計畫",
+            "Assessment and treatment planning",
+
+            "評估青光眼、眼壓及房角結構，確認是否適合此眼內治療。",
+            "Glaucoma, pressure, and angle anatomy are assessed to determine suitability.",
+
+            "不顯示病人專屬的治療位置、造孔數量或雷射設定。",
+            "No patient-specific treatment locations, channel count, or laser settings are supplied."
+          ),
+
+          stage(
+            "手術準備與角膜入口",
+            "Preparation and corneal access",
+
+            "以入口符號表示眼內器械的進入位置；麻醉及手術準備依臨床計畫進行。",
+            "An access marker represents entry for the intraocular instrument. Anesthesia and preparation follow the clinical plan.",
+
+            "入口大小、位置及形成方式均經簡化；本動畫不是操作教學。",
+            "Access size, position, and formation are simplified. This is not an operative tutorial."
+          ),
+
+          stage(
+            "探頭進入前房與房角定位",
+            "Probe entry and angle targeting",
+
+            "光纖探頭進入前房，並在房角觀察下定位於小樑網。",
+            "The fiber-optic probe enters the anterior chamber and is positioned at the trabecular meshwork under angle visualization.",
+
+            "透明角膜與標籤用於教學；未模擬完整房角鏡光學。",
+            "Corneal transparency and labels support teaching; complete gonioscopic optics are not simulated."
+          ),
+
+          stage(
+            "雷射建立微小通道",
+            "Laser channel creation",
+
+            "探頭在小樑網依序定位，動畫以逐漸形成的孔洞表示通往 Schlemm 管的通道。",
+            "The probe moves between trabecular targets. Progressively appearing openings represent channels into Schlemm’s canal.",
+
+            "閃光是可視化提示，不是實際雷射顏色；孔數、尺寸及節奏不是治療參數。",
+            "The glow is a visualization cue, not the actual laser color. Count, dimensions, and timing are not treatment parameters."
+          ),
+
+          stage(
+            "移除探頭與引流路徑示意",
+            "Probe withdrawal and outflow pathway",
+
+            "探頭退出後，房水粒子示意穿過通道進入 Schlemm 管，再通往集液管區域。",
+            "After probe withdrawal, particles illustrate passage through the channels into Schlemm’s canal and toward collector channels.",
+
+            "粒子不是流量或眼壓測量；不表示直接排到眼表或形成濾過泡。",
+            "Particles are not flow or pressure measurements. They do not represent drainage onto the eye surface or a filtering bleb."
+          ),
+
+          stage(
+            "術後評估與追蹤",
+            "Postoperative assessment and follow-up",
+
+            "評估眼壓及眼部狀態，依臨床指示安排用藥與追蹤。",
+            "Pressure and ocular status are assessed, with medication and follow-up directed by the clinician.",
+
+            "造孔保持可見，但不保證永久通暢或特定降眼壓效果。",
+            "The channels remain visible without implying permanent patency or a specific pressure reduction."
+          )
+        ]
+      };
+
+
+      // ------------------------------------------------------------
+      // 2. BUILD ELT ANIMATION
+      // ------------------------------------------------------------
+
+      function buildLaserAddonELT() {
+        const root = new THREE.Group();
+        scene.add(root);
+
+        const eye = makeEye(root);
+
+        // Keep the same eye orientation as the existing animations:
+        // positive Z = anterior.
+        // ELT is usually performed in a pseudophakic eye.
+        eye.iris.material.color.set(0xd7ad76);
+        eye.iris.material.opacity = .55;
+        eye.lens.visible = false;
+        laserAddonPseudophakicIol(root, 1.42);
+
+        const tmZ = 1.52;
+        const canalZ = 1.43;
+
+        const tmInnerRadius = 1.04;
+        const tmOuterRadius = 1.24;
+        const canalRadius = 1.14;
+
+        // Arbitrary teaching count—not a prescribed channel count.
+        const illustrativeChannelCount = 7;
+
+        const sites = Array.from(
+          { length: illustrativeChannelCount },
+          (_, i) => {
+            const angle =
+              -.48 + (i / (illustrativeChannelCount - 1)) * .96;
+
+            return {
+              angle,
+              x: canalRadius * Math.cos(angle),
+              y: canalRadius * Math.sin(angle)
+            };
+          }
+        );
+
+        // Build an annular sheet with actual geometric openings.
+        function createTrabecularGeometry(channelProgress) {
+          const shape = new THREE.Shape();
+
+          shape.absarc(
+            0, 0, tmOuterRadius,
+            0, Math.PI * 2, false
+          );
+
+          const centralOpening = new THREE.Path();
+
+          centralOpening.absarc(
+            0, 0, tmInnerRadius,
+            0, Math.PI * 2, true
+          );
+
+          shape.holes.push(centralOpening);
+
+          sites.forEach((site, index) => {
+            const local = smooth(
+              channelProgress * illustrativeChannelCount - index
+            );
+
+            const radius = .037 * local;
+
+            if (radius <= .001) return;
+
+            const opening = new THREE.Path();
+
+            opening.absarc(
+              site.x, site.y, radius,
+              0, Math.PI * 2, true
+            );
+
+            shape.holes.push(opening);
+          });
+
+          const geometry = new THREE.ShapeGeometry(shape, 96);
+          geometry.computeVertexNormals();
+
+          return geometry;
+        }
+
+        const trabecular = mesh(
+          root,
+          createTrabecularGeometry(0),
+          mat(0x75dbc5, .88, { roughness: .65 })
+        );
+
+        trabecular.position.z = tmZ;
+
+        // Enlarged schematic canal behind the trabecular sheet.
+        ring(
+          root,
+          canalRadius,
+          .039,
+          [0, 0, canalZ],
+          mat(0x8edfff, .50)
+        );
+
+        // A reusable cylinder between two points.
+        // Used instead of rebuilding geometry every frame.
+        function makeRod(radius, material) {
+          return mesh(
+            root,
+            new THREE.CylinderGeometry(
+              radius, radius, 1, 12
+            ),
+            material
+          );
+        }
+
+        const cylinderAxis = V(0, 1, 0);
+        const direction = V(0, 0, 0);
+
+        function positionRod(object, start, end) {
+          direction.copy(end).sub(start);
+
+          const length = direction.length();
+
+          object.position.copy(start).add(end).multiplyScalar(.5);
+          object.scale.set(1, Math.max(length, .0001), 1);
+
+          if (length > .0001) {
+            object.quaternion.setFromUnitVectors(
+              cylinderAxis,
+              direction.normalize()
+            );
+          }
+        }
+
+        // Access marker only; no incision dimensions are prescribed.
+        const accessPoint = V(-1.08, .02, 1.99);
+
+        const accessMarker = ring(
+          root,
+          .075,
+          .011,
+          accessPoint.toArray(),
+          mat(0xc5eaff, .80)
+        );
+
+        const probeShaft = makeRod(
+          .024,
+          mat(0xd5e4ee, .95, { roughness: .25 })
+        );
+
+        const probeHandle = makeRod(
+          .060,
+          mat(0x557993, .95)
+        );
+
+        const probeTip = ball(
+          root,
+          .030,
+          [1, 1, 1],
+          [0, 0, 0],
+          mat(0xe8f8ff, .95)
+        );
+
+        // Visualization cue only—not a visible UV beam.
+        const activationGlow = ball(
+          root,
+          .050,
+          [1, 1, .7],
+          [0, 0, 0],
+          mat(0xc6b7ff, .85, {
+            emissive: 0x9d87ff,
+            emissiveIntensity: .75
+          })
+        );
+
+        // Illustrative collector routes remain inside the model.
+        const collectorRoutes = [];
+
+        sites.forEach(site => {
+          const start = V(site.x, site.y, canalZ);
+
+          const end = V(
+            1.43 * Math.cos(site.angle),
+            1.43 * Math.sin(site.angle),
+            canalZ - .08
+          );
+
+          const geometry =
+            new THREE.BufferGeometry().setFromPoints([start, end]);
+
+          const line = new THREE.Line(
+            geometry,
+            new THREE.LineBasicMaterial({
+              color: 0x8edfff,
+              transparent: true,
+              opacity: .30
+            })
+          );
+
+          root.add(line);
+          collectorRoutes.push(line);
+        });
+
+        const flowMarkers = [];
+
+        sites.forEach((site, siteIndex) => {
+          for (let i = 0; i < 3; i++) {
+            const object = ball(
+              root,
+              .014,
+              [1, 1, 1],
+              [0, 0, 0],
+              mat(0xb4f5ff, .90)
+            );
+
+            flowMarkers.push({
+              object,
+              site,
+              phase: i / 3 + siteIndex * .07
+            });
+          }
+        });
+
+        const labels = [
+          {
+            zh: "角膜入口符號",
+            en: "Corneal access marker",
+            point: accessPoint.clone(),
+            visible: p => p >= 1 && p < 4.8
+          },
+          {
+            zh: "眼內光纖探頭",
+            en: "Intraocular fiber-optic probe",
+            point: V(-.15, .12, 1.84),
+            visible: p => p >= 2 && p < 4.6
+          },
+          {
+            zh: "小樑網（放大示意）",
+            en: "Trabecular meshwork—enlarged",
+            point: V(-.70, .91, tmZ)
+          },
+          {
+            zh: "Schlemm 管（放大示意）",
+            en: "Schlemm’s canal—enlarged",
+            point: V(-.76, -.85, canalZ)
+          },
+          {
+            zh: "通往 Schlemm 管的造孔",
+            en: "Channels into Schlemm’s canal",
+            point: V(sites[3].x, sites[3].y, tmZ),
+            visible: p => p > 3.5
+          }
+        ];
+
+        let lastGeometryStep = -1;
+
+        return laserAddonModel(
+          root,
+          eye,
+          labels,
+
+          progress => {
+            const treatment = clamp(progress - 3, 0, 1);
+
+            // Quantized updates avoid allocating geometry every frame.
+            const geometryStep = Math.round(treatment * 140);
+
+            if (geometryStep !== lastGeometryStep) {
+              lastGeometryStep = geometryStep;
+
+              laserAddonReplaceGeometry(
+                trabecular,
+                createTrabecularGeometry(geometryStep / 140)
+              );
+            }
+
+            accessMarker.visible =
+              progress >= 1 && progress < 4.8;
+
+            // Smoothly move between illustrative target locations.
+            const sitePosition = Math.min(
+              sites.length - 1,
+              treatment * sites.length
+            );
+
+            const firstIndex = Math.floor(sitePosition);
+            const nextIndex = Math.min(
+              sites.length - 1,
+              firstIndex + 1
+            );
+
+            const between = smooth(sitePosition - firstIndex);
+
+            const target = V(
+              THREE.MathUtils.lerp(
+                sites[firstIndex].x,
+                sites[nextIndex].x,
+                between
+              ),
+              THREE.MathUtils.lerp(
+                sites[firstIndex].y,
+                sites[nextIndex].y,
+                between
+              ),
+              tmZ + .018
+            );
+
+            const insertion = smooth(progress - 2);
+            const withdrawal =
+              smooth((progress - 4) / .60);
+
+            const extension = insertion * (1 - withdrawal);
+
+            const currentTip = accessPoint.clone().lerp(
+              target,
+              extension
+            );
+
+            const probeVisible =
+              progress >= 2 && progress < 4.60;
+
+            probeShaft.visible = probeVisible;
+            probeHandle.visible = probeVisible;
+            probeTip.visible = probeVisible;
+
+            positionRod(probeShaft, accessPoint, currentTip);
+
+            const approach = target.clone()
+              .sub(accessPoint)
+              .normalize();
+
+            const handleEnd = accessPoint.clone()
+              .addScaledVector(approach, -.38);
+
+            positionRod(
+              probeHandle,
+              handleEnd,
+              accessPoint
+            );
+
+            probeTip.position.copy(currentTip);
+
+            // Slowed activation cue; not a clinical pulse train.
+            const pulsePhase =
+              (treatment * sites.length * 3) % 1;
+
+            activationGlow.visible =
+              progress >= 3 &&
+              progress < 4 &&
+              pulsePhase < .22;
+
+            activationGlow.position.copy(target);
+
+            collectorRoutes.forEach(route => {
+              route.visible = progress >= 4;
+            });
+
+            // Constant symbolic particle speed:
+            // no simulated pressure or quantitative flow improvement.
+            flowMarkers.forEach(({ object, site, phase }) => {
+              object.visible = progress >= 4;
+
+              const q = (progress * .55 + phase) % 1;
+
+              if (q < .50) {
+                // Anterior chamber -> channel -> canal.
+                const t = q / .50;
+
+                object.position.set(
+                  site.x,
+                  site.y,
+                  THREE.MathUtils.lerp(
+                    tmZ + .24,
+                    canalZ,
+                    t
+                  )
+                );
+              } else {
+                // Canal region -> illustrative collector route.
+                const t = (q - .50) / .50;
+
+                const radius = THREE.MathUtils.lerp(
+                  canalRadius,
+                  1.43,
+                  t
+                );
+
+                object.position.set(
+                  radius * Math.cos(site.angle),
+                  radius * Math.sin(site.angle),
+                  canalZ - .08 * t
+                );
+              }
+            });
+          },
+
+          {
+            target: V(.15, 0, 1.35),
+            home: V(3.2, 2.0, 6.8)
+          }
+        );
+      }
+
+
+      // ------------------------------------------------------------
+      // 3. REGISTER MODEL AND DROPDOWN OPTION
+      // ------------------------------------------------------------
+
+      models.elt = buildLaserAddonELT();
+
+      if (
+        !Array.from($("procedure").options)
+          .some(option => option.value === "elt")
+      ) {
+        const option = document.createElement("option");
+
+        option.value = "elt";
+        option.textContent =
+          "9. 準分子雷射小樑造孔術 — Excimer laser trabeculostomy";
+
+        $("procedure").appendChild(option);
+      }
+
+      // END ELT ADD-ON
+
+
+
+      // ============================================================
       // 6. APPLICATION STATE
       // Each procedure remembers its own timeline position.
       // Deterministic state allows reverse scrubbing and replay.
       // ============================================================
+
+      // Japanese education copy (merged after all procedure registrations).
+      Object.entries(PROCEDURES_JA).forEach(([id, ja]) => {
+        const data = PROCEDURES[id];
+        if (!data) return;
+        data.ja = ja.title;
+        data.subtitleJa = ja.subtitle;
+        data.warningJa = ja.warning;
+        if (Array.isArray(ja.legend)) {
+          data.legend = data.legend.map((row, i) => {
+            const next = row.slice();
+            if (ja.legend[i]) next[3] = ja.legend[i];
+            return next;
+          });
+        }
+        (ja.stages || []).forEach((stageJa, i) => {
+          if (!data.stages[i]) return;
+          Object.assign(data.stages[i], stageJa);
+        });
+      });
 
       const query = new URLSearchParams(location.search);
       const requestedProcedure = query.get("procedure");
@@ -2157,22 +3880,26 @@
 
       let language = "both";
       const requestedLanguage = query.get("lang");
-      if (requestedLanguage === "zh" || requestedLanguage === "en") {
+      if (
+        requestedLanguage === "zh" ||
+        requestedLanguage === "en" ||
+        requestedLanguage === "ja"
+      ) {
         language = requestedLanguage;
         $("language").value = requestedLanguage;
         document.documentElement.lang =
-          requestedLanguage === "en" ? "en" : "zh-Hant";
+          requestedLanguage === "en" ? "en" :
+          requestedLanguage === "ja" ? "ja" : "zh-Hant";
       }
-      document.title = language === "en"
-        ? "Ophthalmic procedures"
-        : "眼科手術 3D 教學";
+      document.title =
+        language === "en" ? "Ophthalmic procedures" :
+        language === "ja" ? "眼科手術の3D示意" :
+        "眼科手術 3D 教學";
       let playing = false;
 
-      const progressByProcedure = {
-        rrd: 0,
-        injection: 0,
-        chalazion: 0
-      };
+      const progressByProcedure = Object.fromEntries(
+        Object.keys(PROCEDURES).map(id => [id, 0])
+      );
 
       let buttons = [];
       let labelElements = [];
@@ -2191,10 +3918,28 @@
         );
       }
 
-      function localized(zh, en, separator = " / ") {
+      function localized(zh, en, ja = "", separator = " / ") {
         if (language === "zh") return zh;
         if (language === "en") return en;
+        if (language === "ja") return ja || en || zh;
         return zh + separator + en;
+      }
+
+      function procedureTitle(data) {
+        if (language === "en") return data.en;
+        if (language === "ja") return data.ja || data.en;
+        return data.zh;
+      }
+
+      function stageTitle(entry) {
+        if (language === "en") return entry.en;
+        if (language === "ja") return entry.ja || entry.en;
+        return entry.zh;
+      }
+
+      function labelCopy(label) {
+        const ja = label.ja || LABEL_JA[label.zh] || label.en;
+        return localized(label.zh, label.en, ja);
       }
 
       function getStageState() {
@@ -2252,18 +3997,17 @@
       function updateHeader() {
         const data = activeData();
 
-        $("procedureTitle").textContent =
-          language === "en" ? data.en : data.zh;
+        $("procedureTitle").textContent = procedureTitle(data);
 
         $("procedureSubtitle").textContent =
-          localized(data.subtitleZh, data.subtitleEn);
+          localized(data.subtitleZh, data.subtitleEn, data.subtitleJa);
 
         $("procedureWarning").textContent =
-          localized(data.warningZh, data.warningEn, "\n\n");
+          localized(data.warningZh, data.warningEn, data.warningJa, "\n\n");
 
         $("legend").replaceChildren();
 
-        data.legend.forEach(([color, zh, en]) => {
+        data.legend.forEach(([color, zh, en, ja]) => {
           const row = document.createElement("div");
           row.className = "legend-row";
 
@@ -2272,7 +4016,7 @@
           dot.style.background = color;
 
           const text = document.createElement("span");
-          text.textContent = localized(zh, en);
+          text.textContent = localized(zh, en, ja);
 
           row.append(dot, text);
           $("legend").appendChild(row);
@@ -2290,33 +4034,40 @@
           $("stepCount").textContent =
             `STAGE ${String(index + 1).padStart(2, "0")} / ${total}`;
 
-          $("stageTitle").textContent =
-            language === "en" ? entry.en : entry.zh;
+          $("stageTitle").textContent = stageTitle(entry);
 
           $("stageSubtitle").textContent =
             language === "both" ? entry.en : "";
 
-          $("stageTag").textContent = localized(entry.zh, entry.en);
+          $("stageTag").textContent =
+            localized(entry.zh, entry.en, entry.ja);
 
           $("explanation").replaceChildren();
 
-          if (language !== "en") {
+          if (language === "ja") {
             const paragraph = document.createElement("p");
-            paragraph.lang = "zh-Hant";
-            paragraph.textContent = entry.bodyZh;
+            paragraph.lang = "ja";
+            paragraph.textContent = entry.bodyJa || entry.bodyEn;
             $("explanation").appendChild(paragraph);
-          }
+          } else {
+            if (language !== "en") {
+              const paragraph = document.createElement("p");
+              paragraph.lang = "zh-Hant";
+              paragraph.textContent = entry.bodyZh;
+              $("explanation").appendChild(paragraph);
+            }
 
-          if (language !== "zh") {
-            const paragraph = document.createElement("p");
-            paragraph.lang = "en";
-            paragraph.className = "en";
-            paragraph.textContent = entry.bodyEn;
-            $("explanation").appendChild(paragraph);
+            if (language !== "zh") {
+              const paragraph = document.createElement("p");
+              paragraph.lang = "en";
+              paragraph.className = "en";
+              paragraph.textContent = entry.bodyEn;
+              $("explanation").appendChild(paragraph);
+            }
           }
 
           $("clinicalNote").textContent =
-            localized(entry.noteZh, entry.noteEn, "\n\n");
+            localized(entry.noteZh, entry.noteEn, entry.noteJa, "\n\n");
 
           buttons.forEach((button, i) => {
             const stepData = activeData().stages[i];
@@ -2326,8 +4077,7 @@
             number.textContent = String(i + 1).padStart(2, "0");
 
             const title = document.createElement("span");
-            title.textContent =
-              language === "en" ? stepData.en : stepData.zh;
+            title.textContent = stageTitle(stepData);
 
             button.append(number, title);
 
@@ -2345,7 +4095,7 @@
 
             button.setAttribute(
               "aria-label",
-              `${i + 1}. ${localized(stepData.zh, stepData.en)}`
+              `${i + 1}. ${localized(stepData.zh, stepData.en, stepData.ja)}`
             );
           });
         }
@@ -2355,7 +4105,7 @@
 
         $("timeline").setAttribute(
           "aria-valuetext",
-          `${localized(entry.zh, entry.en)} ${Math.round(fraction * 100)}%`
+          `${localized(entry.zh, entry.en, entry.ja)} ${Math.round(fraction * 100)}%`
         );
 
         $("progressText").textContent =
@@ -2363,8 +4113,8 @@
           `${Math.round(progress / total * 100)}%`;
 
         $("play").textContent = playing
-          ? localized("⏸ 暫停", "⏸ Pause")
-          : localized("▶ 播放", "▶ Play");
+          ? localized("⏸ 暫停", "⏸ Pause", "⏸ 一時停止")
+          : localized("▶ 播放", "▶ Play", "▶ 再生");
 
         $("previous").disabled = progress <= 0;
         $("next").disabled = progress >= total;
@@ -2392,7 +4142,7 @@
           const visible =
             !label.visible || label.visible(progress);
 
-          element.textContent = localized(label.zh, label.en);
+          element.textContent = labelCopy(label);
 
           return {
             element,
@@ -2425,7 +4175,10 @@
 
       function activateProcedure(id) {
         if (id === "cataract") {
-          const lang = language === "en" ? "en" : language === "zh" ? "zh" : "";
+          const lang =
+            language === "en" || language === "zh" || language === "ja"
+              ? language
+              : "";
           if (window.parent !== window) {
             window.parent.postMessage(
               { type: "eyesinfo-procedure", procedure: "cataract" },
@@ -2476,10 +4229,12 @@
       $("language").addEventListener("change", event => {
         language = event.target.value;
         document.documentElement.lang =
-          language === "en" ? "en" : "zh-Hant";
-        document.title = language === "en"
-          ? "Ophthalmic procedures"
-          : "眼科手術 3D 教學";
+          language === "en" ? "en" :
+          language === "ja" ? "ja" : "zh-Hant";
+        document.title =
+          language === "en" ? "Ophthalmic procedures" :
+          language === "ja" ? "眼科手術の3D示意" :
+          "眼科手術 3D 教學";
         updateHeader();
         refresh();
       });
