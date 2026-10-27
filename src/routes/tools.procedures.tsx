@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { ProcedureFrames } from "@/components/procedure-frames";
@@ -12,6 +12,49 @@ import type { Locale } from "@/i18n/locale";
 import { localizeTopic, useI18n } from "@/i18n";
 import { pageHead } from "@/lib/page-seo";
 import { localeFromMatch } from "@/lib/locale-path";
+
+/** Cataract lives in its own HTML viewer; all other clips share procedures-3d. */
+type ViewerShell = "cataract" | "bundle";
+
+function viewerShellFor(id: ProcedureId): ViewerShell {
+  return id === "cataract" ? "cataract" : "bundle";
+}
+
+function buildViewerSrc(
+  id: ProcedureId,
+  lang: "zh" | "en" | "ja"
+): string {
+  if (id === "cataract") {
+    return `/cataract-phaco.html?lang=${lang}`;
+  }
+  return `/procedures-3d.html?procedure=${id}&lang=${lang}`;
+}
+
+/** Must match `TEACHING_FS_PERSIST_KEY` in public/js/teaching-fullscreen.js */
+const TEACHING_FS_PERSIST_KEY = "eyesinfo-teaching-fs-persist";
+
+/**
+ * Same-origin iframe: if teaching chrome is fullscreen (native or CSS
+ * fallback), mark persist before a document remount so the next viewer
+ * restores FS from the user's POV.
+ */
+function markPersistIfViewerFullscreen(iframe: HTMLIFrameElement | null) {
+  try {
+    const doc = iframe?.contentDocument;
+    if (!doc) return;
+    const webkitDoc = doc as Document & {
+      webkitFullscreenElement?: Element | null;
+    };
+    const native = doc.fullscreenElement || webkitDoc.webkitFullscreenElement;
+    const chrome = doc.getElementById("teachingChrome");
+    const cssOn = chrome?.classList.contains("is-fullscreen");
+    if (native || cssOn) {
+      sessionStorage.setItem(TEACHING_FS_PERSIST_KEY, "1");
+    }
+  } catch {
+    /* cross-origin or unavailable document */
+  }
+}
 
 const PROCEDURE_IDS = [
   "rrd",
@@ -173,10 +216,13 @@ function ProcedureTeachingPage() {
   const id: ProcedureId = procedure ?? "cataract";
   const cataract = id === "cataract" ? cataractDiagram(locale) : null;
   const viewerLang = procedureViewerLang(locale);
-  const src =
-    id === "cataract"
-      ? `/cataract-phaco.html?lang=${viewerLang}`
-      : `/procedures-3d.html?procedure=${id}&lang=${viewerLang}`;
+  const shell = viewerShellFor(id);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const shellRef = useRef<ViewerShell>(shell);
+  const langRef = useRef(viewerLang);
+  // Remount only when crossing cataract ↔ bundle (or language changes).
+  // Bundle↔bundle procedure swaps stay in-viewer so fullscreen is preserved.
+  const [frameSrc, setFrameSrc] = useState(() => buildViewerSrc(id, viewerLang));
 
   useEffect(() => {
     function onMessage(event: MessageEvent) {
@@ -193,6 +239,43 @@ function ProcedureTeachingPage() {
     window.addEventListener("message", onMessage);
     return () => window.removeEventListener("message", onMessage);
   }, [id, navigate]);
+
+  useEffect(() => {
+    const shellChanged = shellRef.current !== shell;
+    const langChanged = langRef.current !== viewerLang;
+    shellRef.current = shell;
+    langRef.current = viewerLang;
+
+    if (shellChanged || langChanged) {
+      setFrameSrc(buildViewerSrc(id, viewerLang));
+      return;
+    }
+
+    // Same shell: ask the live iframe to swap the clip (keeps #teachingChrome FS).
+    if (shell === "bundle") {
+      iframeRef.current?.contentWindow?.postMessage(
+        { type: "eyesinfo-select-procedure", procedure: id },
+        window.location.origin
+      );
+    }
+  }, [id, shell, viewerLang]);
+
+  function chooseProcedure(next: ProcedureId) {
+    if (next === id) return;
+    const nextShell = viewerShellFor(next);
+    // Document remount tears down native FS — mark persist synchronously.
+    if (nextShell !== shell) {
+      markPersistIfViewerFullscreen(iframeRef.current);
+      iframeRef.current?.contentWindow?.postMessage(
+        { type: "eyesinfo-prepare-procedure-nav", procedure: next },
+        window.location.origin
+      );
+    }
+    void navigate({
+      search: (prev) => ({ ...prev, procedure: next }),
+      replace: true,
+    });
+  }
 
   return (
     <div className="px-4 pb-8 pt-4 layout-lg:px-6">
@@ -229,13 +312,7 @@ function ProcedureTeachingPage() {
                   ? "inline-flex h-11 items-center rounded-full border border-navy bg-navy px-4 text-[0.85rem] font-semibold text-paper"
                   : "inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy"
               }
-              onClick={() => {
-                if (choice.id === id) return;
-                void navigate({
-                  search: (prev) => ({ ...prev, procedure: choice.id }),
-                  replace: true,
-                });
-              }}
+              onClick={() => chooseProcedure(choice.id)}
             >
               {choiceLabel(locale, choice)}
             </button>
@@ -243,8 +320,9 @@ function ProcedureTeachingPage() {
         })}
       </div>
       <iframe
+        ref={iframeRef}
         id="eyesinfo-procedure-viewer"
-        src={src}
+        src={frameSrc}
         title={copy.title}
         className="procedure-viewer-frame mt-4"
         allow="fullscreen"

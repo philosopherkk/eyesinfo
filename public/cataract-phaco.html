@@ -237,6 +237,17 @@
       flex-direction: column;
     }
 
+    /* After a procedure remount, native requestFullscreen may be blocked;
+       keep teaching chrome covering the viewport from the user's POV. */
+    #teachingChrome.is-fullscreen-css {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      width: 100vw;
+      height: 100vh;
+      max-height: 100dvh;
+    }
+
     /* Keep viewer + stage text + timeline in one teaching panel when possible. */
     #teachingChrome:fullscreen .layout,
     #teachingChrome:-webkit-full-screen .layout,
@@ -417,6 +428,22 @@
           9. 準分子雷射小樑造孔術 — Excimer laser trabeculostomy
         </option>
       </select>
+      <script>
+        /* Keep selected value during first paint when deep-linked. */
+        (function () {
+          try {
+            var id = new URLSearchParams(location.search).get("procedure");
+            var el = document.getElementById("procedure");
+            if (!id || !el) return;
+            for (var i = 0; i < el.options.length; i++) {
+              if (el.options[i].value === id) {
+                el.value = id;
+                break;
+              }
+            }
+          } catch (e) {}
+        })();
+      </script>
       <select id="language" aria-label="Language / 語言 / 言語">
         <option value="both">繁體中文 + English</option>
         <option value="zh">繁體中文</option>
@@ -536,7 +563,7 @@
       const [
         { OrbitControls },
         { enablePageScrollOrbit },
-        { bindTeachingFullscreen },
+        teachingFs,
         kit,
         { STAGES_JA },
       ] = await Promise.all([
@@ -676,12 +703,17 @@
       );
 
       const $ = id => document.getElementById(id);
-      bindTeachingFullscreen({
+      const teachingFullscreen = teachingFs.bindTeachingFullscreen({
         target: $("teachingChrome"),
         enterButton: $("enterFullscreen"),
         exitButton: $("exitFullscreen"),
         parkElements: [$("procedure")],
       });
+      const markFsPersist = () => {
+        if (teachingFullscreen.active()) {
+          teachingFs.markTeachingFullscreenPersist();
+        }
+      };
       kit.bindPlaybackSpeed($("speed"));
       const clamp = THREE.MathUtils.clamp;
       const smooth = x => {
@@ -1520,6 +1552,10 @@
       $("procedure").addEventListener("change", event => {
         const id = event.target.value;
         if (id === "cataract") return;
+        // Leaving this document for procedures-3d — keep FS across the remount.
+        markFsPersist();
+        // Keep the chosen value visible until navigation completes (no cataract flash).
+        event.target.value = id;
         const lang =
           language === "en" || language === "zh" || language === "ja"
             ? language
@@ -1535,6 +1571,15 @@
         params.set("procedure", id);
         if (lang) params.set("lang", lang);
         location.href = `/procedures-3d.html?${params}`;
+      });
+
+      window.addEventListener("message", event => {
+        if (event.origin !== location.origin) return;
+        const data = event.data;
+        if (!data || typeof data !== "object") return;
+        if (data.type === "eyesinfo-prepare-procedure-nav") {
+          markFsPersist();
+        }
       });
 
       ["irisOpacity", "corneaOpacity", "showShell"].forEach(id => {
