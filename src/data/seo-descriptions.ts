@@ -310,6 +310,16 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
       ja: ["眼瞼贅皮"],
     }
   },
+  "/t/t-elt-migs": {
+    zh: "比較準分子激光小梁造口與小梁支架類微創青光眼手術的機制差異；不是品牌比較，亦不是療效保證（公眾教育，不能代替面診。）",
+    en: "Education comparing excimer laser trabeculostomy with trabecular-bypass class MIGS — mechanism only, not a brand ranking or outcome promise.",
+    ja: "エキシマレーザー線維柱帯造口と線維柱帯バイパス類MIGSの機序比較です。ブランド比較でも効果の約束でもありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    about: {
+      zh: ["青光眼"],
+      en: ["Glaucoma"],
+      ja: ["緑内障"],
+    }
+  },
   "/t/t-erm": {
     zh: "介紹黃斑前膜如何引起視物變形，以及並非一經發現就必須手術的教育要點（公眾教育，不能代替面診。）詳見內文。",
     en: "Education on epiretinal membrane causing distortion, and why finding a membrane does not always mean immediate surgery.",
@@ -403,6 +413,16 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
       zh: ["偏頭痛"],
       en: ["Migraine"],
       ja: ["片頭痛"],
+    }
+  },
+  "/t/t-mlt": {
+    zh: "介紹微脈衝激光小梁成形術作為開角／高眼壓可討論的小梁激光類，並與選擇性激光小梁成形術區分能量傳遞（公眾教育，不能代替面診。）",
+    en: "Education on micropulse laser trabeculoplasty as a trabecular-laser option class for open-angle disease or ocular hypertension, distinct in energy delivery from SLT.",
+    ja: "マイクロパルスレーザー線維柱帯形成術を、開放隅角／高眼圧で話し合い得る線維柱帯レーザーの一種として紹介し、SLTとのエネルギー伝達の違いを説明します。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+    about: {
+      zh: ["青光眼"],
+      en: ["Glaucoma"],
+      ja: ["緑内障"],
     }
   },
   "/t/t-myopia": {

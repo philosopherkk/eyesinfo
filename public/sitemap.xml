@@ -542,6 +542,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/t/t-early"/>
   </url>
   <url>
+    <loc>https://www.eyesinfo.org/t/t-elt-migs</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-elt-migs"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-elt-migs?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-elt-migs?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.eyesinfo.org/t/t-elt-migs?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/t/t-elt-migs"/>
+  </url>
+  <url>
     <loc>https://www.eyesinfo.org/t/t-entropion</loc>
     <lastmod>2026-10-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-entropion"/>
@@ -666,6 +675,15 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-migraine?lang=en"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://www.eyesinfo.org/t/t-migraine?lang=ja"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/t/t-migraine"/>
+  </url>
+  <url>
+    <loc>https://www.eyesinfo.org/t/t-mlt</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-mlt"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-mlt?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-mlt?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.eyesinfo.org/t/t-mlt?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/t/t-mlt"/>
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-myopia</loc>

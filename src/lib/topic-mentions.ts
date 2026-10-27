@@ -24,6 +24,8 @@ const MENTION_ALIASES: MentionLink[] = [
   { phrase: "青光眼監察：目標眼壓、OCT／視野與報告解讀", href: "/t/t-glaucoma-monitor" },
   { phrase: "青光眼眼藥水", href: "/t/t-gldrops" },
   { phrase: "青光眼總論", href: "/t/d4" },
+  { phrase: "微脈衝激光小梁成形術（MLT）", href: "/t/t-mlt" },
+  { phrase: "準分子激光小梁造口（ELT）與小梁支架類 MIGS", href: "/t/t-elt-migs" },
   { phrase: "遠視／淺前房專題", href: "/t/t-early" },
   { phrase: "遠視／淺前房與閉角", href: "/t/t-early" },
   { phrase: "類固醇節約用藥", href: "/t/t-steroid-sparing" },
