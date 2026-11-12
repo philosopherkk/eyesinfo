@@ -57,6 +57,22 @@ export function TopicRefs({ ids }: { ids?: string[] }) {
           </li>
         ))}
       </ol>
+
+      {/* Improved linkage helper: always show See also when there are related topics */}
+      {list.length > 0 && (
+        <div className="mt-8 pt-4 border-t border-line">
+          <h3 className="text-[0.95rem] font-semibold text-navy mb-2">相關主題 / See also / 関連トピック</h3>
+          <ul className="space-y-1 text-[0.85rem]">
+            {list.map((c) => (
+              <li key={`see-${c.id}`}>
+                <a href={c.url || "#"} className="text-navy hover:underline">
+                  {c.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </section>
   );
 }
