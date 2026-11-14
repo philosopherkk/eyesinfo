@@ -1,0 +1,35 @@
+/* Progressive-lens stair walking embed — wide canvas pair + control bar. */
+.pal-stairs-sim {
+  max-width: 100%;
+  overflow-x: hidden;
+  margin-top: 0.35rem;
+}
+
+.pal-stairs-sim__caption {
+  margin: 0 0 0.65rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 10px;
+  background: var(--color-paper);
+  border: 1px solid var(--color-line);
+  color: var(--color-muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.pal-stairs-sim__frame {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: min(1100px, 165vw);
+  min-height: 720px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: #12151a;
+  touch-action: pan-y;
+}
+
+@media (min-width: 900px) {
+  .pal-stairs-sim__frame {
+    height: 1120px;
+  }
+}

@@ -327,6 +327,12 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-cl", label: "隱形眼鏡併發症" },
     { href: "/t/t-lasik", label: "LASIK 與 SMILE" },
     { href: "/t/t-cataract", label: "超聲波乳化與晶體" },
+    { href: "/t/t-pal-stairs", label: "遠視與漸進鏡：上下樓梯" },
+  ],
+  "t-pal-stairs": [
+    { href: "/t/t-presbyopia", label: "老花五類選擇" },
+    { href: "/t/d1", label: "屈光不正" },
+    { href: "/tools/rx", label: "眼鏡度數解讀" },
   ],
   "t-chalazion": [
     { href: "/tools/warm", label: "熱敷計時" },

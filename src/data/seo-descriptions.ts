@@ -490,6 +490,16 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
       ja: ["老視"],
     }
   },
+  "/t/t-pal-stairs": {
+    zh: "解釋遠視患者配戴漸進多焦點鏡片上下樓梯（尤其下樓梯）時，近用區放大、模糊與稜鏡效應的光學教育，並附示意動畫（公眾教育，不能代替面診。）",
+    en: "Explains why hyperopes in progressive lenses struggle on stairs — near-zone magnification, blur and prism — with a teaching animation (education only, not a consult).",
+    ja: "遠視で累進レンズを装用する人が階段（とくに下り）で困る理由——近用部の拡大・ぼけ・プリズム——を教育用図示つきで説明します。市民教育であり、対面診療の代わりにはなりません。",
+    about: {
+      zh: ["漸進鏡", "遠視", "上下樓梯"],
+      en: ["Progressive lenses", "Hyperopia", "Stairs"],
+      ja: ["累進レンズ", "遠視", "階段"],
+    },
+  },
   "/t/t-pterygium": {
     zh: "介紹翼狀胬肉與紫外線等相關因素，以及生活上遮陽防護的建議，並說明何時宜找專科評估（公眾教育），詳見專題正文。",
     en: "Educational notes on pterygium and UV-related factors, plus everyday sun-protection ideas from the published leaflet for readers.",
