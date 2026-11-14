@@ -491,14 +491,19 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
     }
   },
   "/t/t-pal-stairs": {
-    zh: "解釋遠視患者配戴漸進多焦點鏡片上下樓梯（尤其下樓梯）時，近用區放大、模糊與稜鏡效應的光學教育，並附示意動畫（公眾教育，不能代替面診。）",
-    en: "Explains why hyperopes in progressive lenses struggle on stairs — near-zone magnification, blur and prism — with a teaching animation (education only, not a consult).",
-    ja: "遠視で累進レンズを装用する人が階段（とくに下り）で困る理由——近用部の拡大・ぼけ・プリズム——を教育用図示つきで説明します。市民教育であり、対面診療の代わりにはなりません。",
+    zh: "解釋遠視患者配戴漸進多焦點鏡片落樓梯時，近用區放大、模糊與稜鏡效應的光學教育，並附示意動畫（公眾教育，不能代替面診。）",
+    en: "Explains why hyperopes in progressive lenses struggle going downstairs — near-zone magnification, blur and prism — with a teaching animation (education only, not a consult).",
+    ja: "遠視で累進レンズを装用する人が下り階段で困る理由——近用部の拡大・ぼけ・プリズム——を教育用図示つきで説明します。市民教育であり、対面診療の代わりにはなりません。",
     about: {
-      zh: ["漸進鏡", "遠視", "上下樓梯"],
-      en: ["Progressive lenses", "Hyperopia", "Stairs"],
-      ja: ["累進レンズ", "遠視", "階段"],
+      zh: ["漸進鏡", "遠視", "落樓梯"],
+      en: ["Progressive lenses", "Hyperopia", "Downstairs"],
+      ja: ["累進レンズ", "遠視", "下り階段"],
     },
+  },
+  "/tools/pal-stairs": {
+    zh: "漸進多焦點鏡片落樓梯時近用區放大、模糊與稜鏡效應的教學動畫；可切換遠視／近視與度數（教育工具，不是檢查）。",
+    en: "Teaching animation of progressive-lens downstairs optics — near-zone magnification, blur and prism; toggle hyperope/myope (education tool, not a test).",
+    ja: "累進レンズで下り階段を見るときの近用部の拡大・ぼけ・プリズムの教育用アニメ。遠視／近視を切替（検査ではない）。",
   },
   "/t/t-pterygium": {
     zh: "介紹翼狀胬肉與紫外線等相關因素，以及生活上遮陽防護的建議，並說明何時宜找專科評估（公眾教育），詳見專題正文。",

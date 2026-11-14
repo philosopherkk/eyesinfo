@@ -3047,7 +3047,7 @@ export const EN_PACKS: Record<string, TopicPack> = {
     ],
   },
   "t-pal-stairs": {
-    title: "Hyperopia and progressive lenses: walking stairs",
+    title: "Hyperopia and progressive lenses: going downstairs",
     tag: "Optics illustration · not a test",
     meta: "Near zone · magnification · blur · prism",
     keyPoints: [

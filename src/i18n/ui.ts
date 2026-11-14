@@ -345,9 +345,10 @@ const zhHant = {
     "以近軸光線示意眼軸、物體距離與人工晶體設計如何影響聚焦。只供教學，不是臨床度數計算器，不能代替註冊醫生。此模型數字只作光學教學示意，並非確定的臨床結果，亦不可用作人工晶體度數或散光軸位選擇；實際結果須由主診醫生按檢查及量度決定。",
   iolOpticsFoot:
     "示意不能代替散瞳眼底、生物測量或手術規劃。本工具結果正常不能排除眼疾。不是術後保證。本站不提供預約或轉介。",
-  palStairsSimTitle: "漸進鏡 · 上下樓梯光學示意",
+  palStairsSimTitle: "漸進鏡 · 落樓梯光學示意",
   palStairsSimCaption:
-    "下方為教學動畫：比較遠視／近視、度數與低頭角度如何改變階梯的放大、模糊與位置線索。控制項標籤暫為英文（預覽）。示意不是視力檢查或配鏡評估。",
+    "下方為教學動畫：比較遠視／近視、度數與低頭角度如何改變階梯的放大、模糊與位置線索。可用 繁／简／EN／日 切換控制項語言。示意不是視力檢查或配鏡評估。",
+  palStairsTopicLink: "遠視與漸進鏡：落樓梯",
   iolOpticsH: "光學設計",
   iolTargetH: "單焦／預留目標度數",
   iolTargetHint: "由遠視 +3.00（晶體度數明顯不夠）拖到近視 −3.00（預留更近）。每格 0.25 D（25 度）。多焦通常以正視為目標；偏離會令各個焦點一齊移位。",
@@ -926,9 +927,10 @@ const en: Record<Key, string> = {
     "A paraxial ray schematic of axial length, object distance and IOL design. Education only — not a clinical power calculator, and cannot replace a registered doctor. These numbers come from a simplified optical teaching model. They are not a definite clinical outcome, not a prescription, and must not be used to choose an IOL power or astigmatism axis; actual results and lens choice depend on your treating doctor’s examination and measurements.",
   iolOpticsFoot:
     "Illustration cannot replace dilated fundus exam, biometry or surgical planning. A normal tool result cannot rule out disease. Not a post-operative guarantee. This site does not book or refer.",
-  palStairsSimTitle: "Progressive lenses · stair-walking optics demo",
+  palStairsSimTitle: "Progressive lenses · going downstairs",
   palStairsSimCaption:
-    "Teaching animation below: compare hyperope / myope, prescription and head tilt for magnification, blur and where steps appear. Control labels remain English for this preview. Illustration only — not a vision test or dispensing assessment.",
+    "Teaching animation below: compare hyperope / myope, prescription and head tilt for magnification, blur and where steps appear. Switch 繁／简／EN／日 for control labels. Illustration only — not a vision test or dispensing assessment.",
+  palStairsTopicLink: "Hyperopia and progressive lenses: going downstairs",
   iolOpticsH: "Optical design",
   iolTargetH: "Monofocal / target power",
   iolTargetHint: "From hyperopia +3.00 (under-powered lens) to myopia −3.00 (near bias). Steps of 0.25 D (25 degrees). Multifocals usually aim for emmetropia; offset shifts every focus together.",
@@ -1497,9 +1499,10 @@ const ja: Record<Key, string> = {
     "近軸光線で眼軸・物体距離・眼内レンズ設計の焦点を示す教育用図示です。臨床用の度数計算機ではなく、登録医師の代わりにもなりません。このモデルの数値は光学教育用に簡略化した図示であり、確定した臨床結果ではありません。処方ではなく、眼内レンズ度数や乱視軸の選択に使うことはできません。実際の結果とレンズの選択は、主治医の検査と測定によって決まります。",
   iolOpticsFoot:
     "図示は散瞳眼底・生体計測・手術計画の代わりになりません。正常でも眼疾患を否定できません。術後保証ではありません。予約・紹介はしません。",
-  palStairsSimTitle: "累進レンズ · 階段の光学図示",
+  palStairsSimTitle: "累進レンズ · 下り階段の光学図示",
   palStairsSimCaption:
-    "下は教育用アニメです。遠視／近視・度数・頭の傾きで、段の拡大・ぼけ・位置の手がかりがどう変わるかを比べます。操作ラベルはこのプレビューでは英語のままです。図示であり、視力検査や眼鏡合わせの評価ではありません。",
+    "下は教育用アニメです。遠視／近視・度数・頭の傾きで、段の拡大・ぼけ・位置の手がかりがどう変わるかを比べます。繁／简／EN／日で操作ラベルを切り替えられます。図示であり、視力検査や眼鏡合わせの評価ではありません。",
+  palStairsTopicLink: "遠視と累進レンズ：下り階段",
   iolOpticsH: "光学デザイン",
   iolTargetH: "単焦点／目標度数",
   iolTargetHint: "遠視 +3.00（度数が明らかに足りない）から近視 −3.00（より近くを狙う）まで。1目盛 0.25 D（25度）。多焦点は多く正視を目標にし、ずれると各焦点が一緒にずれます。",

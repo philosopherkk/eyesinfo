@@ -3564,7 +3564,7 @@ export const EXTRA_TOPICS: Topic[] = [
   {
     id: "t-pal-stairs",
     num: "BL",
-    title: "遠視與漸進鏡：上下樓梯",
+    title: "遠視與漸進鏡：落樓梯",
     tag: "光學示意 · 不是檢查",
     meta: "近用區 · 放大 · 模糊 · 稜鏡效應",
     category: "lens",

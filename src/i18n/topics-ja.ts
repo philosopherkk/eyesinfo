@@ -2898,7 +2898,7 @@ export const JA_PACKS: Record<string, TopicPack> = {
     ],
   },
   "t-pal-stairs": {
-    title: "遠視と累進レンズ：階段の上り下り",
+    title: "遠視と累進レンズ：下り階段",
     tag: "光学図示 · 検査ではない",
     meta: "近用部 · 拡大 · ぼけ · プリズム",
     keyPoints: [

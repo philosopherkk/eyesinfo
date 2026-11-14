@@ -48,7 +48,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/search</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/search"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/search?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/search?lang=en"/>
@@ -57,7 +57,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/tools</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools?lang=en"/>
@@ -225,6 +225,15 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/halo?lang=en"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://www.eyesinfo.org/tools/halo?lang=ja"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/tools/halo"/>
+  </url>
+  <url>
+    <loc>https://www.eyesinfo.org/tools/pal-stairs</loc>
+    <lastmod>2026-11-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/pal-stairs"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/pal-stairs?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/pal-stairs?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.eyesinfo.org/tools/pal-stairs?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/tools/pal-stairs"/>
   </url>
   <url>
     <loc>https://www.eyesinfo.org/tools/warm</loc>
@@ -543,7 +552,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-elt-migs</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-elt-migs"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-elt-migs?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-elt-migs?lang=en"/>
@@ -741,7 +750,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-pal-stairs</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-11-14</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-pal-stairs"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-pal-stairs?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-pal-stairs?lang=en"/>
