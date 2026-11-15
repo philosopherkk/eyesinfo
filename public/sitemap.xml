@@ -48,7 +48,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/search</loc>
-    <lastmod>2026-11-14</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/search"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/search?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/search?lang=en"/>
@@ -57,7 +57,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/tools</loc>
-    <lastmod>2026-11-14</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools?lang=en"/>
@@ -237,7 +237,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/tools/shallow-ac</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/shallow-ac"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/shallow-ac?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/shallow-ac?lang=en"/>
