@@ -106,6 +106,11 @@ const STATIC_SOURCES = {
     "src/components/pal-stairs-sim.tsx",
     "public/pal-stairs.html",
   ],
+  "/tools/shallow-ac": [
+    "src/routes/tools.shallow-ac.tsx",
+    "src/components/shallow-ac-sim.tsx",
+    "public/shallow-ac.html",
+  ],
   "/tools/warm": ["src/components/care-tools.tsx"],
   "/tools/visit": ["src/components/ask-visit-rx.tsx"],
   "/tools/outdoor": ["src/components/care-tools.tsx"],

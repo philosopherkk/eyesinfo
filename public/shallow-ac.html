@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#12151a" />
+  <meta name="robots" content="noindex" />
+  <title>淺前房與閉角機制示意 — 護眼學堂</title>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "/vendor/three/0.180.0/build/three.module.js",
+      "three/addons/": "/vendor/three/0.180.0/examples/jsm/"
+    }
+  }
+  </script>
+  <style>
+    html, body { margin: 0; padding: 0; background: #0f1217; color: #e4e4e4; }
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 10px 8px 16px; }
+    .cap { font: 13px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color: #9aa3b2; margin: 0 4px 10px; }
+    #sacsim {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: #12151a; color: #e4e4e4; padding: 12px; border-radius: 14px;
+      max-width: 980px; margin: auto; user-select: none;
+    }
+    #sacsim .bar { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: center; margin: 4px 2px 10px; }
+    #sacsim .btn {
+      background: #23272f; color: #ddd; border: 1px solid #444; border-radius: 9px;
+      padding: 7px 13px; font-size: 14px; cursor: pointer; min-height: 40px;
+    }
+    #sacsim .btn.on {
+      background: #2a3d4a; border-color: #5aa0c0; color: #bfe6f5;
+    }
+    #sacsim label.is-dim { opacity: 0.45; pointer-events: none; }
+    #sacsim label { font-size: 13px; display: flex; align-items: center; gap: 6px; color: #bbb; }
+    #sacsim input[type=range] { width: 130px; accent-color: #f0a030; }
+    #sacsim .v { min-width: 52px; font-variant-numeric: tabular-nums; color: #f3c06a; }
+    #sacsim .mech {
+      margin: 0 2px 10px; padding: 12px 14px; border-radius: 10px;
+      background: #1a1f28; border: 1px solid #3a4558; font-size: 13.5px; line-height: 1.55; color: #d5dae3;
+    }
+    #sacsim .mech h2 { margin: 0 0 8px; font-size: 14.5px; color: #f3c06a; font-weight: 700; }
+    #sacsim .mech ul { margin: 0; padding-left: 1.2em; }
+    #sacsim .mech li { margin: 2px 0; }
+    #sacsim .mech li.on { color: #f0a030; font-weight: 600; }
+    #sacsim .story {
+      margin: 0 2px 10px; padding: 10px 12px; border-radius: 10px;
+      background: #161b24; border: 1px solid #2c3440; font-size: 13.5px; line-height: 1.5; color: #d5dae3;
+      min-height: 2.8em;
+    }
+    #sac-view {
+      position: relative; width: 100%; height: min(440px, 78vw);
+      border-radius: 10px; overflow: hidden; background: #05070b; border: 1px solid #2a3140;
+    }
+    #sac-view canvas { display: block; width: 100% !important; height: 100% !important; touch-action: none; }
+    #sac-hud {
+      position: absolute; left: 10px; top: 10px; right: 10px;
+      display: flex; flex-wrap: wrap; gap: 8px; pointer-events: none;
+    }
+    #sac-hud .chip {
+      background: rgba(20,26,34,0.88); border: 1px solid #3a4250; border-radius: 8px;
+      padding: 6px 10px; font-size: 12px; color: #c8cdd6;
+    }
+    #sac-hud .chip strong { color: #f3c06a; font-weight: 700; }
+    #sac-hud .chip.warn { border-color: #e07070; color: #f0b0b0; }
+    #sac-hud .chip.warn strong { color: #e07070; }
+    #sacsim .hint { margin: 10px 2px 0; font-size: 12.5px; line-height: 1.45; color: #8b93a3; }
+    #sacsim .hint a { color: #7ec8e3; }
+    #sacsim .flow-wrap { margin-top: 10px; }
+    #sac-flow { width: 100%; display: block; border-radius: 10px; background: #000; }
+    .label3d {
+      color: #dce3ee; font: 600 12px/1.2 system-ui, sans-serif;
+      text-shadow: 0 1px 2px #000; white-space: nowrap; pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="cap" id="sac-page-cap"></p>
+    <div id="sacsim">
+      <div class="mech" id="sac-mech">
+        <h2 id="sac-mech-title"></h2>
+        <ul id="sac-mech-list"></ul>
+      </div>
+      <div class="bar">
+        <label><span id="sac-depth-lab"></span> <input id="sac-depth" type="range" min="0" max="100" step="1" value="78"><span class="v" id="sac-depthv"></span></label>
+        <label><span id="sac-lens-lab"></span> <input id="sac-lens" type="range" min="0" max="100" step="1" value="28"><span class="v" id="sac-lensv"></span></label>
+        <label><span id="sac-pupil-lab"></span> <input id="sac-pupil" type="range" min="0" max="100" step="1" value="22"><span class="v" id="sac-pupilv"></span></label>
+        <button class="btn" type="button" id="sac-iol"></button>
+        <button class="btn" type="button" id="sac-cut"></button>
+        <button class="btn" type="button" id="sac-reset"></button>
+      </div>
+      <p class="story" id="sac-story" aria-live="polite"></p>
+      <div id="sac-view">
+        <div id="sac-hud">
+          <div class="chip" id="sac-chip-angle"></div>
+          <div class="chip" id="sac-chip-iop"></div>
+          <div class="chip" id="sac-chip-path"></div>
+        </div>
+      </div>
+      <div class="flow-wrap">
+        <canvas id="sac-flow" width="960" height="210" aria-label="aqueous flow"></canvas>
+      </div>
+      <p class="hint" id="sac-hint"></p>
+    </div>
+  </div>
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { CSS2DRenderer, CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
+import { createMapEyeAnatomy } from "/js/map-eye-anatomy.mjs";
+
+/**
+ * Uses the same revolved map-eye model as /tools/map (eye-viewer.html).
+ * Anterior = +Z. Sliders drive AC depth (lens along Z), lens size, pupil.
+ */
+
+const I18N = {
+  "zh-Hant": {
+    pageCap: "教育示意 · 眼球模型與「眼圖」相同。原發性閉角不是單一機制。拖動前房深度、晶體大小、瞳孔觀察。不是自我檢查或診斷。",
+    mechTitle: "重點：原發性閉角有多種機制（不是只有一種）",
+    mech1: "瞳孔阻滯：中等散大時虹膜貼晶體前囊，後房壓力令周邊虹膜向前膨隆，關閉房角",
+    mech2: "晶體增厚／前移：晶體變大或前移（沿光軸靠近角膜），擠佔前房，把虹膜推向前",
+    mech3: "淺前房／窄角解剖：前房本來較淺時，上述變化更容易令房角關閉",
+    mechNote: "以上可單獨或以不同比重同時出現；本頁用三個相對滑桿示意，不是個人診斷。",
+    depth: "前房深度（相對）",
+    lens: "晶體大小（相對）",
+    pupil: "瞳孔大小（相對）",
+    reset: "重設",
+    cutOn: "切開面：開",
+    cutOff: "切開面：關",
+    iolOn: "晶體取出＋人工晶體（示意結果）",
+    iolOff: "恢復自然晶體",
+    deep: "深",
+    shallow: "淺",
+    small: "小",
+    large: "大",
+    storyOpen: "房水路徑暢通：藍點沿睫狀體 → 後房 → 瞳孔 → 前房 → 小樑網。路徑跟隨眼模型。可拖曳旋轉。",
+    storyShallow: "前房變淺：晶體沿光軸前移靠近角膜。周邊虹膜更靠近房角；藍點在瞳孔／房角關卡變慢或停住。",
+    storyThick: "晶體相對變大，擠佔前房，可把虹膜推向前，房角變窄；藍點較難到達小樑網。",
+    storyBlock: "瞳孔中等散大：較易瞳孔阻滯；後房壓力把周邊虹膜向前膨隆；藍點卡在瞳孔關卡。",
+    storyCrowd: "淺前房 + 大晶體 + 中等瞳孔疊加：房角相對關閉，藍點受阻。急性劇痛／虹視／嘔吐 → 急症頁。",
+    storyIol: "示意結果：取出天然晶體並放入薄型人工晶體後，前房相對加深、虹膜後退、瞳孔阻滯與房角擁擠減輕；藍點可再走完全程。這是機制教學，不是手術建議或個人預後。",
+    angleStatus: "房角狀態",
+    angleOpen: "較開（示意）",
+    angleNarrow: "較窄（示意）",
+    angleClosed: "接觸／關閉（示意）",
+    iopStatus: "相對壓力",
+    iopLow: "較低",
+    iopMid: "中等",
+    iopHigh: "較高",
+    pathStatus: "房水出路",
+    pathOk: "暢通",
+    pathLimited: "部分受限",
+    pathBlocked: "受阻",
+    cornea: "角膜",
+    ac: "前房",
+    iris: "虹膜",
+    lensLab: "晶體",
+    lensLabIol: "人工晶體",
+    tm: "房角／小樑",
+    pc: "後房",
+    ciliary: "睫狀體",
+    pupilStation: "瞳孔",
+    flowTitle: "房水流動：五站路徑（跟隨眼模型）",
+    gateOpen: "暢通",
+    gatePartial: "受限",
+    gateClosed: "受阻",
+    hint: "相對滑桿只供教學，沒有臨床毫米汞柱數字。模型取自本站眼圖。藍點路徑跟隨眼結構變化。「晶體取出＋人工晶體」只示意機制，不是手術建議。突然劇痛、虹視、視力急降或頭痛嘔吐：立即急症室；無法前往請致電 999。詳見",
+    urgentLink: "急症頁",
+    htmlLang: "zh-Hant",
+  },
+  "zh-Hans": {
+    pageCap: "教育示意 · 眼球模型与「眼图」相同。原发性闭角不是单一机制。拖动前房深度、晶体大小、瞳孔观察。不是自我检查或诊断。",
+    mechTitle: "重点：原发性闭角有多种机制（不是只有一种）",
+    mech1: "瞳孔阻滞：中等散大时虹膜贴晶体前囊，后房压力令周边虹膜向前膨隆，关闭房角",
+    mech2: "晶体增厚／前移：晶体变大或前移（沿光轴靠近角膜），挤占前房，把虹膜推向前",
+    mech3: "浅前房／窄角解剖：前房本来较浅时，上述变化更容易令房角关闭",
+    mechNote: "以上可单独或以不同比重同时出现；本页用三个相对滑杆示意，不是个人诊断。",
+    depth: "前房深度（相对）",
+    lens: "晶体大小（相对）",
+    pupil: "瞳孔大小（相对）",
+    reset: "重设",
+    cutOn: "切开面：开",
+    cutOff: "切开面：关",
+    iolOn: "晶体取出＋人工晶体（示意结果）",
+    iolOff: "恢复自然晶体",
+    deep: "深",
+    shallow: "浅",
+    small: "小",
+    large: "大",
+    storyOpen: "房水路径畅通：蓝点沿睫状体 → 后房 → 瞳孔 → 前房 → 小梁网。路径跟随眼模型。可拖曳旋转。",
+    storyShallow: "前房变浅：晶体沿光轴前移靠近角膜。周边虹膜更靠近房角；蓝点在瞳孔／房角关卡变慢或停住。",
+    storyThick: "晶体相对变大，挤占前房，可把虹膜推向前，房角变窄；蓝点较难到达小梁网。",
+    storyBlock: "瞳孔中等散大：较易瞳孔阻滞；后房压力把周边虹膜向前膨隆；蓝点卡在瞳孔关卡。",
+    storyCrowd: "浅前房 + 大晶体 + 中等瞳孔叠加：房角相对关闭，蓝点受阻。急性剧痛／虹视／呕吐 → 急症页。",
+    storyIol: "示意结果：取出天然晶体并放入薄型人工晶体后，前房相对加深、虹膜后退、瞳孔阻滞与房角拥挤减轻；蓝点可再走完全程。这是机制教学，不是手术建议或个人预后。",
+    angleStatus: "房角状态",
+    angleOpen: "较开（示意）",
+    angleNarrow: "较窄（示意）",
+    angleClosed: "接触／关闭（示意）",
+    iopStatus: "相对压力",
+    iopLow: "较低",
+    iopMid: "中等",
+    iopHigh: "较高",
+    pathStatus: "房水出路",
+    pathOk: "畅通",
+    pathLimited: "部分受限",
+    pathBlocked: "受阻",
+    cornea: "角膜",
+    ac: "前房",
+    iris: "虹膜",
+    lensLab: "晶体",
+    lensLabIol: "人工晶体",
+    tm: "房角／小梁",
+    pc: "后房",
+    ciliary: "睫状体",
+    pupilStation: "瞳孔",
+    flowTitle: "房水流动：五站路径（跟随眼模型）",
+    gateOpen: "畅通",
+    gatePartial: "受限",
+    gateClosed: "受阻",
+    hint: "相对滑杆只供教学，没有临床毫米汞柱数字。模型取自本站眼图。蓝点路径跟随眼结构变化。「晶体取出＋人工晶体」只示意机制，不是手术建议。突然剧痛、虹视、视力急降或头痛呕吐：立即急诊室；无法前往请致电 999。详见",
+    urgentLink: "急症页",
+    htmlLang: "zh-CN",
+  },
+  en: {
+    pageCap: "Teaching illustration · same eye model as the Eye map tool. Primary angle closure is not one mechanism. Drag AC depth, lens size and pupil. Not a self-check or diagnosis.",
+    mechTitle: "Key point: primary angle closure has several mechanisms (not just one)",
+    mech1: "Pupil block: at mid-dilation the iris contacts the lens; posterior pressure bows peripheral iris forward and closes the angle",
+    mech2: "Thicker / more anterior lens: a larger or forward lens crowds the chamber and pushes the iris forward",
+    mech3: "Shallow-chamber anatomy: when the chamber starts shallow, the changes above close the angle more readily",
+    mechNote: "These can act alone or together. Three relative sliders only — not a personal diagnosis.",
+    depth: "AC depth (relative)",
+    lens: "Lens size (relative)",
+    pupil: "Pupil size (relative)",
+    reset: "Reset",
+    cutOn: "Cutaway: on",
+    cutOff: "Cutaway: off",
+    iolOn: "Lens out + IOL (illustrated outcome)",
+    iolOff: "Restore natural lens",
+    deep: "deep",
+    shallow: "shallow",
+    small: "small",
+    large: "large",
+    storyOpen: "Aqueous path open: blue dots run ciliary → PC → pupil → AC → trabecular meshwork. Path follows the eye model. Drag to rotate.",
+    storyShallow: "Shallower chamber: lens moves forward toward the cornea. Peripheral iris nearer the angle; dots slow or stop at pupil / angle gates.",
+    storyThick: "Larger lens crowds the chamber and can push the iris forward; dots struggle to reach the meshwork.",
+    storyBlock: "Mid-dilation favours pupil block; peripheral iris bows forward; dots stall at the pupil gate.",
+    storyCrowd: "Shallow chamber + large lens + mid pupil stacked: angle relatively closed; dots blocked. Severe pain / halos / vomiting → urgent page.",
+    storyIol: "Illustrated outcome: after removing the natural lens and placing a thin intraocular lens, the chamber deepens, the iris falls back, and pupil block / angle crowding ease — dots can complete the path again. Mechanism teaching only — not surgical advice or personal prognosis.",
+    angleStatus: "Angle",
+    angleOpen: "more open (illustration)",
+    angleNarrow: "narrower (illustration)",
+    angleClosed: "contact / closed (illustration)",
+    iopStatus: "Relative pressure",
+    iopLow: "lower",
+    iopMid: "mid",
+    iopHigh: "higher",
+    pathStatus: "Outflow path",
+    pathOk: "open",
+    pathLimited: "limited",
+    pathBlocked: "blocked",
+    cornea: "Cornea",
+    ac: "AC",
+    iris: "Iris",
+    lensLab: "Lens",
+    lensLabIol: "Intraocular lens",
+    tm: "Angle / TM",
+    pc: "PC",
+    ciliary: "Ciliary body",
+    pupilStation: "Pupil",
+    flowTitle: "Aqueous flow: five stations (follows the eye model)",
+    gateOpen: "open",
+    gatePartial: "limited",
+    gateClosed: "blocked",
+    hint: "Relative sliders only — no clinical mmHg. Model from this site’s Eye map. Blue dots follow structural changes. “Lens out + IOL” is mechanism illustration only, not surgical advice. Sudden severe pain, halos, vision drop or headache with vomiting: A&E; if you cannot travel call 999. See",
+    urgentLink: "urgent page",
+    htmlLang: "en",
+  },
+  ja: {
+    pageCap: "教育用図示 · 眼球モデルは「眼の図」と同じ。原発閉塞隅角は単一の機序ではありません。前房深度・水晶体サイズ・瞳孔を動かします。自己検査や診断ではありません。",
+    mechTitle: "要点：原発閉塞隅角には複数の機序がある（一つだけではない）",
+    mech1: "瞳孔ブロック：中等度散大で虹彩が水晶体前面に接触し、後房圧で周辺虹彩が前方へ膨隆して隅角が閉じる",
+    mech2: "水晶体肥厚／前方移動：水晶体が大きくまたは前方へ（光軸に沿って角膜へ）移動し、前房を圧迫して虹彩を前へ押し出す",
+    mech3: "浅い前房の解剖：もともと前房が浅いと、上記の変化で隅角が閉じやすい",
+    mechNote: "単独でも、比重を変えて同時でも起こり得ます。相対スライダー3つの図示であり個人の診断ではありません。",
+    depth: "前房深度（相対）",
+    lens: "水晶体サイズ（相対）",
+    pupil: "瞳孔サイズ（相対）",
+    reset: "リセット",
+    cutOn: "切断面：オン",
+    cutOff: "切断面：オフ",
+    iolOn: "水晶体摘出＋眼内レンズ（図示の結果）",
+    iolOff: "天然水晶体に戻す",
+    deep: "深い",
+    shallow: "浅い",
+    small: "小",
+    large: "大",
+    storyOpen: "房水経路は開通：青い点は毛様体 → 後房 → 瞳孔 → 前房 → 線維柱帯。経路は眼モデルに追従。ドラッグで回転。",
+    storyShallow: "前房が浅くなる：水晶体が角膜へ前へ移動。周辺虹彩が隅角に近づき、点は瞳孔／隅角で遅く／止まる。",
+    storyThick: "水晶体が大きく前房を圧迫；点は線維柱帯へ到達しにくい。",
+    storyBlock: "中等度散大は瞳孔ブロックを起こしやすい；点は瞳孔ゲートで停滞。",
+    storyCrowd: "浅い前房＋大きな水晶体＋中等度瞳孔：隅角が相対的に閉じ、点が遮断。激痛／虹視／嘔吐 → 緊急ページ。",
+    storyIol: "図示の結果：天然水晶体を摘出し薄い眼内レンズを入れると、前房が相対的に深くなり虹彩が後退し、瞳孔ブロック／隅角の混雑が軽減；点は再び全経路を通れる。機序の教育用であり、手術の助言や個人の予後ではない。",
+    angleStatus: "隅角",
+    angleOpen: "より開（図示）",
+    angleNarrow: "より狭（図示）",
+    angleClosed: "接触／閉鎖（図示）",
+    iopStatus: "相対圧",
+    iopLow: "低め",
+    iopMid: "中等",
+    iopHigh: "高め",
+    pathStatus: "流出路",
+    pathOk: "開通",
+    pathLimited: "制限",
+    pathBlocked: "遮断",
+    cornea: "角膜",
+    ac: "前房",
+    iris: "虹彩",
+    lensLab: "水晶体",
+    lensLabIol: "眼内レンズ",
+    tm: "隅角／線維柱帯",
+    pc: "後房",
+    ciliary: "毛様体",
+    pupilStation: "瞳孔",
+    flowTitle: "房水の流れ：5駅の経路（眼モデルに追従）",
+    gateOpen: "開通",
+    gatePartial: "制限",
+    gateClosed: "遮断",
+    hint: "相対スライダーは教育用のみで mmHg はありません。モデルは本サイトの眼の図から。青い点は構造変化に追従。「水晶体摘出＋眼内レンズ」は機序の図示であり手術の助言ではない。突然の激痛・虹視・視力急低下・頭痛嘔吐：救急へ；行けない場合は 999。詳細は",
+    urgentLink: "緊急ページ",
+    htmlLang: "ja",
+  },
+};
+
+const normalizeLang = (raw) => {
+  const v = (raw || "").trim();
+  if (v === "zh" || v === "zh-Hant" || v === "zh-hant") return "zh-Hant";
+  if (v === "zh-Hans" || v === "zh-hans" || v === "zh-CN" || v === "zh-cn") return "zh-Hans";
+  if (v === "ja" || v === "jp") return "ja";
+  if (v === "en") return "en";
+  return "zh-Hant";
+};
+
+let uiLang = normalizeLang(new URLSearchParams(location.search).get("lang"));
+let T = I18N[uiLang];
+const $ = (id) => document.getElementById(id);
+const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
+const lerp = (a, b, t) => a + (b - a) * t;
+const smooth = (t) => { const x = clamp(t, 0, 1); return x * x * (3 - 2 * x); };
+
+const S = { depth: 78, lens: 28, pupil: 22, iol: false };
+let cutawayOn = true;
+
+function midBell(p01) {
+  const x = (p01 - 0.5) / 0.2;
+  return Math.exp(-0.5 * x * x);
+}
+
+function metrics() {
+  const shallow = 1 - S.depth / 100;
+  const thick = S.lens / 100;
+  const p01 = S.pupil / 100;
+  const rawBlock = clamp(
+    shallow * 0.35 + midBell(p01) * shallow * (0.7 + thick * 0.35) + thick * shallow * 0.3,
+    0,
+    1,
+  );
+  let block = smooth(rawBlock);
+  let bombe = smooth(clamp((block - 0.28) / 0.5, 0, 1)) * (0.25 + shallow * 0.75);
+  let crowd = shallow * 0.42 + thick * 0.48 + bombe * 0.55;
+  let angleOpen = clamp(1 - crowd, 0, 1);
+  let tmContact = clamp(1 - angleOpen * 1.15, 0, 1);
+  let iop = smooth(clamp(tmContact * 0.75 + block * 0.3 + thick * 0.2, 0, 1));
+  let pupilGate = clamp(1 - block * 0.95, 0, 1);
+  let tmGate = clamp(1 - tmContact * 0.97, 0, 1);
+
+  // Map-eye parametric anatomy (same +Z anterior as eye-viewer)
+  let lensEquatorZ = lerp(0.78, 1.06, shallow);
+  let lensRadius = lerp(0.42, 0.58, thick);
+  let lensFront = lerp(0.16, 0.28, thick);
+  let lensBack = lerp(0.24, 0.36, thick);
+  const pupilR = lerp(0.12, 0.42, p01);
+
+  // Lens out + thin IOL: crowding / block / bombé resolve (teaching outcome)
+  if (S.iol) {
+    block = 0.05;
+    bombe = 0;
+    crowd = 0.08;
+    angleOpen = 0.92;
+    tmContact = 0.05;
+    iop = 0.12;
+    pupilGate = 0.96;
+    tmGate = 0.95;
+    lensEquatorZ = 0.86;
+    lensRadius = 0.55;
+    lensFront = 0.045;
+    lensBack = 0.05;
+  }
+
+  return {
+    shallow, thick, p01, block, bombe, angleOpen, tmContact, iop, pupilGate, tmGate,
+    lensEquatorZ, lensRadius, lensFront, lensBack, pupilR, iol: S.iol,
+  };
+}
+
+function activeMechs(m) {
+  if (m.iol) return { block: false, thick: false, shallow: false };
+  return {
+    block: m.block > 0.4 && m.bombe > 0.25,
+    thick: m.thick > 0.5,
+    shallow: m.shallow > 0.4,
+  };
+}
+
+function storyFor(m) {
+  if (m.iol) return T.storyIol;
+  if (m.tmContact > 0.55 && m.shallow > 0.35 && m.thick > 0.4) return T.storyCrowd;
+  if (m.block > 0.45 && m.bombe > 0.3) return T.storyBlock;
+  if (m.thick > 0.55) return T.storyThick;
+  if (m.shallow > 0.45) return T.storyShallow;
+  return T.storyOpen;
+}
+
+function applyLang() {
+  document.documentElement.lang = T.htmlLang;
+  $("sac-page-cap").textContent = T.pageCap;
+  $("sac-mech-title").textContent = T.mechTitle;
+  $("sac-depth-lab").textContent = T.depth;
+  $("sac-lens-lab").textContent = T.lens;
+  $("sac-pupil-lab").textContent = T.pupil;
+  $("sac-reset").textContent = T.reset;
+  $("sac-cut").textContent = cutawayOn ? T.cutOn : T.cutOff;
+  $("sac-iol").textContent = S.iol ? T.iolOff : T.iolOn;
+  $("sac-iol").classList.toggle("on", S.iol);
+  const list = $("sac-mech-list");
+  list.innerHTML = "";
+  [T.mech1, T.mech2, T.mech3].forEach((text, i) => {
+    const li = document.createElement("li");
+    li.dataset.mech = ["block", "thick", "shallow"][i];
+    li.textContent = text;
+    list.appendChild(li);
+  });
+  let note = document.getElementById("sac-mech-note");
+  if (!note) {
+    note = document.createElement("p");
+    note.id = "sac-mech-note";
+    note.style.margin = "8px 0 0";
+    note.style.color = "#8b93a3";
+    note.style.fontSize = "12.5px";
+    list.parentElement.appendChild(note);
+  }
+  note.textContent = T.mechNote;
+
+  const hint = $("sac-hint");
+  hint.innerHTML = "";
+  hint.appendChild(document.createTextNode(T.hint + " "));
+  const a = document.createElement("a");
+  a.href = "/urgent"; a.target = "_top"; a.rel = "noopener";
+  a.textContent = T.urgentLink;
+  hint.appendChild(a);
+  hint.appendChild(document.createTextNode(uiLang === "en" ? "." : "。"));
+  syncChrome();
+  updateLabels();
+  postHeight();
+}
+
+let anatomyDirty = true;
+
+function syncChrome() {
+  const m = metrics();
+  $("sac-depth").value = String(Math.round(S.depth));
+  $("sac-lens").value = String(Math.round(S.lens));
+  $("sac-pupil").value = String(Math.round(S.pupil));
+  const dTag = S.depth >= 55 ? T.deep : S.depth <= 35 ? T.shallow : "";
+  $("sac-depthv").textContent = Math.round(S.depth) + "%" + (dTag ? " · " + dTag : "");
+  const lTag = S.lens >= 60 ? T.large : S.lens <= 25 ? T.small : "";
+  $("sac-lensv").textContent = Math.round(S.lens) + "%" + (lTag ? " · " + lTag : "");
+  $("sac-pupilv").textContent = Math.round(S.pupil) + "%";
+  $("sac-story").textContent = storyFor(m);
+  $("sac-cut").textContent = cutawayOn ? T.cutOn : T.cutOff;
+  $("sac-iol").textContent = S.iol ? T.iolOff : T.iolOn;
+  $("sac-iol").classList.toggle("on", S.iol);
+
+  // While showing IOL outcome, depth/lens sliders are dimmed (pupil still free)
+  $("sac-depth").closest("label").classList.toggle("is-dim", S.iol);
+  $("sac-lens").closest("label").classList.toggle("is-dim", S.iol);
+
+  const act = activeMechs(m);
+  [...$("sac-mech-list").children].forEach((li) => {
+    li.classList.toggle("on", !!act[li.dataset.mech]);
+  });
+
+  const angleLab = m.angleOpen > 0.45 ? T.angleOpen : m.angleOpen > 0.2 ? T.angleNarrow : T.angleClosed;
+  const iopLab = m.iop < 0.35 ? T.iopLow : m.iop < 0.65 ? T.iopMid : T.iopHigh;
+  const pathLab = m.tmGate > 0.65 && m.pupilGate > 0.65 ? T.pathOk : m.tmGate < 0.3 || m.pupilGate < 0.3 ? T.pathBlocked : T.pathLimited;
+
+  $("sac-chip-angle").innerHTML = `${T.angleStatus}：<strong>${angleLab}</strong>`;
+  $("sac-chip-iop").innerHTML = `${T.iopStatus}：<strong>${iopLab}</strong>`;
+  $("sac-chip-path").innerHTML = `${T.pathStatus}：<strong>${pathLab}</strong>`;
+  $("sac-chip-angle").classList.toggle("warn", m.angleOpen <= 0.2);
+  $("sac-chip-iop").classList.toggle("warn", m.iop >= 0.65);
+  $("sac-chip-path").classList.toggle("warn", m.tmGate < 0.3 || m.pupilGate < 0.3);
+
+  anatomyDirty = true;
+}
+
+function applyAnatomyIfNeeded() {
+  if (!anatomyDirty) return;
+  anatomyDirty = false;
+  const m = metrics();
+  anatomy.setParams({
+    pupilR: m.pupilR,
+    lensEquatorZ: m.lensEquatorZ,
+    lensRadius: m.lensRadius,
+    lensFront: m.lensFront,
+    lensBack: m.lensBack,
+    bombe: m.bombe,
+    angleOpen: m.angleOpen,
+    cutaway: cutawayOn,
+    iol: m.iol,
+  });
+  updateLabels();
+}
+
+/* —— Three.js: map-eye anatomy —— */
+const view = $("sac-view");
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+renderer.setClearColor(0x05070b, 1);
+renderer.localClippingEnabled = true;
+view.appendChild(renderer.domElement);
+
+const labelRenderer = new CSS2DRenderer();
+labelRenderer.domElement.style.position = "absolute";
+labelRenderer.domElement.style.inset = "0";
+labelRenderer.domElement.style.pointerEvents = "none";
+view.appendChild(labelRenderer.domElement);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(42, 1, 0.05, 60);
+// Sagittal teaching view: look at anterior segment from +X so cut face is visible; cornea (+Z) toward the right of frame.
+camera.position.set(3.6, 0.55, 1.15);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.target.set(0, 0, 1.05);
+controls.minDistance = 2.0;
+controls.maxDistance = 8;
+
+scene.add(new THREE.AmbientLight(0x8899aa, 0.7));
+const key = new THREE.DirectionalLight(0xfff0dc, 1.8);
+key.position.set(3, 2.2, 4);
+scene.add(key);
+const fill = new THREE.DirectionalLight(0x9cc3ff, 0.65);
+fill.position.set(-2.5, -0.5, 2);
+scene.add(fill);
+const rim = new THREE.DirectionalLight(0x7cb9ff, 1.1);
+rim.position.set(-1, 2, -3);
+scene.add(rim);
+
+const anatomy = createMapEyeAnatomy(THREE, { cutaway: true });
+scene.add(anatomy.group);
+
+function makeLabel(text) {
+  const el = document.createElement("div");
+  el.className = "label3d";
+  el.textContent = text;
+  return new CSS2DObject(el);
+}
+const labels = {
+  cornea: makeLabel(""),
+  lens: makeLabel(""),
+  ciliary: makeLabel(""),
+  iris: makeLabel(""),
+  tm: makeLabel(""),
+  ac: makeLabel(""),
+};
+labels.cornea.position.set(0.15, 0.55, 1.62);
+labels.lens.position.set(0.15, -0.05, 0.92);
+labels.ciliary.position.set(0.15, 0.95, 1.05);
+labels.iris.position.set(0.15, 0.55, 1.18);
+labels.tm.position.set(0.15, 0.9, 1.28);
+labels.ac.position.set(0.15, 0.25, 1.35);
+Object.values(labels).forEach((l) => scene.add(l));
+
+function updateLabels() {
+  labels.cornea.element.textContent = T.cornea;
+  labels.lens.element.textContent = S.iol ? T.lensLabIol : T.lensLab;
+  labels.ciliary.element.textContent = T.ciliary;
+  labels.iris.element.textContent = T.iris;
+  labels.tm.element.textContent = T.tm;
+  labels.ac.element.textContent = T.ac;
+  const path = anatomy.getFlowPath();
+  if (path.length >= 5) {
+    labels.ciliary.position.set(path[0].x + 0.02, path[0].y + 0.08, path[0].z);
+    labels.ac.position.set(path[3].x + 0.02, path[3].y - 0.06, path[3].z);
+    labels.tm.position.set(path[4].x + 0.02, path[4].y + 0.08, path[4].z);
+  }
+}
+
+/* —— Aqueous flow: one particle state → 3D eye path + 2D chart —— */
+const flow = $("sac-flow");
+const fx = flow.getContext("2d");
+/** @type {{ seg: number, u: number, hold: number, alive: boolean }[]} */
+const particles = [];
+
+const flowGroup = new THREE.Group();
+scene.add(flowGroup);
+/** @type {THREE.Mesh[]} */
+const checkpointMeshes = [];
+/** @type {THREE.Mesh[]} */
+const particleMeshes = [];
+/** Concurrent travelers — keep low so each can finish all 5 stations before despawn. */
+const MAX_LIVE = 10;
+const PARTICLE_POOL = 12;
+const checkGeo = new THREE.SphereGeometry(0.032, 12, 12);
+const partGeo = new THREE.SphereGeometry(0.028, 10, 10);
+let spawnAcc = 0;
+
+function spawnFlowParticle() {
+  const live = particles.reduce((n, p) => n + (p.alive ? 1 : 0), 0);
+  if (live >= MAX_LIVE) return;
+  particles.push({ seg: 0, u: 0, hold: 0, alive: true });
+}
+
+function gateAt(seg, m) {
+  // Gate on the segment LEAVING a station toward the next
+  if (seg === 1 || seg === 2) return m.pupilGate; // into / through pupil
+  if (seg === 3) return m.tmGate; // AC → angle / TM
+  return 1; // ciliary → PC always open for production
+}
+
+function updateFlowParticles(dt, m) {
+  // ~1 new droplet every 0.55s when under cap — never cull mid-journey
+  spawnAcc += dt;
+  if (spawnAcc >= 0.55) {
+    spawnAcc = 0;
+    spawnFlowParticle();
+  }
+  for (const p of particles) {
+    if (!p.alive) continue;
+    // Arrived at angle / TM: dwell so the finish is visible, then despawn
+    if (p.seg >= 4) {
+      p.hold += dt;
+      if (p.hold > 0.7) p.alive = false;
+      continue;
+    }
+    const g = gateAt(p.seg, m);
+    if (g < 0.28) {
+      // Hard stop near the blocked gate — still visible at that checkpoint
+      p.u = Math.min(p.u + dt * 0.2, 0.9);
+      continue;
+    }
+    // Patent / partial: move clearly; full tour ~2.2s when open
+    const speed = lerp(0.7, 1.6, clamp((g - 0.28) / 0.55, 0, 1));
+    p.u += dt * speed;
+    while (p.u >= 1 && p.alive && p.seg < 4) {
+      p.u -= 1;
+      p.seg += 1;
+      if (p.seg >= 4) {
+        if (m.tmGate < 0.28) {
+          p.seg = 3;
+          p.u = 0.9;
+          break;
+        }
+        p.u = 0;
+        p.hold = 0;
+        break;
+      }
+    }
+  }
+  for (let i = particles.length - 1; i >= 0; i--) if (!particles[i].alive) particles.splice(i, 1);
+}
+
+function syncFlow3D(m) {
+  const path = anatomy.getFlowPath();
+  if (path.length < 5) return;
+
+  while (checkpointMeshes.length < path.length) {
+    const mesh = new THREE.Mesh(
+      checkGeo,
+      new THREE.MeshBasicMaterial({ color: 0xf3c06a, transparent: true, opacity: 0.9 }),
+    );
+    flowGroup.add(mesh);
+    checkpointMeshes.push(mesh);
+  }
+  path.forEach((wp, i) => {
+    const mesh = checkpointMeshes[i];
+    mesh.position.set(wp.x, wp.y, wp.z);
+    mesh.visible = true;
+    const g = i === 0 ? 1 : i <= 2 ? m.pupilGate : m.tmGate;
+    mesh.material.color.setHex(g > 0.65 ? 0x6ecf8e : g > 0.3 ? 0xf0a030 : 0xe07070);
+  });
+
+  while (particleMeshes.length < PARTICLE_POOL) {
+    const mesh = new THREE.Mesh(
+      partGeo,
+      new THREE.MeshBasicMaterial({ color: 0x7ec8e3 }),
+    );
+    mesh.visible = false;
+    flowGroup.add(mesh);
+    particleMeshes.push(mesh);
+  }
+  for (const mesh of particleMeshes) mesh.visible = false;
+
+  particles.forEach((p, idx) => {
+    if (!p.alive || idx >= particleMeshes.length) return;
+    const mesh = particleMeshes[idx];
+    let x; let y; let z;
+    if (p.seg >= 4) {
+      ({ x, y, z } = path[4]);
+    } else {
+      const a = path[p.seg];
+      const b = path[p.seg + 1];
+      const t = clamp(p.u, 0, 1);
+      x = lerp(a.x, b.x, t);
+      y = lerp(a.y, b.y, t);
+      z = lerp(a.z, b.z, t);
+    }
+    mesh.position.set(x, y, z);
+    mesh.visible = true;
+    const g = p.seg >= 4 ? 1 : gateAt(p.seg, m);
+    mesh.material.color.setHex(g < 0.28 && p.u > 0.5 ? 0xe07070 : 0x7ec8e3);
+  });
+}
+
+function drawFlow(m) {
+  const W = flow.width, H = flow.height;
+  fx.setTransform(1, 0, 0, 1, 0, 0);
+  fx.clearRect(0, 0, W, H);
+  fx.fillStyle = "#0b0d11";
+  fx.fillRect(0, 0, W, H);
+  fx.fillStyle = "#c8cdd6";
+  fx.font = "13px system-ui";
+  fx.fillText(T.flowTitle, 18, 24);
+
+  const nodes = [
+    { x: 90, y: 115, lab: T.ciliary },
+    { x: 280, y: 115, lab: T.pc },
+    { x: 480, y: 115, lab: T.pupilStation },
+    { x: 680, y: 115, lab: T.ac },
+    { x: 870, y: 115, lab: T.tm },
+  ];
+  const gates = [1, m.pupilGate, m.pupilGate, m.tmGate];
+
+  for (let i = 0; i < 4; i++) {
+    const a = nodes[i], b = nodes[i + 1], g = gates[i];
+    fx.strokeStyle = g > 0.65 ? "#6ecf8e" : g > 0.3 ? "#f0a030" : "#e07070";
+    fx.lineWidth = 4;
+    fx.beginPath();
+    fx.moveTo(a.x + 34, a.y);
+    fx.lineTo(b.x - 34, b.y);
+    fx.stroke();
+    fx.fillStyle = fx.strokeStyle;
+    fx.beginPath();
+    fx.moveTo(b.x - 34, b.y);
+    fx.lineTo(b.x - 46, b.y - 7);
+    fx.lineTo(b.x - 46, b.y + 7);
+    fx.closePath();
+    fx.fill();
+  }
+
+  nodes.forEach((n, i) => {
+    const g = i === 0 ? 1 : gates[i - 1];
+    const col = i === 0 ? "#4a90b8" : g > 0.65 ? "#6ecf8e" : g > 0.3 ? "#f0a030" : "#e07070";
+    fx.fillStyle = "#1a1f28";
+    fx.beginPath();
+    fx.arc(n.x, n.y, 32, 0, Math.PI * 2);
+    fx.fill();
+    fx.strokeStyle = col;
+    fx.lineWidth = 3;
+    fx.stroke();
+    fx.fillStyle = "#e4e4e4";
+    fx.font = "11px system-ui";
+    fx.textAlign = "center";
+    fx.fillText(n.lab, n.x, n.y + 4);
+    if (i > 0) {
+      fx.fillStyle = col;
+      fx.font = "10px system-ui";
+      fx.fillText(g > 0.65 ? T.gateOpen : g > 0.3 ? T.gatePartial : T.gateClosed, n.x, n.y + 48);
+    }
+  });
+  fx.textAlign = "left";
+
+  for (const p of particles) {
+    if (!p.alive) continue;
+    if (p.seg >= 4) {
+      const n = nodes[4];
+      fx.fillStyle = "#7ec8e3";
+      fx.beginPath();
+      fx.arc(n.x, n.y, 5, 0, Math.PI * 2);
+      fx.fill();
+      continue;
+    }
+    const a = nodes[p.seg], b = nodes[p.seg + 1];
+    if (!a || !b) continue;
+    const t = clamp(p.u, 0, 1);
+    const x = lerp(a.x, b.x, t);
+    const y = lerp(a.y, b.y, t);
+    const g = gates[p.seg];
+    fx.fillStyle = g < 0.28 && t > 0.5 ? "#e07070" : "#7ec8e3";
+    fx.beginPath();
+    fx.arc(x, y, 4.5, 0, Math.PI * 2);
+    fx.fill();
+  }
+}
+
+function resize() {
+  const w = view.clientWidth || 640;
+  const h = view.clientHeight || 400;
+  renderer.setSize(w, h, false);
+  labelRenderer.setSize(w, h);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+
+function postHeight() {
+  try {
+    const h = Math.ceil(document.documentElement.scrollHeight || 0);
+    if (h > 0 && window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: "eyesinfo-shallow-ac-height", height: h }, "*");
+    }
+  } catch (_) { /* ignore */ }
+}
+
+$("sac-depth").addEventListener("input", (e) => {
+  if (S.iol) return;
+  S.depth = +e.target.value;
+  syncChrome();
+});
+$("sac-lens").addEventListener("input", (e) => {
+  if (S.iol) return;
+  S.lens = +e.target.value;
+  syncChrome();
+});
+$("sac-pupil").addEventListener("input", (e) => { S.pupil = +e.target.value; syncChrome(); });
+$("sac-iol").addEventListener("click", () => {
+  S.iol = !S.iol;
+  particles.length = 0;
+  syncChrome();
+});
+$("sac-cut").addEventListener("click", () => {
+  cutawayOn = !cutawayOn;
+  anatomy.setCutaway(cutawayOn);
+  anatomyDirty = true;
+  $("sac-cut").textContent = cutawayOn ? T.cutOn : T.cutOff;
+});
+$("sac-reset").addEventListener("click", () => {
+  S.depth = 78; S.lens = 28; S.pupil = 22; S.iol = false;
+  particles.length = 0;
+  syncChrome();
+});
+
+window.addEventListener("resize", () => { resize(); postHeight(); });
+
+applyLang();
+resize();
+
+let last = performance.now();
+function frame(now) {
+  const dt = Math.min(0.05, (now - last) / 1000);
+  last = now;
+  const m = metrics();
+  applyAnatomyIfNeeded();
+  updateFlowParticles(dt, m);
+  syncFlow3D(m);
+  drawFlow(m);
+  controls.update();
+  renderer.render(scene, camera);
+  labelRenderer.render(scene, camera);
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+setTimeout(postHeight, 80);
+setTimeout(postHeight, 400);
+</script>
+</body>
+</html>

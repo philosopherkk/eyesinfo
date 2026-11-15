@@ -14,7 +14,8 @@ export type ToolId =
   | "iol"
   | "iolOptics"
   | "procedures"
-  | "palStairs";
+  | "palStairs"
+  | "shallow-ac";
 
 export type ToolDef = {
   id: ToolId;
@@ -57,6 +58,13 @@ export const TOOLS: ToolDef[] = [
     canto: "落樓梯點解矇同怪",
     href: "/tools/pal-stairs",
   },
+  {
+    id: "shallow-ac",
+    title: "淺前房與閉角機制",
+    blurb: "沿用眼圖眼球模型，示意原發性閉角多種機制：瞳孔阻滯、晶體增厚／前移、淺前房（不是自我檢查）",
+    canto: "點解會突然劇痛虹視",
+    href: "/tools/shallow-ac",
+  },
   { id: "warm", title: "熱敷計時", blurb: "示意計時，跟醫生指示", canto: "熱敷跟時間", href: "/tools/warm" },
   { id: "visit", title: "一次眼科檢查", blurb: "散瞳後唔好自己開車", canto: "去診所會做咩", href: "/tools/visit" },
   { id: "outdoor", title: "兒童戶外時間", blurb: "戶外日光時間記錄（公共衞生約數）", canto: "出街睇日光", href: "/tools/outdoor" },
@@ -78,6 +86,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   ],
   d4: [
     { href: "/tools/tunnel", label: "青光眼視野示意" },
+    { href: "/tools/shallow-ac", label: "淺前房與閉角機制" },
     { href: "/t/t-glaucoma-monitor", label: "青光眼監察：目標眼壓、OCT／視野與報告解讀" },
     { href: "/t/t-gldrops", label: "青光眼眼藥水" },
     { href: "/t/t-mlt", label: "微脈衝激光小梁成形術（MLT）" },
@@ -342,6 +351,12 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-presbyopia", label: "老花五類選擇" },
     { href: "/t/d1", label: "屈光不正" },
     { href: "/tools/rx", label: "眼鏡度數解讀" },
+  ],
+  "t-early": [
+    { href: "/tools/shallow-ac", label: "淺前房與閉角機制" },
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/d4", label: "青光眼總論" },
+    { href: "/tools/tunnel", label: "青光眼視野示意" },
   ],
   "t-chalazion": [
     { href: "/tools/warm", label: "熱敷計時" },
