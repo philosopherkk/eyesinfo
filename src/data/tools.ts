@@ -15,7 +15,8 @@ export type ToolId =
   | "iolOptics"
   | "procedures"
   | "palStairs"
-  | "shallow-ac";
+  | "shallow-ac"
+  | "tear-film";
 
 export type ToolDef = {
   id: ToolId;
@@ -65,6 +66,13 @@ export const TOOLS: ToolDef[] = [
     canto: "點解會突然劇痛虹視",
     href: "/tools/shallow-ac",
   },
+  {
+    id: "tear-film",
+    title: "淚膜三層與乾眼機制",
+    blurb: "脂質／水液／黏液缺損對蒸發、破裂時間與炎症的示意（不是檢查）",
+    canto: "揀狀態睇淚膜點散",
+    href: "/tools/tear-film",
+  },
   { id: "warm", title: "熱敷計時", blurb: "示意計時，跟醫生指示", canto: "熱敷跟時間", href: "/tools/warm" },
   { id: "visit", title: "一次眼科檢查", blurb: "散瞳後唔好自己開車", canto: "去診所會做咩", href: "/tools/visit" },
   { id: "outdoor", title: "兒童戶外時間", blurb: "戶外日光時間記錄（公共衞生約數）", canto: "出街睇日光", href: "/tools/outdoor" },
@@ -73,6 +81,7 @@ export const TOOLS: ToolDef[] = [
 
 export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   d2: [
+    { href: "/tools/tear-film", label: "淚膜三層與乾眼機制" },
     { href: "/tools/drops", label: "滴藥水步驟" },
     { href: "/tools/warm", label: "熱敷計時" },
     { href: "/t/t-lube", label: "潤眼液與潤滑劑" },
@@ -172,8 +181,14 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/iol", label: "晶體視力示意" },
     { href: "/iol-optics", label: "人工晶體3D光學教學" },
   ],
-  "t-dry": [{ href: "/tools/drops", label: "滴藥水步驟" }, { href: "/t/t-lube", label: "潤眼液與潤滑劑" }, { href: "/tools/warm", label: "熱敷計時" }],
+  "t-dry": [
+    { href: "/tools/tear-film", label: "淚膜三層與乾眼機制" },
+    { href: "/tools/drops", label: "滴藥水步驟" },
+    { href: "/t/t-lube", label: "潤眼液與潤滑劑" },
+    { href: "/tools/warm", label: "熱敷計時" },
+  ],
   "t-lube": [
+    { href: "/tools/tear-film", label: "淚膜三層與乾眼機制" },
     { href: "/tools/drops", label: "滴藥水步驟" },
     { href: "/t/d2", label: "乾眼症" },
     { href: "/t/t-dry", label: "乾眼處理梯階" },

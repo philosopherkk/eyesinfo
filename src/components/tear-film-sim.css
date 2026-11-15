@@ -1,0 +1,35 @@
+/* Tear-film / dry-eye mechanism embed — SVG cross-section animation. */
+.tear-film-sim {
+  max-width: 100%;
+  overflow-x: hidden;
+  margin-top: 0.35rem;
+}
+
+.tear-film-sim__caption {
+  margin: 0 0 0.65rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 10px;
+  background: var(--color-paper);
+  border: 1px solid var(--color-line);
+  color: var(--color-muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.tear-film-sim__frame {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: min(1200px, 210vw);
+  min-height: 900px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: #fff;
+  touch-action: pan-y;
+}
+
+@media (min-width: 900px) {
+  .tear-film-sim__frame {
+    height: 1180px;
+  }
+}

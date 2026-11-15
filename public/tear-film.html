@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex" />
+  <title>淚膜三層與乾眼機制示意 — 護眼學堂</title>
+  <style>
+.tfm{--ink:#1d2b3a;--muted:#5b6b7b;--line:#e1e8ee;--card:#fff;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);
+  max-width:980px;margin:0 auto;padding:12px 8px 16px;box-sizing:border-box;line-height:1.5}
+.tfm *,.tfm *::before,.tfm *::after{box-sizing:border-box}
+.tfm-title{font-size:clamp(1.15rem,2.6vw,1.45rem);margin:0 0 4px;line-height:1.25}
+.tfm-sub{margin:0 0 14px;color:var(--muted);font-size:.92rem}
+.tfm-controls{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.tfm-btn{appearance:none;font-family:inherit;font-size:.88rem;font-weight:600;line-height:1.2;color:var(--ink);
+  background:#f6f8fa;border:1.5px solid var(--line);border-radius:10px;padding:10px 8px;min-height:46px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;transition:background .2s,border-color .2s,color .2s,transform .1s}
+.tfm-btn:hover{border-color:var(--c)}
+.tfm-btn:active{transform:scale(.98)}
+.tfm-btn:focus-visible,.tfm-tool:focus-visible{outline:3px solid #1f6feb;outline-offset:2px}
+.tfm-btn[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:#fff}
+.tfm-swatch{flex:0 0 auto;width:10px;height:10px;border-radius:50%;background:var(--c)}
+.tfm-btn[aria-pressed="true"] .tfm-swatch{background:#fff}
+.tfm-stage{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#e8f2f9}
+.tfm-svg{display:block;width:100%;height:auto;touch-action:manipulation}
+.tfm-svg-label{font:700 15px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;fill:#1d2b3a;paint-order:stroke;
+  stroke:rgba(255,255,255,.85);stroke-width:4px;stroke-linejoin:round;pointer-events:none}
+.tfm-svg-air{fill:#6b7f90}
+.tfm-dry-text{font:800 14px system-ui,sans-serif;fill:#c0392b;paint-order:stroke;stroke:#fff;stroke-width:4px;stroke-linejoin:round}
+.tfm-tools{position:absolute;top:8px;right:8px;display:flex;gap:6px}
+.tfm-tool{appearance:none;font-family:inherit;font-size:.8rem;font-weight:700;color:var(--ink);background:rgba(255,255,255,.92);
+  border:1px solid var(--line);border-radius:999px;padding:6px 12px;min-height:34px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.tfm-timer{margin:10px 0 4px}
+.tfm-timer-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 12px;font-size:.82rem;color:var(--muted)}
+.tfm-timer-top b{color:var(--ink)}
+.tfm-timer-key{display:inline-flex;align-items:center;gap:6px}
+.tfm-timer-key i{display:inline-block;width:3px;height:12px;background:#e74c3c;border-radius:2px}
+.tfm-timer-track{position:relative;height:8px;background:#edf1f5;border-radius:99px;margin-top:4px;overflow:visible}
+.tfm-timer-fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#6dbbe8,#2e86de)}
+.tfm-timer-mark{position:absolute;top:-4px;width:3px;height:16px;background:#e74c3c;border-radius:2px;left:0;display:none}
+.tfm-legend{list-style:none;padding:0;margin:12px 0 0;display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.82rem}
+.tfm-legend li{display:flex;align-items:center;gap:6px}
+.tfm-legend small{color:var(--muted)}
+.tfm-chip{display:inline-block;width:14px;height:10px;border-radius:3px}
+.tfm-chip.tfm-round{width:10px;height:10px;border-radius:50%}
+.tfm-grid{display:grid;grid-template-columns:1.45fr 1fr;gap:14px;margin-top:14px}
+.tfm-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.tfm-card-title{margin:0 0 10px;font-size:1rem}
+.tfm-info h3{margin:6px 0 8px;font-size:1.1rem;line-height:1.3}
+.tfm-info h5{margin:12px 0 4px;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.tfm-info p{margin:0 0 6px;font-size:.92rem}
+.tfm-info ul{margin:0;padding-left:18px;font-size:.92rem}
+.tfm-info li{margin-bottom:3px}
+.tfm-badge{display:inline-block;font-size:.72rem;font-weight:700;color:#fff;padding:3px 9px;border-radius:99px;letter-spacing:.03em}
+.tfm-cycle{margin-top:12px;padding:10px 12px;border-radius:10px;background:#fff4f2;border:1px solid #f6d0ca;font-size:.86rem}
+.tfm-meter{margin-bottom:11px}
+.tfm-meter-top{display:flex;justify-content:space-between;gap:8px;font-size:.84rem;margin-bottom:3px}
+.tfm-meter-top b{font-weight:700;white-space:nowrap}
+.tfm-track{height:8px;background:#edf1f5;border-radius:99px;overflow:hidden}
+.tfm-fill{height:100%;width:0;border-radius:inherit;transition:width .25s linear,background-color .25s linear}
+.tfm-mini{margin:4px 0 0;font-size:.75rem;color:var(--muted)}
+.tfm-note{font-size:.78rem;color:var(--muted);margin:12px 0 0}
+html,body{margin:0;padding:0;background:#fff}
+@media (max-width:760px){.tfm-grid{grid-template-columns:1fr}}
+@media (max-width:560px){
+  .tfm{padding:10px 6px 14px}
+  .tfm-controls{grid-template-columns:1fr 1fr}
+  .tfm-svg{height:260px}
+  .tfm-svg-label{display:none}
+  .tfm-tool{font-size:.75rem;padding:5px 10px}
+}
+  </style>
+</head>
+<body>
+<div class="tfm" id="tfm">
+  <div class="tfm-header">
+    <h2 class="tfm-title" data-i="title">淚膜與乾眼症機制</h2>
+    <p class="tfm-sub" data-i="sub">揀一種狀態，睇睇三層淚膜缺咗邊層會發生咩事。</p>
+  </div>
+
+  <div class="tfm-controls" role="group" aria-label="Tear film condition">
+    <button type="button" class="tfm-btn" data-state="healthy" aria-pressed="true" style="--c:#2fb36d"><span class="tfm-swatch"></span><span data-i="btnHealthy">健康</span></button>
+    <button type="button" class="tfm-btn" data-state="lipid" aria-pressed="false" style="--c:#e08e1b"><span class="tfm-swatch"></span><span data-i="btnLipid">脂質不足</span></button>
+    <button type="button" class="tfm-btn" data-state="aqueous" aria-pressed="false" style="--c:#2e86de"><span class="tfm-swatch"></span><span data-i="btnAqueous">水液不足</span></button>
+    <button type="button" class="tfm-btn" data-state="mucin" aria-pressed="false" style="--c:#8e44ad"><span class="tfm-swatch"></span><span data-i="btnMucin">黏液不足</span></button>
+  </div>
+
+  <div class="tfm-stage">
+    <svg class="tfm-svg" viewBox="0 0 800 420" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="tfm-svg-title tfm-svg-desc">
+      <title id="tfm-svg-title">Cross-section of the tear film on the corneal surface</title>
+      <desc id="tfm-svg-desc">Animated diagram showing the lipid, aqueous and mucin layers of the tear film over the corneal epithelium, with evaporation, solute concentration, tear break-up and inflammation.</desc>
+      <defs>
+        <linearGradient id="tfm-air" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#f3f8fc"/><stop offset="1" stop-color="#dcebf5"/>
+        </linearGradient>
+        <linearGradient id="tfm-lipid" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ffd659"/><stop offset="1" stop-color="#eaa23a"/>
+        </linearGradient>
+        <linearGradient id="tfm-aq" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#a9def7"/><stop offset="1" stop-color="#5fb2e3"/>
+        </linearGradient>
+        <linearGradient id="tfm-muc" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#c39be0" stop-opacity="0.15"/><stop offset="1" stop-color="#8e44ad" stop-opacity="0.85"/>
+        </linearGradient>
+        <linearGradient id="tfm-lidg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#d79a78"/><stop offset="1" stop-color="#f0bfa0"/>
+        </linearGradient>
+      </defs>
+
+      <rect width="800" height="420" fill="url(#tfm-air)"/>
+      <text class="tfm-svg-label tfm-svg-air" data-lair x="14" y="30">空氣</text>
+      <g data-tfm="evap"></g>
+      <path data-tfm="aq" fill="url(#tfm-aq)"/>
+      <g data-tfm="salt"></g>
+      <g data-tfm="cyto"></g>
+      <path data-tfm="muc" fill="url(#tfm-muc)"/>
+      <path data-tfm="lip" fill="url(#tfm-lipid)" stroke="#c98418" stroke-width="0.6"/>
+      <rect data-tfm="epibg" x="0" y="318" width="800" height="102" fill="#f3cfc7"/>
+      <g data-tfm="epi"></g>
+      <g data-tfm="strand"></g>
+      <g data-tfm="dry"></g>
+      <g data-tfm="labels">
+        <text class="tfm-svg-label" data-l="lip" x="14" y="100">脂質層</text>
+        <text class="tfm-svg-label" data-l="aq" x="14" y="200">水液層</text>
+        <text class="tfm-svg-label" data-l="muc" x="14" y="305">黏液層</text>
+        <text class="tfm-svg-label" data-l="epi" x="14" y="368">角膜上皮</text>
+      </g>
+      <g data-tfm="lid" style="display:none">
+        <path data-tfm="lidbody" fill="url(#tfm-lidg)"/>
+        <rect data-tfm="lidmargin" height="9" fill="#b9775a"/>
+      </g>
+    </svg>
+
+    <div class="tfm-tools">
+      <button type="button" class="tfm-tool" data-tfm="blinkbtn" aria-label="Blink now">眨眼</button>
+      <button type="button" class="tfm-tool" data-tfm="playbtn" aria-pressed="false" aria-label="Pause animation">暫停</button>
+    </div>
+  </div>
+
+  <div class="tfm-timer">
+    <div class="tfm-timer-top">
+      <span><span data-i="sinceBlink">距上次眨眼</span>：<b data-tfm="tbtext">0.0 s</b></span>
+      <span class="tfm-timer-key"><i></i><span data-i="tbutKey">淚膜破裂時間</span></span>
+    </div>
+    <div class="tfm-timer-track">
+      <div class="tfm-timer-fill" data-tfm="tbfill"></div>
+      <div class="tfm-timer-mark" data-tfm="tbmark"></div>
+    </div>
+  </div>
+
+  <ul class="tfm-legend" aria-label="Legend">
+    <li><span class="tfm-chip" style="background:#f4b63f"></span><span data-i="legLip">脂質層</span> <small data-i="legLipSrc">（瞼板腺）</small></li>
+    <li><span class="tfm-chip" style="background:#6dbbe8"></span><span data-i="legAq">水液層</span> <small data-i="legAqSrc">（淚腺）</small></li>
+    <li><span class="tfm-chip" style="background:#8e44ad"></span><span data-i="legMuc">黏液／糖萼</span> <small data-i="legMucSrc">（杯狀細胞與上皮）</small></li>
+    <li><span class="tfm-chip" style="background:#f0b3a8"></span><span data-i="legEpi">角膜上皮</span></li>
+    <li><span class="tfm-chip tfm-round" style="background:#3498db"></span><span data-i="legEvap">蒸發的水分</span></li>
+    <li><span class="tfm-chip tfm-round" style="background:#fff;border:1px solid #5d7f99"></span><span data-i="legSalt">溶質（滲透壓）</span></li>
+    <li><span class="tfm-chip tfm-round" style="background:#e74c3c"></span><span data-i="legInfl">炎症介質</span></li>
+  </ul>
+
+  <div class="tfm-grid">
+    <div class="tfm-card tfm-info" data-tfm="info" aria-live="polite"></div>
+    <div class="tfm-card">
+      <h4 class="tfm-card-title" data-i="metersTitle">淚膜指標</h4>
+      <div data-tfm="meters"></div>
+      <p class="tfm-mini" data-i="metersNote">數值屬示意，不是個人檢查結果。</p>
+    </div>
+  </div>
+
+  <p class="tfm-note" data-i="scaleNote">示意、比例放大。真實脂質層約 0.04–0.1 µm，整層淚膜約 3–5 µm。不能代替註冊醫生。</p>
+</div>
+<script>
+(function () {
+  const root = document.getElementById('tfm');
+  if (!root || root.dataset.ready) return;
+  root.dataset.ready = '1';
+
+  const normalizeLang = (v) => {
+    if (!v) return 'zh-Hant';
+    v = String(v);
+    if (v === 'zh-Hans' || v === 'zh-hans' || v === 'zh-CN' || v === 'zh-cn') return 'zh-Hans';
+    if (v === 'ja' || v === 'jp') return 'ja';
+    if (v === 'en') return 'en';
+    return 'zh-Hant';
+  };
+  let uiLang = normalizeLang(new URLSearchParams(location.search).get('lang'));
+
+  const I18N = {
+    'zh-Hant': {
+      htmlLang: 'zh-Hant',
+      title: '淚膜與乾眼症機制',
+      sub: '揀一種狀態，睇睇三層淚膜缺咗邊層會發生咩事。',
+      btnHealthy: '健康', btnLipid: '脂質不足', btnAqueous: '水液不足', btnMucin: '黏液不足',
+      blink: '眨眼', pause: '暫停', play: '播放',
+      sinceBlink: '距上次眨眼', tbutKey: '淚膜破裂時間',
+      air: '空氣', lip: '脂質層', aq: '水液層', muc: '黏液層', epi: '角膜上皮', drySpot: '乾點',
+      svgTitle: '角膜表面淚膜切面示意',
+      svgDesc: '動畫示意脂質、水液、黏液層，以及蒸發、溶質濃縮、淚膜破裂與炎症。',
+      legLip: '脂質層', legLipSrc: '（瞼板腺）', legAq: '水液層', legAqSrc: '（淚腺）',
+      legMuc: '黏液／糖萼', legMucSrc: '（杯狀細胞與上皮）', legEpi: '角膜上皮',
+      legEvap: '蒸發的水分', legSalt: '溶質（滲透壓）', legInfl: '炎症介質',
+      metersTitle: '淚膜指標', metersNote: '數值屬示意，不是個人檢查結果。',
+      scaleNote: '示意、比例放大。真實脂質層約 0.04–0.1 µm，整層淚膜約 3–5 µm。不能代替註冊醫生。',
+      mEvap: '蒸發', mVol: '淚液量', mOsm: '淚液滲透壓', mTbut: '淚膜穩定性（TBUT）', mInfl: '眼表炎症',
+      low: '低', mod: '中等', high: '高', normal: '正常', mildLow: '輕度減少', none: '無', mild: '輕度', marked: '明顯',
+      cycle: '<div class="tfm-cycle"><strong>惡性循環：</strong>淚膜不穩 → 高滲透壓 → 炎症；炎症損傷表面細胞，令淚膜更不穩。各類乾眼最終常進入此循環。</div>',
+      info: {
+        healthy: { tag:'正常', color:'#2fb36d', title:'健康淚膜',
+          html:'<p>三層協同，令眼表保持光滑、濕潤與保護。</p>' +
+            '<ul><li><strong>脂質層</strong>（瞼板腺）：減慢蒸發，穩定淚膜。</li>' +
+            '<li><strong>水液層</strong>（淚腺）：水分、電解質、蛋白質與抗菌成分；滋潤並沖洗。</li>' +
+            '<li><strong>黏液層</strong>（杯狀細胞分泌，加上膜結合糖萼）：令角膜可被水濕潤，淚液均勻鋪開。</li></ul>' +
+            '<h5>結果</h5><ul><li>眨眼之間淚膜穩定（破裂時間多超過 10 秒）</li><li>滲透壓約正常（約 300 mOsm/L）</li><li>光學表面平滑，視力清晰</li></ul>' },
+        lipid: { tag:'蒸發型乾眼', color:'#e08e1b', title:'脂質層不足',
+          html:'<h5>常見原因</h5><p>瞼板腺功能障礙（MGD）是乾眼最常見原因之一。其他：瞼緣炎、玫瑰痤瘡、隱形眼鏡、眨眼減少（例如長時間用螢幕）。</p>' +
+            '<h5>機制</h5><p>油脂層變薄或呈斑塊狀，無法封住淚面，水分<strong>蒸發加快</strong>。眨眼之間水液層變薄、滲透壓升高，淚膜提早破裂。</p>' +
+            '<h5>影響</h5><ul><li>蒸發增加、淚膜破裂時間縮短</li><li>高滲透壓刺激上皮，觸發炎症</li><li>灼熱、沙礫感、視力波動；有時反而反射性流眼水</li></ul>' },
+        aqueous: { tag:'水液不足型乾眼', color:'#2e86de', title:'水液層不足',
+          html:'<h5>常見原因</h5><p>淚腺分泌減少。可包括乾燥綜合症（修格蘭氏綜合症）、老化、淚腺疾病、部分全身藥物（抗組胺、抗抑鬱等），以及角膜感覺減退。</p>' +
+            '<h5>機制</h5><p>水分減少但溶質相對不變，淚液<strong>滲透壓升高</strong>。薄淚膜提早破裂，亦較難清除碎屑與炎症介質。</p>' +
+            '<h5>影響</h5><ul><li>淚液量低，三型中滲透壓常最高</li><li>炎症細胞因子積聚，損傷上皮與杯狀細胞</li><li>乾澀、異物感、畏光與眼表染色</li></ul>' },
+        mucin: { tag:'濕潤缺陷', color:'#8e44ad', title:'黏液層不足',
+          html:'<h5>常見原因</h5><p>杯狀細胞減少或糖萼受損。可包括慢性炎症、瘢痕性結膜炎（史蒂芬強生症候群、眼類天疱瘡）、化學傷、維生素 A 缺乏，以及長期使用含防腐劑眼藥水。</p>' +
+            '<h5>機制</h5><p>缺乏黏液令上皮變得<strong>疏水</strong>（拒水）。即使淚液量接近正常，水液層亦無法均勻鋪開，易成珠並迅速破裂。</p>' +
+            '<h5>影響</h5><ul><li>淚液量近正常，但破裂時間極短</li><li>乾點暴露，導致上皮損傷與炎症</li><li>刺激感與視力不穩、間歇模糊</li></ul>' }
+      }
+    },
+    'zh-Hans': {
+      htmlLang: 'zh-Hans',
+      title: '泪膜与干眼症机制',
+      sub: '选一种状态，看看三层泪膜缺了哪一层会发生什么。',
+      btnHealthy: '健康', btnLipid: '脂质不足', btnAqueous: '水液不足', btnMucin: '黏液不足',
+      blink: '眨眼', pause: '暂停', play: '播放',
+      sinceBlink: '距上次眨眼', tbutKey: '泪膜破裂时间',
+      air: '空气', lip: '脂质层', aq: '水液层', muc: '黏液层', epi: '角膜上皮', drySpot: '干点',
+      svgTitle: '角膜表面泪膜切面示意',
+      svgDesc: '动画示意脂质、水液、黏液层，以及蒸发、溶质浓缩、泪膜破裂与炎症。',
+      legLip: '脂质层', legLipSrc: '（睑板腺）', legAq: '水液层', legAqSrc: '（泪腺）',
+      legMuc: '黏液／糖萼', legMucSrc: '（杯状细胞与上皮）', legEpi: '角膜上皮',
+      legEvap: '蒸发的水分', legSalt: '溶质（渗透压）', legInfl: '炎症介质',
+      metersTitle: '泪膜指标', metersNote: '数值属示意，不是个人检查结果。',
+      scaleNote: '示意、比例放大。真实脂质层约 0.04–0.1 µm，整层泪膜约 3–5 µm。不能代替注册医生。',
+      mEvap: '蒸发', mVol: '泪液量', mOsm: '泪液渗透压', mTbut: '泪膜稳定性（TBUT）', mInfl: '眼表炎症',
+      low: '低', mod: '中等', high: '高', normal: '正常', mildLow: '轻度减少', none: '无', mild: '轻度', marked: '明显',
+      cycle: '<div class="tfm-cycle"><strong>恶性循环：</strong>泪膜不稳 → 高渗透压 → 炎症；炎症损伤表面细胞，令泪膜更不稳。各类干眼最终常进入此循环。</div>',
+      info: {
+        healthy: { tag:'正常', color:'#2fb36d', title:'健康泪膜',
+          html:'<p>三层协同，令眼表保持光滑、湿润与保护。</p>' +
+            '<ul><li><strong>脂质层</strong>（睑板腺）：减慢蒸发，稳定泪膜。</li>' +
+            '<li><strong>水液层</strong>（泪腺）：水分、电解质、蛋白质与抗菌成分；滋润并冲洗。</li>' +
+            '<li><strong>黏液层</strong>（杯状细胞分泌，加上膜结合糖萼）：令角膜可被水湿润，泪液均匀铺开。</li></ul>' +
+            '<h5>结果</h5><ul><li>眨眼之间泪膜稳定（破裂时间多超过 10 秒）</li><li>渗透压约正常（约 300 mOsm/L）</li><li>光学表面平滑，视力清晰</li></ul>' },
+        lipid: { tag:'蒸发型干眼', color:'#e08e1b', title:'脂质层不足',
+          html:'<h5>常见原因</h5><p>睑板腺功能障碍（MGD）是干眼最常见原因之一。其他：睑缘炎、玫瑰痤疮、隐形眼镜、眨眼减少（例如长时间用屏幕）。</p>' +
+            '<h5>机制</h5><p>油脂层变薄或呈斑块状，无法封住泪面，水分<strong>蒸发加快</strong>。眨眼之间水液层变薄、渗透压升高，泪膜提早破裂。</p>' +
+            '<h5>影响</h5><ul><li>蒸发增加、泪膜破裂时间缩短</li><li>高渗透压刺激上皮，触发炎症</li><li>灼热、砂砾感、视力波动；有时反而反射性流泪</li></ul>' },
+        aqueous: { tag:'水液不足型干眼', color:'#2e86de', title:'水液层不足',
+          html:'<h5>常见原因</h5><p>泪腺分泌减少。可包括干燥综合征（舍格伦综合征）、老化、泪腺疾病、部分全身药物（抗组胺、抗抑郁等），以及角膜感觉减退。</p>' +
+            '<h5>机制</h5><p>水分减少但溶质相对不变，泪液<strong>渗透压升高</strong>。薄泪膜提早破裂，也较难清除碎屑与炎症介质。</p>' +
+            '<h5>影响</h5><ul><li>泪液量低，三型中渗透压常最高</li><li>炎症细胞因子积聚，损伤上皮与杯状细胞</li><li>干涩、异物感、畏光与眼表染色</li></ul>' },
+        mucin: { tag:'湿润缺陷', color:'#8e44ad', title:'黏液层不足',
+          html:'<h5>常见原因</h5><p>杯状细胞减少或糖萼受损。可包括慢性炎症、瘢痕性结膜炎（史蒂文斯–约翰逊综合征、眼类天疱疮）、化学伤、维生素 A 缺乏，以及长期使用含防腐剂眼药水。</p>' +
+            '<h5>机制</h5><p>缺乏黏液令上皮变得<strong>疏水</strong>（拒水）。即使泪液量接近正常，水液层也无法均匀铺开，易成珠并迅速破裂。</p>' +
+            '<h5>影响</h5><ul><li>泪液量近正常，但破裂时间极短</li><li>干点暴露，导致上皮损伤与炎症</li><li>刺激感与视力不稳、间歇模糊</li></ul>' }
+      }
+    },
+    en: {
+      htmlLang: 'en',
+      title: 'The Tear Film & Dry Eye Disease',
+      sub: 'Pick a condition to see what happens when one of the three tear-film layers is missing or not working.',
+      btnHealthy: 'Healthy', btnLipid: 'Lipid deficiency', btnAqueous: 'Aqueous deficiency', btnMucin: 'Mucin deficiency',
+      blink: 'Blink', pause: 'Pause', play: 'Play',
+      sinceBlink: 'Time since last blink', tbutKey: 'Tear break-up time',
+      air: 'Air', lip: 'Lipid layer', aq: 'Aqueous layer', muc: 'Mucin layer', epi: 'Corneal epithelium', drySpot: 'Dry spot',
+      svgTitle: 'Cross-section of the tear film on the corneal surface',
+      svgDesc: 'Animated diagram of lipid, aqueous and mucin layers with evaporation, osmolarity, break-up and inflammation.',
+      legLip: 'Lipid layer', legLipSrc: '(meibomian glands)', legAq: 'Aqueous layer', legAqSrc: '(lacrimal glands)',
+      legMuc: 'Mucin / glycocalyx', legMucSrc: '(goblet & epithelial cells)', legEpi: 'Corneal epithelium',
+      legEvap: 'Evaporating water', legSalt: 'Solutes (osmolarity)', legInfl: 'Inflammatory mediators',
+      metersTitle: 'Tear film indicators', metersNote: 'Values are illustrative — not your personal test results.',
+      scaleNote: 'Schematic, not to scale. Real lipid layer is about 0.04–0.1 µm; whole tear film about 3–5 µm. Cannot replace a registered doctor.',
+      mEvap: 'Evaporation', mVol: 'Tear volume', mOsm: 'Tear osmolarity', mTbut: 'Tear film stability (TBUT)', mInfl: 'Surface inflammation',
+      low: 'Low', mod: 'Moderate', high: 'High', normal: 'Normal', mildLow: 'Mildly reduced', none: 'None', mild: 'Mild', marked: 'Marked',
+      cycle: '<div class="tfm-cycle"><strong>The vicious circle:</strong> an unstable tear film leads to hyperosmolarity, which drives inflammation. Inflammation damages surface cells, and that makes the film even more unstable. Every type of dry eye can end up in this loop.</div>',
+      info: {
+        healthy: { tag:'NORMAL', color:'#2fb36d', title:'Healthy tear film',
+          html:'<p>The three layers work as one system to keep the eye surface smooth, wet and protected.</p>' +
+            '<ul><li><strong>Lipid layer</strong> (meibomian glands): slows evaporation and keeps the film stable.</li>' +
+            '<li><strong>Aqueous layer</strong> (lacrimal glands): water, electrolytes, proteins and antimicrobial factors.</li>' +
+            '<li><strong>Mucin layer</strong> (goblet cells plus membrane-bound glycocalyx): makes the cornea wettable so tears spread evenly.</li></ul>' +
+            '<h5>Result</h5><ul><li>Stable film between blinks (break-up time often over 10 s)</li><li>Normal osmolarity (about 300 mOsm/L)</li><li>Smooth optical surface</li></ul>' },
+        lipid: { tag:'EVAPORATIVE DRY EYE', color:'#e08e1b', title:'Lipid layer deficiency',
+          html:'<h5>Common causes</h5><p>Meibomian gland dysfunction (MGD) is a very common cause. Others: blepharitis, rosacea, contact lens wear, and reduced blinking (for example during screen use).</p>' +
+            '<h5>Mechanism</h5><p>A thin or patchy oil layer no longer seals the surface, so water <strong>evaporates rapidly</strong>. Between blinks the aqueous layer thins and becomes hyperosmolar, so the film breaks up early.</p>' +
+            '<h5>Effects</h5><ul><li>More evaporation and a short tear break-up time</li><li>Hyperosmolar stress on epithelial cells, triggering inflammation</li><li>Burning, grit and fluctuating vision; sometimes paradoxical reflex watering</li></ul>' },
+        aqueous: { tag:'AQUEOUS-DEFICIENT DRY EYE', color:'#2e86de', title:'Aqueous layer deficiency',
+          html:'<h5>Common causes</h5><p>The lacrimal glands make fewer tears. Causes include Sjögren syndrome, ageing, lacrimal gland disease, systemic drugs (antihistamines, antidepressants and others), and reduced corneal sensation.</p>' +
+            '<h5>Mechanism</h5><p>Less water carries the same amount of solutes, so tear <strong>osmolarity rises</strong>. The thin film breaks up early and clears debris and inflammatory mediators poorly.</p>' +
+            '<h5>Effects</h5><ul><li>Low tear volume and often the highest osmolarity of the three types</li><li>Inflammatory cytokines build up and damage epithelium and goblet cells</li><li>Dryness, foreign-body sensation, light sensitivity and surface staining</li></ul>' },
+        mucin: { tag:'WETTABILITY DEFECT', color:'#8e44ad', title:'Mucin layer deficiency',
+          html:'<h5>Common causes</h5><p>Loss of goblet cells or glycocalyx damage. Causes include chronic inflammation, cicatricial conjunctivitis (Stevens–Johnson syndrome, ocular pemphigoid), chemical injury, vitamin A deficiency, and long-term preserved eye drops.</p>' +
+            '<h5>Mechanism</h5><p>Without mucins the epithelium becomes <strong>hydrophobic</strong>. Even with near-normal volume, the aqueous layer cannot spread; it beads and breaks apart quickly.</p>' +
+            '<h5>Effects</h5><ul><li>Very short break-up time even when volume is near normal</li><li>Exposed dry spots, epithelial damage and inflammation</li><li>Irritation and blurred, unstable vision</li></ul>' }
+      }
+    },
+    ja: {
+      htmlLang: 'ja',
+      title: '涙液層とドライアイの機序',
+      sub: '状態を選ぶと、三層の涙液のうち一層が不足したときに何が起きるかが見られます。',
+      btnHealthy: '健常', btnLipid: '脂質不足', btnAqueous: '水層不足', btnMucin: 'ムチン不足',
+      blink: 'まばたき', pause: '一時停止', play: '再生',
+      sinceBlink: '前回のまばたきから', tbutKey: '涙液層破壊時間',
+      air: '空気', lip: '脂質層', aq: '水層', muc: 'ムチン層', epi: '角膜上皮', drySpot: '乾燥斑',
+      svgTitle: '角膜表面の涙液層断面の図示',
+      svgDesc: '脂質・水・ムチン層と蒸発、浸透圧、破壊、炎症を示すアニメーション。',
+      legLip: '脂質層', legLipSrc: '（マイボーム腺）', legAq: '水層', legAqSrc: '（涙腺）',
+      legMuc: 'ムチン／糖衣', legMucSrc: '（杯細胞と上皮）', legEpi: '角膜上皮',
+      legEvap: '蒸発する水分', legSalt: '溶質（浸透圧）', legInfl: '炎症メディエーター',
+      metersTitle: '涙液の指標', metersNote: '数値は図示です。個人の検査結果ではありません。',
+      scaleNote: '模式図であり実寸ではありません。脂質層は約 0.04–0.1 µm、涙液全体は約 3–5 µm。登録医の代わりにはなりません。',
+      mEvap: '蒸発', mVol: '涙液量', mOsm: '涙液浸透圧', mTbut: '涙液層安定性（TBUT）', mInfl: '眼表面の炎症',
+      low: '低い', mod: '中等度', high: '高い', normal: '正常', mildLow: '軽度減少', none: 'なし', mild: '軽度', marked: '著明',
+      cycle: '<div class="tfm-cycle"><strong>悪循環：</strong>涙液不安定 → 高浸透圧 → 炎症。炎症が表面細胞を傷つけ、さらに不安定になります。ドライアイの各型でこのループに入り得ます。</div>',
+      info: {
+        healthy: { tag:'正常', color:'#2fb36d', title:'健常な涙液層',
+          html:'<p>三層が一つの系として働き、眼表面を滑らか・湿潤・保護します。</p>' +
+            '<ul><li><strong>脂質層</strong>（マイボーム腺）：蒸発を抑え安定させます。</li>' +
+            '<li><strong>水層</strong>（涙腺）：水分、電解質、蛋白質、抗菌因子。</li>' +
+            '<li><strong>ムチン層</strong>（杯細胞と膜結合糖衣）：角膜を濡れやすくし、涙を均一に広げます。</li></ul>' +
+            '<h5>結果</h5><ul><li>まばたきのあいだ安定（破壊時間はしばしば 10 秒超）</li><li>浸透圧はおおむね正常（約 300 mOsm/L）</li><li>光学面が滑らか</li></ul>' },
+        lipid: { tag:'蒸発亢進型ドライアイ', color:'#e08e1b', title:'脂質層の不足',
+          html:'<h5>よくある原因</h5><p>マイボーム腺機能不全（MGD）が非常に多いです。ほか：眼瞼炎、酒さ、コンタクトレンズ、まばたき減少（画面作業など）。</p>' +
+            '<h5>機序</h5><p>薄い／斑状の油層では表面を封じられず、水分が<strong>急速に蒸発</strong>します。水層が薄く高浸透圧になり、早期に破壊します。</p>' +
+            '<h5>影響</h5><ul><li>蒸発増加と短い破壊時間</li><li>上皮への高浸透圧ストレスと炎症</li><li>灼熱・異物感・視力変動；反射性の流涙も</li></ul>' },
+        aqueous: { tag:'涙液減少型ドライアイ', color:'#2e86de', title:'水層の不足',
+          html:'<h5>よくある原因</h5><p>涙腺分泌の低下。シェーグレン症候群、加齢、涙腺疾患、全身薬（抗ヒスタミン・抗うつなど）、角膜知覚低下など。</p>' +
+            '<h5>機序</h5><p>水分が減り溶質が相対的に濃くなり、<strong>浸透圧が上昇</strong>します。薄い涙液は早期に破壊し、炎症物質の清除も不十分です。</p>' +
+            '<h5>影響</h5><ul><li>涙液量が低く、三型で浸透圧が最も高くなりやすい</li><li>炎症サイトカインが上皮と杯細胞を傷害</li><li>乾燥・異物感・羞明・表面染色</li></ul>' },
+        mucin: { tag:'濡れ性の障害', color:'#8e44ad', title:'ムチン層の不足',
+          html:'<h5>よくある原因</h5><p>杯細胞減少や糖衣障害。慢性炎症、瘢痕性結膜炎（スティーブンス・ジョンソン症候群、眼類天疱瘡）、化学外傷、ビタミンA欠乏、防腐剤入り点眼の長期使用など。</p>' +
+            '<h5>機序</h5><p>ムチンがないと上皮は<strong>疎水</strong>になります。量はほぼ正常でも水層が広がらず、玉になって早く壊れます。</p>' +
+            '<h5>影響</h5><ul><li>量は近くても破壊時間が非常に短い</li><li>乾燥斑の露出、上皮損傷と炎症</li><li>刺激感と不安定な見え方</li></ul>' }
+      }
+    }
+  };
+
+  let T = I18N[uiLang];
+
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = root.querySelector('.tfm-svg');
+  const q = s => root.querySelector('[data-tfm="' + s + '"]');
+  const W = 800, EPI = 318, STEP = 8, N = W / STEP + 1;
+  const BLINK = 7;
+  const CLOSE = 0.16, HOLD = 0.06, OPEN = 0.24;
+  const RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const STATES = {
+    healthy: { lip:16, patchy:0,   aq:165, thin:1.5, minAq:150, bead:0,    muc:30, strand:1,    evap:3,  osm:298, osmRise:0.4, infl:0,    tbut:99,  vol:100, spots:[] },
+    lipid:   { lip:6,  patchy:0.9, aq:150, thin:11,  minAq:80,  bead:0.08, muc:27, strand:0.9,  evap:28, osm:322, osmRise:3,   infl:0.5,  tbut:3.5, vol:80,
+               spots:[{x:250,d:0,s:40,max:70},{x:565,d:0.8,s:35,max:60}] },
+    aqueous: { lip:13, patchy:0.15,aq:75,  thin:4,   minAq:50,  bead:0.1,  muc:22, strand:0.75, evap:7,  osm:338, osmRise:2,   infl:0.85, tbut:4,   vol:40,
+               spots:[{x:400,d:0,s:45,max:85},{x:170,d:1,s:30,max:50},{x:650,d:0.5,s:35,max:60}] },
+    mucin:   { lip:14, patchy:0.2, aq:150, thin:5,   minAq:100, bead:0.3,  muc:9,  strand:0.3,  evap:9,  osm:315, osmRise:2,   infl:0.6,  tbut:2.2, vol:90,
+               spots:[{x:210,d:0,s:50,max:70},{x:480,d:0.3,s:45,max:80},{x:690,d:0.9,s:35,max:50}] }
+  };
+  const KEYS = ['lip','patchy','aq','thin','minAq','bead','muc','strand','evap','osm','osmRise','infl','tbut','vol'];
+
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const smooth = (e0, e1, x) => { const t = clamp((x - e0) / (e1 - e0)); return t * t * (3 - 2 * t); };
+  const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  const mix = (a, b, k) => 'rgb(' + a.map((v, i) => Math.round(v + (b[i] - v) * k)).join(',') + ')';
+  function mk(tag, attrs, parent) {
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  const gEvap = q('evap'), gSalt = q('salt'), gCyto = q('cyto'), gEpi = q('epi'), gStrand = q('strand'), gDry = q('dry');
+  const pAq = q('aq'), pMuc = q('muc'), pLip = q('lip'), gLid = q('lid'), lidBody = q('lidbody'), lidMargin = q('lidmargin');
+  const labels = {}; svg.querySelectorAll('[data-l]').forEach(n => labels[n.getAttribute('data-l')] = n);
+  const airLabel = svg.querySelector('[data-lair]');
+
+  const CELL_OK = [246, 196, 186], CELL_BAD = [222, 84, 76];
+  const cellsTop = [], cellsDeep = [];
+  function row(y, h, count, off, arr, rx) {
+    const w = (W + off * 2) / count;
+    for (let i = 0; i < count; i++) {
+      const x = -off + i * w;
+      const r = mk('rect', { x: x + 1.5, y, width: w - 3, height: h, rx, fill: mix(CELL_OK, CELL_OK, 0), stroke: '#d99a90', 'stroke-width': 1 }, gEpi);
+      mk('ellipse', { cx: x + w / 2, cy: y + h / 2, rx: Math.min(w * 0.16, 13), ry: h * 0.22, fill: '#a8606c', 'fill-opacity': 0.5 }, gEpi);
+      arr.push({ el: r, cx: x + w / 2, dmg: 0, ph: Math.random() * 6.28 });
+    }
+  }
+  row(EPI + 2, 20, 11, 0, cellsTop, 10);
+  row(EPI + 25, 30, 9, 30, cellsDeep, 12);
+  row(EPI + 58, 44, 8, 10, cellsDeep, 14);
+
+  const strands = [];
+  for (let i = 0; i < 100; i++) {
+    const x = 4 + i * 8;
+    strands.push({ el: mk('line', { x1: x, y1: EPI, x2: x, y2: EPI - 20, stroke: '#7d3c98', 'stroke-width': 2, 'stroke-linecap': 'round' }, gStrand),
+      x, keep: Math.random(), len: 0.6 + Math.random() * 0.4, ph: Math.random() * 6.28 });
+  }
+  const SALT = 150, salt = [];
+  for (let i = 0; i < SALT; i++) salt.push({ el: mk('circle', { r: 2.3, fill: '#fff', stroke: '#5d7f99', 'stroke-width': 0.7, opacity: 0 }, gSalt), u: Math.random(), v: Math.random(), ph: Math.random() * 6.28 });
+  const CYTO = 30, cyto = [];
+  for (let i = 0; i < CYTO; i++) cyto.push({ el: mk('circle', { r: 3.2, fill: '#e74c3c', opacity: 0 }, gCyto), u: Math.random(), v: Math.random(), ph: Math.random() * 6.28 });
+  const EVAP = 90, evap = [];
+  for (let i = 0; i < EVAP; i++) evap.push({ el: mk('circle', { r: 3, fill: '#3498db', opacity: 0 }, gEvap), alive: false });
+  const dryLabels = [];
+  for (let i = 0; i < 3; i++) {
+    const g = mk('g', { opacity: 0 }, gDry);
+    const tx = mk('text', { class: 'tfm-dry-text', x: 0, y: -24, 'text-anchor': 'middle' }, g);
+    tx.textContent = 'Dry spot';
+    mk('path', { d: 'M0 -18 V-3 M-5 -8 L0 -3 L5 -8', stroke: '#c0392b', 'stroke-width': 2.5, fill: 'none', 'stroke-linecap': 'round' }, g);
+    dryLabels.push({ g, tx });
+  }
+
+  const meterBox = q('meters'), meters = {};
+  const METER_IDS = [['evap','mEvap'],['vol','mVol'],['osm','mOsm'],['tbut','mTbut'],['infl','mInfl']];
+  function buildMeters() {
+    meterBox.innerHTML = '';
+    METER_IDS.forEach(([id, key]) => {
+      const d = document.createElement('div');
+      d.className = 'tfm-meter';
+      d.innerHTML = '<div class="tfm-meter-top"><span>' + T[key] + '</span><b></b></div><div class="tfm-track"><div class="tfm-fill"></div></div>';
+      meterBox.appendChild(d);
+      meters[id] = { v: d.querySelector('b'), f: d.querySelector('.tfm-fill') };
+    });
+  }
+  function setMeter(id, frac, bad, text) {
+    const m = meters[id];
+    m.f.style.width = (clamp(frac, 0.03, 1) * 100).toFixed(1) + '%';
+    m.f.style.backgroundColor = 'hsl(' + Math.round(140 * (1 - clamp(bad))) + ',62%,45%)';
+    m.v.textContent = text;
+  }
+  const infoBox = q('info');
+  let currentKey = 'healthy';
+  function showInfo(key) {
+    currentKey = key;
+    const s = T.info[key];
+    const cycle = key === 'healthy' ? '' : T.cycle;
+    infoBox.innerHTML = '<span class="tfm-badge" style="background:' + s.color + '">' + s.tag + '</span><h3>' + s.title + '</h3>' + s.html + cycle;
+  }
+  const tbText = q('tbtext'), tbFill = q('tbfill'), tbMark = q('tbmark');
+  const playBtn = q('playbtn'), blinkBtn = q('blinkbtn');
+
+  function applyLang() {
+    T = I18N[uiLang];
+    document.documentElement.lang = T.htmlLang;
+    document.title = T.title + ' — 護眼學堂';
+    root.querySelectorAll('[data-i]').forEach((el) => {
+      const k = el.getAttribute('data-i');
+      if (T[k] != null) el.textContent = T[k];
+    });
+    if (airLabel) airLabel.textContent = T.air;
+    labels.lip.textContent = T.lip;
+    labels.aq.textContent = T.aq;
+    labels.muc.textContent = T.muc;
+    labels.epi.textContent = T.epi;
+    dryLabels.forEach(({ tx }) => { tx.textContent = T.drySpot; });
+    document.getElementById('tfm-svg-title').textContent = T.svgTitle;
+    document.getElementById('tfm-svg-desc').textContent = T.svgDesc;
+    root.querySelector('.tfm-controls').setAttribute('aria-label', T.title);
+    blinkBtn.textContent = T.blink;
+    blinkBtn.setAttribute('aria-label', T.blink);
+    buildMeters();
+    showInfo(currentKey);
+    setRunning(running);
+    updateUI();
+  }
+
+  const P = {}; KEYS.forEach(k => P[k] = STATES.healthy[k]);
+  let target = STATES.healthy, spots = [], pendingSpots = null;
+  let t = 0, tb = 0, running = !RM, visible = true, last = 0, evapAcc = 0, uiAcc = 1;
+  const blink = { on: false, p: 0, reset: false };
+  const aT = new Float32Array(N), lT = new Float32Array(N), lH = new Float32Array(N), mT = new Float32Array(N), dA = new Float32Array(N), EPIarr = new Float32Array(N).fill(EPI);
+
+  function startBlink() { blink.on = true; blink.p = 0; blink.reset = false; }
+  function lidPos(p) {
+    if (p < CLOSE) return -40 + (W + 80) * ease(p / CLOSE);
+    if (p < CLOSE + HOLD) return W + 40;
+    return W + 40 - (W + 80) * ease(clamp((p - CLOSE - HOLD) / OPEN));
+  }
+  function band(top, bot) {
+    let d = 'M0 ' + top[0].toFixed(1);
+    for (let i = 1; i < N; i++) d += 'L' + i * STEP + ' ' + top[i].toFixed(1);
+    for (let i = N - 1; i >= 0; i--) d += 'L' + i * STEP + ' ' + bot[i].toFixed(1);
+    return d + 'Z';
+  }
+  const idx = x => clamp(Math.round(x / STEP), 0, N - 1);
+
+  function spawnEvap() {
+    let x, i, tries = 0;
+    do { x = Math.random() * W; i = idx(x); tries++; }
+    while (tries < 4 && (dA[i] > 0.5 || Math.random() < clamp(lH[i] / 16) * 0.75));
+    if (dA[i] > 0.5) return;
+    const p = evap.find(e => !e.alive); if (!p) return;
+    p.alive = true; p.x = x; p.y = lT[i] - 2; p.vx = (Math.random() - .5) * 12; p.vy = -(30 + Math.random() * 35); p.life = 0; p.max = 1.3 + Math.random();
+  }
+
+  function update(dt) {
+    t += dt; tb += dt;
+    const k = 1 - Math.exp(-dt * 3);
+    for (const key of KEYS) P[key] += (target[key] - P[key]) * k;
+
+    if (!blink.on && tb >= BLINK) startBlink();
+    let lidX = null;
+    if (blink.on) {
+      blink.p += dt;
+      if (!blink.reset && blink.p >= CLOSE) {
+        blink.reset = true; tb = 0;
+        if (pendingSpots) { spots = pendingSpots; pendingSpots = null; }
+      }
+      if (blink.p >= CLOSE + HOLD + OPEN) blink.on = false; else lidX = lidPos(blink.p);
+    }
+
+    const ss = spots.map(s => { const e = tb - P.tbut - s.d; return e > 0 ? { x: s.x, w: Math.min(s.max, e * s.s), a: Math.min(1, e / 0.6) } : { x: s.x, w: 0, a: 0 }; });
+    const aqNow = Math.max(P.minAq, P.aq - P.thin * tb);
+    let lidSum = 0;
+    for (let i = 0; i < N; i++) {
+      const x = i * STEP;
+      let d = 0;
+      for (const s of ss) if (s.a > 0) { const v = s.a * (1 - smooth(s.w, s.w + 35, Math.abs(x - s.x))); if (v > d) d = v; }
+      dA[i] = d;
+      const bead = 1 - P.bead * (0.5 + 0.5 * Math.sin(x * 0.022 + t * 0.6 + Math.sin(x * 0.007) * 2));
+      const film = (P.muc + aqNow * bead) * (1 - d);
+      const rip = (1.6 * Math.sin(x * 0.025 + t * 1.8) + Math.sin(x * 0.061 - t * 1.1)) * (1 - d);
+      const a = Math.min(EPI, EPI - film + rip);
+      aT[i] = a;
+      const pv = 0.5 + 0.35 * Math.sin(x * 0.031 + t * 0.35) + 0.25 * Math.sin(x * 0.013 - t * 0.2 + 1.3);
+      const lh = P.lip * (1 - P.patchy * smooth(0.35, 0.75, pv)) * (1 - d);
+      lH[i] = lh; lT[i] = a - lh; lidSum += lT[i];
+      mT[i] = Math.max(a, EPI - P.muc);
+    }
+    pAq.setAttribute('d', band(aT, EPIarr));
+    pMuc.setAttribute('d', band(mT, EPIarr));
+    pLip.setAttribute('d', band(lT, aT));
+
+    evapAcc += P.evap * dt * (RM ? 0.4 : 1);
+    while (evapAcc >= 1) { evapAcc--; spawnEvap(); }
+    for (const p of evap) {
+      if (!p.alive) continue;
+      p.life += dt; p.x += p.vx * dt; p.y += p.vy * dt;
+      if (p.life >= p.max) { p.alive = false; p.el.setAttribute('opacity', 0); continue; }
+      p.el.setAttribute('cx', p.x.toFixed(1)); p.el.setAttribute('cy', p.y.toFixed(1));
+      p.el.setAttribute('opacity', (0.85 * (1 - p.life / p.max)).toFixed(2));
+    }
+
+    const nSalt = clamp(Math.round((P.osm - 285) * 2.6 + tb * P.osmRise), 0, SALT);
+    salt.forEach((s, j) => {
+      if (j >= nSalt) { s.el.setAttribute('opacity', 0); return; }
+      const x = ((s.u * W + Math.sin(t * 0.5 + s.ph) * 6) + W) % W, i = idx(x), top = aT[i], bot = mT[i];
+      if (bot - top < 7 || dA[i] > 0.4) { s.el.setAttribute('opacity', 0); return; }
+      s.el.setAttribute('cx', x.toFixed(1));
+      s.el.setAttribute('cy', (top + 3 + (bot - top - 6) * s.v + Math.sin(t + s.ph) * 1.5).toFixed(1));
+      s.el.setAttribute('opacity', 0.95);
+    });
+
+    const nCyto = Math.round(clamp(P.infl) * CYTO);
+    cyto.forEach((c, j) => {
+      if (j >= nCyto) { c.el.setAttribute('opacity', 0); return; }
+      const x = ((c.u * W + Math.sin(t * 0.4 + c.ph) * 10) + W) % W, i = idx(x), top = aT[i], bot = mT[i];
+      if (bot - top < 8) { c.el.setAttribute('opacity', 0); return; }
+      c.el.setAttribute('cx', x.toFixed(1));
+      c.el.setAttribute('cy', (bot - 4 - c.v * Math.min(40, (bot - top) * 0.6)).toFixed(1));
+      c.el.setAttribute('opacity', (0.6 + 0.35 * Math.sin(t * 3 + c.ph)).toFixed(2));
+    });
+
+    for (const s of strands) {
+      const op = clamp((P.strand - s.keep) * 8) * 0.8;
+      if (op <= 0.01) { s.el.setAttribute('opacity', 0); continue; }
+      const len = P.muc * s.len * 0.95, sway = Math.sin(t * 1.2 + s.ph) * 2;
+      s.el.setAttribute('x2', (s.x + sway).toFixed(1)); s.el.setAttribute('y2', (EPI - len).toFixed(1));
+      s.el.setAttribute('opacity', op.toFixed(2));
+    }
+
+    cellsTop.forEach(c => {
+      const tg = Math.max(P.infl * 0.55, dA[idx(c.cx)]);
+      c.dmg += (tg - c.dmg) * Math.min(1, dt * (tg > c.dmg ? 1.2 : 0.35));
+      const pulse = 0.85 + 0.15 * Math.sin(t * 3 + c.ph);
+      c.el.setAttribute('fill', mix(CELL_OK, CELL_BAD, clamp(c.dmg * pulse)));
+      c.el.setAttribute('stroke', c.dmg > 0.5 ? '#b03a2e' : '#d99a90');
+    });
+    cellsDeep.forEach(c => c.el.setAttribute('fill', mix(CELL_OK, CELL_BAD, clamp(P.infl * 0.4 * (0.9 + 0.1 * Math.sin(t * 2 + c.ph))))));
+
+    dryLabels.forEach(({ g }, j) => {
+      const s = ss[j];
+      if (!s || s.w < 8) { g.setAttribute('opacity', 0); return; }
+      g.setAttribute('transform', 'translate(' + s.x + ',' + (EPI - 4) + ')');
+      g.setAttribute('opacity', s.a.toFixed(2));
+    });
+
+    labels.lip.setAttribute('y', (lT[2] - 8).toFixed(1));
+    labels.aq.setAttribute('y', ((aT[2] + mT[2]) / 2 + 5).toFixed(1));
+    labels.muc.setAttribute('y', (EPI - Math.max(P.muc, 14) / 2 + 5).toFixed(1));
+    labels.epi.setAttribute('y', EPI + 50);
+
+    if (lidX !== null) {
+      const b = lidSum / N - 1;
+      gLid.style.display = '';
+      lidBody.setAttribute('d', 'M' + (lidX - 1000) + ' -10H' + (lidX - 40) + 'C' + (lidX + 8) + ' -10 ' + (lidX + 8) + ' ' + b + ' ' + (lidX - 40) + ' ' + b + 'H' + (lidX - 1000) + 'Z');
+      lidMargin.setAttribute('x', lidX - 1000); lidMargin.setAttribute('y', b - 9); lidMargin.setAttribute('width', 958);
+    } else gLid.style.display = 'none';
+
+    uiAcc += dt;
+    if (uiAcc >= 0.1) { uiAcc = 0; updateUI(); }
+  }
+
+  function updateUI() {
+    tbText.textContent = tb.toFixed(1) + ' s';
+    tbFill.style.width = (clamp(tb / BLINK) * 100).toFixed(1) + '%';
+    if (P.tbut < BLINK) { tbMark.style.display = 'block'; tbMark.style.left = 'calc(' + (P.tbut / BLINK * 100).toFixed(1) + '% - 1px)'; }
+    else tbMark.style.display = 'none';
+
+    const ev = clamp(P.evap / 28);
+    setMeter('evap', ev, ev, ev < 0.25 ? T.low : ev < 0.6 ? T.mod : T.high);
+    setMeter('vol', P.vol / 100, (100 - P.vol) / 60, P.vol > 85 ? T.normal : P.vol > 60 ? T.mildLow : T.low);
+    const osm = P.osm + tb * P.osmRise * 0.5;
+    setMeter('osm', (osm - 280) / 70, (osm - 300) / 40, '≈ ' + Math.round(osm) + ' mOsm/L');
+    setMeter('tbut', Math.min(P.tbut, 10) / 10, 1 - Math.min(P.tbut, 10) / 10, P.tbut > 10 ? '> 10 s' : P.tbut.toFixed(1) + ' s');
+    setMeter('infl', P.infl, P.infl, P.infl < 0.1 ? T.none : P.infl < 0.45 ? T.mild : P.infl < 0.7 ? T.mod : T.marked);
+  }
+
+  const btns = root.querySelectorAll('.tfm-btn');
+  function setRunning(v) {
+    running = v;
+    playBtn.textContent = v ? T.pause : T.play;
+    playBtn.setAttribute('aria-label', v ? T.pause : T.play);
+    playBtn.setAttribute('aria-pressed', String(!v));
+  }
+  btns.forEach(b => b.addEventListener('click', () => {
+    const key = b.dataset.state;
+    btns.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    target = STATES[key];
+    pendingSpots = STATES[key].spots;
+    showInfo(key);
+    startBlink();
+    setRunning(true);
+  }));
+  blinkBtn.addEventListener('click', () => { startBlink(); if (!running) setRunning(true); });
+  playBtn.addEventListener('click', () => setRunning(!running));
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(e => { visible = e[0].isIntersecting; }, { threshold: 0.05 }).observe(root);
+  }
+
+  function loop(now) {
+    const dt = last ? Math.min(0.05, (now - last) / 1000) : 0;
+    last = now;
+    if (running && visible && !document.hidden) update(dt);
+    requestAnimationFrame(loop);
+  }
+
+  function reportHeight() {
+    const h = Math.ceil(document.documentElement.scrollHeight || document.body.scrollHeight || 900);
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: 'eyesinfo-tear-film-height', height: h }, '*');
+    }
+  }
+  const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(() => reportHeight()) : null;
+  if (ro) ro.observe(root);
+  window.addEventListener('load', reportHeight);
+  setInterval(reportHeight, 1000);
+
+  if (window.parent !== window) {
+    const hdr = root.querySelector('.tfm-header');
+    if (hdr) hdr.style.display = 'none';
+  }
+
+  applyLang();
+  update(0); updateUI();
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

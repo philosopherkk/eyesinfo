@@ -38,6 +38,7 @@ import { Route as ToolsIndexRouteImport } from './routes/tools.index'
 import { Route as ToolsToolIdRouteImport } from './routes/tools.$toolId'
 import { Route as ToolsPalStairsRouteImport } from './routes/tools.pal-stairs'
 import { Route as ToolsShallowAcRouteImport } from './routes/tools.shallow-ac'
+import { Route as ToolsTearFilmRouteImport } from './routes/tools.tear-film'
 import { Route as ToolsProceduresRouteImport } from './routes/tools.procedures'
 import { Route as ZhCNIndexRouteImport } from './routes/zh-CN.index'
 import { Route as ZhCNSplatRouteImport } from './routes/zh-CN.$'
@@ -189,6 +190,11 @@ const ToolsShallowAcRoute = ToolsShallowAcRouteImport.update({
   path: '/shallow-ac',
   getParentRoute: () => ToolsRoute,
 } as any)
+const ToolsTearFilmRoute = ToolsTearFilmRouteImport.update({
+  id: '/tear-film',
+  path: '/tear-film',
+  getParentRoute: () => ToolsRoute,
+} as any)
 const ToolsProceduresRoute = ToolsProceduresRouteImport.update({
   id: '/procedures',
   path: '/procedures',
@@ -242,6 +248,7 @@ export interface FileRoutesByFullPath {
   '/tools/$toolId': typeof ToolsToolIdRoute
   '/tools/pal-stairs': typeof ToolsPalStairsRoute
   '/tools/shallow-ac': typeof ToolsShallowAcRoute
+  '/tools/tear-film': typeof ToolsTearFilmRoute
   '/tools/procedures': typeof ToolsProceduresRoute
   '/zh-CN/$': typeof ZhCNSplatRoute
   '/zh-Hans/$': typeof ZhHansSplatRoute
@@ -273,6 +280,7 @@ export interface FileRoutesByTo {
   '/tools/$toolId': typeof ToolsToolIdRoute
   '/tools/pal-stairs': typeof ToolsPalStairsRoute
   '/tools/shallow-ac': typeof ToolsShallowAcRoute
+  '/tools/tear-film': typeof ToolsTearFilmRoute
   '/tools/procedures': typeof ToolsProceduresRoute
   '/zh-CN/$': typeof ZhCNSplatRoute
   '/zh-Hans/$': typeof ZhHansSplatRoute
@@ -310,6 +318,7 @@ export interface FileRoutesById {
   '/tools/$toolId': typeof ToolsToolIdRoute
   '/tools/pal-stairs': typeof ToolsPalStairsRoute
   '/tools/shallow-ac': typeof ToolsShallowAcRoute
+  '/tools/tear-film': typeof ToolsTearFilmRoute
   '/tools/procedures': typeof ToolsProceduresRoute
   '/zh-CN/$': typeof ZhCNSplatRoute
   '/zh-Hans/$': typeof ZhHansSplatRoute
@@ -348,6 +357,7 @@ export interface FileRouteTypes {
     | '/tools/$toolId'
     | '/tools/pal-stairs'
     | '/tools/shallow-ac'
+    | '/tools/tear-film'
     | '/tools/procedures'
     | '/zh-CN/$'
     | '/zh-Hans/$'
@@ -379,6 +389,7 @@ export interface FileRouteTypes {
     | '/tools/$toolId'
     | '/tools/pal-stairs'
     | '/tools/shallow-ac'
+    | '/tools/tear-film'
     | '/tools/procedures'
     | '/zh-CN/$'
     | '/zh-Hans/$'
@@ -415,6 +426,7 @@ export interface FileRouteTypes {
     | '/tools/$toolId'
     | '/tools/pal-stairs'
     | '/tools/shallow-ac'
+    | '/tools/tear-film'
     | '/tools/procedures'
     | '/zh-CN/$'
     | '/zh-Hans/$'
@@ -654,6 +666,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsShallowAcRouteImport
       parentRoute: typeof ToolsRoute
     }
+    '/tools/tear-film': {
+      id: '/tools/tear-film'
+      path: '/tear-film'
+      fullPath: '/tools/tear-film'
+      preLoaderRoute: typeof ToolsTearFilmRouteImport
+      parentRoute: typeof ToolsRoute
+    }
     '/tools/procedures': {
       id: '/tools/procedures'
       path: '/procedures'
@@ -720,6 +739,7 @@ interface ToolsRouteChildren {
   ToolsToolIdRoute: typeof ToolsToolIdRoute
   ToolsPalStairsRoute: typeof ToolsPalStairsRoute
   ToolsShallowAcRoute: typeof ToolsShallowAcRoute
+  ToolsTearFilmRoute: typeof ToolsTearFilmRoute
   ToolsProceduresRoute: typeof ToolsProceduresRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
 }
@@ -728,6 +748,7 @@ const ToolsRouteChildren: ToolsRouteChildren = {
   ToolsToolIdRoute: ToolsToolIdRoute,
   ToolsPalStairsRoute: ToolsPalStairsRoute,
   ToolsShallowAcRoute: ToolsShallowAcRoute,
+  ToolsTearFilmRoute: ToolsTearFilmRoute,
   ToolsProceduresRoute: ToolsProceduresRoute,
   ToolsIndexRoute: ToolsIndexRoute,
 }

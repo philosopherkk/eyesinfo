@@ -245,6 +245,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/tools/shallow-ac"/>
   </url>
   <url>
+    <loc>https://www.eyesinfo.org/tools/tear-film</loc>
+    <lastmod>2026-09-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/tear-film"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/tear-film?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/tear-film?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.eyesinfo.org/tools/tear-film?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/tools/tear-film"/>
+  </url>
+  <url>
     <loc>https://www.eyesinfo.org/tools/warm</loc>
     <lastmod>2026-09-07</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/warm"/>

@@ -114,7 +114,8 @@ function Panel({ id }: { id: ToolId }) {
     case "procedures":
     case "palStairs":
     case "shallow-ac":
-      // Dedicated file routes (`tools.pal-stairs`, `tools.shallow-ac`, …) own these.
+    case "tear-film":
+      // Dedicated file routes (`tools.pal-stairs`, `tools.shallow-ac`, `tools.tear-film`, …) own these.
       return null;
     default: {
       const _exhaustive: never = id;

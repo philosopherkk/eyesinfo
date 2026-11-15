@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-15T05:43:18.507Z",
+  "generatedAt": "2026-11-15T06:43:48.869Z",
   "timezone": "Asia/Hong_Kong",
   "note": "Per-URL content lastmod from git (page body/data only). Regenerate with: npm run sitemap:regen",
   "lastmod": {
@@ -30,6 +30,7 @@
     "/tools/halo": "2026-10-08",
     "/tools/pal-stairs": "2026-11-15",
     "/tools/shallow-ac": "2026-11-15",
+    "/tools/tear-film": "2026-09-18",
     "/tools/warm": "2026-09-07",
     "/tools/visit": "2026-09-12",
     "/tools/outdoor": "2026-09-07",
