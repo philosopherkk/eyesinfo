@@ -61,7 +61,7 @@ export const TOOLS: ToolDef[] = [
   {
     id: "shallow-ac",
     title: "淺前房與閉角機制",
-    blurb: "原發性閉角多種機制 3D 示意：瞳孔阻滯、晶體增厚／前移、淺前房（不是自我檢查）",
+    blurb: "沿用眼圖眼球模型，示意原發性閉角多種機制：瞳孔阻滯、晶體增厚／前移、淺前房（不是自我檢查）",
     canto: "點解會突然劇痛虹視",
     href: "/tools/shallow-ac",
   },
