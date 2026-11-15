@@ -83,15 +83,18 @@ html,body{margin:0;padding:0;background:#fff}
 </head>
 <body>
 <div class="tfm" id="tfm">
-  <p class="tfm-locked" data-i="lockedBanner">本頁屬非急症機制教育。內容不能代替註冊醫生面診。</p>
-  <p class="tfm-badge-line"><span class="tfm-edu-badge" data-i="eduBadge">機制示意 · 不是自我檢查</span></p>
-  <p class="tfm-locked-sub" data-i="noTreatment">需由醫生評估，本頁不講治療選擇。</p>
-  <div class="tfm-header">
-    <h2 class="tfm-title" data-i="title">淚膜與乾眼症機制</h2>
-    <p class="tfm-sub" data-i="sub">揀一種狀態，睇睇三層淚膜缺咗邊層會發生咩事。</p>
+  <!-- Standalone page chrome; hidden when embedded (wrapper TearFilmTeachingCaveat owns the same copy). -->
+  <div class="tfm-page-chrome" data-tfm="pagechrome">
+    <p class="tfm-locked" data-i="lockedBanner">本頁屬非急症機制教育。內容不能代替註冊醫生面診。</p>
+    <p class="tfm-badge-line"><span class="tfm-edu-badge" data-i="eduBadge">機制示意 · 不是自我檢查</span></p>
+    <p class="tfm-locked-sub" data-i="noTreatment">需由醫生評估，本頁不講治療選擇。</p>
+    <div class="tfm-header">
+      <h2 class="tfm-title" data-i="title">淚膜與乾眼症機制</h2>
+      <p class="tfm-sub" data-i="sub">揀一種狀態，睇睇三層淚膜缺咗邊層會發生咩事。</p>
+    </div>
+    <p class="tfm-redflag" data-i-html="redFlagHtml"></p>
+    <p class="tfm-systemic" data-i="systemic">劇痛畏光、單眼明顯紅腫大量分泌，或合併口乾／關節痛／皮疹：勿當普通乾眼，需由醫生評估。</p>
   </div>
-  <p class="tfm-redflag" data-i-html="redFlagHtml"></p>
-  <p class="tfm-systemic" data-i="systemic">劇痛畏光、單眼明顯紅腫大量分泌，或合併口乾／關節痛／皮疹：勿當普通乾眼，需由醫生評估。</p>
 
   <div class="tfm-controls" role="group" aria-label="Tear film condition">
     <button type="button" class="tfm-btn" data-state="healthy" aria-pressed="true" style="--c:#2fb36d"><span class="tfm-swatch"></span><span data-i="btnHealthy">健康</span></button>
@@ -710,8 +713,8 @@ html,body{margin:0;padding:0;background:#fff}
   setInterval(reportHeight, 1000);
 
   if (window.parent !== window) {
-    const hdr = root.querySelector('.tfm-header');
-    if (hdr) hdr.style.display = 'none';
+    const chrome = q('pagechrome');
+    if (chrome) chrome.style.display = 'none';
   }
 
   applyLang();
