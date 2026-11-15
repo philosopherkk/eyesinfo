@@ -375,11 +375,11 @@ const zhHant = {
   tearFilmEduCaveat:
     "本圖只供教學示意，不能自行診斷乾眼類型，亦不能量度個人淚膜破裂時間或滲透壓。",
   tearFilmEduRedFlag:
-    "突然視力下降或突然失明、劇痛兼頭痛嘔吐等紅旗徵狀：請先看本站",
+    "突然視力下降或突然失明、劇痛兼頭痛嘔吐，或劇痛畏光、單眼明顯紅腫大量分泌等紅旗徵狀：請先看本站",
   tearFilmEduRedFlagLink: "急症頁",
   tearFilmEduRedFlagAfter: "。",
   tearFilmEduSystemic:
-    "劇痛畏光、單眼明顯紅腫大量分泌，或合併口乾／關節痛／皮疹：勿當普通乾眼，需由醫生評估。",
+    "口乾／關節痛／皮疹：勿當普通乾眼，需由醫生評估。",
   tearFilmSimFooter:
     "示意不是自我檢查或診斷，亦不能代替面診。指標屬相對示意，不是個人化驗或檢查結果。本站不提供預約或轉介。",
   tearFilmTopicLink: "乾眼症專題",
@@ -993,11 +993,11 @@ const en: Record<Key, string> = {
   tearFilmEduCaveat:
     "Teaching illustration only — do not self-diagnose dry-eye type, and do not treat this as a personal tear break-up or osmolarity measurement.",
   tearFilmEduRedFlag:
-    "Sudden vision drop or sudden blindness, severe pain with headache or vomiting, and similar red-flag symptoms: see this site’s",
+    "Sudden vision drop or sudden blindness, severe pain with headache or vomiting, or severe pain and photophobia with a very red swollen eye and heavy discharge, and similar red-flag symptoms: see this site’s",
   tearFilmEduRedFlagLink: "urgent page",
   tearFilmEduRedFlagAfter: ".",
   tearFilmEduSystemic:
-    "Severe pain and photophobia, a very red swollen eye with heavy discharge, or dry mouth / joint pain / rash as well: do not treat as ordinary dry eye — these need a doctor’s assessment.",
+    "Dry mouth / joint pain / rash: do not treat as ordinary dry eye — these need a doctor’s assessment.",
   tearFilmSimFooter:
     "Illustration only — not a self-check or diagnosis, and not a substitute for an in-person visit. Meter figures are relative teaching labels, not personal lab or clinical results. This site does not book or refer.",
   tearFilmTopicLink: "Dry-eye topic",
@@ -1600,11 +1600,11 @@ const ja: Record<Key, string> = {
   tearFilmEduCaveat:
     "教育用図示であり、ドライアイの型を自分で診断したり、個人の破壊時間や浸透圧の測定として扱ったりしないでください。",
   tearFilmEduRedFlag:
-    "突然の視力低下・失明、激痛と頭痛・嘔吐などの赤旗症状：まず本サイトの",
+    "突然の視力低下・失明、激痛と頭痛・嘔吐、または激痛と羞明、片眼の強い発赤腫脹と大量分泌などの赤旗症状：まず本サイトの",
   tearFilmEduRedFlagLink: "救急ページ",
   tearFilmEduRedFlagAfter: "へ。",
   tearFilmEduSystemic:
-    "激痛と羞明、片眼の強い発赤腫脹と大量分泌、または口渇／関節痛／皮疹の合併は「普通のドライアイ」と決めつけず、医師の評価が必要です。",
+    "口渇／関節痛／皮疹は「普通のドライアイ」と決めつけず、医師の評価が必要です。",
   tearFilmSimFooter:
     "図示であり、自己検査や診断でも、対面診察の代わりでもありません。指標は相対的な教育用ラベルであり、個人の検査値ではありません。予約・紹介はしません。",
   tearFilmTopicLink: "ドライアイのページ",
