@@ -359,7 +359,7 @@ const zhHant = {
   palStairsTopicLink: "遠視與漸進鏡：落樓梯",
   shallowAcSimTitle: "淺前房與閉角機制示意",
   shallowAcSimCaption:
-    "下方為 3D 教學動畫：眼球模型與「眼圖」相同。原發性閉角常見有多種機制（瞳孔阻滯、晶體增厚／前移、淺前房解剖等）。拖動前房深度、晶體大小、瞳孔觀察。控制項語言跟隨網站語言。示意不是自我檢查或診斷。",
+    "下方為 3D 教學動畫：眼球模型與「眼圖」相同。藍點沿房水路徑跟隨眼結構變化。可試「晶體取出＋人工晶體」看閉角相關擁擠如何相對紓緩（機制示意，不是手術建議）。拖動前房深度、晶體大小、瞳孔。示意不是自我檢查或診斷。",
   shallowAcEduBadge: "多機制示意 · 不是檢查",
   shallowAcEduCaveat:
     "原發性閉角不是單一機制。本圖只供教學示意，不能自行判斷有沒有窄角或閉角。急性劇痛、虹視、視力急降或頭痛嘔吐 → 本站急症頁（／urgent），不是預約診所。不能代替註冊醫生。",
@@ -957,7 +957,7 @@ const en: Record<Key, string> = {
   palStairsTopicLink: "Hyperopia and progressive lenses: going downstairs",
   shallowAcSimTitle: "Shallow AC and angle-closure mechanism",
   shallowAcSimCaption:
-    "3D teaching animation using the same eye model as the Eye map tool. Primary angle closure has several common mechanisms (pupil block, thicker/more anterior lens, shallow-chamber anatomy, and combinations). Drag AC depth, lens size and pupil. Control labels follow the site language. Illustration only — not a self-check or diagnosis.",
+    "3D teaching animation using the same eye model as the Eye map tool. Blue dots follow the aqueous path as structures change. Try “Lens out + IOL” to see how related crowding can ease (mechanism illustration — not surgical advice). Drag AC depth, lens size and pupil. Illustration only — not a self-check or diagnosis.",
   shallowAcEduBadge: "Multi-mechanism illustration · not a test",
   shallowAcEduCaveat:
     "Primary angle closure is not a single mechanism. Teaching illustration only — do not self-judge narrow angle or angle closure. Acute severe pain, halos, sudden vision drop, or headache with vomiting → this site’s /urgent only — not clinic booking. Cannot replace a registered doctor.",
@@ -1545,7 +1545,7 @@ const ja: Record<Key, string> = {
   palStairsTopicLink: "遠視と累進レンズ：下り階段",
   shallowAcSimTitle: "浅い前房と閉塞隅角の機序",
   shallowAcSimCaption:
-    "下は3D教育用アニメです。眼球モデルは「眼の図」と同じです。原発閉塞隅角には複数のよくある機序があります（瞳孔ブロック、水晶体肥厚／前方移動、浅い前房の解剖など）。前房深度・水晶体サイズ・瞳孔を動かします。操作ラベルはサイトの言語に従います。図示であり、自己検査や診断ではありません。",
+    "下は3D教育用アニメです。眼球モデルは「眼の図」と同じです。青い点は構造変化に追従して房水経路を進みます。「水晶体摘出＋眼内レンズ」で閉塞関連の混雑が相対的に軽減する様子を示します（機序の図示であり手術の助言ではありません）。前房深度・水晶体サイズ・瞳孔を動かします。図示であり、自己検査や診断ではありません。",
   shallowAcEduBadge: "複数機序の図示 · 検査ではない",
   shallowAcEduCaveat:
     "原発閉塞隅角は単一の機序ではありません。教育用図示であり、狭い隅角や閉塞を自分で判定しないでください。急性の激痛・虹視・視力急低下・頭痛嘔吐 → 本サイトの／urgentのみ（予約ではない）。登録医の代わりにはなりません。",

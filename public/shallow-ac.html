@@ -28,6 +28,10 @@
       background: #23272f; color: #ddd; border: 1px solid #444; border-radius: 9px;
       padding: 7px 13px; font-size: 14px; cursor: pointer; min-height: 40px;
     }
+    #sacsim .btn.on {
+      background: #2a3d4a; border-color: #5aa0c0; color: #bfe6f5;
+    }
+    #sacsim label.is-dim { opacity: 0.45; pointer-events: none; }
     #sacsim label { font-size: 13px; display: flex; align-items: center; gap: 6px; color: #bbb; }
     #sacsim input[type=range] { width: 130px; accent-color: #f0a030; }
     #sacsim .v { min-width: 52px; font-variant-numeric: tabular-nums; color: #f3c06a; }
@@ -82,6 +86,7 @@
         <label><span id="sac-depth-lab"></span> <input id="sac-depth" type="range" min="0" max="100" step="1" value="78"><span class="v" id="sac-depthv"></span></label>
         <label><span id="sac-lens-lab"></span> <input id="sac-lens" type="range" min="0" max="100" step="1" value="28"><span class="v" id="sac-lensv"></span></label>
         <label><span id="sac-pupil-lab"></span> <input id="sac-pupil" type="range" min="0" max="100" step="1" value="22"><span class="v" id="sac-pupilv"></span></label>
+        <button class="btn" type="button" id="sac-iol"></button>
         <button class="btn" type="button" id="sac-cut"></button>
         <button class="btn" type="button" id="sac-reset"></button>
       </div>
@@ -124,15 +129,18 @@ const I18N = {
     reset: "重設",
     cutOn: "切開面：開",
     cutOff: "切開面：關",
+    iolOn: "晶體取出＋人工晶體（示意結果）",
+    iolOff: "恢復自然晶體",
     deep: "深",
     shallow: "淺",
     small: "小",
     large: "大",
-    storyOpen: "房水路徑暢通：睫狀體 → 後房 → 瞳孔 → 前房 → 小樑網。模型與眼圖相同（角膜向前／+Z）。可拖曳旋轉。",
-    storyShallow: "前房變淺：晶體沿光軸前移靠近角膜。周邊虹膜更靠近房角。",
-    storyThick: "晶體相對變大，擠佔前房，可把虹膜推向前，房角變窄（晶體相關路徑）。",
-    storyBlock: "瞳孔中等散大：較易瞳孔阻滯；後房壓力把周邊虹膜向前（朝角膜）膨隆。",
-    storyCrowd: "淺前房 + 大晶體 + 中等瞳孔疊加：房角相對關閉。急性劇痛／虹視／嘔吐 → 急症頁。",
+    storyOpen: "房水路徑暢通：藍點沿睫狀體 → 後房 → 瞳孔 → 前房 → 小樑網。路徑跟隨眼模型。可拖曳旋轉。",
+    storyShallow: "前房變淺：晶體沿光軸前移靠近角膜。周邊虹膜更靠近房角；藍點在瞳孔／房角關卡變慢或停住。",
+    storyThick: "晶體相對變大，擠佔前房，可把虹膜推向前，房角變窄；藍點較難到達小樑網。",
+    storyBlock: "瞳孔中等散大：較易瞳孔阻滯；後房壓力把周邊虹膜向前膨隆；藍點卡在瞳孔關卡。",
+    storyCrowd: "淺前房 + 大晶體 + 中等瞳孔疊加：房角相對關閉，藍點受阻。急性劇痛／虹視／嘔吐 → 急症頁。",
+    storyIol: "示意結果：取出天然晶體並放入薄型人工晶體後，前房相對加深、虹膜後退、瞳孔阻滯與房角擁擠減輕；藍點可再走完全程。這是機制教學，不是手術建議或個人預後。",
     angleStatus: "房角狀態",
     angleOpen: "較開（示意）",
     angleNarrow: "較窄（示意）",
@@ -149,15 +157,16 @@ const I18N = {
     ac: "前房",
     iris: "虹膜",
     lensLab: "晶體",
+    lensLabIol: "人工晶體",
     tm: "房角／小樑",
     pc: "後房",
     ciliary: "睫狀體",
     pupilStation: "瞳孔",
-    flowTitle: "房水流動：五站路徑（示意）",
+    flowTitle: "房水流動：五站路徑（跟隨眼模型）",
     gateOpen: "暢通",
     gatePartial: "受限",
     gateClosed: "受阻",
-    hint: "相對滑桿只供教學，沒有臨床毫米汞柱數字。模型取自本站眼圖。原發性閉角機制不只一種。突然劇痛、虹視、視力急降或頭痛嘔吐：立即急症室；無法前往請致電 999。詳見",
+    hint: "相對滑桿只供教學，沒有臨床毫米汞柱數字。模型取自本站眼圖。藍點路徑跟隨眼結構變化。「晶體取出＋人工晶體」只示意機制，不是手術建議。突然劇痛、虹視、視力急降或頭痛嘔吐：立即急症室；無法前往請致電 999。詳見",
     urgentLink: "急症頁",
     htmlLang: "zh-Hant",
   },
@@ -174,15 +183,18 @@ const I18N = {
     reset: "重设",
     cutOn: "切开面：开",
     cutOff: "切开面：关",
+    iolOn: "晶体取出＋人工晶体（示意结果）",
+    iolOff: "恢复自然晶体",
     deep: "深",
     shallow: "浅",
     small: "小",
     large: "大",
-    storyOpen: "房水路径畅通：睫状体 → 后房 → 瞳孔 → 前房 → 小梁网。模型与眼图相同（角膜向前／+Z）。可拖曳旋转。",
-    storyShallow: "前房变浅：晶体沿光轴前移靠近角膜。周边虹膜更靠近房角。",
-    storyThick: "晶体相对变大，挤占前房，可把虹膜推向前，房角变窄（晶体相关路径）。",
-    storyBlock: "瞳孔中等散大：较易瞳孔阻滞；后房压力把周边虹膜向前（朝角膜）膨隆。",
-    storyCrowd: "浅前房 + 大晶体 + 中等瞳孔叠加：房角相对关闭。急性剧痛／虹视／呕吐 → 急症页。",
+    storyOpen: "房水路径畅通：蓝点沿睫状体 → 后房 → 瞳孔 → 前房 → 小梁网。路径跟随眼模型。可拖曳旋转。",
+    storyShallow: "前房变浅：晶体沿光轴前移靠近角膜。周边虹膜更靠近房角；蓝点在瞳孔／房角关卡变慢或停住。",
+    storyThick: "晶体相对变大，挤占前房，可把虹膜推向前，房角变窄；蓝点较难到达小梁网。",
+    storyBlock: "瞳孔中等散大：较易瞳孔阻滞；后房压力把周边虹膜向前膨隆；蓝点卡在瞳孔关卡。",
+    storyCrowd: "浅前房 + 大晶体 + 中等瞳孔叠加：房角相对关闭，蓝点受阻。急性剧痛／虹视／呕吐 → 急症页。",
+    storyIol: "示意结果：取出天然晶体并放入薄型人工晶体后，前房相对加深、虹膜后退、瞳孔阻滞与房角拥挤减轻；蓝点可再走完全程。这是机制教学，不是手术建议或个人预后。",
     angleStatus: "房角状态",
     angleOpen: "较开（示意）",
     angleNarrow: "较窄（示意）",
@@ -199,15 +211,16 @@ const I18N = {
     ac: "前房",
     iris: "虹膜",
     lensLab: "晶体",
+    lensLabIol: "人工晶体",
     tm: "房角／小梁",
     pc: "后房",
     ciliary: "睫状体",
     pupilStation: "瞳孔",
-    flowTitle: "房水流动：五站路径（示意）",
+    flowTitle: "房水流动：五站路径（跟随眼模型）",
     gateOpen: "畅通",
     gatePartial: "受限",
     gateClosed: "受阻",
-    hint: "相对滑杆只供教学，没有临床毫米汞柱数字。模型取自本站眼图。原发性闭角机制不只一种。突然剧痛、虹视、视力急降或头痛呕吐：立即急诊室；无法前往请致电 999。详见",
+    hint: "相对滑杆只供教学，没有临床毫米汞柱数字。模型取自本站眼图。蓝点路径跟随眼结构变化。「晶体取出＋人工晶体」只示意机制，不是手术建议。突然剧痛、虹视、视力急降或头痛呕吐：立即急诊室；无法前往请致电 999。详见",
     urgentLink: "急症页",
     htmlLang: "zh-CN",
   },
@@ -224,15 +237,18 @@ const I18N = {
     reset: "Reset",
     cutOn: "Cutaway: on",
     cutOff: "Cutaway: off",
+    iolOn: "Lens out + IOL (illustrated outcome)",
+    iolOff: "Restore natural lens",
     deep: "deep",
     shallow: "shallow",
     small: "small",
     large: "large",
-    storyOpen: "Aqueous path open: ciliary → PC → pupil → AC → trabecular meshwork. Same model as the Eye map (cornea forward / +Z). Drag to rotate.",
-    storyShallow: "Shallower chamber: lens moves forward along the optical axis toward the cornea. Peripheral iris nearer the angle.",
-    storyThick: "Larger lens crowds the chamber and can push the iris forward, narrowing the angle (lens-related path).",
-    storyBlock: "Mid-dilation favours pupil block; posterior pressure bows peripheral iris forward toward the cornea.",
-    storyCrowd: "Shallow chamber + large lens + mid pupil stacked: angle relatively closed. Severe pain / halos / vomiting → urgent page.",
+    storyOpen: "Aqueous path open: blue dots run ciliary → PC → pupil → AC → trabecular meshwork. Path follows the eye model. Drag to rotate.",
+    storyShallow: "Shallower chamber: lens moves forward toward the cornea. Peripheral iris nearer the angle; dots slow or stop at pupil / angle gates.",
+    storyThick: "Larger lens crowds the chamber and can push the iris forward; dots struggle to reach the meshwork.",
+    storyBlock: "Mid-dilation favours pupil block; peripheral iris bows forward; dots stall at the pupil gate.",
+    storyCrowd: "Shallow chamber + large lens + mid pupil stacked: angle relatively closed; dots blocked. Severe pain / halos / vomiting → urgent page.",
+    storyIol: "Illustrated outcome: after removing the natural lens and placing a thin intraocular lens, the chamber deepens, the iris falls back, and pupil block / angle crowding ease — dots can complete the path again. Mechanism teaching only — not surgical advice or personal prognosis.",
     angleStatus: "Angle",
     angleOpen: "more open (illustration)",
     angleNarrow: "narrower (illustration)",
@@ -249,15 +265,16 @@ const I18N = {
     ac: "AC",
     iris: "Iris",
     lensLab: "Lens",
+    lensLabIol: "Intraocular lens",
     tm: "Angle / TM",
     pc: "PC",
     ciliary: "Ciliary body",
     pupilStation: "Pupil",
-    flowTitle: "Aqueous flow: five stations (illustration)",
+    flowTitle: "Aqueous flow: five stations (follows the eye model)",
     gateOpen: "open",
     gatePartial: "limited",
     gateClosed: "blocked",
-    hint: "Relative sliders only — no clinical mmHg. Model from this site’s Eye map. Primary angle closure is not one mechanism. Sudden severe pain, halos, vision drop or headache with vomiting: A&E; if you cannot travel call 999. See",
+    hint: "Relative sliders only — no clinical mmHg. Model from this site’s Eye map. Blue dots follow structural changes. “Lens out + IOL” is mechanism illustration only, not surgical advice. Sudden severe pain, halos, vision drop or headache with vomiting: A&E; if you cannot travel call 999. See",
     urgentLink: "urgent page",
     htmlLang: "en",
   },
@@ -274,15 +291,18 @@ const I18N = {
     reset: "リセット",
     cutOn: "切断面：オン",
     cutOff: "切断面：オフ",
+    iolOn: "水晶体摘出＋眼内レンズ（図示の結果）",
+    iolOff: "天然水晶体に戻す",
     deep: "深い",
     shallow: "浅い",
     small: "小",
     large: "大",
-    storyOpen: "房水経路は開通：毛様体 → 後房 → 瞳孔 → 前房 → 線維柱帯。眼の図と同じモデル（角膜は前方／+Z）。ドラッグで回転。",
-    storyShallow: "前房が浅くなる：水晶体が光軸に沿って角膜へ前へ移動。周辺虹彩が隅角に近づく。",
-    storyThick: "水晶体が相対的に大きくなり前房を圧迫し、虹彩を前へ押し隅角が狭くなり得る（水晶体関連経路）。",
-    storyBlock: "中等度散大は瞳孔ブロックを起こしやすい；後房圧で周辺虹彩が角膜側へ膨隆。",
-    storyCrowd: "浅い前房＋大きな水晶体＋中等度瞳孔の重ね合わせ：隅角が相対的に閉じる。激痛／虹視／嘔吐 → 緊急ページ。",
+    storyOpen: "房水経路は開通：青い点は毛様体 → 後房 → 瞳孔 → 前房 → 線維柱帯。経路は眼モデルに追従。ドラッグで回転。",
+    storyShallow: "前房が浅くなる：水晶体が角膜へ前へ移動。周辺虹彩が隅角に近づき、点は瞳孔／隅角で遅く／止まる。",
+    storyThick: "水晶体が大きく前房を圧迫；点は線維柱帯へ到達しにくい。",
+    storyBlock: "中等度散大は瞳孔ブロックを起こしやすい；点は瞳孔ゲートで停滞。",
+    storyCrowd: "浅い前房＋大きな水晶体＋中等度瞳孔：隅角が相対的に閉じ、点が遮断。激痛／虹視／嘔吐 → 緊急ページ。",
+    storyIol: "図示の結果：天然水晶体を摘出し薄い眼内レンズを入れると、前房が相対的に深くなり虹彩が後退し、瞳孔ブロック／隅角の混雑が軽減；点は再び全経路を通れる。機序の教育用であり、手術の助言や個人の予後ではない。",
     angleStatus: "隅角",
     angleOpen: "より開（図示）",
     angleNarrow: "より狭（図示）",
@@ -299,15 +319,16 @@ const I18N = {
     ac: "前房",
     iris: "虹彩",
     lensLab: "水晶体",
+    lensLabIol: "眼内レンズ",
     tm: "隅角／線維柱帯",
     pc: "後房",
     ciliary: "毛様体",
     pupilStation: "瞳孔",
-    flowTitle: "房水の流れ：5駅の経路（図示）",
+    flowTitle: "房水の流れ：5駅の経路（眼モデルに追従）",
     gateOpen: "開通",
     gatePartial: "制限",
     gateClosed: "遮断",
-    hint: "相対スライダーは教育用のみで mmHg はありません。モデルは本サイトの眼の図から。原発閉塞隅角の機序は一つではありません。突然の激痛・虹視・視力急低下・頭痛嘔吐：救急へ；行けない場合は 999。詳細は",
+    hint: "相対スライダーは教育用のみで mmHg はありません。モデルは本サイトの眼の図から。青い点は構造変化に追従。「水晶体摘出＋眼内レンズ」は機序の図示であり手術の助言ではない。突然の激痛・虹視・視力急低下・頭痛嘔吐：救急へ；行けない場合は 999。詳細は",
     urgentLink: "緊急ページ",
     htmlLang: "ja",
   },
@@ -329,7 +350,7 @@ const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
 const lerp = (a, b, t) => a + (b - a) * t;
 const smooth = (t) => { const x = clamp(t, 0, 1); return x * x * (3 - 2 * x); };
 
-const S = { depth: 78, lens: 28, pupil: 22 };
+const S = { depth: 78, lens: 28, pupil: 22, iol: false };
 let cutawayOn = true;
 
 function midBell(p01) {
@@ -346,29 +367,46 @@ function metrics() {
     0,
     1,
   );
-  const block = smooth(rawBlock);
-  const bombe = smooth(clamp((block - 0.28) / 0.5, 0, 1)) * (0.25 + shallow * 0.75);
-  const crowd = shallow * 0.42 + thick * 0.48 + bombe * 0.55;
-  const angleOpen = clamp(1 - crowd, 0, 1);
-  const tmContact = clamp(1 - angleOpen * 1.15, 0, 1);
-  const iop = smooth(clamp(tmContact * 0.75 + block * 0.3 + thick * 0.2, 0, 1));
-  const pupilGate = clamp(1 - block * 0.95, 0, 1);
-  const tmGate = clamp(1 - tmContact * 0.97, 0, 1);
+  let block = smooth(rawBlock);
+  let bombe = smooth(clamp((block - 0.28) / 0.5, 0, 1)) * (0.25 + shallow * 0.75);
+  let crowd = shallow * 0.42 + thick * 0.48 + bombe * 0.55;
+  let angleOpen = clamp(1 - crowd, 0, 1);
+  let tmContact = clamp(1 - angleOpen * 1.15, 0, 1);
+  let iop = smooth(clamp(tmContact * 0.75 + block * 0.3 + thick * 0.2, 0, 1));
+  let pupilGate = clamp(1 - block * 0.95, 0, 1);
+  let tmGate = clamp(1 - tmContact * 0.97, 0, 1);
 
   // Map-eye parametric anatomy (same +Z anterior as eye-viewer)
-  const lensEquatorZ = lerp(0.78, 1.06, shallow);
-  const lensRadius = lerp(0.42, 0.58, thick);
-  const lensFront = lerp(0.16, 0.28, thick);
-  const lensBack = lerp(0.24, 0.36, thick);
+  let lensEquatorZ = lerp(0.78, 1.06, shallow);
+  let lensRadius = lerp(0.42, 0.58, thick);
+  let lensFront = lerp(0.16, 0.28, thick);
+  let lensBack = lerp(0.24, 0.36, thick);
   const pupilR = lerp(0.12, 0.42, p01);
+
+  // Lens out + thin IOL: crowding / block / bombé resolve (teaching outcome)
+  if (S.iol) {
+    block = 0.05;
+    bombe = 0;
+    crowd = 0.08;
+    angleOpen = 0.92;
+    tmContact = 0.05;
+    iop = 0.12;
+    pupilGate = 0.96;
+    tmGate = 0.95;
+    lensEquatorZ = 0.86;
+    lensRadius = 0.55;
+    lensFront = 0.045;
+    lensBack = 0.05;
+  }
 
   return {
     shallow, thick, p01, block, bombe, angleOpen, tmContact, iop, pupilGate, tmGate,
-    lensEquatorZ, lensRadius, lensFront, lensBack, pupilR,
+    lensEquatorZ, lensRadius, lensFront, lensBack, pupilR, iol: S.iol,
   };
 }
 
 function activeMechs(m) {
+  if (m.iol) return { block: false, thick: false, shallow: false };
   return {
     block: m.block > 0.4 && m.bombe > 0.25,
     thick: m.thick > 0.5,
@@ -377,6 +415,7 @@ function activeMechs(m) {
 }
 
 function storyFor(m) {
+  if (m.iol) return T.storyIol;
   if (m.tmContact > 0.55 && m.shallow > 0.35 && m.thick > 0.4) return T.storyCrowd;
   if (m.block > 0.45 && m.bombe > 0.3) return T.storyBlock;
   if (m.thick > 0.55) return T.storyThick;
@@ -393,6 +432,8 @@ function applyLang() {
   $("sac-pupil-lab").textContent = T.pupil;
   $("sac-reset").textContent = T.reset;
   $("sac-cut").textContent = cutawayOn ? T.cutOn : T.cutOff;
+  $("sac-iol").textContent = S.iol ? T.iolOff : T.iolOn;
+  $("sac-iol").classList.toggle("on", S.iol);
   const list = $("sac-mech-list");
   list.innerHTML = "";
   [T.mech1, T.mech2, T.mech3].forEach((text, i) => {
@@ -439,6 +480,12 @@ function syncChrome() {
   $("sac-pupilv").textContent = Math.round(S.pupil) + "%";
   $("sac-story").textContent = storyFor(m);
   $("sac-cut").textContent = cutawayOn ? T.cutOn : T.cutOff;
+  $("sac-iol").textContent = S.iol ? T.iolOff : T.iolOn;
+  $("sac-iol").classList.toggle("on", S.iol);
+
+  // While showing IOL outcome, depth/lens sliders are dimmed (pupil still free)
+  $("sac-depth").closest("label").classList.toggle("is-dim", S.iol);
+  $("sac-lens").closest("label").classList.toggle("is-dim", S.iol);
 
   const act = activeMechs(m);
   [...$("sac-mech-list").children].forEach((li) => {
@@ -472,7 +519,9 @@ function applyAnatomyIfNeeded() {
     bombe: m.bombe,
     angleOpen: m.angleOpen,
     cutaway: cutawayOn,
+    iol: m.iol,
   });
+  updateLabels();
 }
 
 /* —— Three.js: map-eye anatomy —— */
@@ -538,22 +587,38 @@ Object.values(labels).forEach((l) => scene.add(l));
 
 function updateLabels() {
   labels.cornea.element.textContent = T.cornea;
-  labels.lens.element.textContent = T.lensLab;
+  labels.lens.element.textContent = S.iol ? T.lensLabIol : T.lensLab;
   labels.ciliary.element.textContent = T.ciliary;
   labels.iris.element.textContent = T.iris;
   labels.tm.element.textContent = T.tm;
   labels.ac.element.textContent = T.ac;
+  const path = anatomy.getFlowPath();
+  if (path.length >= 5) {
+    labels.ciliary.position.set(path[0].x + 0.02, path[0].y + 0.08, path[0].z);
+    labels.ac.position.set(path[3].x + 0.02, path[3].y - 0.06, path[3].z);
+    labels.tm.position.set(path[4].x + 0.02, path[4].y + 0.08, path[4].z);
+  }
 }
 
-/* —— Aqueous flow 2D —— */
+/* —— Aqueous flow: one particle state → 3D eye path + 2D chart —— */
 const flow = $("sac-flow");
 const fx = flow.getContext("2d");
 /** @type {{ seg: number, u: number, hold: number, alive: boolean }[]} */
 const particles = [];
 
+const flowGroup = new THREE.Group();
+scene.add(flowGroup);
+/** @type {THREE.Mesh[]} */
+const checkpointMeshes = [];
+/** @type {THREE.Mesh[]} */
+const particleMeshes = [];
+const PARTICLE_POOL = 36;
+const checkGeo = new THREE.SphereGeometry(0.032, 12, 12);
+const partGeo = new THREE.SphereGeometry(0.022, 10, 10);
+
 function spawnFlowParticle() {
   particles.push({ seg: 0, u: 0, hold: 0, alive: true });
-  if (particles.length > 32) particles.shift();
+  if (particles.length > PARTICLE_POOL) particles.shift();
 }
 
 function gateAt(seg, m) {
@@ -594,6 +659,58 @@ function updateFlowParticles(dt, m) {
     }
   }
   for (let i = particles.length - 1; i >= 0; i--) if (!particles[i].alive) particles.splice(i, 1);
+}
+
+function syncFlow3D(m) {
+  const path = anatomy.getFlowPath();
+  if (path.length < 5) return;
+
+  while (checkpointMeshes.length < path.length) {
+    const mesh = new THREE.Mesh(
+      checkGeo,
+      new THREE.MeshBasicMaterial({ color: 0xf3c06a, transparent: true, opacity: 0.9 }),
+    );
+    flowGroup.add(mesh);
+    checkpointMeshes.push(mesh);
+  }
+  path.forEach((wp, i) => {
+    const mesh = checkpointMeshes[i];
+    mesh.position.set(wp.x, wp.y, wp.z);
+    mesh.visible = true;
+    const g = i === 0 ? 1 : i <= 2 ? m.pupilGate : m.tmGate;
+    mesh.material.color.setHex(g > 0.65 ? 0x6ecf8e : g > 0.3 ? 0xf0a030 : 0xe07070);
+  });
+
+  while (particleMeshes.length < PARTICLE_POOL) {
+    const mesh = new THREE.Mesh(
+      partGeo,
+      new THREE.MeshBasicMaterial({ color: 0x7ec8e3 }),
+    );
+    mesh.visible = false;
+    flowGroup.add(mesh);
+    particleMeshes.push(mesh);
+  }
+  for (const mesh of particleMeshes) mesh.visible = false;
+
+  particles.forEach((p, idx) => {
+    if (!p.alive || idx >= particleMeshes.length) return;
+    const mesh = particleMeshes[idx];
+    let x; let y; let z;
+    if (p.seg >= 4) {
+      ({ x, y, z } = path[4]);
+    } else {
+      const a = path[p.seg];
+      const b = path[p.seg + 1];
+      const t = clamp(p.u, 0, 1);
+      x = lerp(a.x, b.x, t);
+      y = lerp(a.y, b.y, t);
+      z = lerp(a.z, b.z, t);
+    }
+    mesh.position.set(x, y, z);
+    mesh.visible = true;
+    const g = p.seg >= 4 ? 1 : gateAt(p.seg, m);
+    mesh.material.color.setHex(g < 0.28 && p.u > 0.5 ? 0xe07070 : 0x7ec8e3);
+  });
 }
 
 function drawFlow(m) {
@@ -695,9 +812,22 @@ function postHeight() {
   } catch (_) { /* ignore */ }
 }
 
-$("sac-depth").addEventListener("input", (e) => { S.depth = +e.target.value; syncChrome(); });
-$("sac-lens").addEventListener("input", (e) => { S.lens = +e.target.value; syncChrome(); });
+$("sac-depth").addEventListener("input", (e) => {
+  if (S.iol) return;
+  S.depth = +e.target.value;
+  syncChrome();
+});
+$("sac-lens").addEventListener("input", (e) => {
+  if (S.iol) return;
+  S.lens = +e.target.value;
+  syncChrome();
+});
 $("sac-pupil").addEventListener("input", (e) => { S.pupil = +e.target.value; syncChrome(); });
+$("sac-iol").addEventListener("click", () => {
+  S.iol = !S.iol;
+  particles.length = 0;
+  syncChrome();
+});
 $("sac-cut").addEventListener("click", () => {
   cutawayOn = !cutawayOn;
   anatomy.setCutaway(cutawayOn);
@@ -705,7 +835,7 @@ $("sac-cut").addEventListener("click", () => {
   $("sac-cut").textContent = cutawayOn ? T.cutOn : T.cutOff;
 });
 $("sac-reset").addEventListener("click", () => {
-  S.depth = 78; S.lens = 28; S.pupil = 22;
+  S.depth = 78; S.lens = 28; S.pupil = 22; S.iol = false;
   particles.length = 0;
   syncChrome();
 });
@@ -722,6 +852,7 @@ function frame(now) {
   const m = metrics();
   applyAnatomyIfNeeded();
   updateFlowParticles(dt, m);
+  syncFlow3D(m);
   drawFlow(m);
   controls.update();
   renderer.render(scene, camera);

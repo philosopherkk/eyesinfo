@@ -337,10 +337,15 @@ export function createMapEyeAnatomy(THREE, options = {}) {
 
   const irisMat = tissue("#5a8a78", { roughness: 0.55 });
   const lensMat = glassy(tissue("#b6dceb", { opacity: 0.72, roughness: 0.12 }), 0.28, 0.6, "lens");
+  const iolMat = glassy(tissue("#c8e8f4", { opacity: 0.55, roughness: 0.08, physical: true, extra: { ior: 1.46 } }), 0.22, 0.5, "iol");
   const pupilMat = tissue("#050a12", { opacity: 0.74, roughness: 0.3 });
   const aqueousMat = tissue("#63bce7", { opacity: 0.055, roughness: 0.4 });
   const angleOpenMat = tissue("#6ecf8e", { opacity: 0.85, roughness: 0.45 });
   const angleCloseMat = tissue("#e07070", { opacity: 0.9, roughness: 0.45 });
+
+  /** Last aqueous checkpoints in 3D (ciliary → PC → pupil → AC → TM), cut-face visible. */
+  let lastFlowPath = [];
+  let lastLayout = null;
 
   function clearDynamic() {
     for (const m of dynamicMeshes) {
@@ -380,16 +385,19 @@ export function createMapEyeAnatomy(THREE, options = {}) {
    *   bombe?: number,
    *   angleOpen?: number,
    *   cutaway?: boolean,
+   *   iol?: boolean,
    * }} p
    */
   function setParams(p = {}) {
+    const iol = !!p.iol;
     const pupilR = p.pupilR ?? 0.25;
-    const lensEquatorZ = p.lensEquatorZ ?? 0.92;
-    const lensRadius = p.lensRadius ?? 0.5;
-    const lensFrontH = p.lensFront ?? 0.2;
-    const lensBackH = p.lensBack ?? 0.3;
-    const bombe = p.bombe ?? 0;
-    const angleOpen = p.angleOpen ?? 1;
+    // After crystalline-lens removal + IOL: thin optic, more posterior vault, no bombé crowding
+    const lensEquatorZ = iol ? 0.86 : (p.lensEquatorZ ?? 0.92);
+    const lensRadius = iol ? 0.55 : (p.lensRadius ?? 0.5);
+    const lensFrontH = iol ? 0.045 : (p.lensFront ?? 0.2);
+    const lensBackH = iol ? 0.05 : (p.lensBack ?? 0.3);
+    const bombe = iol ? 0 : (p.bombe ?? 0);
+    const angleOpen = iol ? Math.max(p.angleOpen ?? 1, 0.88) : (p.angleOpen ?? 1);
     if (typeof p.cutaway === "boolean") cutaway = p.cutaway;
 
     clearDynamic();
@@ -397,7 +405,7 @@ export function createMapEyeAnatomy(THREE, options = {}) {
     const lensFront = (r) =>
       lensEquatorZ + lensFrontH * Math.sqrt(Math.max(0, 1 - (r / lensRadius) ** 2));
 
-    // Lens
+    // Crystalline lens or thin IOL optic (no brand — class only)
     const lensPolygon = [];
     for (let i = 0; i <= 28; i++) {
       const t = (i / 28) * Math.PI / 2;
@@ -407,15 +415,19 @@ export function createMapEyeAnatomy(THREE, options = {}) {
       const t = Math.PI / 2 + (i / 28) * Math.PI / 2;
       lensPolygon.push(V2(lensRadius * Math.sin(t), lensEquatorZ + lensBackH * Math.cos(t)));
     }
-    const lens = track(new THREE.Mesh(revolve(lensPolygon, 56), lensMat));
+    const opticMat = iol ? iolMat : lensMat;
+    const lens = track(new THREE.Mesh(revolve(lensPolygon, 56), opticMat));
     lens.renderOrder = 1;
-    const lensCap = track(new THREE.Mesh(capGeometry(lensPolygon), tissue("#a9d3e4")), true);
+    const lensCap = track(
+      new THREE.Mesh(capGeometry(lensPolygon), tissue(iol ? "#b8dce8" : "#a9d3e4")),
+      true,
+    );
 
-    // Iris with optional bombé (forward = +Z toward cornea)
+    // Iris: after IOL, falls slightly back (deeper chamber); no pupil-block bombé
     const irisRootR = 0.81;
-    const irisFrontBase = (r) => 1.15 + ((0.8 - r) / 0.55) * 0.022;
+    const irisFall = iol ? 0.055 : 0;
+    const irisFrontBase = (r) => 1.15 - irisFall + ((0.8 - r) / 0.55) * 0.022;
     const irisFront = (r) => {
-      // Mid-peripheral bulge toward cornea when pupil block / bombé
       const mid = Math.exp(-Math.pow((r - 0.52) / 0.22, 2));
       return irisFrontBase(r) + bombe * mid * 0.085;
     };
@@ -429,7 +441,7 @@ export function createMapEyeAnatomy(THREE, options = {}) {
     track(new THREE.Mesh(revolve(irisPolygon, 96), irisMat));
     track(new THREE.Mesh(capGeometry(irisPolygon), tissue("#6f9a84")), true);
 
-    // Pupil aperture skin on lens front
+    // Pupil aperture skin on optic front
     const pupilPolygon = [];
     for (let i = 0; i <= 10; i++) {
       const r = pupilR * (i / 10);
@@ -471,35 +483,62 @@ export function createMapEyeAnatomy(THREE, options = {}) {
     const angleMesh = track(new THREE.Mesh(revolve(anglePoly, 48), angleMat));
     angleMesh.renderOrder = 7;
 
-    // Zonules: ciliary tip → lens equator
+    // Zonules only for crystalline lens (IOL sits in bag — omit zonule lines for clarity)
     const tip = ciliaryInner(0.66);
-    const zonulePositions = [];
-    for (let i = 0; i < CILIARY_PROCESSES; i++) {
-      const phi = (i / CILIARY_PROCESSES) * Math.PI * 2;
-      const cos = Math.cos(phi);
-      const sin = Math.sin(phi);
-      for (const dz of [0.035, -0.035]) {
-        zonulePositions.push(
-          tip.x * cos,
-          tip.x * sin,
-          tip.y,
-          lensRadius * 0.98 * cos,
-          lensRadius * 0.98 * sin,
-          lensEquatorZ + dz,
-        );
+    if (!iol) {
+      const zonulePositions = [];
+      for (let i = 0; i < CILIARY_PROCESSES; i++) {
+        const phi = (i / CILIARY_PROCESSES) * Math.PI * 2;
+        const cos = Math.cos(phi);
+        const sin = Math.sin(phi);
+        for (const dz of [0.035, -0.035]) {
+          zonulePositions.push(
+            tip.x * cos,
+            tip.x * sin,
+            tip.y,
+            lensRadius * 0.98 * cos,
+            lensRadius * 0.98 * sin,
+            lensEquatorZ + dz,
+          );
+        }
       }
+      const zg = new THREE.BufferGeometry();
+      zg.setAttribute("position", new THREE.Float32BufferAttribute(zonulePositions, 3));
+      zonules = new THREE.LineSegments(
+        zg,
+        new THREE.LineBasicMaterial({ color: "#d9cde4", transparent: true, opacity: 0.75 }),
+      );
+      group.add(zonules);
     }
-    const zg = new THREE.BufferGeometry();
-    zg.setAttribute("position", new THREE.Float32BufferAttribute(zonulePositions, 3));
-    zonules = new THREE.LineSegments(
-      zg,
-      new THREE.LineBasicMaterial({ color: "#d9cde4", transparent: true, opacity: 0.75 }),
-    );
-    group.add(zonules);
+
+    // Flow path on the cut face (x≈CUT_X) so blue dots track the live anatomy
+    const pathX = CUT_X + 0.04;
+    const yAt = (r) => Math.sqrt(Math.max(r * r - pathX * pathX, 0.002));
+    const pcR = (pupilR + 0.72) * 0.5;
+    lastFlowPath = [
+      { key: "ciliary", x: pathX, y: yAt(tip.x * 0.92), z: tip.y },
+      { key: "pc", x: pathX, y: yAt(pcR), z: irisBack(pcR) - 0.02 },
+      { key: "pupil", x: pathX, y: yAt(pupilR * 0.55), z: (irisFront(pupilR) + lensFront(pupilR * 0.5)) * 0.5 },
+      { key: "ac", x: pathX, y: yAt(0.32), z: (irisFront(0.32) + apexInner - sagInner(0.32)) * 0.5 },
+      { key: "tm", x: pathX, y: yAt(0.82), z: (rootZ + corneaNear) * 0.5 },
+    ];
+    lastLayout = {
+      gap, rootZ, corneaNear, apexOuter, apexInner, iol, pupilR,
+      lensEquatorZ, lensRadius, lensFrontH, lensBackH, bombe, angleOpen,
+    };
 
     applyCutaway();
     void lensCap;
-    return { gap, rootZ, corneaNear, apexOuter, apexInner };
+    void angleMesh;
+    return lastLayout;
+  }
+
+  function getFlowPath() {
+    return lastFlowPath.map((p) => ({ ...p }));
+  }
+
+  function getLayout() {
+    return lastLayout ? { ...lastLayout } : null;
   }
 
   function applyCutaway() {
@@ -527,6 +566,8 @@ export function createMapEyeAnatomy(THREE, options = {}) {
     cutPlane,
     setParams,
     setCutaway,
+    getFlowPath,
+    getLayout,
     constants: {
       LIMBUS_ANGLE,
       apexOuter,
