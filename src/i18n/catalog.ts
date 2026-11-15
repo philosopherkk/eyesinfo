@@ -38,7 +38,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     },
     "shallow-ac": {
       title: "淺前房與閉角機制",
-      blurb: "瞳孔阻滯、晶體增厚、前凸拱頂、高原虹膜等閉角路徑機制示意（不是自我檢查）",
+      blurb: "原發性閉角多種機制 3D 示意：瞳孔阻滯、晶體增厚／前移、淺前房（不是自我檢查）",
       canto: "點解會突然劇痛虹視",
     },
   },
@@ -73,7 +73,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     },
     "shallow-ac": {
       title: "浅前房与闭角机制",
-      blurb: "瞳孔阻滞、晶体增厚、前凸拱顶、高原虹膜等闭角路径机制示意（不是自我检查）",
+      blurb: "原发性闭角多种机制 3D 示意：瞳孔阻滞、晶体增厚／前移、浅前房（不是自我检查）",
       canto: "为何会突然剧痛虹视",
     },
   },
@@ -108,7 +108,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     },
     "shallow-ac": {
       title: "Shallow AC and angle-closure mechanism",
-      blurb: "Pupil block, thicker lens, anterior vault, plateau iris — angle-closure paths (not a self-check)",
+      blurb: "3D teaching of several primary angle-closure mechanisms: pupil block, thicker/forward lens, shallow chamber (not a self-check)",
       canto: "Why sudden pain and halos",
     },
   },
@@ -143,7 +143,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     },
     "shallow-ac": {
       title: "浅い前房と閉塞隅角の機序",
-      blurb: "瞳孔ブロック・水晶体肥厚・前方ヴォールト・プラトー虹彩など閉塞経路の機序図示（自己検査ではない）",
+      blurb: "原発閉塞隅角の複数機序を3Dで図示：瞳孔ブロック・水晶体肥厚／前方移動・浅い前房（自己検査ではない）",
       canto: "なぜ突然の激痛と虹視か",
     },
   },
