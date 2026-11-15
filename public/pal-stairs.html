@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#12151a" />
+  <meta name="robots" content="noindex" />
+  <title>漸進鏡 · 落樓梯示意 — 護眼學堂</title>
+  <style>
+    html, body { margin: 0; padding: 0; background: #0f1217; color: #e4e4e4; }
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 10px 8px 16px; }
+    .cap { font: 13px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color: #9aa3b2; margin: 0 4px 10px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="cap" id="ps-page-cap"></p>
+<!-- ===== Progressive-lens stair-walking simulator (drop-in block) ===== -->
+<div id="palsim">
+<style>
+#palsim{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#12151a;color:#e4e4e4;padding:12px;border-radius:14px;max-width:980px;margin:auto;user-select:none}
+#palsim canvas{width:100%;display:block;border-radius:10px;background:#000}
+#palsim .bar{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin:4px 2px 10px}
+#palsim .seg{display:flex;border-radius:9px;overflow:hidden;border:1px solid #444}
+#palsim .seg button,#palsim .btn{background:#23272f;color:#ddd;border:0;padding:7px 13px;font-size:14px;cursor:pointer}
+#palsim .seg button.on{background:#f0a030;color:#111;font-weight:700}
+#palsim .btn{border:1px solid #444;border-radius:9px}
+#palsim label{font-size:13px;display:flex;align-items:center;gap:6px;color:#bbb}
+#palsim input[type=range]{width:105px;accent-color:#f0a030}
+#palsim .v{min-width:46px;font-variant-numeric:tabular-nums;color:#f3c06a}
+</style>
+<div class="bar">
+  <div class="seg">
+    <button type="button" data-t="myope" id="ps-myope">− Myope</button>
+    <button type="button" data-t="hyper" class="on" id="ps-hyper">+ Hyperope</button>
+  </div>
+  <label><span id="ps-rx-lab">Rx</span> <input id="ps-rx" type="range" min="0.5" max="6" step="0.25" value="4"><span class="v" id="ps-rxv"></span></label>
+  <label><span id="ps-add-lab">Add</span> <input id="ps-add" type="range" min="0.75" max="3" step="0.25" value="2"><span class="v" id="ps-addv"></span></label>
+  <label><span id="ps-tilt-lab">Head tilt</span> <input id="ps-tilt" type="range" min="10" max="55" step="1" value="30"><span class="v" id="ps-tiltv"></span></label>
+  <label><span id="ps-ex-lab">Optics strength</span> <input id="ps-ex" type="range" min="0.5" max="1.25" step="0.05" value="1"><span class="v" id="ps-exv"></span></label>
+  <button class="btn" id="ps-play" type="button" aria-label="pause">❚❚</button>
+  <label><input type="checkbox" id="ps-ideal"> <span id="ps-ideal-lab">outside = no-lens reference</span></label>
+  <label><input type="checkbox" id="ps-edges"> <span id="ps-edges-lab">true edges</span></label>
+  <label><input type="checkbox" id="ps-zones"> <span id="ps-zones-lab">lens zones</span></label>
+</div>
+<canvas id="ps-fp" width="960" height="600"></canvas>
+<canvas id="ps-side" width="960" height="330" style="margin-top:10px"></canvas>
+<script>
+(()=>{
+const I18N = {
+  "zh-Hant": {
+    pageCap: "教育示意 · 不是視力檢查或配鏡評估。",
+    myope: "− 近視",
+    hyper: "+ 遠視",
+    rx: "度數",
+    add: "加入度",
+    tilt: "低頭",
+    ex: "光學強度",
+    ideal: "鏡外＝無鏡片參考",
+    edges: "真實階緣",
+    zones: "鏡片分區",
+    play: "❚❚",
+    pauseAria: "暫停",
+    playAria: "播放",
+    real: "實際",
+    seen: "所見",
+    notSeen: "看不見",
+    htmlLang: "zh-Hant",
+  },
+  "zh-Hans": {
+    pageCap: "教育示意 · 不是视力检查或配镜评估。",
+    myope: "− 近视",
+    hyper: "+ 远视",
+    rx: "度数",
+    add: "加入度",
+    tilt: "低头",
+    ex: "光学强度",
+    ideal: "镜外＝无镜片参考",
+    edges: "真实阶缘",
+    zones: "镜片分区",
+    play: "❚❚",
+    pauseAria: "暂停",
+    playAria: "播放",
+    real: "实际",
+    seen: "所见",
+    notSeen: "看不见",
+    htmlLang: "zh-CN",
+  },
+  en: {
+    pageCap: "Education illustration · not a vision test or dispensing assessment.",
+    myope: "− Myope",
+    hyper: "+ Hyperope",
+    rx: "Rx",
+    add: "Add",
+    tilt: "Head tilt",
+    ex: "Optics strength",
+    ideal: "outside = no-lens reference",
+    edges: "true edges",
+    zones: "lens zones",
+    play: "❚❚",
+    pauseAria: "Pause",
+    playAria: "Play",
+    real: "real",
+    seen: "seen",
+    notSeen: "not seen",
+    htmlLang: "en",
+  },
+  ja: {
+    pageCap: "教育用図示 · 視力検査や眼鏡合わせの評価ではありません。",
+    myope: "− 近視",
+    hyper: "+ 遠視",
+    rx: "度数",
+    add: "加入",
+    tilt: "頭の傾き",
+    ex: "光学の強さ",
+    ideal: "レンズ外＝裸眼参考",
+    edges: "実際の段縁",
+    zones: "レンズ区画",
+    play: "❚❚",
+    pauseAria: "一時停止",
+    playAria: "再生",
+    real: "実際",
+    seen: "見え方",
+    notSeen: "見えない",
+    htmlLang: "ja",
+  },
+};
+
+const normalizeLang = (raw) => {
+  const v = (raw || "").trim();
+  if (v === "zh" || v === "zh-Hant" || v === "zh-hant") return "zh-Hant";
+  if (v === "zh-Hans" || v === "zh-hans" || v === "zh-CN" || v === "zh-cn") return "zh-Hans";
+  if (v === "ja" || v === "jp") return "ja";
+  if (v === "en") return "en";
+  return "zh-Hant";
+};
+
+let uiLang = normalizeLang(new URLSearchParams(location.search).get("lang"));
+let T = I18N[uiLang];
+
+const $=id=>document.getElementById(id);
+const fp=$('ps-fp'),fx=fp.getContext('2d'),sd=$('ps-side'),sx=sd.getContext('2d');
+const W=960,H=600,M=90,CX=480,CY=200,F=336,K=7,HG=F/K;
+const SW=W+2*M,SH=H+2*M;
+const mk=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c;};
+const scn=mk(SW,SH),sc=scn.getContext('2d');
+const LV=[0,1.2,2.4,3.8,5.5,7.5,10,13,17,22];
+const lev=LV.map(()=>mk(SW,SH)),levx=lev.map(c=>c.getContext('2d'));
+const tmp=mk(SW,SH),tmpx=tmp.getContext('2d');
+const hasFilter=(()=>{const c=mk(2,2).getContext('2d');if(!('filter' in c))return false;c.filter='blur(2px)';return c.filter==='blur(2px)';})();
+const GAIN=5,AMP=0.75;
+const RS=0.17,TS=0.28,N=16,WH=0.62,CH=2.55,LAND=3.2;
+const zLast=(N-1)*TS,zEnd=N*TS+LAND,yBot=-N*RS;
+const S={type:'hyper',rx:4,add:2,tilt:30,ex:1,play:true,ideal:false,edges:false,zones:false};
+const cam={x:0,y:1.6,z:-1.2,p:0.5};
+let walkZ=-1.2,pauseT=0;
+const Rx=()=>S.type==='hyper'?S.rx:-S.rx;
+const clamp=(v,a,b)=>v<a?a:v>b?b:v;
+const sstep=(a,b,x)=>{const t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t);};
+const floorAt=z=>z<0?0:-(Math.min(N-1,Math.floor(z/TS))+1)*RS;
+
+const PB=15,INSET=2.5,LA=25,LB=17,LN=3.2,LOFF=3;
+const prog=y=>{const u=clamp(y/PB,0,1);return u*u*(3-2*u);};
+const progD=y=>{if(y<=0||y>=PB)return 0;const u=y/PB;return 6*u*(1-u)/PB;};
+const progI=y=>{if(y<=0)return 0;if(y>=PB)return PB*0.5+(y-PB);const u=y/PB;return PB*(u*u*u-u*u*u*u/2);};
+function lensOpt(xm,ym,nas){
+  const R=Rx(),A=S.add,pg=prog(ym),pd=progD(ym),xr=xm-nas*INSET*pg;
+  const P=R+A*pg;
+  const Iy=R*ym+A*progI(ym)+A*pd*xr*xr*0.2;
+  const Ix=R*xm+A*pg*xr;
+  const g=Math.max(pd,0.045*sstep(6,16,ym));
+  const C=Math.min(A*1.15,2*A*g*Math.max(0,Math.abs(xr)-1.2));
+  return {P,Ix,Iy,C,pg};
+}
+const inLens=(xm,ym)=>Math.pow(Math.abs(xm/LA),LN)+Math.pow(Math.abs((ym-LOFF)/LB),LN);
+const LENS=[{cx:CX-205,nas:1},{cx:CX+205,nas:-1}];
+function lensPath(ctx,L){ctx.beginPath();for(let i=0;i<=80;i++){const a=i/80*2*Math.PI,ca=Math.cos(a),sa=Math.sin(a);
+  const x=LA*Math.sign(ca)*Math.pow(Math.abs(ca),2/LN),y=LOFF+LB*Math.sign(sa)*Math.pow(Math.abs(sa),2/LN);
+  const X=L.cx+x*K,Y=CY+y*K;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y);}ctx.closePath();}
+function defocus(R,P,d){const dem=(R-P)+1/Math.max(d,0.25);return dem<0?-dem:Math.max(0,dem-AMP);}
+function lvl(px){let b=0,bd=1e9;for(let k=0;k<LV.length;k++){const e=Math.abs(LV[k]-px);if(e<bd){bd=e;b=k;}}return b;}
+const zc=(pg,a=1)=>`rgba(${90+165*pg|0},${210-60*pg|0},${140-90*pg|0},${a})`;
+
+function update(dt){
+  if(S.play){if(pauseT>0){pauseT-=dt;if(pauseT<=0)walkZ=-1.2;}
+    else{walkZ+=0.42*dt;if(walkZ>zLast-0.35){walkZ=zLast-0.35;pauseT=1.4;}}}
+  const ph=2*Math.PI*walkZ/TS,base=-clamp((walkZ+0.15)/TS,0,N)*RS;
+  cam.z=walkZ;cam.y=1.6+base+0.018*Math.cos(ph);cam.p=(S.tilt+0.8*Math.sin(ph))*Math.PI/180;
+}
+
+let cc=1,ss=0;const NEAR=0.04;
+const tc=p=>{const rx=p[0]-cam.x,ry=p[1]-cam.y,rz=p[2]-cam.z;return [rx,ry*cc+rz*ss,-ry*ss+rz*cc];};
+const pj=q=>[CX+M+F*q[0]/q[2],CY+M-F*q[1]/q[2]];
+const lerpN=(A,B)=>{const t=(NEAR-A[2])/(B[2]-A[2]);return [A[0]+t*(B[0]-A[0]),A[1]+t*(B[1]-A[1]),NEAR];};
+function clipN(q){const o=[];for(let i=0;i<q.length;i++){const a=q[i],b=q[(i+1)%q.length],ia=a[2]>=NEAR,ib=b[2]>=NEAR;
+  if(ia)o.push(a);if(ia!==ib)o.push(lerpN(a,b));}return o;}
+function poly(pts,fill){const q=clipN(pts.map(tc));if(q.length<3)return;sc.beginPath();
+  q.forEach((p,i)=>{const s=pj(p);i?sc.lineTo(s[0],s[1]):sc.moveTo(s[0],s[1]);});sc.closePath();sc.fillStyle=fill;sc.fill();}
+function seg(a,b,col,w){let A=tc(a),B=tc(b);if(A[2]<NEAR&&B[2]<NEAR)return;if(A[2]<NEAR)A=lerpN(A,B);else if(B[2]<NEAR)B=lerpN(B,A);
+  const s1=pj(A),s2=pj(B);sc.strokeStyle=col;sc.lineWidth=clamp(F*w*2/(A[2]+B[2]),1,40);sc.beginPath();sc.moveTo(s1[0],s1[1]);sc.lineTo(s2[0],s2[1]);sc.stroke();}
+function wallPts(x){const p=[[x,0,-8],[x,0,0]];for(let i=0;i<N;i++){p.push([x,-(i+1)*RS,i*TS],[x,-(i+1)*RS,i<N-1?(i+1)*TS:zEnd]);}
+  p.push([x,CH,zEnd],[x,CH,-8]);return p;}
+const railY=z=>z<0?0.92:z<zLast?0.92-z/TS*RS:0.92-zLast/TS*RS-RS*sstep(zLast,zLast+0.3,z);
+function drawScene(){
+  cc=Math.cos(cam.p);ss=Math.sin(cam.p);sc.lineCap='round';
+  sc.fillStyle='#d9d4ca';sc.fillRect(0,0,SW,SH);
+  poly([[-WH,CH,-8],[WH,CH,-8],[WH,CH,zEnd],[-WH,CH,zEnd]],'#ebe8e2');
+  for(let z=-2.4;z<zEnd-0.5;z+=1.3)poly([[-0.2,CH-0.01,z],[0.2,CH-0.01,z],[0.2,CH-0.01,z+0.4],[-0.2,CH-0.01,z+0.4]],'#fffdf0');
+  const ze=zEnd-0.005;
+  poly([[-WH,yBot,zEnd],[WH,yBot,zEnd],[WH,CH,zEnd],[-WH,CH,zEnd]],'#d6cfbf');
+  poly([[-0.45,0.55,ze],[0.45,0.55,ze],[0.45,2.2,ze],[-0.45,2.2,ze]],'#a9d4f5');
+  seg([0,0.55,ze-0.003],[0,2.2,ze-0.003],'#f4f4f4',0.03);seg([-0.45,1.4,ze-0.003],[0.45,1.4,ze-0.003],'#f4f4f4',0.03);
+  poly([[-0.52,yBot,ze],[-0.04,yBot,ze],[-0.04,yBot+2.05,ze],[-0.52,yBot+2.05,ze]],'#6e5038');
+  poly([[-0.13,yBot+0.98,ze-0.002],[-0.08,yBot+0.98,ze-0.002],[-0.08,yBot+1.02,ze-0.002],[-0.13,yBot+1.02,ze-0.002]],'#e2b64a');
+  poly([[0.1,yBot+1.02,ze],[0.56,yBot+1.02,ze],[0.56,yBot+1.78,ze],[0.1,yBot+1.78,ze]],'#fafafa');
+  const rows=[[0.11,'E'],[0.075,'F P'],[0.05,'T O Z'],[0.035,'L P E D'],[0.025,'P E C F D'],[0.018,'E D F C Z P']];
+  let yy=yBot+1.72;sc.fillStyle='#111';sc.textAlign='center';sc.textBaseline='middle';
+  for(const [h,t] of rows){const q=tc([0.33,yy-h/2,ze-0.01]);if(q[2]>NEAR){const s=pj(q);sc.font=`bold ${F*h/q[2]}px Arial`;sc.fillText(t,s[0],s[1]);}yy-=h*1.35;}
+  poly(wallPts(-WH),'#bfb8aa');poly(wallPts(WH),'#cdc6b8');
+  for(let z=-3;z<zEnd;z+=0.5)for(const x of[-WH,WH])seg([x,floorAt(z),z],[x,CH,z],'rgba(0,0,0,0.13)',0.008);
+  for(let i=N-1;i>=0;i--){
+    const y=-(i+1)*RS,z0=i*TS,z1=i<N-1?(i+1)*TS:zEnd;
+    poly([[-WH,y,z0],[WH,y,z0],[WH,y,z1],[-WH,y,z1]],i===N-1?'#7a6a58':(i%2?'#8b7865':'#937f6b'));
+    if(i===N-1){for(let z=z0+0.3;z<z1;z+=0.3)seg([-WH,y,z],[WH,y,z],'rgba(0,0,0,.25)',0.006);
+      for(let x=-WH+0.31;x<WH;x+=0.31)seg([x,y,z0],[x,y,z1],'rgba(0,0,0,.25)',0.006);}
+    else{poly([[-WH,y,z0],[WH,y,z0],[WH,y,z0+0.08],[-WH,y,z0+0.08]],'rgba(0,0,0,.3)');
+      seg([-WH,y,z0+0.13],[WH,y,z0+0.13],'rgba(0,0,0,.12)',0.004);seg([-WH,y,z0+0.2],[WH,y,z0+0.2],'rgba(0,0,0,.12)',0.004);
+      poly([[-WH,y,z1-0.045],[WH,y,z1-0.045],[WH,y,z1],[-WH,y,z1]],'#f3c432');}
+  }
+  poly([[-WH,0,-8],[WH,0,-8],[WH,0,0],[-WH,0,0]],'#7c6b59');
+  poly([[-WH,0,-0.045],[WH,0,-0.045],[WH,0,0],[-WH,0,0]],'#f3c432');
+  for(const x of[-(WH-0.05),WH-0.05])for(let z=-3;z<zEnd-0.2;z+=0.2)seg([x,railY(z),z],[x,railY(z+0.2),z+0.2],'#4a3828',0.05);
+}
+function depth(u,v){
+  const dx=u,dy=-v*cc-ss,dz=-v*ss+cc;let tm=1e9;
+  if(dy<0){let t=-cam.y/dy;if(cam.z+t*dz<0&&Math.abs(t*dx)<WH)tm=t;
+    for(let i=0;i<N;i++){const y=-(i+1)*RS;t=(y-cam.y)/dy;const z=cam.z+t*dz,z1=i<N-1?(i+1)*TS:zEnd;
+      if(t>0&&z>=i*TS&&z<=z1&&Math.abs(t*dx)<WH&&t<tm)tm=t;}}
+  if(dx!==0){const t=Math.sign(dx)*WH/dx;if(t>0&&t<tm)tm=t;}
+  if(dz>0){const t=(zEnd-cam.z)/dz;if(t<tm)tm=t;}
+  if(dy>0){const t=(CH-cam.y)/dy;if(t<tm)tm=t;}
+  return Math.min(tm,30)*Math.hypot(dx,dy,dz);
+}
+function buildLevels(){
+  for(let k=0;k<LV.length;k++){const c=levx[k],r=LV[k];c.clearRect(0,0,SW,SH);
+    if(r===0){c.drawImage(scn,0,0);continue;}
+    if(hasFilter){
+      if(r<5){c.filter=`blur(${r}px)`;c.drawImage(scn,0,0);c.filter='none';}
+      else{tmpx.clearRect(0,0,SW/2,SH/2);tmpx.filter=`blur(${r/2}px)`;tmpx.drawImage(scn,0,0,SW/2,SH/2);tmpx.filter='none';
+        c.drawImage(tmp,0,0,SW/2,SH/2,0,0,SW,SH);}
+    }else{const f=Math.max(1,r/1.2),w=Math.ceil(SW/f),h=Math.ceil(SH/f);tmpx.clearRect(0,0,w,h);
+      tmpx.drawImage(scn,0,0,w,h);c.imageSmoothingEnabled=true;c.drawImage(tmp,0,0,w,h,0,0,SW,SH);}
+  }
+}
+
+function renderFP(){
+  const R=Rx(),C0=16,C1=8,k=F*S.ex/1000;
+  fx.setTransform(1,0,0,1,0,0);
+  for(let y=0;y<H;y+=C0)for(let x=0;x<W;x+=C0){
+    let hidden=false;
+    for(const L of LENS){const a=(x-L.cx)/K,b=(x+C0-L.cx)/K,c=(y-CY)/K,d=(y+C0-CY)/K;
+      if(inLens(a,c)<0.97&&inLens(b,c)<0.97&&inLens(a,d)<0.97&&inLens(b,d)<0.97)hidden=true;}
+    if(hidden)continue;
+    const D=S.ideal?0:defocus(R,0,depth((x+8-CX)/F,(y+8-CY)/F));
+    fx.drawImage(lev[lvl(D*GAIN)],x+M,y+M,C0,C0,x,y,C0,C0);
+  }
+  for(const L of LENS){
+    fx.save();lensPath(fx,L);fx.clip();
+    const mp=(X,Y)=>{const o=lensOpt((X-L.cx)/K,(Y-CY)/K,L.nas);return [X-k*o.Ix,Y-k*o.Iy,o];};
+    for(let y=CY-14*K-C1;y<CY+20*K+C1;y+=C1)for(let x=L.cx-25*K-C1;x<L.cx+25*K+C1;x+=C1){
+      if(inLens((x+C1/2-L.cx)/K,(y+C1/2-CY)/K)>1.3)continue;
+      const a=mp(x,y+C1/2),b=mp(x+C1,y+C1/2),t=mp(x+C1/2,y),bt=mp(x+C1/2,y+C1),c=mp(x+C1/2,y+C1/2),o=c[2];
+      const D=defocus(R,o.P,depth((c[0]-CX)/F,(c[1]-CY)/F))+o.C*0.5;
+      fx.drawImage(lev[lvl(D*GAIN)],a[0]+M,t[1]+M,Math.max(0.5,b[0]-a[0]),Math.max(0.5,bt[1]-t[1]),x,y,C1+0.7,C1+0.7);
+    }
+    if(S.zones){for(let y=CY-14*K;y<CY+20*K;y+=C1)for(let x=L.cx-25*K;x<L.cx+25*K;x+=C1){
+        const o=lensOpt((x+4-L.cx)/K,(y+4-CY)/K,L.nas);
+        if(o.C>0.75)fx.fillStyle=`rgba(255,40,60,${Math.min(.45,o.C*.18)})`;else fx.fillStyle=zc(o.pg,.12);
+        fx.fillRect(x,y,C1,C1);}
+      fx.strokeStyle='rgba(255,255,255,.7)';fx.lineWidth=1.5;fx.beginPath();
+      fx.moveTo(L.cx-8,CY);fx.lineTo(L.cx+8,CY);fx.moveTo(L.cx,CY-8);fx.lineTo(L.cx,CY+8);fx.stroke();}
+    const g=fx.createLinearGradient(L.cx-160,CY-110,L.cx+160,CY+150);
+    g.addColorStop(0,'rgba(255,255,255,.10)');g.addColorStop(.45,'rgba(255,255,255,0)');g.addColorStop(1,'rgba(150,200,255,.07)');
+    fx.fillStyle=g;fx.fillRect(L.cx-200,CY-120,400,300);
+    fx.restore();
+  }
+  if(S.edges){fx.save();fx.setLineDash([7,5]);fx.strokeStyle='#36e3ff';fx.lineWidth=1.6;
+    const list=[[0,0]];for(let i=0;i<N-1;i++)list.push([(i+1)*TS,-(i+1)*RS]);
+    for(const [z,y] of list){const A=tc([-WH,y,z]),B=tc([WH,y,z]);if(A[2]<NEAR)continue;const a=pj(A),b=pj(B);
+      fx.beginPath();fx.moveTo(a[0]-M,a[1]-M);fx.lineTo(b[0]-M,b[1]-M);fx.stroke();}fx.restore();}
+  fx.save();fx.lineJoin='round';
+  for(const L of LENS){lensPath(fx,L);fx.lineWidth=18;fx.strokeStyle='#17171b';fx.stroke();fx.lineWidth=2;fx.strokeStyle='rgba(255,255,255,.16)';fx.stroke();}
+  fx.strokeStyle='#17171b';fx.lineWidth=14;fx.beginPath();fx.moveTo(CX-40,CY-52);fx.quadraticCurveTo(CX,CY-85,CX+40,CY-52);fx.stroke();
+  fx.lineWidth=16;fx.beginPath();fx.moveTo(CX-372,CY-62);fx.lineTo(0,CY-80);fx.moveTo(CX+372,CY-62);fx.lineTo(W,CY-80);fx.stroke();
+  fx.fillStyle='rgba(200,220,235,.35)';for(const s of[-1,1]){fx.beginPath();fx.ellipse(CX+s*44,CY+25,7,14,s*0.3,0,7);fx.fill();}
+  fx.restore();
+}
+
+let mapKey='';const mapC=mk(310,330),mx=mapC.getContext('2d');
+function profile(){const p=[[-8,0],[0,0]];for(let i=0;i<N;i++)p.push([i*TS,-(i+1)*RS],[i<N-1?(i+1)*TS:zEnd,-(i+1)*RS]);return p;}
+function renderSide(){
+  const c=sx,R=Rx(),s2=58,EX=120,EY=78,LG=HG,kk=S.ex/1000;
+  c.setTransform(1,0,0,1,0,0);c.fillStyle='#0f1217';c.fillRect(0,0,960,330);
+  const P2=(z,y)=>[EX+(z-cam.z)*s2,EY-(y-cam.y)*s2];
+  const cp=Math.cos(cam.p),sp=Math.sin(cam.p),loc=(a,b)=>[EX+a*cp-b*sp,EY+a*sp+b*cp];
+  const ln=(a,b)=>{c.beginPath();c.moveTo(a[0],a[1]);c.lineTo(b[0],b[1]);c.stroke();};
+  const dev=u=>kk*lensOpt(0,HG*u,0).Iy,inside=u=>{const y=HG*u;return y>-14&&y<20;};
+  function look(z,y){const dz=z-cam.z,dy=cam.y-y;if(dz<-0.3)return null;const th=Math.atan2(dy,dz)-cam.p;if(th<-1.2||th>1.3)return null;
+    const uo=Math.tan(th);let u=uo;for(let i=0;i<60;i++)u=uo+dev(u);
+    const ok=inside(u)&&Math.abs(u-dev(u)-uo)<1e-4;return {uo,uin:ok?u:null,out:!inside(uo),dist:Math.hypot(dz,dy)};}
+  const gpos=(L,u)=>{const a=cam.p+Math.atan(u);return P2(cam.z+L.dist*Math.cos(a),cam.y-L.dist*Math.sin(a));};
+  c.save();c.beginPath();c.rect(0,0,640,330);c.clip();c.lineCap='round';
+  c.strokeStyle='#39404c';c.lineWidth=2;ln(P2(-8,CH),P2(zEnd,CH));ln(P2(zEnd,CH),P2(zEnd,yBot));
+  const prof=profile();
+  c.beginPath();prof.forEach((q,i)=>{const p=P2(q[0],q[1]);i?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1]);});
+  let e=P2(zEnd,yBot-6);c.lineTo(e[0],e[1]);e=P2(-8,yBot-6);c.lineTo(e[0],e[1]);c.closePath();c.fillStyle='#2b2520';c.fill();
+  c.beginPath();prof.forEach((q,i)=>{const p=P2(q[0],q[1]);i?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1]);});c.strokeStyle='#8a7662';c.lineWidth=2;c.stroke();
+  const pts=[];for(let j=0;j<prof.length-1;j++){const a=prof[j],b=prof[j+1],n=Math.max(1,Math.ceil(Math.hypot(b[0]-a[0],b[1]-a[1])/0.03));
+    for(let q=0;q<n;q++){const t=q/n;pts.push([a[0]+t*(b[0]-a[0]),a[1]+t*(b[1]-a[1])]);}}
+  let prev=null;
+  for(const q of pts){if(q[0]<cam.z-0.5||q[0]>cam.z+10){prev=null;continue;}
+    const L=look(q[0],q[1]);if(!L||L.uin==null){prev=null;continue;}
+    const g=gpos(L,L.uin),o=lensOpt(0,HG*L.uin,0),D=defocus(R,o.P,L.dist),col=zc(o.pg);
+    if(prev){c.strokeStyle=col;c.shadowColor=col;c.shadowBlur=D*GAIN*0.9;c.lineWidth=2.5+D*0.8;c.globalAlpha=1/(1+D*0.35);ln(prev,g);}
+    prev=g;}
+  c.shadowBlur=0;c.globalAlpha=1;
+  const ft=P2(cam.z,floorAt(cam.z)),hip=P2(cam.z-0.05,cam.y-0.8);
+  c.strokeStyle='#2a303a';c.lineWidth=9;ln(loc(-30,32),hip);ln(hip,[ft[0]-6,ft[1]]);
+  const f2=P2(cam.z+0.25,floorAt(cam.z+0.25));ln(hip,[f2[0],f2[1]-4]);
+  const hc=loc(-30,-6);c.fillStyle='#262c36';c.beginPath();c.arc(hc[0],hc[1],36,0,7);c.fill();
+  c.beginPath();let p=loc(4,-6);c.moveTo(p[0],p[1]);p=loc(20,16);c.lineTo(p[0],p[1]);p=loc(3,22);c.lineTo(p[0],p[1]);c.fill();
+  p=loc(1,0);c.fillStyle='#e9e9e9';c.beginPath();c.arc(p[0],p[1],8,0,7);c.fill();p=loc(6,0);c.fillStyle='#111';c.beginPath();c.arc(p[0],p[1],3.2,0,7);c.fill();
+  const eye=loc(7,0),nos=[[0,0]];for(let i=0;i<N-1;i++)nos.push([(i+1)*TS,-(i+1)*RS]);
+  const hits=[];
+  for(const n of nos){if(n[0]<cam.z+0.05)continue;const L=look(n[0],n[1]);if(!L)continue;const A=P2(n[0],n[1]);
+    if(L.uin!=null){const o=lensOpt(0,HG*L.uin,0),col=zc(o.pg),lp=loc(LG,HG*L.uin),g=gpos(L,L.uin);
+      c.strokeStyle=col;c.globalAlpha=.6;c.lineWidth=1.2;ln(eye,lp);ln(lp,A);
+      c.setLineDash([4,4]);ln(lp,g);c.setLineDash([]);c.globalAlpha=1;c.lineWidth=1.6;c.beginPath();c.arc(g[0],g[1],4,0,7);c.stroke();
+      hits.push({ym:HG*L.uin,pg:o.pg});}
+    if(L.out){c.strokeStyle='#8a94a3';c.globalAlpha=.4;c.lineWidth=1;ln(eye,A);c.globalAlpha=1;}
+    if(L.uin==null&&!L.out){c.strokeStyle='#ff4a5a';c.lineWidth=2;c.beginPath();c.arc(A[0],A[1],7,0,7);c.stroke();}
+    c.fillStyle='#f3c432';c.fillRect(A[0]-3,A[1]-3,6,6);}
+  const thick=y=>{const q=(y-LOFF)/LB;return (S.type==='hyper'?1.2+S.rx*0.6*(1-q*q):1.2+S.rx*0.6*q*q)+S.add*0.7*prog(y);};
+  c.beginPath();for(let y=-14;y<=20;y++){p=loc(LG-y*y/140,y);y===-14?c.moveTo(p[0],p[1]):c.lineTo(p[0],p[1]);}
+  for(let y=20;y>=-14;y--){p=loc(LG-y*y/140+thick(y),y);c.lineTo(p[0],p[1]);}c.closePath();
+  c.fillStyle='rgba(140,190,255,.3)';c.fill();c.strokeStyle='#a8d0ff';c.lineWidth=1.2;c.stroke();
+  c.fillStyle='#111';for(const y of[-14,20]){p=loc(LG-y*y/140+thick(y)/2,y);c.beginPath();c.arc(p[0],p[1],3.5,0,7);c.fill();}
+  c.font='12px system-ui';c.fillStyle='#9aa3b2';c.strokeStyle='#ccc';c.lineWidth=1.3;
+  ln([18,312],[44,312]);c.fillText(T.real,50,316);c.setLineDash([4,4]);ln([92,312],[118,312]);c.setLineDash([]);c.fillText(T.seen,124,316);
+  c.strokeStyle='#ff4a5a';c.beginPath();c.arc(176,312,6,0,7);c.stroke();c.fillText(T.notSeen,188,316);
+  c.restore();
+  const MS=5.2,mcx=150,mcy=140,key=[S.type,S.rx,S.add].join();
+  if(key!==mapKey){mapKey=key;mx.clearRect(0,0,310,330);
+    for(let xm=-25;xm<=25;xm+=0.6)for(let ym=-14;ym<=20;ym+=0.6){if(inLens(xm,ym)>1)continue;const o=lensOpt(xm,ym,-1);
+      mx.fillStyle=zc(o.pg,.85);mx.fillRect(mcx+xm*MS,mcy+ym*MS,3.4,3.4);
+      if(o.C>0.5){mx.fillStyle=`rgba(255,30,60,${Math.min(.75,o.C*.32)})`;mx.fillRect(mcx+xm*MS,mcy+ym*MS,3.4,3.4);}}
+    mx.strokeStyle='#ddd';mx.lineWidth=1.5;mx.beginPath();
+    for(let i=0;i<=80;i++){const a=i/80*2*Math.PI,ca=Math.cos(a),sa=Math.sin(a);
+      const X=mcx+LA*Math.sign(ca)*Math.pow(Math.abs(ca),2/LN)*MS,Y=mcy+(LOFF+LB*Math.sign(sa)*Math.pow(Math.abs(sa),2/LN))*MS;i?mx.lineTo(X,Y):mx.moveTo(X,Y);}
+    mx.closePath();mx.stroke();
+    mx.strokeStyle='#fff';mx.lineWidth=1.4;
+    for(const xm of[-18,-9,0,9,18])for(const ym of[-8,2,10,17]){if(inLens(xm,ym)>0.85)continue;const o=lensOpt(xm,ym,-1);
+      const x0=mcx+xm*MS,y0=mcy+ym*MS,vx=o.Ix*0.22,vy=o.Iy*0.22,L=Math.hypot(vx,vy);if(L<3)continue;
+      const x1=x0+vx,y1=y0+vy,ux=vx/L,uy=vy/L;mx.beginPath();mx.moveTo(x0,y0);mx.lineTo(x1,y1);
+      mx.lineTo(x1-6*ux+4*uy,y1-6*uy-4*ux);mx.moveTo(x1,y1);mx.lineTo(x1-6*ux-4*uy,y1-6*uy+4*ux);mx.stroke();}
+    mx.strokeStyle='#000';mx.beginPath();mx.moveTo(mcx-7,mcy);mx.lineTo(mcx+7,mcy);mx.moveTo(mcx,mcy-7);mx.lineTo(mcx,mcy+7);mx.stroke();
+    const o=lensOpt(0,14,0),pr=Math.abs(o.Iy)/10,mg=1/(1-0.014*o.P);
+    mx.fillStyle='#f3c06a';mx.font='bold 26px system-ui';mx.fillText(S.type==='hyper'?'+':'−',14,34);
+    mx.font='14px system-ui';mx.fillStyle='#ddd';mx.fillText(`${R>0?'+':'−'}${S.rx.toFixed(2)} D   Add +${S.add.toFixed(2)}`,40,30);
+    mx.fillText(`14 mm ↓ :  ${pr.toFixed(1)}Δ ${o.Iy>0?'BU (image ↓)':'BD (image ↑)'}   ×${mg.toFixed(2)}`,14,310);}
+  c.fillStyle='#161a21';c.fillRect(645,0,315,330);c.drawImage(mapC,650,0);
+  for(const h of hits){const X=650+mcx+(-1)*INSET*h.pg*MS*-1,Y=mcy+h.ym*MS;c.fillStyle=zc(h.pg);c.strokeStyle='#000';c.lineWidth=1;
+    c.beginPath();c.arc(X,Y,4,0,7);c.fill();c.stroke();}
+}
+
+
+function applyLang(lang){
+  uiLang = normalizeLang(lang);
+  T = I18N[uiLang];
+  document.documentElement.lang = T.htmlLang;
+  const cap = document.getElementById('ps-page-cap');
+  if (cap) cap.textContent = T.pageCap;
+  $('ps-myope').textContent = T.myope;
+  $('ps-hyper').textContent = T.hyper;
+  $('ps-rx-lab').textContent = T.rx;
+  $('ps-add-lab').textContent = T.add;
+  $('ps-tilt-lab').textContent = T.tilt;
+  $('ps-ex-lab').textContent = T.ex;
+  $('ps-ideal-lab').textContent = T.ideal;
+  $('ps-edges-lab').textContent = T.edges;
+  $('ps-zones-lab').textContent = T.zones;
+  $('ps-play').textContent = S.play ? '❚❚' : '▶';
+  $('ps-play').setAttribute('aria-label', S.play ? T.pauseAria : T.playAria);
+}
+
+const segB=[...document.querySelectorAll('#palsim .seg button')].filter(b=>b.dataset.t);
+const fmt={rx:v=>(S.type==='hyper'?'+':'−')+v.toFixed(2),add:v=>'+'+v.toFixed(2),tilt:v=>v+'°',ex:v=>v.toFixed(2)};
+function bind(id,key){const el=$(id),out=$(id+'v');const f=()=>{S[key]=+el.value;out.textContent=fmt[key](S[key]);};el.oninput=f;f();}
+bind('ps-rx','rx');bind('ps-add','add');bind('ps-tilt','tilt');bind('ps-ex','ex');
+segB.forEach(b=>b.onclick=()=>{S.type=b.dataset.t;segB.forEach(x=>x.classList.toggle('on',x===b));$('ps-rxv').textContent=fmt.rx(S.rx);});
+$('ps-play').onclick=()=>{S.play=!S.play;$('ps-play').textContent=S.play?'❚❚':'▶';$('ps-play').setAttribute('aria-label', S.play ? T.pauseAria : T.playAria);};
+for(const [id,k] of[['ps-ideal','ideal'],['ps-edges','edges'],['ps-zones','zones']])$(id).onchange=e=>S[k]=e.target.checked;
+applyLang(uiLang);
+
+let last=performance.now();
+function frame(now){const dt=Math.min(0.05,(now-last)/1000);last=now;update(dt);drawScene();buildLevels();renderFP();renderSide();requestAnimationFrame(frame);}
+requestAnimationFrame(frame);
+})();
+</script>
+</div>
+  </div>
+</body>
+</html>

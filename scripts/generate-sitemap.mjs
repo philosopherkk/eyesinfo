@@ -101,6 +101,11 @@ const STATIC_SOURCES = {
   "/tools/haze": ["src/components/tool-demos.tsx"],
   "/tools/floaters": ["src/components/tool-demos.tsx"],
   "/tools/halo": ["src/components/tool-demos.tsx", "src/components/halo-overlay.tsx"],
+  "/tools/pal-stairs": [
+    "src/routes/tools.pal-stairs.tsx",
+    "src/components/pal-stairs-sim.tsx",
+    "public/pal-stairs.html",
+  ],
   "/tools/warm": ["src/components/care-tools.tsx"],
   "/tools/visit": ["src/components/ask-visit-rx.tsx"],
   "/tools/outdoor": ["src/components/care-tools.tsx"],

@@ -36,12 +36,14 @@ function ChipRow({ items }: { items: RelatedItem[] }) {
 }
 
 function toolIdFromHref(href: string): string | null {
-  if (href === "/amsler") return "amsler";
-  if (href === "/iol") return "iol";
-  if (href === "/iol-optics") return "iolOptics";
-  if (href.startsWith("/tools/")) return href.slice("/tools/".length);
-  const hit = TOOLS.find((t) => t.href === href);
-  return hit?.id ?? null;
+  const pathOnly = href.split("?")[0]?.split("#")[0] ?? href;
+  if (pathOnly === "/amsler") return "amsler";
+  if (pathOnly === "/iol") return "iol";
+  if (pathOnly === "/iol-optics") return "iolOptics";
+  const hit = TOOLS.find((t) => t.href === pathOnly);
+  if (hit) return hit.id;
+  if (pathOnly.startsWith("/tools/")) return pathOnly.slice("/tools/".length);
+  return null;
 }
 
 function localizeRelatedLabel(

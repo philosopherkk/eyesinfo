@@ -31,6 +31,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     visit: { title: "一次眼科檢查", blurb: "散瞳後唔好自己開車", canto: "去診所會做咩" },
     outdoor: { title: "兒童戶外時間", blurb: "戶外日光時間記錄（公共衞生約數）", canto: "出街睇日光" },
     rx: { title: "眼鏡度數解讀", blurb: "球鏡、柱鏡、軸、老花加度", canto: "張紙寫緊咩" },
+    palStairs: {
+      title: "漸進鏡落樓梯示意",
+      blurb: "遠視／近視、近用區放大模糊與稜鏡效應（不是檢查）",
+      canto: "落樓梯點解矇同怪",
+    },
   },
   "zh-Hans": {
     amsler: { title: "阿姆斯勒方格", blurb: "教育工具 · 自我察觉中央视力", canto: "遮一眼望中央" },
@@ -56,6 +61,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     visit: { title: "一次眼科检查", blurb: "散瞳后不要自己开车", canto: "去诊所会做什么" },
     outdoor: { title: "儿童户外时间", blurb: "户外日光时间记录（公共卫生约数）", canto: "出门看日光" },
     rx: { title: "眼镜度数解读", blurb: "球镜、柱镜、轴、老花加光", canto: "那张纸写什么" },
+    palStairs: {
+      title: "渐进镜落楼梯示意",
+      blurb: "远视／近视、近用区放大模糊与棱镜效应（不是检查）",
+      canto: "落楼梯为何模糊又怪",
+    },
   },
   en: {
     amsler: { title: "Amsler grid", blurb: "Education tool · self-awareness of central vision", canto: "Cover one eye · centre" },
@@ -81,6 +91,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     visit: { title: "A clinic visit", blurb: "Do not drive yourself after dilation", canto: "What happens at the visit" },
     outdoor: { title: "Children’s outdoor time", blurb: "Outdoor daylight log (public-health round number)", canto: "Go out in daylight" },
     rx: { title: "Reading a glasses prescription", blurb: "Sph, Cyl, Axis, Add", canto: "What the slip means" },
+    palStairs: {
+      title: "Progressive lenses · going downstairs",
+      blurb: "Hyperope / myope near-zone magnification, blur and prism (not a test)",
+      canto: "Why stairs look wrong",
+    },
   },
   ja: {
     amsler: { title: "アムスラーチャート", blurb: "教育ツール · 中心視力の自己観察", canto: "片眼隠し中央を見る" },
@@ -106,6 +121,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     visit: { title: "眼科受診の流れ", blurb: "散瞳後は自分で運転しない", canto: "診察で何をするか" },
     outdoor: { title: "子どもの屋外時間", blurb: "屋外日光の記録（公衆衛生の目安）", canto: "外の光を" },
     rx: { title: "眼鏡処方箋の読み方", blurb: "Sph・Cyl・Axis・Add", canto: "用紙の意味" },
+    palStairs: {
+      title: "累進レンズ · 下り階段の図示",
+      blurb: "遠視／近視・近用部の拡大・ぼけ・プリズム（検査ではない）",
+      canto: "下りでおかしく見える理由",
+    },
   },
 };
 

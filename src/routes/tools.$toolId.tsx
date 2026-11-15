@@ -108,7 +108,15 @@ function Panel({ id }: { id: ToolId }) {
       return <OutdoorCard />;
     case "rx":
       return <RxDecoder />;
-    default:
+    case "amsler":
+    case "iol":
+    case "iolOptics":
+    case "procedures":
+    case "palStairs":
       return null;
+    default: {
+      const _exhaustive: never = id;
+      return _exhaustive;
+    }
   }
 }

@@ -92,7 +92,10 @@ function buildCrumbs(pathname: string, t: (k: UiKey) => string, locale: Locale):
 
   const toolMatch = pathname.match(/^\/tools\/([^/]+)\/?$/);
   if (toolMatch) {
-    const tool = TOOLS.find((x) => x.id === toolMatch[1]);
+    const path = `/tools/${toolMatch[1]}`;
+    const tool =
+      TOOLS.find((x) => x.href === path) ??
+      TOOLS.find((x) => x.id === toolMatch[1]);
     if (!tool) return null; // unknown tool → 404
     trail.push({ label: t("toolsTitle"), href: hrefWithLang("/tools", locale) });
     const title = TOOL_TEXT[locale]?.[tool.id]?.title ?? tool.title;

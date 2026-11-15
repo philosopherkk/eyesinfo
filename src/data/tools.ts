@@ -13,7 +13,8 @@ export type ToolId =
   | "amsler"
   | "iol"
   | "iolOptics"
-  | "procedures";
+  | "procedures"
+  | "palStairs";
 
 export type ToolDef = {
   id: ToolId;
@@ -49,6 +50,13 @@ export const TOOLS: ToolDef[] = [
   { id: "haze", title: "白內障日夜示意", blurb: "顏色變淡、霧、車燈眩光", canto: "夜晚開車矇唔矇", href: "/tools/haze" },
   { id: "floaters", title: "飛蚊與簾幕", blurb: "會飄的飛蚊 vs 唔郁的簾幕", canto: "有簾幕去急症；新飛蚊同日散瞳眼底（不是只散瞳便足夠）", href: "/tools/floaters" },
   { id: "halo", title: "夜間光暈比較", blurb: "單焦、延伸景深、三焦點示意", canto: "唔係術後保證", href: "/tools/halo" },
+  {
+    id: "palStairs",
+    title: "漸進鏡落樓梯示意",
+    blurb: "遠視／近視、近用區放大模糊與稜鏡效應（不是檢查）",
+    canto: "落樓梯點解矇同怪",
+    href: "/tools/pal-stairs",
+  },
   { id: "warm", title: "熱敷計時", blurb: "示意計時，跟醫生指示", canto: "熱敷跟時間", href: "/tools/warm" },
   { id: "visit", title: "一次眼科檢查", blurb: "散瞳後唔好自己開車", canto: "去診所會做咩", href: "/tools/visit" },
   { id: "outdoor", title: "兒童戶外時間", blurb: "戶外日光時間記錄（公共衞生約數）", canto: "出街睇日光", href: "/tools/outdoor" },
@@ -327,6 +335,13 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-cl", label: "隱形眼鏡併發症" },
     { href: "/t/t-lasik", label: "LASIK 與 SMILE" },
     { href: "/t/t-cataract", label: "超聲波乳化與晶體" },
+    { href: "/t/t-pal-stairs", label: "遠視與漸進鏡：落樓梯" },
+  ],
+  "t-pal-stairs": [
+    { href: "/tools/pal-stairs", label: "漸進鏡落樓梯示意" },
+    { href: "/t/t-presbyopia", label: "老花五類選擇" },
+    { href: "/t/d1", label: "屈光不正" },
+    { href: "/tools/rx", label: "眼鏡度數解讀" },
   ],
   "t-chalazion": [
     { href: "/tools/warm", label: "熱敷計時" },

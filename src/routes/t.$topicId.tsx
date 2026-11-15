@@ -185,7 +185,12 @@ function TopicPage() {
         {/* Skip duplicate immediate callout when EmergencyShell already covers A&E. */}
         {seekCareLevel &&
         !(raw.isAcuteEmergency && seekCareLevel === "immediate") ? (
-          <SeekCareCallout level={seekCareLevel} />
+          <SeekCareCallout
+            level={seekCareLevel}
+            routineBodyKey={
+              raw.id === "t-pal-stairs" ? "seekCarePalStairsBody" : undefined
+            }
+          />
         ) : null}
         {keyPoints.length > 0 ? <KeyPointsCard points={keyPoints} /> : null}
         <TopicBody blocks={topic.blocks} topicId={raw.id} />

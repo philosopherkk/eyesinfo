@@ -3,6 +3,7 @@ import type { Block } from "@/data/topics";
 import { TOPICS } from "@/data/topics";
 import { TOOLS } from "@/data/tools";
 import { EduLink } from "@/components/edu-link";
+import { PalStairsSim } from "@/components/pal-stairs-sim";
 import { ProcedureFrames } from "@/components/procedure-frames";
 import { useI18n, localizeTopic } from "@/i18n";
 import { toHans } from "@/i18n/hans";
@@ -14,6 +15,9 @@ import {
   type MentionLink,
   type TextPart,
 } from "@/lib/topic-mentions";
+
+/** Heading `id` that mounts the progressive-lens stair simulator on `t-pal-stairs`. */
+const PAL_STAIRS_SIM_HEADING_ID = "pal-stairs-sim";
 
 function renderParts(parts: TextPart[]): ReactNode {
   return parts.map((part, i) =>
@@ -44,6 +48,7 @@ const ARTICLE_MEASURE_TOPICS = new Set([
   "t-barrier-laser",
   "t-yag-cap",
   "t-cataract-day",
+  "t-pal-stairs",
 ]);
 
 function linkText(
@@ -98,6 +103,25 @@ export function TopicBody({
     return blocks.map((block, i) => {
       if (block.type === "h") {
         const id = resolveHeadingId(block.text, block.id, usedHeadingIds);
+        const heading = (
+          <h2
+            id={id}
+            className="scroll-mt-20 pt-1 text-[0.95rem] font-semibold tracking-tight text-navy layout-lg:text-[1.05rem]"
+          >
+            {block.text}
+          </h2>
+        );
+        if (
+          topicId === "t-pal-stairs" &&
+          block.id === PAL_STAIRS_SIM_HEADING_ID
+        ) {
+          return (
+            <div key={i} className="space-y-4">
+              {heading}
+              <PalStairsSim />
+            </div>
+          );
+        }
         return (
           <h2
             key={i}
@@ -192,7 +216,7 @@ export function TopicBody({
         </div>
       );
     });
-  }, [blocks, mentions, selfHref]);
+  }, [blocks, mentions, selfHref, topicId]);
 
   const articleMeasure = topicId ? ARTICLE_MEASURE_TOPICS.has(topicId) : false;
 

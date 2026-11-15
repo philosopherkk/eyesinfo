@@ -36,6 +36,7 @@ import { Route as JaSplatRouteImport } from './routes/ja.$'
 import { Route as TTopicIdRouteImport } from './routes/t.$topicId'
 import { Route as ToolsIndexRouteImport } from './routes/tools.index'
 import { Route as ToolsToolIdRouteImport } from './routes/tools.$toolId'
+import { Route as ToolsPalStairsRouteImport } from './routes/tools.pal-stairs'
 import { Route as ToolsProceduresRouteImport } from './routes/tools.procedures'
 import { Route as ZhCNIndexRouteImport } from './routes/zh-CN.index'
 import { Route as ZhCNSplatRouteImport } from './routes/zh-CN.$'
@@ -177,6 +178,11 @@ const ToolsToolIdRoute = ToolsToolIdRouteImport.update({
   path: '/$toolId',
   getParentRoute: () => ToolsRoute,
 } as any)
+const ToolsPalStairsRoute = ToolsPalStairsRouteImport.update({
+  id: '/pal-stairs',
+  path: '/pal-stairs',
+  getParentRoute: () => ToolsRoute,
+} as any)
 const ToolsProceduresRoute = ToolsProceduresRouteImport.update({
   id: '/procedures',
   path: '/procedures',
@@ -228,6 +234,7 @@ export interface FileRoutesByFullPath {
   '/ja/$': typeof JaSplatRoute
   '/t/$topicId': typeof TTopicIdRoute
   '/tools/$toolId': typeof ToolsToolIdRoute
+  '/tools/pal-stairs': typeof ToolsPalStairsRoute
   '/tools/procedures': typeof ToolsProceduresRoute
   '/zh-CN/$': typeof ZhCNSplatRoute
   '/zh-Hans/$': typeof ZhHansSplatRoute
@@ -257,6 +264,7 @@ export interface FileRoutesByTo {
   '/ja/$': typeof JaSplatRoute
   '/t/$topicId': typeof TTopicIdRoute
   '/tools/$toolId': typeof ToolsToolIdRoute
+  '/tools/pal-stairs': typeof ToolsPalStairsRoute
   '/tools/procedures': typeof ToolsProceduresRoute
   '/zh-CN/$': typeof ZhCNSplatRoute
   '/zh-Hans/$': typeof ZhHansSplatRoute
@@ -292,6 +300,7 @@ export interface FileRoutesById {
   '/ja/$': typeof JaSplatRoute
   '/t/$topicId': typeof TTopicIdRoute
   '/tools/$toolId': typeof ToolsToolIdRoute
+  '/tools/pal-stairs': typeof ToolsPalStairsRoute
   '/tools/procedures': typeof ToolsProceduresRoute
   '/zh-CN/$': typeof ZhCNSplatRoute
   '/zh-Hans/$': typeof ZhHansSplatRoute
@@ -328,6 +337,7 @@ export interface FileRouteTypes {
     | '/ja/$'
     | '/t/$topicId'
     | '/tools/$toolId'
+    | '/tools/pal-stairs'
     | '/tools/procedures'
     | '/zh-CN/$'
     | '/zh-Hans/$'
@@ -357,6 +367,7 @@ export interface FileRouteTypes {
     | '/ja/$'
     | '/t/$topicId'
     | '/tools/$toolId'
+    | '/tools/pal-stairs'
     | '/tools/procedures'
     | '/zh-CN/$'
     | '/zh-Hans/$'
@@ -391,6 +402,7 @@ export interface FileRouteTypes {
     | '/ja/$'
     | '/t/$topicId'
     | '/tools/$toolId'
+    | '/tools/pal-stairs'
     | '/tools/procedures'
     | '/zh-CN/$'
     | '/zh-Hans/$'
@@ -616,6 +628,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsToolIdRouteImport
       parentRoute: typeof ToolsRoute
     }
+    '/tools/pal-stairs': {
+      id: '/tools/pal-stairs'
+      path: '/pal-stairs'
+      fullPath: '/tools/pal-stairs'
+      preLoaderRoute: typeof ToolsPalStairsRouteImport
+      parentRoute: typeof ToolsRoute
+    }
     '/tools/procedures': {
       id: '/tools/procedures'
       path: '/procedures'
@@ -680,12 +699,14 @@ const JaRouteWithChildren = JaRoute._addFileChildren(JaRouteChildren)
 
 interface ToolsRouteChildren {
   ToolsToolIdRoute: typeof ToolsToolIdRoute
+  ToolsPalStairsRoute: typeof ToolsPalStairsRoute
   ToolsProceduresRoute: typeof ToolsProceduresRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
 }
 
 const ToolsRouteChildren: ToolsRouteChildren = {
   ToolsToolIdRoute: ToolsToolIdRoute,
+  ToolsPalStairsRoute: ToolsPalStairsRoute,
   ToolsProceduresRoute: ToolsProceduresRoute,
   ToolsIndexRoute: ToolsIndexRoute,
 }
@@ -743,12 +764,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}

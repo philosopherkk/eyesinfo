@@ -104,6 +104,8 @@ function SearchPage() {
           if (h.href === "/amsler") return "amsler";
           if (h.href === "/iol") return "iol";
           if (h.href === "/iol-optics") return "iolOptics";
+          const byHref = TOOLS.find((t) => t.href === h.href);
+          if (byHref) return byHref.id;
           return h.href.split("/").pop() ?? "";
         }),
     );
