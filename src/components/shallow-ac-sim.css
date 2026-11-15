@@ -20,8 +20,8 @@
   display: block;
   width: 100%;
   max-width: 100%;
-  height: min(980px, 155vw);
-  min-height: 720px;
+  height: min(1080px, 170vw);
+  min-height: 780px;
   border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
   background: #12151a;
@@ -30,6 +30,6 @@
 
 @media (min-width: 900px) {
   .shallow-ac-sim__frame {
-    height: 980px;
+    height: 1080px;
   }
 }

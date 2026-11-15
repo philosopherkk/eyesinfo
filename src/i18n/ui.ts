@@ -359,10 +359,10 @@ const zhHant = {
   palStairsTopicLink: "遠視與漸進鏡：落樓梯",
   shallowAcSimTitle: "淺前房與閉角機制示意",
   shallowAcSimCaption:
-    "下方為教學動畫：淺前房、瞳孔阻滯、虹膜膨隆與房角關閉路徑。控制項語言跟隨網站語言。示意不是自我檢查或診斷。",
+    "下方為教學動畫：瞳孔阻滯（虹膜向前膨隆）、晶體增厚、前凸拱頂、高原虹膜等閉角路徑。晶體與睫狀體畫在眼球內。控制項語言跟隨網站語言。示意不是自我檢查或診斷。",
   shallowAcEduBadge: "機制示意 · 不是檢查",
   shallowAcEduCaveat:
-    "本圖只供機制教學，不能自行判斷有沒有窄角或閉角。急性劇痛、虹視、視力急降或頭痛嘔吐 → 本站急症頁（／urgent），不是預約診所。不能代替註冊醫生。",
+    "本圖只供機制教學（多種閉角路徑示意），不能自行判斷有沒有窄角或閉角。急性劇痛、虹視、視力急降或頭痛嘔吐 → 本站急症頁（／urgent），不是預約診所。不能代替註冊醫生。",
   shallowAcSimFooter:
     "示意不是自我檢查或診斷，亦不能代替面診。相對滑桿沒有臨床毫米汞柱數字。本站不提供預約或轉介。",
   shallowAcTopicLink: "遠視、淺前房與晶體",
@@ -957,10 +957,10 @@ const en: Record<Key, string> = {
   palStairsTopicLink: "Hyperopia and progressive lenses: going downstairs",
   shallowAcSimTitle: "Shallow AC and angle-closure mechanism",
   shallowAcSimCaption:
-    "Teaching animation below: shallow chamber, pupil block, iris bombé and angle-closure path. Control labels follow the site language. Illustration only — not a self-check or diagnosis.",
+    "Teaching animation below: pupil block (forward iris bombé), thicker lens, anterior vault, and plateau iris. Lens and ciliary body stay inside the globe. Control labels follow the site language. Illustration only — not a self-check or diagnosis.",
   shallowAcEduBadge: "Mechanism illustration · not a test",
   shallowAcEduCaveat:
-    "Mechanism teaching only — do not self-judge narrow angle or angle closure. Acute severe pain, halos, sudden vision drop, or headache with vomiting → this site’s /urgent only — not clinic booking. Cannot replace a registered doctor.",
+    "Mechanism teaching only (several angle-closure paths) — do not self-judge narrow angle or angle closure. Acute severe pain, halos, sudden vision drop, or headache with vomiting → this site’s /urgent only — not clinic booking. Cannot replace a registered doctor.",
   shallowAcSimFooter:
     "Illustration only — not a self-check or diagnosis, and not a substitute for an in-person visit. Relative sliders have no clinical mmHg figures. This site does not book or refer.",
   shallowAcTopicLink: "Hyperopia, shallow chamber and the lens",
@@ -1545,10 +1545,10 @@ const ja: Record<Key, string> = {
   palStairsTopicLink: "遠視と累進レンズ：下り階段",
   shallowAcSimTitle: "浅い前房と閉塞隅角の機序",
   shallowAcSimCaption:
-    "下は教育用アニメです。浅い前房・瞳孔ブロック・虹彩ボンベ・隅角閉鎖の経路を示します。操作ラベルはサイトの言語に従います。図示であり、自己検査や診断ではありません。",
+    "下は教育用アニメです。瞳孔ブロック（前方への虹彩ボンベ）、水晶体肥厚、前方ヴォールト、プラトー虹彩などの閉塞経路を示します。水晶体と毛様体は眼球の内側に描きます。操作ラベルはサイトの言語に従います。図示であり、自己検査や診断ではありません。",
   shallowAcEduBadge: "機序の図示 · 検査ではない",
   shallowAcEduCaveat:
-    "機序の教育用図示であり、狭い隅角や閉塞を自分で判定しないでください。急性の激痛・虹視・視力急低下・頭痛嘔吐 → 本サイトの／urgentのみ（予約ではない）。登録医の代わりにはなりません。",
+    "複数の閉塞隅角経路の教育用図示であり、狭い隅角や閉塞を自分で判定しないでください。急性の激痛・虹視・視力急低下・頭痛嘔吐 → 本サイトの／urgentのみ（予約ではない）。登録医の代わりにはなりません。",
   shallowAcSimFooter:
     "図示であり、自己検査や診断でも、対面診察の代わりでもありません。相対スライダーに臨床の mmHg 数値はありません。予約・紹介はしません。",
   shallowAcTopicLink: "遠視・浅い前房と水晶体",

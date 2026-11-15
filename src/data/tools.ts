@@ -61,7 +61,7 @@ export const TOOLS: ToolDef[] = [
   {
     id: "shallow-ac",
     title: "淺前房與閉角機制",
-    blurb: "前房變淺、瞳孔阻滯、虹膜膨隆與房角關閉路徑的機制示意（不是自我檢查）",
+    blurb: "瞳孔阻滯、晶體增厚、前凸拱頂、高原虹膜等閉角路徑機制示意（不是自我檢查）",
     canto: "點解會突然劇痛虹視",
     href: "/tools/shallow-ac",
   },
