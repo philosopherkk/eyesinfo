@@ -48,7 +48,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/search</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/search"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/search?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/search?lang=en"/>
@@ -57,7 +57,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/tools</loc>
-    <lastmod>2026-10-06</lastmod>
+    <lastmod>2026-10-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools?lang=en"/>
@@ -138,7 +138,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/iol</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-10-07</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/iol"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/iol?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/iol?lang=en"/>
@@ -165,7 +165,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/tools/procedures</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/procedures"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/procedures?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/procedures?lang=en"/>
@@ -174,7 +174,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/tools/drops</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/drops"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/drops?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/drops?lang=en"/>
@@ -201,7 +201,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/tools/haze</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/haze"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/haze?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/haze?lang=en"/>
@@ -210,7 +210,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/tools/floaters</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/floaters"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/floaters?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/floaters?lang=en"/>
@@ -219,12 +219,75 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/tools/halo</loc>
-    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/halo"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/halo?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/halo?lang=en"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://www.eyesinfo.org/tools/halo?lang=ja"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/tools/halo"/>
+  </url>
+  <url>
+    <loc>https://www.eyesinfo.org/tools/presbyopia</loc>
+    <lastmod>2026-09-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/presbyopia"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/presbyopia?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/presbyopia?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.eyesinfo.org/tools/presbyopia?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/tools/presbyopia"/>
+  </url>
+  <url>
+    <loc>https://www.eyesinfo.org/tools/astigmatism</loc>
+    <lastmod>2026-09-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/astigmatism"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/astigmatism?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/astigmatism?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.eyesinfo.org/tools/astigmatism?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/tools/astigmatism"/>
+  </url>
+  <url>
+    <loc>https://www.eyesinfo.org/tools/tear-film</loc>
+    <lastmod>2026-09-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/tear-film"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/tear-film?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/tear-film?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.eyesinfo.org/tools/tear-film?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/tools/tear-film"/>
+  </url>
+  <url>
+    <loc>https://www.eyesinfo.org/tools/pal-zones</loc>
+    <lastmod>2026-09-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/pal-zones"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/pal-zones?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/pal-zones?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.eyesinfo.org/tools/pal-zones?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/tools/pal-zones"/>
+  </url>
+  <url>
+    <loc>https://www.eyesinfo.org/tools/cl-overwear</loc>
+    <lastmod>2026-09-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/cl-overwear"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/cl-overwear?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/cl-overwear?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.eyesinfo.org/tools/cl-overwear?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/tools/cl-overwear"/>
+  </url>
+  <url>
+    <loc>https://www.eyesinfo.org/tools/shallow-ac</loc>
+    <lastmod>2026-09-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/shallow-ac"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/shallow-ac?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/shallow-ac?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.eyesinfo.org/tools/shallow-ac?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/tools/shallow-ac"/>
+  </url>
+  <url>
+    <loc>https://www.eyesinfo.org/tools/axial-length</loc>
+    <lastmod>2026-09-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/axial-length"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/axial-length?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/axial-length?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.eyesinfo.org/tools/axial-length?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/tools/axial-length"/>
   </url>
   <url>
     <loc>https://www.eyesinfo.org/tools/warm</loc>
@@ -354,7 +417,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/d4</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-10-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/d4"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/d4?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/d4?lang=en"/>
@@ -570,7 +633,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-erm</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-10-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-erm"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-erm?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-erm?lang=en"/>
@@ -738,6 +801,15 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-optic-neuritis?lang=en"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://www.eyesinfo.org/t/t-optic-neuritis?lang=ja"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/t/t-optic-neuritis"/>
+  </url>
+  <url>
+    <loc>https://www.eyesinfo.org/t/t-pal-zones</loc>
+    <lastmod>2026-10-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-pal-zones"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-pal-zones?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-pal-zones?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.eyesinfo.org/t/t-pal-zones?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/t/t-pal-zones"/>
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-presbyopia</loc>

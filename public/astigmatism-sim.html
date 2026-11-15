@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#12151a" />
+  <meta name="robots" content="noindex" />
+  <title>散光 · 經線與柱鏡示意 — 護眼學堂</title>
+  <style>
+html, body { margin: 0; padding: 0; background: #0f1217; color: #e4e4e4; }
+.wrap { max-width: 1000px; margin: 0 auto; padding: 10px 8px 16px; }
+.cap { font: 13px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color: #9aa3b2; margin: 0 4px 10px; }
+.teach { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: #12151a; color: #e4e4e4; padding: 12px; border-radius: 14px; max-width: 980px; margin: auto; user-select: none; }
+.teach canvas { width: 100%; display: block; border-radius: 10px; background: #000; touch-action: none; }
+.teach .bar { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin: 4px 2px 10px; }
+.teach .seg { display: flex; border-radius: 9px; overflow: hidden; border: 1px solid #444; }
+.teach .seg button, .teach .btn { background: #23272f; color: #ddd; border: 0; padding: 8px 12px; font-size: 14px; cursor: pointer; min-height: 40px; }
+.teach .seg button.on { background: #f0a030; color: #111; font-weight: 700; }
+.teach .btn { border: 1px solid #444; border-radius: 9px; }
+.teach label { font-size: 13px; display: flex; align-items: center; gap: 6px; color: #bbb; }
+.teach input[type=range] { width: 110px; accent-color: #f0a030; }
+.teach .v { min-width: 42px; font-variant-numeric: tabular-nums; color: #f3c06a; }
+.teach .hint { margin: 8px 2px 0; font-size: 12.5px; line-height: 1.45; color: #8b93a3; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="cap" id="page-cap"></p>
+<div class="teach" id="sim">
+  <div class="bar">
+    <label><span id="lab-cyl"></span> <input id="cyl" type="range" min="0" max="3" step="0.25" value="1.5"><span class="v" id="cylv"></span></label>
+    <label><span id="lab-ax"></span> <input id="ax" type="range" min="0" max="180" step="1" value="90"><span class="v" id="axv"></span></label>
+    <div class="seg">
+      <button type="button" id="uncorr" class="on"></button>
+      <button type="button" id="corr"></button>
+    </div>
+    <button class="btn" type="button" id="play">❚❚</button>
+  </div>
+  <canvas id="cv" width="960" height="520"></canvas>
+  <p class="hint" id="hint"></p>
+</div>
+  </div>
+<script>
+(()=>{
+
+const I18N = {
+  "zh-Hant": {
+    pageCap: "教育示意 · 兩條主經線焦距不同，柱鏡補償其一。不是驗光或配鏡。",
+    cyl: "柱鏡量（示意）", ax: "軸", uncorr: "未矯正", corr: "柱鏡補償", play: "❚❚",
+    pauseAria: "暫停", playAria: "播放",
+    m1: "經線 1", m2: "經線 2", focus: "焦線",
+    hint: "調整柱鏡量與軸：未矯正時點光源拉成焦線；柱鏡補償後焦點更接近圓點——教學示意。",
+    htmlLang: "zh-Hant",
+  },
+  "zh-Hans": {
+    pageCap: "教育示意 · 两条主经线焦距不同，柱镜补偿其一。不是验光或配镜。",
+    cyl: "柱镜量（示意）", ax: "轴", uncorr: "未矫正", corr: "柱镜补偿", play: "❚❚",
+    pauseAria: "暂停", playAria: "播放",
+    m1: "经线 1", m2: "经线 2", focus: "焦线",
+    hint: "调整柱镜量与轴：未矫正时点光源拉成焦线；柱镜补偿后焦点更接近圆点——教学示意。",
+    htmlLang: "zh-CN",
+  },
+  en: {
+    pageCap: "Education illustration · two principal meridians focus differently; cylinder compensates one. Not a refraction.",
+    cyl: "Cylinder (illus.)", ax: "Axis", uncorr: "Uncorrected", corr: "With cylinder", play: "❚❚",
+    pauseAria: "Pause", playAria: "Play",
+    m1: "Meridian 1", m2: "Meridian 2", focus: "Focal line",
+    hint: "Change cylinder and axis: an uncorrected point becomes a focal line; cylinder brings it closer to a point — teaching only.",
+    htmlLang: "en",
+  },
+  ja: {
+    pageCap: "教育用図示 · 二つの主経線で焦点距離が異なり、円柱で一方を補います。検眼ではありません。",
+    cyl: "円柱量（示意）", ax: "軸", uncorr: "未矯正", corr: "円柱補正", play: "❚❚",
+    pauseAria: "一時停止", playAria: "再生",
+    m1: "経線 1", m2: "経線 2", focus: "焦線",
+    hint: "円柱と軸を動かす：未矯正では点光源が焦線に。円柱で点に近づく——教育用のみ。",
+    htmlLang: "ja",
+  },
+};
+
+const normalizeLang = (raw) => {
+  const v = (raw || "").trim();
+  if (v === "zh" || v === "zh-Hant" || v === "zh-hant") return "zh-Hant";
+  if (v === "zh-Hans" || v === "zh-hans" || v === "zh-CN" || v === "zh-cn") return "zh-Hans";
+  if (v === "ja" || v === "jp") return "ja";
+  if (v === "en") return "en";
+  return "zh-Hant";
+};
+let uiLang = normalizeLang(new URLSearchParams(location.search).get("lang"));
+let T = I18N[uiLang];
+const $ = (id) => document.getElementById(id);
+function applyLang(lang) {
+  uiLang = normalizeLang(lang);
+  T = I18N[uiLang];
+  document.documentElement.lang = T.htmlLang;
+  const cap = $("page-cap");
+  if (cap) cap.textContent = T.pageCap;
+  if (typeof onLang === "function") onLang();
+}
+
+const S = { cyl: 1.5, ax: 90, corr: false, play: true };
+const cv = $("cv"), ctx = cv.getContext("2d");
+const W = 960, H = 520;
+function onLang(){
+  $("lab-cyl").textContent = T.cyl;
+  $("lab-ax").textContent = T.ax;
+  $("uncorr").textContent = T.uncorr;
+  $("corr").textContent = T.corr;
+  $("hint").textContent = T.hint;
+  $("uncorr").classList.toggle("on", !S.corr);
+  $("corr").classList.toggle("on", S.corr);
+  $("play").setAttribute("aria-label", S.play ? T.pauseAria : T.playAria);
+  $("play").textContent = S.play ? "❚❚" : "▶";
+  sync();
+}
+function sync(){
+  $("cylv").textContent = S.cyl.toFixed(2) + " D";
+  $("axv").textContent = S.ax + "°";
+}
+$("cyl").addEventListener("input", e => { S.cyl = +e.target.value; sync(); });
+$("ax").addEventListener("input", e => { S.ax = +e.target.value; sync(); });
+$("uncorr").addEventListener("click", () => { S.corr = false; onLang(); });
+$("corr").addEventListener("click", () => { S.corr = true; onLang(); });
+$("play").addEventListener("click", () => { S.play = !S.play; onLang(); });
+let t0 = performance.now();
+function draw(now){
+  if (S.play) S.ax = (S.ax + (now - t0) * 0.01) % 180;
+  t0 = now;
+  $("ax").value = String(Math.round(S.ax));
+  sync();
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = "#0b0d11"; ctx.fillRect(0,0,W,H);
+  // cornea ellipse with meridians
+  const cx = 240, cy = 240, rx = 110, ry = 90;
+  ctx.strokeStyle = "#7ec8e3"; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI*2); ctx.stroke();
+  const rad = S.ax * Math.PI / 180;
+  ctx.strokeStyle = "#f0a030"; ctx.lineWidth = 2.5;
+  lineAt(cx, cy, rad, 130); ctx.fillStyle = "#f0a030"; ctx.font = "12px system-ui";
+  ctx.fillText(T.m1, cx + Math.cos(rad)*140 - 20, cy + Math.sin(rad)*140);
+  ctx.strokeStyle = "#7eb6ff";
+  lineAt(cx, cy, rad + Math.PI/2, 130);
+  ctx.fillStyle = "#7eb6ff";
+  ctx.fillText(T.m2, cx + Math.cos(rad+Math.PI/2)*140 - 20, cy + Math.sin(rad+Math.PI/2)*140);
+  // Sturm conoid / PSF
+  const px = 640, py = 240;
+  const stretch = S.corr ? 0.15 : (0.35 + S.cyl * 0.55);
+  ctx.save();
+  ctx.translate(px, py);
+  ctx.rotate(rad);
+  const g = ctx.createRadialGradient(0,0,2,0,0,80);
+  g.addColorStop(0, "rgba(255,240,180,0.95)");
+  g.addColorStop(1, "rgba(255,200,80,0)");
+  ctx.fillStyle = g;
+  ctx.beginPath(); ctx.ellipse(0, 0, 18 + stretch * 70, 18 + (1 - Math.min(1,stretch)) * 8, 0, 0, Math.PI*2); ctx.fill();
+  ctx.restore();
+  ctx.fillStyle = "#c8cdd6"; ctx.font = "13px system-ui"; ctx.textAlign = "center";
+  ctx.fillText(T.focus, px, py + 120);
+  // cylinder lens glyph
+  ctx.strokeStyle = S.corr ? "#6ecf8e" : "#555";
+  ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.ellipse(440, 240, 36, 55, rad, 0, Math.PI*2); ctx.stroke();
+  requestAnimationFrame(draw);
+}
+function lineAt(x,y,a,len){
+  ctx.beginPath();
+  ctx.moveTo(x - Math.cos(a)*len, y - Math.sin(a)*len);
+  ctx.lineTo(x + Math.cos(a)*len, y + Math.sin(a)*len);
+  ctx.stroke();
+}
+applyLang(uiLang);
+requestAnimationFrame(draw);
+
+})();
+</script>
+</body>
+</html>

@@ -101,6 +101,41 @@ const STATIC_SOURCES = {
   "/tools/haze": ["src/components/tool-demos.tsx"],
   "/tools/floaters": ["src/components/tool-demos.tsx"],
   "/tools/halo": ["src/components/tool-demos.tsx", "src/components/halo-overlay.tsx"],
+  "/tools/presbyopia": [
+    "src/components/teaching-sims/index.tsx",
+    "src/components/teaching-sims/teaching-sim-frame.tsx",
+    "public/presbyopia-sim.html",
+  ],
+  "/tools/astigmatism": [
+    "src/components/teaching-sims/index.tsx",
+    "src/components/teaching-sims/teaching-sim-frame.tsx",
+    "public/astigmatism-sim.html",
+  ],
+  "/tools/tear-film": [
+    "src/components/teaching-sims/index.tsx",
+    "src/components/teaching-sims/teaching-sim-frame.tsx",
+    "public/tear-film-sim.html",
+  ],
+  "/tools/pal-zones": [
+    "src/components/teaching-sims/index.tsx",
+    "src/components/teaching-sims/teaching-sim-frame.tsx",
+    "public/pal-zones-sim.html",
+  ],
+  "/tools/cl-overwear": [
+    "src/components/teaching-sims/index.tsx",
+    "src/components/teaching-sims/teaching-sim-frame.tsx",
+    "public/cl-overwear-sim.html",
+  ],
+  "/tools/shallow-ac": [
+    "src/components/teaching-sims/index.tsx",
+    "src/components/teaching-sims/teaching-sim-frame.tsx",
+    "public/shallow-ac-sim.html",
+  ],
+  "/tools/axial-length": [
+    "src/components/teaching-sims/index.tsx",
+    "src/components/teaching-sims/teaching-sim-frame.tsx",
+    "public/axial-length-sim.html",
+  ],
   "/tools/warm": ["src/components/care-tools.tsx"],
   "/tools/visit": ["src/components/ask-visit-rx.tsx"],
   "/tools/outdoor": ["src/components/care-tools.tsx"],

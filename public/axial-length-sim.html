@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#12151a" />
+  <meta name="robots" content="noindex" />
+  <title>兒童眼軸伸長示意 — 護眼學堂</title>
+  <style>
+html, body { margin: 0; padding: 0; background: #0f1217; color: #e4e4e4; }
+.wrap { max-width: 1000px; margin: 0 auto; padding: 10px 8px 16px; }
+.cap { font: 13px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color: #9aa3b2; margin: 0 4px 10px; }
+.teach { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: #12151a; color: #e4e4e4; padding: 12px; border-radius: 14px; max-width: 980px; margin: auto; user-select: none; }
+.teach canvas { width: 100%; display: block; border-radius: 10px; background: #000; touch-action: none; }
+.teach .bar { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin: 4px 2px 10px; }
+.teach .seg { display: flex; border-radius: 9px; overflow: hidden; border: 1px solid #444; }
+.teach .seg button, .teach .btn { background: #23272f; color: #ddd; border: 0; padding: 8px 12px; font-size: 14px; cursor: pointer; min-height: 40px; }
+.teach .seg button.on { background: #f0a030; color: #111; font-weight: 700; }
+.teach .btn { border: 1px solid #444; border-radius: 9px; }
+.teach label { font-size: 13px; display: flex; align-items: center; gap: 6px; color: #bbb; }
+.teach input[type=range] { width: 110px; accent-color: #f0a030; }
+.teach .v { min-width: 42px; font-variant-numeric: tabular-nums; color: #f3c06a; }
+.teach .hint { margin: 8px 2px 0; font-size: 12.5px; line-height: 1.45; color: #8b93a3; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="cap" id="page-cap"></p>
+<div class="teach" id="sim">
+  <div class="bar">
+    <label><span id="lab-al"></span> <input id="al" type="range" min="22" max="27" step="0.05" value="23.5"><span class="v" id="alv"></span></label>
+    <label><input type="checkbox" id="compare" checked> <span id="lab-cmp"></span></label>
+    <button class="btn" type="button" id="play">❚❚</button>
+  </div>
+  <canvas id="cv" width="960" height="520"></canvas>
+  <p class="hint" id="hint"></p>
+</div>
+  </div>
+<script>
+(()=>{
+
+const I18N = {
+  "zh-Hant": {
+    pageCap: "公共衞生教育示意 · 眼軸變長與近視度數可一併加深。不是生長百分位、不是個人發病率、不是控近視產品療效。",
+    al: "眼軸長度示意", cmp: "對照較短眼軸", pauseAria: "暫停", playAria: "播放",
+    short: "較短眼軸（示意）", long: "較長眼軸（示意）", focus: "焦點落在視網膜前 → 遠距模糊（示意）",
+    hedge: "文獻群體約數≠個人風險；不是品牌比較、不是療效保證。",
+    hint: "眼軸變長時，焦點可落在視網膜前方，遠距變矇——這是機制示意。本頁不給個人發病率、不計算百分位、不承諾任何控近視產品可減慢百分之多少。",
+    htmlLang: "zh-Hant",
+  },
+  "zh-Hans": {
+    pageCap: "公共卫生教育示意 · 眼轴变长与近视度数可一并加深。不是生长百分位、不是个人发病率、不是控近视产品疗效。",
+    al: "眼轴长度示意", cmp: "对照较短眼轴", pauseAria: "暂停", playAria: "播放",
+    short: "较短眼轴（示意）", long: "较长眼轴（示意）", focus: "焦点落在视网膜前 → 远距模糊（示意）",
+    hedge: "文献群体约数≠个人风险；不是品牌比较、不是疗效保证。",
+    hint: "眼轴变长时，焦点可落在视网膜前方，远距变糊——这是机制示意。本页不给个人发病率、不计算百分位、不承诺任何控近视产品可减慢百分之多少。",
+    htmlLang: "zh-CN",
+  },
+  en: {
+    pageCap: "Public-health illustration · axial elongation can deepen myopic prescription. Not a growth percentile, individual incidence rate, or myopia-control product claim.",
+    al: "Axial length (illus.)", cmp: "Compare shorter eye", pauseAria: "Pause", playAria: "Play",
+    short: "Shorter axis (illus.)", long: "Longer axis (illus.)", focus: "Focus in front of retina → distance blur (illus.)",
+    hedge: "Study population figures ≠ personal risk; not brand comparison; not an efficacy promise.",
+    hint: "As the eye lengthens, focus can fall in front of the retina and distance blur — mechanism only. No individual incidence rates, no percentiles, no promise that any product slows myopia by X%.",
+    htmlLang: "en",
+  },
+  ja: {
+    pageCap: "公衆衛生の図示 · 眼軸が伸びると近視度数が深まり得ます。成長百分位、個人の発症率、近視進行抑制製品の効果主張ではありません。",
+    al: "眼軸長（示意）", cmp: "短い眼軸と比較", pauseAria: "一時停止", playAria: "再生",
+    short: "短い眼軸（示意）", long: "長い眼軸（示意）", focus: "焦点が網膜の前 → 遠方ボケ（示意）",
+    hedge: "文献の集団数字≠個人リスク；ブランド比較でも効果保証でもない。",
+    hint: "眼軸が伸びると焦点が網膜の前に来て遠方がボケ得る——機序の図示のみ。個人の発症率・百分位・「何％遅らせる」製品主張はありません。",
+    htmlLang: "ja",
+  },
+};
+
+const normalizeLang = (raw) => {
+  const v = (raw || "").trim();
+  if (v === "zh" || v === "zh-Hant" || v === "zh-hant") return "zh-Hant";
+  if (v === "zh-Hans" || v === "zh-hans" || v === "zh-CN" || v === "zh-cn") return "zh-Hans";
+  if (v === "ja" || v === "jp") return "ja";
+  if (v === "en") return "en";
+  return "zh-Hant";
+};
+let uiLang = normalizeLang(new URLSearchParams(location.search).get("lang"));
+let T = I18N[uiLang];
+const $ = (id) => document.getElementById(id);
+function applyLang(lang) {
+  uiLang = normalizeLang(lang);
+  T = I18N[uiLang];
+  document.documentElement.lang = T.htmlLang;
+  const cap = $("page-cap");
+  if (cap) cap.textContent = T.pageCap;
+  if (typeof onLang === "function") onLang();
+}
+
+const S = { al: 23.5, compare: true, play: true };
+const cv = $("cv"), ctx = cv.getContext("2d");
+const W = 960, H = 520;
+function onLang(){
+  $("lab-al").textContent = T.al;
+  $("lab-cmp").textContent = T.cmp;
+  $("hint").textContent = T.hint;
+  $("play").setAttribute("aria-label", S.play ? T.pauseAria : T.playAria);
+  $("play").textContent = S.play ? "❚❚" : "▶";
+  sync();
+}
+function sync(){ $("alv").textContent = S.al.toFixed(2) + " mm"; }
+$("al").addEventListener("input", e => { S.al = +e.target.value; sync(); });
+$("compare").addEventListener("change", e => { S.compare = e.target.checked; });
+$("play").addEventListener("click", () => { S.play = !S.play; onLang(); });
+function drawEye(cx, cy, alMm, label, tint){
+  const scale = 8.5;
+  const len = alMm * scale;
+  ctx.strokeStyle = tint; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.ellipse(cx, cy, len * 0.55, len * 0.38, 0, 0, Math.PI*2); ctx.stroke();
+  // cornea bump
+  ctx.beginPath(); ctx.ellipse(cx - len * 0.52, cy, 18, 28, 0, -1.2, 1.2); ctx.stroke();
+  // retina arc
+  ctx.strokeStyle = "#e07070";
+  ctx.beginPath(); ctx.arc(cx + len * 0.35, cy, 22, -1.3, 1.3); ctx.stroke();
+  // rays focusing short of retina when long
+  const focusX = cx + len * 0.35 - (alMm - 22.5) * 14;
+  ctx.strokeStyle = "rgba(255,220,120,0.75)"; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(cx - len * 0.55, cy - 20); ctx.lineTo(focusX, cy); ctx.lineTo(cx - len * 0.55, cy + 20); ctx.stroke();
+  ctx.fillStyle = "#f3c06a";
+  ctx.beginPath(); ctx.arc(focusX, cy, 4, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = "#c8cdd6"; ctx.font = "13px system-ui"; ctx.textAlign = "center";
+  ctx.fillText(label, cx, cy + len * 0.38 + 28);
+  ctx.fillText(alMm.toFixed(2) + " mm", cx, cy + len * 0.38 + 48);
+}
+function draw(now){
+  if (S.play) {
+    S.al = 22.8 + 2.4 * (0.5 + 0.5 * Math.sin(now / 2600));
+    $("al").value = String(S.al);
+    sync();
+  }
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = "#0b0d11"; ctx.fillRect(0,0,W,H);
+  if (S.compare) drawEye(260, 230, 22.8, T.short, "#7ec8e3");
+  drawEye(S.compare ? 700 : 480, 230, S.al, T.long, "#f0a030");
+  ctx.fillStyle = "#e4e4e4"; ctx.font = "14px system-ui"; ctx.textAlign = "left";
+  ctx.fillText(T.focus, 40, 430);
+  ctx.fillStyle = "#9aa3b2"; ctx.font = "12px system-ui";
+  ctx.fillText(T.hedge, 40, 458);
+  requestAnimationFrame(draw);
+}
+applyLang(uiLang);
+requestAnimationFrame(draw);
+
+})();
+</script>
+</body>
+</html>

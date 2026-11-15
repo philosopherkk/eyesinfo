@@ -1,0 +1,46 @@
+/* Shared chrome for public/*.html teaching-animation iframes. */
+.teaching-sim {
+  max-width: 100%;
+  overflow-x: hidden;
+  margin-top: 0.35rem;
+}
+
+.teaching-sim__caption {
+  margin: 0 0 0.65rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 10px;
+  background: var(--color-paper);
+  border: 1px solid var(--color-line);
+  color: var(--color-muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.teaching-sim__frame {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: min(920px, 145vw);
+  min-height: 620px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: #12151a;
+  touch-action: pan-y;
+}
+
+.teaching-sim__foot {
+  margin-top: 0.75rem;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: var(--color-faint);
+}
+
+@media (min-width: 900px) {
+  .teaching-sim__frame {
+    height: 860px;
+  }
+
+  .teaching-sim__frame--tall {
+    height: 980px;
+  }
+}

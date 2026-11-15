@@ -1,6 +1,9 @@
 import { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
+import { SpaHref } from "@/components/locale-href";
 import { useI18n } from "@/i18n";
+import { TOOL_TEXT } from "@/i18n/catalog";
+import { hrefWithLang } from "@/lib/locale-path";
 
 const SITS_TC = [
   {
@@ -434,6 +437,20 @@ export function RxDecoder() {
       <p className="mt-4 text-[0.88rem] leading-relaxed">
         兒童常需<strong>散瞳驗光</strong>（睫狀肌麻痺），因為調節力強，不散瞳會低估遠視或漏咗隱性度數。成人驗光多數唔使散瞳，但眼底檢查往往要散瞳。
       </p>
+      <div className="mt-4 flex flex-wrap gap-2">
+        <SpaHref
+          href={hrefWithLang("/tools/astigmatism", locale)}
+          className="inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy no-underline"
+        >
+          {TOOL_TEXT[locale].astigmatism.title} →
+        </SpaHref>
+        <SpaHref
+          href={hrefWithLang("/tools/presbyopia", locale)}
+          className="inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy no-underline"
+        >
+          {TOOL_TEXT[locale].presbyopia.title} →
+        </SpaHref>
+      </div>
     </div>
   );
 }

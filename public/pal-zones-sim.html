@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#12151a" />
+  <meta name="robots" content="noindex" />
+  <title>漸進鏡 · 遠中近分區示意 — 護眼學堂</title>
+  <style>
+html, body { margin: 0; padding: 0; background: #0f1217; color: #e4e4e4; }
+.wrap { max-width: 1000px; margin: 0 auto; padding: 10px 8px 16px; }
+.cap { font: 13px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color: #9aa3b2; margin: 0 4px 10px; }
+.teach { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: #12151a; color: #e4e4e4; padding: 12px; border-radius: 14px; max-width: 980px; margin: auto; user-select: none; }
+.teach canvas { width: 100%; display: block; border-radius: 10px; background: #000; touch-action: none; }
+.teach .bar { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin: 4px 2px 10px; }
+.teach .seg { display: flex; border-radius: 9px; overflow: hidden; border: 1px solid #444; }
+.teach .seg button, .teach .btn { background: #23272f; color: #ddd; border: 0; padding: 8px 12px; font-size: 14px; cursor: pointer; min-height: 40px; }
+.teach .seg button.on { background: #f0a030; color: #111; font-weight: 700; }
+.teach .btn { border: 1px solid #444; border-radius: 9px; }
+.teach label { font-size: 13px; display: flex; align-items: center; gap: 6px; color: #bbb; }
+.teach input[type=range] { width: 110px; accent-color: #f0a030; }
+.teach .v { min-width: 42px; font-variant-numeric: tabular-nums; color: #f3c06a; }
+.teach .hint { margin: 8px 2px 0; font-size: 12.5px; line-height: 1.45; color: #8b93a3; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="cap" id="page-cap"></p>
+<div class="teach" id="sim">
+  <div class="bar">
+    <div class="seg">
+      <button type="button" data-z="far" class="on" id="z-far"></button>
+      <button type="button" data-z="mid" id="z-mid"></button>
+      <button type="button" data-z="near" id="z-near"></button>
+    </div>
+    <label><span id="lab-gaze"></span> <input id="gaze" type="range" min="0" max="100" step="1" value="15"><span class="v" id="gazev"></span></label>
+    <label><input type="checkbox" id="zones" checked> <span id="lab-zones"></span></label>
+    <button class="btn" type="button" id="play">❚❚</button>
+  </div>
+  <canvas id="cv" width="960" height="600"></canvas>
+  <p class="hint" id="hint"></p>
+</div>
+  </div>
+<script>
+(()=>{
+
+const I18N = {
+  "zh-Hant": {
+    pageCap: "教育示意 · 漸進鏡上方遠用、走廊中距、下方近用；兩側為像差區。不是配鏡評估。",
+    far: "遠用區", mid: "中距走廊", near: "近用區", gaze: "視線高度", zones: "顯示分區",
+    pauseAria: "暫停", playAria: "播放",
+    sceneFar: "遠景", sceneMid: "中距（螢幕／貨架）", sceneNear: "近距（閱讀）",
+    soft: "周邊像差區",
+    hint: "切換遠／中／近或拖動視線高度：清晰帶會上下移動；兩側始終較矇——教學示意。",
+    htmlLang: "zh-Hant",
+  },
+  "zh-Hans": {
+    pageCap: "教育示意 · 渐进镜上方远用、走廊中距、下方近用；两侧为像差区。不是配镜评估。",
+    far: "远用区", mid: "中距走廊", near: "近用区", gaze: "视线高度", zones: "显示分区",
+    pauseAria: "暂停", playAria: "播放",
+    sceneFar: "远景", sceneMid: "中距（屏幕／货架）", sceneNear: "近距（阅读）",
+    soft: "周边像差区",
+    hint: "切换远／中／近或拖动视线高度：清晰带会上下移动；两侧始终较糊——教学示意。",
+    htmlLang: "zh-CN",
+  },
+  en: {
+    pageCap: "Education illustration · progressive lenses: distance above, intermediate corridor, near below; sides have aberrations. Not a dispensing assessment.",
+    far: "Distance", mid: "Intermediate", near: "Near", gaze: "Gaze height", zones: "Show zones",
+    pauseAria: "Pause", playAria: "Play",
+    sceneFar: "Distance view", sceneMid: "Intermediate (screen / shelf)", sceneNear: "Near (reading)",
+    soft: "Peripheral blur zones",
+    hint: "Switch distance / intermediate / near or drag gaze height: the clear band moves; the sides stay softer — teaching only.",
+    htmlLang: "en",
+  },
+  ja: {
+    pageCap: "教育用図示 · 累進レンズは上遠用・中間回廊・下近用、左右は収差域。眼鏡合わせの評価ではありません。",
+    far: "遠用", mid: "中間", near: "近用", gaze: "視線の高さ", zones: "区画表示",
+    pauseAria: "一時停止", playAria: "再生",
+    sceneFar: "遠方", sceneMid: "中間（画面／棚）", sceneNear: "近方（読書）",
+    soft: "周辺収差域",
+    hint: "遠／中／近の切替や視線高さでクリア帯が上下します。左右は常にややボケ——教育用のみ。",
+    htmlLang: "ja",
+  },
+};
+
+const normalizeLang = (raw) => {
+  const v = (raw || "").trim();
+  if (v === "zh" || v === "zh-Hant" || v === "zh-hant") return "zh-Hant";
+  if (v === "zh-Hans" || v === "zh-hans" || v === "zh-CN" || v === "zh-cn") return "zh-Hans";
+  if (v === "ja" || v === "jp") return "ja";
+  if (v === "en") return "en";
+  return "zh-Hant";
+};
+let uiLang = normalizeLang(new URLSearchParams(location.search).get("lang"));
+let T = I18N[uiLang];
+const $ = (id) => document.getElementById(id);
+function applyLang(lang) {
+  uiLang = normalizeLang(lang);
+  T = I18N[uiLang];
+  document.documentElement.lang = T.htmlLang;
+  const cap = $("page-cap");
+  if (cap) cap.textContent = T.pageCap;
+  if (typeof onLang === "function") onLang();
+}
+
+const S = { zone: "far", gaze: 15, zones: true, play: true };
+const cv = $("cv"), ctx = cv.getContext("2d");
+const W = 960, H = 600;
+const zoneY = { far: 15, mid: 48, near: 78 };
+function onLang(){
+  $("z-far").textContent = T.far;
+  $("z-mid").textContent = T.mid;
+  $("z-near").textContent = T.near;
+  $("lab-gaze").textContent = T.gaze;
+  $("lab-zones").textContent = T.zones;
+  $("hint").textContent = T.hint;
+  document.querySelectorAll("[data-z]").forEach(b => b.classList.toggle("on", b.dataset.z === S.zone));
+  $("play").setAttribute("aria-label", S.play ? T.pauseAria : T.playAria);
+  $("play").textContent = S.play ? "❚❚" : "▶";
+  sync();
+}
+function sync(){ $("gazev").textContent = Math.round(S.gaze) + "%"; }
+document.querySelectorAll("[data-z]").forEach(b => b.addEventListener("click", () => {
+  S.zone = b.dataset.z; S.gaze = zoneY[S.zone]; $("gaze").value = String(S.gaze); onLang();
+}));
+$("gaze").addEventListener("input", e => { S.gaze = +e.target.value; sync(); });
+$("zones").addEventListener("change", e => { S.zones = e.target.checked; });
+$("play").addEventListener("click", () => { S.play = !S.play; onLang(); });
+let phase = 0;
+function draw(now){
+  if (S.play) {
+    phase = now / 2500;
+    const keys = ["far","mid","near"];
+    const i = Math.floor(phase) % 3;
+    const t = phase % 1;
+    const a = zoneY[keys[i]], b = zoneY[keys[(i+1)%3]];
+    S.gaze = a + (b - a) * (0.5 - 0.5 * Math.cos(Math.PI * t));
+    $("gaze").value = String(S.gaze);
+    sync();
+  }
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = "#0b0d11"; ctx.fillRect(0,0,W,H);
+  // background scene strips
+  drawScene();
+  // lens
+  const lx = 480, ly = 300, lw = 210, lh = 260;
+  ctx.save();
+  lensPath(lx, ly, lw, lh);
+  ctx.clip();
+  // clear corridor vs side blur overlay
+  const gy = ly - lh + (S.gaze / 100) * (2 * lh);
+  const corridor = 46 + (S.gaze / 100) * 10;
+  // base sharp scene already drawn; add side blur veil
+  const grd = ctx.createLinearGradient(lx - lw, 0, lx + lw, 0);
+  grd.addColorStop(0, "rgba(12,14,18,0.72)");
+  grd.addColorStop(0.5 - corridor/lw, "rgba(12,14,18,0.55)");
+  grd.addColorStop(0.5, "rgba(12,14,18,0)");
+  grd.addColorStop(0.5 + corridor/lw, "rgba(12,14,18,0.55)");
+  grd.addColorStop(1, "rgba(12,14,18,0.72)");
+  ctx.fillStyle = grd; ctx.fillRect(lx-lw, ly-lh, 2*lw, 2*lh);
+  // vertical focus band tint
+  const band = ctx.createLinearGradient(0, ly - lh, 0, ly + lh);
+  band.addColorStop(Math.max(0, S.gaze/100 - 0.12), "rgba(110,200,140,0.05)");
+  band.addColorStop(S.gaze/100, "rgba(110,200,140,0.18)");
+  band.addColorStop(Math.min(1, S.gaze/100 + 0.12), "rgba(110,200,140,0.05)");
+  ctx.fillStyle = band; ctx.fillRect(lx-corridor, ly-lh, corridor*2, 2*lh);
+  ctx.restore();
+  // lens outline + zones
+  ctx.strokeStyle = "#d0d6e0"; ctx.lineWidth = 2.5;
+  lensPath(lx, ly, lw, lh); ctx.stroke();
+  if (S.zones) {
+    ctx.setLineDash([6,5]);
+    ctx.strokeStyle = "#f0a030";
+    ctx.beginPath(); ctx.moveTo(lx - 70, ly - lh + 2*lh*0.28); ctx.lineTo(lx + 70, ly - lh + 2*lh*0.28); ctx.stroke();
+    ctx.strokeStyle = "#7eb6ff";
+    ctx.beginPath(); ctx.moveTo(lx - 55, ly - lh + 2*lh*0.55); ctx.lineTo(lx + 55, ly - lh + 2*lh*0.55); ctx.stroke();
+    ctx.strokeStyle = "#6ecf8e";
+    ctx.beginPath(); ctx.moveTo(lx - 40, ly - lh + 2*lh*0.78); ctx.lineTo(lx + 40, ly - lh + 2*lh*0.78); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = "#f0a030"; ctx.font = "12px system-ui"; ctx.textAlign = "left";
+    ctx.fillText(T.far, lx + lw + 12, ly - lh + 2*lh*0.22);
+    ctx.fillStyle = "#7eb6ff"; ctx.fillText(T.mid, lx + lw + 12, ly - lh + 2*lh*0.52);
+    ctx.fillStyle = "#6ecf8e"; ctx.fillText(T.near, lx + lw + 12, ly - lh + 2*lh*0.78);
+    ctx.fillStyle = "#9aa3b2"; ctx.fillText(T.soft, lx + lw + 12, ly + 20);
+  }
+  // gaze marker
+  ctx.fillStyle = "#fff";
+  ctx.beginPath(); ctx.arc(lx, gy, 5, 0, Math.PI*2); ctx.fill();
+  requestAnimationFrame(draw);
+}
+function lensPath(x,y,w,h){
+  ctx.beginPath();
+  ctx.ellipse(x, y, w, h, 0, 0, Math.PI*2);
+}
+function drawScene(){
+  // far mountains
+  ctx.fillStyle = "#1a3048";
+  ctx.fillRect(40, 40, 880, 160);
+  ctx.fillStyle = "#2a4a68";
+  ctx.beginPath(); ctx.moveTo(40,200); ctx.lineTo(200,90); ctx.lineTo(360,180); ctx.lineTo(520,70); ctx.lineTo(700,160); ctx.lineTo(920,100); ctx.lineTo(920,200); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = "#c8cdd6"; ctx.font = "13px system-ui"; ctx.fillText(T.sceneFar, 56, 60);
+  // mid
+  ctx.fillStyle = "#243040";
+  ctx.fillRect(40, 210, 880, 150);
+  for (let i=0;i<6;i++){
+    ctx.fillStyle = i%2 ? "#3a4a5e" : "#323e50";
+    ctx.fillRect(80 + i*130, 230, 100, 100);
+  }
+  ctx.fillStyle = "#c8cdd6"; ctx.fillText(T.sceneMid, 56, 228);
+  // near text
+  ctx.fillStyle = "#2a241c";
+  ctx.fillRect(40, 370, 880, 180);
+  ctx.fillStyle = "#e8dfc8";
+  ctx.font = "22px Georgia, serif";
+  const lines = uiLang.startsWith("zh") || uiLang === "ja"
+    ? ["近距閱讀示意", "字句隨視線進入近用區而清晰", "兩側走廊外較矇"]
+    : ["Near-reading illustration", "Lines clear in the near zone", "Softer outside the corridor"];
+  lines.forEach((ln,i) => ctx.fillText(ln, 70, 420 + i*36));
+  ctx.font = "13px system-ui"; ctx.fillStyle = "#c8cdd6"; ctx.fillText(T.sceneNear, 56, 388);
+}
+applyLang(uiLang);
+requestAnimationFrame(draw);
+
+})();
+</script>
+</body>
+</html>

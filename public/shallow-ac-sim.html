@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#12151a" />
+  <meta name="robots" content="noindex" />
+  <title>淺前房與閉角機制示意 — 護眼學堂</title>
+  <style>
+html, body { margin: 0; padding: 0; background: #0f1217; color: #e4e4e4; }
+.wrap { max-width: 1000px; margin: 0 auto; padding: 10px 8px 16px; }
+.cap { font: 13px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color: #9aa3b2; margin: 0 4px 10px; }
+.teach { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: #12151a; color: #e4e4e4; padding: 12px; border-radius: 14px; max-width: 980px; margin: auto; user-select: none; }
+.teach canvas { width: 100%; display: block; border-radius: 10px; background: #000; touch-action: none; }
+.teach .bar { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin: 4px 2px 10px; }
+.teach .seg { display: flex; border-radius: 9px; overflow: hidden; border: 1px solid #444; }
+.teach .seg button, .teach .btn { background: #23272f; color: #ddd; border: 0; padding: 8px 12px; font-size: 14px; cursor: pointer; min-height: 40px; }
+.teach .seg button.on { background: #f0a030; color: #111; font-weight: 700; }
+.teach .btn { border: 1px solid #444; border-radius: 9px; }
+.teach label { font-size: 13px; display: flex; align-items: center; gap: 6px; color: #bbb; }
+.teach input[type=range] { width: 110px; accent-color: #f0a030; }
+.teach .v { min-width: 42px; font-variant-numeric: tabular-nums; color: #f3c06a; }
+.teach .hint { margin: 8px 2px 0; font-size: 12.5px; line-height: 1.45; color: #8b93a3; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="cap" id="page-cap"></p>
+<div class="teach" id="sim">
+  <div class="bar">
+    <label><span id="lab-depth"></span> <input id="depth" type="range" min="20" max="100" step="1" value="70"><span class="v" id="depthv"></span></label>
+    <label><span id="lab-pupil"></span> <input id="pupil" type="range" min="20" max="90" step="1" value="45"><span class="v" id="pupilv"></span></label>
+    <div class="seg">
+      <button type="button" data-s="open" class="on" id="s-open"></button>
+      <button type="button" data-s="block" id="s-block"></button>
+    </div>
+    <button class="btn" type="button" id="play">❚❚</button>
+  </div>
+  <canvas id="cv" width="960" height="520"></canvas>
+  <p class="hint" id="hint"></p>
+</div>
+  </div>
+<script>
+(()=>{
+
+const I18N = {
+  "zh-Hant": {
+    pageCap: "機制教學 · 淺前房、瞳孔阻滯、房角關閉路徑。不能自行判斷自己有沒有窄角或閉角。急性症狀 → 本站／urgent。",
+    depth: "前房深度示意", pupil: "瞳孔大小示意", open: "房角較開（示意）", block: "瞳孔阻滯路徑（示意）",
+    pauseAria: "暫停", playAria: "播放",
+    ac: "前房", angle: "房角", blockLab: "瞳孔阻滯", flow: "房水出路",
+    hint: "拖動前房深度與瞳孔：這只是機制示意，不能用來自我判斷窄角或閉角。突然劇痛、虹視、視力急降或頭痛嘔吐 → 本站／urgent（不是預約診所）。",
+    htmlLang: "zh-Hant",
+  },
+  "zh-Hans": {
+    pageCap: "机制教学 · 浅前房、瞳孔阻滞、房角关闭路径。不能自行判断自己有没有窄角或闭角。急性症状 → 本站／urgent。",
+    depth: "前房深度示意", pupil: "瞳孔大小示意", open: "房角较开（示意）", block: "瞳孔阻滞路径（示意）",
+    pauseAria: "暂停", playAria: "播放",
+    ac: "前房", angle: "房角", blockLab: "瞳孔阻滞", flow: "房水出路",
+    hint: "拖动前房深度与瞳孔：这只是机制示意，不能用来自我判断窄角或闭角。突然剧痛、虹视、视力急降或头痛呕吐 → 本站／urgent（不是预约诊所）。",
+    htmlLang: "zh-CN",
+  },
+  en: {
+    pageCap: "Mechanism teaching · shallow anterior chamber, pupil block, angle closure path. Do not self-judge narrow angle or angle closure. Acute symptoms → this site’s /urgent.",
+    depth: "AC depth (illus.)", pupil: "Pupil size (illus.)", open: "Wider angle (illus.)", block: "Pupil-block path (illus.)",
+    pauseAria: "Pause", playAria: "Play",
+    ac: "Anterior chamber", angle: "Angle", blockLab: "Pupil block", flow: "Aqueous outflow",
+    hint: "Move AC depth and pupil: mechanism only — not a self-check for narrow angle or angle closure. Sudden severe pain, halos, vision drop, or headache with vomiting → /urgent only (no clinic booking).",
+    htmlLang: "en",
+  },
+  ja: {
+    pageCap: "機序の教育 · 浅い前房・瞳孔ブロック・隅角閉鎖の経路。狭い隅角や閉塞を自分で判定しないでください。急性症状 → 本サイトの／urgent。",
+    depth: "前房深度（示意）", pupil: "瞳孔径（示意）", open: "隅角が広い（示意）", block: "瞳孔ブロック経路（示意）",
+    pauseAria: "一時停止", playAria: "再生",
+    ac: "前房", angle: "隅角", blockLab: "瞳孔ブロック", flow: "房水流出",
+    hint: "前房深度と瞳孔は機序の図示のみ——狭い隅角や閉塞の自己判定には使えません。突然の激痛・虹視・視力急低下・頭痛嘔吐 → ／urgentのみ（予約ではない）。",
+    htmlLang: "ja",
+  },
+};
+
+const normalizeLang = (raw) => {
+  const v = (raw || "").trim();
+  if (v === "zh" || v === "zh-Hant" || v === "zh-hant") return "zh-Hant";
+  if (v === "zh-Hans" || v === "zh-hans" || v === "zh-CN" || v === "zh-cn") return "zh-Hans";
+  if (v === "ja" || v === "jp") return "ja";
+  if (v === "en") return "en";
+  return "zh-Hant";
+};
+let uiLang = normalizeLang(new URLSearchParams(location.search).get("lang"));
+let T = I18N[uiLang];
+const $ = (id) => document.getElementById(id);
+function applyLang(lang) {
+  uiLang = normalizeLang(lang);
+  T = I18N[uiLang];
+  document.documentElement.lang = T.htmlLang;
+  const cap = $("page-cap");
+  if (cap) cap.textContent = T.pageCap;
+  if (typeof onLang === "function") onLang();
+}
+
+const S = { depth: 70, pupil: 45, state: "open", play: true };
+const cv = $("cv"), ctx = cv.getContext("2d");
+const W = 960, H = 520;
+function onLang(){
+  $("lab-depth").textContent = T.depth;
+  $("lab-pupil").textContent = T.pupil;
+  $("s-open").textContent = T.open;
+  $("s-block").textContent = T.block;
+  $("hint").textContent = T.hint;
+  $("s-open").classList.toggle("on", S.state === "open");
+  $("s-block").classList.toggle("on", S.state === "block");
+  $("play").setAttribute("aria-label", S.play ? T.pauseAria : T.playAria);
+  $("play").textContent = S.play ? "❚❚" : "▶";
+  sync();
+}
+function sync(){
+  $("depthv").textContent = S.depth + "%";
+  $("pupilv").textContent = S.pupil + "%";
+}
+$("depth").addEventListener("input", e => { S.depth = +e.target.value; sync(); });
+$("pupil").addEventListener("input", e => { S.pupil = +e.target.value; sync(); });
+$("s-open").addEventListener("click", () => { S.state = "open"; onLang(); });
+$("s-block").addEventListener("click", () => { S.state = "block"; onLang(); });
+$("play").addEventListener("click", () => { S.play = !S.play; onLang(); });
+function draw(now){
+  if (S.play) {
+    S.depth = 35 + 40 * (0.5 + 0.5 * Math.sin(now / 2400));
+    S.pupil = 30 + 40 * (0.5 + 0.5 * Math.sin(now / 1800 + 1));
+    const next = Math.sin(now / 3200) > 0 ? "open" : "block";
+    if (next !== S.state) {
+      S.state = next;
+      $("s-open").classList.toggle("on", S.state === "open");
+      $("s-block").classList.toggle("on", S.state === "block");
+    }
+    $("depth").value = String(Math.round(S.depth));
+    $("pupil").value = String(Math.round(S.pupil));
+    sync();
+  }
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = "#0b0d11"; ctx.fillRect(0,0,W,H);
+  // side-view eye: cornea, iris, lens, AC
+  const ox = 420, oy = 260;
+  const depthPx = 40 + (S.depth / 100) * 90;
+  ctx.strokeStyle = "#7ec8e3"; ctx.lineWidth = 3;
+  // cornea arc
+  ctx.beginPath(); ctx.arc(ox - 40, oy, 130, -1.1, 1.1); ctx.stroke();
+  // iris plates
+  const irisGap = 18 + (S.pupil / 100) * 50;
+  ctx.fillStyle = "#4a6a8a";
+  ctx.beginPath(); ctx.moveTo(ox - 20, oy - 95); ctx.lineTo(ox + depthPx, oy - irisGap); ctx.lineTo(ox + depthPx + 20, oy - irisGap - 10); ctx.lineTo(ox - 10, oy - 110); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(ox - 20, oy + 95); ctx.lineTo(ox + depthPx, oy + irisGap); ctx.lineTo(ox + depthPx + 20, oy + irisGap + 10); ctx.lineTo(ox - 10, oy + 110); ctx.closePath(); ctx.fill();
+  // lens
+  ctx.fillStyle = "rgba(240,200,120,0.45)";
+  ctx.beginPath(); ctx.ellipse(ox + depthPx + 55, oy, 28, 55, 0, 0, Math.PI*2); ctx.fill();
+  ctx.strokeStyle = "#f0a030"; ctx.stroke();
+  // AC fill
+  ctx.fillStyle = S.state === "block" ? "rgba(224,112,112,0.25)" : "rgba(126,200,227,0.2)";
+  ctx.beginPath();
+  ctx.moveTo(ox - 40 + Math.cos(-1.0)*130, oy + Math.sin(-1.0)*130);
+  ctx.arc(ox - 40, oy, 130, -1.0, 1.0);
+  ctx.lineTo(ox + depthPx, oy + irisGap);
+  ctx.lineTo(ox + depthPx, oy - irisGap);
+  ctx.closePath(); ctx.fill();
+  // angle marker
+  const angOpen = S.depth > 55 && S.state === "open";
+  ctx.strokeStyle = angOpen ? "#6ecf8e" : "#e07070";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(ox - 40 + Math.cos(0.95)*130, oy + Math.sin(0.95)*130);
+  ctx.lineTo(ox + depthPx - 5, oy + irisGap);
+  ctx.stroke();
+  ctx.fillStyle = "#c8cdd6"; ctx.font = "13px system-ui";
+  ctx.fillText(T.ac, ox + 20, oy - 20);
+  ctx.fillText(T.angle, ox - 10, oy + 120);
+  if (S.state === "block") {
+    ctx.fillStyle = "#e07070";
+    ctx.fillText(T.blockLab, ox + depthPx + 10, oy - 70);
+    // blocked flow arrow
+    ctx.strokeStyle = "#e07070";
+    ctx.beginPath(); ctx.moveTo(ox + depthPx + 10, oy); ctx.lineTo(ox + depthPx + 70, oy - 40); ctx.stroke();
+  } else {
+    ctx.fillStyle = "#6ecf8e";
+    ctx.fillText(T.flow, ox - 80, oy + 40);
+  }
+  // disclaimer box
+  ctx.fillStyle = "#1a1f28";
+  round(40, 40, 280, 120, 10); ctx.fill();
+  ctx.fillStyle = "#e4e4e4"; ctx.font = "13px system-ui";
+  wrap(T.hint.split(uiLang === "en" ? " Sudden" : "。突然")[0] + (uiLang.startsWith("zh") || uiLang === "ja" ? "。" : "."), 55, 70, 250, 18);
+  requestAnimationFrame(draw);
+}
+function round(x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+function wrap(text,x,y,maxW,lh){
+  const words = [...text];
+  let line = "", yy = y;
+  for (const ch of words) {
+    const test = line + ch;
+    if (ctx.measureText(test).width > maxW && line) { ctx.fillText(line, x, yy); yy += lh; line = ch; }
+    else line = test;
+  }
+  if (line) ctx.fillText(line, x, yy);
+}
+applyLang(uiLang);
+requestAnimationFrame(draw);
+
+})();
+</script>
+</body>
+</html>

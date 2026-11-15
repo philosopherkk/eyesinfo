@@ -11,6 +11,15 @@ import { FloaterDemo, HaloDemo, HazeDemo } from "@/components/tool-demos";
 import { GlaucomaFieldSim } from "@/components/glaucoma-field-sim";
 import { DropTrainer, OutdoorCard, WarmTimer } from "@/components/care-tools";
 import { AskDoctor, RxDecoder, VisitWalk } from "@/components/ask-visit-rx";
+import {
+  AstigmatismSim,
+  AxialLengthSim,
+  ClOverwearSim,
+  PalZonesSim,
+  PresbyopiaSim,
+  ShallowAcSim,
+  TearFilmSim,
+} from "@/components/teaching-sims";
 import { SpaHref } from "@/components/locale-href";
 import { toolSaveKey } from "@/lib/saved";
 import { useI18n, TOOL_TEXT } from "@/i18n";
@@ -47,6 +56,17 @@ export const Route = createFileRoute("/tools/$toolId")({
 
 const EDU_CAVEAT_TOOLS = new Set<ToolId>(["map", "drops", "ask", "outdoor", "visit", "rx"]);
 
+/** Teaching animations use page-specific captions/footnotes (not generic OCT / 「結果無論」 boilerplate). */
+const TEACHING_ANIM_TOOLS = new Set<ToolId>([
+  "presbyopia",
+  "astigmatism",
+  "tear-film",
+  "pal-zones",
+  "cl-overwear",
+  "shallow-ac",
+  "axial-length",
+]);
+
 function ToolPage() {
   const { toolId } = Route.useParams();
   const tool = TOOLS.find((item) => item.id === toolId && item.href.startsWith("/tools/"));
@@ -54,6 +74,7 @@ function ToolPage() {
   if (!tool) throw notFound();
   const text = TOOL_TEXT[locale][tool.id];
   const showEduCaveat = EDU_CAVEAT_TOOLS.has(tool.id);
+  const teachingAnim = TEACHING_ANIM_TOOLS.has(tool.id);
 
   return (
     <div className="pb-8">
@@ -77,7 +98,7 @@ function ToolPage() {
       <div className="px-4 pt-3">
         {showEduCaveat ? <EduToolCaveat /> : null}
         <Panel id={tool.id} />
-        <SimDisclaimer />
+        {teachingAnim ? null : <SimDisclaimer />}
         <EditorialFooter />
       </div>
     </div>
@@ -108,7 +129,22 @@ function Panel({ id }: { id: ToolId }) {
       return <OutdoorCard />;
     case "rx":
       return <RxDecoder />;
+    case "presbyopia":
+      return <PresbyopiaSim />;
+    case "astigmatism":
+      return <AstigmatismSim />;
+    case "tear-film":
+      return <TearFilmSim />;
+    case "pal-zones":
+      return <PalZonesSim />;
+    case "cl-overwear":
+      return <ClOverwearSim />;
+    case "shallow-ac":
+      return <ShallowAcSim />;
+    case "axial-length":
+      return <AxialLengthSim />;
     default:
+      // Dedicated routes (amsler / iol / procedures / …) never reach this Panel.
       return null;
   }
 }

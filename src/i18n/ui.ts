@@ -547,6 +547,41 @@ const zhHant = {
   qrHigh: "高",
   qrFoot:
     "二維碼只是把你輸入的字編成可掃描圖。內容對不對、連去哪裡，由你負責。不要把病歷或個人資料放進去。",
+  teachPresbyopiaTitle: "老花：調節與加入度示意",
+  teachPresbyopiaCaption:
+    "教學動畫：調節幅度隨年齡下降，近距需要加入度（ADD）。不是驗光、處方或配鏡。",
+  teachPresbyopiaFoot:
+    "不能代替註冊醫生。本頁是光學教學示意，不是檢查、診斷、處方、預約或轉介。",
+  teachAstigmatismTitle: "散光：經線與柱鏡示意",
+  teachAstigmatismCaption:
+    "教學動畫：兩條主經線焦距不同，柱鏡可補償其一。不是驗光或配鏡評估。",
+  teachAstigmatismFoot:
+    "不能代替註冊醫生。本頁是光學教學示意，不是檢查、診斷、處方、預約或轉介。",
+  teachTearFilmTitle: "淚膜破裂與眨眼示意",
+  teachTearFilmCaption:
+    "教學動畫：睜眼後淚膜變薄並可出現破裂；眨眼重新鋪展。不是乾眼檢查分數。",
+  teachTearFilmFoot:
+    "不能代替註冊醫生。本頁是眼表教學示意，不是檢查、診斷、處方、預約或轉介。",
+  teachPalZonesTitle: "漸進鏡：遠中近分區示意",
+  teachPalZonesCaption:
+    "教學動畫：上方遠用、走廊中距、下方近用；兩側為像差區。不是配鏡評估。",
+  teachPalZonesFoot:
+    "不能代替註冊醫生。本頁是鏡片分區教學示意，不是檢查、診斷、處方、預約或轉介。",
+  teachClOverwearTitle: "隱鏡過戴示意",
+  teachClOverwearCaption:
+    "教學動畫：分開慢性缺氧不適與急性感染紅旗。不是安全時數計算、不是品牌或透氧（Dk）比較。",
+  teachClOverwearFoot:
+    "不能代替註冊醫生。劇痛、畏光或突然視力下降 → 本站急症頁（／urgent），不是預約或轉介。本頁不定戴用時數。",
+  teachShallowAcTitle: "淺前房與閉角機制",
+  teachShallowAcCaption:
+    "機制教學：淺前房、瞳孔阻滯、房角關閉路徑。不能自行判斷自己有沒有窄角或閉角。",
+  teachShallowAcFoot:
+    "不能代替註冊醫生。急性劇痛、虹視、視力急降或頭痛嘔吐 → 本站急症頁（／urgent），不是預約診所。本頁不是自我檢查。",
+  teachAxialLengthTitle: "兒童眼軸伸長示意",
+  teachAxialLengthCaption:
+    "公共衞生教學：眼軸變長可令近視度數加深。不是生長百分位、不是個人發病率、不是控近視產品療效。",
+  teachAxialLengthFoot:
+    "不能代替註冊醫生。若引用群體約數須具名文獻，並標明「不是個人風險／不是品牌比較」。本頁不承諾任何產品可減慢百分之多少。",
 };
 
 type Key = keyof typeof zhHant;
@@ -1133,6 +1168,41 @@ const en: Record<Key, string> = {
   qrHigh: "High",
   qrFoot:
     "A QR mark only encodes the text you type. You are responsible for whether that text is correct and where it leads. Do not put medical records or personal data in it.",
+  teachPresbyopiaTitle: "Presbyopia: accommodation and Add",
+  teachPresbyopiaCaption:
+    "Teaching animation: accommodation falls with age; near work may need an Add. Not a refraction, prescription or dispensing visit.",
+  teachPresbyopiaFoot:
+    "Not a substitute for a registered doctor. Optics teaching only — not a test, diagnosis, prescription, booking or referral.",
+  teachAstigmatismTitle: "Astigmatism: meridians and cylinder",
+  teachAstigmatismCaption:
+    "Teaching animation: two principal meridians focus differently; cylinder can compensate one. Not a refraction or dispensing assessment.",
+  teachAstigmatismFoot:
+    "Not a substitute for a registered doctor. Optics teaching only — not a test, diagnosis, prescription, booking or referral.",
+  teachTearFilmTitle: "Tear-film breakup and blink",
+  teachTearFilmCaption:
+    "Teaching animation: after a blink the tear film thins and may break up; a blink resurfaces it. Not a dry-eye test score.",
+  teachTearFilmFoot:
+    "Not a substitute for a registered doctor. Ocular-surface teaching only — not a test, diagnosis, prescription, booking or referral.",
+  teachPalZonesTitle: "Progressive zones: distance / mid / near",
+  teachPalZonesCaption:
+    "Teaching animation: distance above, intermediate corridor, near below; sides have aberrations. Not a dispensing assessment.",
+  teachPalZonesFoot:
+    "Not a substitute for a registered doctor. Lens-zone teaching only — not a test, diagnosis, prescription, booking or referral.",
+  teachClOverwearTitle: "Contact-lens overwear",
+  teachClOverwearCaption:
+    "Teaching animation: separates chronic hypoxia discomfort from acute-infection red flags. Not a safe-hours calculator, brand comparison, or oxygen-permeability (Dk) comparison.",
+  teachClOverwearFoot:
+    "Not a substitute for a registered doctor. Severe pain, photophobia or sudden vision drop → this site’s /urgent page only — no booking or referral. No wear-hour prescriptions here.",
+  teachShallowAcTitle: "Shallow AC and angle-closure mechanism",
+  teachShallowAcCaption:
+    "Mechanism teaching: shallow anterior chamber, pupil block, angle closure path. Do not self-judge whether you have a narrow angle or angle closure.",
+  teachShallowAcFoot:
+    "Not a substitute for a registered doctor. Acute severe pain, halos, sudden vision drop, or headache with vomiting → this site’s /urgent only — not clinic booking. Not a self-check.",
+  teachAxialLengthTitle: "Childhood axial elongation",
+  teachAxialLengthCaption:
+    "Public-health teaching: a longer eye can deepen myopic prescription. Not a growth percentile, individual incidence rate, or myopia-control product claim.",
+  teachAxialLengthFoot:
+    "Not a substitute for a registered doctor. Any population rate must name a study and hedge that it is not personal risk / not brand comparison. No promise that any product slows myopia by X%.",
 };
 
 const ja: Record<Key, string> = {
@@ -1698,6 +1768,41 @@ const ja: Record<Key, string> = {
   qrHigh: "高",
   qrFoot:
     "二次元コードは入力した文字を図にしたものです。内容の正否とリンク先は利用者の責任です。病歴や個人情報は入れないでください。",
+  teachPresbyopiaTitle: "老視：調節と加入の図示",
+  teachPresbyopiaCaption:
+    "教育アニメ：調節力は加齢で低下し、近方には加入（ADD）が必要になることがあります。検眼・処方・眼鏡合わせではありません。",
+  teachPresbyopiaFoot:
+    "登録医師の代替ではありません。光学の教育図示であり、検査・診断・処方・予約・紹介ではありません。",
+  teachAstigmatismTitle: "乱視：経線と円柱の図示",
+  teachAstigmatismCaption:
+    "教育アニメ：二つの主経線で焦点が異なり、円柱で一方を補えます。検眼や眼鏡合わせの評価ではありません。",
+  teachAstigmatismFoot:
+    "登録医師の代替ではありません。光学の教育図示であり、検査・診断・処方・予約・紹介ではありません。",
+  teachTearFilmTitle: "涙液層の破綻とまばたき",
+  teachTearFilmCaption:
+    "教育アニメ：開瞼後に涙液層が薄くなり破綻し、まばたきで再び広がります。ドライアイ検査の点数ではありません。",
+  teachTearFilmFoot:
+    "登録医師の代替ではありません。眼表面の教育図示であり、検査・診断・処方・予約・紹介ではありません。",
+  teachPalZonesTitle: "累進ゾーン：遠・中・近",
+  teachPalZonesCaption:
+    "教育アニメ：上遠用・中間回廊・下近用、左右は収差域。眼鏡合わせの評価ではありません。",
+  teachPalZonesFoot:
+    "登録医師の代替ではありません。レンズ区画の教育図示であり、検査・診断・処方・予約・紹介ではありません。",
+  teachClOverwearTitle: "コンタクトレンズ過装用",
+  teachClOverwearCaption:
+    "教育アニメ：慢性の低酸素による不快と急性感染の赤旗を分けます。安全装着時間の計算、ブランド比較、酸素透過（Dk）比較ではありません。",
+  teachClOverwearFoot:
+    "登録医師の代替ではありません。強い痛み・羞明・突然の視力低下 → 本サイトの／urgentのみ（予約・紹介ではない）。装用時間の処方はありません。",
+  teachShallowAcTitle: "浅い前房と閉塞隅角の機序",
+  teachShallowAcCaption:
+    "機序の教育：浅い前房・瞳孔ブロック・隅角閉鎖の経路。狭い隅角や閉塞を自分で判定しないでください。",
+  teachShallowAcFoot:
+    "登録医師の代替ではありません。急性の激痛・虹視・視力急低下・頭痛嘔吐 → 本サイトの／urgentのみ（予約ではない）。自己検査ではありません。",
+  teachAxialLengthTitle: "小児の眼軸伸長",
+  teachAxialLengthCaption:
+    "公衆衛生の教育：眼軸が伸びると近視度数が深まり得ます。成長百分位、個人の発症率、近視進行抑制製品の主張ではありません。",
+  teachAxialLengthFoot:
+    "登録医師の代替ではありません。集団の数字を出す場合は研究名を示し、「個人リスクではない／ブランド比較ではない」と明記。何％遅らせる製品約束はありません。",
 };
 
 export type UiKey = Key;

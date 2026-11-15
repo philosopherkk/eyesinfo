@@ -4,6 +4,7 @@ import { TOPICS } from "@/data/topics";
 import { TOOLS } from "@/data/tools";
 import { EduLink } from "@/components/edu-link";
 import { ProcedureFrames } from "@/components/procedure-frames";
+import { PalZonesSim } from "@/components/teaching-sims";
 import { useI18n, localizeTopic } from "@/i18n";
 import { toHans } from "@/i18n/hans";
 import { TOOL_TEXT } from "@/i18n/catalog";
@@ -14,6 +15,9 @@ import {
   type MentionLink,
   type TextPart,
 } from "@/lib/topic-mentions";
+
+/** Heading `id` that mounts the progressive-zone simulator on `t-pal-zones`. */
+const PAL_ZONES_SIM_HEADING_ID = "pal-zones-sim";
 
 function renderParts(parts: TextPart[]): ReactNode {
   return parts.map((part, i) =>
@@ -98,6 +102,19 @@ export function TopicBody({
     return blocks.map((block, i) => {
       if (block.type === "h") {
         const id = resolveHeadingId(block.text, block.id, usedHeadingIds);
+        if (topicId === "t-pal-zones" && id === PAL_ZONES_SIM_HEADING_ID) {
+          return (
+            <div key={i} className="scroll-mt-20 space-y-3 pt-1">
+              <h2
+                id={id}
+                className="text-[0.95rem] font-semibold tracking-tight text-navy layout-lg:text-[1.05rem]"
+              >
+                {block.text}
+              </h2>
+              <PalZonesSim />
+            </div>
+          );
+        }
         return (
           <h2
             key={i}

@@ -3046,5 +3046,35 @@ export const EN_PACKS: Record<string, TopicPack> = {
       ),
     ],
   },
+  "t-pal-zones": {
+    title: "Progressive lenses: distance, intermediate and near zones",
+    tag: "Optics illustration · not a test",
+    meta: "Distance zone · intermediate corridor · near zone · side aberrations",
+    keyPoints: [
+      "Progressive lenses place distance above, an intermediate corridor in the middle, and near below; the sides have unavoidable aberration zones.",
+      "Gaze height decides which zone you use: straight ahead for distance; a slight chin tuck for the corridor; lower still for near.",
+      "Intermediate (about arm’s length to a few feet) often uses the corridor; reading at about 30–40 cm uses the near zone.",
+      "This page is a zone-teaching illustration — not a dispensing assessment, refraction or prescription.",
+    ],
+    blocks: [
+      p(
+        "Progressive addition lenses (PALs) arrange distance, intermediate and near powers continuously in one lens. Understanding the zones helps explain why distance can look clear while a screen or reading needs a small head adjustment — that is optical design, not a diagnosis that “the lens is broken.”",
+      ),
+      h("Three clear bands and side aberrations"),
+      ul([
+        "Above: distance zone.",
+        "Middle corridor: intermediate transition (for example a screen or shelf).",
+        "Below: near zone (reading; highest Add).",
+        "Left and right sides: peripheral aberration zones (softer, sometimes a swim feel) — a physical limit that cannot be fully removed.",
+      ]),
+      h("Illustration", "pal-zones-sim"),
+      p(
+        "The diagram labels distance / intermediate / near zones and lets you compare how the clear band moves with gaze height or auto-play. Teaching only — not a dispensing assessment or vision test.",
+      ),
+      note(
+        "Not a substitute for a registered doctor. Optics education and illustration only — not diagnosis, prescribing, booking, selling or referral. Cross-read: presbyopia, refractive error, reading a glasses prescription.",
+      ),
+    ],
+  },
   ...PROCEDURE_DAY_EN,
 };

@@ -685,6 +685,46 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
     en: "Halo illustrations comparing monofocal, extended-depth and multifocal intraocular-lens ideas. Optics education—not product promotion.",
     ja: "単焦点・EDOF・多焦点のハロー差の図示。光学の教育であり製品の勧誘ではありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
+  "/tools/presbyopia": {
+    zh: "老花調節幅度、近距需求與加入度（ADD）的教學動畫示意；不是驗光或處方（公眾教育，不能代替面診。）",
+    en: "Teaching animation of accommodation, near demand and near Add in presbyopia. Education only—not a refraction or prescription.",
+    ja: "老視の調節力・近方需要・加入（ADD）の教育アニメ。検眼や処方の代わりではありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+  },
+  "/tools/astigmatism": {
+    zh: "散光兩條主經線、焦線與柱鏡補償的教學示意；不是驗光或配鏡評估（公眾教育，不能代替面診。）",
+    en: "Teaching illustration of principal meridians, focal lines and cylinder compensation in astigmatism. Not a refraction.",
+    ja: "乱視の主経線・焦線・円柱補正の教育図示。検眼の代わりではありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+  },
+  "/tools/tear-film": {
+    zh: "淚膜變薄、破裂與眨眼重新鋪展的教學示意；不是乾眼檢查分數（公眾教育，不能代替面診。）",
+    en: "Teaching illustration of tear-film thinning, breakup and resurfacing after a blink. Not a dry-eye test score.",
+    ja: "涙液層の菲薄化・破綻とまばたきによる再展開の教育図示。ドライアイ検査ではありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+  },
+  "/tools/pal-zones": {
+    zh: "漸進鏡遠用、中距走廊、近用與周邊像差區的教學示意；不是配鏡評估（公眾教育，不能代替面診。）",
+    en: "Teaching illustration of progressive-lens distance, intermediate and near zones with side aberrations. Not a dispensing assessment.",
+    ja: "累進レンズの遠用・中間・近用と周辺収差の教育図示。眼鏡合わせ評価ではありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+  },
+  "/tools/cl-overwear": {
+    zh: "隱形眼鏡過戴：分開慢性缺氧不適與急性感染紅旗的教學示意；不是安全時數或品牌比較（公眾教育，不能代替面診。）",
+    en: "Contact-lens overwear teaching: chronic hypoxia discomfort vs acute-infection red flags. Not a safe-hours calculator or brand comparison.",
+    ja: "コンタクトレンズ過装用の教育：慢性低酸素の不快と急性感染の赤旗を分けます。安全装着時間やブランド比較ではありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+  },
+  "/tools/shallow-ac": {
+    zh: "淺前房、瞳孔阻滯與房角關閉路徑的機制示意；不能自行判斷窄角或閉角（公眾教育，不能代替面診。）",
+    en: "Mechanism illustration of shallow anterior chamber, pupil block and angle closure. Not a self-check for narrow angle.",
+    ja: "浅い前房・瞳孔ブロック・隅角閉鎖経路の機序図示。狭い隅角の自己判定ではありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+  },
+  "/tools/axial-length": {
+    zh: "兒童眼軸伸長與近視加深的公共衞生示意；不是生長百分位或控近視產品療效（公眾教育，不能代替面診。）",
+    en: "Public-health illustration of childhood axial elongation and deepening myopia. Not a growth percentile or product-efficacy claim.",
+    ja: "小児の眼軸伸長と近視深化の公衆衛生図示。成長百分位や近視抑制製品の効果主張ではありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+  },
+  "/t/t-pal-zones": {
+    zh: "漸進鏡遠中近分區與視線高度的教育專題，附教學示意；不是配鏡評估（公眾教育，不能代替面診。）",
+    en: "Education topic on progressive-lens distance, intermediate and near zones with a teaching illustration. Not a dispensing assessment.",
+    ja: "累進レンズの遠・中・近区画と視線高さの教育トピック（図示付き）。眼鏡合わせ評価ではありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。",
+  },
   "/tools/haze": {
     zh: "顏色變淡、霧感與車燈眩光的示意，幫助描述症狀；不能代替視力或眼底檢查（公眾教育，不能代替面診。）詳見內文。",
     en: "Illustration of washed-out colour, haze and headlight glare to help describe symptoms—not a vision or fundus test.",

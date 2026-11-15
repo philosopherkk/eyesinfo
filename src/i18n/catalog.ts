@@ -31,6 +31,41 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     visit: { title: "一次眼科檢查", blurb: "散瞳後唔好自己開車", canto: "去診所會做咩" },
     outdoor: { title: "兒童戶外時間", blurb: "戶外日光時間記錄（公共衞生約數）", canto: "出街睇日光" },
     rx: { title: "眼鏡度數解讀", blurb: "球鏡、柱鏡、軸、老花加度", canto: "張紙寫緊咩" },
+    presbyopia: {
+      title: "老花：調節與加入度",
+      blurb: "調節幅度、近距需求與加入度（ADD）教學示意（不是驗光）",
+      canto: "點解睇近要加度",
+    },
+    astigmatism: {
+      title: "散光：經線與柱鏡",
+      blurb: "兩條主經線、焦線與柱鏡補償示意（不是驗光）",
+      canto: "點解一條線矇一條清",
+    },
+    "tear-film": {
+      title: "淚膜破裂與眨眼",
+      blurb: "睜眼後淚膜變薄、破裂與眨眼重新鋪展（不是乾眼檢查）",
+      canto: "眼淚膜點解會破",
+    },
+    "pal-zones": {
+      title: "漸進鏡：遠中近分區",
+      blurb: "遠用、中距走廊、近用與周邊像差區示意（不是配鏡評估）",
+      canto: "漸進鏡邊度睇遠睇近",
+    },
+    "cl-overwear": {
+      title: "隱鏡過戴示意",
+      blurb: "戴太耐／過夜對角膜氧氣與不適的教學示意（不是安全時數計算）",
+      canto: "戴太耐點解唔舒服",
+    },
+    "shallow-ac": {
+      title: "淺前房與閉角機制",
+      blurb: "前房變淺、房角關閉路徑的機制示意（不是自我檢查）",
+      canto: "點解會突然劇痛虹視",
+    },
+    "axial-length": {
+      title: "兒童眼軸伸長示意",
+      blurb: "眼軸變長與近視加深的教育示意（不是生長百分位或療效計算）",
+      canto: "眼軸長咗點解更深近視",
+    },
   },
   "zh-Hans": {
     amsler: { title: "阿姆斯勒方格", blurb: "教育工具 · 自我察觉中央视力", canto: "遮一眼望中央" },
@@ -56,6 +91,41 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     visit: { title: "一次眼科检查", blurb: "散瞳后不要自己开车", canto: "去诊所会做什么" },
     outdoor: { title: "儿童户外时间", blurb: "户外日光时间记录（公共卫生约数）", canto: "出门看日光" },
     rx: { title: "眼镜度数解读", blurb: "球镜、柱镜、轴、老花加光", canto: "那张纸写什么" },
+    presbyopia: {
+      title: "老花：调节与加入度",
+      blurb: "调节幅度、近距需求与加入度（ADD）教学示意（不是验光）",
+      canto: "为何看近要加度",
+    },
+    astigmatism: {
+      title: "散光：经线与柱镜",
+      blurb: "两条主经线、焦线与柱镜补偿示意（不是验光）",
+      canto: "为何一条线糊一条清",
+    },
+    "tear-film": {
+      title: "泪膜破裂与眨眼",
+      blurb: "睁眼后泪膜变薄、破裂与眨眼重新铺展（不是干眼检查）",
+      canto: "泪膜为何会破",
+    },
+    "pal-zones": {
+      title: "渐进镜：远中近分区",
+      blurb: "远用、中距走廊、近用与周边像差区示意（不是配镜评估）",
+      canto: "渐进镜何处看远看近",
+    },
+    "cl-overwear": {
+      title: "隐镜过戴示意",
+      blurb: "戴太久／过夜对角膜氧气与不适的教学示意（不是安全时数计算）",
+      canto: "戴太久为何不舒服",
+    },
+    "shallow-ac": {
+      title: "浅前房与闭角机制",
+      blurb: "前房变浅、房角关闭路径的机制示意（不是自我检查）",
+      canto: "为何会突然剧痛虹视",
+    },
+    "axial-length": {
+      title: "儿童眼轴伸长示意",
+      blurb: "眼轴变长与近视加深的教育示意（不是生长百分位或疗效计算）",
+      canto: "眼轴长了为何更深近视",
+    },
   },
   en: {
     amsler: { title: "Amsler grid", blurb: "Education tool · self-awareness of central vision", canto: "Cover one eye · centre" },
@@ -81,6 +151,41 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     visit: { title: "A clinic visit", blurb: "Do not drive yourself after dilation", canto: "What happens at the visit" },
     outdoor: { title: "Children’s outdoor time", blurb: "Outdoor daylight log (public-health round number)", canto: "Go out in daylight" },
     rx: { title: "Reading a glasses prescription", blurb: "Sph, Cyl, Axis, Add", canto: "What the slip means" },
+    presbyopia: {
+      title: "Presbyopia: accommodation and Add",
+      blurb: "Amplitude, near demand and near Add — teaching illustration (not a refraction)",
+      canto: "Why near needs Add",
+    },
+    astigmatism: {
+      title: "Astigmatism: meridians and cylinder",
+      blurb: "Principal meridians, focal lines and cylinder compensation (not a refraction)",
+      canto: "Why one meridian blurs",
+    },
+    "tear-film": {
+      title: "Tear-film breakup and blink",
+      blurb: "Thinning, breakup and resurfacing after a blink (not a dry-eye test)",
+      canto: "Why the film breaks",
+    },
+    "pal-zones": {
+      title: "Progressive zones: distance / mid / near",
+      blurb: "Distance, intermediate corridor, near and side aberrations (not a dispensing assessment)",
+      canto: "Where PALs see far and near",
+    },
+    "cl-overwear": {
+      title: "Contact-lens overwear",
+      blurb: "Teaching illustration of long wear / overnight hypoxia discomfort (not a safe-hours calculator)",
+      canto: "Why long wear feels worse",
+    },
+    "shallow-ac": {
+      title: "Shallow AC and angle-closure mechanism",
+      blurb: "Mechanism of shallow chamber and angle closure path (not a self-check)",
+      canto: "Why sudden pain and halos",
+    },
+    "axial-length": {
+      title: "Childhood axial elongation",
+      blurb: "How a longer eye can deepen myopia (not a growth percentile or efficacy calculator)",
+      canto: "Why a longer eye blurs distance",
+    },
   },
   ja: {
     amsler: { title: "アムスラーチャート", blurb: "教育ツール · 中心視力の自己観察", canto: "片眼隠し中央を見る" },
@@ -106,6 +211,41 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     visit: { title: "眼科受診の流れ", blurb: "散瞳後は自分で運転しない", canto: "診察で何をするか" },
     outdoor: { title: "子どもの屋外時間", blurb: "屋外日光の記録（公衆衛生の目安）", canto: "外の光を" },
     rx: { title: "眼鏡処方箋の読み方", blurb: "Sph・Cyl・Axis・Add", canto: "用紙の意味" },
+    presbyopia: {
+      title: "老視：調節と加入",
+      blurb: "調節力・近方需要・加入（ADD）の教育図示（検眼ではない）",
+      canto: "なぜ近くに加入が要る",
+    },
+    astigmatism: {
+      title: "乱視：経線と円柱",
+      blurb: "主経線・焦線・円柱補正の図示（検眼ではない）",
+      canto: "なぜ一方だけボケる",
+    },
+    "tear-film": {
+      title: "涙液層の破綻とまばたき",
+      blurb: "開瞼後の菲薄化・破綻とまばたきによる再展開（ドライアイ検査ではない）",
+      canto: "なぜ涙液層が破れる",
+    },
+    "pal-zones": {
+      title: "累進ゾーン：遠・中・近",
+      blurb: "遠用・中間回廊・近用と周辺収差の図示（眼鏡合わせ評価ではない）",
+      canto: "累進のどこで遠近を見る",
+    },
+    "cl-overwear": {
+      title: "コンタクトレンズ過装用の図示",
+      blurb: "長時間／夜間装用による低酸素と不快の教育図示（安全装着時間の計算ではない）",
+      canto: "長く付けるとなぜ不快か",
+    },
+    "shallow-ac": {
+      title: "浅い前房と閉塞隅角の機序",
+      blurb: "前房が浅くなり隅角が閉じる経路の機序図示（自己検査ではない）",
+      canto: "なぜ突然の激痛と虹視か",
+    },
+    "axial-length": {
+      title: "小児の眼軸伸長の図示",
+      blurb: "眼軸が伸びると近視が深まり得る教育図示（成長百分位や効果計算ではない）",
+      canto: "眼軸が長いとなぜ遠方がボケるか",
+    },
   },
 };
 

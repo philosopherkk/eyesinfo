@@ -13,7 +13,14 @@ export type ToolId =
   | "amsler"
   | "iol"
   | "iolOptics"
-  | "procedures";
+  | "procedures"
+  | "presbyopia"
+  | "astigmatism"
+  | "tear-film"
+  | "pal-zones"
+  | "cl-overwear"
+  | "shallow-ac"
+  | "axial-length";
 
 export type ToolDef = {
   id: ToolId;
@@ -49,6 +56,55 @@ export const TOOLS: ToolDef[] = [
   { id: "haze", title: "白內障日夜示意", blurb: "顏色變淡、霧、車燈眩光", canto: "夜晚開車矇唔矇", href: "/tools/haze" },
   { id: "floaters", title: "飛蚊與簾幕", blurb: "會飄的飛蚊 vs 唔郁的簾幕", canto: "有簾幕去急症；新飛蚊同日散瞳眼底（不是只散瞳便足夠）", href: "/tools/floaters" },
   { id: "halo", title: "夜間光暈比較", blurb: "單焦、延伸景深、三焦點示意", canto: "唔係術後保證", href: "/tools/halo" },
+  {
+    id: "presbyopia",
+    title: "老花：調節與加入度",
+    blurb: "調節幅度、近距需求與加入度（ADD）教學示意（不是驗光）",
+    canto: "點解睇近要加度",
+    href: "/tools/presbyopia",
+  },
+  {
+    id: "astigmatism",
+    title: "散光：經線與柱鏡",
+    blurb: "兩條主經線、焦線與柱鏡補償示意（不是驗光）",
+    canto: "點解一條線矇一條清",
+    href: "/tools/astigmatism",
+  },
+  {
+    id: "tear-film",
+    title: "淚膜破裂與眨眼",
+    blurb: "睜眼後淚膜變薄、破裂與眨眼重新鋪展（不是乾眼檢查）",
+    canto: "眼淚膜點解會破",
+    href: "/tools/tear-film",
+  },
+  {
+    id: "pal-zones",
+    title: "漸進鏡：遠中近分區",
+    blurb: "遠用、中距走廊、近用與周邊像差區示意（不是配鏡評估）",
+    canto: "漸進鏡邊度睇遠睇近",
+    href: "/tools/pal-zones",
+  },
+  {
+    id: "cl-overwear",
+    title: "隱鏡過戴示意",
+    blurb: "戴太耐／過夜對角膜氧氣與不適的教學示意（不是安全時數計算）",
+    canto: "戴太耐點解唔舒服",
+    href: "/tools/cl-overwear",
+  },
+  {
+    id: "shallow-ac",
+    title: "淺前房與閉角機制",
+    blurb: "前房變淺、房角關閉路徑的機制示意（不是自我檢查）",
+    canto: "點解會突然劇痛虹視",
+    href: "/tools/shallow-ac",
+  },
+  {
+    id: "axial-length",
+    title: "兒童眼軸伸長示意",
+    blurb: "眼軸變長與近視加深的教育示意（不是生長百分位或療效計算）",
+    canto: "眼軸長咗點解更深近視",
+    href: "/tools/axial-length",
+  },
   { id: "warm", title: "熱敷計時", blurb: "示意計時，跟醫生指示", canto: "熱敷跟時間", href: "/tools/warm" },
   { id: "visit", title: "一次眼科檢查", blurb: "散瞳後唔好自己開車", canto: "去診所會做咩", href: "/tools/visit" },
   { id: "outdoor", title: "兒童戶外時間", blurb: "戶外日光時間記錄（公共衞生約數）", canto: "出街睇日光", href: "/tools/outdoor" },
@@ -57,6 +113,7 @@ export const TOOLS: ToolDef[] = [
 
 export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   d2: [
+    { href: "/tools/tear-film", label: "淚膜破裂與眨眼" },
     { href: "/tools/drops", label: "滴藥水步驟" },
     { href: "/tools/warm", label: "熱敷計時" },
     { href: "/t/t-lube", label: "潤眼液與潤滑劑" },
@@ -157,6 +214,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   ],
   "t-dry": [{ href: "/tools/drops", label: "滴藥水步驟" }, { href: "/t/t-lube", label: "潤眼液與潤滑劑" }, { href: "/tools/warm", label: "熱敷計時" }],
   "t-lube": [
+    { href: "/tools/tear-film", label: "淚膜破裂與眨眼" },
     { href: "/tools/drops", label: "滴藥水步驟" },
     { href: "/t/d2", label: "乾眼症" },
     { href: "/t/t-dry", label: "乾眼處理梯階" },
@@ -164,13 +222,18 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-cl", label: "隱形眼鏡" },
   ],
   "t-drops": [
+    { href: "/tools/tear-film", label: "淚膜破裂與眨眼" },
     { href: "/tools/drops", label: "滴藥水步驟" },
     { href: "/t/t-lube", label: "潤眼液與潤滑劑" },
     { href: "/t/t-gldrops", label: "青光眼眼藥水" },
   ],
   "t-warm": [{ href: "/tools/warm", label: "熱敷計時" }],
-  "t-myopia": [{ href: "/tools/outdoor", label: "兒童戶外時間" }],
+  "t-myopia": [
+    { href: "/tools/axial-length", label: "兒童眼軸伸長示意" },
+    { href: "/tools/outdoor", label: "兒童戶外時間" },
+  ],
   d1: [
+    { href: "/tools/astigmatism", label: "散光：經線與柱鏡" },
     { href: "/tools/rx", label: "眼鏡度數解讀" },
     { href: "/tools/outdoor", label: "兒童戶外時間" },
     { href: "/t/t-high-myopia-pathology", label: "高度近視長遠風險（病理近視）" },
@@ -204,10 +267,17 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/iol", label: "晶體視力示意" },
   ],
   "t-cl": [
+    { href: "/tools/cl-overwear", label: "隱鏡過戴示意" },
     { href: "/urgent", label: "急症與同日評估" },
     { href: "/t/t-lube", label: "潤眼液與潤滑劑" },
     { href: "/t/t-lasik", label: "激光矯視" },
     { href: "/t/t-keratoconus", label: "圓錐角膜" },
+  ],
+  "t-early": [
+    { href: "/tools/shallow-ac", label: "淺前房與閉角機制" },
+    { href: "/urgent", label: "急症與同日評估" },
+    { href: "/t/d4", label: "青光眼總論" },
+    { href: "/tools/tunnel", label: "青光眼視野示意" },
   ],
   "t-yag": [
     { href: "/tools/procedures?procedure=yag", label: "教學示意" },
@@ -322,11 +392,21 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-ivt-day", label: "抗血管內皮生長因子注射當日過程" },
   ],
   "t-presbyopia": [
+    { href: "/tools/presbyopia", label: "老花：調節與加入度" },
+    { href: "/tools/pal-zones", label: "漸進鏡：遠中近分區" },
     { href: "/iol", label: "晶體視力示意" },
     { href: "/tools/rx", label: "眼鏡度數解讀" },
+    { href: "/t/t-pal-zones", label: "漸進鏡分區教學" },
     { href: "/t/t-cl", label: "隱形眼鏡併發症" },
     { href: "/t/t-lasik", label: "LASIK 與 SMILE" },
     { href: "/t/t-cataract", label: "超聲波乳化與晶體" },
+  ],
+  "t-pal-zones": [
+    { href: "/tools/pal-zones", label: "漸進鏡：遠中近分區" },
+    { href: "/tools/presbyopia", label: "老花：調節與加入度" },
+    { href: "/tools/rx", label: "眼鏡度數解讀" },
+    { href: "/t/t-presbyopia", label: "老花五類選擇" },
+    { href: "/t/d1", label: "屈光不正總覽" },
   ],
   "t-chalazion": [
     { href: "/tools/warm", label: "熱敷計時" },
