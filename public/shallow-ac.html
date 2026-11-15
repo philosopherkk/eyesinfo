@@ -31,7 +31,6 @@
     #sacsim .btn.on {
       background: #2a3d4a; border-color: #5aa0c0; color: #bfe6f5;
     }
-    #sacsim label.is-dim { opacity: 0.45; pointer-events: none; }
     #sacsim label { font-size: 13px; display: flex; align-items: center; gap: 6px; color: #bbb; }
     #sacsim input[type=range] { width: 130px; accent-color: #f0a030; }
     #sacsim .v { min-width: 52px; font-variant-numeric: tabular-nums; color: #f3c06a; }
@@ -65,7 +64,7 @@
     #sac-hud .chip.warn { border-color: #e07070; color: #f0b0b0; }
     #sac-hud .chip.warn strong { color: #e07070; }
     #sacsim .hint { margin: 10px 2px 0; font-size: 12.5px; line-height: 1.45; color: #8b93a3; }
-    #sacsim .hint a { color: #7ec8e3; }
+    #sacsim .hint a, #sacsim .story a { color: #7ec8e3; }
     #sacsim .flow-wrap { margin-top: 10px; }
     #sac-flow { width: 100%; display: block; border-radius: 10px; background: #000; }
     .label3d {
@@ -86,7 +85,6 @@
         <label><span id="sac-depth-lab"></span> <input id="sac-depth" type="range" min="0" max="100" step="1" value="78"><span class="v" id="sac-depthv"></span></label>
         <label><span id="sac-lens-lab"></span> <input id="sac-lens" type="range" min="0" max="100" step="1" value="28"><span class="v" id="sac-lensv"></span></label>
         <label><span id="sac-pupil-lab"></span> <input id="sac-pupil" type="range" min="0" max="100" step="1" value="22"><span class="v" id="sac-pupilv"></span></label>
-        <button class="btn" type="button" id="sac-iol"></button>
         <button class="btn" type="button" id="sac-cut"></button>
         <button class="btn" type="button" id="sac-reset"></button>
       </div>
@@ -94,7 +92,6 @@
       <div id="sac-view">
         <div id="sac-hud">
           <div class="chip" id="sac-chip-angle"></div>
-          <div class="chip" id="sac-chip-iop"></div>
           <div class="chip" id="sac-chip-path"></div>
         </div>
       </div>
@@ -117,20 +114,18 @@ import { createMapEyeAnatomy } from "/js/map-eye-anatomy.mjs";
 
 const I18N = {
   "zh-Hant": {
-    pageCap: "教育示意 · 眼球模型與「眼圖」相同。原發性閉角不是單一機制。拖動前房深度、晶體大小、瞳孔觀察。不是自我檢查或診斷。",
+    pageCap: "本頁屬非急症機制教育。內容不能代替註冊醫生面診。",
     mechTitle: "重點：原發性閉角有多種機制（不是只有一種）",
     mech1: "瞳孔阻滯：中等散大時虹膜貼晶體前囊，後房壓力令周邊虹膜向前膨隆，關閉房角",
     mech2: "晶體增厚／前移：晶體變大或前移（沿光軸靠近角膜），擠佔前房，把虹膜推向前",
     mech3: "淺前房／窄角解剖：前房本來較淺時，上述變化更容易令房角關閉",
-    mechNote: "以上可單獨或以不同比重同時出現；本頁用三個相對滑桿示意，不是個人診斷。",
+    mechNote: "以上可單獨或以不同比重同時出現；本頁用三個相對滑桿示意。原發性閉角不是單一機制。不能自行判斷有沒有窄角或閉角。需由醫生評估，本頁不講治療選擇。",
     depth: "前房深度（相對）",
     lens: "晶體大小（相對）",
     pupil: "瞳孔大小（相對）",
     reset: "重設",
     cutOn: "切開面：開",
     cutOff: "切開面：關",
-    iolOn: "晶體取出＋人工晶體（示意結果）",
-    iolOff: "恢復自然晶體",
     deep: "深",
     shallow: "淺",
     small: "小",
@@ -139,17 +134,13 @@ const I18N = {
     storyShallow: "前房變淺：晶體沿光軸前移靠近角膜。周邊虹膜更靠近房角；藍點在瞳孔／房角關卡變慢或停住。",
     storyThick: "晶體相對變大，擠佔前房，可把虹膜推向前，房角變窄；藍點較難到達小樑網。",
     storyBlock: "瞳孔中等散大：較易瞳孔阻滯；後房壓力把周邊虹膜向前膨隆；藍點卡在瞳孔關卡。",
-    storyCrowd: "淺前房 + 大晶體 + 中等瞳孔疊加：房角相對關閉，藍點受阻。急性劇痛／虹視／嘔吐 → 急症頁。",
-    storyIol: "示意結果：取出天然晶體並放入薄型人工晶體後，前房相對加深、虹膜後退、瞳孔阻滯與房角擁擠減輕；藍點可再走完全程。這是機制教學，不是手術建議或個人預後。",
-    angleStatus: "房角狀態",
-    angleOpen: "較開（示意）",
-    angleNarrow: "較窄（示意）",
-    angleClosed: "接觸／關閉（示意）",
-    iopStatus: "相對壓力",
-    iopLow: "較低",
-    iopMid: "中等",
-    iopHigh: "較高",
-    pathStatus: "房水出路",
+    storyCrowdBefore: "淺前房 + 大晶體 + 中等瞳孔疊加：房角相對關閉，藍點受阻。急性劇痛／虹視／嘔吐 → ",
+    storyCrowdAfter: "。",
+    angleStatus: "房角狀態（示意）",
+    angleOpen: "較開",
+    angleNarrow: "較窄",
+    angleClosed: "接觸／關閉",
+    pathStatus: "房水出路（示意）",
     pathOk: "暢通",
     pathLimited: "部分受限",
     pathBlocked: "受阻",
@@ -157,7 +148,6 @@ const I18N = {
     ac: "前房",
     iris: "虹膜",
     lensLab: "晶體",
-    lensLabIol: "人工晶體",
     tm: "房角／小樑",
     pc: "後房",
     ciliary: "睫狀體",
@@ -166,25 +156,23 @@ const I18N = {
     gateOpen: "暢通",
     gatePartial: "受限",
     gateClosed: "受阻",
-    hint: "相對滑桿只供教學，沒有臨床毫米汞柱數字。模型取自本站眼圖。藍點路徑跟隨眼結構變化。「晶體取出＋人工晶體」只示意機制，不是手術建議。突然劇痛、虹視、視力急降或頭痛嘔吐：立即急症室；無法前往請致電 999。詳見",
+    hint: "相對滑桿只供教學。模型取自本站眼圖。藍點路徑跟隨眼結構變化。突然劇痛、虹視、視力急降或頭痛嘔吐：見",
     urgentLink: "急症頁",
     htmlLang: "zh-Hant",
   },
   "zh-Hans": {
-    pageCap: "教育示意 · 眼球模型与「眼图」相同。原发性闭角不是单一机制。拖动前房深度、晶体大小、瞳孔观察。不是自我检查或诊断。",
+    pageCap: "本页属非急症机制教育。内容不能代替注册医生面诊。",
     mechTitle: "重点：原发性闭角有多种机制（不是只有一种）",
     mech1: "瞳孔阻滞：中等散大时虹膜贴晶体前囊，后房压力令周边虹膜向前膨隆，关闭房角",
     mech2: "晶体增厚／前移：晶体变大或前移（沿光轴靠近角膜），挤占前房，把虹膜推向前",
     mech3: "浅前房／窄角解剖：前房本来较浅时，上述变化更容易令房角关闭",
-    mechNote: "以上可单独或以不同比重同时出现；本页用三个相对滑杆示意，不是个人诊断。",
+    mechNote: "以上可单独或以不同比重同时出现；本页用三个相对滑杆示意。原发性闭角不是单一机制。不能自行判断有没有窄角或闭角。需由医生评估，本页不讲治疗选择。",
     depth: "前房深度（相对）",
     lens: "晶体大小（相对）",
     pupil: "瞳孔大小（相对）",
     reset: "重设",
     cutOn: "切开面：开",
     cutOff: "切开面：关",
-    iolOn: "晶体取出＋人工晶体（示意结果）",
-    iolOff: "恢复自然晶体",
     deep: "深",
     shallow: "浅",
     small: "小",
@@ -193,17 +181,13 @@ const I18N = {
     storyShallow: "前房变浅：晶体沿光轴前移靠近角膜。周边虹膜更靠近房角；蓝点在瞳孔／房角关卡变慢或停住。",
     storyThick: "晶体相对变大，挤占前房，可把虹膜推向前，房角变窄；蓝点较难到达小梁网。",
     storyBlock: "瞳孔中等散大：较易瞳孔阻滞；后房压力把周边虹膜向前膨隆；蓝点卡在瞳孔关卡。",
-    storyCrowd: "浅前房 + 大晶体 + 中等瞳孔叠加：房角相对关闭，蓝点受阻。急性剧痛／虹视／呕吐 → 急症页。",
-    storyIol: "示意结果：取出天然晶体并放入薄型人工晶体后，前房相对加深、虹膜后退、瞳孔阻滞与房角拥挤减轻；蓝点可再走完全程。这是机制教学，不是手术建议或个人预后。",
-    angleStatus: "房角状态",
-    angleOpen: "较开（示意）",
-    angleNarrow: "较窄（示意）",
-    angleClosed: "接触／关闭（示意）",
-    iopStatus: "相对压力",
-    iopLow: "较低",
-    iopMid: "中等",
-    iopHigh: "较高",
-    pathStatus: "房水出路",
+    storyCrowdBefore: "浅前房 + 大晶体 + 中等瞳孔叠加：房角相对关闭，蓝点受阻。急性剧痛／虹视／呕吐 → ",
+    storyCrowdAfter: "。",
+    angleStatus: "房角状态（示意）",
+    angleOpen: "较开",
+    angleNarrow: "较窄",
+    angleClosed: "接触／关闭",
+    pathStatus: "房水出路（示意）",
     pathOk: "畅通",
     pathLimited: "部分受限",
     pathBlocked: "受阻",
@@ -211,7 +195,6 @@ const I18N = {
     ac: "前房",
     iris: "虹膜",
     lensLab: "晶体",
-    lensLabIol: "人工晶体",
     tm: "房角／小梁",
     pc: "后房",
     ciliary: "睫状体",
@@ -220,25 +203,23 @@ const I18N = {
     gateOpen: "畅通",
     gatePartial: "受限",
     gateClosed: "受阻",
-    hint: "相对滑杆只供教学，没有临床毫米汞柱数字。模型取自本站眼图。蓝点路径跟随眼结构变化。「晶体取出＋人工晶体」只示意机制，不是手术建议。突然剧痛、虹视、视力急降或头痛呕吐：立即急诊室；无法前往请致电 999。详见",
+    hint: "相对滑杆只供教学。模型取自本站眼图。蓝点路径跟随眼结构变化。突然剧痛、虹视、视力急降或头痛呕吐：见",
     urgentLink: "急症页",
     htmlLang: "zh-CN",
   },
   en: {
-    pageCap: "Teaching illustration · same eye model as the Eye map tool. Primary angle closure is not one mechanism. Drag AC depth, lens size and pupil. Not a self-check or diagnosis.",
+    pageCap: "This page is non-emergency mechanism education. It cannot replace an in-person visit with a registered doctor.",
     mechTitle: "Key point: primary angle closure has several mechanisms (not just one)",
     mech1: "Pupil block: at mid-dilation the iris contacts the lens; posterior pressure bows peripheral iris forward and closes the angle",
     mech2: "Thicker / more anterior lens: a larger or forward lens crowds the chamber and pushes the iris forward",
     mech3: "Shallow-chamber anatomy: when the chamber starts shallow, the changes above close the angle more readily",
-    mechNote: "These can act alone or together. Three relative sliders only — not a personal diagnosis.",
+    mechNote: "These can act alone or together. Three relative sliders only. Primary angle closure is not a single mechanism. Do not self-judge narrow angle or angle closure. A doctor must assess; this page does not discuss treatment options.",
     depth: "AC depth (relative)",
     lens: "Lens size (relative)",
     pupil: "Pupil size (relative)",
     reset: "Reset",
     cutOn: "Cutaway: on",
     cutOff: "Cutaway: off",
-    iolOn: "Lens out + IOL (illustrated outcome)",
-    iolOff: "Restore natural lens",
     deep: "deep",
     shallow: "shallow",
     small: "small",
@@ -247,17 +228,13 @@ const I18N = {
     storyShallow: "Shallower chamber: lens moves forward toward the cornea. Peripheral iris nearer the angle; dots slow or stop at pupil / angle gates.",
     storyThick: "Larger lens crowds the chamber and can push the iris forward; dots struggle to reach the meshwork.",
     storyBlock: "Mid-dilation favours pupil block; peripheral iris bows forward; dots stall at the pupil gate.",
-    storyCrowd: "Shallow chamber + large lens + mid pupil stacked: angle relatively closed; dots blocked. Severe pain / halos / vomiting → urgent page.",
-    storyIol: "Illustrated outcome: after removing the natural lens and placing a thin intraocular lens, the chamber deepens, the iris falls back, and pupil block / angle crowding ease — dots can complete the path again. Mechanism teaching only — not surgical advice or personal prognosis.",
-    angleStatus: "Angle",
-    angleOpen: "more open (illustration)",
-    angleNarrow: "narrower (illustration)",
-    angleClosed: "contact / closed (illustration)",
-    iopStatus: "Relative pressure",
-    iopLow: "lower",
-    iopMid: "mid",
-    iopHigh: "higher",
-    pathStatus: "Outflow path",
+    storyCrowdBefore: "Shallow chamber + large lens + mid pupil stacked: angle relatively closed; dots blocked. Severe pain / halos / vomiting → ",
+    storyCrowdAfter: ".",
+    angleStatus: "Angle (illustration)",
+    angleOpen: "more open",
+    angleNarrow: "narrower",
+    angleClosed: "contact / closed",
+    pathStatus: "Outflow path (illustration)",
     pathOk: "open",
     pathLimited: "limited",
     pathBlocked: "blocked",
@@ -265,7 +242,6 @@ const I18N = {
     ac: "AC",
     iris: "Iris",
     lensLab: "Lens",
-    lensLabIol: "Intraocular lens",
     tm: "Angle / TM",
     pc: "PC",
     ciliary: "Ciliary body",
@@ -274,25 +250,23 @@ const I18N = {
     gateOpen: "open",
     gatePartial: "limited",
     gateClosed: "blocked",
-    hint: "Relative sliders only — no clinical mmHg. Model from this site’s Eye map. Blue dots follow structural changes. “Lens out + IOL” is mechanism illustration only, not surgical advice. Sudden severe pain, halos, vision drop or headache with vomiting: A&E; if you cannot travel call 999. See",
+    hint: "Relative sliders for teaching only. Model from this site’s Eye map. Blue dots follow structural changes. Sudden severe pain, halos, vision drop or headache with vomiting: see",
     urgentLink: "urgent page",
     htmlLang: "en",
   },
   ja: {
-    pageCap: "教育用図示 · 眼球モデルは「眼の図」と同じ。原発閉塞隅角は単一の機序ではありません。前房深度・水晶体サイズ・瞳孔を動かします。自己検査や診断ではありません。",
+    pageCap: "本ページは非救急の機序教育です。登録医の対面診療の代わりにはなりません。",
     mechTitle: "要点：原発閉塞隅角には複数の機序がある（一つだけではない）",
     mech1: "瞳孔ブロック：中等度散大で虹彩が水晶体前面に接触し、後房圧で周辺虹彩が前方へ膨隆して隅角が閉じる",
     mech2: "水晶体肥厚／前方移動：水晶体が大きくまたは前方へ（光軸に沿って角膜へ）移動し、前房を圧迫して虹彩を前へ押し出す",
     mech3: "浅い前房の解剖：もともと前房が浅いと、上記の変化で隅角が閉じやすい",
-    mechNote: "単独でも、比重を変えて同時でも起こり得ます。相対スライダー3つの図示であり個人の診断ではありません。",
+    mechNote: "単独でも、比重を変えて同時でも起こり得ます。相対スライダー3つの図示です。原発閉塞隅角は単一の機序ではありません。狭い隅角や閉塞を自分で判定しないでください。医師の評価が必要で、本ページは治療の選択肢を述べません。",
     depth: "前房深度（相対）",
     lens: "水晶体サイズ（相対）",
     pupil: "瞳孔サイズ（相対）",
     reset: "リセット",
     cutOn: "切断面：オン",
     cutOff: "切断面：オフ",
-    iolOn: "水晶体摘出＋眼内レンズ（図示の結果）",
-    iolOff: "天然水晶体に戻す",
     deep: "深い",
     shallow: "浅い",
     small: "小",
@@ -301,17 +275,13 @@ const I18N = {
     storyShallow: "前房が浅くなる：水晶体が角膜へ前へ移動。周辺虹彩が隅角に近づき、点は瞳孔／隅角で遅く／止まる。",
     storyThick: "水晶体が大きく前房を圧迫；点は線維柱帯へ到達しにくい。",
     storyBlock: "中等度散大は瞳孔ブロックを起こしやすい；点は瞳孔ゲートで停滞。",
-    storyCrowd: "浅い前房＋大きな水晶体＋中等度瞳孔：隅角が相対的に閉じ、点が遮断。激痛／虹視／嘔吐 → 緊急ページ。",
-    storyIol: "図示の結果：天然水晶体を摘出し薄い眼内レンズを入れると、前房が相対的に深くなり虹彩が後退し、瞳孔ブロック／隅角の混雑が軽減；点は再び全経路を通れる。機序の教育用であり、手術の助言や個人の予後ではない。",
-    angleStatus: "隅角",
-    angleOpen: "より開（図示）",
-    angleNarrow: "より狭（図示）",
-    angleClosed: "接触／閉鎖（図示）",
-    iopStatus: "相対圧",
-    iopLow: "低め",
-    iopMid: "中等",
-    iopHigh: "高め",
-    pathStatus: "流出路",
+    storyCrowdBefore: "浅い前房＋大きな水晶体＋中等度瞳孔：隅角が相対的に閉じ、点が遮断。激痛／虹視／嘔吐 → ",
+    storyCrowdAfter: "。",
+    angleStatus: "隅角（図示）",
+    angleOpen: "より開",
+    angleNarrow: "より狭",
+    angleClosed: "接触／閉鎖",
+    pathStatus: "流出路（図示）",
     pathOk: "開通",
     pathLimited: "制限",
     pathBlocked: "遮断",
@@ -319,7 +289,6 @@ const I18N = {
     ac: "前房",
     iris: "虹彩",
     lensLab: "水晶体",
-    lensLabIol: "眼内レンズ",
     tm: "隅角／線維柱帯",
     pc: "後房",
     ciliary: "毛様体",
@@ -328,7 +297,7 @@ const I18N = {
     gateOpen: "開通",
     gatePartial: "制限",
     gateClosed: "遮断",
-    hint: "相対スライダーは教育用のみで mmHg はありません。モデルは本サイトの眼の図から。青い点は構造変化に追従。「水晶体摘出＋眼内レンズ」は機序の図示であり手術の助言ではない。突然の激痛・虹視・視力急低下・頭痛嘔吐：救急へ；行けない場合は 999。詳細は",
+    hint: "相対スライダーは教育用のみです。モデルは本サイトの眼の図から。青い点は構造変化に追従。突然の激痛・虹視・視力急低下・頭痛嘔吐：詳細は",
     urgentLink: "緊急ページ",
     htmlLang: "ja",
   },
@@ -350,7 +319,7 @@ const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
 const lerp = (a, b, t) => a + (b - a) * t;
 const smooth = (t) => { const x = clamp(t, 0, 1); return x * x * (3 - 2 * x); };
 
-const S = { depth: 78, lens: 28, pupil: 22, iol: false };
+const S = { depth: 78, lens: 28, pupil: 22 };
 let cutawayOn = true;
 
 function midBell(p01) {
@@ -367,46 +336,28 @@ function metrics() {
     0,
     1,
   );
-  let block = smooth(rawBlock);
-  let bombe = smooth(clamp((block - 0.28) / 0.5, 0, 1)) * (0.25 + shallow * 0.75);
-  let crowd = shallow * 0.42 + thick * 0.48 + bombe * 0.55;
-  let angleOpen = clamp(1 - crowd, 0, 1);
-  let tmContact = clamp(1 - angleOpen * 1.15, 0, 1);
-  let iop = smooth(clamp(tmContact * 0.75 + block * 0.3 + thick * 0.2, 0, 1));
-  let pupilGate = clamp(1 - block * 0.95, 0, 1);
-  let tmGate = clamp(1 - tmContact * 0.97, 0, 1);
+  const block = smooth(rawBlock);
+  const bombe = smooth(clamp((block - 0.28) / 0.5, 0, 1)) * (0.25 + shallow * 0.75);
+  const crowd = shallow * 0.42 + thick * 0.48 + bombe * 0.55;
+  const angleOpen = clamp(1 - crowd, 0, 1);
+  const tmContact = clamp(1 - angleOpen * 1.15, 0, 1);
+  const pupilGate = clamp(1 - block * 0.95, 0, 1);
+  const tmGate = clamp(1 - tmContact * 0.97, 0, 1);
 
   // Map-eye parametric anatomy (same +Z anterior as eye-viewer)
-  let lensEquatorZ = lerp(0.78, 1.06, shallow);
-  let lensRadius = lerp(0.42, 0.58, thick);
-  let lensFront = lerp(0.16, 0.28, thick);
-  let lensBack = lerp(0.24, 0.36, thick);
+  const lensEquatorZ = lerp(0.78, 1.06, shallow);
+  const lensRadius = lerp(0.42, 0.58, thick);
+  const lensFront = lerp(0.16, 0.28, thick);
+  const lensBack = lerp(0.24, 0.36, thick);
   const pupilR = lerp(0.12, 0.42, p01);
 
-  // Lens out + thin IOL: crowding / block / bombé resolve (teaching outcome)
-  if (S.iol) {
-    block = 0.05;
-    bombe = 0;
-    crowd = 0.08;
-    angleOpen = 0.92;
-    tmContact = 0.05;
-    iop = 0.12;
-    pupilGate = 0.96;
-    tmGate = 0.95;
-    lensEquatorZ = 0.86;
-    lensRadius = 0.55;
-    lensFront = 0.045;
-    lensBack = 0.05;
-  }
-
   return {
-    shallow, thick, p01, block, bombe, angleOpen, tmContact, iop, pupilGate, tmGate,
-    lensEquatorZ, lensRadius, lensFront, lensBack, pupilR, iol: S.iol,
+    shallow, thick, p01, block, bombe, angleOpen, tmContact, pupilGate, tmGate,
+    lensEquatorZ, lensRadius, lensFront, lensBack, pupilR,
   };
 }
 
 function activeMechs(m) {
-  if (m.iol) return { block: false, thick: false, shallow: false };
   return {
     block: m.block > 0.4 && m.bombe > 0.25,
     thick: m.thick > 0.5,
@@ -414,13 +365,32 @@ function activeMechs(m) {
   };
 }
 
+function isCrowdStory(m) {
+  return m.tmContact > 0.55 && m.shallow > 0.35 && m.thick > 0.4;
+}
+
 function storyFor(m) {
-  if (m.iol) return T.storyIol;
-  if (m.tmContact > 0.55 && m.shallow > 0.35 && m.thick > 0.4) return T.storyCrowd;
   if (m.block > 0.45 && m.bombe > 0.3) return T.storyBlock;
   if (m.thick > 0.55) return T.storyThick;
   if (m.shallow > 0.45) return T.storyShallow;
   return T.storyOpen;
+}
+
+function applyStory(m) {
+  const el = $("sac-story");
+  el.replaceChildren();
+  if (isCrowdStory(m)) {
+    el.appendChild(document.createTextNode(T.storyCrowdBefore));
+    const a = document.createElement("a");
+    a.href = "/urgent";
+    a.target = "_top";
+    a.rel = "noopener";
+    a.textContent = T.urgentLink;
+    el.appendChild(a);
+    el.appendChild(document.createTextNode(T.storyCrowdAfter));
+    return;
+  }
+  el.textContent = storyFor(m);
 }
 
 function applyLang() {
@@ -432,8 +402,6 @@ function applyLang() {
   $("sac-pupil-lab").textContent = T.pupil;
   $("sac-reset").textContent = T.reset;
   $("sac-cut").textContent = cutawayOn ? T.cutOn : T.cutOff;
-  $("sac-iol").textContent = S.iol ? T.iolOff : T.iolOn;
-  $("sac-iol").classList.toggle("on", S.iol);
   const list = $("sac-mech-list");
   list.innerHTML = "";
   [T.mech1, T.mech2, T.mech3].forEach((text, i) => {
@@ -478,14 +446,8 @@ function syncChrome() {
   const lTag = S.lens >= 60 ? T.large : S.lens <= 25 ? T.small : "";
   $("sac-lensv").textContent = Math.round(S.lens) + "%" + (lTag ? " · " + lTag : "");
   $("sac-pupilv").textContent = Math.round(S.pupil) + "%";
-  $("sac-story").textContent = storyFor(m);
+  applyStory(m);
   $("sac-cut").textContent = cutawayOn ? T.cutOn : T.cutOff;
-  $("sac-iol").textContent = S.iol ? T.iolOff : T.iolOn;
-  $("sac-iol").classList.toggle("on", S.iol);
-
-  // While showing IOL outcome, depth/lens sliders are dimmed (pupil still free)
-  $("sac-depth").closest("label").classList.toggle("is-dim", S.iol);
-  $("sac-lens").closest("label").classList.toggle("is-dim", S.iol);
 
   const act = activeMechs(m);
   [...$("sac-mech-list").children].forEach((li) => {
@@ -493,14 +455,11 @@ function syncChrome() {
   });
 
   const angleLab = m.angleOpen > 0.45 ? T.angleOpen : m.angleOpen > 0.2 ? T.angleNarrow : T.angleClosed;
-  const iopLab = m.iop < 0.35 ? T.iopLow : m.iop < 0.65 ? T.iopMid : T.iopHigh;
   const pathLab = m.tmGate > 0.65 && m.pupilGate > 0.65 ? T.pathOk : m.tmGate < 0.3 || m.pupilGate < 0.3 ? T.pathBlocked : T.pathLimited;
 
   $("sac-chip-angle").innerHTML = `${T.angleStatus}：<strong>${angleLab}</strong>`;
-  $("sac-chip-iop").innerHTML = `${T.iopStatus}：<strong>${iopLab}</strong>`;
   $("sac-chip-path").innerHTML = `${T.pathStatus}：<strong>${pathLab}</strong>`;
   $("sac-chip-angle").classList.toggle("warn", m.angleOpen <= 0.2);
-  $("sac-chip-iop").classList.toggle("warn", m.iop >= 0.65);
   $("sac-chip-path").classList.toggle("warn", m.tmGate < 0.3 || m.pupilGate < 0.3);
 
   anatomyDirty = true;
@@ -519,7 +478,6 @@ function applyAnatomyIfNeeded() {
     bombe: m.bombe,
     angleOpen: m.angleOpen,
     cutaway: cutawayOn,
-    iol: m.iol,
   });
   updateLabels();
 }
@@ -587,7 +545,7 @@ Object.values(labels).forEach((l) => scene.add(l));
 
 function updateLabels() {
   labels.cornea.element.textContent = T.cornea;
-  labels.lens.element.textContent = S.iol ? T.lensLabIol : T.lensLab;
+  labels.lens.element.textContent = T.lensLab;
   labels.ciliary.element.textContent = T.ciliary;
   labels.iris.element.textContent = T.iris;
   labels.tm.element.textContent = T.tm;
@@ -826,21 +784,14 @@ function postHeight() {
 }
 
 $("sac-depth").addEventListener("input", (e) => {
-  if (S.iol) return;
   S.depth = +e.target.value;
   syncChrome();
 });
 $("sac-lens").addEventListener("input", (e) => {
-  if (S.iol) return;
   S.lens = +e.target.value;
   syncChrome();
 });
 $("sac-pupil").addEventListener("input", (e) => { S.pupil = +e.target.value; syncChrome(); });
-$("sac-iol").addEventListener("click", () => {
-  S.iol = !S.iol;
-  particles.length = 0;
-  syncChrome();
-});
 $("sac-cut").addEventListener("click", () => {
   cutawayOn = !cutawayOn;
   anatomy.setCutaway(cutawayOn);
@@ -848,7 +799,7 @@ $("sac-cut").addEventListener("click", () => {
   $("sac-cut").textContent = cutawayOn ? T.cutOn : T.cutOff;
 });
 $("sac-reset").addEventListener("click", () => {
-  S.depth = 78; S.lens = 28; S.pupil = 22; S.iol = false;
+  S.depth = 78; S.lens = 28; S.pupil = 22;
   particles.length = 0;
   syncChrome();
 });

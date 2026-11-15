@@ -507,9 +507,9 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
     ja: "累進レンズで下り階段を見るときの近用部の拡大・ぼけ・プリズムの教育用アニメ。遠視／近視を切替（検査ではない）。",
   },
   "/tools/shallow-ac": {
-    zh: "閉角機制教學動畫：瞳孔阻滯（向前膨隆）、晶體增厚、前凸拱頂、高原虹膜（教育工具，不是自我檢查；急性症狀見急症頁）。",
-    en: "Teaching animation of angle-closure paths: pupil block (forward bombé), thicker lens, anterior vault, plateau iris (education tool, not a self-check; acute → urgent page).",
-    ja: "閉塞隅角の機序：瞳孔ブロック（前方ボンベ）、水晶体肥厚、前方ヴォールト、プラトー虹彩の教育用アニメ（自己検査ではない。急性は緊急ページへ）。",
+    zh: "閉角機制教學動畫：瞳孔阻滯、晶體增厚／前移、淺前房（教育工具，不是自我檢查；急性症狀見急症頁）。",
+    en: "Teaching animation of angle-closure mechanisms: pupil block, thicker/forward lens, shallow chamber (education tool, not a self-check; acute → urgent page).",
+    ja: "閉塞隅角の機序：瞳孔ブロック、水晶体肥厚／前方移動、浅い前房の教育用アニメ（自己検査ではない。急性は緊急ページへ）。",
   },
   "/t/t-pterygium": {
     zh: "介紹翼狀胬肉與紫外線等相關因素，以及生活上遮陽防護的建議，並說明何時宜找專科評估（公眾教育），詳見專題正文。",

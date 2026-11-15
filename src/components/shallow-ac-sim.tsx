@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { EduLink } from "@/components/edu-link";
 import { useI18n } from "@/i18n";
 import type { Locale } from "@/i18n/locale";
 import "./shallow-ac-sim.css";
@@ -26,7 +27,16 @@ export function ShallowAcTeachingCaveat() {
       aria-label={t("shallowAcEduBadge")}
     >
       <p className="font-semibold text-navy">{t("shallowAcEduBadge")}</p>
-      <p className="mt-1.5">{t("shallowAcEduCaveat")}</p>
+      <p className="mt-1.5">
+        {t("shallowAcEduCaveatBefore")}
+        <EduLink
+          href="/urgent"
+          className="font-medium text-navy underline underline-offset-2"
+        >
+          {t("shallowAcUrgentLink")}
+        </EduLink>
+        {t("shallowAcEduCaveatAfter")}
+      </p>
     </aside>
   );
 }

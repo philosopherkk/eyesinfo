@@ -359,12 +359,14 @@ const zhHant = {
   palStairsTopicLink: "遠視與漸進鏡：落樓梯",
   shallowAcSimTitle: "淺前房與閉角機制示意",
   shallowAcSimCaption:
-    "下方為 3D 教學動畫：眼球模型與「眼圖」相同。藍點沿房水路徑跟隨眼結構變化。可試「晶體取出＋人工晶體」看閉角相關擁擠如何相對紓緩（機制示意，不是手術建議）。拖動前房深度、晶體大小、瞳孔。示意不是自我檢查或診斷。",
-  shallowAcEduBadge: "多機制示意 · 不是檢查",
-  shallowAcEduCaveat:
-    "原發性閉角不是單一機制。本圖只供教學示意，不能自行判斷有沒有窄角或閉角。急性劇痛、虹視、視力急降或頭痛嘔吐 → 本站急症頁（／urgent），不是預約診所。不能代替註冊醫生。",
+    "下方為 3D 教學動畫：眼球模型與「眼圖」相同。藍點沿房水路徑跟隨眼結構變化。拖動前房深度、晶體大小、瞳孔。示意不是自我檢查或診斷。",
+  shallowAcEduBadge: "機制示意 · 不是自我檢查",
+  shallowAcEduCaveatBefore:
+    "本頁屬非急症機制教育。內容不能代替註冊醫生面診。原發性閉角不是單一機制。不能自行判斷有沒有窄角或閉角。需由醫生評估，本頁不講治療選擇。急性劇痛、虹視、視力急降或頭痛嘔吐 → ",
+  shallowAcUrgentLink: "本站急症頁",
+  shallowAcEduCaveatAfter: "，不是預約診所。",
   shallowAcSimFooter:
-    "示意不是自我檢查或診斷，亦不能代替面診。相對滑桿沒有臨床毫米汞柱數字。本站不提供預約或轉介。",
+    "示意不是自我檢查或診斷，亦不能代替面診。需由醫生評估，本頁不講治療選擇。本站不提供預約或轉介。",
   shallowAcTopicLink: "遠視、淺前房與晶體",
   iolOpticsH: "光學設計",
   iolTargetH: "單焦／預留目標度數",
@@ -957,12 +959,14 @@ const en: Record<Key, string> = {
   palStairsTopicLink: "Hyperopia and progressive lenses: going downstairs",
   shallowAcSimTitle: "Shallow AC and angle-closure mechanism",
   shallowAcSimCaption:
-    "3D teaching animation using the same eye model as the Eye map tool. Blue dots follow the aqueous path as structures change. Try “Lens out + IOL” to see how related crowding can ease (mechanism illustration — not surgical advice). Drag AC depth, lens size and pupil. Illustration only — not a self-check or diagnosis.",
-  shallowAcEduBadge: "Multi-mechanism illustration · not a test",
-  shallowAcEduCaveat:
-    "Primary angle closure is not a single mechanism. Teaching illustration only — do not self-judge narrow angle or angle closure. Acute severe pain, halos, sudden vision drop, or headache with vomiting → this site’s /urgent only — not clinic booking. Cannot replace a registered doctor.",
+    "3D teaching animation using the same eye model as the Eye map tool. Blue dots follow the aqueous path as structures change. Drag AC depth, lens size and pupil. Illustration only — not a self-check or diagnosis.",
+  shallowAcEduBadge: "Mechanism illustration · not a self-check",
+  shallowAcEduCaveatBefore:
+    "This page is non-emergency mechanism education. It cannot replace an in-person visit with a registered doctor. Primary angle closure is not a single mechanism. Do not self-judge narrow angle or angle closure. A doctor must assess; this page does not discuss treatment options. Acute severe pain, halos, sudden vision drop, or headache with vomiting → ",
+  shallowAcUrgentLink: "this site’s urgent page",
+  shallowAcEduCaveatAfter: " — not clinic booking.",
   shallowAcSimFooter:
-    "Illustration only — not a self-check or diagnosis, and not a substitute for an in-person visit. Relative sliders have no clinical mmHg figures. This site does not book or refer.",
+    "Illustration only — not a self-check or diagnosis, and not a substitute for an in-person visit. A doctor must assess; this page does not discuss treatment options. This site does not book or refer.",
   shallowAcTopicLink: "Hyperopia, shallow chamber and the lens",
   iolOpticsH: "Optical design",
   iolTargetH: "Monofocal / target power",
@@ -1545,12 +1549,14 @@ const ja: Record<Key, string> = {
   palStairsTopicLink: "遠視と累進レンズ：下り階段",
   shallowAcSimTitle: "浅い前房と閉塞隅角の機序",
   shallowAcSimCaption:
-    "下は3D教育用アニメです。眼球モデルは「眼の図」と同じです。青い点は構造変化に追従して房水経路を進みます。「水晶体摘出＋眼内レンズ」で閉塞関連の混雑が相対的に軽減する様子を示します（機序の図示であり手術の助言ではありません）。前房深度・水晶体サイズ・瞳孔を動かします。図示であり、自己検査や診断ではありません。",
-  shallowAcEduBadge: "複数機序の図示 · 検査ではない",
-  shallowAcEduCaveat:
-    "原発閉塞隅角は単一の機序ではありません。教育用図示であり、狭い隅角や閉塞を自分で判定しないでください。急性の激痛・虹視・視力急低下・頭痛嘔吐 → 本サイトの／urgentのみ（予約ではない）。登録医の代わりにはなりません。",
+    "下は3D教育用アニメです。眼球モデルは「眼の図」と同じです。青い点は構造変化に追従して房水経路を進みます。前房深度・水晶体サイズ・瞳孔を動かします。図示であり、自己検査や診断ではありません。",
+  shallowAcEduBadge: "機序の図示 · 自己検査ではない",
+  shallowAcEduCaveatBefore:
+    "本ページは非救急の機序教育です。登録医の対面診療の代わりにはなりません。原発閉塞隅角は単一の機序ではありません。狭い隅角や閉塞を自分で判定しないでください。医師の評価が必要で、本ページは治療の選択肢を述べません。急性の激痛・虹視・視力急低下・頭痛嘔吐 → ",
+  shallowAcUrgentLink: "本サイトの緊急ページ",
+  shallowAcEduCaveatAfter: "（予約ではない）。",
   shallowAcSimFooter:
-    "図示であり、自己検査や診断でも、対面診察の代わりでもありません。相対スライダーに臨床の mmHg 数値はありません。予約・紹介はしません。",
+    "図示であり、自己検査や診断でも、対面診察の代わりでもありません。医師の評価が必要で、本ページは治療の選択肢を述べません。予約・紹介はしません。",
   shallowAcTopicLink: "遠視・浅い前房と水晶体",
   iolOpticsH: "光学デザイン",
   iolTargetH: "単焦点／目標度数",
