@@ -361,8 +361,10 @@ const zhHant = {
   shallowAcSimCaption:
     "下方為 3D 教學動畫：眼球模型與「眼圖」相同。藍點沿房水路徑跟隨眼結構變化。拖動前房深度、晶體大小、瞳孔。示意不是自我檢查或診斷。",
   shallowAcEduBadge: "機制示意 · 不是自我檢查",
-  shallowAcEduCaveat:
-    "本頁屬非急症機制教育。內容不能代替註冊醫生面診。原發性閉角不是單一機制。不能自行判斷有沒有窄角或閉角。需由醫生評估，本頁不講治療選擇。急性劇痛、虹視、視力急降或頭痛嘔吐 → 本站急症頁（／urgent），不是預約診所。",
+  shallowAcEduCaveatBefore:
+    "本頁屬非急症機制教育。內容不能代替註冊醫生面診。原發性閉角不是單一機制。不能自行判斷有沒有窄角或閉角。需由醫生評估，本頁不講治療選擇。急性劇痛、虹視、視力急降或頭痛嘔吐 → ",
+  shallowAcUrgentLink: "本站急症頁",
+  shallowAcEduCaveatAfter: "，不是預約診所。",
   shallowAcSimFooter:
     "示意不是自我檢查或診斷，亦不能代替面診。需由醫生評估，本頁不講治療選擇。本站不提供預約或轉介。",
   shallowAcTopicLink: "遠視、淺前房與晶體",
@@ -959,8 +961,10 @@ const en: Record<Key, string> = {
   shallowAcSimCaption:
     "3D teaching animation using the same eye model as the Eye map tool. Blue dots follow the aqueous path as structures change. Drag AC depth, lens size and pupil. Illustration only — not a self-check or diagnosis.",
   shallowAcEduBadge: "Mechanism illustration · not a self-check",
-  shallowAcEduCaveat:
-    "This page is non-emergency mechanism education. It cannot replace an in-person visit with a registered doctor. Primary angle closure is not a single mechanism. Do not self-judge narrow angle or angle closure. A doctor must assess; this page does not discuss treatment options. Acute severe pain, halos, sudden vision drop, or headache with vomiting → this site’s /urgent only — not clinic booking.",
+  shallowAcEduCaveatBefore:
+    "This page is non-emergency mechanism education. It cannot replace an in-person visit with a registered doctor. Primary angle closure is not a single mechanism. Do not self-judge narrow angle or angle closure. A doctor must assess; this page does not discuss treatment options. Acute severe pain, halos, sudden vision drop, or headache with vomiting → ",
+  shallowAcUrgentLink: "this site’s urgent page",
+  shallowAcEduCaveatAfter: " — not clinic booking.",
   shallowAcSimFooter:
     "Illustration only — not a self-check or diagnosis, and not a substitute for an in-person visit. A doctor must assess; this page does not discuss treatment options. This site does not book or refer.",
   shallowAcTopicLink: "Hyperopia, shallow chamber and the lens",
@@ -1547,8 +1551,10 @@ const ja: Record<Key, string> = {
   shallowAcSimCaption:
     "下は3D教育用アニメです。眼球モデルは「眼の図」と同じです。青い点は構造変化に追従して房水経路を進みます。前房深度・水晶体サイズ・瞳孔を動かします。図示であり、自己検査や診断ではありません。",
   shallowAcEduBadge: "機序の図示 · 自己検査ではない",
-  shallowAcEduCaveat:
-    "本ページは非救急の機序教育です。登録医の対面診療の代わりにはなりません。原発閉塞隅角は単一の機序ではありません。狭い隅角や閉塞を自分で判定しないでください。医師の評価が必要で、本ページは治療の選択肢を述べません。急性の激痛・虹視・視力急低下・頭痛嘔吐 → 本サイトの／urgentのみ（予約ではない）。",
+  shallowAcEduCaveatBefore:
+    "本ページは非救急の機序教育です。登録医の対面診療の代わりにはなりません。原発閉塞隅角は単一の機序ではありません。狭い隅角や閉塞を自分で判定しないでください。医師の評価が必要で、本ページは治療の選択肢を述べません。急性の激痛・虹視・視力急低下・頭痛嘔吐 → ",
+  shallowAcUrgentLink: "本サイトの緊急ページ",
+  shallowAcEduCaveatAfter: "（予約ではない）。",
   shallowAcSimFooter:
     "図示であり、自己検査や診断でも、対面診察の代わりでもありません。医師の評価が必要で、本ページは治療の選択肢を述べません。予約・紹介はしません。",
   shallowAcTopicLink: "遠視・浅い前房と水晶体",

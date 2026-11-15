@@ -64,7 +64,7 @@
     #sac-hud .chip.warn { border-color: #e07070; color: #f0b0b0; }
     #sac-hud .chip.warn strong { color: #e07070; }
     #sacsim .hint { margin: 10px 2px 0; font-size: 12.5px; line-height: 1.45; color: #8b93a3; }
-    #sacsim .hint a { color: #7ec8e3; }
+    #sacsim .hint a, #sacsim .story a { color: #7ec8e3; }
     #sacsim .flow-wrap { margin-top: 10px; }
     #sac-flow { width: 100%; display: block; border-radius: 10px; background: #000; }
     .label3d {
@@ -134,7 +134,8 @@ const I18N = {
     storyShallow: "前房變淺：晶體沿光軸前移靠近角膜。周邊虹膜更靠近房角；藍點在瞳孔／房角關卡變慢或停住。",
     storyThick: "晶體相對變大，擠佔前房，可把虹膜推向前，房角變窄；藍點較難到達小樑網。",
     storyBlock: "瞳孔中等散大：較易瞳孔阻滯；後房壓力把周邊虹膜向前膨隆；藍點卡在瞳孔關卡。",
-    storyCrowd: "淺前房 + 大晶體 + 中等瞳孔疊加：房角相對關閉，藍點受阻。急性劇痛／虹視／嘔吐 → 急症頁。",
+    storyCrowdBefore: "淺前房 + 大晶體 + 中等瞳孔疊加：房角相對關閉，藍點受阻。急性劇痛／虹視／嘔吐 → ",
+    storyCrowdAfter: "。",
     angleStatus: "房角狀態（示意）",
     angleOpen: "較開",
     angleNarrow: "較窄",
@@ -180,7 +181,8 @@ const I18N = {
     storyShallow: "前房变浅：晶体沿光轴前移靠近角膜。周边虹膜更靠近房角；蓝点在瞳孔／房角关卡变慢或停住。",
     storyThick: "晶体相对变大，挤占前房，可把虹膜推向前，房角变窄；蓝点较难到达小梁网。",
     storyBlock: "瞳孔中等散大：较易瞳孔阻滞；后房压力把周边虹膜向前膨隆；蓝点卡在瞳孔关卡。",
-    storyCrowd: "浅前房 + 大晶体 + 中等瞳孔叠加：房角相对关闭，蓝点受阻。急性剧痛／虹视／呕吐 → 急症页。",
+    storyCrowdBefore: "浅前房 + 大晶体 + 中等瞳孔叠加：房角相对关闭，蓝点受阻。急性剧痛／虹视／呕吐 → ",
+    storyCrowdAfter: "。",
     angleStatus: "房角状态（示意）",
     angleOpen: "较开",
     angleNarrow: "较窄",
@@ -226,7 +228,8 @@ const I18N = {
     storyShallow: "Shallower chamber: lens moves forward toward the cornea. Peripheral iris nearer the angle; dots slow or stop at pupil / angle gates.",
     storyThick: "Larger lens crowds the chamber and can push the iris forward; dots struggle to reach the meshwork.",
     storyBlock: "Mid-dilation favours pupil block; peripheral iris bows forward; dots stall at the pupil gate.",
-    storyCrowd: "Shallow chamber + large lens + mid pupil stacked: angle relatively closed; dots blocked. Severe pain / halos / vomiting → urgent page.",
+    storyCrowdBefore: "Shallow chamber + large lens + mid pupil stacked: angle relatively closed; dots blocked. Severe pain / halos / vomiting → ",
+    storyCrowdAfter: ".",
     angleStatus: "Angle (illustration)",
     angleOpen: "more open",
     angleNarrow: "narrower",
@@ -272,7 +275,8 @@ const I18N = {
     storyShallow: "前房が浅くなる：水晶体が角膜へ前へ移動。周辺虹彩が隅角に近づき、点は瞳孔／隅角で遅く／止まる。",
     storyThick: "水晶体が大きく前房を圧迫；点は線維柱帯へ到達しにくい。",
     storyBlock: "中等度散大は瞳孔ブロックを起こしやすい；点は瞳孔ゲートで停滞。",
-    storyCrowd: "浅い前房＋大きな水晶体＋中等度瞳孔：隅角が相対的に閉じ、点が遮断。激痛／虹視／嘔吐 → 緊急ページ。",
+    storyCrowdBefore: "浅い前房＋大きな水晶体＋中等度瞳孔：隅角が相対的に閉じ、点が遮断。激痛／虹視／嘔吐 → ",
+    storyCrowdAfter: "。",
     angleStatus: "隅角（図示）",
     angleOpen: "より開",
     angleNarrow: "より狭",
@@ -361,12 +365,32 @@ function activeMechs(m) {
   };
 }
 
+function isCrowdStory(m) {
+  return m.tmContact > 0.55 && m.shallow > 0.35 && m.thick > 0.4;
+}
+
 function storyFor(m) {
-  if (m.tmContact > 0.55 && m.shallow > 0.35 && m.thick > 0.4) return T.storyCrowd;
   if (m.block > 0.45 && m.bombe > 0.3) return T.storyBlock;
   if (m.thick > 0.55) return T.storyThick;
   if (m.shallow > 0.45) return T.storyShallow;
   return T.storyOpen;
+}
+
+function applyStory(m) {
+  const el = $("sac-story");
+  el.replaceChildren();
+  if (isCrowdStory(m)) {
+    el.appendChild(document.createTextNode(T.storyCrowdBefore));
+    const a = document.createElement("a");
+    a.href = "/urgent";
+    a.target = "_top";
+    a.rel = "noopener";
+    a.textContent = T.urgentLink;
+    el.appendChild(a);
+    el.appendChild(document.createTextNode(T.storyCrowdAfter));
+    return;
+  }
+  el.textContent = storyFor(m);
 }
 
 function applyLang() {
@@ -422,7 +446,7 @@ function syncChrome() {
   const lTag = S.lens >= 60 ? T.large : S.lens <= 25 ? T.small : "";
   $("sac-lensv").textContent = Math.round(S.lens) + "%" + (lTag ? " · " + lTag : "");
   $("sac-pupilv").textContent = Math.round(S.pupil) + "%";
-  $("sac-story").textContent = storyFor(m);
+  applyStory(m);
   $("sac-cut").textContent = cutawayOn ? T.cutOn : T.cutOff;
 
   const act = activeMechs(m);
