@@ -368,6 +368,24 @@ const zhHant = {
   shallowAcSimFooter:
     "示意不是自我檢查或診斷，亦不能代替面診。需由醫生評估，本頁不講治療選擇。本站不提供預約或轉介。",
   shallowAcTopicLink: "遠視、淺前房與晶體",
+  tearFilmSimTitle: "淚膜三層與乾眼機制示意",
+  tearFilmSimCaption:
+    "下方為教學動畫：角膜切面示意脂質、水液、黏液三層，以及蒸發、滲透壓趨勢、淚膜穩定性與炎症。指標只用相對等級（較穩／較易破裂、較低／較高），不是個人檢查結果。",
+  tearFilmLockedBanner: "本頁屬非急症機制教育。內容不能代替註冊醫生面診。",
+  tearFilmEduBadge: "機制示意 · 不是自我檢查",
+  tearFilmNoTreatment: "需由醫生評估，本頁不講治療選擇。",
+  tearFilmEduCaveat:
+    "本圖只供教學示意，不能自行診斷乾眼類型，亦不能量度個人淚膜破裂時間或滲透壓。",
+  tearFilmEduRedFlag:
+    "突然視力下降或突然失明、劇痛兼頭痛嘔吐，或劇痛畏光、單眼明顯紅腫大量分泌等紅旗徵狀：請先看本站",
+  tearFilmEduRedFlagLink: "急症頁",
+  tearFilmEduRedFlagAfter: "。",
+  tearFilmEduSystemic:
+    "口乾／關節痛／皮疹：勿當普通乾眼，需由醫生評估。",
+  tearFilmSimFooter:
+    "示意不是自我檢查或診斷，亦不能代替面診。指標屬相對示意，不是個人化驗或檢查結果。本站不提供預約或轉介。",
+  tearFilmTopicLink: "乾眼症專題",
+  tearFilmLadderLink: "乾眼分類與處理梯階",
   iolOpticsH: "光學設計",
   iolTargetH: "單焦／預留目標度數",
   iolTargetHint: "由遠視 +3.00（晶體度數明顯不夠）拖到近視 −3.00（預留更近）。每格 0.25 D（25 度）。多焦通常以正視為目標；偏離會令各個焦點一齊移位。",
@@ -968,6 +986,26 @@ const en: Record<Key, string> = {
   shallowAcSimFooter:
     "Illustration only — not a self-check or diagnosis, and not a substitute for an in-person visit. A doctor must assess; this page does not discuss treatment options. This site does not book or refer.",
   shallowAcTopicLink: "Hyperopia, shallow chamber and the lens",
+  tearFilmSimTitle: "Tear film layers and dry-eye mechanism",
+  tearFilmSimCaption:
+    "Teaching animation below: a corneal cross-section of the lipid, aqueous and mucin layers, with evaporation, relative osmolarity trend, tear-film stability and inflammation. Meters use relative labels only (more stable / breaks more easily; lower / higher) — not your personal test results.",
+  tearFilmLockedBanner:
+    "This page is non-urgent mechanism education. Content cannot replace a visit with a registered doctor.",
+  tearFilmEduBadge: "Mechanism illustration · not a self-check",
+  tearFilmNoTreatment:
+    "Needs a doctor’s assessment; this page does not discuss treatment choices.",
+  tearFilmEduCaveat:
+    "Teaching illustration only — do not self-diagnose dry-eye type, and do not treat this as a personal tear break-up or osmolarity measurement.",
+  tearFilmEduRedFlag:
+    "Sudden vision drop or sudden blindness, severe pain with headache or vomiting, or severe pain and photophobia with a very red swollen eye and heavy discharge, and similar red-flag symptoms: see this site’s",
+  tearFilmEduRedFlagLink: "urgent page",
+  tearFilmEduRedFlagAfter: ".",
+  tearFilmEduSystemic:
+    "Dry mouth / joint pain / rash: do not treat as ordinary dry eye — these need a doctor’s assessment.",
+  tearFilmSimFooter:
+    "Illustration only — not a self-check or diagnosis, and not a substitute for an in-person visit. Meter figures are relative teaching labels, not personal lab or clinical results. This site does not book or refer.",
+  tearFilmTopicLink: "Dry-eye topic",
+  tearFilmLadderLink: "Dry-eye types and care ladder",
   iolOpticsH: "Optical design",
   iolTargetH: "Monofocal / target power",
   iolTargetHint: "From hyperopia +3.00 (under-powered lens) to myopia −3.00 (near bias). Steps of 0.25 D (25 degrees). Multifocals usually aim for emmetropia; offset shifts every focus together.",
@@ -1558,6 +1596,25 @@ const ja: Record<Key, string> = {
   shallowAcSimFooter:
     "図示であり、自己検査や診断でも、対面診察の代わりでもありません。医師の評価が必要で、本ページは治療の選択肢を述べません。予約・紹介はしません。",
   shallowAcTopicLink: "遠視・浅い前房と水晶体",
+  tearFilmSimTitle: "涙液三層とドライアイの機序",
+  tearFilmSimCaption:
+    "下は教育用アニメです。角膜断面で脂質・水・ムチンの三層と蒸発・相対的な浸透圧傾向・涙液層の安定性・炎症を示します。指標は相対ラベルのみ（より安定／破れやすい、低い／高い）で、個人の検査結果ではありません。",
+  tearFilmLockedBanner:
+    "本ページは非救急の機序教育です。内容は登録医の対面診療の代わりにはなりません。",
+  tearFilmEduBadge: "機序の図示 · 自己検査ではない",
+  tearFilmNoTreatment: "医師の評価が必要です。本ページでは治療の選択を述べません。",
+  tearFilmEduCaveat:
+    "教育用図示であり、ドライアイの型を自分で診断したり、個人の破壊時間や浸透圧の測定として扱ったりしないでください。",
+  tearFilmEduRedFlag:
+    "突然の視力低下・失明、激痛と頭痛・嘔吐、または激痛と羞明、片眼の強い発赤腫脹と大量分泌などの赤旗症状：まず本サイトの",
+  tearFilmEduRedFlagLink: "救急ページ",
+  tearFilmEduRedFlagAfter: "へ。",
+  tearFilmEduSystemic:
+    "口渇／関節痛／皮疹は「普通のドライアイ」と決めつけず、医師の評価が必要です。",
+  tearFilmSimFooter:
+    "図示であり、自己検査や診断でも、対面診察の代わりでもありません。指標は相対的な教育用ラベルであり、個人の検査値ではありません。予約・紹介はしません。",
+  tearFilmTopicLink: "ドライアイのページ",
+  tearFilmLadderLink: "ドライアイの分類と段階的ケア",
   iolOpticsH: "光学デザイン",
   iolTargetH: "単焦点／目標度数",
   iolTargetHint: "遠視 +3.00（度数が明らかに足りない）から近視 −3.00（より近くを狙う）まで。1目盛 0.25 D（25度）。多焦点は多く正視を目標にし、ずれると各焦点が一緒にずれます。",

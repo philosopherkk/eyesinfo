@@ -41,6 +41,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
       blurb: "沿用眼圖眼球模型，示意原發性閉角多種機制：瞳孔阻滯、晶體增厚／前移、淺前房（不是自我檢查）",
       canto: "點解會突然劇痛虹視",
     },
+    "tear-film": {
+      title: "淚膜三層與乾眼機制",
+      blurb: "脂質／水液／黏液缺損對蒸發、破裂時間與炎症的示意（不是檢查）",
+      canto: "揀狀態睇淚膜點散",
+    },
   },
   "zh-Hans": {
     amsler: { title: "阿姆斯勒方格", blurb: "教育工具 · 自我察觉中央视力", canto: "遮一眼望中央" },
@@ -75,6 +80,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
       title: "浅前房与闭角机制",
       blurb: "沿用眼图眼球模型，示意原发性闭角多种机制：瞳孔阻滞、晶体增厚／前移、浅前房（不是自我检查）",
       canto: "为何会突然剧痛虹视",
+    },
+    "tear-film": {
+      title: "泪膜三层与干眼机制",
+      blurb: "脂质／水液／黏液缺损对蒸发、破裂时间与炎症的示意（不是检查）",
+      canto: "选状态看泪膜如何散开",
     },
   },
   en: {
@@ -111,6 +121,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
       blurb: "Uses the Eye-map globe to teach several primary angle-closure mechanisms: pupil block, thicker/forward lens, shallow chamber (not a self-check)",
       canto: "Why sudden pain and halos",
     },
+    "tear-film": {
+      title: "Tear film layers and dry-eye mechanism",
+      blurb: "Illustration of lipid / aqueous / mucin deficiency on evaporation, break-up time and inflammation (not a test)",
+      canto: "Pick a state · watch the film break",
+    },
   },
   ja: {
     amsler: { title: "アムスラーチャート", blurb: "教育ツール · 中心視力の自己観察", canto: "片眼隠し中央を見る" },
@@ -145,6 +160,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
       title: "浅い前房と閉塞隅角の機序",
       blurb: "眼の図と同じ眼球モデルで原発閉塞隅角の複数機序を図示：瞳孔ブロック・水晶体肥厚／前方移動・浅い前房（自己検査ではない）",
       canto: "なぜ突然の激痛と虹視か",
+    },
+    "tear-film": {
+      title: "涙液三層とドライアイの機序",
+      blurb: "脂質／水／ムチン不足が蒸発・破壊時間・炎症に与える影響の図示（検査ではない）",
+      canto: "状態を選んで破壊を見る",
     },
   },
 };

@@ -111,6 +111,11 @@ const STATIC_SOURCES = {
     "src/components/shallow-ac-sim.tsx",
     "public/shallow-ac.html",
   ],
+  "/tools/tear-film": [
+    "src/routes/tools.tear-film.tsx",
+    "src/components/tear-film-sim.tsx",
+    "public/tear-film.html",
+  ],
   "/tools/warm": ["src/components/care-tools.tsx"],
   "/tools/visit": ["src/components/ask-visit-rx.tsx"],
   "/tools/outdoor": ["src/components/care-tools.tsx"],
