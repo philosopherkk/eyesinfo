@@ -612,36 +612,49 @@ scene.add(flowGroup);
 const checkpointMeshes = [];
 /** @type {THREE.Mesh[]} */
 const particleMeshes = [];
-const PARTICLE_POOL = 36;
+/** Concurrent travelers — keep low so each can finish all 5 stations before despawn. */
+const MAX_LIVE = 10;
+const PARTICLE_POOL = 12;
 const checkGeo = new THREE.SphereGeometry(0.032, 12, 12);
-const partGeo = new THREE.SphereGeometry(0.022, 10, 10);
+const partGeo = new THREE.SphereGeometry(0.028, 10, 10);
+let spawnAcc = 0;
 
 function spawnFlowParticle() {
+  const live = particles.reduce((n, p) => n + (p.alive ? 1 : 0), 0);
+  if (live >= MAX_LIVE) return;
   particles.push({ seg: 0, u: 0, hold: 0, alive: true });
-  if (particles.length > PARTICLE_POOL) particles.shift();
 }
 
 function gateAt(seg, m) {
-  if (seg === 1 || seg === 2) return m.pupilGate;
-  if (seg === 3) return m.tmGate;
-  return 1;
+  // Gate on the segment LEAVING a station toward the next
+  if (seg === 1 || seg === 2) return m.pupilGate; // into / through pupil
+  if (seg === 3) return m.tmGate; // AC → angle / TM
+  return 1; // ciliary → PC always open for production
 }
 
 function updateFlowParticles(dt, m) {
-  if (Math.random() < 0.55) spawnFlowParticle();
+  // ~1 new droplet every 0.55s when under cap — never cull mid-journey
+  spawnAcc += dt;
+  if (spawnAcc >= 0.55) {
+    spawnAcc = 0;
+    spawnFlowParticle();
+  }
   for (const p of particles) {
     if (!p.alive) continue;
+    // Arrived at angle / TM: dwell so the finish is visible, then despawn
     if (p.seg >= 4) {
       p.hold += dt;
-      if (p.hold > 0.4) p.alive = false;
+      if (p.hold > 0.7) p.alive = false;
       continue;
     }
     const g = gateAt(p.seg, m);
     if (g < 0.28) {
-      p.u = Math.min(p.u + dt * 0.12, 0.86);
+      // Hard stop near the blocked gate — still visible at that checkpoint
+      p.u = Math.min(p.u + dt * 0.2, 0.9);
       continue;
     }
-    const speed = lerp(0.4, 0.95, clamp((g - 0.28) / 0.55, 0, 1));
+    // Patent / partial: move clearly; full tour ~2.2s when open
+    const speed = lerp(0.7, 1.6, clamp((g - 0.28) / 0.55, 0, 1));
     p.u += dt * speed;
     while (p.u >= 1 && p.alive && p.seg < 4) {
       p.u -= 1;
@@ -649,7 +662,7 @@ function updateFlowParticles(dt, m) {
       if (p.seg >= 4) {
         if (m.tmGate < 0.28) {
           p.seg = 3;
-          p.u = 0.86;
+          p.u = 0.9;
           break;
         }
         p.u = 0;
@@ -777,7 +790,7 @@ function drawFlow(m) {
       const n = nodes[4];
       fx.fillStyle = "#7ec8e3";
       fx.beginPath();
-      fx.arc(n.x + Math.sin(p.hold * 12) * 2, n.y, 4, 0, Math.PI * 2);
+      fx.arc(n.x, n.y, 5, 0, Math.PI * 2);
       fx.fill();
       continue;
     }
@@ -785,11 +798,11 @@ function drawFlow(m) {
     if (!a || !b) continue;
     const t = clamp(p.u, 0, 1);
     const x = lerp(a.x, b.x, t);
-    const y = a.y + Math.sin(t * Math.PI) * -12;
+    const y = lerp(a.y, b.y, t);
     const g = gates[p.seg];
     fx.fillStyle = g < 0.28 && t > 0.5 ? "#e07070" : "#7ec8e3";
     fx.beginPath();
-    fx.arc(x, y, 3.6, 0, Math.PI * 2);
+    fx.arc(x, y, 4.5, 0, Math.PI * 2);
     fx.fill();
   }
 }

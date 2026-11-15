@@ -511,16 +511,25 @@ export function createMapEyeAnatomy(THREE, options = {}) {
       group.add(zonules);
     }
 
-    // Flow path on the cut face (x≈CUT_X) so blue dots track the live anatomy
+    // Flow path on the cut face — keep r > pathX so stations stay spatially distinct
     const pathX = CUT_X + 0.04;
     const yAt = (r) => Math.sqrt(Math.max(r * r - pathX * pathX, 0.002));
-    const pcR = (pupilR + 0.72) * 0.5;
+    const rCil = Math.max(tip.x * 0.92, pathX + 0.08);
+    const rPc = Math.max((pupilR + 0.72) * 0.5, pathX + 0.12);
+    const rPup = Math.max(Math.max(pupilR, 0.2) + 0.08, pathX + 0.06);
+    const rAc = Math.max(0.38, pathX + 0.1);
+    const rTm = Math.max(0.82, pathX + 0.15);
     lastFlowPath = [
-      { key: "ciliary", x: pathX, y: yAt(tip.x * 0.92), z: tip.y },
-      { key: "pc", x: pathX, y: yAt(pcR), z: irisBack(pcR) - 0.02 },
-      { key: "pupil", x: pathX, y: yAt(pupilR * 0.55), z: (irisFront(pupilR) + lensFront(pupilR * 0.5)) * 0.5 },
-      { key: "ac", x: pathX, y: yAt(0.32), z: (irisFront(0.32) + apexInner - sagInner(0.32)) * 0.5 },
-      { key: "tm", x: pathX, y: yAt(0.82), z: (rootZ + corneaNear) * 0.5 },
+      { key: "ciliary", x: pathX, y: yAt(rCil), z: tip.y },
+      { key: "pc", x: pathX, y: yAt(rPc), z: irisBack(Math.min(rPc, 0.75)) - 0.02 },
+      {
+        key: "pupil",
+        x: pathX,
+        y: yAt(rPup),
+        z: (irisFront(pupilR) + lensFront(Math.min(pupilR * 0.85, lensRadius * 0.9))) * 0.5,
+      },
+      { key: "ac", x: pathX, y: yAt(rAc), z: (irisFront(0.35) + apexInner - sagInner(0.35)) * 0.5 },
+      { key: "tm", x: pathX, y: yAt(rTm), z: (rootZ + corneaNear) * 0.5 },
     ];
     lastLayout = {
       gap, rootZ, corneaNear, apexOuter, apexInner, iol, pupilR,
