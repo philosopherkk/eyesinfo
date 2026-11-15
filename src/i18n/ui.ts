@@ -359,7 +359,7 @@ const zhHant = {
   palStairsTopicLink: "遠視與漸進鏡：落樓梯",
   shallowAcSimTitle: "淺前房與閉角機制示意",
   shallowAcSimCaption:
-    "下方為教學動畫：瞳孔阻滯（虹膜向前膨隆）、晶體增厚、前凸拱頂、高原虹膜等閉角路徑。晶體與睫狀體畫在眼球內。控制項語言跟隨網站語言。示意不是自我檢查或診斷。",
+    "下方為教學動畫：拖動前房深度（晶體左←→右）、晶體大小、瞳孔，觀察閉角相關機制。晶體與睫狀體在角膜弧內側（眼球內）。控制項語言跟隨網站語言。示意不是自我檢查或診斷。",
   shallowAcEduBadge: "機制示意 · 不是檢查",
   shallowAcEduCaveat:
     "本圖只供機制教學（多種閉角路徑示意），不能自行判斷有沒有窄角或閉角。急性劇痛、虹視、視力急降或頭痛嘔吐 → 本站急症頁（／urgent），不是預約診所。不能代替註冊醫生。",
@@ -957,7 +957,7 @@ const en: Record<Key, string> = {
   palStairsTopicLink: "Hyperopia and progressive lenses: going downstairs",
   shallowAcSimTitle: "Shallow AC and angle-closure mechanism",
   shallowAcSimCaption:
-    "Teaching animation below: pupil block (forward iris bombé), thicker lens, anterior vault, and plateau iris. Lens and ciliary body stay inside the globe. Control labels follow the site language. Illustration only — not a self-check or diagnosis.",
+    "Teaching animation below: drag AC depth (lens left↔right), lens size and pupil to see angle-closure-related mechanisms. Lens and ciliary body sit inside the corneal arc. Control labels follow the site language. Illustration only — not a self-check or diagnosis.",
   shallowAcEduBadge: "Mechanism illustration · not a test",
   shallowAcEduCaveat:
     "Mechanism teaching only (several angle-closure paths) — do not self-judge narrow angle or angle closure. Acute severe pain, halos, sudden vision drop, or headache with vomiting → this site’s /urgent only — not clinic booking. Cannot replace a registered doctor.",
@@ -1545,7 +1545,7 @@ const ja: Record<Key, string> = {
   palStairsTopicLink: "遠視と累進レンズ：下り階段",
   shallowAcSimTitle: "浅い前房と閉塞隅角の機序",
   shallowAcSimCaption:
-    "下は教育用アニメです。瞳孔ブロック（前方への虹彩ボンベ）、水晶体肥厚、前方ヴォールト、プラトー虹彩などの閉塞経路を示します。水晶体と毛様体は眼球の内側に描きます。操作ラベルはサイトの言語に従います。図示であり、自己検査や診断ではありません。",
+    "下は教育用アニメです。前房深度（水晶体が左←→右）、水晶体サイズ、瞳孔を動かして閉塞関連の機序を見ます。水晶体と毛様体は角膜の弧の内側（眼内）にあります。操作ラベルはサイトの言語に従います。図示であり、自己検査や診断ではありません。",
   shallowAcEduBadge: "機序の図示 · 検査ではない",
   shallowAcEduCaveat:
     "複数の閉塞隅角経路の教育用図示であり、狭い隅角や閉塞を自分で判定しないでください。急性の激痛・虹視・視力急低下・頭痛嘔吐 → 本サイトの／urgentのみ（予約ではない）。登録医の代わりにはなりません。",

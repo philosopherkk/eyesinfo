@@ -16,28 +16,18 @@
       max-width: 980px; margin: auto; user-select: none;
     }
     #sacsim canvas { width: 100%; display: block; border-radius: 10px; background: #000; touch-action: none; }
-    #sacsim .bar { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; margin: 4px 2px 8px; }
-    #sacsim .seg { display: flex; flex-wrap: wrap; border-radius: 9px; overflow: hidden; border: 1px solid #444; }
-    #sacsim .seg button, #sacsim .btn {
-      background: #23272f; color: #ddd; border: 0; padding: 7px 11px; font-size: 13px;
-      cursor: pointer; min-height: 40px;
+    #sacsim .bar { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: center; margin: 4px 2px 10px; }
+    #sacsim .btn {
+      background: #23272f; color: #ddd; border: 1px solid #444; border-radius: 9px;
+      padding: 7px 13px; font-size: 14px; cursor: pointer; min-height: 40px;
     }
-    #sacsim .seg button.on { background: #f0a030; color: #111; font-weight: 700; }
-    #sacsim .btn { border: 1px solid #444; border-radius: 9px; }
-    #sacsim .steps { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
-    #sacsim .steps button {
-      background: #1a1f28; color: #9aa3b2; border: 1px solid #3a4250; border-radius: 999px;
-      padding: 6px 11px; font-size: 12.5px; cursor: pointer; min-height: 36px;
-    }
-    #sacsim .steps button.on { background: #2a3340; color: #f3c06a; border-color: #f0a030; font-weight: 600; }
     #sacsim label { font-size: 13px; display: flex; align-items: center; gap: 6px; color: #bbb; }
-    #sacsim label.dim { opacity: 0.4; pointer-events: none; }
-    #sacsim input[type=range] { width: 100px; accent-color: #f0a030; }
-    #sacsim .v { min-width: 42px; font-variant-numeric: tabular-nums; color: #f3c06a; }
+    #sacsim input[type=range] { width: 130px; accent-color: #f0a030; }
+    #sacsim .v { min-width: 46px; font-variant-numeric: tabular-nums; color: #f3c06a; }
     #sacsim .story {
       margin: 0 2px 10px; padding: 10px 12px; border-radius: 10px;
       background: #1a1f28; border: 1px solid #2c3440; font-size: 13.5px; line-height: 1.5; color: #d5dae3;
-      min-height: 3.4em;
+      min-height: 3.2em;
     }
     #sacsim .hint { margin: 10px 2px 0; font-size: 12.5px; line-height: 1.45; color: #8b93a3; }
     #sacsim .hint a { color: #7ec8e3; }
@@ -49,23 +39,15 @@
     <p class="cap" id="sac-page-cap"></p>
     <div id="sacsim">
       <div class="bar">
-        <div class="seg" role="group" aria-label="mechanism" id="sac-modes"></div>
-        <button class="btn" type="button" id="sac-play" aria-label="pause">❚❚</button>
-        <button class="btn" type="button" id="sac-demo"></button>
+        <label><span id="sac-depth-lab"></span> <input id="sac-depth" type="range" min="0" max="100" step="1" value="70"><span class="v" id="sac-depthv"></span></label>
+        <label><span id="sac-lens-lab"></span> <input id="sac-lens" type="range" min="0" max="100" step="1" value="35"><span class="v" id="sac-lensv"></span></label>
+        <label><span id="sac-pupil-lab"></span> <input id="sac-pupil" type="range" min="0" max="100" step="1" value="45"><span class="v" id="sac-pupilv"></span></label>
         <button class="btn" type="button" id="sac-reset"></button>
       </div>
-      <div class="bar" id="sac-sliders">
-        <label id="lab-wrap-depth"><span id="sac-depth-lab"></span> <input id="sac-depth" type="range" min="0" max="100" step="1" value="25"><span class="v" id="sac-depthv"></span></label>
-        <label id="lab-wrap-pupil"><span id="sac-pupil-lab"></span> <input id="sac-pupil" type="range" min="0" max="100" step="1" value="45"><span class="v" id="sac-pupilv"></span></label>
-        <label id="lab-wrap-lens"><span id="sac-lens-lab"></span> <input id="sac-lens" type="range" min="0" max="100" step="1" value="20"><span class="v" id="sac-lensv"></span></label>
-        <label id="lab-wrap-vault"><span id="sac-vault-lab"></span> <input id="sac-vault" type="range" min="0" max="100" step="1" value="15"><span class="v" id="sac-vaultv"></span></label>
-        <label id="lab-wrap-plateau"><span id="sac-plateau-lab"></span> <input id="sac-plateau" type="range" min="0" max="100" step="1" value="10"><span class="v" id="sac-plateauv"></span></label>
-      </div>
-      <div class="steps" id="sac-steps" role="tablist"></div>
       <p class="story" id="sac-story" aria-live="polite"></p>
       <canvas id="sac-sag" width="960" height="440" aria-label="sagittal"></canvas>
       <div class="flow-wrap">
-        <canvas id="sac-flow" width="960" height="220" aria-label="flow"></canvas>
+        <canvas id="sac-flow" width="960" height="200" aria-label="flow"></canvas>
       </div>
       <p class="hint" id="sac-hint"></p>
     </div>
@@ -73,52 +55,34 @@
 <script>
 (()=>{
 /**
- * Sagittal teaching model (anterior = LEFT, posterior = RIGHT).
- * Lens + ciliary body stay inside the globe. Pupil-block bombé bows
- * peripheral iris ANTERIORLY (toward cornea), opposite posterior flop.
+ * Sagittal view: CORNEA = left arc. Inside the eye = to the RIGHT of that arc
+ * (still left half of the globe). Lens + ciliary body live there.
+ * AC-depth slider moves the lens LEFT ↔ RIGHT (shallow → left / toward cornea;
+ * deep → right / farther from cornea).
+ * UI: three relative sliders only — no play / auto demo.
  */
 const I18N = {
   "zh-Hant": {
-    pageCap: "教育示意 · 閉角機制：瞳孔阻滯、晶體增厚、前凸拱頂、高原虹膜。不是自我檢查或診斷。",
-    mOpen: "開角參考",
-    mBlock: "瞳孔阻滯",
-    mLens: "晶體增厚",
-    mVault: "前凸拱頂",
-    mPlateau: "高原虹膜",
+    pageCap: "教育示意 · 拖動前房深度、晶體大小、瞳孔：觀察閉角相關機制。不是自我檢查或診斷。",
     depth: "前房深度（相對）",
+    lens: "晶體大小（相對）",
     pupil: "瞳孔大小（相對）",
-    lens: "晶體厚度（相對）",
-    vault: "前凸拱頂（相對）",
-    plateau: "高原程度（相對）",
-    demo: "自動示範",
     reset: "重設",
-    pauseAria: "暫停",
-    playAria: "播放",
-    step1: "① 開角流通",
-    step2: "② 瞳孔阻滯・膨隆",
-    step3: "③ 晶體增厚",
-    step4: "④ 前凸拱頂",
-    step5: "⑤ 高原虹膜",
-    story1: "房水由睫狀體產生（眼內），經瞳孔進入前房，再由小樑網流出。晶體與睫狀體都在眼球內。開角時路徑暢通（示意）。",
-    story2: "中等散大時虹膜與晶體前囊接觸面較大，易瞳孔阻滯：後房壓力把周邊虹膜向前（角膜方向）膨隆——方向與向後塌陷相反。膨隆可關閉房角。",
-    story3: "晶體相對增厚／前移，擠佔前房，把虹膜推向前，房角變窄（晶體相關／晶狀體性路徑示意，不是個人預測）。",
-    story4: "晶體前表面拱頂較高時，虹膜被抬高貼近房角，即使中央前房看起來未必極淺，周邊仍可關閉（示意）。",
-    story5: "高原虹膜：睫狀突相對靠前，撐起虹膜根部；中央前房可仍深，但周邊房角窄。機制與典型瞳孔阻滯不同（示意）。",
+    storyOpen: "房水由眼內睫狀體產生，經瞳孔進入前房，再由小樑網流出。晶體與睫狀體都在角膜弧的內側（眼球內）。",
+    storyShallow: "前房變淺：晶體沿左←→右方向移近角膜（向左）。周邊虹膜更靠近房角。",
+    storyThick: "晶體相對變大／變厚，擠佔前房空間，可把虹膜推向前，房角變窄（晶體相關路徑示意）。",
+    storyBlock: "瞳孔中等散大時較易瞳孔阻滯：後房壓力把周邊虹膜向前（角膜方向／向左）膨隆，可關閉房角。",
+    storyCrowd: "多項因素疊加：前房淺、晶體大、瞳孔中等——房角相對關閉，相對壓力示意上升。急性劇痛／虹視／嘔吐 → 急症頁。",
     cornea: "角膜",
     ac: "前房",
     iris: "虹膜",
-    pupilLab: "瞳孔",
-    lensLab: "晶體（眼內）",
+    lensLab: "晶體",
     tm: "小樑網",
     angle: "房角",
     pc: "後房",
-    ciliary: "睫狀體（眼內）",
+    ciliary: "睫狀體",
     bombe: "虹膜膨隆（向前）",
     pupilBlock: "瞳孔阻滯",
-    thickLens: "晶體增厚",
-    antVault: "前凸拱頂",
-    plateauIris: "高原虹膜",
-    outflow: "房水出路",
     inset: "房角放大",
     gaugeAngle: "房角開度（相對）",
     gaugeIop: "相對壓力示意",
@@ -134,51 +98,35 @@ const I18N = {
     gateOpen: "暢通",
     gatePartial: "受限",
     gateClosed: "受阻",
+    deep: "深",
+    shallow: "淺",
+    small: "小",
+    large: "大",
     hint: "相對滑桿只供教學，沒有臨床毫米汞柱數字。不能自行判斷窄角或閉角。突然劇痛、虹視、視力急降或頭痛嘔吐：立即急症室；無法前往請致電 999。詳見",
     urgentLink: "急症頁",
     htmlLang: "zh-Hant",
   },
   "zh-Hans": {
-    pageCap: "教育示意 · 闭角机制：瞳孔阻滞、晶体增厚、前凸拱顶、高原虹膜。不是自我检查或诊断。",
-    mOpen: "开角参考",
-    mBlock: "瞳孔阻滞",
-    mLens: "晶体增厚",
-    mVault: "前凸拱顶",
-    mPlateau: "高原虹膜",
+    pageCap: "教育示意 · 拖动前房深度、晶体大小、瞳孔：观察闭角相关机制。不是自我检查或诊断。",
     depth: "前房深度（相对）",
+    lens: "晶体大小（相对）",
     pupil: "瞳孔大小（相对）",
-    lens: "晶体厚度（相对）",
-    vault: "前凸拱顶（相对）",
-    plateau: "高原程度（相对）",
-    demo: "自动示范",
     reset: "重设",
-    pauseAria: "暂停",
-    playAria: "播放",
-    step1: "① 开角流通",
-    step2: "② 瞳孔阻滞・膨隆",
-    step3: "③ 晶体增厚",
-    step4: "④ 前凸拱顶",
-    step5: "⑤ 高原虹膜",
-    story1: "房水由睫状体产生（眼内），经瞳孔进入前房，再由小梁网流出。晶体与睫状体都在眼球内。开角时路径畅通（示意）。",
-    story2: "中等散大时虹膜与晶体前囊接触面较大，易瞳孔阻滞：后房压力把周边虹膜向前（角膜方向）膨隆——方向与向后塌陷相反。膨隆可关闭房角。",
-    story3: "晶体相对增厚／前移，挤占前房，把虹膜推向前，房角变窄（晶体相关路径示意，不是个人预测）。",
-    story4: "晶体前表面拱顶较高时，虹膜被抬高贴近房角，即使中央前房看起来未必极浅，周边仍可关闭（示意）。",
-    story5: "高原虹膜：睫状突相对靠前，撑起虹膜根部；中央前房可仍深，但周边房角窄。机制与典型瞳孔阻滞不同（示意）。",
+    storyOpen: "房水由眼内睫状体产生，经瞳孔进入前房，再由小梁网流出。晶体与睫状体都在角膜弧的内侧（眼球内）。",
+    storyShallow: "前房变浅：晶体沿左←→右方向移近角膜（向左）。周边虹膜更靠近房角。",
+    storyThick: "晶体相对变大／变厚，挤占前房空间，可把虹膜推向前，房角变窄（晶体相关路径示意）。",
+    storyBlock: "瞳孔中等散大时较易瞳孔阻滞：后房压力把周边虹膜向前（角膜方向／向左）膨隆，可关闭房角。",
+    storyCrowd: "多项因素叠加：前房浅、晶体大、瞳孔中等——房角相对关闭，相对压力示意上升。急性剧痛／虹视／呕吐 → 急症页。",
     cornea: "角膜",
     ac: "前房",
     iris: "虹膜",
-    pupilLab: "瞳孔",
-    lensLab: "晶体（眼内）",
+    lensLab: "晶体",
     tm: "小梁网",
     angle: "房角",
     pc: "后房",
-    ciliary: "睫状体（眼内）",
+    ciliary: "睫状体",
     bombe: "虹膜膨隆（向前）",
     pupilBlock: "瞳孔阻滞",
-    thickLens: "晶体增厚",
-    antVault: "前凸拱顶",
-    plateauIris: "高原虹膜",
-    outflow: "房水出路",
     inset: "房角放大",
     gaugeAngle: "房角开度（相对）",
     gaugeIop: "相对压力示意",
@@ -194,51 +142,35 @@ const I18N = {
     gateOpen: "畅通",
     gatePartial: "受限",
     gateClosed: "受阻",
+    deep: "深",
+    shallow: "浅",
+    small: "小",
+    large: "大",
     hint: "相对滑杆只供教学，没有临床毫米汞柱数字。不能自行判断窄角或闭角。突然剧痛、虹视、视力急降或头痛呕吐：立即急诊室；无法前往请致电 999。详见",
     urgentLink: "急症页",
     htmlLang: "zh-CN",
   },
   en: {
-    pageCap: "Education illustration · angle-closure mechanisms: pupil block, thicker lens, anterior vault, plateau iris. Not a self-check or diagnosis.",
-    mOpen: "Open reference",
-    mBlock: "Pupil block",
-    mLens: "Thicker lens",
-    mVault: "Anterior vault",
-    mPlateau: "Plateau iris",
+    pageCap: "Education illustration · drag AC depth, lens size and pupil to see angle-closure-related mechanisms. Not a self-check or diagnosis.",
     depth: "AC depth (relative)",
+    lens: "Lens size (relative)",
     pupil: "Pupil size (relative)",
-    lens: "Lens thickness (relative)",
-    vault: "Anterior vault (relative)",
-    plateau: "Plateau amount (relative)",
-    demo: "Auto demo",
     reset: "Reset",
-    pauseAria: "Pause",
-    playAria: "Play",
-    step1: "① Open outflow",
-    step2: "② Pupil block · bombé",
-    step3: "③ Thicker lens",
-    step4: "④ Anterior vault",
-    step5: "⑤ Plateau iris",
-    story1: "Aqueous forms in the ciliary body (inside the eye), passes through the pupil into the anterior chamber, then leaves via the trabecular meshwork. Lens and ciliary body stay inside the globe. Open angle = free path (illustration).",
-    story2: "At mid-dilation, iris–lens contact is larger → pupil block: posterior-chamber pressure bows peripheral iris ANTERIORLY (toward the cornea)—opposite a posterior flop. Bombé can close the angle.",
-    story3: "A relatively thicker / more anterior lens crowds the chamber and pushes the iris forward, narrowing the angle (lens-related path illustration — not a personal prediction).",
-    story4: "Higher anterior lens vault lifts the iris toward the angle; central depth may not look extreme, yet the periphery can still close (illustration).",
-    story5: "Plateau iris: anteriorly placed ciliary processes prop up the iris root; central chamber can stay deep while the peripheral angle is narrow. Different from classic pupil block (illustration).",
+    storyOpen: "Aqueous forms in the ciliary body inside the eye, passes through the pupil into the anterior chamber, then leaves via the trabecular meshwork. Lens and ciliary body sit inside the corneal arc.",
+    storyShallow: "Shallower chamber: the lens moves left↔right toward the cornea (left). Peripheral iris sits closer to the angle.",
+    storyThick: "A relatively larger / thicker lens crowds the chamber and can push the iris forward, narrowing the angle (lens-related path illustration).",
+    storyBlock: "Mid-dilation favours pupil block: posterior-chamber pressure bows peripheral iris forward (toward the cornea / left) and can close the angle.",
+    storyCrowd: "Combined shallow chamber, larger lens and mid-dilation — angle relatively closed; relative pressure gauge rises. Sudden pain / halos / vomiting → urgent page.",
     cornea: "Cornea",
     ac: "Anterior chamber",
     iris: "Iris",
-    pupilLab: "Pupil",
-    lensLab: "Lens (inside eye)",
+    lensLab: "Lens",
     tm: "Trabecular meshwork",
     angle: "Angle",
     pc: "Posterior chamber",
-    ciliary: "Ciliary body (inside)",
+    ciliary: "Ciliary body",
     bombe: "Iris bombé (forward)",
     pupilBlock: "Pupil block",
-    thickLens: "Thicker lens",
-    antVault: "Anterior vault",
-    plateauIris: "Plateau iris",
-    outflow: "Aqueous outflow",
     inset: "Angle inset",
     gaugeAngle: "Angle opening (relative)",
     gaugeIop: "Relative pressure",
@@ -254,51 +186,35 @@ const I18N = {
     gateOpen: "Open",
     gatePartial: "Limited",
     gateClosed: "Blocked",
+    deep: "Deep",
+    shallow: "Shallow",
+    small: "Small",
+    large: "Large",
     hint: "Relative sliders are teaching-only — no clinical mmHg figures. Do not self-judge narrow angle or angle closure. Sudden severe pain, halos, vision drop, or headache with vomiting: A&E now; if you cannot travel, call 999. See",
     urgentLink: "urgent page",
     htmlLang: "en",
   },
   ja: {
-    pageCap: "教育用図示 · 閉塞隅角の機序：瞳孔ブロック、水晶体肥厚、前方ヴォールト、プラトー虹彩。自己検査や診断ではありません。",
-    mOpen: "開放の参考",
-    mBlock: "瞳孔ブロック",
-    mLens: "水晶体肥厚",
-    mVault: "前方ヴォールト",
-    mPlateau: "プラトー虹彩",
+    pageCap: "教育用図示 · 前房深度・水晶体サイズ・瞳孔を動かして閉塞関連の機序を見ます。自己検査や診断ではありません。",
     depth: "前房深度（相対）",
+    lens: "水晶体サイズ（相対）",
     pupil: "瞳孔径（相対）",
-    lens: "水晶体厚（相対）",
-    vault: "前方ヴォールト（相対）",
-    plateau: "プラトー程度（相対）",
-    demo: "自動デモ",
     reset: "リセット",
-    pauseAria: "一時停止",
-    playAria: "再生",
-    step1: "① 開放の流出",
-    step2: "② 瞳孔ブロック・ボンベ",
-    step3: "③ 水晶体肥厚",
-    step4: "④ 前方ヴォールト",
-    step5: "⑤ プラトー虹彩",
-    story1: "房水は毛様体（眼内）で作られ、瞳孔を通って前房へ入り、線維柱帯から流出します。水晶体と毛様体は眼球の内側にあります。開放隅角では経路が開いています（図示）。",
-    story2: "中等散大では虹彩と水晶体前面の接触が広く、瞳孔ブロックが起きやすい：後房の圧で周辺虹彩が前方（角膜側）へ膨らみます——後方へ落ちる動きとは反対です。ボンベで隅角が閉じ得ます。",
-    story3: "水晶体が相対的に厚く／前方へ寄ると前房が狭まり、虹彩が前方へ押し出されて隅角が狭くなります（水晶体関連経路の図示であり個人予測ではありません）。",
-    story4: "前方ヴォールトが高いと虹彩が隅角側へ持ち上がり、中央前房が極端に浅く見えなくても周辺は閉じ得ます（図示）。",
-    story5: "プラトー虹彩：毛様体突起が前方にあり虹彩根部を支え、中央前房は深くても周辺隅角は狭い。古典的瞳孔ブロックとは機序が異なります（図示）。",
+    storyOpen: "房水は眼内の毛様体で作られ、瞳孔を通って前房へ入り、線維柱帯から流出します。水晶体と毛様体は角膜の弧の内側（眼内）にあります。",
+    storyShallow: "前房が浅い：水晶体は左←→右に動き角膜側（左）へ寄ります。周辺虹彩が隅角に近づきます。",
+    storyThick: "水晶体が相対的に大きい／厚いと前房が狭まり、虹彩が前方へ押し出されて隅角が狭くなり得ます（水晶体関連経路の図示）。",
+    storyBlock: "中等散大では瞳孔ブロックが起きやすい：後房の圧で周辺虹彩が前方（角膜／左）へ膨らみ、隅角が閉じ得ます。",
+    storyCrowd: "前房が浅い・水晶体が大きい・中等散大が重なると隅角は相対的に閉じ、相対的な圧の示意が上がります。突然の激痛／虹視／嘔吐 → 緊急ページ。",
     cornea: "角膜",
     ac: "前房",
     iris: "虹彩",
-    pupilLab: "瞳孔",
-    lensLab: "水晶体（眼内）",
+    lensLab: "水晶体",
     tm: "線維柱帯",
     angle: "隅角",
     pc: "後房",
-    ciliary: "毛様体（眼内）",
+    ciliary: "毛様体",
     bombe: "虹彩ボンベ（前方）",
     pupilBlock: "瞳孔ブロック",
-    thickLens: "水晶体肥厚",
-    antVault: "前方ヴォールト",
-    plateauIris: "プラトー虹彩",
-    outflow: "房水流出",
     inset: "隅角拡大",
     gaugeAngle: "隅角開大（相対）",
     gaugeIop: "相対的な圧の示意",
@@ -314,13 +230,16 @@ const I18N = {
     gateOpen: "開通",
     gatePartial: "制限",
     gateClosed: "遮断",
+    deep: "深い",
+    shallow: "浅い",
+    small: "小",
+    large: "大",
     hint: "相対スライダーは教育用のみで、臨床の mmHg 数値はありません。狭い隅角や閉塞を自分で判定しないでください。突然の激痛・虹視・視力急低下・頭痛嘔吐：救急へ；行けない場合は 999。詳細は",
     urgentLink: "緊急ページ",
     htmlLang: "ja",
   },
 };
 
-const MODES = ["open", "block", "lens", "vault", "plateau"];
 const normalizeLang = (raw) => {
   const v = (raw || "").trim();
   if (v === "zh" || v === "zh-Hant" || v === "zh-hant") return "zh-Hant";
@@ -337,20 +256,8 @@ const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
 const lerp = (a, b, t) => a + (b - a) * t;
 const smooth = (t) => { const x = clamp(t, 0, 1); return x * x * (3 - 2 * x); };
 
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-const S = {
-  mode: "open",
-  depth: 25,     // 0 deep … 100 shallow
-  pupil: 45,     // 0 miotic … 100 dilated
-  lens: 20,      // thickness
-  vault: 15,     // anterior vault
-  plateau: 10,   // plateau iris
-  play: !reduceMotion,
-  demo: !reduceMotion,
-  step: 0,
-  demoT: 0,
-};
+/** depth: 0 = shallow (lens left/near cornea), 100 = deep (lens right/far) — matches slider label 「深度」 */
+const S = { depth: 70, lens: 35, pupil: 45 };
 
 function midBell(p01) {
   const x = (p01 - 0.5) / 0.22;
@@ -358,139 +265,45 @@ function midBell(p01) {
 }
 
 function metrics() {
-  const shallow = S.depth / 100;
-  const p01 = S.pupil / 100;
+  // UI depth 100 = deep → shallowFactor 0; UI depth 0 = shallow → shallowFactor 1
+  const shallow = 1 - S.depth / 100;
   const thick = S.lens / 100;
-  const vault = S.vault / 100;
-  const plat = S.plateau / 100;
-
-  // Force emphasis by selected mechanism
-  const force = {
-    open: { block: 0, thick: 0.05, vault: 0.05, plat: 0.05, shallowBias: -0.25 },
-    block: { block: 0.85, thick: 0.1, vault: 0.1, plat: 0.05, shallowBias: 0.2 },
-    lens: { block: 0.15, thick: 0.9, vault: 0.25, plat: 0.05, shallowBias: 0.35 },
-    vault: { block: 0.2, thick: 0.25, vault: 0.9, plat: 0.1, shallowBias: 0.15 },
-    plateau: { block: 0.08, thick: 0.1, vault: 0.1, plat: 0.9, shallowBias: -0.1 },
-  }[S.mode] || { block: 0, thick: 0, vault: 0, plat: 0, shallowBias: 0 };
-
-  const shallowEff = clamp(shallow + force.shallowBias * 0.5 + thick * 0.25 + vault * 0.15, 0, 1);
-  const thickEff = clamp(thick * 0.55 + force.thick * 0.55, 0, 1);
-  const vaultEff = clamp(vault * 0.55 + force.vault * 0.55 + thickEff * 0.2, 0, 1);
-  const platEff = clamp(plat * 0.55 + force.plat * 0.55, 0, 1);
-
-  const rawBlock = clamp(
-    force.block * 0.7 +
-    shallowEff * 0.35 * midBell(p01) +
-    midBell(p01) * 0.35 * (S.mode === "block" ? 1 : 0.35) -
-    (S.mode === "open" ? 0.45 : 0) -
-    (S.mode === "plateau" ? 0.2 : 0),
-    0, 1
-  );
+  const p01 = S.pupil / 100;
+  const rawBlock = clamp(shallow * 0.45 + midBell(p01) * (0.4 + shallow * 0.45) + thick * 0.15, 0, 1);
   const block = smooth(rawBlock);
-  // Bombé: peripheral iris bows ANTERIORLY (toward cornea)
-  const bombe = smooth(clamp((block - 0.2) / 0.55, 0, 1)) * (0.4 + shallowEff * 0.6);
-
-  // Angle crowding from multiple mechanisms
-  const crowd =
-    shallowEff * 0.35 +
-    bombe * 0.55 +
-    thickEff * 0.4 +
-    vaultEff * 0.45 +
-    platEff * 0.55;
+  const bombe = smooth(clamp((block - 0.22) / 0.55, 0, 1)) * (0.35 + shallow * 0.65);
+  const crowd = shallow * 0.4 + thick * 0.45 + bombe * 0.55;
   const angleOpen = clamp(1 - crowd, 0, 1);
-  // Plateau: central AC can stay deeper while angle is narrow
-  const centralDeep = clamp(1 - shallowEff * 0.8 - thickEff * 0.35 - vaultEff * 0.25 + platEff * 0.45, 0, 1);
-  const tmContact = clamp(1 - angleOpen * 1.1, 0, 1);
-  const iop = smooth(clamp(tmContact * 0.7 + block * 0.25 + thickEff * 0.15 + platEff * 0.1, 0, 1));
-  const pupilGate = S.mode === "plateau" ? 0.85 : 1 - block * 0.92;
+  const tmContact = clamp(1 - angleOpen * 1.12, 0, 1);
+  const iop = smooth(clamp(tmContact * 0.75 + block * 0.3 + thick * 0.2, 0, 1));
+  const pupilGate = 1 - block * 0.92;
   const tmGate = 1 - tmContact * 0.95;
+  return { shallow, thick, p01, block, bombe, angleOpen, tmContact, iop, pupilGate, tmGate };
+}
 
-  return {
-    shallow: shallowEff, p01, thick: thickEff, vault: vaultEff, plat: platEff,
-    block, bombe, angleOpen, centralDeep, tmContact, iop, pupilGate, tmGate,
-  };
+function storyFor(m) {
+  if (m.tmContact > 0.55 && m.shallow > 0.35 && m.thick > 0.4) return T.storyCrowd;
+  if (m.block > 0.45 && m.bombe > 0.3) return T.storyBlock;
+  if (m.thick > 0.55) return T.storyThick;
+  if (m.shallow > 0.45) return T.storyShallow;
+  return T.storyOpen;
 }
 
 const particles = [];
 function spawnParticle() {
   particles.push({ t: 0, speed: 0.18 + Math.random() * 0.12, alive: true });
-  if (particles.length > 48) particles.shift();
-}
-
-function modeLabel(mode) {
-  switch (mode) {
-    case "open": return T.mOpen;
-    case "block": return T.mBlock;
-    case "lens": return T.mLens;
-    case "vault": return T.mVault;
-    case "plateau": return T.mPlateau;
-    default: {
-      const _x = mode;
-      return _x;
-    }
-  }
-}
-
-function sliderRelevance() {
-  // Which sliders are primary for the active mechanism (others dimmed but still usable)
-  return {
-    depth: true,
-    pupil: S.mode === "open" || S.mode === "block",
-    lens: S.mode === "lens" || S.mode === "open",
-    vault: S.mode === "vault" || S.mode === "lens",
-    plateau: S.mode === "plateau",
-  };
+  if (particles.length > 40) particles.shift();
 }
 
 function applyLang(lang) {
   uiLang = normalizeLang(lang);
   T = I18N[uiLang];
   document.documentElement.lang = T.htmlLang;
-  const cap = $("sac-page-cap");
-  if (cap) cap.textContent = T.pageCap;
+  $("sac-page-cap").textContent = T.pageCap;
   $("sac-depth-lab").textContent = T.depth;
-  $("sac-pupil-lab").textContent = T.pupil;
   $("sac-lens-lab").textContent = T.lens;
-  $("sac-vault-lab").textContent = T.vault;
-  $("sac-plateau-lab").textContent = T.plateau;
-  $("sac-demo").textContent = T.demo;
+  $("sac-pupil-lab").textContent = T.pupil;
   $("sac-reset").textContent = T.reset;
-
-  const modes = $("sac-modes");
-  modes.innerHTML = "";
-  MODES.forEach((mode) => {
-    const b = document.createElement("button");
-    b.type = "button";
-    b.dataset.mode = mode;
-    b.textContent = modeLabel(mode);
-    b.className = mode === S.mode ? "on" : "";
-    b.addEventListener("click", () => {
-      S.mode = mode;
-      S.demo = false;
-      S.step = MODES.indexOf(mode);
-      applyStepTargets(S.step, true);
-      refreshChrome();
-    });
-    modes.appendChild(b);
-  });
-
-  const steps = $("sac-steps");
-  steps.innerHTML = "";
-  [T.step1, T.step2, T.step3, T.step4, T.step5].forEach((label, i) => {
-    const b = document.createElement("button");
-    b.type = "button";
-    b.textContent = label;
-    b.className = i === S.step ? "on" : "";
-    b.setAttribute("role", "tab");
-    b.addEventListener("click", () => {
-      S.step = i;
-      S.demo = false;
-      applyStepTargets(i, true);
-      refreshChrome();
-    });
-    steps.appendChild(b);
-  });
-
   const hint = $("sac-hint");
   hint.innerHTML = "";
   hint.appendChild(document.createTextNode(T.hint + " "));
@@ -501,74 +314,26 @@ function applyLang(lang) {
   a.textContent = T.urgentLink;
   hint.appendChild(a);
   hint.appendChild(document.createTextNode(uiLang === "en" ? "." : "。"));
-  refreshChrome();
+  syncLabels();
   postHeight();
 }
 
-function refreshChrome() {
-  [["depth", S.depth], ["pupil", S.pupil], ["lens", S.lens], ["vault", S.vault], ["plateau", S.plateau]].forEach(([k, v]) => {
-    $(`sac-${k}`).value = String(Math.round(v));
-    $(`sac-${k}v`).textContent = Math.round(v) + "%";
-  });
-  const rel = sliderRelevance();
-  $("lab-wrap-depth").classList.toggle("dim", !rel.depth);
-  $("lab-wrap-pupil").classList.toggle("dim", !rel.pupil);
-  $("lab-wrap-lens").classList.toggle("dim", !rel.lens);
-  $("lab-wrap-vault").classList.toggle("dim", !rel.vault);
-  $("lab-wrap-plateau").classList.toggle("dim", !rel.plateau);
-
-  [...$("sac-modes").children].forEach((b) => b.classList.toggle("on", b.dataset.mode === S.mode));
-  [...$("sac-steps").children].forEach((b, i) => {
-    b.classList.toggle("on", i === S.step);
-    b.setAttribute("aria-selected", i === S.step ? "true" : "false");
-  });
-  $("sac-play").textContent = S.play ? "❚❚" : "▶";
-  $("sac-play").setAttribute("aria-label", S.play ? T.pauseAria : T.playAria);
-  const stories = [T.story1, T.story2, T.story3, T.story4, T.story5];
-  $("sac-story").textContent = stories[S.step] || stories[0];
-}
-
-function applyStepTargets(step, snap) {
-  const targets = [
-    { mode: "open", depth: 18, pupil: 35, lens: 15, vault: 10, plateau: 5 },
-    { mode: "block", depth: 72, pupil: 52, lens: 25, vault: 20, plateau: 8 },
-    { mode: "lens", depth: 55, pupil: 40, lens: 85, vault: 45, plateau: 10 },
-    { mode: "vault", depth: 40, pupil: 42, lens: 40, vault: 88, plateau: 12 },
-    { mode: "plateau", depth: 22, pupil: 48, lens: 20, vault: 18, plateau: 90 },
-  ][step] || { mode: "open", depth: 25, pupil: 45, lens: 20, vault: 15, plateau: 10 };
-  if (snap) {
-    S.mode = targets.mode;
-    S.depth = targets.depth;
-    S.pupil = targets.pupil;
-    S.lens = targets.lens;
-    S.vault = targets.vault;
-    S.plateau = targets.plateau;
-  }
-  return targets;
-}
-
-function updateDemo(dt) {
-  if (!S.demo || !S.play) return;
-  S.demoT += dt;
-  const phase = S.demoT % 25;
-  const step = Math.min(4, Math.floor(phase / 5));
-  if (step !== S.step) S.step = step;
-  const targets = applyStepTargets(S.step, false);
-  const prev = applyStepTargets(Math.max(0, S.step - 1), false);
-  const local = (phase % 5) / 5;
-  const ease = smooth(local);
-  const from = S.step === 0 ? targets : prev;
-  S.mode = ease > 0.35 ? targets.mode : from.mode;
-  S.depth = lerp(from.depth, targets.depth, ease);
-  S.pupil = lerp(from.pupil, targets.pupil, ease);
-  S.lens = lerp(from.lens, targets.lens, ease);
-  S.vault = lerp(from.vault, targets.vault, ease);
-  S.plateau = lerp(from.plateau, targets.plateau, ease);
+function syncLabels() {
+  $("sac-depth").value = String(Math.round(S.depth));
+  $("sac-lens").value = String(Math.round(S.lens));
+  $("sac-pupil").value = String(Math.round(S.pupil));
+  // Show deep←→shallow hint on depth value
+  const dTag = S.depth >= 55 ? T.deep : S.depth <= 35 ? T.shallow : "";
+  $("sac-depthv").textContent = Math.round(S.depth) + "%" + (dTag ? " · " + dTag : "");
+  const lTag = S.lens >= 60 ? T.large : S.lens <= 25 ? T.small : "";
+  $("sac-lensv").textContent = Math.round(S.lens) + "%" + (lTag ? " · " + lTag : "");
+  $("sac-pupilv").textContent = Math.round(S.pupil) + "%";
+  $("sac-story").textContent = storyFor(metrics());
 }
 
 const sag = $("sac-sag"), sx = sag.getContext("2d");
 const flow = $("sac-flow"), fx = flow.getContext("2d");
-const SW = 960, SH = 440, FW = 960, FH = 220;
+const SW = 960, SH = 440, FW = 960, FH = 200;
 
 function roundRect(ctx, x, y, w, h, r) {
   const rr = Math.min(r, w / 2, h / 2);
@@ -621,59 +386,71 @@ function wrapCenter(ctx, text, x, y, maxW, lh) {
 }
 
 /**
- * Anatomy layout (anterior LEFT):
- *  - Globe ellipse; cornea anterior bulge
- *  - Lens oval INSIDE globe, posterior to iris
- *  - Ciliary body INSIDE sclera at iris root
- *  - Bombé: peripheral iris bows LEFT (anterior)
+ * Layout: cornea = LEFT arc. Inside eye = right of cornea (left half of globe).
+ * Lens X moves left↔right with AC depth.
  */
 function layout(m) {
-  const CX = 430, CY = 225;
-  const RX = 195, RY = 155;
-  // Iris plane x: deeper when AC deep (centralDeep high), more anterior when shallow/thick/vault
-  const irisX = CX - 35 - m.centralDeep * 42 + (1 - m.centralDeep) * 8 + m.thick * 10 + m.vault * 12;
-  const pupilHalf = lerp(12, 52, m.p01);
-  // Lens center behind iris, always inside globe
-  const lensThick = lerp(22, 48, m.thick);
-  const vaultShift = m.vault * 28; // anterior surface advances
-  const lensCX = irisX + 38 + lensThick * 0.15 - vaultShift * 0.15;
-  const lensRX = lerp(28, 40, m.thick) + m.vault * 4;
-  const lensRY = lerp(52, 68, m.thick);
-  // Ciliary body: inside wall, just posterior to iris root; plateau moves it anterior
-  const cbInset = 18;
-  const cbAnterior = m.plat * 22; // plateau: processes more anterior
-  const angleTop = { x: CX - RX + 38, y: CY - RY + 48 };
-  const angleBot = { x: CX - RX + 38, y: CY + RY - 48 };
-  return { CX, CY, RX, RY, irisX, pupilHalf, lensCX, lensRX, lensRY, lensThick, vaultShift, cbInset, cbAnterior, angleTop, angleBot };
+  const CX = 400, CY = 225;
+  const RX = 200, RY = 158;
+  // Cornea apex (leftmost)
+  const corneaX = CX - RX - 8;
+  // Lens horizontal travel: deep → right, shallow → left (toward cornea)
+  const lensXDeep = CX - 10;
+  const lensXShallow = CX - RX + 78;
+  const lensCX = lerp(lensXShallow, lensXDeep, 1 - m.shallow);
+  const lensRX = lerp(24, 44, m.thick);
+  const lensRY = lerp(48, 70, m.thick);
+  const pupilHalf = lerp(11, 50, m.p01);
+  // Iris plane just in front of lens anterior surface
+  const lensFront = lensCX - lensRX;
+  const irisX = lensFront - 6;
+  const angleTop = { x: CX - RX + 36, y: CY - RY + 52 };
+  const angleBot = { x: CX - RX + 36, y: CY + RY - 52 };
+  return { CX, CY, RX, RY, corneaX, lensCX, lensRX, lensRY, pupilHalf, irisX, lensFront, angleTop, angleBot };
 }
 
-function irisCurveY(side, t, L, m) {
-  // t: 0 at angle root → 1 at pupil margin
-  // side: -1 upper, +1 lower
-  const rootY = side < 0 ? L.angleTop.y + 8 : L.angleBot.y - 8;
+function irisCurveY(side, t, L) {
+  const rootY = side < 0 ? L.angleTop.y + 6 : L.angleBot.y - 6;
   const pupilY = L.CY + side * L.pupilHalf;
-  let y = lerp(rootY, pupilY, smooth(t));
-  // Plateau: root stays propped anteriorly (handled in x); mild mid flattening
-  if (m.plat > 0.2) {
-    y = lerp(y, lerp(rootY, pupilY, t * 0.85 + 0.1), m.plat * 0.35);
-  }
-  return y;
+  return lerp(rootY, pupilY, smooth(t));
 }
 
 function irisCurveX(t, L, m) {
-  // Base iris near irisX; pupil margin contacts anterior lens
-  const lensFront = L.lensCX - L.lensRX + L.vaultShift * 0.35;
-  const rootX = L.irisX - 8 - m.plat * 10; // plateau: root more anterior
-  const pupilX = lensFront - 2;
+  const rootX = L.angleTop.x + 10;
+  const pupilX = L.lensFront - 1;
   let x = lerp(rootX, pupilX, smooth(t));
-  // Bombé: mid-peripheral iris bows ANTERIORLY (smaller x = toward cornea)
-  if (m.bombe > 0.05) {
-    const bow = Math.sin(Math.PI * t) * m.bombe * 36;
-    x -= bow; // anterior = left
-  }
-  // Thick lens / vault: whole leaflet nudged anterior
-  x -= m.thick * 8 * (1 - t) + m.vault * 10 * (0.3 + 0.7 * (1 - t));
+  // Bombé: peripheral mid-iris bows LEFT (anterior / toward cornea)
+  if (m.bombe > 0.05) x -= Math.sin(Math.PI * t) * m.bombe * 34;
+  // Thicker lens nudges leaflet slightly anterior
+  x -= m.thick * 6 * (1 - t);
   return x;
+}
+
+function aqueousPathPts(L, m) {
+  const pts = [];
+  for (let i = 0; i <= 40; i++) {
+    const t = i / 40;
+    let x, y;
+    if (t < 0.22) {
+      const u = t / 0.22;
+      x = lerp(L.irisX + 24, L.lensFront + 6, u);
+      y = lerp(L.CY - L.RY + 38, L.CY - L.pupilHalf - 4, u);
+    } else if (t < 0.45) {
+      const u = (t - 0.22) / 0.23;
+      x = irisCurveX(1, L, m);
+      y = lerp(L.CY - L.pupilHalf, L.CY + L.pupilHalf * 0.2, u);
+    } else if (t < 0.7) {
+      const u = (t - 0.45) / 0.25;
+      x = lerp(irisCurveX(1, L, m) - 2, L.CX - L.RX + 88, u);
+      y = lerp(L.CY, L.CY + 48, u);
+    } else {
+      const u = (t - 0.7) / 0.3;
+      x = lerp(L.CX - L.RX + 88, L.CX - L.RX + 40, u);
+      y = lerp(L.CY + 48, L.CY + L.RY - 52, u);
+    }
+    pts.push([x, y]);
+  }
+  return pts;
 }
 
 function drawSagittal(m) {
@@ -685,7 +462,7 @@ function drawSagittal(m) {
 
   const L = layout(m);
 
-  // Globe (sclera/vitreous cavity) — everything of interest sits inside
+  // Globe
   ctx.fillStyle = "#1a222c";
   ctx.beginPath();
   ctx.ellipse(L.CX, L.CY, L.RX, L.RY, 0, 0, Math.PI * 2);
@@ -694,113 +471,80 @@ function drawSagittal(m) {
   ctx.lineWidth = 2;
   ctx.stroke();
 
-  // Cornea = anterior bulge (left)
+  // Cornea = LEFT arc (outside / anterior wall)
   ctx.strokeStyle = "#8fd0e8";
-  ctx.lineWidth = 4;
+  ctx.lineWidth = 5;
   ctx.beginPath();
-  ctx.ellipse(L.CX - L.RX + 18, L.CY, 52, 78, 0, -1.25, 1.25);
+  ctx.ellipse(L.CX - L.RX + 22, L.CY, 56, 82, 0, -1.28, 1.28);
   ctx.stroke();
-  ctx.strokeStyle = "rgba(143,208,232,0.28)";
-  ctx.lineWidth = 10;
+  ctx.strokeStyle = "rgba(143,208,232,0.3)";
+  ctx.lineWidth = 11;
   ctx.beginPath();
-  ctx.ellipse(L.CX - L.RX + 18, L.CY, 46, 72, 0, -1.15, 1.15);
+  ctx.ellipse(L.CX - L.RX + 22, L.CY, 48, 74, 0, -1.18, 1.18);
   ctx.stroke();
 
-  // Clip to globe interior for lens / CB / iris
+  // Clip interior of globe — lens & CB must stay inside
   ctx.save();
   ctx.beginPath();
-  ctx.ellipse(L.CX, L.CY, L.RX - 3, L.RY - 3, 0, 0, Math.PI * 2);
+  ctx.ellipse(L.CX, L.CY, L.RX - 4, L.RY - 4, 0, 0, Math.PI * 2);
   ctx.clip();
 
-  // Posterior chamber tint when blocked
   if (m.block > 0.25) {
-    ctx.fillStyle = `rgba(224,112,112,${0.06 + m.block * 0.16})`;
-    ctx.beginPath();
-    ctx.rect(L.irisX - 5, L.CY - L.pupilHalf - 20, L.lensCX + L.lensRX - L.irisX + 20, L.pupilHalf * 2 + 40);
-    ctx.fill();
+    ctx.fillStyle = `rgba(224,112,112,${0.06 + m.block * 0.14})`;
+    ctx.fillRect(L.irisX - 4, L.CY - L.pupilHalf - 16, L.lensRX * 2 + 30, L.pupilHalf * 2 + 32);
   }
 
-  // Anterior chamber wash (between cornea and iris)
-  const acCol = m.tmContact > 0.55
+  // AC wash between cornea and iris (left of iris, inside arc)
+  ctx.fillStyle = m.tmContact > 0.55
     ? "rgba(224,112,112,0.2)"
     : m.block > 0.4
-      ? "rgba(240,160,48,0.16)"
+      ? "rgba(240,160,48,0.15)"
       : "rgba(126,200,227,0.16)";
-  ctx.fillStyle = acCol;
   ctx.beginPath();
-  ctx.moveTo(L.CX - L.RX + 8, L.CY);
-  ctx.ellipse(L.CX - L.RX + 18, L.CY, 48, 74, 0, -1.2, 1.2);
-  for (let i = 24; i >= 0; i--) {
-    const t = i / 24;
-    ctx.lineTo(irisCurveX(t, L, m), irisCurveY(1, t, L, m));
-  }
-  for (let i = 0; i <= 24; i++) {
-    const t = i / 24;
-    ctx.lineTo(irisCurveX(t, L, m), irisCurveY(-1, t, L, m));
-  }
+  ctx.ellipse(L.CX - L.RX + 22, L.CY, 50, 76, 0, -1.2, 1.2);
+  for (let i = 24; i >= 0; i--) ctx.lineTo(irisCurveX(i / 24, L, m), irisCurveY(1, i / 24, L));
+  for (let i = 0; i <= 24; i++) ctx.lineTo(irisCurveX(i / 24, L, m), irisCurveY(-1, i / 24, L));
   ctx.closePath();
   ctx.fill();
 
-  // Ciliary body — INSIDE sclera, behind iris root; plateau advances processes
-  const cbX = L.irisX + 14 - L.cbAnterior;
+  // Ciliary body — inside globe, at iris root (left half, behind iris root)
   ctx.fillStyle = "#6a5040";
   for (const side of [-1, 1]) {
-    const cy = L.CY + side * (L.RY - 42);
+    const cy = L.CY + side * (L.RY - 44);
+    const cbx = L.angleTop.x + 22;
     ctx.beginPath();
-    ctx.moveTo(cbX - 6, cy);
-    ctx.lineTo(cbX + 28, cy + side * 8);
-    ctx.lineTo(cbX + 22, cy + side * 28);
-    ctx.lineTo(cbX - 10, cy + side * 18);
+    ctx.moveTo(cbx - 4, cy);
+    ctx.lineTo(cbx + 26, cy + side * 6);
+    ctx.lineTo(cbx + 20, cy + side * 26);
+    ctx.lineTo(cbx - 8, cy + side * 16);
     ctx.closePath();
     ctx.fill();
-    // Plateau: anterior process finger toward iris root
-    if (m.plat > 0.25) {
-      ctx.fillStyle = "#8a6a50";
-      ctx.beginPath();
-      ctx.ellipse(cbX - 8 - m.plat * 6, cy + side * 6, 10, 7, 0, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = "#6a5040";
-    }
   }
 
-  // Lens — INSIDE globe, posterior to iris
-  const lensFront = L.lensCX - L.lensRX + L.vaultShift * 0.5;
-  const lensBack = L.lensCX + L.lensRX;
-  ctx.fillStyle = "rgba(240,200,120,0.45)";
+  // Lens — INSIDE arc / inside globe; X from AC depth
+  ctx.fillStyle = "rgba(240,200,120,0.48)";
   ctx.beginPath();
-  ctx.ellipse(L.lensCX + L.vaultShift * 0.15, L.CY, L.lensRX, L.lensRY, 0, 0, Math.PI * 2);
+  ctx.ellipse(L.lensCX, L.CY, L.lensRX, L.lensRY, 0, 0, Math.PI * 2);
   ctx.fill();
   ctx.strokeStyle = "#f0a030";
   ctx.lineWidth = 2;
   ctx.stroke();
-  // Anterior vault highlight
-  if (m.vault > 0.25) {
-    ctx.strokeStyle = `rgba(240,160,48,${0.35 + m.vault * 0.4})`;
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.ellipse(lensFront + 8, L.CY, 10 + m.vault * 8, L.lensRY * 0.85, 0, -1.4, 1.4);
-    ctx.stroke();
-  }
 
-  // Iris leaflets (upper & lower)
+  // Iris
   ctx.fillStyle = "#3d5f7a";
   for (const side of [-1, 1]) {
     ctx.beginPath();
-    ctx.moveTo(irisCurveX(0, L, m), irisCurveY(side, 0, L, m));
+    ctx.moveTo(irisCurveX(0, L, m), irisCurveY(side, 0, L));
     for (let i = 1; i <= 28; i++) {
       const t = i / 28;
-      ctx.lineTo(irisCurveX(t, L, m), irisCurveY(side, t, L, m));
+      ctx.lineTo(irisCurveX(t, L, m), irisCurveY(side, t, L));
     }
-    // thicken toward root
-    const tipX = irisCurveX(1, L, m);
-    const tipY = irisCurveY(side, 1, L, m);
-    ctx.lineTo(tipX + 10, tipY + side * 6);
-    ctx.lineTo(irisCurveX(0, L, m) + 12, irisCurveY(side, 0, L, m) + side * 14);
+    ctx.lineTo(irisCurveX(1, L, m) + 10, irisCurveY(side, 1, L) + side * 6);
+    ctx.lineTo(irisCurveX(0, L, m) + 12, irisCurveY(side, 0, L) + side * 14);
     ctx.closePath();
     ctx.fill();
   }
 
-  // Pupil-block contact at pupil margin (against anterior lens)
   if (m.block > 0.3) {
     ctx.strokeStyle = `rgba(224,112,112,${0.45 + m.block * 0.45})`;
     ctx.lineWidth = 3;
@@ -813,22 +557,21 @@ function drawSagittal(m) {
     ctx.fillText(T.pupilBlock, irisCurveX(1, L, m) + 6, L.CY - L.pupilHalf - 10);
   }
 
-  // Angle / TM markers
-  const tmX = L.CX - L.RX + 42;
-  const tmY = L.CY + L.RY - 55;
-  const irisNear = { x: irisCurveX(0.08, L, m), y: irisCurveY(1, 0.08, L, m) };
+  // Angle marker
+  const tmX = L.CX - L.RX + 40;
+  const tmY = L.CY + L.RY - 52;
   ctx.strokeStyle = m.angleOpen > 0.45 ? "#6ecf8e" : m.angleOpen > 0.2 ? "#f0a030" : "#e07070";
   ctx.lineWidth = 3;
   ctx.beginPath();
   ctx.moveTo(tmX, tmY);
-  ctx.lineTo(irisNear.x, irisNear.y);
+  ctx.lineTo(irisCurveX(0.1, L, m), irisCurveY(1, 0.1, L));
   ctx.stroke();
   ctx.fillStyle = ctx.strokeStyle;
   ctx.beginPath();
   ctx.arc(tmX, tmY, 5, 0, Math.PI * 2);
   ctx.fill();
 
-  // Particles along aqueous path
+  // Particles
   const path = aqueousPathPts(L, m);
   for (const p of particles) {
     if (!p.alive) continue;
@@ -838,39 +581,32 @@ function drawSagittal(m) {
     const blockedHere = (p.t > 0.35 && p.t < 0.55 && m.pupilGate < 0.35) || (p.t > 0.78 && m.tmGate < 0.3);
     ctx.fillStyle = blockedHere ? "rgba(224,112,112,0.9)" : "rgba(126,200,227,0.9)";
     ctx.beginPath();
-    ctx.arc(pt[0], pt[1], blockedHere ? 3.2 : 2.5, 0, Math.PI * 2);
+    ctx.arc(pt[0], pt[1], blockedHere ? 3.1 : 2.4, 0, Math.PI * 2);
     ctx.fill();
   }
 
-  ctx.restore(); // end globe clip
+  ctx.restore();
 
-  // Labels (outside clip)
+  // Labels
   ctx.fillStyle = "#c8cdd6";
   ctx.font = "12px system-ui";
-  ctx.fillText(T.cornea, L.CX - L.RX - 20, L.CY - 95);
-  ctx.fillText(T.ac, L.CX - L.RX + 70, L.CY - 10);
-  ctx.fillText(T.lensLab, L.lensCX - 10, L.CY + 4);
-  ctx.fillText(T.ciliary, L.irisX + 20 - L.cbAnterior, L.CY - L.RY + 28);
-  ctx.fillText(T.tm, tmX - 8, tmY + 18);
+  ctx.fillText(T.cornea, L.CX - L.RX - 28, L.CY - 100);
+  ctx.fillText(T.ac, L.CX - L.RX + 70, L.CY - 8);
+  ctx.fillText(T.lensLab, L.lensCX - 12, L.CY + 4);
+  ctx.fillText(T.ciliary, L.angleTop.x + 8, L.CY - L.RY + 30);
+  ctx.fillText(T.tm, tmX - 6, tmY + 18);
   if (m.bombe > 0.25) {
     ctx.fillStyle = "#f0a030";
-    ctx.fillText(T.bombe, L.irisX - 70, L.CY - 55);
-  }
-  if (m.thick > 0.45 && S.mode === "lens") {
-    ctx.fillStyle = "#f0a030";
-    ctx.fillText(T.thickLens, L.lensCX - 20, L.CY - L.lensRY - 8);
-  }
-  if (m.vault > 0.45 && S.mode === "vault") {
-    ctx.fillStyle = "#f0a030";
-    ctx.fillText(T.antVault, L.lensCX - L.lensRX - 30, L.CY - 70);
-  }
-  if (m.plat > 0.45 && S.mode === "plateau") {
-    ctx.fillStyle = "#f0a030";
-    ctx.fillText(T.plateauIris, L.irisX - 40, L.CY + L.RY - 20);
+    ctx.fillText(T.bombe, L.irisX - 80, L.CY - 50);
   }
 
-  // Angle inset
-  const ix = 700, iy = 36, iw = 236, ih = 200;
+  // Depth motion cue arrow under diagram area
+  ctx.fillStyle = "#6a7384";
+  ctx.font = "11px system-ui";
+  ctx.fillText("← " + T.shallow + "    " + T.depth + "    " + T.deep + " →", L.CX - 90, L.CY + L.RY + 28);
+
+  // Inset
+  const ix = 700, iy = 36, iw = 236, ih = 190;
   ctx.fillStyle = "#141920";
   roundRect(ctx, ix, iy, iw, ih, 12); ctx.fill();
   ctx.strokeStyle = "#3a4250";
@@ -879,71 +615,31 @@ function drawSagittal(m) {
   ctx.fillStyle = "#9aa3b2";
   ctx.font = "12px system-ui";
   ctx.fillText(T.inset, ix + 12, iy + 20);
-
-  const cx = ix + 48, cy = iy + 118;
+  const cx = ix + 48, cy = iy + 112;
   ctx.strokeStyle = "#8fd0e8";
   ctx.lineWidth = 3;
   ctx.beginPath();
-  ctx.arc(cx, cy, 72, -0.25, 1.4);
+  ctx.arc(cx, cy, 70, -0.25, 1.4);
   ctx.stroke();
-  // Iris root: plateau props it up; bombé / thick / vault crowd the angle
   const openPx = lerp(6, 46, m.angleOpen);
-  const rootLift = m.plat * 14;
   ctx.fillStyle = "#3d5f7a";
   ctx.beginPath();
-  ctx.moveTo(cx + 58, cy - 8 - rootLift);
-  ctx.quadraticCurveTo(cx + 28, cy - openPx * 0.15 - rootLift * 0.3, cx + 6, cy - openPx);
-  ctx.lineTo(cx + 72, cy - 55);
+  ctx.moveTo(cx + 58, cy - 8);
+  ctx.quadraticCurveTo(cx + 28, cy - openPx * 0.15, cx + 6, cy - openPx);
+  ctx.lineTo(cx + 70, cy - 52);
   ctx.closePath();
   ctx.fill();
-  // Plateau ciliary process in inset
-  if (m.plat > 0.3) {
-    ctx.fillStyle = "#8a6a50";
-    ctx.beginPath();
-    ctx.ellipse(cx + 40, cy + 8, 12, 8, -0.3, 0, Math.PI * 2);
-    ctx.fill();
-  }
   ctx.fillStyle = m.tmContact > 0.5 ? "#e07070" : "#6ecf8e";
   ctx.beginPath();
-  ctx.arc(cx + 50, cy + 20, 7, 0, Math.PI * 2);
+  ctx.arc(cx + 50, cy + 18, 7, 0, Math.PI * 2);
   ctx.fill();
   ctx.fillStyle = "#c8cdd6";
   ctx.font = "11px system-ui";
-  ctx.fillText(T.angle, cx + 72, cy - 6);
-  ctx.fillText(T.tm, cx + 60, cy + 38);
-  ctx.fillText(m.angleOpen > 0.45 ? T.gaugeOpen : m.angleOpen > 0.2 ? T.gaugeNarrow : T.gaugeClosed, ix + 12, iy + ih - 14);
+  ctx.fillText(T.angle, cx + 70, cy - 4);
+  ctx.fillText(m.angleOpen > 0.45 ? T.gaugeOpen : m.angleOpen > 0.2 ? T.gaugeNarrow : T.gaugeClosed, ix + 12, iy + ih - 12);
 
-  drawGauge(ctx, 20, 20, 250, 70, 1 - m.angleOpen, T.gaugeAngle, T.gaugeOpen, T.gaugeNarrow, T.gaugeClosed);
-  drawGauge(ctx, 20, 100, 250, 70, m.iop, T.gaugeIop, T.gaugeLow, T.gaugeMid, T.gaugeHigh);
-}
-
-function aqueousPathPts(L, m) {
-  const pts = [];
-  const lensFront = L.lensCX - L.lensRX + L.vaultShift * 0.35;
-  for (let i = 0; i <= 40; i++) {
-    const t = i / 40;
-    let x, y;
-    if (t < 0.22) {
-      const u = t / 0.22;
-      x = lerp(L.irisX + 20 - L.cbAnterior, lensFront + 8, u);
-      y = lerp(L.CY - L.RY + 40, L.CY - L.pupilHalf - 6, u);
-    } else if (t < 0.45) {
-      const u = (t - 0.22) / 0.23;
-      x = irisCurveX(1, L, m) + 2;
-      y = lerp(L.CY - L.pupilHalf, L.CY + L.pupilHalf * 0.15, u);
-    } else if (t < 0.7) {
-      const u = (t - 0.45) / 0.25;
-      x = lerp(irisCurveX(1, L, m) - 4, L.CX - L.RX + 90, u);
-      // After pupil: into AC (more anterior if bombé creates space then toward angle)
-      y = lerp(L.CY, L.CY + 50, u);
-    } else {
-      const u = (t - 0.7) / 0.3;
-      x = lerp(L.CX - L.RX + 90, L.CX - L.RX + 42, u);
-      y = lerp(L.CY + 50, L.CY + L.RY - 55, u);
-    }
-    pts.push([x, y]);
-  }
-  return pts;
+  drawGauge(ctx, 18, 18, 250, 70, 1 - m.angleOpen, T.gaugeAngle, T.gaugeOpen, T.gaugeNarrow, T.gaugeClosed);
+  drawGauge(ctx, 18, 98, 250, 70, m.iop, T.gaugeIop, T.gaugeLow, T.gaugeMid, T.gaugeHigh);
 }
 
 function drawFlow(m) {
@@ -954,20 +650,19 @@ function drawFlow(m) {
   ctx.fillRect(0, 0, FW, FH);
   ctx.fillStyle = "#c8cdd6";
   ctx.font = "13px system-ui";
-  ctx.fillText(T.flowTitle, 20, 28);
+  ctx.fillText(T.flowTitle, 20, 26);
 
   const nodes = [
-    { x: 90, y: 120, lab: T.ciliary },
-    { x: 280, y: 120, lab: T.pc },
-    { x: 480, y: 120, lab: T.gatePupil },
-    { x: 680, y: 120, lab: T.ac },
-    { x: 870, y: 120, lab: T.gateTm },
+    { x: 90, y: 110, lab: T.ciliary },
+    { x: 280, y: 110, lab: T.pc },
+    { x: 480, y: 110, lab: T.gatePupil },
+    { x: 680, y: 110, lab: T.ac },
+    { x: 870, y: 110, lab: T.gateTm },
   ];
   const gates = [1, 1, m.pupilGate, 1, m.tmGate];
 
   for (let i = 0; i < nodes.length - 1; i++) {
-    const a = nodes[i], b = nodes[i + 1];
-    const g = gates[i + 1];
+    const a = nodes[i], b = nodes[i + 1], g = gates[i + 1];
     ctx.strokeStyle = g > 0.65 ? "#6ecf8e" : g > 0.3 ? "#f0a030" : "#e07070";
     ctx.lineWidth = 4;
     ctx.beginPath();
@@ -990,7 +685,7 @@ function drawFlow(m) {
       : "#4a90b8";
     ctx.fillStyle = "#1a1f28";
     ctx.beginPath();
-    ctx.arc(n.x, n.y, 34, 0, Math.PI * 2);
+    ctx.arc(n.x, n.y, 32, 0, Math.PI * 2);
     ctx.fill();
     ctx.strokeStyle = col;
     ctx.lineWidth = 3;
@@ -998,12 +693,11 @@ function drawFlow(m) {
     ctx.fillStyle = "#e4e4e4";
     ctx.font = "11px system-ui";
     ctx.textAlign = "center";
-    wrapCenter(ctx, n.lab, n.x, n.y - 4, 70, 13);
+    wrapCenter(ctx, n.lab, n.x, n.y - 2, 68, 12);
     if (i === 2 || i === 4) {
-      const state = g > 0.65 ? T.gateOpen : g > 0.3 ? T.gatePartial : T.gateClosed;
       ctx.fillStyle = col;
       ctx.font = "10px system-ui";
-      ctx.fillText(state, n.x, n.y + 48);
+      ctx.fillText(g > 0.65 ? T.gateOpen : g > 0.3 ? T.gatePartial : T.gateClosed, n.x, n.y + 46);
     }
   });
   ctx.textAlign = "left";
@@ -1017,9 +711,7 @@ function drawFlow(m) {
     if (!a || !b) continue;
     const x = lerp(a.x, b.x, local);
     const y = a.y + Math.sin(local * Math.PI) * -8;
-    const gate = gates[seg + 1];
-    const blocked = gate < 0.3 && local > 0.55;
-    ctx.fillStyle = blocked ? "#e07070" : "#7ec8e3";
+    ctx.fillStyle = gates[seg + 1] < 0.3 && local > 0.55 ? "#e07070" : "#7ec8e3";
     ctx.beginPath();
     ctx.arc(x, y, 3, 0, Math.PI * 2);
     ctx.fill();
@@ -1027,15 +719,13 @@ function drawFlow(m) {
 }
 
 function updateParticles(dt, m) {
-  if (Math.random() < 0.35 * (0.3 + m.pupilGate)) spawnParticle();
+  if (Math.random() < 0.32 * (0.35 + m.pupilGate)) spawnParticle();
   for (const p of particles) {
     if (!p.alive) continue;
     let speed = p.speed;
     if (p.t > 0.35 && p.t < 0.55) speed *= Math.max(0.05, m.pupilGate);
     if (p.t > 0.78) speed *= Math.max(0.05, m.tmGate);
-    if ((p.t > 0.4 && p.t < 0.52 && m.pupilGate < 0.25) || (p.t > 0.85 && m.tmGate < 0.2)) {
-      speed *= 0.02;
-    }
+    if ((p.t > 0.4 && p.t < 0.52 && m.pupilGate < 0.25) || (p.t > 0.85 && m.tmGate < 0.2)) speed *= 0.02;
     p.t += dt * speed;
     if (p.t >= 1) {
       if (m.tmGate < 0.25) p.t = 0.88;
@@ -1058,45 +748,24 @@ let last = performance.now();
 function frame(now) {
   const dt = Math.min(0.05, (now - last) / 1000);
   last = now;
-  if (S.play) {
-    updateDemo(dt);
-    updateParticles(dt, metrics());
-    refreshChrome();
-  }
   const m = metrics();
+  updateParticles(dt, m);
   drawSagittal(m);
   drawFlow(m);
   requestAnimationFrame(frame);
 }
 
-["depth", "pupil", "lens", "vault", "plateau"].forEach((k) => {
-  $(`sac-${k}`).addEventListener("input", (e) => {
-    S[k] = +e.target.value;
-    S.demo = false;
-    refreshChrome();
-  });
-});
-$("sac-play").addEventListener("click", () => { S.play = !S.play; refreshChrome(); });
-$("sac-demo").addEventListener("click", () => {
-  S.demo = true;
-  S.play = true;
-  S.demoT = S.step * 5;
-  refreshChrome();
-});
+$("sac-depth").addEventListener("input", (e) => { S.depth = +e.target.value; syncLabels(); });
+$("sac-lens").addEventListener("input", (e) => { S.lens = +e.target.value; syncLabels(); });
+$("sac-pupil").addEventListener("input", (e) => { S.pupil = +e.target.value; syncLabels(); });
 $("sac-reset").addEventListener("click", () => {
-  S.mode = "open";
-  S.depth = 25; S.pupil = 45; S.lens = 20; S.vault = 15; S.plateau = 10;
-  S.step = 0; S.demoT = 0;
-  S.demo = !reduceMotion;
-  S.play = !reduceMotion;
+  S.depth = 70; S.lens = 35; S.pupil = 45;
   particles.length = 0;
-  refreshChrome();
+  syncLabels();
 });
 
 window.addEventListener("resize", postHeight);
 applyLang(uiLang);
-applyStepTargets(0, true);
-refreshChrome();
 requestAnimationFrame(frame);
 setTimeout(postHeight, 50);
 setTimeout(postHeight, 300);
