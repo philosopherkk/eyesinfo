@@ -28,9 +28,6 @@
 #palsim label{font-size:13px;display:flex;align-items:center;gap:6px;color:#bbb}
 #palsim input[type=range]{width:105px;accent-color:#f0a030}
 #palsim .v{min-width:46px;font-variant-numeric:tabular-nums;color:#f3c06a}
-#palsim .lang{display:flex;border-radius:9px;overflow:hidden;border:1px solid #444;margin-left:auto}
-#palsim .lang button{background:#23272f;color:#bbb;border:0;padding:6px 10px;font-size:12px;cursor:pointer}
-#palsim .lang button.on{background:#3a7bd5;color:#fff;font-weight:700}
 </style>
 <div class="bar">
   <div class="seg">
@@ -45,12 +42,6 @@
   <label><input type="checkbox" id="ps-ideal"> <span id="ps-ideal-lab">outside = ideal eye</span></label>
   <label><input type="checkbox" id="ps-edges"> <span id="ps-edges-lab">true edges</span></label>
   <label><input type="checkbox" id="ps-zones"> <span id="ps-zones-lab">lens zones</span></label>
-  <div class="lang" role="group" aria-label="Language">
-    <button type="button" data-lang="zh-Hant" class="on">繁</button>
-    <button type="button" data-lang="zh-Hans">简</button>
-    <button type="button" data-lang="en">EN</button>
-    <button type="button" data-lang="ja">日</button>
-  </div>
 </div>
 <canvas id="ps-fp" width="960" height="600"></canvas>
 <canvas id="ps-side" width="960" height="330" style="margin-top:10px"></canvas>
@@ -58,7 +49,7 @@
 (()=>{
 const I18N = {
   "zh-Hant": {
-    pageCap: "教育示意 · 不是視力檢查或配鏡評估。可切換 繁／简／EN／日。",
+    pageCap: "教育示意 · 不是視力檢查或配鏡評估。",
     myope: "− 近視",
     hyper: "+ 遠視",
     rx: "度數",
@@ -77,7 +68,7 @@ const I18N = {
     htmlLang: "zh-Hant",
   },
   "zh-Hans": {
-    pageCap: "教育示意 · 不是视力检查或配镜评估。可切换 繁／简／EN／日。",
+    pageCap: "教育示意 · 不是视力检查或配镜评估。",
     myope: "− 近视",
     hyper: "+ 远视",
     rx: "度数",
@@ -96,7 +87,7 @@ const I18N = {
     htmlLang: "zh-CN",
   },
   en: {
-    pageCap: "Education illustration · not a vision test or dispensing assessment. Switch 繁／简／EN／日.",
+    pageCap: "Education illustration · not a vision test or dispensing assessment.",
     myope: "− Myope",
     hyper: "+ Hyperope",
     rx: "Rx",
@@ -115,7 +106,7 @@ const I18N = {
     htmlLang: "en",
   },
   ja: {
-    pageCap: "教育用図示 · 視力検査や眼鏡合わせの評価ではありません。繁／简／EN／日を切り替えられます。",
+    pageCap: "教育用図示 · 視力検査や眼鏡合わせの評価ではありません。",
     myope: "− 近視",
     hyper: "+ 遠視",
     rx: "度数",
@@ -400,14 +391,6 @@ function applyLang(lang){
   $('ps-zones-lab').textContent = T.zones;
   $('ps-play').textContent = S.play ? '❚❚' : '▶';
   $('ps-play').setAttribute('aria-label', S.play ? T.pauseAria : T.playAria);
-  document.querySelectorAll('#palsim .lang button').forEach(b=>{
-    b.classList.toggle('on', b.dataset.lang === uiLang);
-  });
-  try {
-    const u = new URL(location.href);
-    u.searchParams.set('lang', uiLang);
-    history.replaceState(null, '', u);
-  } catch (_) {}
 }
 
 const segB=[...document.querySelectorAll('#palsim .seg button')].filter(b=>b.dataset.t);
@@ -417,9 +400,6 @@ bind('ps-rx','rx');bind('ps-add','add');bind('ps-tilt','tilt');bind('ps-ex','ex'
 segB.forEach(b=>b.onclick=()=>{S.type=b.dataset.t;segB.forEach(x=>x.classList.toggle('on',x===b));$('ps-rxv').textContent=fmt.rx(S.rx);});
 $('ps-play').onclick=()=>{S.play=!S.play;$('ps-play').textContent=S.play?'❚❚':'▶';$('ps-play').setAttribute('aria-label', S.play ? T.pauseAria : T.playAria);};
 for(const [id,k] of[['ps-ideal','ideal'],['ps-edges','edges'],['ps-zones','zones']])$(id).onchange=e=>S[k]=e.target.checked;
-document.querySelectorAll('#palsim .lang button').forEach(b=>{
-  b.onclick=()=>applyLang(b.dataset.lang);
-});
 applyLang(uiLang);
 
 let last=performance.now();

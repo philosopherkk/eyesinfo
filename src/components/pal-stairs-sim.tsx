@@ -4,7 +4,7 @@ import { useI18n } from "@/i18n";
 import type { Locale } from "@/i18n/locale";
 import "./pal-stairs-sim.css";
 
-/** Map site locale → `?lang=` for `public/pal-stairs.html` (繁／简／EN／日). */
+/** Map site locale → `?lang=` for `public/pal-stairs.html`. */
 export function palStairsLang(locale: Locale): Locale {
   return locale;
 }
@@ -16,7 +16,7 @@ type PalStairsSimProps = {
 
 /**
  * Embeds the progressive-lens stair-walking illustration (`public/pal-stairs.html`).
- * Control labels and in-sim language picker follow site locales.
+ * Control labels follow the site locale via `?lang=` (no in-sim language picker).
  */
 export function PalStairsSim({ showChrome = true }: PalStairsSimProps) {
   const { t, locale } = useI18n();

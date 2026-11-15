@@ -347,7 +347,7 @@ const zhHant = {
     "示意不能代替散瞳眼底、生物測量或手術規劃。本工具結果正常不能排除眼疾。不是術後保證。本站不提供預約或轉介。",
   palStairsSimTitle: "漸進鏡 · 落樓梯光學示意",
   palStairsSimCaption:
-    "下方為教學動畫：比較遠視／近視、度數與低頭角度如何改變階梯的放大、模糊與位置線索。可用 繁／简／EN／日 切換控制項語言。示意不是視力檢查或配鏡評估。",
+    "下方為教學動畫：比較遠視／近視、度數與低頭角度如何改變階梯的放大、模糊與位置線索。控制項語言跟隨網站語言。示意不是視力檢查或配鏡評估。",
   palStairsTopicLink: "遠視與漸進鏡：落樓梯",
   iolOpticsH: "光學設計",
   iolTargetH: "單焦／預留目標度數",
@@ -929,7 +929,7 @@ const en: Record<Key, string> = {
     "Illustration cannot replace dilated fundus exam, biometry or surgical planning. A normal tool result cannot rule out disease. Not a post-operative guarantee. This site does not book or refer.",
   palStairsSimTitle: "Progressive lenses · going downstairs",
   palStairsSimCaption:
-    "Teaching animation below: compare hyperope / myope, prescription and head tilt for magnification, blur and where steps appear. Switch 繁／简／EN／日 for control labels. Illustration only — not a vision test or dispensing assessment.",
+    "Teaching animation below: compare hyperope / myope, prescription and head tilt for magnification, blur and where steps appear. Control labels follow the site language. Illustration only — not a vision test or dispensing assessment.",
   palStairsTopicLink: "Hyperopia and progressive lenses: going downstairs",
   iolOpticsH: "Optical design",
   iolTargetH: "Monofocal / target power",
@@ -1501,7 +1501,7 @@ const ja: Record<Key, string> = {
     "図示は散瞳眼底・生体計測・手術計画の代わりになりません。正常でも眼疾患を否定できません。術後保証ではありません。予約・紹介はしません。",
   palStairsSimTitle: "累進レンズ · 下り階段の光学図示",
   palStairsSimCaption:
-    "下は教育用アニメです。遠視／近視・度数・頭の傾きで、段の拡大・ぼけ・位置の手がかりがどう変わるかを比べます。繁／简／EN／日で操作ラベルを切り替えられます。図示であり、視力検査や眼鏡合わせの評価ではありません。",
+    "下は教育用アニメです。遠視／近視・度数・頭の傾きで、段の拡大・ぼけ・位置の手がかりがどう変わるかを比べます。操作ラベルはサイトの言語に従います。図示であり、視力検査や眼鏡合わせの評価ではありません。",
   palStairsTopicLink: "遠視と累進レンズ：下り階段",
   iolOpticsH: "光学デザイン",
   iolTargetH: "単焦点／目標度数",
