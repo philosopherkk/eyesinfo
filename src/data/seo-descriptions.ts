@@ -494,10 +494,11 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
     zh: "解釋遠視患者配戴漸進多焦點鏡片落樓梯時，近用區放大、模糊與稜鏡效應的光學教育，並附示意動畫（公眾教育，不能代替面診。）",
     en: "Explains why hyperopes in progressive lenses struggle going downstairs — near-zone magnification, blur and prism — with a teaching animation (education only, not a consult).",
     ja: "遠視で累進レンズを装用する人が下り階段で困る理由——近用部の拡大・ぼけ・プリズム——を教育用図示つきで説明します。市民教育であり、対面診療の代わりにはなりません。",
+    // Only Hyperopia is a MedicalCondition in JSON-LD; do not type stairs / PAL as conditions.
     about: {
-      zh: ["漸進鏡", "遠視", "落樓梯"],
-      en: ["Progressive lenses", "Hyperopia", "Downstairs"],
-      ja: ["累進レンズ", "遠視", "下り階段"],
+      zh: ["遠視"],
+      en: ["Hyperopia"],
+      ja: ["遠視"],
     },
   },
   "/tools/pal-stairs": {

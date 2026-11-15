@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
-import { PalStairsSim } from "@/components/pal-stairs-sim";
-import { EduToolCaveat } from "@/components/edu-tool-caveat";
+import {
+  PalStairsSim,
+  PalStairsTeachingCaveat,
+  PalStairsTeachingFooter,
+} from "@/components/pal-stairs-sim";
 import { EditorialFooter } from "@/components/editorial-footer";
-import { SimDisclaimer } from "@/components/sim-disclaimer";
 import { SaveButton } from "@/components/save-button";
 import { ShareButton } from "@/components/share-button";
 import { toolSaveKey } from "@/lib/saved";
@@ -59,7 +61,7 @@ function PalStairsToolPage() {
       <p className="px-4 text-[0.75rem] text-steel">{text.canto}</p>
 
       <div className="mt-3 px-4">
-        <EduToolCaveat />
+        <PalStairsTeachingCaveat />
       </div>
 
       <div className="mt-2 px-4">
@@ -84,7 +86,7 @@ function PalStairsToolPage() {
       </div>
 
       <div className="px-4">
-        <SimDisclaimer />
+        <PalStairsTeachingFooter />
         <p className="mt-2 text-[0.7rem] leading-relaxed text-faint">
           {COPYRIGHT_LINE}
         </p>

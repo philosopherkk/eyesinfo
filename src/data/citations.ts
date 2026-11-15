@@ -1215,6 +1215,18 @@ export const CITE: Record<string, Citation> = {
     pmid: "32391398",
     note: "ELT 公開綜述：準分子激光造通道、不留下植入物。文獻限制包括對照不足。不是個人預後、不是品牌比較、不是療效保證。",
   },
+  lord2002multifocal: {
+    id: "lord2002multifocal",
+    authors: "Lord SR, Dayhew J, Howland A.",
+    title: "Multifocal glasses impair edge-contrast sensitivity and depth perception and increase the risk of falls in older people",
+    source: "J Am Geriatr Soc. 2002;50(11):1760-1766",
+    pmid: "12410892",
+    note: "社區居住長者（約 63–90 歲）：多焦（含雙光、三光或漸進）相對非多焦配戴者，任何跌倒調整後 OR 約 2.29（95% CI 1.06–4.92）；樓梯相關跌倒亦較多。群體相對風險，不是個人預後、不是品牌比較。",
+    noteEn:
+      "Community-dwelling older adults (about 63–90 years): multifocal wearers (bifocal, trifocal or progressive) vs non-multifocal — adjusted OR for any fall about 2.29 (95% CI 1.06–4.92); more falls related to stairs as well. Population relative risk, not personal prognosis, not a brand comparison.",
+    noteJa:
+      "地域在住の高齢者（約63–90歳）：多焦点（二重・三重または累進を含む）装用者と非多焦点との比較で、任意の転倒の調整後ORは約2.29（95% CI 1.06–4.92）；階段関連の転倒も多い。集団の相対リスクであり、個人予後でもブランド比較でもありません。",
+  },
 };
 
 export function citationsFor(ids: string[]): Citation[] {

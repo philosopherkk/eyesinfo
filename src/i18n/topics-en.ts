@@ -3051,33 +3051,33 @@ export const EN_PACKS: Record<string, TopicPack> = {
     tag: "Optics illustration · not a test",
     meta: "Near zone · magnification · blur · prism",
     keyPoints: [
-      "Looking down stairs often sends the line of sight through the progressive near zone; for hyperopes near power = distance + add, so plus-lens effects are stronger.",
+      "If you only look down without adjusting head posture, the line of sight often crosses the near or intermediate zone; for hyperopes near power = distance + add, so plus-lens effects are stronger.",
       "Main optical issues are magnification, blur, and base-up prism (steps look lower) — depth cues can conflict.",
-      "Tuck the chin slightly so gaze uses the distance zone, use the handrail, slow down, and keep good lighting; most people adapt over about one to two weeks.",
-      "If distortion still affects safety after two weeks, return to the original dispenser to check fitting height, frame fit and prescription — not an A&E path.",
+      "Tuck the chin slightly so gaze uses the distance zone; on stairs, use the handrail, slow down, and keep good lighting. Adaptation varies — often days to weeks.",
+      "If after about two weeks distortion still affects safety, return to the original dispenser to check — not an A&E path.",
     ],
     blocks: [
       p(
-        "When a person with hyperopia wears progressive addition lenses (PAL), the main optical problem on stairs — especially going down — is that looking downward must pass through the near zone at the bottom of the lens. Power there is much higher than the distance zone. For hyperopia (plus lenses) this is especially noticeable: near power = distance power + add (ADD), so the plus-lens effect is magnified.",
+        "When a person with hyperopia wears progressive addition lenses (PAL), the main optical problem on stairs — especially going down — is that if you only look downward without adjusting head posture, the line of sight often crosses the near or intermediate zone at the bottom of the lens. That zone has the highest add; in hyperopia it is a stronger plus lens (near power = distance power + add), so the plus-lens effect is magnified.",
       ),
       h("Progressive lens zones (build the concept first)"),
       ul([
         "Top: distance zone.",
         "Corridor in the middle: intermediate transition.",
-        "Bottom: near zone (highest plus for near work).",
+        "Bottom: near zone (for near work; highest add. In hyperopia that zone is a stronger plus lens; in myopia the near power may still be minus, only with a higher add).",
         "Sides: unavoidable peripheral aberration (blur, swim) — a design limit that cannot be fully removed.",
       ]),
       p(
-        "Looking straight ahead through the distance zone is fine. Going downstairs, the eyes naturally look down at steps about 1–2 m away — far beyond the ~40 cm near design — so the line of sight crosses the near or intermediate zone.",
+        "Looking straight ahead through the distance zone is fine. Going downstairs, the eyes naturally look down at steps about 1–2 m away — far beyond the ~40 cm near design — so without adjusting head posture the line of sight often crosses the near or intermediate zone.",
       ),
       h("Three main optical problems (stronger in hyperopia)"),
       ol([
-        "Magnification: plus lenses enlarge the image. Higher near power makes steps look larger and closer. Wrong distance cues make height and distance easy to misjudge.",
+        "Magnification: plus lenses enlarge the image. A higher add in the near zone makes steps look larger and closer for hyperopes. Wrong distance cues make height and distance easy to misjudge.",
         "Blur / defocus: the near zone is focused for about 30–40 cm. Steps are farther, so the retinal image softens and edges are harder to place.",
         "Prismatic effect: looking away from the optical centre induces prism. For plus (hyperopia), looking down tends to give base-up prism, which makes objects look lower than they are. Steps can look both larger and lower — conflicting depth cues. (Myopes use minus lenses; the prism direction reverses and magnification is usually milder.)",
       ]),
       p(
-        "These effects matter more going downstairs, where each riser must be judged precisely. Going up is usually milder (gaze flatter) but still affected if head posture is wrong. Literature also reports higher fall risk among multifocal wearers than single-vision wearers (population relative risk, not personal prognosis), mainly from lower-field blur and spatial distortion.",
+        "These effects matter more going downstairs, where each riser must be judged precisely. Going up is usually milder (gaze flatter) but still affected if head posture is wrong. In a study of community-dwelling older adults (about 63–90 years), multifocal wearers (bifocal, trifocal or progressive) had a higher adjusted odds of any fall than non-multifocal wearers (OR about 2.29, 95% CI 1.06–4.92), and more falls related to stairs — population relative risk, not personal prognosis, and not a brand comparison. The main mechanisms are lower-field blur and spatial distortion.",
       ),
       p(
         "Peripheral aberration can add “swim”: as the head or body moves, floor or step edges seem to shift, which further upsets balance.",
@@ -3086,14 +3086,14 @@ export const EN_PACKS: Record<string, TopicPack> = {
       p(
         "The figure marks lens zones, gaze path, and how magnification, blur and prism change the stair image. Toggle hyperope / myope and adjust power and head tilt to compare — teaching illustration only, not a vision test or dispensing assessment.",
       ),
-      h("Practical advice for wearers"),
+      h("General points"),
       ul([
-        "Change gaze habit now: tuck the chin slightly so you look through the upper distance zone at the steps, rather than dropping the eyes alone. It takes deliberate practice; most brains adapt in 1–2 weeks.",
-        "Safety: always use the handrail, slow down, keep good lighting. Do not rush.",
-        "Adaptation: many people improve clearly within 1–2 weeks. If after two weeks steps still feel badly misplaced, dizzy or unsafe, return to the original dispenser to check fitting height, frame slip or pantoscopic tilt, over-correction (easy in hyperopia), and whether a softer design or longer corridor suits better.",
+        "Gaze habit: tuck the chin slightly so you look through the upper distance zone at the steps, rather than dropping the eyes alone. It takes deliberate practice at first.",
+        "Safety: on stairs, use the handrail when you can, slow down, and keep good lighting. Do not rush.",
+        "Adaptation varies — often days to weeks. If after about two weeks steps still feel badly misplaced, dizzy or unsafe, return to the original dispenser to check. The dispenser may review fitting height, frame slip or pantoscopic tilt, prescription and lens design.",
       ]),
       p(
-        "These issues are intrinsic to progressive optics — not only “a wrong pair” — but correct fitting height, frame adjustment and gaze habit can reduce them a lot.",
+        "These issues are intrinsic to progressive optics — not only “a wrong pair”. Correct fitting height, frame adjustment and gaze habit may help; suitability and adjustments are for the original dispenser to assess.",
       ),
       note(
         "Not a substitute for a registered doctor. This page is optics education and illustration — not diagnosis, prescribing, booking, selling or referral, and not a personal dispensing analysis. Cross-read: presbyopia, refractive error, and spectacle Rx decode.",

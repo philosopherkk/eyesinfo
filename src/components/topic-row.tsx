@@ -13,7 +13,7 @@ export function TopicRow({
   className?: string;
 }) {
   const loc = useLocalizedTopic(topic);
-  const cardTitle = topicCardTitle(loc.title);
+  const cardTitle = topicCardTitle(loc.title, topic.id);
   const sub = loc.meta || loc.tag;
   return (
     <Link

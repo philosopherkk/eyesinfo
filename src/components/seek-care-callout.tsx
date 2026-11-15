@@ -8,6 +8,11 @@ export type SeekCareLevel = "immediate" | "same-day" | "routine";
 type Props = {
   level: SeekCareLevel;
   className?: string;
+  /**
+   * Optional routine-body override (e.g. `/t/t-pal-stairs` has no in-page
+   * red flags — avoid the shared A&E / dilated wording). Title stays shared.
+   */
+  routineBodyKey?: "seekCareRoutineBody" | "seekCarePalStairsBody";
 };
 
 /**
@@ -15,7 +20,7 @@ type Props = {
  * immediate → A&E / 999; same-day → 應盡快（最好當日）; routine → non-urgent education.
  * Links only to this site’s 急症頁 — no clinic booking.
  */
-export function SeekCareCallout({ level, className }: Props) {
+export function SeekCareCallout({ level, className, routineBodyKey }: Props) {
   const { t } = useI18n();
 
   if (level === "immediate") {
@@ -86,7 +91,9 @@ export function SeekCareCallout({ level, className }: Props) {
         <Info className="mt-0.5 size-4 shrink-0 text-steel" aria-hidden />
         <div className="min-w-0 text-[0.88rem] leading-relaxed">
           <p className="font-semibold text-ink">{t("seekCareRoutineTitle")}</p>
-          <p className="mt-1">{t("seekCareRoutineBody")}</p>
+          <p className="mt-1">
+            {t(routineBodyKey ?? "seekCareRoutineBody")}
+          </p>
         </div>
       </div>
     </aside>

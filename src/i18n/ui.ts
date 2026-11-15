@@ -227,6 +227,9 @@ const zhHant = {
   seekCareRoutineTitle: "一般教育專題",
   seekCareRoutineBody:
     "本頁屬非急症教育。若出現文內紅旗徵狀，仍須按指示立即急症室或盡快散瞳評估。內容不能代替註冊醫生面診。",
+  /** `/t/t-pal-stairs` only — no in-page red-flag / A&E / dilated path. */
+  seekCarePalStairsBody:
+    "本頁屬非急症光學教育。內容不能代替註冊醫生面診。",
   seekCareUrgentLink: "急症頁",
   contentVer: "內容版本",
   siteVersionLabel: "網站版本",
@@ -348,6 +351,11 @@ const zhHant = {
   palStairsSimTitle: "漸進鏡 · 落樓梯光學示意",
   palStairsSimCaption:
     "下方為教學動畫：比較遠視／近視、度數與低頭角度如何改變階梯的放大、模糊與位置線索。控制項語言跟隨網站語言。示意不是視力檢查或配鏡評估。",
+  palStairsEduBadge: "光學示意 · 不是檢查",
+  palStairsEduCaveat:
+    "本圖只供教學示意，不是視力檢查或配鏡評估。本站不提供預約或轉介。不能代替註冊醫生。",
+  palStairsSimFooter:
+    "示意不是視力檢查或配鏡評估，亦不能代替面診。本站不提供預約或轉介。",
   palStairsTopicLink: "遠視與漸進鏡：落樓梯",
   iolOpticsH: "光學設計",
   iolTargetH: "單焦／預留目標度數",
@@ -796,6 +804,8 @@ const en: Record<Key, string> = {
   seekCareRoutineTitle: "General education topic",
   seekCareRoutineBody:
     "This page is non-urgent education. If in-page red-flag symptoms appear, still follow the instructions for A&E or prompt dilated assessment. Content cannot replace a visit with a registered doctor.",
+  seekCarePalStairsBody:
+    "This page is non-urgent optics education. Content cannot replace a visit with a registered doctor.",
   seekCareUrgentLink: "Urgent care page",
   contentVer: "Content version",
   siteVersionLabel: "Site version",
@@ -930,6 +940,11 @@ const en: Record<Key, string> = {
   palStairsSimTitle: "Progressive lenses · going downstairs",
   palStairsSimCaption:
     "Teaching animation below: compare hyperope / myope, prescription and head tilt for magnification, blur and where steps appear. Control labels follow the site language. Illustration only — not a vision test or dispensing assessment.",
+  palStairsEduBadge: "Optics illustration · not a test",
+  palStairsEduCaveat:
+    "Illustration only — not a vision test or dispensing assessment. This site does not book or refer. Cannot replace a registered doctor.",
+  palStairsSimFooter:
+    "Illustration only — not a vision test or dispensing assessment, and not a substitute for an in-person visit. This site does not book or refer.",
   palStairsTopicLink: "Hyperopia and progressive lenses: going downstairs",
   iolOpticsH: "Optical design",
   iolTargetH: "Monofocal / target power",
@@ -1376,6 +1391,8 @@ const ja: Record<Key, string> = {
   seekCareRoutineTitle: "一般向け教育ページ",
   seekCareRoutineBody:
     "このページは非救急の教育です。本文の危険徴候が出た場合は、救急外来または早めの散瞳評価の指示に従ってください。内容は登録医の対面診察の代わりにはなりません。",
+  seekCarePalStairsBody:
+    "このページは非救急の光学教育です。内容は登録医の対面診察の代わりにはなりません。",
   seekCareUrgentLink: "救急ページ",
   contentVer: "コンテンツ版",
   siteVersionLabel: "サイト版",
@@ -1502,6 +1519,11 @@ const ja: Record<Key, string> = {
   palStairsSimTitle: "累進レンズ · 下り階段の光学図示",
   palStairsSimCaption:
     "下は教育用アニメです。遠視／近視・度数・頭の傾きで、段の拡大・ぼけ・位置の手がかりがどう変わるかを比べます。操作ラベルはサイトの言語に従います。図示であり、視力検査や眼鏡合わせの評価ではありません。",
+  palStairsEduBadge: "光学図示 · 検査ではない",
+  palStairsEduCaveat:
+    "教育用図示であり、視力検査や眼鏡合わせの評価ではありません。予約・紹介はしません。登録医の代わりにはなりません。",
+  palStairsSimFooter:
+    "図示であり、視力検査や眼鏡合わせの評価でも、対面診察の代わりでもありません。予約・紹介はしません。",
   palStairsTopicLink: "遠視と累進レンズ：下り階段",
   iolOpticsH: "光学デザイン",
   iolTargetH: "単焦点／目標度数",

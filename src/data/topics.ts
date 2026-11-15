@@ -119,8 +119,12 @@ export function topicEditorial(topic: Topic): {
  * Prefer the clause before a full-width or ASCII colon so long hub titles
  * (e.g. 青光眼監察：…) do not truncate mid-phrase on narrow viewports.
  * Full `title` remains for the topic H1 and SEO.
+ *
+ * Exception: `t-pal-stairs` keeps the stairs clause on cards (落樓梯 /
+ * going downstairs / 下り階段) so the listing stays meaningful.
  */
-export function topicCardTitle(title: string): string {
+export function topicCardTitle(title: string, topicId?: string): string {
+  if (topicId === "t-pal-stairs") return title;
   const idx = title.search(/[：:]/);
   if (idx > 0) return title.slice(0, idx).trim();
   return title;

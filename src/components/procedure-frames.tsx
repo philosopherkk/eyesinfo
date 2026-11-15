@@ -506,7 +506,7 @@ function CataractSimRelated() {
                 path={`/t/${topic.id}`}
                 className="flex min-h-11 items-center px-3 py-2 text-[0.85rem] font-semibold text-navy no-underline"
               >
-                {topicCardTitle(loc.title)}
+                {topicCardTitle(loc.title, topic.id)}
               </LocaleHrefLink>
             </li>
           );
