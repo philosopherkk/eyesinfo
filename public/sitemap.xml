@@ -3,7 +3,7 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.eyesinfo.org/</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/en"/>
@@ -12,7 +12,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/en</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/en"/>
@@ -21,7 +21,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/zh-Hans</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/en"/>
@@ -30,7 +30,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/ja</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/en"/>
@@ -165,7 +165,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/tools/procedures</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/procedures"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/procedures?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/procedures?lang=en"/>
@@ -228,12 +228,21 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/tools/pal-stairs</loc>
-    <lastmod>2026-11-14</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/pal-stairs"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/pal-stairs?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/pal-stairs?lang=en"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://www.eyesinfo.org/tools/pal-stairs?lang=ja"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/tools/pal-stairs"/>
+  </url>
+  <url>
+    <loc>https://www.eyesinfo.org/tools/shallow-ac</loc>
+    <lastmod>2026-09-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/shallow-ac"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/shallow-ac?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/shallow-ac?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.eyesinfo.org/tools/shallow-ac?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/tools/shallow-ac"/>
   </url>
   <url>
     <loc>https://www.eyesinfo.org/tools/warm</loc>
@@ -273,7 +282,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/c/lens</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/c/lens"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/c/lens?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/c/lens?lang=en"/>
@@ -282,7 +291,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/c/lid</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/c/lid"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/c/lid?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/c/lid?lang=en"/>
@@ -291,7 +300,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/c/glaucoma</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/c/glaucoma"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/c/glaucoma?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/c/glaucoma?lang=en"/>
@@ -300,7 +309,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/c/retina</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/c/retina"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/c/retina?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/c/retina?lang=en"/>
@@ -309,7 +318,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/c/surface</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/c/surface"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/c/surface?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/c/surface?lang=en"/>
@@ -318,7 +327,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/c/macula</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/c/macula"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/c/macula?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/c/macula?lang=en"/>
@@ -750,7 +759,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/t/t-pal-stairs</loc>
-    <lastmod>2026-11-14</lastmod>
+    <lastmod>2026-11-15</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/t/t-pal-stairs"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/t/t-pal-stairs?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/t/t-pal-stairs?lang=en"/>

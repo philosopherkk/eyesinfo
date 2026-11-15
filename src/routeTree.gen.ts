@@ -37,6 +37,7 @@ import { Route as TTopicIdRouteImport } from './routes/t.$topicId'
 import { Route as ToolsIndexRouteImport } from './routes/tools.index'
 import { Route as ToolsToolIdRouteImport } from './routes/tools.$toolId'
 import { Route as ToolsPalStairsRouteImport } from './routes/tools.pal-stairs'
+import { Route as ToolsShallowAcRouteImport } from './routes/tools.shallow-ac'
 import { Route as ToolsProceduresRouteImport } from './routes/tools.procedures'
 import { Route as ZhCNIndexRouteImport } from './routes/zh-CN.index'
 import { Route as ZhCNSplatRouteImport } from './routes/zh-CN.$'
@@ -183,6 +184,11 @@ const ToolsPalStairsRoute = ToolsPalStairsRouteImport.update({
   path: '/pal-stairs',
   getParentRoute: () => ToolsRoute,
 } as any)
+const ToolsShallowAcRoute = ToolsShallowAcRouteImport.update({
+  id: '/shallow-ac',
+  path: '/shallow-ac',
+  getParentRoute: () => ToolsRoute,
+} as any)
 const ToolsProceduresRoute = ToolsProceduresRouteImport.update({
   id: '/procedures',
   path: '/procedures',
@@ -235,6 +241,7 @@ export interface FileRoutesByFullPath {
   '/t/$topicId': typeof TTopicIdRoute
   '/tools/$toolId': typeof ToolsToolIdRoute
   '/tools/pal-stairs': typeof ToolsPalStairsRoute
+  '/tools/shallow-ac': typeof ToolsShallowAcRoute
   '/tools/procedures': typeof ToolsProceduresRoute
   '/zh-CN/$': typeof ZhCNSplatRoute
   '/zh-Hans/$': typeof ZhHansSplatRoute
@@ -265,6 +272,7 @@ export interface FileRoutesByTo {
   '/t/$topicId': typeof TTopicIdRoute
   '/tools/$toolId': typeof ToolsToolIdRoute
   '/tools/pal-stairs': typeof ToolsPalStairsRoute
+  '/tools/shallow-ac': typeof ToolsShallowAcRoute
   '/tools/procedures': typeof ToolsProceduresRoute
   '/zh-CN/$': typeof ZhCNSplatRoute
   '/zh-Hans/$': typeof ZhHansSplatRoute
@@ -301,6 +309,7 @@ export interface FileRoutesById {
   '/t/$topicId': typeof TTopicIdRoute
   '/tools/$toolId': typeof ToolsToolIdRoute
   '/tools/pal-stairs': typeof ToolsPalStairsRoute
+  '/tools/shallow-ac': typeof ToolsShallowAcRoute
   '/tools/procedures': typeof ToolsProceduresRoute
   '/zh-CN/$': typeof ZhCNSplatRoute
   '/zh-Hans/$': typeof ZhHansSplatRoute
@@ -338,6 +347,7 @@ export interface FileRouteTypes {
     | '/t/$topicId'
     | '/tools/$toolId'
     | '/tools/pal-stairs'
+    | '/tools/shallow-ac'
     | '/tools/procedures'
     | '/zh-CN/$'
     | '/zh-Hans/$'
@@ -368,6 +378,7 @@ export interface FileRouteTypes {
     | '/t/$topicId'
     | '/tools/$toolId'
     | '/tools/pal-stairs'
+    | '/tools/shallow-ac'
     | '/tools/procedures'
     | '/zh-CN/$'
     | '/zh-Hans/$'
@@ -403,6 +414,7 @@ export interface FileRouteTypes {
     | '/t/$topicId'
     | '/tools/$toolId'
     | '/tools/pal-stairs'
+    | '/tools/shallow-ac'
     | '/tools/procedures'
     | '/zh-CN/$'
     | '/zh-Hans/$'
@@ -635,6 +647,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsPalStairsRouteImport
       parentRoute: typeof ToolsRoute
     }
+    '/tools/shallow-ac': {
+      id: '/tools/shallow-ac'
+      path: '/shallow-ac'
+      fullPath: '/tools/shallow-ac'
+      preLoaderRoute: typeof ToolsShallowAcRouteImport
+      parentRoute: typeof ToolsRoute
+    }
     '/tools/procedures': {
       id: '/tools/procedures'
       path: '/procedures'
@@ -700,6 +719,7 @@ const JaRouteWithChildren = JaRoute._addFileChildren(JaRouteChildren)
 interface ToolsRouteChildren {
   ToolsToolIdRoute: typeof ToolsToolIdRoute
   ToolsPalStairsRoute: typeof ToolsPalStairsRoute
+  ToolsShallowAcRoute: typeof ToolsShallowAcRoute
   ToolsProceduresRoute: typeof ToolsProceduresRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
 }
@@ -707,6 +727,7 @@ interface ToolsRouteChildren {
 const ToolsRouteChildren: ToolsRouteChildren = {
   ToolsToolIdRoute: ToolsToolIdRoute,
   ToolsPalStairsRoute: ToolsPalStairsRoute,
+  ToolsShallowAcRoute: ToolsShallowAcRoute,
   ToolsProceduresRoute: ToolsProceduresRoute,
   ToolsIndexRoute: ToolsIndexRoute,
 }

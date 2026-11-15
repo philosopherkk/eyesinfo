@@ -113,6 +113,8 @@ function Panel({ id }: { id: ToolId }) {
     case "iolOptics":
     case "procedures":
     case "palStairs":
+    case "shallow-ac":
+      // Dedicated file routes (`tools.pal-stairs`, `tools.shallow-ac`, …) own these.
       return null;
     default: {
       const _exhaustive: never = id;

@@ -506,6 +506,11 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
     en: "Teaching animation of progressive-lens downstairs optics — near-zone magnification, blur and prism; toggle hyperope/myope (education tool, not a test).",
     ja: "累進レンズで下り階段を見るときの近用部の拡大・ぼけ・プリズムの教育用アニメ。遠視／近視を切替（検査ではない）。",
   },
+  "/tools/shallow-ac": {
+    zh: "淺前房、瞳孔阻滯、虹膜膨隆與房角關閉路徑的機制教學動畫（教育工具，不是自我檢查；急性症狀見急症頁）。",
+    en: "Teaching animation of shallow anterior chamber, pupil block, iris bombé and angle-closure path (education tool, not a self-check; acute symptoms → urgent page).",
+    ja: "浅い前房・瞳孔ブロック・虹彩ボンベ・隅角閉鎖経路の機序を示す教育用アニメ（自己検査ではない。急性症状は緊急ページへ）。",
+  },
   "/t/t-pterygium": {
     zh: "介紹翼狀胬肉與紫外線等相關因素，以及生活上遮陽防護的建議，並說明何時宜找專科評估（公眾教育），詳見專題正文。",
     en: "Educational notes on pterygium and UV-related factors, plus everyday sun-protection ideas from the published leaflet for readers.",

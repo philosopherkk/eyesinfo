@@ -36,6 +36,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
       blurb: "遠視／近視、近用區放大模糊與稜鏡效應（不是檢查）",
       canto: "落樓梯點解矇同怪",
     },
+    "shallow-ac": {
+      title: "淺前房與閉角機制",
+      blurb: "前房變淺、瞳孔阻滯、虹膜膨隆與房角關閉路徑的機制示意（不是自我檢查）",
+      canto: "點解會突然劇痛虹視",
+    },
   },
   "zh-Hans": {
     amsler: { title: "阿姆斯勒方格", blurb: "教育工具 · 自我察觉中央视力", canto: "遮一眼望中央" },
@@ -65,6 +70,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
       title: "渐进镜落楼梯示意",
       blurb: "远视／近视、近用区放大模糊与棱镜效应（不是检查）",
       canto: "落楼梯为何模糊又怪",
+    },
+    "shallow-ac": {
+      title: "浅前房与闭角机制",
+      blurb: "前房变浅、瞳孔阻滞、虹膜膨隆与房角关闭路径的机制示意（不是自我检查）",
+      canto: "为何会突然剧痛虹视",
     },
   },
   en: {
@@ -96,6 +106,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
       blurb: "Hyperope / myope near-zone magnification, blur and prism (not a test)",
       canto: "Why stairs look wrong",
     },
+    "shallow-ac": {
+      title: "Shallow AC and angle-closure mechanism",
+      blurb: "Mechanism of shallow chamber, pupil block, iris bombé and angle closure (not a self-check)",
+      canto: "Why sudden pain and halos",
+    },
   },
   ja: {
     amsler: { title: "アムスラーチャート", blurb: "教育ツール · 中心視力の自己観察", canto: "片眼隠し中央を見る" },
@@ -125,6 +140,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
       title: "累進レンズ · 下り階段の図示",
       blurb: "遠視／近視・近用部の拡大・ぼけ・プリズム（検査ではない）",
       canto: "下りでおかしく見える理由",
+    },
+    "shallow-ac": {
+      title: "浅い前房と閉塞隅角の機序",
+      blurb: "前房が浅くなり、瞳孔ブロック・虹彩ボンベ・隅角閉鎖に至る経路の機序図示（自己検査ではない）",
+      canto: "なぜ突然の激痛と虹視か",
     },
   },
 };

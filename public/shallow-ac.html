@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#12151a" />
+  <meta name="robots" content="noindex" />
+  <title>淺前房與閉角機制示意 — 護眼學堂</title>
+  <style>
+    html, body { margin: 0; padding: 0; background: #0f1217; color: #e4e4e4; }
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 10px 8px 16px; }
+    .cap { font: 13px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color: #9aa3b2; margin: 0 4px 10px; }
+    #sacsim {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: #12151a; color: #e4e4e4; padding: 12px; border-radius: 14px;
+      max-width: 980px; margin: auto; user-select: none;
+    }
+    #sacsim canvas { width: 100%; display: block; border-radius: 10px; background: #000; touch-action: none; }
+    #sacsim .bar { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin: 4px 2px 10px; }
+    #sacsim .seg { display: flex; border-radius: 9px; overflow: hidden; border: 1px solid #444; }
+    #sacsim .seg button, #sacsim .btn {
+      background: #23272f; color: #ddd; border: 0; padding: 7px 13px; font-size: 14px;
+      cursor: pointer; min-height: 40px;
+    }
+    #sacsim .seg button.on { background: #f0a030; color: #111; font-weight: 700; }
+    #sacsim .btn { border: 1px solid #444; border-radius: 9px; }
+    #sacsim .steps { display: flex; flex-wrap: wrap; gap: 6px; }
+    #sacsim .steps button {
+      background: #1a1f28; color: #9aa3b2; border: 1px solid #3a4250; border-radius: 999px;
+      padding: 6px 11px; font-size: 12.5px; cursor: pointer; min-height: 36px;
+    }
+    #sacsim .steps button.on { background: #2a3340; color: #f3c06a; border-color: #f0a030; font-weight: 600; }
+    #sacsim label { font-size: 13px; display: flex; align-items: center; gap: 6px; color: #bbb; }
+    #sacsim input[type=range] { width: 110px; accent-color: #f0a030; }
+    #sacsim .v { min-width: 46px; font-variant-numeric: tabular-nums; color: #f3c06a; }
+    #sacsim .story {
+      margin: 0 2px 10px; padding: 10px 12px; border-radius: 10px;
+      background: #1a1f28; border: 1px solid #2c3440; font-size: 13.5px; line-height: 1.5; color: #d5dae3;
+      min-height: 3.2em;
+    }
+    #sacsim .hint { margin: 10px 2px 0; font-size: 12.5px; line-height: 1.45; color: #8b93a3; }
+    #sacsim .hint a { color: #7ec8e3; }
+    #sacsim .flow-wrap { margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="cap" id="sac-page-cap"></p>
+    <div id="sacsim">
+      <div class="bar">
+        <div class="seg" role="group" aria-label="mode">
+          <button type="button" data-mode="open" class="on" id="sac-open"></button>
+          <button type="button" data-mode="block" id="sac-block"></button>
+        </div>
+        <label><span id="sac-depth-lab"></span> <input id="sac-depth" type="range" min="0" max="100" step="1" value="30"><span class="v" id="sac-depthv"></span></label>
+        <label><span id="sac-pupil-lab"></span> <input id="sac-pupil" type="range" min="0" max="100" step="1" value="50"><span class="v" id="sac-pupilv"></span></label>
+        <button class="btn" type="button" id="sac-play" aria-label="pause">❚❚</button>
+        <button class="btn" type="button" id="sac-demo"></button>
+        <button class="btn" type="button" id="sac-reset"></button>
+      </div>
+      <div class="steps" id="sac-steps" role="tablist"></div>
+      <p class="story" id="sac-story" aria-live="polite"></p>
+      <canvas id="sac-sag" width="960" height="420" aria-label="sagittal"></canvas>
+      <div class="flow-wrap">
+        <canvas id="sac-flow" width="960" height="220" aria-label="flow"></canvas>
+      </div>
+      <p class="hint" id="sac-hint"></p>
+    </div>
+  </div>
+<script>
+(()=>{
+const I18N = {
+  "zh-Hant": {
+    pageCap: "教育示意 · 淺前房、瞳孔阻滯、虹膜膨隆與房角關閉路徑。不是自我檢查或診斷。",
+    open: "開角路徑",
+    block: "瞳孔阻滯路徑",
+    depth: "前房深度（相對）",
+    pupil: "瞳孔大小（相對）",
+    demo: "自動示範",
+    reset: "重設",
+    pauseAria: "暫停",
+    playAria: "播放",
+    step1: "① 開角流通",
+    step2: "② 前房變淺",
+    step3: "③ 中等散大・阻滯",
+    step4: "④ 房角關閉・壓升",
+    story1: "房水由睫狀體產生，經瞳孔進入前房，再由小樑網流出。開角時路徑暢通（示意）。",
+    story2: "前房相對變淺時，周邊虹膜更靠近房角。這只是解剖機制示意，不能用來判斷你自己的房角。",
+    story3: "瞳孔中等散大時，虹膜與晶體接觸面較大，較易出現瞳孔阻滯；後房壓力把虹膜向前膨隆（虹膜膨隆）。",
+    story4: "膨隆的周邊虹膜可接觸小樑網，堵住房水出路；相對眼壓示意上升。急性劇痛／虹視／嘔吐 → 急症頁。",
+    cornea: "角膜",
+    ac: "前房",
+    iris: "虹膜",
+    pupilLab: "瞳孔",
+    lens: "晶體",
+    tm: "小樑網",
+    angle: "房角",
+    pc: "後房",
+    ciliary: "睫狀體",
+    bombe: "虹膜膨隆",
+    pupilBlock: "瞳孔阻滯",
+    outflow: "房水出路",
+    inset: "房角放大",
+    gaugeAngle: "房角開度（相對）",
+    gaugeIop: "相對壓力示意",
+    gaugeOpen: "較開",
+    gaugeNarrow: "較窄",
+    gaugeClosed: "接觸",
+    gaugeLow: "較低",
+    gaugeMid: "中等",
+    gaugeHigh: "較高",
+    flowTitle: "房水流動路徑（示意）",
+    gatePupil: "瞳孔通道",
+    gateTm: "小樑網",
+    gateOpen: "暢通",
+    gatePartial: "受限",
+    gateClosed: "受阻",
+    hint: "相對滑桿只供教學，沒有臨床毫米汞柱數字。不能自行判斷窄角或閉角。突然劇痛、虹視、視力急降或頭痛嘔吐：立即急症室；無法前往請致電 999。詳見",
+    urgentLink: "急症頁",
+    htmlLang: "zh-Hant",
+  },
+  "zh-Hans": {
+    pageCap: "教育示意 · 浅前房、瞳孔阻滞、虹膜膨隆与房角关闭路径。不是自我检查或诊断。",
+    open: "开角路径",
+    block: "瞳孔阻滞路径",
+    depth: "前房深度（相对）",
+    pupil: "瞳孔大小（相对）",
+    demo: "自动示范",
+    reset: "重设",
+    pauseAria: "暂停",
+    playAria: "播放",
+    step1: "① 开角流通",
+    step2: "② 前房变浅",
+    step3: "③ 中等散大・阻滞",
+    step4: "④ 房角关闭・压升",
+    story1: "房水由睫状体产生，经瞳孔进入前房，再由小梁网流出。开角时路径畅通（示意）。",
+    story2: "前房相对变浅时，周边虹膜更靠近房角。这只是解剖机制示意，不能用来判断你自己的房角。",
+    story3: "瞳孔中等散大时，虹膜与晶体接触面较大，较易出现瞳孔阻滞；后房压力把虹膜向前膨隆（虹膜膨隆）。",
+    story4: "膨隆的周边虹膜可接触小梁网，堵住房水出路；相对眼压示意上升。急性剧痛／虹视／呕吐 → 急症页。",
+    cornea: "角膜",
+    ac: "前房",
+    iris: "虹膜",
+    pupilLab: "瞳孔",
+    lens: "晶体",
+    tm: "小梁网",
+    angle: "房角",
+    pc: "后房",
+    ciliary: "睫状体",
+    bombe: "虹膜膨隆",
+    pupilBlock: "瞳孔阻滞",
+    outflow: "房水出路",
+    inset: "房角放大",
+    gaugeAngle: "房角开度（相对）",
+    gaugeIop: "相对压力示意",
+    gaugeOpen: "较开",
+    gaugeNarrow: "较窄",
+    gaugeClosed: "接触",
+    gaugeLow: "较低",
+    gaugeMid: "中等",
+    gaugeHigh: "较高",
+    flowTitle: "房水流动路径（示意）",
+    gatePupil: "瞳孔通道",
+    gateTm: "小梁网",
+    gateOpen: "畅通",
+    gatePartial: "受限",
+    gateClosed: "受阻",
+    hint: "相对滑杆只供教学，没有临床毫米汞柱数字。不能自行判断窄角或闭角。突然剧痛、虹视、视力急降或头痛呕吐：立即急诊室；无法前往请致电 999。详见",
+    urgentLink: "急症页",
+    htmlLang: "zh-CN",
+  },
+  en: {
+    pageCap: "Education illustration · shallow anterior chamber, pupil block, iris bombé and angle-closure path. Not a self-check or diagnosis.",
+    open: "Open-angle path",
+    block: "Pupil-block path",
+    depth: "AC depth (relative)",
+    pupil: "Pupil size (relative)",
+    demo: "Auto demo",
+    reset: "Reset",
+    pauseAria: "Pause",
+    playAria: "Play",
+    step1: "① Open outflow",
+    step2: "② Shallower AC",
+    step3: "③ Mid-dilation · block",
+    step4: "④ Angle contact · rise",
+    story1: "Aqueous forms at the ciliary body, passes through the pupil into the anterior chamber, then leaves via the trabecular meshwork. Open angle = free path (illustration).",
+    story2: "When the chamber is relatively shallow, peripheral iris sits closer to the angle. Anatomy teaching only — not a way to judge your own angle.",
+    story3: "At mid-dilation the iris–lens contact zone is larger, so pupil block is more likely; posterior pressure bows the iris forward (bombé).",
+    story4: "Bombed peripheral iris can touch the trabecular meshwork and impede outflow; relative pressure gauge rises. Sudden pain / halos / vomiting → urgent page.",
+    cornea: "Cornea",
+    ac: "Anterior chamber",
+    iris: "Iris",
+    pupilLab: "Pupil",
+    lens: "Lens",
+    tm: "Trabecular meshwork",
+    angle: "Angle",
+    pc: "Posterior chamber",
+    ciliary: "Ciliary body",
+    bombe: "Iris bombé",
+    pupilBlock: "Pupil block",
+    outflow: "Aqueous outflow",
+    inset: "Angle inset",
+    gaugeAngle: "Angle opening (relative)",
+    gaugeIop: "Relative pressure",
+    gaugeOpen: "Wider",
+    gaugeNarrow: "Narrower",
+    gaugeClosed: "Contact",
+    gaugeLow: "Lower",
+    gaugeMid: "Mid",
+    gaugeHigh: "Higher",
+    flowTitle: "Aqueous flow path (illustration)",
+    gatePupil: "Pupil channel",
+    gateTm: "Trabecular meshwork",
+    gateOpen: "Open",
+    gatePartial: "Limited",
+    gateClosed: "Blocked",
+    hint: "Relative sliders are teaching-only — no clinical mmHg figures. Do not self-judge narrow angle or angle closure. Sudden severe pain, halos, vision drop, or headache with vomiting: A&E now; if you cannot travel, call 999. See",
+    urgentLink: "urgent page",
+    htmlLang: "en",
+  },
+  ja: {
+    pageCap: "教育用図示 · 浅い前房・瞳孔ブロック・虹彩ボンベと隅角閉鎖の経路。自己検査や診断ではありません。",
+    open: "開放隅角の経路",
+    block: "瞳孔ブロック経路",
+    depth: "前房深度（相対）",
+    pupil: "瞳孔径（相対）",
+    demo: "自動デモ",
+    reset: "リセット",
+    pauseAria: "一時停止",
+    playAria: "再生",
+    step1: "① 開放の流出",
+    step2: "② 前房が浅く",
+    step3: "③ 中等散大・ブロック",
+    step4: "④ 隅角接触・上昇",
+    story1: "房水は毛様体で作られ、瞳孔を通って前房へ入り、線維柱帯から流出します。開放隅角では経路が開いています（図示）。",
+    story2: "前房が相対的に浅いと、周辺虹彩が隅角に近づきます。解剖の機序の図示であり、自分の隅角を判定する手段ではありません。",
+    story3: "瞳孔が中等度に開くと虹彩と水晶体の接触面が広くなり、瞳孔ブロックが起きやすく、後房の圧で虹彩が前方へ膨らみます（ボンベ）。",
+    story4: "膨らんだ周辺虹彩が線維柱帯に触れ、流出を妨げ得ます。相対的な圧の示意が上がります。突然の激痛／虹視／嘔吐 → 緊急ページ。",
+    cornea: "角膜",
+    ac: "前房",
+    iris: "虹彩",
+    pupilLab: "瞳孔",
+    lens: "水晶体",
+    tm: "線維柱帯",
+    angle: "隅角",
+    pc: "後房",
+    ciliary: "毛様体",
+    bombe: "虹彩ボンベ",
+    pupilBlock: "瞳孔ブロック",
+    outflow: "房水流出",
+    inset: "隅角拡大",
+    gaugeAngle: "隅角開大（相対）",
+    gaugeIop: "相対的な圧の示意",
+    gaugeOpen: "広い",
+    gaugeNarrow: "狭い",
+    gaugeClosed: "接触",
+    gaugeLow: "低い",
+    gaugeMid: "中等",
+    gaugeHigh: "高い",
+    flowTitle: "房水の流れ（図示）",
+    gatePupil: "瞳孔経路",
+    gateTm: "線維柱帯",
+    gateOpen: "開通",
+    gatePartial: "制限",
+    gateClosed: "遮断",
+    hint: "相対スライダーは教育用のみで、臨床の mmHg 数値はありません。狭い隅角や閉塞を自分で判定しないでください。突然の激痛・虹視・視力急低下・頭痛嘔吐：救急へ；行けない場合は 999。詳細は",
+    urgentLink: "緊急ページ",
+    htmlLang: "ja",
+  },
+};
+
+const normalizeLang = (raw) => {
+  const v = (raw || "").trim();
+  if (v === "zh" || v === "zh-Hant" || v === "zh-hant") return "zh-Hant";
+  if (v === "zh-Hans" || v === "zh-hans" || v === "zh-CN" || v === "zh-cn") return "zh-Hans";
+  if (v === "ja" || v === "jp") return "ja";
+  if (v === "en") return "en";
+  return "zh-Hant";
+};
+
+let uiLang = normalizeLang(new URLSearchParams(location.search).get("lang"));
+let T = I18N[uiLang];
+const $ = (id) => document.getElementById(id);
+const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
+const lerp = (a, b, t) => a + (b - a) * t;
+const smooth = (t) => { const x = clamp(t, 0, 1); return x * x * (3 - 2 * x); };
+
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const S = {
+  mode: "open", // open | block
+  depth: 30,    // 0 deep … 100 shallow (relative)
+  pupil: 50,    // 0 small … 100 large (relative)
+  play: !reduceMotion,
+  demo: !reduceMotion,
+  step: 0,
+  demoT: 0,
+};
+
+/** Mid-dilation bell: peak near 0.5 on [0,1] pupil. */
+function midBell(p01) {
+  const x = (p01 - 0.5) / 0.22;
+  return Math.exp(-0.5 * x * x);
+}
+
+function metrics() {
+  const shallow = S.depth / 100;
+  const p01 = S.pupil / 100;
+  const forced = S.mode === "block" ? 1 : 0;
+  const openBias = S.mode === "open" ? 0.35 : 0;
+  const rawBlock = clamp(shallow * 0.55 + midBell(p01) * (0.35 + shallow * 0.45) + forced * 0.55 - openBias, 0, 1);
+  const block = smooth(rawBlock);
+  const bombe = smooth(clamp((block - 0.25) / 0.55, 0, 1)) * (0.35 + shallow * 0.65);
+  const angleOpen = clamp(1 - shallow * 0.55 - bombe * 0.75 - (S.mode === "block" ? 0.15 : 0), 0, 1);
+  const tmContact = clamp(1 - angleOpen * 1.15, 0, 1);
+  const iop = smooth(clamp(tmContact * 0.75 + block * 0.35 * shallow, 0, 1));
+  const pupilGate = 1 - block * 0.92;
+  const tmGate = 1 - tmContact * 0.95;
+  return { shallow, p01, block, bombe, angleOpen, tmContact, iop, pupilGate, tmGate };
+}
+
+const particles = [];
+function spawnParticle(m) {
+  const path = Math.random() < 0.55 ? "main" : "alt";
+  particles.push({
+    t: 0,
+    speed: 0.18 + Math.random() * 0.12,
+    path,
+    alive: true,
+    stuck: false,
+  });
+  if (particles.length > 48) particles.shift();
+}
+
+function applyLang(lang) {
+  uiLang = normalizeLang(lang);
+  T = I18N[uiLang];
+  document.documentElement.lang = T.htmlLang;
+  const cap = $("sac-page-cap");
+  if (cap) cap.textContent = T.pageCap;
+  $("sac-open").textContent = T.open;
+  $("sac-block").textContent = T.block;
+  $("sac-depth-lab").textContent = T.depth;
+  $("sac-pupil-lab").textContent = T.pupil;
+  $("sac-demo").textContent = T.demo;
+  $("sac-reset").textContent = T.reset;
+  $("sac-play").textContent = S.play ? "❚❚" : "▶";
+  $("sac-play").setAttribute("aria-label", S.play ? T.pauseAria : T.playAria);
+  $("sac-open").classList.toggle("on", S.mode === "open");
+  $("sac-block").classList.toggle("on", S.mode === "block");
+  const steps = $("sac-steps");
+  steps.innerHTML = "";
+  [T.step1, T.step2, T.step3, T.step4].forEach((label, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = label;
+    b.className = i === S.step ? "on" : "";
+    b.setAttribute("role", "tab");
+    b.setAttribute("aria-selected", i === S.step ? "true" : "false");
+    b.addEventListener("click", () => {
+      S.step = i;
+      S.demo = false;
+      applyStepTargets(i, true);
+      refreshChrome();
+    });
+    steps.appendChild(b);
+  });
+  const hint = $("sac-hint");
+  hint.innerHTML = "";
+  hint.appendChild(document.createTextNode(T.hint + " "));
+  const a = document.createElement("a");
+  a.href = "/urgent";
+  a.target = "_top";
+  a.rel = "noopener";
+  a.textContent = T.urgentLink;
+  hint.appendChild(a);
+  hint.appendChild(document.createTextNode(uiLang === "en" ? "." : "。"));
+  refreshChrome();
+  postHeight();
+}
+
+function refreshChrome() {
+  $("sac-depthv").textContent = Math.round(S.depth) + "%";
+  $("sac-pupilv").textContent = Math.round(S.pupil) + "%";
+  $("sac-depth").value = String(Math.round(S.depth));
+  $("sac-pupil").value = String(Math.round(S.pupil));
+  $("sac-open").classList.toggle("on", S.mode === "open");
+  $("sac-block").classList.toggle("on", S.mode === "block");
+  $("sac-play").textContent = S.play ? "❚❚" : "▶";
+  $("sac-play").setAttribute("aria-label", S.play ? T.pauseAria : T.playAria);
+  [...$("sac-steps").children].forEach((b, i) => {
+    b.classList.toggle("on", i === S.step);
+    b.setAttribute("aria-selected", i === S.step ? "true" : "false");
+  });
+  const stories = [T.story1, T.story2, T.story3, T.story4];
+  $("sac-story").textContent = stories[S.step] || stories[0];
+}
+
+function applyStepTargets(step, snap) {
+  const targets = [
+    { mode: "open", depth: 18, pupil: 35 },
+    { mode: "open", depth: 62, pupil: 40 },
+    { mode: "block", depth: 72, pupil: 52 },
+    { mode: "block", depth: 88, pupil: 55 },
+  ][step] || { mode: "open", depth: 30, pupil: 50 };
+  if (snap) {
+    S.mode = targets.mode;
+    S.depth = targets.depth;
+    S.pupil = targets.pupil;
+  }
+  return targets;
+}
+
+function updateDemo(dt) {
+  if (!S.demo || !S.play) return;
+  S.demoT += dt;
+  const phase = S.demoT % 16;
+  const step = Math.min(3, Math.floor(phase / 4));
+  if (step !== S.step) S.step = step;
+  const targets = applyStepTargets(S.step, false);
+  const local = (phase % 4) / 4;
+  const ease = smooth(local);
+  // previous step targets for blend
+  const prev = applyStepTargets(Math.max(0, S.step - 1), false);
+  const from = S.step === 0 ? targets : prev;
+  S.mode = ease > 0.35 ? targets.mode : from.mode;
+  S.depth = lerp(from.depth, targets.depth, ease);
+  S.pupil = lerp(from.pupil, targets.pupil, ease);
+}
+
+const sag = $("sac-sag"), sx = sag.getContext("2d");
+const flow = $("sac-flow"), fx = flow.getContext("2d");
+const SW = 960, SH = 420, FW = 960, FH = 220;
+
+function drawGauge(ctx, x, y, w, h, value, title, low, mid, high) {
+  ctx.fillStyle = "#1a1f28";
+  roundRect(ctx, x, y, w, h, 10); ctx.fill();
+  ctx.fillStyle = "#c8cdd6";
+  ctx.font = "12px system-ui";
+  ctx.textAlign = "left";
+  ctx.fillText(title, x + 12, y + 18);
+  const bx = x + 12, by = y + 32, bw = w - 24, bh = 12;
+  ctx.fillStyle = "#0b0d11";
+  roundRect(ctx, bx, by, bw, bh, 6); ctx.fill();
+  const g = ctx.createLinearGradient(bx, 0, bx + bw, 0);
+  g.addColorStop(0, "#6ecf8e");
+  g.addColorStop(0.55, "#f0a030");
+  g.addColorStop(1, "#e07070");
+  ctx.fillStyle = g;
+  roundRect(ctx, bx, by, Math.max(4, bw * clamp(value, 0, 1)), bh, 6); ctx.fill();
+  ctx.fillStyle = "#9aa3b2";
+  ctx.font = "11px system-ui";
+  ctx.fillText(low, bx, by + 28);
+  ctx.textAlign = "center";
+  ctx.fillText(mid, bx + bw / 2, by + 28);
+  ctx.textAlign = "right";
+  ctx.fillText(high, bx + bw, by + 28);
+  ctx.textAlign = "left";
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  const rr = Math.min(r, w / 2, h / 2);
+  ctx.beginPath();
+  ctx.moveTo(x + rr, y);
+  ctx.arcTo(x + w, y, x + w, y + h, rr);
+  ctx.arcTo(x + w, y + h, x, y + h, rr);
+  ctx.arcTo(x, y + h, x, y, rr);
+  ctx.arcTo(x, y, x + w, y, rr);
+  ctx.closePath();
+}
+
+function drawSagittal(m) {
+  const ctx = sx;
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.clearRect(0, 0, SW, SH);
+  ctx.fillStyle = "#0b0d11";
+  ctx.fillRect(0, 0, SW, SH);
+
+  const ox = 390, oy = 210;
+  // Depth: low S.depth → deep AC (lens farther right); high → shallow
+  const acDepth = lerp(118, 48, m.shallow);
+  const pupilHalf = lerp(10, 48, m.p01);
+  const lensX = ox + acDepth;
+  const bombe = m.bombe;
+
+  // sclera / globe backdrop
+  ctx.fillStyle = "#1c222c";
+  ctx.beginPath();
+  ctx.ellipse(ox + 90, oy, 210, 150, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // cornea arc
+  ctx.strokeStyle = "#8fd0e8";
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.arc(ox - 36, oy, 128, -1.15, 1.15);
+  ctx.stroke();
+  ctx.strokeStyle = "rgba(143,208,232,0.35)";
+  ctx.lineWidth = 10;
+  ctx.beginPath();
+  ctx.arc(ox - 36, oy, 122, -1.05, 1.05);
+  ctx.stroke();
+
+  // anterior chamber wash
+  const acCol = m.tmContact > 0.55
+    ? "rgba(224,112,112,0.22)"
+    : m.block > 0.4
+      ? "rgba(240,160,48,0.18)"
+      : "rgba(126,200,227,0.18)";
+  ctx.fillStyle = acCol;
+  ctx.beginPath();
+  ctx.arc(ox - 36, oy, 120, -1.05, 1.05);
+  const irisTopPupil = oy - pupilHalf;
+  const irisBotPupil = oy + pupilHalf;
+  ctx.lineTo(lensX - 8, irisBotPupil);
+  // lower iris with bombé
+  for (let i = 20; i >= 0; i--) {
+    const x = lerp(lensX - 8, ox - 8, i / 20);
+    const t = i / 20;
+    const y = lerp(irisBotPupil, oy + 108, smooth(1 - t)) + bombe * 38 * Math.sin(Math.PI * (1 - t));
+    ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+  ctx.fill();
+
+  // posterior chamber tint when blocked
+  if (m.block > 0.2) {
+    ctx.fillStyle = `rgba(224,112,112,${0.08 + m.block * 0.18})`;
+    ctx.beginPath();
+    ctx.moveTo(lensX - 6, oy - pupilHalf);
+    ctx.lineTo(lensX + 70, oy - 70);
+    ctx.lineTo(lensX + 70, oy + 70);
+    ctx.lineTo(lensX - 6, oy + pupilHalf);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  // iris plates
+  ctx.fillStyle = "#3d5f7a";
+  ctx.beginPath();
+  ctx.moveTo(ox - 12, oy - 112);
+  for (let i = 0; i <= 24; i++) {
+    const t = i / 24;
+    const x = lerp(ox - 12, lensX - 6, t);
+    const y = lerp(oy - 112, oy - pupilHalf, smooth(t)) - bombe * 40 * Math.sin(Math.PI * t);
+    ctx.lineTo(x, y);
+  }
+  ctx.lineTo(lensX + 14, oy - pupilHalf - 8);
+  ctx.lineTo(ox - 4, oy - 122);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(ox - 12, oy + 112);
+  for (let i = 0; i <= 24; i++) {
+    const t = i / 24;
+    const x = lerp(ox - 12, lensX - 6, t);
+    const y = lerp(oy + 112, oy + pupilHalf, smooth(t)) + bombe * 40 * Math.sin(Math.PI * t);
+    ctx.lineTo(x, y);
+  }
+  ctx.lineTo(lensX + 14, oy + pupilHalf + 8);
+  ctx.lineTo(ox - 4, oy + 122);
+  ctx.closePath();
+  ctx.fill();
+
+  // pupil block contact marker
+  if (m.block > 0.35) {
+    ctx.strokeStyle = `rgba(224,112,112,${0.4 + m.block * 0.5})`;
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(lensX - 6, oy - pupilHalf);
+    ctx.lineTo(lensX - 6, oy + pupilHalf);
+    ctx.stroke();
+    ctx.fillStyle = "#e07070";
+    ctx.font = "bold 12px system-ui";
+    ctx.fillText(T.pupilBlock, lensX - 4, oy - pupilHalf - 14);
+  }
+
+  // lens
+  ctx.fillStyle = "rgba(240,200,120,0.42)";
+  ctx.beginPath();
+  ctx.ellipse(lensX + 34, oy, 30, 58, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = "#f0a030";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // ciliary hint
+  ctx.fillStyle = "#5a4a3a";
+  ctx.beginPath();
+  ctx.ellipse(lensX + 78, oy - 78, 18, 14, -0.4, 0, Math.PI * 2);
+  ctx.ellipse(lensX + 78, oy + 78, 18, 14, 0.4, 0, Math.PI * 2);
+  ctx.fill();
+
+  // TM / angle markers
+  const angleX = ox - 36 + Math.cos(0.95) * 120;
+  const angleY = oy + Math.sin(0.95) * 120;
+  const irisNearAngleY = oy + 108 - bombe * 8;
+  const gap = angleY - (oy + lerp(70, 95, m.shallow) - bombe * 25);
+  ctx.strokeStyle = m.angleOpen > 0.45 ? "#6ecf8e" : m.angleOpen > 0.2 ? "#f0a030" : "#e07070";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(angleX, angleY);
+  ctx.lineTo(ox + 8, irisNearAngleY - 10);
+  ctx.stroke();
+
+  // labels
+  ctx.fillStyle = "#c8cdd6";
+  ctx.font = "12px system-ui";
+  ctx.fillText(T.cornea, ox - 150, oy - 90);
+  ctx.fillText(T.ac, ox + 20, oy - 8);
+  ctx.fillText(T.lens, lensX + 20, oy + 4);
+  ctx.fillText(T.tm, angleX - 30, angleY + 22);
+  ctx.fillText(T.ciliary, lensX + 70, oy - 100);
+  if (bombe > 0.25) {
+    ctx.fillStyle = "#f0a030";
+    ctx.fillText(T.bombe, ox + 40, oy - 70);
+  }
+
+  // particles on sagittal path
+  const pathPts = aqueousPathPts(ox, oy, lensX, pupilHalf, m);
+  for (const p of particles) {
+    if (!p.alive) continue;
+    const idx = Math.min(pathPts.length - 1, Math.floor(p.t * (pathPts.length - 1)));
+    const pt = pathPts[idx];
+    if (!pt) continue;
+    const blockedHere = (p.t > 0.35 && p.t < 0.55 && m.pupilGate < 0.35) || (p.t > 0.78 && m.tmGate < 0.3);
+    ctx.fillStyle = blockedHere ? "rgba(224,112,112,0.85)" : "rgba(126,200,227,0.9)";
+    ctx.beginPath();
+    ctx.arc(pt[0], pt[1], blockedHere ? 3.2 : 2.6, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // magnified angle inset
+  const ix = 700, iy = 40, iw = 230, ih = 190;
+  ctx.fillStyle = "#141920";
+  roundRect(ctx, ix, iy, iw, ih, 12); ctx.fill();
+  ctx.strokeStyle = "#3a4250";
+  ctx.lineWidth = 1.5;
+  roundRect(ctx, ix, iy, iw, ih, 12); ctx.stroke();
+  ctx.fillStyle = "#9aa3b2";
+  ctx.font = "12px system-ui";
+  ctx.fillText(T.inset, ix + 12, iy + 20);
+
+  // inset geometry
+  const cx = ix + 40, cy = iy + 110;
+  ctx.strokeStyle = "#8fd0e8";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.arc(cx, cy, 70, -0.2, 1.35);
+  ctx.stroke();
+  const openPx = lerp(8, 48, m.angleOpen);
+  ctx.fillStyle = "#3d5f7a";
+  ctx.beginPath();
+  ctx.moveTo(cx + 55, cy - 10);
+  ctx.quadraticCurveTo(cx + 30, cy - openPx * 0.2, cx + 8, cy - openPx);
+  ctx.lineTo(cx + 70, cy - 50);
+  ctx.closePath();
+  ctx.fill();
+  ctx.fillStyle = m.tmContact > 0.5 ? "#e07070" : "#6ecf8e";
+  ctx.beginPath();
+  ctx.arc(cx + 48, cy + 18, 7, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = "#c8cdd6";
+  ctx.font = "11px system-ui";
+  ctx.fillText(T.angle, cx + 70, cy - 8);
+  ctx.fillText(T.tm, cx + 58, cy + 36);
+  ctx.fillText(m.angleOpen > 0.45 ? T.gaugeOpen : m.angleOpen > 0.2 ? T.gaugeNarrow : T.gaugeClosed, ix + 12, iy + ih - 14);
+
+  // gauges
+  drawGauge(ctx, 24, 24, 250, 70, 1 - m.angleOpen, T.gaugeAngle, T.gaugeOpen, T.gaugeNarrow, T.gaugeClosed);
+  drawGauge(ctx, 24, 104, 250, 70, m.iop, T.gaugeIop, T.gaugeLow, T.gaugeMid, T.gaugeHigh);
+}
+
+function aqueousPathPts(ox, oy, lensX, pupilHalf, m) {
+  const pts = [];
+  // ciliary → behind iris → pupil → AC → angle/TM
+  const bombe = m.bombe;
+  for (let i = 0; i <= 40; i++) {
+    const t = i / 40;
+    let x, y;
+    if (t < 0.25) {
+      const u = t / 0.25;
+      x = lerp(lensX + 70, lensX + 10, u);
+      y = lerp(oy - 70, oy - pupilHalf - 8, u);
+    } else if (t < 0.45) {
+      const u = (t - 0.25) / 0.2;
+      x = lensX - 4;
+      y = lerp(oy - pupilHalf - 4, oy + pupilHalf * 0.2, u);
+    } else if (t < 0.7) {
+      const u = (t - 0.45) / 0.25;
+      x = lerp(lensX - 8, ox + 10, u);
+      y = lerp(oy, oy + 40 + bombe * 20, u);
+    } else {
+      const u = (t - 0.7) / 0.3;
+      const angleX = ox - 36 + Math.cos(0.95) * 110;
+      const angleY = oy + Math.sin(0.95) * 110;
+      x = lerp(ox + 10, angleX, u);
+      y = lerp(oy + 40 + bombe * 20, angleY, u);
+    }
+    pts.push([x, y]);
+  }
+  return pts;
+}
+
+function drawFlow(m) {
+  const ctx = fx;
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.clearRect(0, 0, FW, FH);
+  ctx.fillStyle = "#0b0d11";
+  ctx.fillRect(0, 0, FW, FH);
+
+  ctx.fillStyle = "#c8cdd6";
+  ctx.font = "13px system-ui";
+  ctx.fillText(T.flowTitle, 20, 28);
+
+  const nodes = [
+    { x: 90, y: 120, lab: T.ciliary },
+    { x: 280, y: 120, lab: T.pc },
+    { x: 480, y: 120, lab: T.gatePupil },
+    { x: 680, y: 120, lab: T.ac },
+    { x: 870, y: 120, lab: T.gateTm },
+  ];
+  const gates = [1, 1, m.pupilGate, 1, m.tmGate];
+
+  for (let i = 0; i < nodes.length - 1; i++) {
+    const a = nodes[i], b = nodes[i + 1];
+    const g = gates[i + 1];
+    ctx.strokeStyle = g > 0.65 ? "#6ecf8e" : g > 0.3 ? "#f0a030" : "#e07070";
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(a.x + 36, a.y);
+    ctx.lineTo(b.x - 36, b.y);
+    ctx.stroke();
+    // arrow head
+    const ang = 0;
+    ctx.beginPath();
+    ctx.moveTo(b.x - 36, b.y);
+    ctx.lineTo(b.x - 48, b.y - 7);
+    ctx.lineTo(b.x - 48, b.y + 7);
+    ctx.closePath();
+    ctx.fillStyle = ctx.strokeStyle;
+    ctx.fill();
+    void ang;
+  }
+
+  nodes.forEach((n, i) => {
+    const g = gates[i];
+    const col = i === 2 || i === 4
+      ? (g > 0.65 ? "#6ecf8e" : g > 0.3 ? "#f0a030" : "#e07070")
+      : "#4a90b8";
+    ctx.fillStyle = "#1a1f28";
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, 34, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = col;
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.fillStyle = "#e4e4e4";
+    ctx.font = "11px system-ui";
+    ctx.textAlign = "center";
+    wrapCenter(ctx, n.lab, n.x, n.y - 4, 70, 13);
+    if (i === 2 || i === 4) {
+      const state = g > 0.65 ? T.gateOpen : g > 0.3 ? T.gatePartial : T.gateClosed;
+      ctx.fillStyle = col;
+      ctx.font = "10px system-ui";
+      ctx.fillText(state, n.x, n.y + 48);
+    }
+  });
+  ctx.textAlign = "left";
+
+  // particle ticks on flow diagram
+  for (const p of particles) {
+    if (!p.alive) continue;
+    const u = p.t;
+    const seg = Math.min(3, Math.floor(u * 4));
+    const local = u * 4 - seg;
+    const a = nodes[seg], b = nodes[seg + 1];
+    if (!a || !b) continue;
+    const x = lerp(a.x, b.x, local);
+    const y = a.y + Math.sin(local * Math.PI) * -8;
+    const gate = gates[seg + 1];
+    const blocked = gate < 0.3 && local > 0.55;
+    ctx.fillStyle = blocked ? "#e07070" : "#7ec8e3";
+    ctx.beginPath();
+    ctx.arc(x, y, 3, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function wrapCenter(ctx, text, x, y, maxW, lh) {
+  const chars = [...text];
+  let line = "", yy = y;
+  const lines = [];
+  for (const ch of chars) {
+    const test = line + ch;
+    if (ctx.measureText(test).width > maxW && line) {
+      lines.push(line);
+      line = ch;
+    } else line = test;
+  }
+  if (line) lines.push(line);
+  const start = yy - ((lines.length - 1) * lh) / 2;
+  lines.forEach((l, i) => ctx.fillText(l, x, start + i * lh));
+}
+
+function updateParticles(dt, m) {
+  if (Math.random() < 0.35 * (0.3 + m.pupilGate)) spawnParticle(m);
+  for (const p of particles) {
+    if (!p.alive) continue;
+    let speed = p.speed;
+    if (p.t > 0.35 && p.t < 0.55) speed *= Math.max(0.05, m.pupilGate);
+    if (p.t > 0.78) speed *= Math.max(0.05, m.tmGate);
+    if ((p.t > 0.4 && p.t < 0.52 && m.pupilGate < 0.25) || (p.t > 0.85 && m.tmGate < 0.2)) {
+      p.stuck = true;
+      speed *= 0.02;
+    }
+    p.t += dt * speed;
+    if (p.t >= 1) {
+      if (m.tmGate < 0.25 && p.t < 1.15) {
+        p.t = 0.88;
+      } else {
+        p.alive = false;
+      }
+    }
+  }
+  for (let i = particles.length - 1; i >= 0; i--) if (!particles[i].alive) particles.splice(i, 1);
+}
+
+function postHeight() {
+  try {
+    const h = Math.ceil(document.documentElement.scrollHeight || document.body.scrollHeight || 0);
+    if (h > 0 && window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: "eyesinfo-shallow-ac-height", height: h }, "*");
+    }
+  } catch (_) { /* ignore */ }
+}
+
+let last = performance.now();
+let spawnAcc = 0;
+function frame(now) {
+  const dt = Math.min(0.05, (now - last) / 1000);
+  last = now;
+  if (S.play) {
+    updateDemo(dt);
+    const m = metrics();
+    updateParticles(dt, m);
+    spawnAcc += dt;
+    if (spawnAcc > 0.2) { spawnAcc = 0; }
+    refreshChrome();
+  }
+  const m = metrics();
+  drawSagittal(m);
+  drawFlow(m);
+  requestAnimationFrame(frame);
+}
+
+// bindings
+$("sac-depth").addEventListener("input", (e) => {
+  S.depth = +e.target.value;
+  S.demo = false;
+  refreshChrome();
+});
+$("sac-pupil").addEventListener("input", (e) => {
+  S.pupil = +e.target.value;
+  S.demo = false;
+  refreshChrome();
+});
+$("sac-open").addEventListener("click", () => {
+  S.mode = "open";
+  S.demo = false;
+  refreshChrome();
+});
+$("sac-block").addEventListener("click", () => {
+  S.mode = "block";
+  S.demo = false;
+  refreshChrome();
+});
+$("sac-play").addEventListener("click", () => {
+  S.play = !S.play;
+  refreshChrome();
+});
+$("sac-demo").addEventListener("click", () => {
+  S.demo = true;
+  S.play = true;
+  S.demoT = S.step * 4;
+  refreshChrome();
+});
+$("sac-reset").addEventListener("click", () => {
+  S.mode = "open";
+  S.depth = 30;
+  S.pupil = 50;
+  S.step = 0;
+  S.demoT = 0;
+  S.demo = !reduceMotion;
+  S.play = !reduceMotion;
+  particles.length = 0;
+  refreshChrome();
+});
+
+window.addEventListener("resize", postHeight);
+applyLang(uiLang);
+applyStepTargets(0, true);
+refreshChrome();
+requestAnimationFrame(frame);
+setTimeout(postHeight, 50);
+setTimeout(postHeight, 300);
+})();
+</script>
+</body>
+</html>
