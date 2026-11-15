@@ -368,12 +368,20 @@ const zhHant = {
   shallowAcTopicLink: "遠視、淺前房與晶體",
   tearFilmSimTitle: "淚膜三層與乾眼機制示意",
   tearFilmSimCaption:
-    "下方為教學動畫：角膜切面示意脂質、水液、黏液三層，以及蒸發、滲透壓、淚膜破裂與炎症。數值屬示意、比例放大，不是個人 TBUT 或滲透壓檢查結果。",
-  tearFilmEduBadge: "機制示意 · 不是檢查",
+    "下方為教學動畫：角膜切面示意脂質、水液、黏液三層，以及蒸發、滲透壓趨勢、淚膜穩定性與炎症。指標只用相對等級（較穩／較易破裂、較低／較高），不是個人檢查結果。",
+  tearFilmLockedBanner: "本頁屬非急症機制教育。內容不能代替註冊醫生面診。",
+  tearFilmEduBadge: "機制示意 · 不是自我檢查",
+  tearFilmNoTreatment: "需由醫生評估，本頁不講治療選擇。",
   tearFilmEduCaveat:
-    "本圖只供教學示意，不能自行診斷乾眼類型或量度破裂時間。劇痛畏光、單眼明顯紅腫大量分泌，或合併口乾／關節痛／皮疹：勿當普通乾眼，盡快（最好當日）檢查。突然視力下降或突然失明、劇痛兼頭痛嘔吐：立即急症室。不能代替註冊醫生。",
+    "本圖只供教學示意，不能自行診斷乾眼類型，亦不能量度個人淚膜破裂時間或滲透壓。",
+  tearFilmEduRedFlag:
+    "突然視力下降或突然失明、劇痛兼頭痛嘔吐等紅旗徵狀：請先看本站",
+  tearFilmEduRedFlagLink: "急症頁",
+  tearFilmEduRedFlagAfter: "。",
+  tearFilmEduSystemic:
+    "劇痛畏光、單眼明顯紅腫大量分泌，或合併口乾／關節痛／皮疹：勿當普通乾眼，需由醫生評估。",
   tearFilmSimFooter:
-    "示意不是檢查或診斷，亦不能代替面診。指標數字屬教學用示意。本站不提供預約或轉介。",
+    "示意不是自我檢查或診斷，亦不能代替面診。指標屬相對示意，不是個人化驗或檢查結果。本站不提供預約或轉介。",
   tearFilmTopicLink: "乾眼症專題",
   tearFilmLadderLink: "乾眼分類與處理梯階",
   iolOpticsH: "光學設計",
@@ -976,12 +984,22 @@ const en: Record<Key, string> = {
   shallowAcTopicLink: "Hyperopia, shallow chamber and the lens",
   tearFilmSimTitle: "Tear film layers and dry-eye mechanism",
   tearFilmSimCaption:
-    "Teaching animation below: a corneal cross-section of the lipid, aqueous and mucin layers, with evaporation, osmolarity, break-up and inflammation. Figures are illustrative and enlarged — not your personal TBUT or osmolarity result.",
-  tearFilmEduBadge: "Mechanism illustration · not a test",
+    "Teaching animation below: a corneal cross-section of the lipid, aqueous and mucin layers, with evaporation, relative osmolarity trend, tear-film stability and inflammation. Meters use relative labels only (more stable / breaks more easily; lower / higher) — not your personal test results.",
+  tearFilmLockedBanner:
+    "This page is non-urgent mechanism education. Content cannot replace a visit with a registered doctor.",
+  tearFilmEduBadge: "Mechanism illustration · not a self-check",
+  tearFilmNoTreatment:
+    "Needs a doctor’s assessment; this page does not discuss treatment choices.",
   tearFilmEduCaveat:
-    "Teaching illustration only — do not self-diagnose dry-eye type or measure break-up time here. Severe pain and photophobia, a very red swollen eye with heavy discharge, or dry mouth / joint pain / rash as well: do not treat as ordinary dry eye — same-day assessment when possible. Sudden vision drop or sudden blindness, or severe pain with headache and vomiting: go to A&E now. Cannot replace a registered doctor.",
+    "Teaching illustration only — do not self-diagnose dry-eye type, and do not treat this as a personal tear break-up or osmolarity measurement.",
+  tearFilmEduRedFlag:
+    "Sudden vision drop or sudden blindness, severe pain with headache or vomiting, and similar red-flag symptoms: see this site’s",
+  tearFilmEduRedFlagLink: "urgent page",
+  tearFilmEduRedFlagAfter: ".",
+  tearFilmEduSystemic:
+    "Severe pain and photophobia, a very red swollen eye with heavy discharge, or dry mouth / joint pain / rash as well: do not treat as ordinary dry eye — these need a doctor’s assessment.",
   tearFilmSimFooter:
-    "Illustration only — not a test or diagnosis, and not a substitute for an in-person visit. Meter figures are teaching illustrations. This site does not book or refer.",
+    "Illustration only — not a self-check or diagnosis, and not a substitute for an in-person visit. Meter figures are relative teaching labels, not personal lab or clinical results. This site does not book or refer.",
   tearFilmTopicLink: "Dry-eye topic",
   tearFilmLadderLink: "Dry-eye types and care ladder",
   iolOpticsH: "Optical design",
@@ -1574,12 +1592,21 @@ const ja: Record<Key, string> = {
   shallowAcTopicLink: "遠視・浅い前房と水晶体",
   tearFilmSimTitle: "涙液三層とドライアイの機序",
   tearFilmSimCaption:
-    "下は教育用アニメです。角膜断面で脂質・水・ムチンの三層と蒸発・浸透圧・破壊・炎症を示します。数値は図示で拡大されており、個人の TBUT や浸透圧の検査結果ではありません。",
-  tearFilmEduBadge: "機序の図示 · 検査ではない",
+    "下は教育用アニメです。角膜断面で脂質・水・ムチンの三層と蒸発・相対的な浸透圧傾向・涙液層の安定性・炎症を示します。指標は相対ラベルのみ（より安定／破れやすい、低い／高い）で、個人の検査結果ではありません。",
+  tearFilmLockedBanner:
+    "本ページは非救急の機序教育です。内容は登録医の対面診療の代わりにはなりません。",
+  tearFilmEduBadge: "機序の図示 · 自己検査ではない",
+  tearFilmNoTreatment: "医師の評価が必要です。本ページでは治療の選択を述べません。",
   tearFilmEduCaveat:
-    "教育用図示であり、ドライアイの型を自分で診断したり破壊時間を測ったりしないでください。激痛と羞明、片眼の強い発赤腫脹と大量分泌、口渇／関節痛／皮疹の合併は「普通のドライアイ」と決めつけず、できれば当日の評価を。突然の視力低下・失明、激痛と頭痛嘔吐は救急へ。登録医の代わりにはなりません。",
+    "教育用図示であり、ドライアイの型を自分で診断したり、個人の破壊時間や浸透圧の測定として扱ったりしないでください。",
+  tearFilmEduRedFlag:
+    "突然の視力低下・失明、激痛と頭痛・嘔吐などの赤旗症状：まず本サイトの",
+  tearFilmEduRedFlagLink: "救急ページ",
+  tearFilmEduRedFlagAfter: "へ。",
+  tearFilmEduSystemic:
+    "激痛と羞明、片眼の強い発赤腫脹と大量分泌、または口渇／関節痛／皮疹の合併は「普通のドライアイ」と決めつけず、医師の評価が必要です。",
   tearFilmSimFooter:
-    "図示であり、検査や診断でも、対面診察の代わりでもありません。指標の数字は教育用です。予約・紹介はしません。",
+    "図示であり、自己検査や診断でも、対面診察の代わりでもありません。指標は相対的な教育用ラベルであり、個人の検査値ではありません。予約・紹介はしません。",
   tearFilmTopicLink: "ドライアイのページ",
   tearFilmLadderLink: "ドライアイの分類と段階的ケア",
   iolOpticsH: "光学デザイン",

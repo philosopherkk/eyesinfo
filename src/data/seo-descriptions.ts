@@ -507,9 +507,9 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
     ja: "累進レンズで下り階段を見るときの近用部の拡大・ぼけ・プリズムの教育用アニメ。遠視／近視を切替（検査ではない）。",
   },
   "/tools/tear-film": {
-    zh: "淚膜三層（脂質、水液、黏液）與蒸發型／水液不足／黏液不足乾眼機制示意；數值屬教學用，不是個人 TBUT 或滲透壓檢查（公眾教育，不能代替面診。）詳見內文。",
-    en: "Interactive illustration of the three tear-film layers and lipid / aqueous / mucin deficiency mechanisms. Teaching figures only—not a personal TBUT or osmolarity test.",
-    ja: "涙液三層（脂質・水・ムチン）と蒸発亢進／涙液減少／ムチン不足の機序図示。数値は教育用であり個人の TBUT や浸透圧検査ではありません。市民教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
+    zh: "淚膜三層（脂質、水液、黏液）與蒸發型／水液不足／黏液不足乾眼機制示意；指標只用相對等級，不是個人檢查。本頁屬非急症機制教育，不能代替面診。",
+    en: "Interactive illustration of the three tear-film layers and lipid / aqueous / mucin deficiency mechanisms. Relative teaching labels only—not a personal test. Non-urgent mechanism education; not a substitute for a registered doctor.",
+    ja: "涙液三層（脂質・水・ムチン）と蒸発亢進／涙液減少／ムチン不足の機序図示。指標は相対ラベルのみで個人検査ではありません。非救急の機序教育であり、登録眼科専門医の対面診療の代わりにはなりません。"
   },
   "/tools/shallow-ac": {
     zh: "閉角機制教學動畫：瞳孔阻滯（向前膨隆）、晶體增厚、前凸拱頂、高原虹膜（教育工具，不是自我檢查；急性症狀見急症頁）。",

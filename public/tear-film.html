@@ -62,6 +62,15 @@
 .tfm-mini{margin:4px 0 0;font-size:.75rem;color:var(--muted)}
 .tfm-note{font-size:.78rem;color:var(--muted);margin:12px 0 0}
 html,body{margin:0;padding:0;background:#fff}
+
+.tfm-locked{margin:0 0 8px;padding:10px 12px;border-radius:10px;background:#f4f7fa;border:1px solid var(--line);font-size:.9rem;font-weight:600;color:var(--ink)}
+.tfm-badge-line{margin:0 0 6px}
+.tfm-edu-badge{display:inline-block;font-size:.72rem;font-weight:700;color:#fff;background:#1d2b3a;padding:3px 9px;border-radius:99px}
+.tfm-locked-sub{margin:0 0 12px;font-size:.86rem;font-weight:600;color:var(--ink)}
+.tfm-redflag{margin:0 0 6px;font-size:.88rem;line-height:1.45}
+.tfm-redflag a{color:#1f6feb;font-weight:700;text-decoration:underline}
+.tfm-systemic{margin:0 0 12px;font-size:.86rem;color:var(--muted)}
+.tfm-timer-cap{margin:4px 0 0;font-size:.75rem;color:var(--muted)}
 @media (max-width:760px){.tfm-grid{grid-template-columns:1fr}}
 @media (max-width:560px){
   .tfm{padding:10px 6px 14px}
@@ -74,10 +83,15 @@ html,body{margin:0;padding:0;background:#fff}
 </head>
 <body>
 <div class="tfm" id="tfm">
+  <p class="tfm-locked" data-i="lockedBanner">本頁屬非急症機制教育。內容不能代替註冊醫生面診。</p>
+  <p class="tfm-badge-line"><span class="tfm-edu-badge" data-i="eduBadge">機制示意 · 不是自我檢查</span></p>
+  <p class="tfm-locked-sub" data-i="noTreatment">需由醫生評估，本頁不講治療選擇。</p>
   <div class="tfm-header">
     <h2 class="tfm-title" data-i="title">淚膜與乾眼症機制</h2>
     <p class="tfm-sub" data-i="sub">揀一種狀態，睇睇三層淚膜缺咗邊層會發生咩事。</p>
   </div>
+  <p class="tfm-redflag" data-i-html="redFlagHtml"></p>
+  <p class="tfm-systemic" data-i="systemic">劇痛畏光、單眼明顯紅腫大量分泌，或合併口乾／關節痛／皮疹：勿當普通乾眼，需由醫生評估。</p>
 
   <div class="tfm-controls" role="group" aria-label="Tear film condition">
     <button type="button" class="tfm-btn" data-state="healthy" aria-pressed="true" style="--c:#2fb36d"><span class="tfm-swatch"></span><span data-i="btnHealthy">健康</span></button>
@@ -138,15 +152,11 @@ html,body{margin:0;padding:0;background:#fff}
     </div>
   </div>
 
-  <div class="tfm-timer">
-    <div class="tfm-timer-top">
-      <span><span data-i="sinceBlink">距上次眨眼</span>：<b data-tfm="tbtext">0.0 s</b></span>
-      <span class="tfm-timer-key"><i></i><span data-i="tbutKey">淚膜破裂時間</span></span>
-    </div>
+  <div class="tfm-timer" aria-hidden="true">
     <div class="tfm-timer-track">
       <div class="tfm-timer-fill" data-tfm="tbfill"></div>
-      <div class="tfm-timer-mark" data-tfm="tbmark"></div>
     </div>
+    <p class="tfm-timer-cap" data-i="blinkCycle">眨眼週期進度（示意，不是個人計時）</p>
   </div>
 
   <ul class="tfm-legend" aria-label="Legend">
@@ -164,11 +174,11 @@ html,body{margin:0;padding:0;background:#fff}
     <div class="tfm-card">
       <h4 class="tfm-card-title" data-i="metersTitle">淚膜指標</h4>
       <div data-tfm="meters"></div>
-      <p class="tfm-mini" data-i="metersNote">數值屬示意，不是個人檢查結果。</p>
+      <p class="tfm-mini" data-i="metersNote">指標只用相對等級，不是個人檢查結果。</p>
     </div>
   </div>
 
-  <p class="tfm-note" data-i="scaleNote">示意、比例放大。真實脂質層約 0.04–0.1 µm，整層淚膜約 3–5 µm。不能代替註冊醫生。</p>
+  <p class="tfm-note" data-i="scaleNote">示意、比例放大。不能代替註冊醫生。</p>
 </div>
 <script>
 (function () {
@@ -189,158 +199,190 @@ html,body{margin:0;padding:0;background:#fff}
   const I18N = {
     'zh-Hant': {
       htmlLang: 'zh-Hant',
+      lockedBanner: '本頁屬非急症機制教育。內容不能代替註冊醫生面診。',
+      eduBadge: '機制示意 · 不是自我檢查',
+      noTreatment: '需由醫生評估，本頁不講治療選擇。',
+      redFlagHtml: '突然視力下降或突然失明、劇痛兼頭痛嘔吐等紅旗徵狀：請先看本站 <a href="/urgent" target="_top">急症頁</a>。',
+      systemic: '劇痛畏光、單眼明顯紅腫大量分泌，或合併口乾／關節痛／皮疹：勿當普通乾眼，需由醫生評估。',
       title: '淚膜與乾眼症機制',
       sub: '揀一種狀態，睇睇三層淚膜缺咗邊層會發生咩事。',
       btnHealthy: '健康', btnLipid: '脂質不足', btnAqueous: '水液不足', btnMucin: '黏液不足',
       blink: '眨眼', pause: '暫停', play: '播放',
-      sinceBlink: '距上次眨眼', tbutKey: '淚膜破裂時間',
+      blinkCycle: '眨眼週期進度（示意，不是個人計時）',
       air: '空氣', lip: '脂質層', aq: '水液層', muc: '黏液層', epi: '角膜上皮', drySpot: '乾點',
       svgTitle: '角膜表面淚膜切面示意',
-      svgDesc: '動畫示意脂質、水液、黏液層，以及蒸發、溶質濃縮、淚膜破裂與炎症。',
+      svgDesc: '動畫示意脂質、水液、黏液層，以及蒸發、滲透壓趨勢、淚膜穩定性與炎症。',
       legLip: '脂質層', legLipSrc: '（瞼板腺）', legAq: '水液層', legAqSrc: '（淚腺）',
       legMuc: '黏液／糖萼', legMucSrc: '（杯狀細胞與上皮）', legEpi: '角膜上皮',
-      legEvap: '蒸發的水分', legSalt: '溶質（滲透壓）', legInfl: '炎症介質',
-      metersTitle: '淚膜指標', metersNote: '數值屬示意，不是個人檢查結果。',
-      scaleNote: '示意、比例放大。真實脂質層約 0.04–0.1 µm，整層淚膜約 3–5 µm。不能代替註冊醫生。',
-      mEvap: '蒸發', mVol: '淚液量', mOsm: '淚液滲透壓', mTbut: '淚膜穩定性（TBUT）', mInfl: '眼表炎症',
-      low: '低', mod: '中等', high: '高', normal: '正常', mildLow: '輕度減少', none: '無', mild: '輕度', marked: '明顯',
-      cycle: '<div class="tfm-cycle"><strong>惡性循環：</strong>淚膜不穩 → 高滲透壓 → 炎症；炎症損傷表面細胞，令淚膜更不穩。各類乾眼最終常進入此循環。</div>',
+      legEvap: '蒸發的水分', legSalt: '溶質（滲透壓趨勢）', legInfl: '炎症介質',
+      metersTitle: '淚膜指標（相對示意）', metersNote: '指標只用相對等級，不是個人檢查結果。',
+      scaleNote: '示意、比例放大。不能代替註冊醫生。',
+      mEvap: '蒸發', mVol: '淚液量', mOsm: '滲透壓趨勢', mTbut: '淚膜穩定性', mInfl: '眼表炎症',
+      low: '低', mod: '中等', high: '高', mildLow: '輕度減少', none: '無', mild: '輕度', marked: '明顯',
+      osmLow: '較低', osmMid: '中等', osmHigh: '較高',
+      stabStable: '較穩', stabMid: '一般', stabUnstable: '較易破裂',
+      volOk: '充足', volMild: '略少', volLow: '偏少',
+      cycle: '<div class="tfm-cycle"><strong>惡性循環：</strong>淚膜不穩 → 高滲透壓趨勢 → 炎症；炎症損傷表面細胞，令淚膜更不穩。各類乾眼最終常進入此循環。</div>',
       info: {
-        healthy: { tag:'正常', color:'#2fb36d', title:'健康淚膜',
+        healthy: { tag:'健康', color:'#2fb36d', title:'健康淚膜',
           html:'<p>三層協同，令眼表保持光滑、濕潤與保護。</p>' +
             '<ul><li><strong>脂質層</strong>（瞼板腺）：減慢蒸發，穩定淚膜。</li>' +
             '<li><strong>水液層</strong>（淚腺）：水分、電解質、蛋白質與抗菌成分；滋潤並沖洗。</li>' +
             '<li><strong>黏液層</strong>（杯狀細胞分泌，加上膜結合糖萼）：令角膜可被水濕潤，淚液均勻鋪開。</li></ul>' +
-            '<h5>結果</h5><ul><li>眨眼之間淚膜穩定（破裂時間多超過 10 秒）</li><li>滲透壓約正常（約 300 mOsm/L）</li><li>光學表面平滑，視力清晰</li></ul>' },
+            '<h5>結果（相對示意）</h5><ul><li>眨眼之間淚膜較穩</li><li>滲透壓趨勢相對較低</li><li>光學表面較平滑，視力較清晰</li></ul>' },
         lipid: { tag:'蒸發型乾眼', color:'#e08e1b', title:'脂質層不足',
           html:'<h5>常見原因</h5><p>瞼板腺功能障礙（MGD）是乾眼最常見原因之一。其他：瞼緣炎、玫瑰痤瘡、隱形眼鏡、眨眼減少（例如長時間用螢幕）。</p>' +
-            '<h5>機制</h5><p>油脂層變薄或呈斑塊狀，無法封住淚面，水分<strong>蒸發加快</strong>。眨眼之間水液層變薄、滲透壓升高，淚膜提早破裂。</p>' +
-            '<h5>影響</h5><ul><li>蒸發增加、淚膜破裂時間縮短</li><li>高滲透壓刺激上皮，觸發炎症</li><li>灼熱、沙礫感、視力波動；有時反而反射性流眼水</li></ul>' },
+            '<h5>機制</h5><p>油脂層變薄或呈斑塊狀，無法封住淚面，水分<strong>蒸發加快</strong>。眨眼之間水液層變薄、滲透壓趨勢升高，淚膜較易提早破裂。</p>' +
+            '<h5>影響</h5><ul><li>蒸發增加、淚膜較易破裂</li><li>高滲透壓趨勢刺激上皮，觸發炎症</li><li>灼熱、沙礫感、視力波動；有時反而反射性流眼水</li></ul>' },
         aqueous: { tag:'水液不足型乾眼', color:'#2e86de', title:'水液層不足',
           html:'<h5>常見原因</h5><p>淚腺分泌減少。可包括乾燥綜合症（修格蘭氏綜合症）、老化、淚腺疾病、部分全身藥物（抗組胺、抗抑鬱等），以及角膜感覺減退。</p>' +
-            '<h5>機制</h5><p>水分減少但溶質相對不變，淚液<strong>滲透壓升高</strong>。薄淚膜提早破裂，亦較難清除碎屑與炎症介質。</p>' +
-            '<h5>影響</h5><ul><li>淚液量低，三型中滲透壓常最高</li><li>炎症細胞因子積聚，損傷上皮與杯狀細胞</li><li>乾澀、異物感、畏光與眼表染色</li></ul>' },
+            '<h5>機制</h5><p>水分減少但溶質相對不變，淚液<strong>滲透壓趨勢較易升高</strong>。薄淚膜較易提早破裂，亦較難清除碎屑與炎症介質。</p>' +
+            '<h5>影響</h5><ul><li>淚液量偏少，滲透壓趨勢較高</li><li>炎症細胞因子積聚，損傷上皮與杯狀細胞</li><li>乾澀、異物感、畏光與眼表染色</li></ul>' },
         mucin: { tag:'濕潤缺陷', color:'#8e44ad', title:'黏液層不足',
           html:'<h5>常見原因</h5><p>杯狀細胞減少或糖萼受損。可包括慢性炎症、瘢痕性結膜炎（史蒂芬強生症候群、眼類天疱瘡）、化學傷、維生素 A 缺乏，以及長期使用含防腐劑眼藥水。</p>' +
-            '<h5>機制</h5><p>缺乏黏液令上皮變得<strong>疏水</strong>（拒水）。即使淚液量接近正常，水液層亦無法均勻鋪開，易成珠並迅速破裂。</p>' +
-            '<h5>影響</h5><ul><li>淚液量近正常，但破裂時間極短</li><li>乾點暴露，導致上皮損傷與炎症</li><li>刺激感與視力不穩、間歇模糊</li></ul>' }
+            '<h5>機制</h5><p>缺乏黏液令上皮變得<strong>疏水</strong>（拒水）。即使淚液量接近充足，水液層亦無法均勻鋪開，易成珠並迅速破裂。</p>' +
+            '<h5>影響</h5><ul><li>淚液量可近充足，但穩定性差、較易破裂</li><li>乾點暴露，導致上皮損傷與炎症</li><li>刺激感與視力不穩、間歇模糊</li></ul>' }
       }
     },
     'zh-Hans': {
       htmlLang: 'zh-Hans',
+      lockedBanner: '本页属非急症机制教育。内容不能代替注册医生面诊。',
+      eduBadge: '机制示意 · 不是自我检查',
+      noTreatment: '需由医生评估，本页不讲治疗选择。',
+      redFlagHtml: '突然视力下降或突然失明、剧痛兼头痛呕吐等红旗症状：请先看本站 <a href="/urgent" target="_top">急症页</a>。',
+      systemic: '剧痛畏光、单眼明显红肿大量分泌，或合并口干／关节痛／皮疹：勿当普通干眼，需由医生评估。',
       title: '泪膜与干眼症机制',
       sub: '选一种状态，看看三层泪膜缺了哪一层会发生什么。',
       btnHealthy: '健康', btnLipid: '脂质不足', btnAqueous: '水液不足', btnMucin: '黏液不足',
       blink: '眨眼', pause: '暂停', play: '播放',
-      sinceBlink: '距上次眨眼', tbutKey: '泪膜破裂时间',
+      blinkCycle: '眨眼周期进度（示意，不是个人计时）',
       air: '空气', lip: '脂质层', aq: '水液层', muc: '黏液层', epi: '角膜上皮', drySpot: '干点',
       svgTitle: '角膜表面泪膜切面示意',
-      svgDesc: '动画示意脂质、水液、黏液层，以及蒸发、溶质浓缩、泪膜破裂与炎症。',
+      svgDesc: '动画示意脂质、水液、黏液层，以及蒸发、渗透压趋势、泪膜稳定性与炎症。',
       legLip: '脂质层', legLipSrc: '（睑板腺）', legAq: '水液层', legAqSrc: '（泪腺）',
       legMuc: '黏液／糖萼', legMucSrc: '（杯状细胞与上皮）', legEpi: '角膜上皮',
-      legEvap: '蒸发的水分', legSalt: '溶质（渗透压）', legInfl: '炎症介质',
-      metersTitle: '泪膜指标', metersNote: '数值属示意，不是个人检查结果。',
-      scaleNote: '示意、比例放大。真实脂质层约 0.04–0.1 µm，整层泪膜约 3–5 µm。不能代替注册医生。',
-      mEvap: '蒸发', mVol: '泪液量', mOsm: '泪液渗透压', mTbut: '泪膜稳定性（TBUT）', mInfl: '眼表炎症',
-      low: '低', mod: '中等', high: '高', normal: '正常', mildLow: '轻度减少', none: '无', mild: '轻度', marked: '明显',
-      cycle: '<div class="tfm-cycle"><strong>恶性循环：</strong>泪膜不稳 → 高渗透压 → 炎症；炎症损伤表面细胞，令泪膜更不稳。各类干眼最终常进入此循环。</div>',
+      legEvap: '蒸发的水分', legSalt: '溶质（渗透压趋势）', legInfl: '炎症介质',
+      metersTitle: '泪膜指标（相对示意）', metersNote: '指标只用相对等级，不是个人检查结果。',
+      scaleNote: '示意、比例放大。不能代替注册医生。',
+      mEvap: '蒸发', mVol: '泪液量', mOsm: '渗透压趋势', mTbut: '泪膜稳定性', mInfl: '眼表炎症',
+      low: '低', mod: '中等', high: '高', mildLow: '轻度减少', none: '无', mild: '轻度', marked: '明显',
+      osmLow: '较低', osmMid: '中等', osmHigh: '较高',
+      stabStable: '较稳', stabMid: '一般', stabUnstable: '较易破裂',
+      volOk: '充足', volMild: '略少', volLow: '偏少',
+      cycle: '<div class="tfm-cycle"><strong>恶性循环：</strong>泪膜不稳 → 高渗透压趋势 → 炎症；炎症损伤表面细胞，令泪膜更不稳。各类干眼最终常进入此循环。</div>',
       info: {
-        healthy: { tag:'正常', color:'#2fb36d', title:'健康泪膜',
+        healthy: { tag:'健康', color:'#2fb36d', title:'健康泪膜',
           html:'<p>三层协同，令眼表保持光滑、湿润与保护。</p>' +
             '<ul><li><strong>脂质层</strong>（睑板腺）：减慢蒸发，稳定泪膜。</li>' +
             '<li><strong>水液层</strong>（泪腺）：水分、电解质、蛋白质与抗菌成分；滋润并冲洗。</li>' +
             '<li><strong>黏液层</strong>（杯状细胞分泌，加上膜结合糖萼）：令角膜可被水湿润，泪液均匀铺开。</li></ul>' +
-            '<h5>结果</h5><ul><li>眨眼之间泪膜稳定（破裂时间多超过 10 秒）</li><li>渗透压约正常（约 300 mOsm/L）</li><li>光学表面平滑，视力清晰</li></ul>' },
+            '<h5>结果（相对示意）</h5><ul><li>眨眼之间泪膜较稳</li><li>渗透压趋势相对较低</li><li>光学表面较平滑，视力较清晰</li></ul>' },
         lipid: { tag:'蒸发型干眼', color:'#e08e1b', title:'脂质层不足',
           html:'<h5>常见原因</h5><p>睑板腺功能障碍（MGD）是干眼最常见原因之一。其他：睑缘炎、玫瑰痤疮、隐形眼镜、眨眼减少（例如长时间用屏幕）。</p>' +
-            '<h5>机制</h5><p>油脂层变薄或呈斑块状，无法封住泪面，水分<strong>蒸发加快</strong>。眨眼之间水液层变薄、渗透压升高，泪膜提早破裂。</p>' +
-            '<h5>影响</h5><ul><li>蒸发增加、泪膜破裂时间缩短</li><li>高渗透压刺激上皮，触发炎症</li><li>灼热、砂砾感、视力波动；有时反而反射性流泪</li></ul>' },
+            '<h5>机制</h5><p>油脂层变薄或呈斑块状，无法封住泪面，水分<strong>蒸发加快</strong>。眨眼之间水液层变薄、渗透压趋势升高，泪膜较易提早破裂。</p>' +
+            '<h5>影响</h5><ul><li>蒸发增加、泪膜较易破裂</li><li>高渗透压趋势刺激上皮，触发炎症</li><li>灼热、砂砾感、视力波动；有时反而反射性流泪</li></ul>' },
         aqueous: { tag:'水液不足型干眼', color:'#2e86de', title:'水液层不足',
           html:'<h5>常见原因</h5><p>泪腺分泌减少。可包括干燥综合征（舍格伦综合征）、老化、泪腺疾病、部分全身药物（抗组胺、抗抑郁等），以及角膜感觉减退。</p>' +
-            '<h5>机制</h5><p>水分减少但溶质相对不变，泪液<strong>渗透压升高</strong>。薄泪膜提早破裂，也较难清除碎屑与炎症介质。</p>' +
-            '<h5>影响</h5><ul><li>泪液量低，三型中渗透压常最高</li><li>炎症细胞因子积聚，损伤上皮与杯状细胞</li><li>干涩、异物感、畏光与眼表染色</li></ul>' },
+            '<h5>机制</h5><p>水分减少但溶质相对不变，泪液<strong>渗透压趋势较易升高</strong>。薄泪膜较易提早破裂，也较难清除碎屑与炎症介质。</p>' +
+            '<h5>影响</h5><ul><li>泪液量偏少，渗透压趋势较高</li><li>炎症细胞因子积聚，损伤上皮与杯状细胞</li><li>干涩、异物感、畏光与眼表染色</li></ul>' },
         mucin: { tag:'湿润缺陷', color:'#8e44ad', title:'黏液层不足',
           html:'<h5>常见原因</h5><p>杯状细胞减少或糖萼受损。可包括慢性炎症、瘢痕性结膜炎（史蒂文斯–约翰逊综合征、眼类天疱疮）、化学伤、维生素 A 缺乏，以及长期使用含防腐剂眼药水。</p>' +
-            '<h5>机制</h5><p>缺乏黏液令上皮变得<strong>疏水</strong>（拒水）。即使泪液量接近正常，水液层也无法均匀铺开，易成珠并迅速破裂。</p>' +
-            '<h5>影响</h5><ul><li>泪液量近正常，但破裂时间极短</li><li>干点暴露，导致上皮损伤与炎症</li><li>刺激感与视力不稳、间歇模糊</li></ul>' }
+            '<h5>机制</h5><p>缺乏黏液令上皮变得<strong>疏水</strong>（拒水）。即使泪液量接近充足，水液层也无法均匀铺开，易成珠并迅速破裂。</p>' +
+            '<h5>影响</h5><ul><li>泪液量可近充足，但稳定性差、较易破裂</li><li>干点暴露，导致上皮损伤与炎症</li><li>刺激感与视力不稳、间歇模糊</li></ul>' }
       }
     },
     en: {
       htmlLang: 'en',
+      lockedBanner: 'This page is non-urgent mechanism education. Content cannot replace a visit with a registered doctor.',
+      eduBadge: 'Mechanism illustration · not a self-check',
+      noTreatment: 'Needs a doctor’s assessment; this page does not discuss treatment choices.',
+      redFlagHtml: 'Sudden vision drop or sudden blindness, severe pain with headache or vomiting, and similar red-flag symptoms: see this site’s <a href="/urgent" target="_top">urgent page</a>.',
+      systemic: 'Severe pain and photophobia, a very red swollen eye with heavy discharge, or dry mouth / joint pain / rash as well: do not treat as ordinary dry eye — these need a doctor’s assessment.',
       title: 'The Tear Film & Dry Eye Disease',
       sub: 'Pick a condition to see what happens when one of the three tear-film layers is missing or not working.',
       btnHealthy: 'Healthy', btnLipid: 'Lipid deficiency', btnAqueous: 'Aqueous deficiency', btnMucin: 'Mucin deficiency',
       blink: 'Blink', pause: 'Pause', play: 'Play',
-      sinceBlink: 'Time since last blink', tbutKey: 'Tear break-up time',
+      blinkCycle: 'Blink-cycle progress (illustration — not a personal timer)',
       air: 'Air', lip: 'Lipid layer', aq: 'Aqueous layer', muc: 'Mucin layer', epi: 'Corneal epithelium', drySpot: 'Dry spot',
       svgTitle: 'Cross-section of the tear film on the corneal surface',
-      svgDesc: 'Animated diagram of lipid, aqueous and mucin layers with evaporation, osmolarity, break-up and inflammation.',
+      svgDesc: 'Animated diagram of lipid, aqueous and mucin layers with evaporation, relative osmolarity trend, stability and inflammation.',
       legLip: 'Lipid layer', legLipSrc: '(meibomian glands)', legAq: 'Aqueous layer', legAqSrc: '(lacrimal glands)',
       legMuc: 'Mucin / glycocalyx', legMucSrc: '(goblet & epithelial cells)', legEpi: 'Corneal epithelium',
-      legEvap: 'Evaporating water', legSalt: 'Solutes (osmolarity)', legInfl: 'Inflammatory mediators',
-      metersTitle: 'Tear film indicators', metersNote: 'Values are illustrative — not your personal test results.',
-      scaleNote: 'Schematic, not to scale. Real lipid layer is about 0.04–0.1 µm; whole tear film about 3–5 µm. Cannot replace a registered doctor.',
-      mEvap: 'Evaporation', mVol: 'Tear volume', mOsm: 'Tear osmolarity', mTbut: 'Tear film stability (TBUT)', mInfl: 'Surface inflammation',
-      low: 'Low', mod: 'Moderate', high: 'High', normal: 'Normal', mildLow: 'Mildly reduced', none: 'None', mild: 'Mild', marked: 'Marked',
-      cycle: '<div class="tfm-cycle"><strong>The vicious circle:</strong> an unstable tear film leads to hyperosmolarity, which drives inflammation. Inflammation damages surface cells, and that makes the film even more unstable. Every type of dry eye can end up in this loop.</div>',
+      legEvap: 'Evaporating water', legSalt: 'Solutes (osmolarity trend)', legInfl: 'Inflammatory mediators',
+      metersTitle: 'Tear film indicators (relative)', metersNote: 'Relative labels only — not your personal test results.',
+      scaleNote: 'Schematic, not to scale. Cannot replace a registered doctor.',
+      mEvap: 'Evaporation', mVol: 'Tear volume', mOsm: 'Osmolarity trend', mTbut: 'Tear-film stability', mInfl: 'Surface inflammation',
+      low: 'Low', mod: 'Moderate', high: 'High', mildLow: 'Mildly reduced', none: 'None', mild: 'Mild', marked: 'Marked',
+      osmLow: 'Lower', osmMid: 'Moderate', osmHigh: 'Higher',
+      stabStable: 'More stable', stabMid: 'Fair', stabUnstable: 'Breaks more easily',
+      volOk: 'Adequate', volMild: 'Somewhat reduced', volLow: 'Low',
+      cycle: '<div class="tfm-cycle"><strong>The vicious circle:</strong> an unstable tear film leads toward hyperosmolarity, which drives inflammation. Inflammation damages surface cells, and that makes the film even more unstable. Every type of dry eye can end up in this loop.</div>',
       info: {
-        healthy: { tag:'NORMAL', color:'#2fb36d', title:'Healthy tear film',
+        healthy: { tag:'HEALTHY', color:'#2fb36d', title:'Healthy tear film',
           html:'<p>The three layers work as one system to keep the eye surface smooth, wet and protected.</p>' +
             '<ul><li><strong>Lipid layer</strong> (meibomian glands): slows evaporation and keeps the film stable.</li>' +
             '<li><strong>Aqueous layer</strong> (lacrimal glands): water, electrolytes, proteins and antimicrobial factors.</li>' +
             '<li><strong>Mucin layer</strong> (goblet cells plus membrane-bound glycocalyx): makes the cornea wettable so tears spread evenly.</li></ul>' +
-            '<h5>Result</h5><ul><li>Stable film between blinks (break-up time often over 10 s)</li><li>Normal osmolarity (about 300 mOsm/L)</li><li>Smooth optical surface</li></ul>' },
+            '<h5>Result (relative illustration)</h5><ul><li>More stable film between blinks</li><li>Relatively lower osmolarity trend</li><li>Smoother optical surface</li></ul>' },
         lipid: { tag:'EVAPORATIVE DRY EYE', color:'#e08e1b', title:'Lipid layer deficiency',
           html:'<h5>Common causes</h5><p>Meibomian gland dysfunction (MGD) is a very common cause. Others: blepharitis, rosacea, contact lens wear, and reduced blinking (for example during screen use).</p>' +
-            '<h5>Mechanism</h5><p>A thin or patchy oil layer no longer seals the surface, so water <strong>evaporates rapidly</strong>. Between blinks the aqueous layer thins and becomes hyperosmolar, so the film breaks up early.</p>' +
-            '<h5>Effects</h5><ul><li>More evaporation and a short tear break-up time</li><li>Hyperosmolar stress on epithelial cells, triggering inflammation</li><li>Burning, grit and fluctuating vision; sometimes paradoxical reflex watering</li></ul>' },
+            '<h5>Mechanism</h5><p>A thin or patchy oil layer no longer seals the surface, so water <strong>evaporates rapidly</strong>. Between blinks the aqueous layer thins and the osmolarity trend rises, so the film breaks up more easily.</p>' +
+            '<h5>Effects</h5><ul><li>More evaporation and less stable tear film</li><li>Hyperosmolar stress on epithelial cells, triggering inflammation</li><li>Burning, grit and fluctuating vision; sometimes paradoxical reflex watering</li></ul>' },
         aqueous: { tag:'AQUEOUS-DEFICIENT DRY EYE', color:'#2e86de', title:'Aqueous layer deficiency',
           html:'<h5>Common causes</h5><p>The lacrimal glands make fewer tears. Causes include Sjögren syndrome, ageing, lacrimal gland disease, systemic drugs (antihistamines, antidepressants and others), and reduced corneal sensation.</p>' +
-            '<h5>Mechanism</h5><p>Less water carries the same amount of solutes, so tear <strong>osmolarity rises</strong>. The thin film breaks up early and clears debris and inflammatory mediators poorly.</p>' +
-            '<h5>Effects</h5><ul><li>Low tear volume and often the highest osmolarity of the three types</li><li>Inflammatory cytokines build up and damage epithelium and goblet cells</li><li>Dryness, foreign-body sensation, light sensitivity and surface staining</li></ul>' },
+            '<h5>Mechanism</h5><p>Less water carries the same amount of solutes, so tear <strong>osmolarity trend rises more easily</strong>. The thin film breaks up more easily and clears debris and inflammatory mediators poorly.</p>' +
+            '<h5>Effects</h5><ul><li>Lower tear volume and a higher osmolarity trend</li><li>Inflammatory cytokines build up and damage epithelium and goblet cells</li><li>Dryness, foreign-body sensation, light sensitivity and surface staining</li></ul>' },
         mucin: { tag:'WETTABILITY DEFECT', color:'#8e44ad', title:'Mucin layer deficiency',
           html:'<h5>Common causes</h5><p>Loss of goblet cells or glycocalyx damage. Causes include chronic inflammation, cicatricial conjunctivitis (Stevens–Johnson syndrome, ocular pemphigoid), chemical injury, vitamin A deficiency, and long-term preserved eye drops.</p>' +
-            '<h5>Mechanism</h5><p>Without mucins the epithelium becomes <strong>hydrophobic</strong>. Even with near-normal volume, the aqueous layer cannot spread; it beads and breaks apart quickly.</p>' +
-            '<h5>Effects</h5><ul><li>Very short break-up time even when volume is near normal</li><li>Exposed dry spots, epithelial damage and inflammation</li><li>Irritation and blurred, unstable vision</li></ul>' }
+            '<h5>Mechanism</h5><p>Without mucins the epithelium becomes <strong>hydrophobic</strong>. Even with near-adequate volume, the aqueous layer cannot spread; it beads and breaks apart quickly.</p>' +
+            '<h5>Effects</h5><ul><li>Volume may be near adequate, but stability is poor and break-up happens more easily</li><li>Exposed dry spots, epithelial damage and inflammation</li><li>Irritation and blurred, unstable vision</li></ul>' }
       }
     },
     ja: {
       htmlLang: 'ja',
+      lockedBanner: '本ページは非救急の機序教育です。内容は登録医の対面診療の代わりにはなりません。',
+      eduBadge: '機序の図示 · 自己検査ではない',
+      noTreatment: '医師の評価が必要です。本ページでは治療の選択を述べません。',
+      redFlagHtml: '突然の視力低下・失明、激痛と頭痛・嘔吐などの赤旗症状：まず本サイトの <a href="/urgent" target="_top">救急ページ</a>へ。',
+      systemic: '激痛と羞明、片眼の強い発赤腫脹と大量分泌、または口渇／関節痛／皮疹の合併は「普通のドライアイ」と決めつけず、医師の評価が必要です。',
       title: '涙液層とドライアイの機序',
       sub: '状態を選ぶと、三層の涙液のうち一層が不足したときに何が起きるかが見られます。',
       btnHealthy: '健常', btnLipid: '脂質不足', btnAqueous: '水層不足', btnMucin: 'ムチン不足',
       blink: 'まばたき', pause: '一時停止', play: '再生',
-      sinceBlink: '前回のまばたきから', tbutKey: '涙液層破壊時間',
+      blinkCycle: 'まばたき周期の進行（図示であり個人の計時ではない）',
       air: '空気', lip: '脂質層', aq: '水層', muc: 'ムチン層', epi: '角膜上皮', drySpot: '乾燥斑',
       svgTitle: '角膜表面の涙液層断面の図示',
-      svgDesc: '脂質・水・ムチン層と蒸発、浸透圧、破壊、炎症を示すアニメーション。',
+      svgDesc: '脂質・水・ムチン層と蒸発、相対的な浸透圧傾向、安定性、炎症を示すアニメーション。',
       legLip: '脂質層', legLipSrc: '（マイボーム腺）', legAq: '水層', legAqSrc: '（涙腺）',
       legMuc: 'ムチン／糖衣', legMucSrc: '（杯細胞と上皮）', legEpi: '角膜上皮',
-      legEvap: '蒸発する水分', legSalt: '溶質（浸透圧）', legInfl: '炎症メディエーター',
-      metersTitle: '涙液の指標', metersNote: '数値は図示です。個人の検査結果ではありません。',
-      scaleNote: '模式図であり実寸ではありません。脂質層は約 0.04–0.1 µm、涙液全体は約 3–5 µm。登録医の代わりにはなりません。',
-      mEvap: '蒸発', mVol: '涙液量', mOsm: '涙液浸透圧', mTbut: '涙液層安定性（TBUT）', mInfl: '眼表面の炎症',
-      low: '低い', mod: '中等度', high: '高い', normal: '正常', mildLow: '軽度減少', none: 'なし', mild: '軽度', marked: '著明',
-      cycle: '<div class="tfm-cycle"><strong>悪循環：</strong>涙液不安定 → 高浸透圧 → 炎症。炎症が表面細胞を傷つけ、さらに不安定になります。ドライアイの各型でこのループに入り得ます。</div>',
+      legEvap: '蒸発する水分', legSalt: '溶質（浸透圧傾向）', legInfl: '炎症メディエーター',
+      metersTitle: '涙液の指標（相対）', metersNote: '相対ラベルのみ。個人の検査結果ではありません。',
+      scaleNote: '模式図であり実寸ではありません。登録医の代わりにはなりません。',
+      mEvap: '蒸発', mVol: '涙液量', mOsm: '浸透圧の傾向', mTbut: '涙液層の安定性', mInfl: '眼表面の炎症',
+      low: '低い', mod: '中等度', high: '高い', mildLow: '軽度減少', none: 'なし', mild: '軽度', marked: '著明',
+      osmLow: '低め', osmMid: '中等度', osmHigh: '高め',
+      stabStable: 'より安定', stabMid: '普通', stabUnstable: '破れやすい',
+      volOk: '十分', volMild: 'やや少ない', volLow: '少ない',
+      cycle: '<div class="tfm-cycle"><strong>悪循環：</strong>涙液不安定 → 高浸透圧の傾向 → 炎症。炎症が表面細胞を傷つけ、さらに不安定になります。ドライアイの各型でこのループに入り得ます。</div>',
       info: {
-        healthy: { tag:'正常', color:'#2fb36d', title:'健常な涙液層',
+        healthy: { tag:'健常', color:'#2fb36d', title:'健常な涙液層',
           html:'<p>三層が一つの系として働き、眼表面を滑らか・湿潤・保護します。</p>' +
             '<ul><li><strong>脂質層</strong>（マイボーム腺）：蒸発を抑え安定させます。</li>' +
             '<li><strong>水層</strong>（涙腺）：水分、電解質、蛋白質、抗菌因子。</li>' +
             '<li><strong>ムチン層</strong>（杯細胞と膜結合糖衣）：角膜を濡れやすくし、涙を均一に広げます。</li></ul>' +
-            '<h5>結果</h5><ul><li>まばたきのあいだ安定（破壊時間はしばしば 10 秒超）</li><li>浸透圧はおおむね正常（約 300 mOsm/L）</li><li>光学面が滑らか</li></ul>' },
+            '<h5>結果（相対の図示）</h5><ul><li>まばたきのあいだより安定</li><li>浸透圧の傾向は相対的に低め</li><li>光学面がより滑らか</li></ul>' },
         lipid: { tag:'蒸発亢進型ドライアイ', color:'#e08e1b', title:'脂質層の不足',
           html:'<h5>よくある原因</h5><p>マイボーム腺機能不全（MGD）が非常に多いです。ほか：眼瞼炎、酒さ、コンタクトレンズ、まばたき減少（画面作業など）。</p>' +
-            '<h5>機序</h5><p>薄い／斑状の油層では表面を封じられず、水分が<strong>急速に蒸発</strong>します。水層が薄く高浸透圧になり、早期に破壊します。</p>' +
-            '<h5>影響</h5><ul><li>蒸発増加と短い破壊時間</li><li>上皮への高浸透圧ストレスと炎症</li><li>灼熱・異物感・視力変動；反射性の流涙も</li></ul>' },
+            '<h5>機序</h5><p>薄い／斑状の油層では表面を封じられず、水分が<strong>急速に蒸発</strong>します。水層が薄く浸透圧の傾向が上がり、破れやすくなります。</p>' +
+            '<h5>影響</h5><ul><li>蒸発増加と安定性の低下</li><li>上皮への高浸透圧ストレスと炎症</li><li>灼熱・異物感・視力変動；反射性の流涙も</li></ul>' },
         aqueous: { tag:'涙液減少型ドライアイ', color:'#2e86de', title:'水層の不足',
           html:'<h5>よくある原因</h5><p>涙腺分泌の低下。シェーグレン症候群、加齢、涙腺疾患、全身薬（抗ヒスタミン・抗うつなど）、角膜知覚低下など。</p>' +
-            '<h5>機序</h5><p>水分が減り溶質が相対的に濃くなり、<strong>浸透圧が上昇</strong>します。薄い涙液は早期に破壊し、炎症物質の清除も不十分です。</p>' +
-            '<h5>影響</h5><ul><li>涙液量が低く、三型で浸透圧が最も高くなりやすい</li><li>炎症サイトカインが上皮と杯細胞を傷害</li><li>乾燥・異物感・羞明・表面染色</li></ul>' },
+            '<h5>機序</h5><p>水分が減り溶質が相対的に濃くなり、<strong>浸透圧の傾向が上がりやすい</strong>です。薄い涙液は破れやすく、炎症物質の清除も不十分です。</p>' +
+            '<h5>影響</h5><ul><li>涙液量が少なく、浸透圧の傾向が高め</li><li>炎症サイトカインが上皮と杯細胞を傷害</li><li>乾燥・異物感・羞明・表面染色</li></ul>' },
         mucin: { tag:'濡れ性の障害', color:'#8e44ad', title:'ムチン層の不足',
           html:'<h5>よくある原因</h5><p>杯細胞減少や糖衣障害。慢性炎症、瘢痕性結膜炎（スティーブンス・ジョンソン症候群、眼類天疱瘡）、化学外傷、ビタミンA欠乏、防腐剤入り点眼の長期使用など。</p>' +
-            '<h5>機序</h5><p>ムチンがないと上皮は<strong>疎水</strong>になります。量はほぼ正常でも水層が広がらず、玉になって早く壊れます。</p>' +
-            '<h5>影響</h5><ul><li>量は近くても破壊時間が非常に短い</li><li>乾燥斑の露出、上皮損傷と炎症</li><li>刺激感と不安定な見え方</li></ul>' }
+            '<h5>機序</h5><p>ムチンがないと上皮は<strong>疎水</strong>になります。量はほぼ十分でも水層が広がらず、玉になって早く壊れます。</p>' +
+            '<h5>影響</h5><ul><li>量は近くても安定性が悪く破れやすい</li><li>乾燥斑の露出、上皮損傷と炎症</li><li>刺激感と不安定な見え方</li></ul>' }
       }
     }
   };
@@ -444,7 +486,7 @@ html,body{margin:0;padding:0;background:#fff}
     const cycle = key === 'healthy' ? '' : T.cycle;
     infoBox.innerHTML = '<span class="tfm-badge" style="background:' + s.color + '">' + s.tag + '</span><h3>' + s.title + '</h3>' + s.html + cycle;
   }
-  const tbText = q('tbtext'), tbFill = q('tbfill'), tbMark = q('tbmark');
+  const tbFill = q('tbfill');
   const playBtn = q('playbtn'), blinkBtn = q('blinkbtn');
 
   function applyLang() {
@@ -454,6 +496,10 @@ html,body{margin:0;padding:0;background:#fff}
     root.querySelectorAll('[data-i]').forEach((el) => {
       const k = el.getAttribute('data-i');
       if (T[k] != null) el.textContent = T[k];
+    });
+    root.querySelectorAll('[data-i-html]').forEach((el) => {
+      const k = el.getAttribute('data-i-html');
+      if (T[k] != null) el.innerHTML = T[k];
     });
     if (airLabel) airLabel.textContent = T.air;
     labels.lip.textContent = T.lip;
@@ -610,17 +656,15 @@ html,body{margin:0;padding:0;background:#fff}
   }
 
   function updateUI() {
-    tbText.textContent = tb.toFixed(1) + ' s';
-    tbFill.style.width = (clamp(tb / BLINK) * 100).toFixed(1) + '%';
-    if (P.tbut < BLINK) { tbMark.style.display = 'block'; tbMark.style.left = 'calc(' + (P.tbut / BLINK * 100).toFixed(1) + '% - 1px)'; }
-    else tbMark.style.display = 'none';
+    if (tbFill) tbFill.style.width = (clamp(tb / BLINK) * 100).toFixed(1) + '%';
 
     const ev = clamp(P.evap / 28);
     setMeter('evap', ev, ev, ev < 0.25 ? T.low : ev < 0.6 ? T.mod : T.high);
-    setMeter('vol', P.vol / 100, (100 - P.vol) / 60, P.vol > 85 ? T.normal : P.vol > 60 ? T.mildLow : T.low);
-    const osm = P.osm + tb * P.osmRise * 0.5;
-    setMeter('osm', (osm - 280) / 70, (osm - 300) / 40, '≈ ' + Math.round(osm) + ' mOsm/L');
-    setMeter('tbut', Math.min(P.tbut, 10) / 10, 1 - Math.min(P.tbut, 10) / 10, P.tbut > 10 ? '> 10 s' : P.tbut.toFixed(1) + ' s');
+    setMeter('vol', P.vol / 100, (100 - P.vol) / 60, P.vol > 85 ? T.volOk : P.vol > 60 ? T.volMild : T.volLow);
+    const osmScore = clamp((P.osm - 295) / 45 + (tb * P.osmRise) / 40);
+    setMeter('osm', Math.max(0.08, osmScore), osmScore, osmScore < 0.25 ? T.osmLow : osmScore < 0.55 ? T.osmMid : T.osmHigh);
+    const stab = clamp(Math.min(P.tbut, 10) / 10);
+    setMeter('tbut', Math.max(0.08, stab), 1 - stab, stab > 0.7 ? T.stabStable : stab > 0.35 ? T.stabMid : T.stabUnstable);
     setMeter('infl', P.infl, P.infl, P.infl < 0.1 ? T.none : P.infl < 0.45 ? T.mild : P.infl < 0.7 ? T.mod : T.marked);
   }
 

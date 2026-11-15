@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { EduLink } from "@/components/edu-link";
 import { useI18n } from "@/i18n";
 import type { Locale } from "@/i18n/locale";
 import "./tear-film-sim.css";
@@ -16,7 +17,7 @@ type TearFilmSimProps = {
   showChrome?: boolean;
 };
 
-/** Teaching-only caveat (illustration — not a TBUT / osmolarity test). */
+/** Locked teaching caveat — not a self-check; red flags only → /urgent. */
 export function TearFilmTeachingCaveat() {
   const { t } = useI18n();
   return (
@@ -24,8 +25,18 @@ export function TearFilmTeachingCaveat() {
       className="mb-4 rounded-lg border border-line bg-line/25 px-3.5 py-3 text-[0.82rem] leading-relaxed text-muted"
       aria-label={t("tearFilmEduBadge")}
     >
-      <p className="font-semibold text-navy">{t("tearFilmEduBadge")}</p>
+      <p className="font-semibold text-navy">{t("tearFilmLockedBanner")}</p>
+      <p className="mt-2 font-semibold text-navy">{t("tearFilmEduBadge")}</p>
       <p className="mt-1.5">{t("tearFilmEduCaveat")}</p>
+      <p className="mt-1.5">
+        {t("tearFilmEduRedFlag")}{" "}
+        <EduLink href="/urgent" className="font-medium text-navy underline underline-offset-2">
+          {t("tearFilmEduRedFlagLink")}
+        </EduLink>
+        {t("tearFilmEduRedFlagAfter")}
+      </p>
+      <p className="mt-1.5">{t("tearFilmEduSystemic")}</p>
+      <p className="mt-1.5 font-medium text-navy">{t("tearFilmNoTreatment")}</p>
     </aside>
   );
 }

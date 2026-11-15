@@ -70,6 +70,12 @@ function TearFilmToolPage() {
 
       <div className="mt-4 flex flex-wrap gap-2 px-4">
         <Link
+          to="/urgent"
+          className="inline-flex h-11 items-center rounded-full border border-danger/40 bg-danger-bg px-4 text-[0.85rem] font-semibold text-danger no-underline"
+        >
+          {t("tearFilmEduRedFlagLink")} →
+        </Link>
+        <Link
           to="/t/$topicId"
           params={{ topicId: "d2" }}
           className="inline-flex h-11 items-center rounded-full border border-line bg-card px-4 text-[0.85rem] font-semibold text-navy no-underline"
