@@ -16,6 +16,62 @@
   line-height: 1.5;
 }
 
+.shallow-ac-sim__toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+}
+
+.shallow-ac-sim__fs-button {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  border-radius: 9999px;
+  border: 1px solid var(--color-line);
+  background: var(--color-card);
+  padding: 0 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  cursor: pointer;
+}
+
+.shallow-ac-sim__fs-exit-bar {
+  display: none;
+  justify-content: flex-end;
+  padding: 0.5rem 0.75rem;
+}
+
+.shallow-ac-sim__chrome:fullscreen,
+.shallow-ac-sim__chrome:-webkit-full-screen,
+.shallow-ac-sim__chrome.is-fullscreen {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 0 0.75rem 0.75rem;
+  overflow: hidden;
+  background: var(--color-paper);
+}
+
+.shallow-ac-sim__chrome:fullscreen .shallow-ac-sim__fs-exit-bar,
+.shallow-ac-sim__chrome:-webkit-full-screen .shallow-ac-sim__fs-exit-bar,
+.shallow-ac-sim__chrome.is-fullscreen .shallow-ac-sim__fs-exit-bar {
+  display: flex;
+  flex: 0 0 auto;
+}
+
+.shallow-ac-sim__chrome:fullscreen .shallow-ac-sim__frame,
+.shallow-ac-sim__chrome:-webkit-full-screen .shallow-ac-sim__frame,
+.shallow-ac-sim__chrome.is-fullscreen .shallow-ac-sim__frame {
+  flex: 1 1 auto;
+  width: 100%;
+  height: auto !important;
+  min-height: 0;
+  border-radius: var(--radius-md);
+}
+
 .shallow-ac-sim__frame {
   display: block;
   width: 100%;

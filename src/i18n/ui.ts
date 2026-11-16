@@ -367,6 +367,8 @@ const zhHant = {
   shallowAcEduCaveatAfter: "，不是預約診所。",
   shallowAcSimFooter:
     "示意不是自我檢查或診斷，亦不能代替面診。需由醫生評估，本頁不講治療選擇。本站不提供預約或轉介。",
+  shallowAcFullscreen: "全螢幕",
+  shallowAcExitFullscreen: "離開全螢幕",
   shallowAcTopicLink: "遠視、淺前房與晶體",
   tearFilmSimTitle: "淚膜三層與乾眼機制示意",
   tearFilmSimCaption:
@@ -985,6 +987,8 @@ const en: Record<Key, string> = {
   shallowAcEduCaveatAfter: " — not clinic booking.",
   shallowAcSimFooter:
     "Illustration only — not a self-check or diagnosis, and not a substitute for an in-person visit. A doctor must assess; this page does not discuss treatment options. This site does not book or refer.",
+  shallowAcFullscreen: "Fullscreen",
+  shallowAcExitFullscreen: "Exit fullscreen",
   shallowAcTopicLink: "Hyperopia, shallow chamber and the lens",
   tearFilmSimTitle: "Tear film layers and dry-eye mechanism",
   tearFilmSimCaption:
@@ -1595,6 +1599,8 @@ const ja: Record<Key, string> = {
   shallowAcEduCaveatAfter: "（予約ではない）。",
   shallowAcSimFooter:
     "図示であり、自己検査や診断でも、対面診察の代わりでもありません。医師の評価が必要で、本ページは治療の選択肢を述べません。予約・紹介はしません。",
+  shallowAcFullscreen: "全画面",
+  shallowAcExitFullscreen: "全画面を終了",
   shallowAcTopicLink: "遠視・浅い前房と水晶体",
   tearFilmSimTitle: "涙液三層とドライアイの機序",
   tearFilmSimCaption:

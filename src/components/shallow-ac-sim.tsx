@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { EduLink } from "@/components/edu-link";
 import { useI18n } from "@/i18n";
 import type { Locale } from "@/i18n/locale";
@@ -17,6 +17,12 @@ type ShallowAcSimProps = {
    */
   showChrome?: boolean;
 };
+
+type FullscreenDocument = Document & {
+  webkitFullscreenElement?: Element | null;
+  webkitExitFullscreen?: () => void;
+};
+type FullscreenElement = HTMLElement & { webkitRequestFullscreen?: () => void };
 
 /** Teaching-only caveat (not the shared Amsler normal/abnormal / OCT boilerplate). */
 export function ShallowAcTeachingCaveat() {
@@ -58,6 +64,9 @@ export function ShallowAcSim({ showChrome = true }: ShallowAcSimProps) {
   const { t, locale } = useI18n();
   const lang = shallowAcLang(locale);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const chromeRef = useRef<HTMLDivElement>(null);
+  const [fullscreen, setFullscreen] = useState(false);
+  const [fullscreenSupported, setFullscreenSupported] = useState(false);
 
   useEffect(() => {
     function onMessage(ev: MessageEvent) {
@@ -72,6 +81,8 @@ export function ShallowAcSim({ showChrome = true }: ShallowAcSimProps) {
       }
       const el = iframeRef.current;
       if (!el) return;
+      // While fullscreen, CSS flex sizing owns the frame height.
+      if (chromeRef.current?.classList.contains("is-fullscreen")) return;
       const next = Math.max(640, Math.min(1400, Math.ceil(data.height)));
       el.style.height = `${next}px`;
     }
@@ -79,20 +90,112 @@ export function ShallowAcSim({ showChrome = true }: ShallowAcSimProps) {
     return () => window.removeEventListener("message", onMessage);
   }, []);
 
+  useEffect(() => {
+    const root = document.documentElement as FullscreenElement;
+    setFullscreenSupported(
+      typeof root.requestFullscreen === "function" ||
+        typeof root.webkitRequestFullscreen === "function",
+    );
+    const sync = () => {
+      const doc = document as FullscreenDocument;
+      const active = doc.fullscreenElement ?? doc.webkitFullscreenElement ?? null;
+      setFullscreen(active !== null && active === chromeRef.current);
+    };
+    document.addEventListener("fullscreenchange", sync);
+    document.addEventListener("webkitfullscreenchange", sync);
+    return () => {
+      document.removeEventListener("fullscreenchange", sync);
+      document.removeEventListener("webkitfullscreenchange", sync);
+    };
+  }, []);
+
+  /** Tell the embed to grow / shrink the 3D stage with parent fullscreen. */
+  useEffect(() => {
+    const win = iframeRef.current?.contentWindow;
+    if (!win) return;
+    win.postMessage(
+      { type: "eyesinfo-shallow-ac-fullscreen", fullscreen },
+      window.location.origin,
+    );
+  }, [fullscreen]);
+
+  const onIframeLoad = () => {
+    const win = iframeRef.current?.contentWindow;
+    if (!win) return;
+    win.postMessage(
+      { type: "eyesinfo-shallow-ac-fullscreen", fullscreen },
+      window.location.origin,
+    );
+  };
+
+  const enterFullscreen = () => {
+    const el = chromeRef.current as FullscreenElement | null;
+    if (!el) return;
+    if (typeof el.requestFullscreen === "function") {
+      void el.requestFullscreen().catch(() => {});
+    } else {
+      el.webkitRequestFullscreen?.();
+    }
+  };
+
+  const exitFullscreen = () => {
+    const doc = document as FullscreenDocument;
+    if (typeof doc.exitFullscreen === "function" && doc.fullscreenElement) {
+      void doc.exitFullscreen().catch(() => {});
+    } else {
+      doc.webkitExitFullscreen?.();
+    }
+  };
+
   return (
     <section className="shallow-ac-sim" aria-label={t("shallowAcSimTitle")}>
       {showChrome ? <ShallowAcTeachingCaveat /> : null}
       <p className="shallow-ac-sim__caption">{t("shallowAcSimCaption")}</p>
-      <iframe
-        ref={iframeRef}
-        key={lang}
-        id="eyesinfo-shallow-ac-sim"
-        src={`/shallow-ac.html?lang=${encodeURIComponent(lang)}`}
-        title={t("shallowAcSimTitle")}
-        className="shallow-ac-sim__frame"
-        loading="lazy"
-        referrerPolicy="same-origin"
-      />
+      {fullscreenSupported ? (
+        <div className="shallow-ac-sim__toolbar">
+          <button
+            type="button"
+            id="shallow-ac-enter-fullscreen"
+            className="shallow-ac-sim__fs-button"
+            aria-pressed={fullscreen}
+            onClick={enterFullscreen}
+          >
+            {t("shallowAcFullscreen")}
+          </button>
+        </div>
+      ) : null}
+      <div
+        id="shallow-ac-teaching-chrome"
+        ref={chromeRef}
+        className={
+          fullscreen
+            ? "shallow-ac-sim__chrome is-fullscreen"
+            : "shallow-ac-sim__chrome"
+        }
+      >
+        <div className="shallow-ac-sim__fs-exit-bar">
+          <button
+            type="button"
+            id="shallow-ac-exit-fullscreen"
+            className="shallow-ac-sim__fs-button"
+            onClick={exitFullscreen}
+          >
+            {t("shallowAcExitFullscreen")}
+          </button>
+        </div>
+        <iframe
+          ref={iframeRef}
+          key={lang}
+          id="eyesinfo-shallow-ac-sim"
+          src={`/shallow-ac.html?lang=${encodeURIComponent(lang)}`}
+          title={t("shallowAcSimTitle")}
+          className="shallow-ac-sim__frame"
+          loading="lazy"
+          referrerPolicy="same-origin"
+          allow="fullscreen"
+          onLoad={onIframeLoad}
+        />
+      </div>
       {showChrome ? <ShallowAcTeachingFooter /> : null}
     </section>
   );
