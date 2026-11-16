@@ -109,6 +109,25 @@ export function ShallowAcSim({ showChrome = true }: ShallowAcSimProps) {
     };
   }, []);
 
+  /** Tell the embed to grow / shrink the 3D stage with parent fullscreen. */
+  useEffect(() => {
+    const win = iframeRef.current?.contentWindow;
+    if (!win) return;
+    win.postMessage(
+      { type: "eyesinfo-shallow-ac-fullscreen", fullscreen },
+      window.location.origin,
+    );
+  }, [fullscreen]);
+
+  const onIframeLoad = () => {
+    const win = iframeRef.current?.contentWindow;
+    if (!win) return;
+    win.postMessage(
+      { type: "eyesinfo-shallow-ac-fullscreen", fullscreen },
+      window.location.origin,
+    );
+  };
+
   const enterFullscreen = () => {
     const el = chromeRef.current as FullscreenElement | null;
     if (!el) return;
@@ -174,6 +193,7 @@ export function ShallowAcSim({ showChrome = true }: ShallowAcSimProps) {
           loading="lazy"
           referrerPolicy="same-origin"
           allow="fullscreen"
+          onLoad={onIframeLoad}
         />
       </div>
       {showChrome ? <ShallowAcTeachingFooter /> : null}

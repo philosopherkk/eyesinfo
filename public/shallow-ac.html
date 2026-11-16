@@ -52,6 +52,32 @@
       border-radius: 10px; overflow: hidden; background: #05070b; border: 1px solid #2a3140;
     }
     #sac-view canvas { display: block; width: 100% !important; height: 100% !important; touch-action: none; }
+    /* Parent teaching chrome fullscreen — grow the 3D stage, drop max-width caps. */
+    html.is-parent-fullscreen, html.is-parent-fullscreen body {
+      height: 100%;
+      overflow: auto;
+    }
+    html.is-parent-fullscreen .wrap {
+      max-width: none;
+      box-sizing: border-box;
+      min-height: 100%;
+      padding: 8px 10px 12px;
+    }
+    html.is-parent-fullscreen .cap { display: none; }
+    html.is-parent-fullscreen #sacsim {
+      max-width: none;
+      box-sizing: border-box;
+      min-height: calc(100dvh - 24px);
+      display: flex;
+      flex-direction: column;
+    }
+    html.is-parent-fullscreen #sac-view {
+      flex: 1 1 auto;
+      width: 100%;
+      height: min(70dvh, 820px);
+      min-height: 360px;
+    }
+    html.is-parent-fullscreen .flow-wrap { flex: 0 0 auto; }
     #sac-hud {
       position: absolute; left: 10px; top: 10px; right: 10px;
       display: flex; flex-wrap: wrap; gap: 8px; pointer-events: none;
@@ -805,6 +831,25 @@ $("sac-reset").addEventListener("click", () => {
 });
 
 window.addEventListener("resize", () => { resize(); postHeight(); });
+
+window.addEventListener("message", (ev) => {
+  const data = ev.data;
+  if (
+    !data ||
+    typeof data !== "object" ||
+    data.type !== "eyesinfo-shallow-ac-fullscreen"
+  ) {
+    return;
+  }
+  document.documentElement.classList.toggle(
+    "is-parent-fullscreen",
+    !!data.fullscreen,
+  );
+  requestAnimationFrame(() => {
+    resize();
+    postHeight();
+  });
+});
 
 applyLang();
 resize();
