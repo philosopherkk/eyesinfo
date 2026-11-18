@@ -322,14 +322,15 @@
   }
 
   function extendFar(canvas) {
+    const band = 72;
     const tmp = mk(SW, PAD);
-    tmp.getContext("2d").drawImage(canvas, 0, 420, SW, PAD, 0, 0, SW, PAD);
-    const ctx = canvas.getContext("2d");
-    ctx.save();
-    ctx.translate(0, SH + PAD);
-    ctx.scale(1, -1);
-    ctx.drawImage(tmp, 0, 0);
-    ctx.restore();
+    const tx = tmp.getContext("2d");
+    tx.save();
+    tx.translate(0, PAD);
+    tx.scale(1, -1);
+    tx.drawImage(canvas, 0, SH - band, SW, band, 0, 0, SW, PAD);
+    tx.restore();
+    canvas.getContext("2d").drawImage(tmp, 0, SH);
   }
 
   const far0 = mk(SW, SCENE_H);
@@ -446,14 +447,10 @@
         const oy = (y - viewCy) / safeMag;
         let sx = srcCx + ox * radial;
         let sy = srcCy + oy * radial;
-        if (sy < 0) sy = -sy;
-        if (sy > maxY) sy = maxY - (sy - maxY);
-        if (sx < 0) sx = -sx;
-        if (sx > maxX) sx = maxX - (sx - maxX);
+        if (sy < 0) sy = Math.min(-sy, 200);
         if (sx < 0) sx = 0;
         else if (sx > maxX) sx = maxX;
-        if (sy < 0) sy = 0;
-        else if (sy > maxY) sy = maxY;
+        if (sy > maxY) sy = maxY;
         const x0 = sx | 0;
         const y0 = sy | 0;
         const fx = sx - x0;
