@@ -48,7 +48,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     },
     "spectacle-image": {
       title: "鏡片所見畫面示意",
-      blurb: "比較遠視、近視、漸進、散光眼鏡，以及隱形眼鏡（不是檢查）",
+      blurb: "比較遠視、近視、散光眼鏡，以及隱形眼鏡（不是檢查）",
       canto: "同一幅山脊，不同鏡片",
     },
   },
@@ -93,7 +93,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     },
     "spectacle-image": {
       title: "镜片所见画面示意",
-      blurb: "比较远视、近视、渐进、散光眼镜，以及隐形眼镜（不是检查）",
+      blurb: "比较远视、近视、散光眼镜，以及隐形眼镜（不是检查）",
       canto: "同一幅山脊，不同镜片",
     },
   },
@@ -138,7 +138,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     },
     "spectacle-image": {
       title: "What the lens shows",
-      blurb: "Hyperopic, myopic, progressive and astigmatism-corrected glasses, plus contact lenses (not a test)",
+      blurb: "Hyperopic, myopic and astigmatism-corrected glasses, plus contact lenses (not a test)",
       canto: "One ridge, different lenses",
     },
   },
@@ -183,7 +183,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     },
     "spectacle-image": {
       title: "レンズの見え方図示",
-      blurb: "遠視・近視・累進・乱視矯正の眼鏡と、コンタクトレンズの比較（検査ではない）",
+      blurb: "遠視・近視・乱視矯正の眼鏡と、コンタクトレンズの比較（検査ではない）",
       canto: "同じ山稜、違うレンズ",
     },
   },
