@@ -507,9 +507,9 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
     ja: "累進レンズで下り階段を見るときの近用部の拡大・ぼけ・プリズムの教育用アニメ。遠視／近視を切替（検査ではない）。",
   },
   "/tools/spectacle-image": {
-    zh: "同一幅山脊照片比較遠視、近視、漸進、散光眼鏡的光學區，以及隱形眼鏡（教育工具，不是檢查或驗光）。滑桿是示意，不是處方。",
-    en: "One ridge photograph compares the optical zone of hyperopic, myopic, progressive and astigmatism-corrected glasses, plus contact lenses. Sliders are an illustration, not a prescription (education tool, not a test).",
-    ja: "同じ山稜の写真で、遠視・近視・累進・乱視矯正眼鏡の光学部と、コンタクトレンズを比べます。スライダーは図示であり処方ではありません（検査ではありません）。",
+    zh: "同一幅山脊照片比較遠視、近視、散光眼鏡的光學區，以及隱形眼鏡（教育工具，不是檢查或驗光）。滑桿是示意，不是處方。",
+    en: "One ridge photograph compares the optical zone of hyperopic, myopic and astigmatism-corrected glasses, plus contact lenses. Sliders are an illustration, not a prescription (education tool, not a test).",
+    ja: "同じ山稜の写真で、遠視・近視・乱視矯正眼鏡の光学部と、コンタクトレンズを比べます。スライダーは図示であり処方ではありません（検査ではありません）。",
   },
   "/tools/tear-film": {
     zh: "淚膜三層（脂質、水液、黏液）與蒸發型／水液不足／黏液不足乾眼機制示意；指標只用相對等級，不是個人檢查。本頁屬非急症機制教育，不能代替面診。",
