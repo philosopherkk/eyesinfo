@@ -151,7 +151,7 @@
       capCl: "整幅畫面矯正球面，幾乎不放大縮小，也沒有鏡框窗。散光設定不是「無」時，方向性模糊仍留在全畫面。",
       capClCyl: "整幅畫面同時收起球面與方向性模糊，方向性放大比眼鏡輕。不示範鏡片旋轉或是否戴得合適。",
       capClSame: "未設定散光示意時，這一格與已矯正隱形眼鏡相近。",
-      capClPlain: "整幅畫面保持未中和的模糊，沒有鏡框窗。近視示意時近處卡片比遠招牌清楚；遠視示意時近處更糊。",
+      capClPlain: "整幅畫面保持未中和的模糊，沒有鏡框窗。近視示意時遠山更糊；遠視示意時遠山較輕。",
     },
     "zh-Hans": {
       htmlLang: "zh-CN",
@@ -183,7 +183,7 @@
       capCl: "整幅画面矫正球面，几乎不放大缩小，也没有镜框窗。散光设定不是「无」时，方向性模糊仍留在全画面。",
       capClCyl: "整幅画面同时收起球面与方向性模糊，方向性放大比眼镜轻。不示范镜片旋转或是否戴得合适。",
       capClSame: "未设定散光示意时，这一格与已矫正隐形眼镜相近。",
-      capClPlain: "整幅画面保持未中和的模糊，没有镜框窗。近视示意时近处卡片比远招牌清楚；远视示意时近处更糊。",
+      capClPlain: "整幅画面保持未中和的模糊，没有镜框窗。近视示意时远山更糊；远视示意时远山较轻。",
     },
     en: {
       htmlLang: "en",
@@ -215,7 +215,7 @@
       capCl: "The whole picture corrects the sphere, with almost no change in size and no frame window. If astigmatism is not none, directional blur remains across the picture.",
       capClCyl: "The whole picture clears both sphere and directional blur. Directional stretch is lighter than with glasses. This does not show lens rotation or whether a lens fits.",
       capClSame: "With astigmatism at none, this mode looks like the corrected contact lens.",
-      capClPlain: "The whole picture stays uncorrected, with no frame window. In the myopia illustration the near card is clearer than the distant sign. In the hyperopia illustration the near card is more blurred.",
+      capClPlain: "The whole picture stays uncorrected, with no frame window. In the myopia illustration the distant ridge is more blurred. In the hyperopia illustration the distant ridge is less blurred.",
     },
     ja: {
       htmlLang: "ja",
@@ -247,7 +247,7 @@
       capCl: "画面全体で球面を矯正し、大きさはほとんど変わらず、枠の窓もありません。乱視が「なし」でなければ、方向性のぼけが全体に残ります。",
       capClCyl: "画面全体で球面と方向性のぼけを同時に取ります。方向性の伸びは眼鏡より軽く描きます。レンズの回転や装用の適否は示しません。",
       capClSame: "乱視の図示が「なし」のときは、矯正済みコンタクトレンズに近くなります。",
-      capClPlain: "画面全体が未中和のぼけのままです。枠の窓はありません。近視の図示では近くのカードが遠い看板よりはっきりし、遠視の図示では近くがよりぼけます。",
+      capClPlain: "画面全体が未中和のぼけのままです。枠の窓はありません。近視の図示では遠い山稜がよりぼけ、遠視の図示では遠方が比較的軽くぼけます。",
     },
   };
 
@@ -332,29 +332,9 @@
     ctx.restore();
   }
 
-  function drawNear(ctx) {
-    const x = SW / 2 - 170;
-    const y = 640;
-    const w = 340;
-    const h = 120;
-    ctx.fillStyle = "#f7f4ee";
-    ctx.fillRect(x, y, w, h);
-    ctx.strokeStyle = "#222";
-    ctx.lineWidth = 4;
-    ctx.strokeRect(x, y, w, h);
-    ctx.fillStyle = "#222";
-    for (let i = 0; i < 4; i++) ctx.fillRect(x + 22, y + 20 + i * 24, w - 80, 8);
-    ctx.beginPath();
-    ctx.arc(x + w - 36, y + 36, 16, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.fillRect(x + w - 42, y + 62, 8, 42);
-  }
-
   const far0 = mk(SW, SCENE_H);
-  const near0 = mk(SW, SCENE_H);
   drawFar(far0.getContext("2d"));
   extendFar(far0);
-  drawNear(near0.getContext("2d"));
   photo.onload = () => {
     photoReady = true;
     blurCache.clear();
@@ -388,7 +368,7 @@
   function blurred(src, r) {
     const q = Math.max(0, Math.round(r * 2) / 2);
     if (q <= 0) return src;
-    const key = (src === far0 ? "f" : "n") + q;
+    const key = "f" + q;
     const hit = blurCache.get(key);
     if (hit) return hit;
     const made = blurOf(src, q);
@@ -396,20 +376,16 @@
     return made;
   }
 
-  function stack(fi, _mi, ni) {
+  function photoOf(level) {
     const rad = [0, 6, 12, 20];
-    const c = mk(SW, SCENE_H);
-    const x = c.getContext("2d");
-    x.drawImage(blurred(far0, rad[fi] || 0), 0, 0);
-    x.drawImage(blurred(near0, rad[ni] || 0), 0, 0);
-    return c;
+    const idx = Math.max(0, Math.min(3, level | 0));
+    return blurred(far0, rad[idx] || 0);
   }
 
-  function layers(farR, nearR) {
+  function layers(farR) {
     const c = mk(SW, SCENE_H);
     const x = c.getContext("2d");
     x.drawImage(blurred(far0, farR), 0, 0);
-    x.drawImage(blurred(near0, nearR), 0, 0);
     return c;
   }
 
@@ -553,17 +529,11 @@
     const bend = amt * amt;
     const pinch = sign === "plus" ? 0.3 * bend : sign === "minus" ? -0.9 * bend : 0;
     let farR = 0;
-    let nearR = 0;
-    if (sign === "minus") {
-      farR = 22 * amt;
-      nearR = 8 * Math.max(0, amt - 0.4);
-    } else if (sign === "plus") {
-      farR = 12 * Math.max(0, amt - 0.2);
-      nearR = 20 * amt;
-    }
-    const uncorr = smear(layers(farR, nearR), ang, cylPx);
-    const residual = smear(layers(0, 0), ang, cylPx);
-    const sharp = layers(0, 0);
+    if (sign === "minus") farR = 22 * amt;
+    else if (sign === "plus") farR = 12 * Math.max(0, amt - 0.2);
+    const uncorr = smear(layers(farR), ang, cylPx);
+    const residual = smear(layers(0), ang, cylPx);
+    const sharp = layers(0);
     return { sign, amt, cA, ang, cylPx, mag, pinch, uncorr, residual, sharp };
   }
 
@@ -706,16 +676,16 @@
         const peri = [0, 2, 3, 3][aL];
         const lookDown = 190;
         if (S.gaze === "down") {
-          const mush = makePlate(stack(3, peri, 3), o.mag, o.pinch, 0, 0, 0, sh, 0, lookDown);
-          const nearScene = smear(stack(Math.min(3, aL + 1), Math.min(3, aL), 0), o.ang, o.cylPx);
+          const mush = makePlate(photoOf(3), o.mag, o.pinch, 0, 0, 0, sh, 0, lookDown);
+          const nearScene = smear(photoOf(0), o.ang, o.cylPx);
           const nearPlate = makePlate(nearScene, addMag, o.pinch, 0, 0, 0, sh, 0, lookDown);
           paintZone(mush, inset);
           paintSoft(nearPlate, inset, maskCorridor);
         } else if (S.gaze === "side") {
-          const mush = makePlate(stack(peri, peri, peri), o.mag, o.pinch, 0, 0, sh, 0, 80, 0);
+          const mush = makePlate(photoOf(peri), o.mag, o.pinch, 0, 0, sh, 0, 80, 0);
           paintZone(mush, inset);
         } else {
-          const around = makePlate(stack(Math.min(3, peri), peri, 3), o.mag, o.pinch, 0, 0, 0, 0, 0, 0);
+          const around = makePlate(photoOf(Math.min(3, peri)), o.mag, o.pinch, 0, 0, 0, 0, 0, 0);
           paintZone(around, inset);
           paintSoft(sv, inset, maskDistance);
         }
