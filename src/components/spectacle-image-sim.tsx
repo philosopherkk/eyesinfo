@@ -41,7 +41,7 @@ export function SpectacleImageTeachingFooter() {
 }
 
 /**
- * Embeds the spectacle / contact-lens / monofocal illustration
+ * Embeds the spectacle / contact-lens illustration
  * (`public/spectacle-image.html`).
  * Control labels follow the site locale via `?lang=` (no in-sim language picker).
  */

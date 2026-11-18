@@ -18,7 +18,7 @@
     .controls { order: 1; }
     .cap { font-size: 13px; line-height: 1.5; color: #9aa3b2; margin: 0 0 8px; }
     .lab { font-size: 13px; font-weight: 700; color: #f3c06a; margin: 0; }
-    .note, .hint, .capmode, .scale { font-size: 13px; line-height: 1.5; color: #c5ceda; margin: 6px 0; }
+    .note, .hint, .capmode { font-size: 13px; line-height: 1.5; color: #c5ceda; margin: 6px 0; }
     .hint { color: #8b95a3; margin: 4px 0; }
     .controls, .stage, .seg, .row, .field { min-width: 0; max-width: 100%; }
     .seg { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
@@ -108,7 +108,6 @@
     <div class="row">
       <label class="chk"><input type="checkbox" id="chk-zone" checked /> <span id="lab-zone"></span></label>
       <label class="chk"><input type="checkbox" id="chk-out" checked /> <span id="lab-out"></span></label>
-      <label class="chk"><input type="checkbox" id="chk-scale" /> <span id="lab-scale"></span></label>
     </div>
     <div id="hints"></div>
     </div>
@@ -116,8 +115,6 @@
     <div class="stage">
     <canvas id="cv" width="960" height="540"></canvas>
     <p class="capmode" id="modeCap"></p>
-    <p class="note" id="scaleNote" hidden></p>
-    <p class="scale" id="scaleLine" hidden></p>
     <p class="note" id="noFixed" hidden></p>
     </div>
   </div>
@@ -131,14 +128,13 @@
       groupCompare: "比較",
       modeHyper: "遠視眼鏡", modeMyope: "近視眼鏡", modeSv: "單焦眼鏡", modeProg: "漸進眼鏡", modeSpecCyl: "散光矯正眼鏡",
       modeCl: "已矯正隱形眼鏡", modeClCyl: "散光矯正隱形眼鏡", modeClPlain: "未矯正隱形眼鏡",
-      modeIol: "中和屈折的單焦點人工晶體",
       groupRx: "示意屈折", rxNote: "示意設定，不是處方",
       sphereSign: "球面方向", signMinus: "近視", signPlus: "遠視", plano: "平光",
       sphereAmt: "球面", cylAmt: "散光", meridian: "散光方向", addAmt: "加入度",
       amtNone: "無", amtLight: "輕", amtMid: "中", amtHigh: "較強",
-      merH: "水平", merO: "斜", merV: "垂直", illus: "示意",
+      merH: "水平", merO: "斜", merV: "垂直",
       groupGaze: "注視", gazeFar: "平視", gazeDown: "向下", gazeSide: "看旁邊",
-      groupShow: "顯示", showZone: "顯示光學區", showOutside: "鏡外＝未矯正參考", showScale: "顯示示意刻度",
+      groupShow: "顯示", showZone: "顯示光學區", showOutside: "鏡外＝未矯正參考",
       zone: "光學區", zoneFar: "遠用區", zoneCorr: "走廊", zoneNear: "近用區", zonePeriph: "周邊", zoneOut: "鏡外", zoneGap: "示意缺口",
       noFixedZone: "此比較沒有固定在眼前的光學區。",
       hintSignLock: "此鏡片類型已固定球面方向",
@@ -156,7 +152,6 @@
       capClCyl: "整幅畫面同時收起球面與方向性模糊，方向性放大比眼鏡輕。不示範鏡片旋轉或是否戴得合適。",
       capClSame: "未設定散光示意時，這一格與已矯正隱形眼鏡相近。",
       capClPlain: "整幅畫面保持未中和的模糊，沒有鏡框窗。近視示意時近處卡片比遠招牌清楚；遠視示意時近處更糊。",
-      capIol: "遠景畫成清楚，近處卡片仍模糊，沒有眼鏡光學區，也沒有放大縮小。這是「遠距離屈折被中和」的示意。真正的單焦點人工晶體不會自動消除角膜散光，也不提供近距離加入度。這裡不是度數計算，也不是手術結果。",
     },
     "zh-Hans": {
       htmlLang: "zh-CN",
@@ -165,14 +160,13 @@
       groupCompare: "比较",
       modeHyper: "远视眼镜", modeMyope: "近视眼镜", modeSv: "单焦眼镜", modeProg: "渐进眼镜", modeSpecCyl: "散光矫正眼镜",
       modeCl: "已矫正隐形眼镜", modeClCyl: "散光矫正隐形眼镜", modeClPlain: "未矫正隐形眼镜",
-      modeIol: "中和屈折的单焦点人工晶体",
       groupRx: "示意屈折", rxNote: "示意设定，不是处方",
       sphereSign: "球面方向", signMinus: "近视", signPlus: "远视", plano: "平光",
       sphereAmt: "球面", cylAmt: "散光", meridian: "散光方向", addAmt: "加入度",
       amtNone: "无", amtLight: "轻", amtMid: "中", amtHigh: "较强",
-      merH: "水平", merO: "斜", merV: "垂直", illus: "示意",
+      merH: "水平", merO: "斜", merV: "垂直",
       groupGaze: "注视", gazeFar: "平视", gazeDown: "向下", gazeSide: "看旁边",
-      groupShow: "显示", showZone: "显示光学区", showOutside: "镜外＝未矫正参考", showScale: "显示示意刻度",
+      groupShow: "显示", showZone: "显示光学区", showOutside: "镜外＝未矫正参考",
       zone: "光学区", zoneFar: "远用区", zoneCorr: "走廊", zoneNear: "近用区", zonePeriph: "周边", zoneOut: "镜外", zoneGap: "示意缺口",
       noFixedZone: "此比较没有固定在眼前的光学区。",
       hintSignLock: "此镜片类型已固定球面方向",
@@ -190,7 +184,6 @@
       capClCyl: "整幅画面同时收起球面与方向性模糊，方向性放大比眼镜轻。不示范镜片旋转或是否戴得合适。",
       capClSame: "未设定散光示意时，这一格与已矫正隐形眼镜相近。",
       capClPlain: "整幅画面保持未中和的模糊，没有镜框窗。近视示意时近处卡片比远招牌清楚；远视示意时近处更糊。",
-      capIol: "远景画成清楚，近处卡片仍模糊，没有眼镜光学区，也没有放大缩小。这是「远距离屈折被中和」的示意。真正的单焦点人工晶体不会自动消除角膜散光，也不提供近距离加入度。这里不是度数计算，也不是手术结果。",
     },
     en: {
       htmlLang: "en",
@@ -199,14 +192,13 @@
       groupCompare: "Compare",
       modeHyper: "Hyperopic glasses", modeMyope: "Myopic glasses", modeSv: "Single-vision glasses", modeProg: "Progressive glasses", modeSpecCyl: "Astigmatism-corrected glasses",
       modeCl: "Corrected contact lens", modeClCyl: "Astigmatism-corrected contact lens", modeClPlain: "Uncorrected contact lens",
-      modeIol: "Monofocal intraocular lens, refraction neutralized",
       groupRx: "Illustration settings", rxNote: "Illustration settings, not a prescription",
       sphereSign: "Sphere direction", signMinus: "Myopia", signPlus: "Hyperopia", plano: "Plano",
       sphereAmt: "Sphere", cylAmt: "Astigmatism", meridian: "Blur direction", addAmt: "Add",
       amtNone: "None", amtLight: "Light", amtMid: "Moderate", amtHigh: "Stronger",
-      merH: "Horizontal", merO: "Oblique", merV: "Vertical", illus: "illustration",
+      merH: "Horizontal", merO: "Oblique", merV: "Vertical",
       groupGaze: "Gaze", gazeFar: "Straight ahead", gazeDown: "Downward", gazeSide: "To the side",
-      groupShow: "Show", showZone: "Show optical zone", showOutside: "Outside the lens = uncorrected reference", showScale: "Show illustration scale",
+      groupShow: "Show", showZone: "Show optical zone", showOutside: "Outside the lens = uncorrected reference",
       zone: "Optical zone", zoneFar: "Distance zone", zoneCorr: "Corridor", zoneNear: "Near zone", zonePeriph: "Periphery", zoneOut: "Outside the lens", zoneGap: "Illustration gap",
       noFixedZone: "This comparison has no optical zone fixed in front of the eye.",
       hintSignLock: "This lens type locks the sphere direction",
@@ -224,7 +216,6 @@
       capClCyl: "The whole picture clears both sphere and directional blur. Directional stretch is lighter than with glasses. This does not show lens rotation or whether a lens fits.",
       capClSame: "With astigmatism at none, this mode looks like the corrected contact lens.",
       capClPlain: "The whole picture stays uncorrected, with no frame window. In the myopia illustration the near card is clearer than the distant sign. In the hyperopia illustration the near card is more blurred.",
-      capIol: "Distance is drawn clear, the near card stays blurred, and there is no glasses optical zone and no change in size. This illustrates distance refraction treated as neutralized. A real monofocal intraocular lens does not by itself remove corneal astigmatism, and it does not add a near focus. This is not a power calculation and not a surgical result.",
     },
     ja: {
       htmlLang: "ja",
@@ -233,14 +224,13 @@
       groupCompare: "比較",
       modeHyper: "遠視眼鏡", modeMyope: "近視眼鏡", modeSv: "単焦点眼鏡", modeProg: "累進眼鏡", modeSpecCyl: "乱視矯正眼鏡",
       modeCl: "矯正済みコンタクトレンズ", modeClCyl: "乱視矯正コンタクトレンズ", modeClPlain: "未矯正コンタクトレンズ",
-      modeIol: "屈折を中和した単焦点眼内レンズ",
       groupRx: "図示の屈折", rxNote: "図示の設定であり、処方ではありません",
       sphereSign: "球面の向き", signMinus: "近視", signPlus: "遠視", plano: "正視",
       sphereAmt: "球面", cylAmt: "乱視", meridian: "ぼける方向", addAmt: "加入",
       amtNone: "なし", amtLight: "弱", amtMid: "中", amtHigh: "強",
-      merH: "水平", merO: "斜め", merV: "垂直", illus: "図示",
+      merH: "水平", merO: "斜め", merV: "垂直",
       groupGaze: "見ている位置", gazeFar: "正面", gazeDown: "下", gazeSide: "横",
-      groupShow: "表示", showZone: "光学部を表示", showOutside: "レンズ外＝未矯正の参考", showScale: "図示の目盛りを表示",
+      groupShow: "表示", showZone: "光学部を表示", showOutside: "レンズ外＝未矯正の参考",
       zone: "光学部", zoneFar: "遠用部", zoneCorr: "廊下", zoneNear: "近用部", zonePeriph: "周辺", zoneOut: "レンズ外", zoneGap: "図示の欠け",
       noFixedZone: "この比較に、眼前に固定された光学部はありません。",
       hintSignLock: "このレンズでは球面の向きは固定です",
@@ -258,7 +248,6 @@
       capClCyl: "画面全体で球面と方向性のぼけを同時に取ります。方向性の伸びは眼鏡より軽く描きます。レンズの回転や装用の適否は示しません。",
       capClSame: "乱視の図示が「なし」のときは、矯正済みコンタクトレンズに近くなります。",
       capClPlain: "画面全体が未中和のぼけのままです。枠の窓はありません。近視の図示では近くのカードが遠い看板よりはっきりし、遠視の図示では近くがよりぼけます。",
-      capIol: "遠方ははっきり描き、近くのカードはぼけたままです。眼鏡の光学部はなく、大きさも変えません。これは「遠方の屈折が中和された」図示です。実際の単焦点眼内レンズは角膜乱視を自動では消さず、近用の加入もありません。度数計算でも手術結果でもありません。",
     },
   };
 
@@ -291,7 +280,6 @@
     gaze: "far",
     zone: true,
     outside: true,
-    scale: false,
   };
 
   const $ = (id) => document.getElementById(id);
@@ -559,9 +547,7 @@
     fx.clearRect(0, 0, VW, VH);
 
     if (!spec) {
-      if (S.mode === "iol") {
-        fx.drawImage(makePlate(stack(0, 0, 2), 1, 0, 0, 0, 0, 0), 0, 0);
-      } else if (S.mode === "clPlain") {
+      if (S.mode === "clPlain") {
         fx.drawImage(makePlate(o.uncorr, 1, 0, 0, 0, 0, 0), 0, 0);
       } else if (S.mode === "clCyl") {
         const stretch = o.cA > 0.66 ? 0.035 : 0;
@@ -670,7 +656,6 @@
   }
 
   function captionText() {
-    if (S.mode === "iol") return T.capIol;
     const { sign, amt } = sphereState();
     const quiet = amt < 0.04 && cylAmt() < 0.04 && !(S.mode === "prog" && LVL[S.add] > 0);
     if (quiet) return T.zeroState;
@@ -683,31 +668,6 @@
     if (S.mode === "sv" && sign === "plus" && amt > 0.72) text += " " + T.capHyperGap;
     if (S.mode === "clCyl" && cylAmt() < 0.04) text += " " + T.capClSame;
     return text;
-  }
-
-  function scaleText() {
-    const { sign, amt } = sphereState();
-    const sN = Math.round(amt * 50) / 10;
-    const cN = Math.round(cylAmt() * 30) / 10;
-    const aN = LVL[S.add];
-    const aMap = { 1: "1", 2: "2", 3: "2.5" };
-    const signed = (sign === "minus" ? "−" : "+") + sN.toFixed(1);
-    const mer = S.mer === "h" ? T.merH : S.mer === "o" ? T.merO : T.merV;
-    let sph;
-    let cyl;
-    let add = "";
-    if (uiLang === "en") {
-      sph = sN === 0 ? "Sphere none" : "Sphere illustration " + signed;
-      cyl = cN === 0 ? "astigmatism none" : "astigmatism illustration " + cN + " · " + mer.toLowerCase();
-      if (S.mode === "prog") add = aN === 0 ? " · Add none" : " · Add illustration " + aMap[aN];
-    } else {
-      sph = sN === 0 ? T.sphereAmt + " " + T.amtNone : T.sphereAmt + " " + T.illus + " " + signed;
-      cyl = cN === 0 ? T.cylAmt + " " + T.amtNone : T.cylAmt + " " + T.illus + " " + cN + " · " + mer;
-      if (S.mode === "prog") {
-        add = aN === 0 ? " · " + T.addAmt + " " + T.amtNone : " · " + T.addAmt + " " + T.illus + " " + aMap[aN];
-      }
-    }
-    return sph + " · " + cyl + add;
   }
 
   function fillSeg(id, key, options) {
@@ -731,7 +691,7 @@
     $("grp-gaze").dataset.k = "gaze";
     fillSeg("grp-mode", "groupCompare", [
       ["sv", "modeSv"], ["prog", "modeProg"], ["specCyl", "modeSpecCyl"],
-      ["cl", "modeCl"], ["clCyl", "modeClCyl"], ["clPlain", "modeClPlain"], ["iol", "modeIol"],
+      ["cl", "modeCl"], ["clCyl", "modeClCyl"], ["clPlain", "modeClPlain"],
     ]);
     fillSeg("grp-mer", "meridian", [["h", "merH"], ["o", "merO"], ["v", "merV"]]);
     fillSeg("grp-add", "addAmt", [["none", "amtNone"], ["light", "amtLight"], ["mid", "amtMid"], ["high", "amtHigh"]]);
@@ -755,7 +715,6 @@
     $("lab-show").textContent = T.groupShow;
     $("lab-zone").textContent = T.showZone;
     $("lab-out").textContent = T.showOutside;
-    $("lab-scale").textContent = T.showScale;
     document.documentElement.lang = T.htmlLang;
     document.title = T.title;
   }
@@ -781,7 +740,6 @@
     $("chk-zone").checked = S.zone;
     $("chk-out").checked = S.outside;
     $("chk-out").disabled = !spec;
-    $("chk-scale").checked = S.scale;
     const hints = [];
     if (cylAmt() < 0.04) hints.push(T.hintMeridian);
     if (S.mode !== "prog") hints.push(T.hintAdd);
@@ -795,11 +753,6 @@
       $("hints").appendChild(p);
     });
     $("modeCap").textContent = captionText();
-    const showScale = S.scale;
-    $("scaleNote").hidden = !showScale;
-    $("scaleLine").hidden = !showScale;
-    $("scaleNote").textContent = T.rxNote;
-    $("scaleLine").textContent = scaleText();
     const showFixed = !spec && S.zone;
     $("noFixed").hidden = !showFixed;
     $("noFixed").textContent = T.noFixedZone;
@@ -821,7 +774,6 @@
   $("rng-cyl").addEventListener("input", (ev) => { S.cyl = Number(ev.target.value); render(); });
   $("chk-zone").addEventListener("change", (ev) => { S.zone = ev.target.checked; render(); });
   $("chk-out").addEventListener("change", (ev) => { S.outside = ev.target.checked; render(); });
-  $("chk-scale").addEventListener("change", (ev) => { S.scale = ev.target.checked; render(); });
 
   function reportHeight() {
     const h = Math.ceil($("sim").getBoundingClientRect().height || 900);
