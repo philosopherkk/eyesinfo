@@ -6,40 +6,63 @@
   <meta name="robots" content="noindex" />
   <title>鏡片所見畫面示意 — 護眼學堂</title>
   <style>
-    html, body { margin: 0; padding: 0; background: #12151a; color: #e4e4e4; overflow-x: hidden; }
+    html, body { margin: 0; padding: 0; background: #101318; color: #e8eaee; overflow-x: hidden; }
     #sim {
       font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
       display: flex; flex-direction: column;
-      max-width: 980px; margin: 0 auto; padding: 12px;
+      max-width: 1040px; margin: 0 auto; padding: 12px 12px 20px;
       box-sizing: border-box;
     }
-    .cap { font-size: 13px; line-height: 1.5; color: #9aa3b2; margin: 0 0 10px; }
-    .lab { font-size: 13px; font-weight: 700; color: #f3c06a; margin: 12px 0 6px; }
+    #pageCap { order: -1; }
+    .stage { order: 0; }
+    .controls { order: 1; }
+    .cap { font-size: 13px; line-height: 1.5; color: #9aa3b2; margin: 0 0 8px; }
+    .lab { font-size: 13px; font-weight: 700; color: #f3c06a; margin: 0; }
     .note, .hint, .capmode, .scale { font-size: 13px; line-height: 1.5; color: #c5ceda; margin: 6px 0; }
-    .hint { color: #9aa3b2; }
-    .controls, .stage, .seg, .row { min-width: 0; max-width: 100%; }
-    .seg { display: flex; flex-wrap: wrap; gap: 6px; }
+    .hint { color: #8b95a3; margin: 4px 0; }
+    .controls, .stage, .seg, .row, .field { min-width: 0; max-width: 100%; }
+    .seg { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
     .seg button, .chk {
-      background: #23272f; color: #ddd; border: 1px solid #444; border-radius: 9px;
-      min-height: 44px; padding: 8px 12px; font-size: 14px; cursor: pointer;
+      background: #23272f; color: #e6e6e6; border: 1px solid #3a404a; border-radius: 999px;
+      min-height: 44px; padding: 8px 14px; font-size: 14px; cursor: pointer;
       max-width: 100%; overflow-wrap: anywhere; box-sizing: border-box;
     }
-    .seg button.on { background: #f0a030; color: #111; font-weight: 700; border-color: #f0a030; }
-    .seg button:disabled { opacity: 0.45; cursor: not-allowed; }
-    .chk { display: flex; align-items: center; gap: 8px; }
+    .seg button.on { background: #f0a030; color: #1a1206; font-weight: 700; border-color: #f0a030; }
+    .seg button:disabled { opacity: 0.4; cursor: not-allowed; }
+    .chk { display: flex; align-items: center; gap: 8px; border-radius: 12px; }
     .chk input { width: 18px; height: 18px; accent-color: #f0a030; }
-    .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-    canvas { width: 100%; max-width: 100%; height: auto; display: block; border-radius: 10px; background: #0e1218; margin-top: 10px; }
-    [hidden] { display: none !important; }
-    /* Wide layout: controls, then the scene. Phone: scene first so it is not below a clipped frame. */
-    .controls { order: 1; }
-    .stage { order: 2; }
-    @media (max-width: 719px) {
-      #pageCap { order: -1; }
-      .stage { order: 0; }
-      .controls { order: 1; }
-      canvas { margin-top: 0; }
+    .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 10px; }
+    .panel {
+      margin-top: 12px; padding: 12px 12px 8px; border-radius: 16px;
+      background: #171b22; border: 1px solid #2c323c;
     }
+    .field { margin: 12px 0 4px; }
+    .field-top, .ends { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+    .live { font-size: 13px; font-weight: 700; color: #fff; }
+    .ends { font-size: 12px; color: #8b95a3; margin-top: 2px; }
+    input[type="range"] {
+      -webkit-appearance: none; appearance: none;
+      width: 100%; height: 44px; margin: 4px 0 0; background: transparent; cursor: pointer;
+    }
+    input[type="range"]:focus-visible { outline: 2px solid #f0a030; outline-offset: 2px; }
+    input[type="range"]::-webkit-slider-runnable-track {
+      height: 8px; border-radius: 999px;
+      background: linear-gradient(90deg, #7eb6e6 0%, #d7dde6 50%, #e7b15a 100%);
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 26px; height: 26px; margin-top: -9px; border-radius: 50%;
+      background: #fff; border: 3px solid #1a1206; box-shadow: 0 1px 4px rgba(0,0,0,.45);
+    }
+    #rng-cyl::-webkit-slider-runnable-track {
+      background: linear-gradient(90deg, #3a404a, #f0a030);
+    }
+    canvas {
+      width: 100%; max-width: 100%; height: auto; display: block;
+      border-radius: 16px; background: #0e1218; margin-top: 4px;
+      box-shadow: 0 10px 28px rgba(0,0,0,.35);
+    }
+    [hidden] { display: none !important; }
   </style>
 </head>
 <body>
@@ -49,27 +72,33 @@
     <p class="lab" id="lab-compare"></p>
     <div class="seg" id="grp-mode" role="group"></div>
 
+    <div class="panel">
     <p class="lab" id="lab-rx"></p>
     <p class="note" id="rxNote"></p>
-    <div class="row" id="row-sign">
-      <span class="lab" id="lab-sign" style="margin:0"></span>
-      <div class="seg" id="grp-sign" role="group"></div>
+    <div class="field">
+      <div class="field-top">
+        <span class="lab" id="lab-sphere"></span>
+        <span class="live" id="sphereLive"></span>
+      </div>
+      <input id="rng-sphere" type="range" min="0" max="200" step="1" value="40" />
+      <div class="ends"><span id="end-plus"></span><span id="end-plano"></span><span id="end-minus"></span></div>
+    </div>
+    <div class="field">
+      <div class="field-top">
+        <span class="lab" id="lab-cyl"></span>
+        <span class="live" id="cylLive"></span>
+      </div>
+      <input id="rng-cyl" type="range" min="0" max="100" step="1" value="0" />
+      <div class="ends"><span id="end-cyl0"></span><span id="end-cyl1"></span></div>
     </div>
     <div class="row">
-      <span class="lab" id="lab-sphere" style="margin:0"></span>
-      <div class="seg" id="grp-sphere" role="group"></div>
-    </div>
-    <div class="row">
-      <span class="lab" id="lab-cyl" style="margin:0"></span>
-      <div class="seg" id="grp-cyl" role="group"></div>
-    </div>
-    <div class="row">
-      <span class="lab" id="lab-mer" style="margin:0"></span>
+      <span class="lab" id="lab-mer"></span>
       <div class="seg" id="grp-mer" role="group"></div>
     </div>
     <div class="row">
-      <span class="lab" id="lab-add" style="margin:0"></span>
+      <span class="lab" id="lab-add"></span>
       <div class="seg" id="grp-add" role="group"></div>
+    </div>
     </div>
 
     <p class="lab" id="lab-gaze"></p>
@@ -100,11 +129,11 @@
       title: "鏡片所見畫面示意 — 護眼學堂",
       pageCap: "教育示意 · 不是視力檢查、驗光或配鏡評估。",
       groupCompare: "比較",
-      modeHyper: "遠視眼鏡", modeMyope: "近視眼鏡", modeProg: "漸進眼鏡", modeSpecCyl: "散光矯正眼鏡",
+      modeHyper: "遠視眼鏡", modeMyope: "近視眼鏡", modeSv: "單焦眼鏡", modeProg: "漸進眼鏡", modeSpecCyl: "散光矯正眼鏡",
       modeCl: "已矯正隱形眼鏡", modeClCyl: "散光矯正隱形眼鏡", modeClPlain: "未矯正隱形眼鏡",
       modeIol: "中和屈折的單焦點人工晶體",
       groupRx: "示意屈折", rxNote: "示意設定，不是處方",
-      sphereSign: "球面方向", signMinus: "近視", signPlus: "遠視",
+      sphereSign: "球面方向", signMinus: "近視", signPlus: "遠視", plano: "平光",
       sphereAmt: "球面", cylAmt: "散光", meridian: "散光方向", addAmt: "加入度",
       amtNone: "無", amtLight: "輕", amtMid: "中", amtHigh: "較強",
       merH: "水平", merO: "斜", merV: "垂直", illus: "示意",
@@ -134,11 +163,11 @@
       title: "镜片所见画面示意 — 护眼学堂",
       pageCap: "教育示意 · 不是视力检查、验光或配镜评估。",
       groupCompare: "比较",
-      modeHyper: "远视眼镜", modeMyope: "近视眼镜", modeProg: "渐进眼镜", modeSpecCyl: "散光矫正眼镜",
+      modeHyper: "远视眼镜", modeMyope: "近视眼镜", modeSv: "单焦眼镜", modeProg: "渐进眼镜", modeSpecCyl: "散光矫正眼镜",
       modeCl: "已矫正隐形眼镜", modeClCyl: "散光矫正隐形眼镜", modeClPlain: "未矫正隐形眼镜",
       modeIol: "中和屈折的单焦点人工晶体",
       groupRx: "示意屈折", rxNote: "示意设定，不是处方",
-      sphereSign: "球面方向", signMinus: "近视", signPlus: "远视",
+      sphereSign: "球面方向", signMinus: "近视", signPlus: "远视", plano: "平光",
       sphereAmt: "球面", cylAmt: "散光", meridian: "散光方向", addAmt: "加入度",
       amtNone: "无", amtLight: "轻", amtMid: "中", amtHigh: "较强",
       merH: "水平", merO: "斜", merV: "垂直", illus: "示意",
@@ -168,11 +197,11 @@
       title: "What the lens shows — Eyesinfo",
       pageCap: "Education illustration · not a vision test, refraction, or dispensing assessment.",
       groupCompare: "Compare",
-      modeHyper: "Hyperopic glasses", modeMyope: "Myopic glasses", modeProg: "Progressive glasses", modeSpecCyl: "Astigmatism-corrected glasses",
+      modeHyper: "Hyperopic glasses", modeMyope: "Myopic glasses", modeSv: "Single-vision glasses", modeProg: "Progressive glasses", modeSpecCyl: "Astigmatism-corrected glasses",
       modeCl: "Corrected contact lens", modeClCyl: "Astigmatism-corrected contact lens", modeClPlain: "Uncorrected contact lens",
       modeIol: "Monofocal intraocular lens, refraction neutralized",
       groupRx: "Illustration settings", rxNote: "Illustration settings, not a prescription",
-      sphereSign: "Sphere direction", signMinus: "Myopia", signPlus: "Hyperopia",
+      sphereSign: "Sphere direction", signMinus: "Myopia", signPlus: "Hyperopia", plano: "Plano",
       sphereAmt: "Sphere", cylAmt: "Astigmatism", meridian: "Blur direction", addAmt: "Add",
       amtNone: "None", amtLight: "Light", amtMid: "Moderate", amtHigh: "Stronger",
       merH: "Horizontal", merO: "Oblique", merV: "Vertical", illus: "illustration",
@@ -202,11 +231,11 @@
       title: "レンズの見え方図示 — 護眼学堂",
       pageCap: "教育用図示 · 視力検査、屈折検査、眼鏡合わせではありません。",
       groupCompare: "比較",
-      modeHyper: "遠視眼鏡", modeMyope: "近視眼鏡", modeProg: "累進眼鏡", modeSpecCyl: "乱視矯正眼鏡",
+      modeHyper: "遠視眼鏡", modeMyope: "近視眼鏡", modeSv: "単焦点眼鏡", modeProg: "累進眼鏡", modeSpecCyl: "乱視矯正眼鏡",
       modeCl: "矯正済みコンタクトレンズ", modeClCyl: "乱視矯正コンタクトレンズ", modeClPlain: "未矯正コンタクトレンズ",
       modeIol: "屈折を中和した単焦点眼内レンズ",
       groupRx: "図示の屈折", rxNote: "図示の設定であり、処方ではありません",
-      sphereSign: "球面の向き", signMinus: "近視", signPlus: "遠視",
+      sphereSign: "球面の向き", signMinus: "近視", signPlus: "遠視", plano: "正視",
       sphereAmt: "球面", cylAmt: "乱視", meridian: "ぼける方向", addAmt: "加入",
       amtNone: "なし", amtLight: "弱", amtMid: "中", amtHigh: "強",
       merH: "水平", merO: "斜め", merV: "垂直", illus: "図示",
@@ -251,13 +280,12 @@
   const MAG = [1, 1.12, 1.26, 1.42];
   const MINI = [1, 0.9, 0.78, 0.7];
   const PIN = [0, 0.12, 0.22, 0.34];
-  const SPEC = { hyper: 1, myope: 1, prog: 1, specCyl: 1 };
+  const SPEC = { sv: 1, prog: 1, specCyl: 1 };
 
   const S = {
-    mode: "hyper",
-    sign: "plus",
-    sphere: "mid",
-    cyl: "none",
+    mode: "sv",
+    sphere: 40,
+    cyl: 0,
     mer: "h",
     add: "mid",
     gaze: "far",
@@ -282,85 +310,34 @@
     return c.filter === "blur(2px)";
   })();
 
+  const photo = new Image();
+  let photoReady = false;
+  const blurCache = new Map();
   function drawFar(ctx) {
-    const g = ctx.createLinearGradient(0, 0, 0, SH);
-    g.addColorStop(0, "#8eb6d6");
-    g.addColorStop(0.5, "#d5e4ef");
-    g.addColorStop(1, "#b7b3a6");
-    ctx.fillStyle = g;
+    ctx.fillStyle = "#243246";
     ctx.fillRect(0, 0, SW, SH);
-    ctx.fillStyle = "#7d8a84";
-    ctx.beginPath();
-    ctx.moveTo(0, SH);
-    ctx.lineTo(SW * 0.42, SH * 0.62);
-    ctx.lineTo(SW * 0.58, SH * 0.62);
-    ctx.lineTo(SW, SH);
-    ctx.fill();
-    ctx.strokeStyle = "#f4ecd4";
-    ctx.lineWidth = 8;
-    ctx.beginPath();
-    ctx.moveTo(SW / 2, SH * 0.62);
-    ctx.lineTo(SW / 2, SH);
-    ctx.stroke();
-    const blocks = [
-      [16, 180, 170, 340],
-      [210, 140, 210, 390],
-      [450, 170, 180, 360],
-      [860, 130, 230, 400],
-      [1120, 175, 160, 350],
-      [1280, 150, 100, 370],
-    ];
-    blocks.forEach((b, i) => {
-      ctx.fillStyle = i % 2 ? "#4e5e6d" : "#3d4b59";
-      ctx.fillRect(b[0], b[1], b[2], b[3]);
-      ctx.strokeStyle = "rgba(255,255,255,.4)";
-      ctx.lineWidth = 3;
-      ctx.strokeRect(b[0] + 8, b[1] + 8, b[2] - 16, b[3] - 16);
-      ctx.fillStyle = "#d7e7f2";
-      for (let y = b[1] + 22; y < b[1] + b[3] - 16; y += 34) {
-        for (let x = b[0] + 16; x < b[0] + b[2] - 16; x += 30) {
-          ctx.fillRect(x, y, 14, 18);
-        }
-      }
-    });
-    const sx = SW / 2 - 130;
-    const sy = 230;
-    ctx.fillStyle = "#f3e2b2";
-    ctx.fillRect(sx, sy, 260, 120);
-    ctx.strokeStyle = "#1c2430";
-    ctx.lineWidth = 6;
-    ctx.strokeRect(sx + 10, sy + 10, 240, 100);
-    ctx.fillStyle = "#1c2430";
-    ctx.font = "700 68px system-ui, sans-serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText("街", SW / 2 + 16, sy + 62);
-    ctx.beginPath();
-    ctx.arc(sx + 40, sy + 40, 16, 0, Math.PI * 2);
-    ctx.stroke();
-  }
-
-  function drawMid(ctx) {
-    const x = SW / 2 - 80;
-    const y = 370;
-    const w = 160;
-    const h = 250;
-    ctx.fillStyle = "#6b4423";
-    ctx.fillRect(x - 18, y - 12, w + 36, h + 16);
-    ctx.fillStyle = "#24180f";
-    ctx.fillRect(x, y, w, h);
-    ctx.strokeStyle = "#ead7b4";
-    ctx.lineWidth = 8;
-    ctx.strokeRect(x + 16, y + 16, w - 32, h - 32);
-    ctx.beginPath();
-    ctx.moveTo(SW / 2, y + 16);
-    ctx.lineTo(SW / 2, y + h - 16);
-    ctx.stroke();
+    if (!photoReady) return;
+    const ir = photo.naturalWidth / photo.naturalHeight;
+    const cr = SW / SH;
+    let dw = SW;
+    let dh = SH;
+    let dx = 0;
+    let dy = 0;
+    if (ir > cr) {
+      dh = SH;
+      dw = SH * ir;
+      dx = (SW - dw) / 2;
+    } else {
+      dw = SW;
+      dh = SW / ir;
+      dy = (SH - dh) * 0.35;
+    }
+    ctx.drawImage(photo, dx, dy, dw, dh);
   }
 
   function drawNear(ctx) {
     const x = SW / 2 - 170;
-    const y = 468;
+    const y = 640;
     const w = 340;
     const h = 120;
     ctx.fillStyle = "#f7f4ee";
@@ -377,11 +354,16 @@
   }
 
   const far0 = mk(SW, SH);
-  const mid0 = mk(SW, SH);
   const near0 = mk(SW, SH);
   drawFar(far0.getContext("2d"));
-  drawMid(mid0.getContext("2d"));
   drawNear(near0.getContext("2d"));
+  photo.onload = () => {
+    photoReady = true;
+    blurCache.clear();
+    drawFar(far0.getContext("2d"));
+    if (typeof render === "function") render();
+  };
+  photo.src = "spectacle-ridge.jpg";
 
   function blurOf(src, r) {
     if (r <= 0) return src;
@@ -403,17 +385,31 @@
     return c;
   }
 
-  const radii = [0, 5, 11, 18];
-  const farB = radii.map((r) => blurOf(far0, r));
-  const midB = radii.map((r) => blurOf(mid0, r));
-  const nearB = radii.map((r) => blurOf(near0, r));
+  function blurred(src, r) {
+    const q = Math.max(0, Math.round(r * 2) / 2);
+    if (q <= 0) return src;
+    const key = (src === far0 ? "f" : "n") + q;
+    const hit = blurCache.get(key);
+    if (hit) return hit;
+    const made = blurOf(src, q);
+    blurCache.set(key, made);
+    return made;
+  }
 
-  function stack(fi, mi, ni) {
+  function stack(fi, _mi, ni) {
+    const rad = [0, 6, 12, 20];
     const c = mk(SW, SH);
     const x = c.getContext("2d");
-    x.drawImage(farB[fi], 0, 0);
-    x.drawImage(midB[mi], 0, 0);
-    x.drawImage(nearB[ni], 0, 0);
+    x.drawImage(blurred(far0, rad[fi] || 0), 0, 0);
+    x.drawImage(blurred(near0, rad[ni] || 0), 0, 0);
+    return c;
+  }
+
+  function layers(farR, nearR) {
+    const c = mk(SW, SH);
+    const x = c.getContext("2d");
+    x.drawImage(blurred(far0, farR), 0, 0);
+    x.drawImage(blurred(near0, nearR), 0, 0);
     return c;
   }
 
@@ -489,41 +485,39 @@
   }
 
   function isSpec() { return !!SPEC[S.mode]; }
-  function effectiveSign() {
-    if (S.mode === "hyper") return "plus";
-    if (S.mode === "myope") return "minus";
-    return S.sign;
+  function sphereState() {
+    const delta = S.sphere - 100;
+    const sign = delta < -1 ? "plus" : delta > 1 ? "minus" : "plano";
+    const amt = Math.min(1, Math.abs(delta) / 100);
+    return { sign, amt };
   }
+  function cylAmt() { return Math.min(1, Math.max(0, S.cyl) / 100); }
   function merAngle() {
     if (S.mer === "v") return Math.PI / 2;
     if (S.mer === "o") return Math.PI / 4;
     return 0;
   }
-  function bFar(sign, level) {
-    if (!level) return 0;
-    return sign === "minus" ? level : Math.max(1, level - 1);
-  }
-  function bMid(sign, level) {
-    if (!level) return 0;
-    return sign === "minus" ? Math.max(0, level - 1) : level;
-  }
-  function bNear(sign, level) {
-    if (!level) return 0;
-    return sign === "minus" ? Math.max(0, level - 2) : Math.min(3, level + 1);
-  }
 
   function optics() {
-    const sign = effectiveSign();
-    const sL = LVL[S.sphere];
-    const cL = LVL[S.cyl];
+    const { sign, amt } = sphereState();
+    const cA = cylAmt();
     const ang = merAngle();
-    const cylPx = [0, 10, 20, 34][cL];
-    const mag = sign === "plus" ? MAG[sL] : MINI[sL];
-    const pinch = sign === "plus" ? PIN[sL] : -PIN[sL];
-    const uncorr = smear(stack(bFar(sign, sL), bMid(sign, sL), bNear(sign, sL)), ang, cylPx);
-    const residual = smear(stack(0, 0, 0), ang, cylPx);
-    const sharp = stack(0, 0, 0);
-    return { sign, sL, cL, ang, cylPx, mag, pinch, uncorr, residual, sharp };
+    const cylPx = cA * 36;
+    const mag = sign === "plus" ? 1 + 0.42 * amt : sign === "minus" ? 1 - 0.3 * amt : 1;
+    const pinch = sign === "plus" ? 0.34 * amt : sign === "minus" ? -0.34 * amt : 0;
+    let farR = 0;
+    let nearR = 0;
+    if (sign === "minus") {
+      farR = 22 * amt;
+      nearR = 8 * Math.max(0, amt - 0.4);
+    } else if (sign === "plus") {
+      farR = 12 * Math.max(0, amt - 0.2);
+      nearR = 20 * amt;
+    }
+    const uncorr = smear(layers(farR, nearR), ang, cylPx);
+    const residual = smear(layers(0, 0), ang, cylPx);
+    const sharp = layers(0, 0);
+    return { sign, amt, cA, ang, cylPx, mag, pinch, uncorr, residual, sharp };
   }
 
   function paintZone(plate, inset) {
@@ -559,7 +553,7 @@
   function draw() {
     const o = optics();
     const spec = isSpec();
-    const gap = S.mode === "hyper" && S.sphere === "high";
+    const gap = S.mode === "sv" && o.sign === "plus" && o.amt > 0.72;
     const inset = gap ? 8 : 0;
     fx.setTransform(1, 0, 0, 1, 0, 0);
     fx.clearRect(0, 0, VW, VH);
@@ -570,7 +564,7 @@
       } else if (S.mode === "clPlain") {
         fx.drawImage(makePlate(o.uncorr, 1, 0, 0, 0, 0, 0), 0, 0);
       } else if (S.mode === "clCyl") {
-        const stretch = [0, 0, 0, 0.035][o.cL];
+        const stretch = o.cA > 0.66 ? 0.035 : 0;
         fx.drawImage(makePlate(o.sharp, 1, 0, o.ang, stretch, 0, 0), 0, 0);
       } else {
         fx.drawImage(makePlate(o.residual, 1, 0, 0, 0, 0, 0), 0, 0);
@@ -608,7 +602,7 @@
         fx.restore();
       }
 
-      const stretch = S.mode === "specCyl" ? [0, 0.045, 0.08, 0.13][o.cL] : 0;
+      const stretch = S.mode === "specCyl" ? 0.13 * o.cA : 0;
       const svScene = S.mode === "specCyl" ? o.sharp : o.residual;
       const sv = makePlate(svScene, o.mag, o.pinch, o.ang, stretch, 0, 0);
       const prog = S.mode === "prog" && LVL[S.add] > 0;
@@ -660,27 +654,44 @@
     }
   }
 
+  function sphereWords() {
+    const { sign, amt } = sphereState();
+    if (sign === "plano" || amt < 0.06) return T.plano;
+    const side = sign === "plus" ? T.signPlus : T.signMinus;
+    const band = amt < 0.34 ? T.amtLight : amt < 0.67 ? T.amtMid : T.amtHigh;
+    return band + " " + side;
+  }
+  function cylWords() {
+    const a = cylAmt();
+    if (a < 0.04) return T.amtNone;
+    if (a < 0.34) return T.amtLight;
+    if (a < 0.67) return T.amtMid;
+    return T.amtHigh;
+  }
+
   function captionText() {
     if (S.mode === "iol") return T.capIol;
-    const quiet = LVL[S.sphere] === 0 && LVL[S.cyl] === 0 && !(S.mode === "prog" && LVL[S.add] > 0);
+    const { sign, amt } = sphereState();
+    const quiet = amt < 0.04 && cylAmt() < 0.04 && !(S.mode === "prog" && LVL[S.add] > 0);
     if (quiet) return T.zeroState;
     const map = {
-      hyper: T.capHyper, myope: T.capMyope, prog: T.capProg, specCyl: T.capSpecCyl,
+      sv: sign === "minus" ? T.capMyope : T.capHyper,
+      prog: T.capProg, specCyl: T.capSpecCyl,
       cl: T.capCl, clCyl: T.capClCyl, clPlain: T.capClPlain,
     };
     let text = map[S.mode] || "";
-    if (S.mode === "hyper" && S.sphere === "high") text += " " + T.capHyperGap;
-    if (S.mode === "clCyl" && LVL[S.cyl] === 0) text += " " + T.capClSame;
+    if (S.mode === "sv" && sign === "plus" && amt > 0.72) text += " " + T.capHyperGap;
+    if (S.mode === "clCyl" && cylAmt() < 0.04) text += " " + T.capClSame;
     return text;
   }
 
   function scaleText() {
-    const sign = effectiveSign();
-    const sN = [0, 1, 3, 5][LVL[S.sphere]];
-    const cN = [0, 1, 2, 3][LVL[S.cyl]];
+    const { sign, amt } = sphereState();
+    const sN = Math.round(amt * 50) / 10;
+    const cN = Math.round(cylAmt() * 30) / 10;
     const aN = LVL[S.add];
     const aMap = { 1: "1", 2: "2", 3: "2.5" };
-    const signed = (sign === "minus" ? "−" : "+") + sN;
+    const signed = (sign === "minus" ? "−" : "+") + sN.toFixed(1);
     const mer = S.mer === "h" ? T.merH : S.mer === "o" ? T.merO : T.merV;
     let sph;
     let cyl;
@@ -715,19 +726,13 @@
 
   function buildControls() {
     $("grp-mode").dataset.k = "mode";
-    $("grp-sign").dataset.k = "sign";
-    $("grp-sphere").dataset.k = "sphere";
-    $("grp-cyl").dataset.k = "cyl";
     $("grp-mer").dataset.k = "mer";
     $("grp-add").dataset.k = "add";
     $("grp-gaze").dataset.k = "gaze";
     fillSeg("grp-mode", "groupCompare", [
-      ["hyper", "modeHyper"], ["myope", "modeMyope"], ["prog", "modeProg"], ["specCyl", "modeSpecCyl"],
+      ["sv", "modeSv"], ["prog", "modeProg"], ["specCyl", "modeSpecCyl"],
       ["cl", "modeCl"], ["clCyl", "modeClCyl"], ["clPlain", "modeClPlain"], ["iol", "modeIol"],
     ]);
-    fillSeg("grp-sign", "sphereSign", [["minus", "signMinus"], ["plus", "signPlus"]]);
-    fillSeg("grp-sphere", "sphereAmt", [["none", "amtNone"], ["light", "amtLight"], ["mid", "amtMid"], ["high", "amtHigh"]]);
-    fillSeg("grp-cyl", "cylAmt", [["none", "amtNone"], ["light", "amtLight"], ["mid", "amtMid"], ["high", "amtHigh"]]);
     fillSeg("grp-mer", "meridian", [["h", "merH"], ["o", "merO"], ["v", "merV"]]);
     fillSeg("grp-add", "addAmt", [["none", "amtNone"], ["light", "amtLight"], ["mid", "amtMid"], ["high", "amtHigh"]]);
     fillSeg("grp-gaze", "groupGaze", [["far", "gazeFar"], ["down", "gazeDown"], ["side", "gazeSide"]]);
@@ -735,8 +740,14 @@
     $("lab-compare").textContent = T.groupCompare;
     $("lab-rx").textContent = T.groupRx;
     $("rxNote").textContent = T.rxNote;
-    $("lab-sign").textContent = T.sphereSign;
     $("lab-sphere").textContent = T.sphereAmt;
+    $("end-plus").textContent = T.signPlus;
+    $("end-plano").textContent = T.plano;
+    $("end-minus").textContent = T.signMinus;
+    $("end-cyl0").textContent = T.amtNone;
+    $("end-cyl1").textContent = T.amtHigh;
+    $("rng-sphere").setAttribute("aria-label", T.sphereAmt);
+    $("rng-cyl").setAttribute("aria-label", T.cylAmt);
     $("lab-cyl").textContent = T.cylAmt;
     $("lab-mer").textContent = T.meridian;
     $("lab-add").textContent = T.addAmt;
@@ -751,28 +762,28 @@
 
   function syncUi() {
     const spec = isSpec();
-    const sign = effectiveSign();
     document.querySelectorAll("#sim button[data-k]").forEach((b) => {
       const k = b.dataset.k;
       const v = b.dataset.v;
-      let on = S[k] === v;
-      if (k === "sign") on = sign === v;
+      const on = S[k] === v;
       b.classList.toggle("on", on);
       b.setAttribute("aria-pressed", on ? "true" : "false");
       let disabled = false;
-      if (k === "sign") disabled = S.mode === "hyper" || S.mode === "myope";
-      if (k === "mer") disabled = S.cyl === "none";
+      if (k === "mer") disabled = cylAmt() < 0.04;
       if (k === "add") disabled = S.mode !== "prog";
       if (k === "gaze") disabled = !spec;
       b.disabled = disabled;
     });
+    $("rng-sphere").value = String(S.sphere);
+    $("rng-cyl").value = String(S.cyl);
+    $("sphereLive").textContent = sphereWords();
+    $("cylLive").textContent = cylWords();
     $("chk-zone").checked = S.zone;
     $("chk-out").checked = S.outside;
     $("chk-out").disabled = !spec;
     $("chk-scale").checked = S.scale;
     const hints = [];
-    if (S.mode === "hyper" || S.mode === "myope") hints.push(T.hintSignLock);
-    if (S.cyl === "none") hints.push(T.hintMeridian);
+    if (cylAmt() < 0.04) hints.push(T.hintMeridian);
     if (S.mode !== "prog") hints.push(T.hintAdd);
     if (!spec) hints.push(T.hintGaze);
     if (!spec) hints.push(T.hintOutside);
@@ -806,6 +817,8 @@
     S[b.dataset.k] = b.dataset.v;
     render();
   });
+  $("rng-sphere").addEventListener("input", (ev) => { S.sphere = Number(ev.target.value); render(); });
+  $("rng-cyl").addEventListener("input", (ev) => { S.cyl = Number(ev.target.value); render(); });
   $("chk-zone").addEventListener("change", (ev) => { S.zone = ev.target.checked; render(); });
   $("chk-out").addEventListener("change", (ev) => { S.outside = ev.target.checked; render(); });
   $("chk-scale").addEventListener("change", (ev) => { S.scale = ev.target.checked; render(); });
