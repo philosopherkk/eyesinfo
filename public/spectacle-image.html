@@ -6,29 +6,46 @@
   <meta name="robots" content="noindex" />
   <title>鏡片所見畫面示意 — 護眼學堂</title>
   <style>
-    html, body { margin: 0; padding: 0; background: #12151a; color: #e4e4e4; }
-    #sim { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; max-width: 980px; margin: 0 auto; padding: 12px; }
+    html, body { margin: 0; padding: 0; background: #12151a; color: #e4e4e4; overflow-x: hidden; }
+    #sim {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      display: flex; flex-direction: column;
+      max-width: 980px; margin: 0 auto; padding: 12px;
+      box-sizing: border-box;
+    }
     .cap { font-size: 13px; line-height: 1.5; color: #9aa3b2; margin: 0 0 10px; }
     .lab { font-size: 13px; font-weight: 700; color: #f3c06a; margin: 12px 0 6px; }
     .note, .hint, .capmode, .scale { font-size: 13px; line-height: 1.5; color: #c5ceda; margin: 6px 0; }
     .hint { color: #9aa3b2; }
+    .controls, .stage, .seg, .row { min-width: 0; max-width: 100%; }
     .seg { display: flex; flex-wrap: wrap; gap: 6px; }
     .seg button, .chk {
       background: #23272f; color: #ddd; border: 1px solid #444; border-radius: 9px;
       min-height: 44px; padding: 8px 12px; font-size: 14px; cursor: pointer;
+      max-width: 100%; overflow-wrap: anywhere; box-sizing: border-box;
     }
     .seg button.on { background: #f0a030; color: #111; font-weight: 700; border-color: #f0a030; }
     .seg button:disabled { opacity: 0.45; cursor: not-allowed; }
     .chk { display: flex; align-items: center; gap: 8px; }
     .chk input { width: 18px; height: 18px; accent-color: #f0a030; }
     .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-    canvas { width: 100%; height: auto; display: block; border-radius: 10px; background: #0e1218; margin-top: 10px; }
+    canvas { width: 100%; max-width: 100%; height: auto; display: block; border-radius: 10px; background: #0e1218; margin-top: 10px; }
     [hidden] { display: none !important; }
+    /* Wide layout: controls, then the scene. Phone: scene first so it is not below a clipped frame. */
+    .controls { order: 1; }
+    .stage { order: 2; }
+    @media (max-width: 719px) {
+      #pageCap { order: -1; }
+      .stage { order: 0; }
+      .controls { order: 1; }
+      canvas { margin-top: 0; }
+    }
   </style>
 </head>
 <body>
   <div id="sim">
     <p class="cap" id="pageCap"></p>
+    <div class="controls">
     <p class="lab" id="lab-compare"></p>
     <div class="seg" id="grp-mode" role="group"></div>
 
@@ -65,12 +82,15 @@
       <label class="chk"><input type="checkbox" id="chk-scale" /> <span id="lab-scale"></span></label>
     </div>
     <div id="hints"></div>
+    </div>
 
+    <div class="stage">
     <canvas id="cv" width="960" height="540"></canvas>
     <p class="capmode" id="modeCap"></p>
     <p class="note" id="scaleNote" hidden></p>
     <p class="scale" id="scaleLine" hidden></p>
     <p class="note" id="noFixed" hidden></p>
+    </div>
   </div>
   <script>
 (() => {
@@ -791,7 +811,7 @@
   $("chk-scale").addEventListener("change", (ev) => { S.scale = ev.target.checked; render(); });
 
   function reportHeight() {
-    const h = Math.ceil(document.documentElement.scrollHeight || document.body.scrollHeight || 900);
+    const h = Math.ceil($("sim").getBoundingClientRect().height || 900);
     if (window.parent && window.parent !== window) {
       window.parent.postMessage({ type: "eyesinfo-spectacle-image-height", height: h }, "*");
     }

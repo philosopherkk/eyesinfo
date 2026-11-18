@@ -51,6 +51,37 @@ export function SpectacleImageSim({ showChrome = true }: SpectacleImageSimProps)
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
+    const el = iframeRef.current;
+    if (!el) return;
+    let obs: ResizeObserver | undefined;
+    let timer = 0;
+
+    function fit(reported?: number) {
+      const frame = iframeRef.current;
+      if (!frame) return false;
+      const sim = frame.contentDocument?.getElementById("sim");
+      const measured = sim ? sim.getBoundingClientRect().height : 0;
+      const next = Math.ceil(measured > 0 ? measured : (reported ?? 0));
+      if (next < 320) return false;
+      const target = next + 2;
+      if (Math.abs(frame.offsetHeight - target) > 1) frame.style.height = `${target}px`;
+      return measured > 0;
+    }
+
+    function watch() {
+      try {
+        const ready = fit();
+        const sim = el.contentDocument?.getElementById("sim");
+        if (sim && !obs && typeof ResizeObserver !== "undefined") {
+          obs = new ResizeObserver(() => fit());
+          obs.observe(sim);
+        }
+        return ready;
+      } catch {
+        return false;
+      }
+    }
+
     function onMessage(ev: MessageEvent) {
       const data = ev.data;
       if (
@@ -61,14 +92,22 @@ export function SpectacleImageSim({ showChrome = true }: SpectacleImageSimProps)
       ) {
         return;
       }
-      const el = iframeRef.current;
-      if (!el) return;
-      const next = Math.max(680, Math.min(1500, Math.ceil(data.height)));
-      el.style.height = `${next}px`;
+      fit(data.height);
     }
+
+    el.addEventListener("load", watch);
     window.addEventListener("message", onMessage);
-    return () => window.removeEventListener("message", onMessage);
-  }, []);
+    watch();
+    timer = window.setInterval(watch, 100);
+    const stop = window.setTimeout(() => window.clearInterval(timer), 4000);
+    return () => {
+      window.clearInterval(timer);
+      window.clearTimeout(stop);
+      el.removeEventListener("load", watch);
+      window.removeEventListener("message", onMessage);
+      obs?.disconnect();
+    };
+  }, [lang]);
 
   return (
     <section className="spectacle-image-sim" aria-label={t("spectacleImageSimTitle")}>
@@ -81,7 +120,7 @@ export function SpectacleImageSim({ showChrome = true }: SpectacleImageSimProps)
         src={`/spectacle-image.html?lang=${encodeURIComponent(lang)}`}
         title={t("spectacleImageSimTitle")}
         className="spectacle-image-sim__frame"
-        loading="lazy"
+        loading="eager"
         referrerPolicy="same-origin"
       />
       {showChrome ? <SpectacleImageTeachingFooter /> : null}
