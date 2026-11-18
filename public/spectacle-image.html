@@ -54,6 +54,13 @@
       width: 26px; height: 26px; margin-top: -9px; border-radius: 50%;
       background: #fff; border: 3px solid #1a1206; box-shadow: 0 1px 4px rgba(0,0,0,.45);
     }
+    #rng-sphere::-webkit-slider-runnable-track {
+      background: linear-gradient(90deg, #e7b15a 0%, #d7dde6 50%, #7eb6e6 100%);
+    }
+    #rng-sphere::-moz-range-track {
+      height: 8px; border-radius: 999px;
+      background: linear-gradient(90deg, #e7b15a 0%, #d7dde6 50%, #7eb6e6 100%);
+    }
     #rng-cyl::-webkit-slider-runnable-track {
       background: linear-gradient(90deg, #3a404a, #f0a030);
     }
@@ -184,8 +191,8 @@
         <span class="lab" id="lab-sphere"></span>
         <span class="live" id="sphereLive"></span>
       </div>
-      <input id="rng-sphere" type="range" min="0" max="200" step="1" value="40" />
-      <div class="ends"><span id="end-plus"></span><span id="end-plano"></span><span id="end-minus"></span></div>
+      <input id="rng-sphere" type="range" min="0" max="200" step="1" value="160" />
+      <div class="ends"><span id="end-minus"></span><span id="end-plano"></span><span id="end-plus"></span></div>
     </div>
     <div class="field">
       <div class="field-top">
@@ -245,7 +252,7 @@
       capCl: "整幅畫面矯正球面，幾乎不放大縮小，也沒有鏡框窗。散光設定不是「無」時，方向性模糊仍留在全畫面。",
       capClCyl: "整幅畫面同時收起球面與方向性模糊，方向性放大比眼鏡輕。不示範鏡片旋轉或是否戴得合適。",
       capClSame: "未設定散光示意時，這一格與已矯正隱形眼鏡相近。",
-      capClPlain: "整幅畫面保持未中和的模糊，沒有鏡框窗。近視示意時遠山更糊；遠視示意時遠山較輕。",
+      capClPlain: "整幅畫面保持未中和的模糊，沒有鏡框窗。近視示意時遠方更糊；遠視示意時遠方較輕。",
     },
     "zh-Hans": {
       htmlLang: "zh-CN",
@@ -273,7 +280,7 @@
       capCl: "整幅画面矫正球面，几乎不放大缩小，也没有镜框窗。散光设定不是「无」时，方向性模糊仍留在全画面。",
       capClCyl: "整幅画面同时收起球面与方向性模糊，方向性放大比眼镜轻。不示范镜片旋转或是否戴得合适。",
       capClSame: "未设定散光示意时，这一格与已矫正隐形眼镜相近。",
-      capClPlain: "整幅画面保持未中和的模糊，没有镜框窗。近视示意时远山更糊；远视示意时远山较轻。",
+      capClPlain: "整幅画面保持未中和的模糊，没有镜框窗。近视示意时远方更糊；远视示意时远方较轻。",
     },
     en: {
       htmlLang: "en",
@@ -301,7 +308,7 @@
       capCl: "The whole picture corrects the sphere, with almost no change in size and no frame window. If astigmatism is not none, directional blur remains across the picture.",
       capClCyl: "The whole picture clears both sphere and directional blur. Directional stretch is lighter than with glasses. This does not show lens rotation or whether a lens fits.",
       capClSame: "With astigmatism at none, this mode looks like the corrected contact lens.",
-      capClPlain: "The whole picture stays uncorrected, with no frame window. In the myopia illustration the distant ridge is more blurred. In the hyperopia illustration the distant ridge is less blurred.",
+      capClPlain: "The whole picture stays uncorrected, with no frame window. In the myopia illustration the far view is more blurred. In the hyperopia illustration the far view is less blurred.",
     },
     ja: {
       htmlLang: "ja",
@@ -329,7 +336,7 @@
       capCl: "画面全体で球面を矯正し、大きさはほとんど変わらず、枠の窓もありません。乱視が「なし」でなければ、方向性のぼけが全体に残ります。",
       capClCyl: "画面全体で球面と方向性のぼけを同時に取ります。方向性の伸びは眼鏡より軽く描きます。レンズの回転や装用の適否は示しません。",
       capClSame: "乱視の図示が「なし」のときは、矯正済みコンタクトレンズに近くなります。",
-      capClPlain: "画面全体が未中和のぼけのままです。枠の窓はありません。近視の図示では遠い山稜がよりぼけ、遠視の図示では遠方が比較的軽くぼけます。",
+      capClPlain: "画面全体が未中和のぼけのままです。枠の窓はありません。近視の図示では遠方がよりぼけ、遠視の図示では遠方が比較的軽くぼけます。",
     },
   };
 
@@ -351,7 +358,7 @@
 
   const S = {
     mode: "sv",
-    sphere: 40,
+    sphere: 160,
     cyl: 0,
     mer: "h",
     zone: true,
@@ -578,8 +585,9 @@
 
   function isSpec() { return !!SPEC[S.mode]; }
   function sphereState() {
+    // Same direction as the straight-line tab: left is minus, right is plus.
     const delta = S.sphere - 100;
-    const sign = delta < -1 ? "plus" : delta > 1 ? "minus" : "plano";
+    const sign = delta < -1 ? "minus" : delta > 1 ? "plus" : "plano";
     const amt = Math.min(1, Math.abs(delta) / 100);
     return { sign, amt };
   }
@@ -960,7 +968,11 @@
       const ny = (y - hh) / hh;
       for (let x = 0; x < w; x++) {
         const nx = (x - hw) / hw;
-        let radial = 1 - pinch * (nx * nx + ny * ny);
+        const r2 = nx * nx + ny * ny;
+        // Plus: ease the corners. A plain r² term hooked the left and right
+        // edges of the strong-plus preview. Still a sketch, not a lens model.
+        const pinchTerm = pinch > 0 ? (pinch * r2) / (1 + 0.65 * r2) : pinch * r2;
+        let radial = 1 - pinchTerm;
         if (radial < 0.45) radial = 0.45; else if (radial > 2) radial = 2;
         let sx = SW / 2 + ((x - hw) / k) * radial / m;
         let sy = SH / 2 + ((y - hh) / k) * radial / m;
