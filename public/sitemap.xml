@@ -48,7 +48,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/search</loc>
-    <lastmod>2026-11-15</lastmod>
+    <lastmod>2026-11-18</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/search"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/search?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/search?lang=en"/>
@@ -57,7 +57,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/tools</loc>
-    <lastmod>2026-11-15</lastmod>
+    <lastmod>2026-11-18</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools?lang=en"/>
@@ -237,7 +237,7 @@
   </url>
   <url>
     <loc>https://www.eyesinfo.org/tools/shallow-ac</loc>
-    <lastmod>2026-11-15</lastmod>
+    <lastmod>2026-11-16</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/shallow-ac"/>
     <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/shallow-ac?lang=zh-Hans"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/shallow-ac?lang=en"/>
@@ -252,6 +252,15 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/tear-film?lang=en"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://www.eyesinfo.org/tools/tear-film?lang=ja"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/tools/tear-film"/>
+  </url>
+  <url>
+    <loc>https://www.eyesinfo.org/tools/spectacle-image</loc>
+    <lastmod>2026-11-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/spectacle-image"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/spectacle-image?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/spectacle-image?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.eyesinfo.org/tools/spectacle-image?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/tools/spectacle-image"/>
   </url>
   <url>
     <loc>https://www.eyesinfo.org/tools/warm</loc>

@@ -153,7 +153,7 @@ test("sitemap.xml is a valid urlset covering edu tools including outdoor", () =>
     );
   }
   const urlCount = (xml.match(/<url>/g) || []).length;
-  assert.equal(urlCount, 99, `sitemap expected 99 canonical urls, got ${urlCount}`);
+  assert.equal(urlCount, 105, `sitemap expected 105 canonical urls, got ${urlCount}`);
 
   const lastmods = [...xml.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((m) => m[1]);
   assert.equal(lastmods.length, urlCount);
