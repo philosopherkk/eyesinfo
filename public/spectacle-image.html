@@ -29,6 +29,7 @@
     }
     .seg button.on { background: #f0a030; color: #1a1206; font-weight: 700; border-color: #f0a030; }
     .seg button:disabled { opacity: 0.4; cursor: not-allowed; }
+    .seg button:focus-visible, .chk:focus-within { outline: 2px solid #f0a030; outline-offset: 2px; }
     .chk { display: flex; align-items: center; gap: 8px; border-radius: 12px; }
     .chk input { width: 18px; height: 18px; accent-color: #f0a030; }
     .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 10px; }
@@ -113,7 +114,10 @@
     .d-ends span:nth-child(2) { color: #9aa3b2; text-align: center; }
     .d-ends span:last-child { text-align: right; }
 
-    .d-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+    .d-tiles { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 12px; }
+    @media (min-width: 520px) {
+      .d-tiles { grid-template-columns: 1fr 1fr; }
+    }
     .d-tile { background: #171b22; border: 2px solid #2c323c; border-radius: 16px; padding: 8px; color: #e8eaee;
       cursor: pointer; text-align: left; font: inherit; min-height: 44px; }
     .d-tile canvas { margin: 0; box-shadow: none; border-radius: 10px; }
@@ -169,8 +173,8 @@
             <label class="chk" style="margin-top:8px"><input type="checkbox" id="chk-guide" checked /> <span id="lab-guide"></span></label>
           </div>
           <div class="d-tiles">
-            <button class="d-tile" data-t="barrel" type="button" aria-pressed="false"><canvas id="tBarrel" width="320" height="180"></canvas><b id="tBarrelB"></b><span id="tBarrelS"></span></button>
-            <button class="d-tile" data-t="pin" type="button" aria-pressed="false"><canvas id="tPin" width="320" height="180"></canvas><b id="tPinB"></b><span id="tPinS"></span></button>
+            <button class="d-tile" data-t="barrel" type="button" aria-pressed="false"><canvas id="tBarrel" width="320" height="180" aria-hidden="true"></canvas><b id="tBarrelB"></b><span id="tBarrelS"></span></button>
+            <button class="d-tile" data-t="pin" type="button" aria-pressed="false"><canvas id="tPin" width="320" height="180" aria-hidden="true"></canvas><b id="tPinB"></b><span id="tPinS"></span></button>
           </div>
         </div>
       </div>
@@ -780,6 +784,8 @@
     $("rng-cyl").value = String(S.cyl);
     $("sphereLive").textContent = sphereWords();
     $("cylLive").textContent = cylWords();
+    $("rng-sphere").setAttribute("aria-valuetext", sphereWords());
+    $("rng-cyl").setAttribute("aria-valuetext", cylWords());
     $("chk-zone").checked = S.zone;
     $("chk-out").checked = S.outside;
     $("chk-out").disabled = !spec;
@@ -794,6 +800,7 @@
       $("hints").appendChild(p);
     });
     $("modeCap").textContent = captionText();
+    $("cv").setAttribute("aria-label", captionText());
     const showFixed = !spec && S.zone;
     $("noFixed").hidden = !showFixed;
     $("noFixed").textContent = T.noFixedZone;
@@ -1018,6 +1025,7 @@
     h.textContent = title;
     if (sub) { const sm = document.createElement("small"); sm.textContent = sub; h.appendChild(sm); }
     $("vBody").textContent = body;
+    $("rng-s").setAttribute("aria-valuetext", sub ? title + " " + sub : title);
     document.querySelectorAll(".d-tile").forEach((t) => t.setAttribute("aria-pressed", String(t.dataset.t === kind)));
   }
 
@@ -1113,11 +1121,14 @@
   tabD.addEventListener("click", () => showTab("dist"));
   tabA.addEventListener("click", () => showTab("adv"));
   $("tabs").addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight" || e.key === "ArrowLeft" || e.key === "Home" || e.key === "End") {
-      e.preventDefault();
-      const toAdv = e.key === "End" || (e.key !== "Home" && tabA.getAttribute("aria-selected") !== "true");
-      showTab(toAdv ? "adv" : "dist", true);
-    }
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft" && e.key !== "Home" && e.key !== "End") return;
+    e.preventDefault();
+    const onAdv = tabA.getAttribute("aria-selected") === "true";
+    // Left and Home stay on or return to the first tab. Right and End move to the second.
+    const toAdv = e.key === "End" || e.key === "ArrowRight";
+    if (e.key === "ArrowLeft" && !onAdv) { tabD.focus(); return; }
+    if (e.key === "ArrowRight" && onAdv) { tabA.focus(); return; }
+    showTab(toAdv ? "adv" : "dist", true);
   });
 
   setText();
