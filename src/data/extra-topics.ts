@@ -415,6 +415,7 @@ export const EXTRA_TOPICS: Topic[] = [
     category: "lens",
     featured: false,
     seekCareLevel: "same-day",
+    refs: [],
     keyPoints: [
       "兒童視力里程碑是粗略參考，個別差異大，不能代替檢查。",
       "約 3–4 個月後仍持續偏斜：應盡快專科評估；多數不是當日急症，但不宜拖到入學。",
@@ -1518,6 +1519,7 @@ export const EXTRA_TOPICS: Topic[] = [
     isAcuteEmergency: true,
     lastReviewed: "2026-09-06",
     seekCareLevel: "immediate",
+    refs: [],
     keyPoints: [
       "巨細胞動脈炎幾乎只見於約 50 歲或以上；可在短時間造成不可逆視力喪失。",
       "任何新的視覺徵狀（突然視力下降、簾幕、短暫單眼黑矇、新發複視等）：立即急症室。",
