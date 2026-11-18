@@ -16,7 +16,8 @@ export type ToolId =
   | "procedures"
   | "palStairs"
   | "shallow-ac"
-  | "tear-film";
+  | "tear-film"
+  | "spectacle-image";
 
 export type ToolDef = {
   id: ToolId;
@@ -72,6 +73,13 @@ export const TOOLS: ToolDef[] = [
     blurb: "脂質／水液／黏液缺損對蒸發、破裂時間與炎症的示意（不是檢查）",
     canto: "揀狀態睇淚膜點散",
     href: "/tools/tear-film",
+  },
+  {
+    id: "spectacle-image",
+    title: "鏡片所見畫面示意",
+    blurb: "比較遠視、近視、漸進、散光眼鏡，以及隱形眼鏡與中和屈折的單焦點人工晶體（不是檢查）",
+    canto: "同一幅街景，不同鏡片",
+    href: "/tools/spectacle-image",
   },
   { id: "warm", title: "熱敷計時", blurb: "示意計時，跟醫生指示", canto: "熱敷跟時間", href: "/tools/warm" },
   { id: "visit", title: "一次眼科檢查", blurb: "散瞳後唔好自己開車", canto: "去診所會做咩", href: "/tools/visit" },
@@ -203,6 +211,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
   "t-warm": [{ href: "/tools/warm", label: "熱敷計時" }],
   "t-myopia": [{ href: "/tools/outdoor", label: "兒童戶外時間" }],
   d1: [
+    { href: "/tools/spectacle-image", label: "鏡片所見畫面示意" },
     { href: "/tools/rx", label: "眼鏡度數解讀" },
     { href: "/tools/outdoor", label: "兒童戶外時間" },
     { href: "/t/t-high-myopia-pathology", label: "高度近視長遠風險（病理近視）" },
@@ -236,6 +245,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/iol", label: "晶體視力示意" },
   ],
   "t-cl": [
+    { href: "/tools/spectacle-image", label: "鏡片所見畫面示意" },
     { href: "/urgent", label: "急症與同日評估" },
     { href: "/t/t-lube", label: "潤眼液與潤滑劑" },
     { href: "/t/t-lasik", label: "激光矯視" },
@@ -354,6 +364,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-ivt-day", label: "抗血管內皮生長因子注射當日過程" },
   ],
   "t-presbyopia": [
+    { href: "/tools/spectacle-image", label: "鏡片所見畫面示意" },
     { href: "/iol", label: "晶體視力示意" },
     { href: "/tools/rx", label: "眼鏡度數解讀" },
     { href: "/t/t-cl", label: "隱形眼鏡併發症" },
@@ -362,6 +373,7 @@ export const TOPIC_TOOLS: Record<string, { href: string; label: string }[]> = {
     { href: "/t/t-pal-stairs", label: "遠視與漸進鏡：落樓梯" },
   ],
   "t-pal-stairs": [
+    { href: "/tools/spectacle-image", label: "鏡片所見畫面示意" },
     { href: "/tools/pal-stairs", label: "漸進鏡落樓梯示意" },
     { href: "/t/t-presbyopia", label: "老花五類選擇" },
     { href: "/t/d1", label: "屈光不正" },

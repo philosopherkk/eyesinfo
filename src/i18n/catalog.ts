@@ -46,6 +46,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
       blurb: "脂質／水液／黏液缺損對蒸發、破裂時間與炎症的示意（不是檢查）",
       canto: "揀狀態睇淚膜點散",
     },
+    "spectacle-image": {
+      title: "鏡片所見畫面示意",
+      blurb: "比較遠視、近視、漸進、散光眼鏡，以及隱形眼鏡與中和屈折的單焦點人工晶體（不是檢查）",
+      canto: "同一幅街景，不同鏡片",
+    },
   },
   "zh-Hans": {
     amsler: { title: "阿姆斯勒方格", blurb: "教育工具 · 自我察觉中央视力", canto: "遮一眼望中央" },
@@ -85,6 +90,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
       title: "泪膜三层与干眼机制",
       blurb: "脂质／水液／黏液缺损对蒸发、破裂时间与炎症的示意（不是检查）",
       canto: "选状态看泪膜如何散开",
+    },
+    "spectacle-image": {
+      title: "镜片所见画面示意",
+      blurb: "比较远视、近视、渐进、散光眼镜，以及隐形眼镜与中和屈折的单焦点人工晶体（不是检查）",
+      canto: "同一幅街景，不同镜片",
     },
   },
   en: {
@@ -126,6 +136,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
       blurb: "Illustration of lipid / aqueous / mucin deficiency on evaporation, break-up time and inflammation (not a test)",
       canto: "Pick a state · watch the film break",
     },
+    "spectacle-image": {
+      title: "What the lens shows",
+      blurb: "Hyperopic, myopic, progressive and astigmatism-corrected glasses, plus contact lenses and a monofocal intraocular lens with the refraction neutralized (not a test)",
+      canto: "One street, different lenses",
+    },
   },
   ja: {
     amsler: { title: "アムスラーチャート", blurb: "教育ツール · 中心視力の自己観察", canto: "片眼隠し中央を見る" },
@@ -165,6 +180,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
       title: "涙液三層とドライアイの機序",
       blurb: "脂質／水／ムチン不足が蒸発・破壊時間・炎症に与える影響の図示（検査ではない）",
       canto: "状態を選んで破壊を見る",
+    },
+    "spectacle-image": {
+      title: "レンズの見え方図示",
+      blurb: "遠視・近視・累進・乱視矯正の眼鏡と、コンタクトレンズ、屈折を中和した単焦点眼内レンズの比較（検査ではない）",
+      canto: "同じ街並み、違うレンズ",
     },
   },
 };

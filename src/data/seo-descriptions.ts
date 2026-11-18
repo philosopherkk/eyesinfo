@@ -506,6 +506,11 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
     en: "Teaching animation of progressive-lens downstairs optics — near-zone magnification, blur and prism; toggle hyperope/myope (education tool, not a test).",
     ja: "累進レンズで下り階段を見るときの近用部の拡大・ぼけ・プリズムの教育用アニメ。遠視／近視を切替（検査ではない）。",
   },
+  "/tools/spectacle-image": {
+    zh: "同一幅街景比較遠視、近視、漸進、散光眼鏡的光學區，以及隱形眼鏡與中和屈折的單焦點人工晶體（教育工具，不是檢查或驗光）。",
+    en: "One drawn street compares the optical zone of hyperopic, myopic, progressive and astigmatism-corrected glasses, plus contact lenses and a monofocal intraocular lens with refraction neutralized (education tool, not a test or refraction).",
+    ja: "同じ街並みで、遠視・近視・累進・乱視矯正眼鏡の光学部と、コンタクトレンズ、屈折を中和した単焦点眼内レンズを比べる教育ツールです（検査や屈折検査ではありません）。",
+  },
   "/tools/tear-film": {
     zh: "淚膜三層（脂質、水液、黏液）與蒸發型／水液不足／黏液不足乾眼機制示意；指標只用相對等級，不是個人檢查。本頁屬非急症機制教育，不能代替面診。",
     en: "Interactive illustration of the three tear-film layers and lipid / aqueous / mucin deficiency mechanisms. Relative teaching labels only—not a personal test. Non-urgent mechanism education; not a substitute for a registered doctor.",

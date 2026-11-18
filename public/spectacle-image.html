@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex" />
+  <title>鏡片所見畫面示意 — 護眼學堂</title>
+  <style>
+    html, body { margin: 0; padding: 0; background: #12151a; color: #e4e4e4; }
+    #sim { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; max-width: 980px; margin: 0 auto; padding: 12px; }
+    .cap { font-size: 13px; line-height: 1.5; color: #9aa3b2; margin: 0 0 10px; }
+    .lab { font-size: 13px; font-weight: 700; color: #f3c06a; margin: 12px 0 6px; }
+    .note, .hint, .capmode, .scale { font-size: 13px; line-height: 1.5; color: #c5ceda; margin: 6px 0; }
+    .hint { color: #9aa3b2; }
+    .seg { display: flex; flex-wrap: wrap; gap: 6px; }
+    .seg button, .chk {
+      background: #23272f; color: #ddd; border: 1px solid #444; border-radius: 9px;
+      min-height: 44px; padding: 8px 12px; font-size: 14px; cursor: pointer;
+    }
+    .seg button.on { background: #f0a030; color: #111; font-weight: 700; border-color: #f0a030; }
+    .seg button:disabled { opacity: 0.45; cursor: not-allowed; }
+    .chk { display: flex; align-items: center; gap: 8px; }
+    .chk input { width: 18px; height: 18px; accent-color: #f0a030; }
+    .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    canvas { width: 100%; height: auto; display: block; border-radius: 10px; background: #0e1218; margin-top: 10px; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <div id="sim">
+    <p class="cap" id="pageCap"></p>
+    <p class="lab" id="lab-compare"></p>
+    <div class="seg" id="grp-mode" role="group"></div>
+
+    <p class="lab" id="lab-rx"></p>
+    <p class="note" id="rxNote"></p>
+    <div class="row" id="row-sign">
+      <span class="lab" id="lab-sign" style="margin:0"></span>
+      <div class="seg" id="grp-sign" role="group"></div>
+    </div>
+    <div class="row">
+      <span class="lab" id="lab-sphere" style="margin:0"></span>
+      <div class="seg" id="grp-sphere" role="group"></div>
+    </div>
+    <div class="row">
+      <span class="lab" id="lab-cyl" style="margin:0"></span>
+      <div class="seg" id="grp-cyl" role="group"></div>
+    </div>
+    <div class="row">
+      <span class="lab" id="lab-mer" style="margin:0"></span>
+      <div class="seg" id="grp-mer" role="group"></div>
+    </div>
+    <div class="row">
+      <span class="lab" id="lab-add" style="margin:0"></span>
+      <div class="seg" id="grp-add" role="group"></div>
+    </div>
+
+    <p class="lab" id="lab-gaze"></p>
+    <div class="seg" id="grp-gaze" role="group"></div>
+
+    <p class="lab" id="lab-show"></p>
+    <div class="row">
+      <label class="chk"><input type="checkbox" id="chk-zone" checked /> <span id="lab-zone"></span></label>
+      <label class="chk"><input type="checkbox" id="chk-out" checked /> <span id="lab-out"></span></label>
+      <label class="chk"><input type="checkbox" id="chk-scale" /> <span id="lab-scale"></span></label>
+    </div>
+    <div id="hints"></div>
+
+    <canvas id="cv" width="960" height="540"></canvas>
+    <p class="capmode" id="modeCap"></p>
+    <p class="note" id="scaleNote" hidden></p>
+    <p class="scale" id="scaleLine" hidden></p>
+    <p class="note" id="noFixed" hidden></p>
+  </div>
+  <script>
+(() => {
+  const I18N = {
+    "zh-Hant": {
+      htmlLang: "zh-Hant",
+      title: "鏡片所見畫面示意 — 護眼學堂",
+      pageCap: "教育示意 · 不是視力檢查、驗光或配鏡評估。",
+      groupCompare: "比較",
+      modeHyper: "遠視眼鏡", modeMyope: "近視眼鏡", modeProg: "漸進眼鏡", modeSpecCyl: "散光矯正眼鏡",
+      modeCl: "已矯正隱形眼鏡", modeClCyl: "散光矯正隱形眼鏡", modeClPlain: "未矯正隱形眼鏡",
+      modeIol: "中和屈折的單焦點人工晶體",
+      groupRx: "示意屈折", rxNote: "示意設定，不是處方",
+      sphereSign: "球面方向", signMinus: "近視", signPlus: "遠視",
+      sphereAmt: "球面", cylAmt: "散光", meridian: "散光方向", addAmt: "加入度",
+      amtNone: "無", amtLight: "輕", amtMid: "中", amtHigh: "較強",
+      merH: "水平", merO: "斜", merV: "垂直", illus: "示意",
+      groupGaze: "注視", gazeFar: "平視", gazeDown: "向下", gazeSide: "看旁邊",
+      groupShow: "顯示", showZone: "顯示光學區", showOutside: "鏡外＝未矯正參考", showScale: "顯示示意刻度",
+      zone: "光學區", zoneFar: "遠用區", zoneCorr: "走廊", zoneNear: "近用區", zonePeriph: "周邊", zoneOut: "鏡外", zoneGap: "示意缺口",
+      noFixedZone: "此比較沒有固定在眼前的光學區。",
+      hintSignLock: "此鏡片類型已固定球面方向",
+      hintMeridian: "未設定散光時，方向不改變畫面",
+      hintAdd: "加入度只在漸進眼鏡這格生效",
+      hintGaze: "此比較沒有固定鏡框，注視位置不改變畫面",
+      hintOutside: "鏡外參考只在眼鏡四格顯示",
+      zeroState: "球面與散光都是「無」時，各格差異很小。請先設定示意屈折。",
+      capHyper: "光學區內遠景變清楚並放大，直線輕微向內彎。散光未另選矯正時，方向性模糊仍在。區外是未矯正畫面。",
+      capHyperGap: "較強遠視這格在光學區外緣加畫一圈示意缺口。輕與中不畫這圈。",
+      capMyope: "光學區內遠景變清楚並縮小，直線輕微向外彎。散光未另選矯正時，方向性模糊仍在。區外是未矯正畫面。",
+      capProg: "光學區仍在。平視用遠用區，向下走窄走廊到近用區，看旁邊則模糊並輕微晃動。加入度為「無」時接近單焦眼鏡。",
+      capSpecCyl: "光學區內收起所選方向的模糊，並留下輕微的方向性放大。區外仍是未矯正的方向性模糊。",
+      capCl: "整幅畫面矯正球面，幾乎不放大縮小，也沒有鏡框窗。散光設定不是「無」時，方向性模糊仍留在全畫面。",
+      capClCyl: "整幅畫面同時收起球面與方向性模糊，方向性放大比眼鏡輕。不示範鏡片旋轉或是否戴得合適。",
+      capClSame: "未設定散光示意時，這一格與已矯正隱形眼鏡相近。",
+      capClPlain: "整幅畫面保持未中和的模糊，沒有鏡框窗。近視示意時近處卡片比遠招牌清楚；遠視示意時近處更糊。",
+      capIol: "遠景畫成清楚，近處卡片仍模糊，沒有眼鏡光學區，也沒有放大縮小。這是「遠距離屈折被中和」的示意。真正的單焦點人工晶體不會自動消除角膜散光，也不提供近距離加入度。這裡不是度數計算，也不是手術結果。",
+    },
+    "zh-Hans": {
+      htmlLang: "zh-CN",
+      title: "镜片所见画面示意 — 护眼学堂",
+      pageCap: "教育示意 · 不是视力检查、验光或配镜评估。",
+      groupCompare: "比较",
+      modeHyper: "远视眼镜", modeMyope: "近视眼镜", modeProg: "渐进眼镜", modeSpecCyl: "散光矫正眼镜",
+      modeCl: "已矫正隐形眼镜", modeClCyl: "散光矫正隐形眼镜", modeClPlain: "未矫正隐形眼镜",
+      modeIol: "中和屈折的单焦点人工晶体",
+      groupRx: "示意屈折", rxNote: "示意设定，不是处方",
+      sphereSign: "球面方向", signMinus: "近视", signPlus: "远视",
+      sphereAmt: "球面", cylAmt: "散光", meridian: "散光方向", addAmt: "加入度",
+      amtNone: "无", amtLight: "轻", amtMid: "中", amtHigh: "较强",
+      merH: "水平", merO: "斜", merV: "垂直", illus: "示意",
+      groupGaze: "注视", gazeFar: "平视", gazeDown: "向下", gazeSide: "看旁边",
+      groupShow: "显示", showZone: "显示光学区", showOutside: "镜外＝未矫正参考", showScale: "显示示意刻度",
+      zone: "光学区", zoneFar: "远用区", zoneCorr: "走廊", zoneNear: "近用区", zonePeriph: "周边", zoneOut: "镜外", zoneGap: "示意缺口",
+      noFixedZone: "此比较没有固定在眼前的光学区。",
+      hintSignLock: "此镜片类型已固定球面方向",
+      hintMeridian: "未设定散光时，方向不改变画面",
+      hintAdd: "加入度只在渐进眼镜这格生效",
+      hintGaze: "此比较没有固定镜框，注视位置不改变画面",
+      hintOutside: "镜外参考只在眼镜四格显示",
+      zeroState: "球面与散光都是「无」时，各格差异很小。请先设定示意屈折。",
+      capHyper: "光学区内远景变清楚并放大，直线轻微向内弯。散光未另选矫正时，方向性模糊仍在。区外是未矫正画面。",
+      capHyperGap: "较强远视这格在光学区外缘加画一圈示意缺口。轻与中不画这圈。",
+      capMyope: "光学区内远景变清楚并缩小，直线轻微向外弯。散光未另选矫正时，方向性模糊仍在。区外是未矫正画面。",
+      capProg: "光学区仍在。平视用远用区，向下走窄走廊到近用区，看旁边则模糊并轻微晃动。加入度为「无」时接近单焦眼镜。",
+      capSpecCyl: "光学区内收起所选方向的模糊，并留下轻微的方向性放大。区外仍是未矫正的方向性模糊。",
+      capCl: "整幅画面矫正球面，几乎不放大缩小，也没有镜框窗。散光设定不是「无」时，方向性模糊仍留在全画面。",
+      capClCyl: "整幅画面同时收起球面与方向性模糊，方向性放大比眼镜轻。不示范镜片旋转或是否戴得合适。",
+      capClSame: "未设定散光示意时，这一格与已矫正隐形眼镜相近。",
+      capClPlain: "整幅画面保持未中和的模糊，没有镜框窗。近视示意时近处卡片比远招牌清楚；远视示意时近处更糊。",
+      capIol: "远景画成清楚，近处卡片仍模糊，没有眼镜光学区，也没有放大缩小。这是「远距离屈折被中和」的示意。真正的单焦点人工晶体不会自动消除角膜散光，也不提供近距离加入度。这里不是度数计算，也不是手术结果。",
+    },
+    en: {
+      htmlLang: "en",
+      title: "What the lens shows — Eyesinfo",
+      pageCap: "Education illustration · not a vision test, refraction, or dispensing assessment.",
+      groupCompare: "Compare",
+      modeHyper: "Hyperopic glasses", modeMyope: "Myopic glasses", modeProg: "Progressive glasses", modeSpecCyl: "Astigmatism-corrected glasses",
+      modeCl: "Corrected contact lens", modeClCyl: "Astigmatism-corrected contact lens", modeClPlain: "Uncorrected contact lens",
+      modeIol: "Monofocal intraocular lens, refraction neutralized",
+      groupRx: "Illustration settings", rxNote: "Illustration settings, not a prescription",
+      sphereSign: "Sphere direction", signMinus: "Myopia", signPlus: "Hyperopia",
+      sphereAmt: "Sphere", cylAmt: "Astigmatism", meridian: "Blur direction", addAmt: "Add",
+      amtNone: "None", amtLight: "Light", amtMid: "Moderate", amtHigh: "Stronger",
+      merH: "Horizontal", merO: "Oblique", merV: "Vertical", illus: "illustration",
+      groupGaze: "Gaze", gazeFar: "Straight ahead", gazeDown: "Downward", gazeSide: "To the side",
+      groupShow: "Show", showZone: "Show optical zone", showOutside: "Outside the lens = uncorrected reference", showScale: "Show illustration scale",
+      zone: "Optical zone", zoneFar: "Distance zone", zoneCorr: "Corridor", zoneNear: "Near zone", zonePeriph: "Periphery", zoneOut: "Outside the lens", zoneGap: "Illustration gap",
+      noFixedZone: "This comparison has no optical zone fixed in front of the eye.",
+      hintSignLock: "This lens type locks the sphere direction",
+      hintMeridian: "With astigmatism set to none, direction does not change the picture",
+      hintAdd: "Add applies only to progressive glasses",
+      hintGaze: "This comparison has no fixed frame, so gaze does not change the picture",
+      hintOutside: "The outside-lens reference is only on the four glasses modes",
+      zeroState: "With sphere and astigmatism both at none, the modes look alike. Set an illustration refraction first.",
+      capHyper: "Inside the optical zone the distance view clears and enlarges, and straight lines bend slightly inward. Directional blur stays until you choose astigmatism-corrected glasses. Outside is the uncorrected picture.",
+      capHyperGap: "The stronger hyperopic setting adds an illustration gap at the zone edge. Light and moderate do not.",
+      capMyope: "Inside the optical zone the distance view clears and shrinks, and straight lines bend slightly outward. Directional blur stays until you choose astigmatism-corrected glasses. Outside is the uncorrected picture.",
+      capProg: "The optical zone stays. Straight ahead uses the distance zone, downward follows the narrow corridor into the near zone, and looking aside is blurred with a slight swim. With add at none, this is close to single-vision glasses.",
+      capSpecCyl: "Inside the optical zone the chosen directional blur clears, and a slight directional stretch remains. Outside, the uncorrected directional blur remains.",
+      capCl: "The whole picture corrects the sphere, with almost no change in size and no frame window. If astigmatism is not none, directional blur remains across the picture.",
+      capClCyl: "The whole picture clears both sphere and directional blur. Directional stretch is lighter than with glasses. This does not show lens rotation or whether a lens fits.",
+      capClSame: "With astigmatism at none, this mode looks like the corrected contact lens.",
+      capClPlain: "The whole picture stays uncorrected, with no frame window. In the myopia illustration the near card is clearer than the distant sign. In the hyperopia illustration the near card is more blurred.",
+      capIol: "Distance is drawn clear, the near card stays blurred, and there is no glasses optical zone and no change in size. This illustrates distance refraction treated as neutralized. A real monofocal intraocular lens does not by itself remove corneal astigmatism, and it does not add a near focus. This is not a power calculation and not a surgical result.",
+    },
+    ja: {
+      htmlLang: "ja",
+      title: "レンズの見え方図示 — 護眼学堂",
+      pageCap: "教育用図示 · 視力検査、屈折検査、眼鏡合わせではありません。",
+      groupCompare: "比較",
+      modeHyper: "遠視眼鏡", modeMyope: "近視眼鏡", modeProg: "累進眼鏡", modeSpecCyl: "乱視矯正眼鏡",
+      modeCl: "矯正済みコンタクトレンズ", modeClCyl: "乱視矯正コンタクトレンズ", modeClPlain: "未矯正コンタクトレンズ",
+      modeIol: "屈折を中和した単焦点眼内レンズ",
+      groupRx: "図示の屈折", rxNote: "図示の設定であり、処方ではありません",
+      sphereSign: "球面の向き", signMinus: "近視", signPlus: "遠視",
+      sphereAmt: "球面", cylAmt: "乱視", meridian: "ぼける方向", addAmt: "加入",
+      amtNone: "なし", amtLight: "弱", amtMid: "中", amtHigh: "強",
+      merH: "水平", merO: "斜め", merV: "垂直", illus: "図示",
+      groupGaze: "見ている位置", gazeFar: "正面", gazeDown: "下", gazeSide: "横",
+      groupShow: "表示", showZone: "光学部を表示", showOutside: "レンズ外＝未矯正の参考", showScale: "図示の目盛りを表示",
+      zone: "光学部", zoneFar: "遠用部", zoneCorr: "廊下", zoneNear: "近用部", zonePeriph: "周辺", zoneOut: "レンズ外", zoneGap: "図示の欠け",
+      noFixedZone: "この比較に、眼前に固定された光学部はありません。",
+      hintSignLock: "このレンズでは球面の向きは固定です",
+      hintMeridian: "乱視が「なし」のとき、方向は画面を変えません",
+      hintAdd: "加入は累進眼鏡のときだけ効きます",
+      hintGaze: "固定の枠がないので、見ている位置は画面を変えません",
+      hintOutside: "レンズ外の参考は四つの眼鏡だけに出ます",
+      zeroState: "球面と乱視がともに「なし」のときは差が小さくなります。先に図示の屈折を設定してください。",
+      capHyper: "光学部の中では遠方がはっきりし、拡大し、直線がわずかに内側へ曲がります。乱視矯正を選んでいなければ、方向性のぼけは残ります。外は未矯正の画面です。",
+      capHyperGap: "強い遠視のときだけ、光学部の縁に図示の欠けを描きます。弱と中では描きません。",
+      capMyope: "光学部の中では遠方がはっきりし、縮小し、直線がわずかに外側へ曲がります。乱視矯正を選んでいなければ、方向性のぼけは残ります。外は未矯正の画面です。",
+      capProg: "光学部はそのままです。正面は遠用部、下は狭い廊下から近用部、横はぼけとわずかなゆらぎです。加入が「なし」のときは単焦点の眼鏡に近くなります。",
+      capSpecCyl: "光学部の中では選んだ方向のぼけが取れ、わずかな方向性の伸びが残ります。外は未矯正の方向性のぼけのままです。",
+      capCl: "画面全体で球面を矯正し、大きさはほとんど変わらず、枠の窓もありません。乱視が「なし」でなければ、方向性のぼけが全体に残ります。",
+      capClCyl: "画面全体で球面と方向性のぼけを同時に取ります。方向性の伸びは眼鏡より軽く描きます。レンズの回転や装用の適否は示しません。",
+      capClSame: "乱視の図示が「なし」のときは、矯正済みコンタクトレンズに近くなります。",
+      capClPlain: "画面全体が未中和のぼけのままです。枠の窓はありません。近視の図示では近くのカードが遠い看板よりはっきりし、遠視の図示では近くがよりぼけます。",
+      capIol: "遠方ははっきり描き、近くのカードはぼけたままです。眼鏡の光学部はなく、大きさも変えません。これは「遠方の屈折が中和された」図示です。実際の単焦点眼内レンズは角膜乱視を自動では消さず、近用の加入もありません。度数計算でも手術結果でもありません。",
+    },
+  };
+
+  const normalizeLang = (raw) => {
+    const v = (raw || "").trim();
+    if (v === "zh" || v === "zh-Hant" || v === "zh-hant") return "zh-Hant";
+    if (v === "zh-Hans" || v === "zh-hans" || v === "zh-CN" || v === "zh-cn") return "zh-Hans";
+    if (v === "ja" || v === "jp") return "ja";
+    if (v === "en") return "en";
+    return "zh-Hant";
+  };
+
+  let uiLang = normalizeLang(new URLSearchParams(location.search).get("lang"));
+  let T = I18N[uiLang];
+
+  const VW = 960, VH = 540, SW = 1400, SH = 788;
+  const ZX = VW / 2, ZY = VH * 0.5, ZRX = 250, ZRY = 230;
+  const LVL = { none: 0, light: 1, mid: 2, high: 3 };
+  const MAG = [1, 1.12, 1.26, 1.42];
+  const MINI = [1, 0.9, 0.78, 0.7];
+  const PIN = [0, 0.12, 0.22, 0.34];
+  const SPEC = { hyper: 1, myope: 1, prog: 1, specCyl: 1 };
+
+  const S = {
+    mode: "hyper",
+    sign: "plus",
+    sphere: "mid",
+    cyl: "none",
+    mer: "h",
+    add: "mid",
+    gaze: "far",
+    zone: true,
+    outside: true,
+    scale: false,
+  };
+
+  const $ = (id) => document.getElementById(id);
+  const cv = $("cv");
+  const fx = cv.getContext("2d");
+  const mk = (w, h) => {
+    const c = document.createElement("canvas");
+    c.width = w;
+    c.height = h;
+    return c;
+  };
+  const hasFilter = (() => {
+    const c = mk(4, 4).getContext("2d");
+    if (!c || !("filter" in c)) return false;
+    c.filter = "blur(2px)";
+    return c.filter === "blur(2px)";
+  })();
+
+  function drawFar(ctx) {
+    const g = ctx.createLinearGradient(0, 0, 0, SH);
+    g.addColorStop(0, "#8eb6d6");
+    g.addColorStop(0.5, "#d5e4ef");
+    g.addColorStop(1, "#b7b3a6");
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, SW, SH);
+    ctx.fillStyle = "#7d8a84";
+    ctx.beginPath();
+    ctx.moveTo(0, SH);
+    ctx.lineTo(SW * 0.42, SH * 0.62);
+    ctx.lineTo(SW * 0.58, SH * 0.62);
+    ctx.lineTo(SW, SH);
+    ctx.fill();
+    ctx.strokeStyle = "#f4ecd4";
+    ctx.lineWidth = 8;
+    ctx.beginPath();
+    ctx.moveTo(SW / 2, SH * 0.62);
+    ctx.lineTo(SW / 2, SH);
+    ctx.stroke();
+    const blocks = [
+      [16, 180, 170, 340],
+      [210, 140, 210, 390],
+      [450, 170, 180, 360],
+      [860, 130, 230, 400],
+      [1120, 175, 160, 350],
+      [1280, 150, 100, 370],
+    ];
+    blocks.forEach((b, i) => {
+      ctx.fillStyle = i % 2 ? "#4e5e6d" : "#3d4b59";
+      ctx.fillRect(b[0], b[1], b[2], b[3]);
+      ctx.strokeStyle = "rgba(255,255,255,.4)";
+      ctx.lineWidth = 3;
+      ctx.strokeRect(b[0] + 8, b[1] + 8, b[2] - 16, b[3] - 16);
+      ctx.fillStyle = "#d7e7f2";
+      for (let y = b[1] + 22; y < b[1] + b[3] - 16; y += 34) {
+        for (let x = b[0] + 16; x < b[0] + b[2] - 16; x += 30) {
+          ctx.fillRect(x, y, 14, 18);
+        }
+      }
+    });
+    const sx = SW / 2 - 130;
+    const sy = 230;
+    ctx.fillStyle = "#f3e2b2";
+    ctx.fillRect(sx, sy, 260, 120);
+    ctx.strokeStyle = "#1c2430";
+    ctx.lineWidth = 6;
+    ctx.strokeRect(sx + 10, sy + 10, 240, 100);
+    ctx.fillStyle = "#1c2430";
+    ctx.font = "700 68px system-ui, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("街", SW / 2 + 16, sy + 62);
+    ctx.beginPath();
+    ctx.arc(sx + 40, sy + 40, 16, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+
+  function drawMid(ctx) {
+    const x = SW / 2 - 80;
+    const y = 370;
+    const w = 160;
+    const h = 250;
+    ctx.fillStyle = "#6b4423";
+    ctx.fillRect(x - 18, y - 12, w + 36, h + 16);
+    ctx.fillStyle = "#24180f";
+    ctx.fillRect(x, y, w, h);
+    ctx.strokeStyle = "#ead7b4";
+    ctx.lineWidth = 8;
+    ctx.strokeRect(x + 16, y + 16, w - 32, h - 32);
+    ctx.beginPath();
+    ctx.moveTo(SW / 2, y + 16);
+    ctx.lineTo(SW / 2, y + h - 16);
+    ctx.stroke();
+  }
+
+  function drawNear(ctx) {
+    const x = SW / 2 - 170;
+    const y = 468;
+    const w = 340;
+    const h = 120;
+    ctx.fillStyle = "#f7f4ee";
+    ctx.fillRect(x, y, w, h);
+    ctx.strokeStyle = "#222";
+    ctx.lineWidth = 4;
+    ctx.strokeRect(x, y, w, h);
+    ctx.fillStyle = "#222";
+    for (let i = 0; i < 4; i++) ctx.fillRect(x + 22, y + 20 + i * 24, w - 80, 8);
+    ctx.beginPath();
+    ctx.arc(x + w - 36, y + 36, 16, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.fillRect(x + w - 42, y + 62, 8, 42);
+  }
+
+  const far0 = mk(SW, SH);
+  const mid0 = mk(SW, SH);
+  const near0 = mk(SW, SH);
+  drawFar(far0.getContext("2d"));
+  drawMid(mid0.getContext("2d"));
+  drawNear(near0.getContext("2d"));
+
+  function blurOf(src, r) {
+    if (r <= 0) return src;
+    const c = mk(src.width, src.height);
+    const x = c.getContext("2d");
+    if (hasFilter) {
+      x.filter = "blur(" + r + "px)";
+      x.drawImage(src, 0, 0);
+      x.filter = "none";
+      return c;
+    }
+    const n = 5;
+    x.globalAlpha = 1 / n;
+    for (let i = 0; i < n; i++) {
+      const t = (i - (n - 1) / 2) * r * 0.35;
+      x.drawImage(src, t, 0);
+      x.drawImage(src, 0, t);
+    }
+    return c;
+  }
+
+  const radii = [0, 5, 11, 18];
+  const farB = radii.map((r) => blurOf(far0, r));
+  const midB = radii.map((r) => blurOf(mid0, r));
+  const nearB = radii.map((r) => blurOf(near0, r));
+
+  function stack(fi, mi, ni) {
+    const c = mk(SW, SH);
+    const x = c.getContext("2d");
+    x.drawImage(farB[fi], 0, 0);
+    x.drawImage(midB[mi], 0, 0);
+    x.drawImage(nearB[ni], 0, 0);
+    return c;
+  }
+
+  function smear(src, angle, dist) {
+    if (dist <= 0) return src;
+    const c = mk(src.width, src.height);
+    const x = c.getContext("2d");
+    const steps = 7;
+    x.globalAlpha = 1 / steps;
+    for (let i = 0; i < steps; i++) {
+      const t = (i / (steps - 1) - 0.5) * dist;
+      x.drawImage(src, Math.cos(angle) * t, Math.sin(angle) * t);
+    }
+    return c;
+  }
+
+  function blitMag(ctx, src, mag, pinch) {
+    const strips = 84;
+    const sampleH = VH / mag;
+    const sampleW = VW / mag;
+    const oy = (SH - sampleH) / 2;
+    const ox = (SW - sampleW) / 2;
+    for (let i = 0; i < strips; i++) {
+      const y0 = (i / strips) * VH;
+      const y1 = ((i + 1) / strips) * VH;
+      const mid = (y0 + y1) / 2;
+      const ny = (mid - VH / 2) / (VH / 2);
+      const e = ny * ny;
+      let frac = 1;
+      if (pinch > 0) frac = 1 - pinch * e;
+      else if (pinch < 0) frac = 1 - (-pinch) * (1 - e);
+      if (frac < 0.55) frac = 0.55;
+      const sw = sampleW * frac;
+      let sx = ox + (sampleW - sw) / 2;
+      let sy = oy + (i / strips) * sampleH;
+      let sh = sampleH / strips + 1.6;
+      sx = Math.max(0, Math.min(SW - 2, sx));
+      sy = Math.max(0, Math.min(SH - 2, sy));
+      const swC = Math.max(1, Math.min(SW - sx, sw));
+      const shC = Math.max(1, Math.min(SH - sy, sh));
+      ctx.drawImage(src, sx, sy, swC, shC, 0, y0, VW, y1 - y0 + 0.6);
+    }
+  }
+
+  function makePlate(scene, mag, pinch, angle, stretchAmt, shx, shy) {
+    const v = mk(VW, VH);
+    blitMag(v.getContext("2d"), scene, mag, pinch);
+    let out = v;
+    if (stretchAmt) {
+      const c = mk(VW, VH);
+      const x = c.getContext("2d");
+      x.translate(VW / 2, VH / 2);
+      x.rotate(angle);
+      x.scale(1 + stretchAmt, 1);
+      x.rotate(-angle);
+      x.drawImage(v, -VW / 2, -VH / 2);
+      out = c;
+    }
+    if (shx || shy) {
+      const c = mk(VW, VH);
+      const x = c.getContext("2d");
+      x.translate(VW / 2, VH / 2);
+      x.transform(1, shy, shx, 1, 0, 0);
+      x.drawImage(out, -VW / 2, -VH / 2);
+      out = c;
+    }
+    return out;
+  }
+
+  function zonePath(ctx, inset) {
+    ctx.beginPath();
+    ctx.ellipse(ZX, ZY, Math.max(8, ZRX - inset), Math.max(8, ZRY - inset), 0, 0, Math.PI * 2);
+  }
+
+  function isSpec() { return !!SPEC[S.mode]; }
+  function effectiveSign() {
+    if (S.mode === "hyper") return "plus";
+    if (S.mode === "myope") return "minus";
+    return S.sign;
+  }
+  function merAngle() {
+    if (S.mer === "v") return Math.PI / 2;
+    if (S.mer === "o") return Math.PI / 4;
+    return 0;
+  }
+  function bFar(sign, level) {
+    if (!level) return 0;
+    return sign === "minus" ? level : Math.max(1, level - 1);
+  }
+  function bMid(sign, level) {
+    if (!level) return 0;
+    return sign === "minus" ? Math.max(0, level - 1) : level;
+  }
+  function bNear(sign, level) {
+    if (!level) return 0;
+    return sign === "minus" ? Math.max(0, level - 2) : Math.min(3, level + 1);
+  }
+
+  function optics() {
+    const sign = effectiveSign();
+    const sL = LVL[S.sphere];
+    const cL = LVL[S.cyl];
+    const ang = merAngle();
+    const cylPx = [0, 10, 20, 34][cL];
+    const mag = sign === "plus" ? MAG[sL] : MINI[sL];
+    const pinch = sign === "plus" ? PIN[sL] : -PIN[sL];
+    const uncorr = smear(stack(bFar(sign, sL), bMid(sign, sL), bNear(sign, sL)), ang, cylPx);
+    const residual = smear(stack(0, 0, 0), ang, cylPx);
+    const sharp = stack(0, 0, 0);
+    return { sign, sL, cL, ang, cylPx, mag, pinch, uncorr, residual, sharp };
+  }
+
+  function paintZone(plate, inset) {
+    fx.save();
+    zonePath(fx, inset);
+    fx.clip();
+    fx.drawImage(plate, 0, 0);
+    fx.restore();
+  }
+
+  function paintBand(plate, inset, x, y, w, h) {
+    fx.save();
+    zonePath(fx, inset);
+    fx.clip();
+    fx.beginPath();
+    fx.rect(x, y, w, h);
+    fx.clip();
+    fx.drawImage(plate, 0, 0);
+    fx.restore();
+  }
+
+  function label(text, x, y) {
+    fx.font = "600 15px system-ui, sans-serif";
+    fx.textAlign = "center";
+    fx.textBaseline = "middle";
+    fx.lineWidth = 4;
+    fx.strokeStyle = "rgba(0,0,0,.7)";
+    fx.fillStyle = "#fff";
+    fx.strokeText(text, x, y);
+    fx.fillText(text, x, y);
+  }
+
+  function draw() {
+    const o = optics();
+    const spec = isSpec();
+    const gap = S.mode === "hyper" && S.sphere === "high";
+    const inset = gap ? 8 : 0;
+    fx.setTransform(1, 0, 0, 1, 0, 0);
+    fx.clearRect(0, 0, VW, VH);
+
+    if (!spec) {
+      if (S.mode === "iol") {
+        fx.drawImage(makePlate(stack(0, 0, 2), 1, 0, 0, 0, 0, 0), 0, 0);
+      } else if (S.mode === "clPlain") {
+        fx.drawImage(makePlate(o.uncorr, 1, 0, 0, 0, 0, 0), 0, 0);
+      } else if (S.mode === "clCyl") {
+        const stretch = [0, 0, 0, 0.035][o.cL];
+        fx.drawImage(makePlate(o.sharp, 1, 0, o.ang, stretch, 0, 0), 0, 0);
+      } else {
+        fx.drawImage(makePlate(o.residual, 1, 0, 0, 0, 0, 0), 0, 0);
+      }
+    } else {
+      const outside = makePlate(o.uncorr, 1, 0, 0, 0, 0, 0);
+      fx.save();
+      if (gap) {
+        fx.beginPath();
+        fx.rect(0, 0, VW, VH);
+        fx.ellipse(ZX, ZY, ZRX + 16, ZRY + 16, 0, 0, Math.PI * 2);
+        fx.clip("evenodd");
+      }
+      if (S.outside) fx.drawImage(outside, 0, 0);
+      else {
+        fx.fillStyle = "#14181e";
+        fx.fillRect(0, 0, VW, VH);
+      }
+      fx.restore();
+      if (!S.outside) {
+        fx.save();
+        zonePath(fx, -2);
+        fx.strokeStyle = "#3a414c";
+        fx.lineWidth = 16;
+        fx.stroke();
+        fx.restore();
+      }
+      if (gap) {
+        fx.save();
+        fx.beginPath();
+        fx.ellipse(ZX, ZY, ZRX + 16, ZRY + 16, 0, 0, Math.PI * 2);
+        fx.ellipse(ZX, ZY, ZRX - inset, ZRY - inset, 0, 0, Math.PI * 2);
+        fx.fillStyle = "rgba(58, 46, 30, 0.94)";
+        fx.fill("evenodd");
+        fx.restore();
+      }
+
+      const stretch = S.mode === "specCyl" ? [0, 0.045, 0.08, 0.13][o.cL] : 0;
+      const svScene = S.mode === "specCyl" ? o.sharp : o.residual;
+      const sv = makePlate(svScene, o.mag, o.pinch, o.ang, stretch, 0, 0);
+      const prog = S.mode === "prog" && LVL[S.add] > 0;
+
+      if (!prog) {
+        paintZone(sv, inset);
+      } else {
+        const aL = LVL[S.add];
+        const sh = [0, 0.045, 0.08, 0.12][aL];
+        const addMag = o.mag * [1, 1.04, 1.09, 1.15][aL];
+        const nearScene = smear(stack(Math.min(3, aL + 1), Math.min(3, aL), 0), o.ang, o.cylPx);
+        const nearPlate = makePlate(nearScene, addMag, o.pinch, 0, 0, 0, 0);
+        const mush = makePlate(stack(3, 3, 3), o.mag, o.pinch, 0, 0, S.gaze === "side" ? sh : 0, S.gaze === "down" ? sh : 0);
+        const mild = makePlate(smear(stack(0, 1, 3), o.ang, o.cylPx), o.mag, o.pinch, 0, 0, 0, 0);
+        const side = makePlate(stack(2, 2, 2), o.mag, o.pinch, 0, 0, 0, 0);
+        if (S.gaze === "down") {
+          paintZone(mush, inset);
+          paintBand(nearPlate, inset, ZX - ZRX * 0.16, 0, ZRX * 0.32, VH);
+        } else if (S.gaze === "side") {
+          paintZone(mush, inset);
+          paintBand(sv, inset, ZX - ZRX + 10, 0, ZRX * 0.36, VH);
+        } else {
+          paintZone(sv, inset);
+          paintBand(mild, inset, 0, ZY + ZRY * 0.22, VW, VH);
+          const sideW = ZRX * 0.26;
+          paintBand(side, inset, ZX - ZRX, 0, sideW, VH);
+          paintBand(side, inset, ZX + ZRX - sideW, 0, sideW, VH);
+        }
+      }
+
+      if (S.zone) {
+        fx.save();
+        zonePath(fx, inset);
+        fx.strokeStyle = "rgba(240,160,48,.95)";
+        fx.lineWidth = 2.5;
+        fx.stroke();
+        fx.restore();
+        label(T.zone, ZX, Math.max(16, ZY - ZRY - 16));
+        if (S.outside) label(T.zoneOut, 70, ZY);
+        if (gap) label(T.zoneGap, ZX + ZRX + 8, ZY + ZRY * 0.72);
+        if (prog) {
+          label(T.zoneFar, ZX, ZY - ZRY * 0.55);
+          label(T.zoneCorr, ZX, ZY);
+          label(T.zoneNear, ZX, ZY + ZRY * 0.58);
+          label(T.zonePeriph, ZX - ZRX * 0.62, ZY);
+          label(T.zonePeriph, ZX + ZRX * 0.62, ZY);
+        }
+      }
+    }
+  }
+
+  function captionText() {
+    if (S.mode === "iol") return T.capIol;
+    const quiet = LVL[S.sphere] === 0 && LVL[S.cyl] === 0 && !(S.mode === "prog" && LVL[S.add] > 0);
+    if (quiet) return T.zeroState;
+    const map = {
+      hyper: T.capHyper, myope: T.capMyope, prog: T.capProg, specCyl: T.capSpecCyl,
+      cl: T.capCl, clCyl: T.capClCyl, clPlain: T.capClPlain,
+    };
+    let text = map[S.mode] || "";
+    if (S.mode === "hyper" && S.sphere === "high") text += " " + T.capHyperGap;
+    if (S.mode === "clCyl" && LVL[S.cyl] === 0) text += " " + T.capClSame;
+    return text;
+  }
+
+  function scaleText() {
+    const sign = effectiveSign();
+    const sN = [0, 1, 3, 5][LVL[S.sphere]];
+    const cN = [0, 1, 2, 3][LVL[S.cyl]];
+    const aN = LVL[S.add];
+    const aMap = { 1: "1", 2: "2", 3: "2.5" };
+    const signed = (sign === "minus" ? "−" : "+") + sN;
+    const mer = S.mer === "h" ? T.merH : S.mer === "o" ? T.merO : T.merV;
+    let sph;
+    let cyl;
+    let add = "";
+    if (uiLang === "en") {
+      sph = sN === 0 ? "Sphere none" : "Sphere illustration " + signed;
+      cyl = cN === 0 ? "astigmatism none" : "astigmatism illustration " + cN + " · " + mer.toLowerCase();
+      if (S.mode === "prog") add = aN === 0 ? " · Add none" : " · Add illustration " + aMap[aN];
+    } else {
+      sph = sN === 0 ? T.sphereAmt + " " + T.amtNone : T.sphereAmt + " " + T.illus + " " + signed;
+      cyl = cN === 0 ? T.cylAmt + " " + T.amtNone : T.cylAmt + " " + T.illus + " " + cN + " · " + mer;
+      if (S.mode === "prog") {
+        add = aN === 0 ? " · " + T.addAmt + " " + T.amtNone : " · " + T.addAmt + " " + T.illus + " " + aMap[aN];
+      }
+    }
+    return sph + " · " + cyl + add;
+  }
+
+  function fillSeg(id, key, options) {
+    const host = $(id);
+    host.setAttribute("aria-label", T[key] || "");
+    host.replaceChildren();
+    options.forEach(([value, labelKey]) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.dataset.k = key === "groupCompare" ? "mode" : host.dataset.k;
+      b.dataset.v = value;
+      b.textContent = T[labelKey];
+      host.appendChild(b);
+    });
+  }
+
+  function buildControls() {
+    $("grp-mode").dataset.k = "mode";
+    $("grp-sign").dataset.k = "sign";
+    $("grp-sphere").dataset.k = "sphere";
+    $("grp-cyl").dataset.k = "cyl";
+    $("grp-mer").dataset.k = "mer";
+    $("grp-add").dataset.k = "add";
+    $("grp-gaze").dataset.k = "gaze";
+    fillSeg("grp-mode", "groupCompare", [
+      ["hyper", "modeHyper"], ["myope", "modeMyope"], ["prog", "modeProg"], ["specCyl", "modeSpecCyl"],
+      ["cl", "modeCl"], ["clCyl", "modeClCyl"], ["clPlain", "modeClPlain"], ["iol", "modeIol"],
+    ]);
+    fillSeg("grp-sign", "sphereSign", [["minus", "signMinus"], ["plus", "signPlus"]]);
+    fillSeg("grp-sphere", "sphereAmt", [["none", "amtNone"], ["light", "amtLight"], ["mid", "amtMid"], ["high", "amtHigh"]]);
+    fillSeg("grp-cyl", "cylAmt", [["none", "amtNone"], ["light", "amtLight"], ["mid", "amtMid"], ["high", "amtHigh"]]);
+    fillSeg("grp-mer", "meridian", [["h", "merH"], ["o", "merO"], ["v", "merV"]]);
+    fillSeg("grp-add", "addAmt", [["none", "amtNone"], ["light", "amtLight"], ["mid", "amtMid"], ["high", "amtHigh"]]);
+    fillSeg("grp-gaze", "groupGaze", [["far", "gazeFar"], ["down", "gazeDown"], ["side", "gazeSide"]]);
+    $("pageCap").textContent = T.pageCap;
+    $("lab-compare").textContent = T.groupCompare;
+    $("lab-rx").textContent = T.groupRx;
+    $("rxNote").textContent = T.rxNote;
+    $("lab-sign").textContent = T.sphereSign;
+    $("lab-sphere").textContent = T.sphereAmt;
+    $("lab-cyl").textContent = T.cylAmt;
+    $("lab-mer").textContent = T.meridian;
+    $("lab-add").textContent = T.addAmt;
+    $("lab-gaze").textContent = T.groupGaze;
+    $("lab-show").textContent = T.groupShow;
+    $("lab-zone").textContent = T.showZone;
+    $("lab-out").textContent = T.showOutside;
+    $("lab-scale").textContent = T.showScale;
+    document.documentElement.lang = T.htmlLang;
+    document.title = T.title;
+  }
+
+  function syncUi() {
+    const spec = isSpec();
+    const sign = effectiveSign();
+    document.querySelectorAll("#sim button[data-k]").forEach((b) => {
+      const k = b.dataset.k;
+      const v = b.dataset.v;
+      let on = S[k] === v;
+      if (k === "sign") on = sign === v;
+      b.classList.toggle("on", on);
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+      let disabled = false;
+      if (k === "sign") disabled = S.mode === "hyper" || S.mode === "myope";
+      if (k === "mer") disabled = S.cyl === "none";
+      if (k === "add") disabled = S.mode !== "prog";
+      if (k === "gaze") disabled = !spec;
+      b.disabled = disabled;
+    });
+    $("chk-zone").checked = S.zone;
+    $("chk-out").checked = S.outside;
+    $("chk-out").disabled = !spec;
+    $("chk-scale").checked = S.scale;
+    const hints = [];
+    if (S.mode === "hyper" || S.mode === "myope") hints.push(T.hintSignLock);
+    if (S.cyl === "none") hints.push(T.hintMeridian);
+    if (S.mode !== "prog") hints.push(T.hintAdd);
+    if (!spec) hints.push(T.hintGaze);
+    if (!spec) hints.push(T.hintOutside);
+    $("hints").replaceChildren();
+    hints.forEach((text) => {
+      const p = document.createElement("p");
+      p.className = "hint";
+      p.textContent = text;
+      $("hints").appendChild(p);
+    });
+    $("modeCap").textContent = captionText();
+    const showScale = S.scale;
+    $("scaleNote").hidden = !showScale;
+    $("scaleLine").hidden = !showScale;
+    $("scaleNote").textContent = T.rxNote;
+    $("scaleLine").textContent = scaleText();
+    const showFixed = !spec && S.zone;
+    $("noFixed").hidden = !showFixed;
+    $("noFixed").textContent = T.noFixedZone;
+  }
+
+  function render() {
+    draw();
+    syncUi();
+    reportHeight();
+  }
+
+  $("sim").addEventListener("click", (ev) => {
+    const b = ev.target.closest("button[data-k]");
+    if (!b || b.disabled) return;
+    S[b.dataset.k] = b.dataset.v;
+    render();
+  });
+  $("chk-zone").addEventListener("change", (ev) => { S.zone = ev.target.checked; render(); });
+  $("chk-out").addEventListener("change", (ev) => { S.outside = ev.target.checked; render(); });
+  $("chk-scale").addEventListener("change", (ev) => { S.scale = ev.target.checked; render(); });
+
+  function reportHeight() {
+    const h = Math.ceil(document.documentElement.scrollHeight || document.body.scrollHeight || 900);
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: "eyesinfo-spectacle-image-height", height: h }, "*");
+    }
+  }
+  window.addEventListener("load", reportHeight);
+  if (typeof ResizeObserver !== "undefined") new ResizeObserver(reportHeight).observe($("sim"));
+
+  buildControls();
+  render();
+})();
+  </script>
+</body>
+</html>

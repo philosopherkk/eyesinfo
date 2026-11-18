@@ -37,9 +37,10 @@ import { Route as TTopicIdRouteImport } from './routes/t.$topicId'
 import { Route as ToolsIndexRouteImport } from './routes/tools.index'
 import { Route as ToolsToolIdRouteImport } from './routes/tools.$toolId'
 import { Route as ToolsPalStairsRouteImport } from './routes/tools.pal-stairs'
-import { Route as ToolsShallowAcRouteImport } from './routes/tools.shallow-ac'
-import { Route as ToolsTearFilmRouteImport } from './routes/tools.tear-film'
 import { Route as ToolsProceduresRouteImport } from './routes/tools.procedures'
+import { Route as ToolsShallowAcRouteImport } from './routes/tools.shallow-ac'
+import { Route as ToolsSpectacleImageRouteImport } from './routes/tools.spectacle-image'
+import { Route as ToolsTearFilmRouteImport } from './routes/tools.tear-film'
 import { Route as ZhCNIndexRouteImport } from './routes/zh-CN.index'
 import { Route as ZhCNSplatRouteImport } from './routes/zh-CN.$'
 import { Route as ZhHansIndexRouteImport } from './routes/zh-Hans.index'
@@ -185,19 +186,24 @@ const ToolsPalStairsRoute = ToolsPalStairsRouteImport.update({
   path: '/pal-stairs',
   getParentRoute: () => ToolsRoute,
 } as any)
+const ToolsProceduresRoute = ToolsProceduresRouteImport.update({
+  id: '/procedures',
+  path: '/procedures',
+  getParentRoute: () => ToolsRoute,
+} as any)
 const ToolsShallowAcRoute = ToolsShallowAcRouteImport.update({
   id: '/shallow-ac',
   path: '/shallow-ac',
   getParentRoute: () => ToolsRoute,
 } as any)
+const ToolsSpectacleImageRoute = ToolsSpectacleImageRouteImport.update({
+  id: '/spectacle-image',
+  path: '/spectacle-image',
+  getParentRoute: () => ToolsRoute,
+} as any)
 const ToolsTearFilmRoute = ToolsTearFilmRouteImport.update({
   id: '/tear-film',
   path: '/tear-film',
-  getParentRoute: () => ToolsRoute,
-} as any)
-const ToolsProceduresRoute = ToolsProceduresRouteImport.update({
-  id: '/procedures',
-  path: '/procedures',
   getParentRoute: () => ToolsRoute,
 } as any)
 const ZhCNIndexRoute = ZhCNIndexRouteImport.update({
@@ -247,9 +253,10 @@ export interface FileRoutesByFullPath {
   '/t/$topicId': typeof TTopicIdRoute
   '/tools/$toolId': typeof ToolsToolIdRoute
   '/tools/pal-stairs': typeof ToolsPalStairsRoute
-  '/tools/shallow-ac': typeof ToolsShallowAcRoute
-  '/tools/tear-film': typeof ToolsTearFilmRoute
   '/tools/procedures': typeof ToolsProceduresRoute
+  '/tools/shallow-ac': typeof ToolsShallowAcRoute
+  '/tools/spectacle-image': typeof ToolsSpectacleImageRoute
+  '/tools/tear-film': typeof ToolsTearFilmRoute
   '/zh-CN/$': typeof ZhCNSplatRoute
   '/zh-Hans/$': typeof ZhHansSplatRoute
   '/en/': typeof EnIndexRoute
@@ -279,9 +286,10 @@ export interface FileRoutesByTo {
   '/t/$topicId': typeof TTopicIdRoute
   '/tools/$toolId': typeof ToolsToolIdRoute
   '/tools/pal-stairs': typeof ToolsPalStairsRoute
-  '/tools/shallow-ac': typeof ToolsShallowAcRoute
-  '/tools/tear-film': typeof ToolsTearFilmRoute
   '/tools/procedures': typeof ToolsProceduresRoute
+  '/tools/shallow-ac': typeof ToolsShallowAcRoute
+  '/tools/spectacle-image': typeof ToolsSpectacleImageRoute
+  '/tools/tear-film': typeof ToolsTearFilmRoute
   '/zh-CN/$': typeof ZhCNSplatRoute
   '/zh-Hans/$': typeof ZhHansSplatRoute
   '/en': typeof EnIndexRoute
@@ -317,9 +325,10 @@ export interface FileRoutesById {
   '/t/$topicId': typeof TTopicIdRoute
   '/tools/$toolId': typeof ToolsToolIdRoute
   '/tools/pal-stairs': typeof ToolsPalStairsRoute
-  '/tools/shallow-ac': typeof ToolsShallowAcRoute
-  '/tools/tear-film': typeof ToolsTearFilmRoute
   '/tools/procedures': typeof ToolsProceduresRoute
+  '/tools/shallow-ac': typeof ToolsShallowAcRoute
+  '/tools/spectacle-image': typeof ToolsSpectacleImageRoute
+  '/tools/tear-film': typeof ToolsTearFilmRoute
   '/zh-CN/$': typeof ZhCNSplatRoute
   '/zh-Hans/$': typeof ZhHansSplatRoute
   '/en/': typeof EnIndexRoute
@@ -356,9 +365,10 @@ export interface FileRouteTypes {
     | '/t/$topicId'
     | '/tools/$toolId'
     | '/tools/pal-stairs'
-    | '/tools/shallow-ac'
-    | '/tools/tear-film'
     | '/tools/procedures'
+    | '/tools/shallow-ac'
+    | '/tools/spectacle-image'
+    | '/tools/tear-film'
     | '/zh-CN/$'
     | '/zh-Hans/$'
     | '/en/'
@@ -388,9 +398,10 @@ export interface FileRouteTypes {
     | '/t/$topicId'
     | '/tools/$toolId'
     | '/tools/pal-stairs'
-    | '/tools/shallow-ac'
-    | '/tools/tear-film'
     | '/tools/procedures'
+    | '/tools/shallow-ac'
+    | '/tools/spectacle-image'
+    | '/tools/tear-film'
     | '/zh-CN/$'
     | '/zh-Hans/$'
     | '/en'
@@ -425,9 +436,10 @@ export interface FileRouteTypes {
     | '/t/$topicId'
     | '/tools/$toolId'
     | '/tools/pal-stairs'
-    | '/tools/shallow-ac'
-    | '/tools/tear-film'
     | '/tools/procedures'
+    | '/tools/shallow-ac'
+    | '/tools/spectacle-image'
+    | '/tools/tear-film'
     | '/zh-CN/$'
     | '/zh-Hans/$'
     | '/en/'
@@ -659,6 +671,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsPalStairsRouteImport
       parentRoute: typeof ToolsRoute
     }
+    '/tools/procedures': {
+      id: '/tools/procedures'
+      path: '/procedures'
+      fullPath: '/tools/procedures'
+      preLoaderRoute: typeof ToolsProceduresRouteImport
+      parentRoute: typeof ToolsRoute
+    }
     '/tools/shallow-ac': {
       id: '/tools/shallow-ac'
       path: '/shallow-ac'
@@ -666,18 +685,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsShallowAcRouteImport
       parentRoute: typeof ToolsRoute
     }
+    '/tools/spectacle-image': {
+      id: '/tools/spectacle-image'
+      path: '/spectacle-image'
+      fullPath: '/tools/spectacle-image'
+      preLoaderRoute: typeof ToolsSpectacleImageRouteImport
+      parentRoute: typeof ToolsRoute
+    }
     '/tools/tear-film': {
       id: '/tools/tear-film'
       path: '/tear-film'
       fullPath: '/tools/tear-film'
       preLoaderRoute: typeof ToolsTearFilmRouteImport
-      parentRoute: typeof ToolsRoute
-    }
-    '/tools/procedures': {
-      id: '/tools/procedures'
-      path: '/procedures'
-      fullPath: '/tools/procedures'
-      preLoaderRoute: typeof ToolsProceduresRouteImport
       parentRoute: typeof ToolsRoute
     }
     '/zh-CN/': {
@@ -738,18 +757,20 @@ const JaRouteWithChildren = JaRoute._addFileChildren(JaRouteChildren)
 interface ToolsRouteChildren {
   ToolsToolIdRoute: typeof ToolsToolIdRoute
   ToolsPalStairsRoute: typeof ToolsPalStairsRoute
-  ToolsShallowAcRoute: typeof ToolsShallowAcRoute
-  ToolsTearFilmRoute: typeof ToolsTearFilmRoute
   ToolsProceduresRoute: typeof ToolsProceduresRoute
+  ToolsShallowAcRoute: typeof ToolsShallowAcRoute
+  ToolsSpectacleImageRoute: typeof ToolsSpectacleImageRoute
+  ToolsTearFilmRoute: typeof ToolsTearFilmRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
 }
 
 const ToolsRouteChildren: ToolsRouteChildren = {
   ToolsToolIdRoute: ToolsToolIdRoute,
   ToolsPalStairsRoute: ToolsPalStairsRoute,
-  ToolsShallowAcRoute: ToolsShallowAcRoute,
-  ToolsTearFilmRoute: ToolsTearFilmRoute,
   ToolsProceduresRoute: ToolsProceduresRoute,
+  ToolsShallowAcRoute: ToolsShallowAcRoute,
+  ToolsSpectacleImageRoute: ToolsSpectacleImageRoute,
+  ToolsTearFilmRoute: ToolsTearFilmRoute,
   ToolsIndexRoute: ToolsIndexRoute,
 }
 
@@ -806,3 +827,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
