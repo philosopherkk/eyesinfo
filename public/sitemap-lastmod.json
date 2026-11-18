@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-15T07:11:41.681Z",
+  "generatedAt": "2026-11-18T00:01:12.606Z",
   "timezone": "Asia/Hong_Kong",
   "note": "Per-URL content lastmod from git (page body/data only). Regenerate with: npm run sitemap:regen",
   "lastmod": {
@@ -8,8 +8,8 @@
     "/zh-Hans": "2026-11-15",
     "/ja": "2026-11-15",
     "/urgent": "2026-09-24",
-    "/search": "2026-11-15",
-    "/tools": "2026-11-15",
+    "/search": "2026-11-18",
+    "/tools": "2026-11-18",
     "/saved": "2026-10-06",
     "/install": "2026-09-22",
     "/clinic": "2026-09-22",
@@ -29,8 +29,9 @@
     "/tools/floaters": "2026-10-08",
     "/tools/halo": "2026-10-08",
     "/tools/pal-stairs": "2026-11-15",
-    "/tools/shallow-ac": "2026-11-15",
+    "/tools/shallow-ac": "2026-11-16",
     "/tools/tear-film": "2026-11-15",
+    "/tools/spectacle-image": "2026-11-18",
     "/tools/warm": "2026-09-07",
     "/tools/visit": "2026-09-12",
     "/tools/outdoor": "2026-09-07",

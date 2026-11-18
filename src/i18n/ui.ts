@@ -357,6 +357,14 @@ const zhHant = {
   palStairsSimFooter:
     "示意不是視力檢查或配鏡評估，亦不能代替面診。本站不提供預約或轉介。",
   palStairsTopicLink: "遠視與漸進鏡：落樓梯",
+  spectacleImageSimTitle: "鏡片所見畫面示意",
+  spectacleImageSimCaption:
+    "下方用同一幅山脊照片。拖動滑桿由遠視經過平光到近視，散光亦可連續調整。眼鏡會畫出光學區。滑桿是示意，不是處方。",
+  spectacleImageEduBadge: "光學示意 · 不是檢查",
+  spectacleImageEduCaveat:
+    "本圖只供教學，展示不同鏡片類型下的示意畫面。不是視力檢查、驗光、配鏡評估，也不是人工晶體度數計算。不能預測你的視力。不能代替註冊醫生。本站不提供診斷、處方、預約、購買或轉介。",
+  spectacleImageSimFooter:
+    "示意不是視力檢查或配鏡評估，亦不能預測戴鏡、隱形眼鏡或單焦點人工晶體後的視力。畫面上的刻度是示意設定，不是你的處方。不能代替註冊醫生。本站不提供診斷、處方、預約、購買或轉介。",
   shallowAcSimTitle: "淺前房與閉角機制示意",
   shallowAcSimCaption:
     "下方為 3D 教學動畫：眼球模型與「眼圖」相同。藍點沿房水路徑跟隨眼結構變化。拖動前房深度、晶體大小、瞳孔。示意不是自我檢查或診斷。",
@@ -977,6 +985,14 @@ const en: Record<Key, string> = {
   palStairsSimFooter:
     "Illustration only — not a vision test or dispensing assessment, and not a substitute for an in-person visit. This site does not book or refer.",
   palStairsTopicLink: "Hyperopia and progressive lenses: going downstairs",
+  spectacleImageSimTitle: "What the lens shows",
+  spectacleImageSimCaption:
+    "The same ridge photograph is used below. Drag the slider from hyperopia through plano to myopia. Astigmatism amount is continuous. Glasses show an optical zone. The sliders are an illustration, not a prescription.",
+  spectacleImageEduBadge: "Optics illustration · not a test",
+  spectacleImageEduCaveat:
+    "This picture is for teaching. It shows an illustration of different lens types. It is not a vision test, a refraction, a dispensing assessment, or an intraocular-lens power calculation. It cannot predict your vision. It cannot replace a registered doctor. This site does not diagnose, prescribe, book appointments, sell, or refer.",
+  spectacleImageSimFooter:
+    "An illustration is not a vision test or a dispensing assessment, and it cannot predict vision with glasses, contact lenses, or a monofocal intraocular lens. Any scale on the picture is an illustration setting, not your prescription. It cannot replace a registered doctor. This site does not diagnose, prescribe, book appointments, sell, or refer.",
   shallowAcSimTitle: "Shallow AC and angle-closure mechanism",
   shallowAcSimCaption:
     "3D teaching animation using the same eye model as the Eye map tool. Blue dots follow the aqueous path as structures change. Drag AC depth, lens size and pupil. Illustration only — not a self-check or diagnosis.",
@@ -1589,6 +1605,14 @@ const ja: Record<Key, string> = {
   palStairsSimFooter:
     "図示であり、視力検査や眼鏡合わせの評価でも、対面診察の代わりでもありません。予約・紹介はしません。",
   palStairsTopicLink: "遠視と累進レンズ：下り階段",
+  spectacleImageSimTitle: "レンズの見え方図示",
+  spectacleImageSimCaption:
+    "下は同じ山稜の写真です。スライダーを遠視から正視を経て近視まで動かします。乱視の量も連続で調整します。眼鏡は光学部を描きます。スライダーは図示であり、処方ではありません。",
+  spectacleImageEduBadge: "光学図示 · 検査ではない",
+  spectacleImageEduCaveat:
+    "この図は教育用です。レンズの種類による見え方の図示です。視力検査、屈折検査、眼鏡合わせ、眼内レンズの度数計算ではありません。あなたの視力を予測できません。登録医の代わりにはなりません。本サイトは診断、処方、予約、販売、紹介を行いません。",
+  spectacleImageSimFooter:
+    "図示は視力検査や眼鏡合わせではなく、眼鏡・コンタクトレンズ・単焦点眼内レンズの後の視力を予測できません。画面の目盛りは図示の設定であり、あなたの処方ではありません。登録医の代わりにはなりません。本サイトは診断、処方、予約、販売、紹介を行いません。",
   shallowAcSimTitle: "浅い前房と閉塞隅角の機序",
   shallowAcSimCaption:
     "下は3D教育用アニメです。眼球モデルは「眼の図」と同じです。青い点は構造変化に追従して房水経路を進みます。前房深度・水晶体サイズ・瞳孔を動かします。図示であり、自己検査や診断ではありません。",

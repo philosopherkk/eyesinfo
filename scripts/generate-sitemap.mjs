@@ -116,6 +116,11 @@ const STATIC_SOURCES = {
     "src/components/tear-film-sim.tsx",
     "public/tear-film.html",
   ],
+  "/tools/spectacle-image": [
+    "src/routes/tools.spectacle-image.tsx",
+    "src/components/spectacle-image-sim.tsx",
+    "public/spectacle-image.html",
+  ],
   "/tools/warm": ["src/components/care-tools.tsx"],
   "/tools/visit": ["src/components/ask-visit-rx.tsx"],
   "/tools/outdoor": ["src/components/care-tools.tsx"],
