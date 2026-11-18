@@ -263,12 +263,9 @@
   let uiLang = normalizeLang(new URLSearchParams(location.search).get("lang"));
   let T = I18N[uiLang];
 
-  const VW = 960, VH = 540, SW = 1400, SH = 788;
+  const VW = 960, VH = 540, SW = 1400, SH = 788, PAD = 240, SCENE_H = SH + PAD;
   const ZX = VW / 2, ZY = VH * 0.5, ZRX = 250, ZRY = 230;
   const LVL = { none: 0, light: 1, mid: 2, high: 3 };
-  const MAG = [1, 1.12, 1.26, 1.42];
-  const MINI = [1, 0.9, 0.78, 0.7];
-  const PIN = [0, 0.12, 0.22, 0.34];
   const SPEC = { sv: 1, prog: 1, specCyl: 1 };
 
   const S = {
@@ -301,6 +298,7 @@
   const photo = new Image();
   let photoReady = false;
   const blurCache = new Map();
+  const pixelCache = new WeakMap();
   function drawFar(ctx) {
     ctx.fillStyle = "#243246";
     ctx.fillRect(0, 0, SW, SH);
@@ -323,6 +321,17 @@
     ctx.drawImage(photo, dx, dy, dw, dh);
   }
 
+  function extendFar(canvas) {
+    const tmp = mk(SW, PAD);
+    tmp.getContext("2d").drawImage(canvas, 0, 420, SW, PAD, 0, 0, SW, PAD);
+    const ctx = canvas.getContext("2d");
+    ctx.save();
+    ctx.translate(0, SH + PAD);
+    ctx.scale(1, -1);
+    ctx.drawImage(tmp, 0, 0);
+    ctx.restore();
+  }
+
   function drawNear(ctx) {
     const x = SW / 2 - 170;
     const y = 640;
@@ -341,14 +350,17 @@
     ctx.fillRect(x + w - 42, y + 62, 8, 42);
   }
 
-  const far0 = mk(SW, SH);
-  const near0 = mk(SW, SH);
+  const far0 = mk(SW, SCENE_H);
+  const near0 = mk(SW, SCENE_H);
   drawFar(far0.getContext("2d"));
+  extendFar(far0);
   drawNear(near0.getContext("2d"));
   photo.onload = () => {
     photoReady = true;
     blurCache.clear();
+    pixelCache.delete(far0);
     drawFar(far0.getContext("2d"));
+    extendFar(far0);
     if (typeof render === "function") render();
   };
   photo.src = "spectacle-ridge.jpg";
@@ -386,7 +398,7 @@
 
   function stack(fi, _mi, ni) {
     const rad = [0, 6, 12, 20];
-    const c = mk(SW, SH);
+    const c = mk(SW, SCENE_H);
     const x = c.getContext("2d");
     x.drawImage(blurred(far0, rad[fi] || 0), 0, 0);
     x.drawImage(blurred(near0, rad[ni] || 0), 0, 0);
@@ -394,7 +406,7 @@
   }
 
   function layers(farR, nearR) {
-    const c = mk(SW, SH);
+    const c = mk(SW, SCENE_H);
     const x = c.getContext("2d");
     x.drawImage(blurred(far0, farR), 0, 0);
     x.drawImage(blurred(near0, nearR), 0, 0);
@@ -414,37 +426,83 @@
     return c;
   }
 
-  function blitMag(ctx, src, mag, pinch) {
-    const strips = 84;
-    const sampleH = VH / mag;
-    const sampleW = VW / mag;
-    const oy = (SH - sampleH) / 2;
-    const ox = (SW - sampleW) / 2;
-    for (let i = 0; i < strips; i++) {
-      const y0 = (i / strips) * VH;
-      const y1 = ((i + 1) / strips) * VH;
-      const mid = (y0 + y1) / 2;
-      const ny = (mid - VH / 2) / (VH / 2);
-      const e = ny * ny;
-      let frac = 1;
-      if (pinch > 0) frac = 1 - pinch * e;
-      else if (pinch < 0) frac = 1 - (-pinch) * (1 - e);
-      if (frac < 0.55) frac = 0.55;
-      const sw = sampleW * frac;
-      let sx = ox + (sampleW - sw) / 2;
-      let sy = oy + (i / strips) * sampleH;
-      let sh = sampleH / strips + 1.6;
-      sx = Math.max(0, Math.min(SW - 2, sx));
-      sy = Math.max(0, Math.min(SH - 2, sy));
-      const swC = Math.max(1, Math.min(SW - sx, sw));
-      const shC = Math.max(1, Math.min(SH - sy, sh));
-      ctx.drawImage(src, sx, sy, swC, shC, 0, y0, VW, y1 - y0 + 0.6);
-    }
+  function srcPixels(src) {
+    const hit = pixelCache.get(src);
+    if (hit) return hit;
+    const img = src.getContext("2d").getImageData(0, 0, src.width, src.height);
+    pixelCache.set(src, img);
+    return img;
   }
 
-  function makePlate(scene, mag, pinch, angle, stretchAmt, shx, shy) {
+  function blitMag(ctx, src, mag, pinch, lookX, lookY) {
+    const srcCx = SW / 2 + (lookX || 0);
+    const srcCy = SH / 2 + (lookY || 0);
+    const safeMag = mag > 0.2 ? mag : 0.2;
+    if (Math.abs(pinch) < 0.015) {
+      const sw = VW / safeMag;
+      const sh = VH / safeMag;
+      ctx.drawImage(src, srcCx - sw / 2, srcCy - sh / 2, sw, sh, 0, 0, VW, VH);
+      return;
+    }
+    const simg = srcPixels(src);
+    const sd = simg.data;
+    const sw = src.width;
+    const shh = src.height;
+    const out = ctx.createImageData(VW, VH);
+    const od = out.data;
+    const viewCx = VW / 2;
+    const viewCy = VH / 2;
+    const maxX = sw - 1.001;
+    const maxY = shh - 1.001;
+    for (let y = 0; y < VH; y++) {
+      const ny = (y - ZY) / ZRY;
+      const ny2 = ny * ny;
+      const row = y * VW;
+      for (let x = 0; x < VW; x++) {
+        const nx = (x - ZX) / ZRX;
+        const r2 = nx * nx + ny2;
+        // pinch > 0 pincushion (plus / hyperopia): magnification grows toward the edge, lines bow inward.
+        // pinch < 0 barrel (minus / myopia): magnification falls toward the edge, lines bow outward.
+        let radial = 1 - pinch * r2;
+        if (radial < 0.34) radial = 0.34;
+        if (radial > 2.6) radial = 2.6;
+        const ox = (x - viewCx) / safeMag;
+        const oy = (y - viewCy) / safeMag;
+        let sx = srcCx + ox * radial;
+        let sy = srcCy + oy * radial;
+        if (sy < 0) sy = -sy;
+        if (sy > maxY) sy = maxY - (sy - maxY);
+        if (sx < 0) sx = -sx;
+        if (sx > maxX) sx = maxX - (sx - maxX);
+        if (sx < 0) sx = 0;
+        else if (sx > maxX) sx = maxX;
+        if (sy < 0) sy = 0;
+        else if (sy > maxY) sy = maxY;
+        const x0 = sx | 0;
+        const y0 = sy | 0;
+        const fx = sx - x0;
+        const fy = sy - y0;
+        const i00 = (y0 * sw + x0) * 4;
+        const i10 = i00 + 4;
+        const i01 = i00 + sw * 4;
+        const i11 = i01 + 4;
+        const w00 = (1 - fx) * (1 - fy);
+        const w10 = fx * (1 - fy);
+        const w01 = (1 - fx) * fy;
+        const w11 = fx * fy;
+        const di = (row + x) * 4;
+        od[di] = sd[i00] * w00 + sd[i10] * w10 + sd[i01] * w01 + sd[i11] * w11;
+        od[di + 1] = sd[i00 + 1] * w00 + sd[i10 + 1] * w10 + sd[i01 + 1] * w01 + sd[i11 + 1] * w11;
+        od[di + 2] = sd[i00 + 2] * w00 + sd[i10 + 2] * w10 + sd[i01 + 2] * w01 + sd[i11 + 2] * w11;
+        od[di + 3] = 255;
+      }
+    }
+    ctx.putImageData(out, 0, 0);
+  }
+
+  function makePlate(scene, mag, pinch, angle, stretchAmt, shx, shy, lookX, lookY) {
     const v = mk(VW, VH);
-    blitMag(v.getContext("2d"), scene, mag, pinch);
+    blitMag(v.getContext("2d"), scene, mag, pinch, lookX, lookY);
     let out = v;
     if (stretchAmt) {
       const c = mk(VW, VH);
@@ -492,7 +550,8 @@
     const ang = merAngle();
     const cylPx = cA * 36;
     const mag = sign === "plus" ? 1 + 0.42 * amt : sign === "minus" ? 1 - 0.3 * amt : 1;
-    const pinch = sign === "plus" ? 0.34 * amt : sign === "minus" ? -0.34 * amt : 0;
+    const bend = amt * amt;
+    const pinch = sign === "plus" ? 0.3 * bend : sign === "minus" ? -0.9 * bend : 0;
     let farR = 0;
     let nearR = 0;
     if (sign === "minus") {
@@ -516,15 +575,60 @@
     fx.restore();
   }
 
-  function paintBand(plate, inset, x, y, w, h) {
+  function paintSoft(plate, inset, drawMask) {
+    const layer = mk(VW, VH);
+    const lx = layer.getContext("2d");
+    lx.drawImage(plate, 0, 0);
+    lx.globalCompositeOperation = "destination-in";
+    drawMask(lx);
     fx.save();
     zonePath(fx, inset);
     fx.clip();
-    fx.beginPath();
-    fx.rect(x, y, w, h);
-    fx.clip();
-    fx.drawImage(plate, 0, 0);
+    fx.drawImage(layer, 0, 0);
     fx.restore();
+  }
+
+  function fillSoft(ctx, blurPx, drawPath) {
+    ctx.save();
+    if (hasFilter) ctx.filter = "blur(" + blurPx + "px)";
+    ctx.fillStyle = "#fff";
+    drawPath(ctx);
+    ctx.fill();
+    ctx.restore();
+    if (hasFilter) return;
+    ctx.save();
+    ctx.globalAlpha = 0.45;
+    ctx.translate(ZX, ZY);
+    ctx.scale(1.16, 1.12);
+    ctx.translate(-ZX, -ZY);
+    ctx.fillStyle = "#fff";
+    drawPath(ctx);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function maskDistance(ctx) {
+    fillSoft(ctx, 18, (c) => {
+      c.beginPath();
+      c.ellipse(ZX, ZY - ZRY * 0.34, ZRX * 0.52, ZRY * 0.42, 0, 0, Math.PI * 2);
+    });
+  }
+
+  function maskCorridor(ctx) {
+    fillSoft(ctx, 13, (c) => {
+      const y0 = ZY - ZRY * 0.28;
+      const y1 = ZY + ZRY * 0.02;
+      const y2 = ZY + ZRY * 0.88;
+      const w0 = ZRX * 0.065;
+      const w1 = ZRX * 0.11;
+      const w2 = ZRX * 0.4;
+      c.beginPath();
+      c.moveTo(ZX - w0, y0);
+      c.quadraticCurveTo(ZX - w1, y1, ZX - w2, y2);
+      c.lineTo(ZX + w2, y2);
+      c.quadraticCurveTo(ZX + w1, y1, ZX + w0, y0);
+      c.closePath();
+    });
   }
 
   function label(text, x, y) {
@@ -597,25 +701,23 @@
         paintZone(sv, inset);
       } else {
         const aL = LVL[S.add];
-        const sh = [0, 0.045, 0.08, 0.12][aL];
+        const sh = [0, 0.045, 0.09, 0.15][aL];
         const addMag = o.mag * [1, 1.04, 1.09, 1.15][aL];
-        const nearScene = smear(stack(Math.min(3, aL + 1), Math.min(3, aL), 0), o.ang, o.cylPx);
-        const nearPlate = makePlate(nearScene, addMag, o.pinch, 0, 0, 0, 0);
-        const mush = makePlate(stack(3, 3, 3), o.mag, o.pinch, 0, 0, S.gaze === "side" ? sh : 0, S.gaze === "down" ? sh : 0);
-        const mild = makePlate(smear(stack(0, 1, 3), o.ang, o.cylPx), o.mag, o.pinch, 0, 0, 0, 0);
-        const side = makePlate(stack(2, 2, 2), o.mag, o.pinch, 0, 0, 0, 0);
+        const peri = [0, 2, 3, 3][aL];
+        const lookDown = 190;
         if (S.gaze === "down") {
+          const mush = makePlate(stack(3, peri, 3), o.mag, o.pinch, 0, 0, 0, sh, 0, lookDown);
+          const nearScene = smear(stack(Math.min(3, aL + 1), Math.min(3, aL), 0), o.ang, o.cylPx);
+          const nearPlate = makePlate(nearScene, addMag, o.pinch, 0, 0, 0, sh, 0, lookDown);
           paintZone(mush, inset);
-          paintBand(nearPlate, inset, ZX - ZRX * 0.16, 0, ZRX * 0.32, VH);
+          paintSoft(nearPlate, inset, maskCorridor);
         } else if (S.gaze === "side") {
+          const mush = makePlate(stack(peri, peri, peri), o.mag, o.pinch, 0, 0, sh, 0, 80, 0);
           paintZone(mush, inset);
-          paintBand(sv, inset, ZX - ZRX + 10, 0, ZRX * 0.36, VH);
         } else {
-          paintZone(sv, inset);
-          paintBand(mild, inset, 0, ZY + ZRY * 0.22, VW, VH);
-          const sideW = ZRX * 0.26;
-          paintBand(side, inset, ZX - ZRX, 0, sideW, VH);
-          paintBand(side, inset, ZX + ZRX - sideW, 0, sideW, VH);
+          const around = makePlate(stack(Math.min(3, peri), peri, 3), o.mag, o.pinch, 0, 0, 0, 0, 0, 0);
+          paintZone(around, inset);
+          paintSoft(sv, inset, maskDistance);
         }
       }
 
@@ -629,13 +731,6 @@
         label(T.zone, ZX, Math.max(16, ZY - ZRY - 16));
         if (S.outside) label(T.zoneOut, 70, ZY);
         if (gap) label(T.zoneGap, ZX + ZRX + 8, ZY + ZRY * 0.72);
-        if (prog) {
-          label(T.zoneFar, ZX, ZY - ZRY * 0.55);
-          label(T.zoneCorr, ZX, ZY);
-          label(T.zoneNear, ZX, ZY + ZRY * 0.58);
-          label(T.zonePeriph, ZX - ZRX * 0.62, ZY);
-          label(T.zonePeriph, ZX + ZRX * 0.62, ZY);
-        }
       }
     }
   }
