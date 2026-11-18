@@ -359,7 +359,7 @@ const zhHant = {
   palStairsTopicLink: "遠視與漸進鏡：落樓梯",
   spectacleImageSimTitle: "鏡片所見畫面示意",
   spectacleImageSimCaption:
-    "下方用同一幅山脊照片。拖動滑桿由遠視經過平光到近視，散光亦可連續調整。眼鏡會畫出光學區。滑桿是示意，不是處方。",
+    "下方用窗框格線示範鏡片如何令直線變形。拖動白線比較有無鏡片，再由近視（桶狀）拖到遠視（枕狀）。散光與隱形眼鏡比較在另一分頁。滑桿是示意，不是處方。",
   spectacleImageEduBadge: "光學示意 · 不是檢查",
   spectacleImageEduCaveat:
     "本圖只供教學，展示不同鏡片類型下的示意畫面。不是視力檢查、驗光或配鏡評估。不能預測你的視力。不能代替註冊醫生。本站不提供診斷、處方、預約、購買或轉介。",
@@ -987,7 +987,7 @@ const en: Record<Key, string> = {
   palStairsTopicLink: "Hyperopia and progressive lenses: going downstairs",
   spectacleImageSimTitle: "What the lens shows",
   spectacleImageSimCaption:
-    "The same ridge photograph is used below. Drag the slider from hyperopia through plano to myopia. Astigmatism amount is continuous. Glasses show an optical zone. The sliders are an illustration, not a prescription.",
+    "The grid below shows how a lens bends straight lines. Drag the white line to compare with and without a lens, then slide from myopia (barrel) to hyperopia (pincushion). Astigmatism and contact-lens comparisons are on the other tab. The slider is an illustration, not a prescription.",
   spectacleImageEduBadge: "Optics illustration · not a test",
   spectacleImageEduCaveat:
     "This picture is for teaching. It shows an illustration of different lens types. It is not a vision test, a refraction, or a dispensing assessment. It cannot predict your vision. It cannot replace a registered doctor. This site does not diagnose, prescribe, book appointments, sell, or refer.",
@@ -1607,7 +1607,7 @@ const ja: Record<Key, string> = {
   palStairsTopicLink: "遠視と累進レンズ：下り階段",
   spectacleImageSimTitle: "レンズの見え方図示",
   spectacleImageSimCaption:
-    "下は同じ山稜の写真です。スライダーを遠視から正視を経て近視まで動かします。乱視の量も連続で調整します。眼鏡は光学部を描きます。スライダーは図示であり、処方ではありません。",
+    "下の格子で、レンズが直線をどうゆがめるかを示します。白い線をドラッグしてレンズの有無を比べ、近視（樽型）から遠視（糸巻き型）までスライダーを動かします。乱視とコンタクトレンズの比較は別のタブにあります。スライダーは図示であり、処方ではありません。",
   spectacleImageEduBadge: "光学図示 · 検査ではない",
   spectacleImageEduCaveat:
     "この図は教育用です。レンズの種類による見え方の図示です。視力検査、屈折検査、眼鏡合わせではありません。あなたの視力を予測できません。登録医の代わりにはなりません。本サイトは診断、処方、予約、販売、紹介を行いません。",

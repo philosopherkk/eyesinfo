@@ -77,8 +77,8 @@ export const TOOLS: ToolDef[] = [
   {
     id: "spectacle-image",
     title: "鏡片所見畫面示意",
-    blurb: "比較遠視、近視、散光眼鏡，以及隱形眼鏡（不是檢查）",
-    canto: "同一幅山脊，不同鏡片",
+    blurb: "用格線看近視眼鏡的桶狀變形與遠視眼鏡的枕狀變形（不是檢查）",
+    canto: "拖一拖，睇直線點彎",
     href: "/tools/spectacle-image",
   },
   { id: "warm", title: "熱敷計時", blurb: "示意計時，跟醫生指示", canto: "熱敷跟時間", href: "/tools/warm" },

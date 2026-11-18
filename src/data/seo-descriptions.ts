@@ -507,9 +507,9 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
     ja: "累進レンズで下り階段を見るときの近用部の拡大・ぼけ・プリズムの教育用アニメ。遠視／近視を切替（検査ではない）。",
   },
   "/tools/spectacle-image": {
-    zh: "同一幅山脊照片比較遠視、近視、散光眼鏡的光學區，以及隱形眼鏡（教育工具，不是檢查或驗光）。滑桿是示意，不是處方。",
-    en: "One ridge photograph compares the optical zone of hyperopic, myopic and astigmatism-corrected glasses, plus contact lenses. Sliders are an illustration, not a prescription (education tool, not a test).",
-    ja: "同じ山稜の写真で、遠視・近視・乱視矯正眼鏡の光学部と、コンタクトレンズを比べます。スライダーは図示であり処方ではありません（検査ではありません）。",
+    zh: "用窗框格線示範近視眼鏡的桶狀變形與遠視眼鏡的枕狀變形，拖動白線比較有無鏡片；另有散光與隱形眼鏡比較（教育工具，不是檢查或驗光）。滑桿是示意，不是處方。",
+    en: "A window-grid illustration of barrel distortion with myopia glasses and pincushion distortion with hyperopia glasses; drag the divider to compare with and without a lens. Astigmatism and contact-lens comparisons are on a second tab. Sliders are an illustration, not a prescription (education tool, not a test).",
+    ja: "窓の格子で、近視眼鏡の樽型ゆがみと遠視眼鏡の糸巻き型ゆがみを図示します。白い線を動かしてレンズの有無を比べられます。乱視とコンタクトレンズの比較は別タブです。スライダーは図示であり処方ではありません（検査ではありません）。",
   },
   "/tools/tear-film": {
     zh: "淚膜三層（脂質、水液、黏液）與蒸發型／水液不足／黏液不足乾眼機制示意；指標只用相對等級，不是個人檢查。本頁屬非急症機制教育，不能代替面診。",

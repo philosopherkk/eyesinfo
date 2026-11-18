@@ -63,10 +63,114 @@
       box-shadow: 0 10px 28px rgba(0,0,0,.35);
     }
     [hidden] { display: none !important; }
+
+    #viewAdv { display: flex; flex-direction: column; }
+    .tabs { display: flex; gap: 6px; margin: 0 0 12px; padding: 4px; border-radius: 999px;
+      background: #171b22; border: 1px solid #2c323c; }
+    .tabs button {
+      flex: 1 1 0; min-height: 44px; padding: 8px 12px; border-radius: 999px; border: 0;
+      background: transparent; color: #c5ceda; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+      overflow-wrap: anywhere;
+    }
+    .tabs button[aria-selected="true"] { background: #f0a030; color: #1a1206; font-weight: 700; }
+    .tabs button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+    .d-verdict { display: flex; align-items: center; gap: 12px; padding: 12px 14px; margin: 0 0 10px;
+      border-radius: 16px; background: #171b22; border: 2px solid #2c323c; min-height: 76px; }
+    .d-verdict[data-kind="barrel"] { border-color: #e7b15a; }
+    .d-verdict[data-kind="pin"] { border-color: #7eb6e6; }
+    .d-badge { flex: none; width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; background: #23272f; }
+    .d-badge svg { width: 36px; height: 36px; }
+    .d-verdict h2 { margin: 0; font-size: 20px; line-height: 1.25; color: #fff; }
+    .d-verdict h2 small { font-size: 13px; font-weight: 600; color: #9aa3b2; margin-left: 6px; }
+    .d-verdict p { margin: 3px 0 0; font-size: 14px; line-height: 1.5; color: #c5ceda; }
+
+    .d-stage { position: relative; border-radius: 16px; overflow: hidden; background: #0e1218;
+      box-shadow: 0 10px 28px rgba(0,0,0,.35); user-select: none; -webkit-user-select: none; touch-action: pan-y; }
+    #dcv { margin: 0; border-radius: 0; box-shadow: none; cursor: ew-resize; }
+    #dcv:focus-visible { outline: 3px solid #f0a030; outline-offset: -3px; }
+    .d-pill { position: absolute; top: 10px; padding: 5px 10px; border-radius: 999px; font-size: 13px; font-weight: 700;
+      background: rgba(10,12,16,.78); color: #fff; pointer-events: none; max-width: 46%; }
+    #pillL { left: 10px; } #pillR { right: 10px; }
+    .d-how { margin: 10px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; color: #9aa3b2; }
+    .d-how b { color: #f0a030; }
+    .d-how .gd { display: inline-block; width: 22px; border-top: 3px dashed #ff5d7a; vertical-align: middle; margin-right: 4px; }
+
+    #rng-s::-webkit-slider-runnable-track { height: 12px; background: linear-gradient(90deg, #e7b15a 0%, #d7dde6 50%, #7eb6e6 100%); }
+    #rng-s::-webkit-slider-thumb { width: 34px; height: 34px; margin-top: -11px; border-width: 4px; }
+    #rng-s::-moz-range-track { height: 12px; border-radius: 999px; background: linear-gradient(90deg, #e7b15a 0%, #d7dde6 50%, #7eb6e6 100%); }
+    #rng-s::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: #fff; border: 4px solid #1a1206; }
+    #rng-s { height: 48px; }
+    .d-ends { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; color: #b8c1ce; }
+    .d-ends b { display: block; font-size: 14px; color: #fff; }
+    .d-ends span:nth-child(2) { color: #9aa3b2; text-align: center; }
+    .d-ends span:last-child { text-align: right; }
+
+    .d-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+    .d-tile { background: #171b22; border: 2px solid #2c323c; border-radius: 16px; padding: 8px; color: #e8eaee;
+      cursor: pointer; text-align: left; font: inherit; min-height: 44px; }
+    .d-tile canvas { margin: 0; box-shadow: none; border-radius: 10px; }
+    .d-tile b { display: block; margin-top: 6px; font-size: 15px; }
+    .d-tile span { display: block; font-size: 12.5px; color: #9aa3b2; line-height: 1.4; }
+    .d-tile[aria-pressed="true"] { border-color: #f0a030; }
+    .d-tile[data-t="barrel"] b { color: #e7b15a; } .d-tile[data-t="pin"] b { color: #7eb6e6; }
+    .d-tile:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+    .d-foot { margin: 14px 0 0; font-size: 12.5px; line-height: 1.6; color: #8b95a3; }
+    .d-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    @media (min-width: 760px) {
+      .d-grid { display: grid; grid-template-columns: 1.55fr 1fr; gap: 14px; align-items: start; }
+      .d-grid .panel { margin-top: 0; }
+    }
   </style>
 </head>
 <body>
   <div id="sim">
+    <div class="tabs" id="tabs" role="tablist">
+      <button type="button" role="tab" id="tabDist" aria-controls="viewDist" aria-selected="true"></button>
+      <button type="button" role="tab" id="tabAdv" aria-controls="viewAdv" aria-selected="false" tabindex="-1"></button>
+    </div>
+
+    <section id="viewDist" role="tabpanel" aria-labelledby="tabDist">
+      <p class="cap" id="dCap"></p>
+      <div class="d-verdict" id="verdict" data-kind="plano" role="status" aria-live="polite">
+        <div class="d-badge" id="dBadge" aria-hidden="true"></div>
+        <div>
+          <h2 id="vTitle"></h2>
+          <p id="vBody"></p>
+        </div>
+      </div>
+
+      <div class="d-grid">
+        <div>
+          <div class="d-stage">
+            <canvas id="dcv" width="960" height="540" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"></canvas>
+            <span class="d-pill" id="pillL"></span>
+            <span class="d-pill" id="pillR"></span>
+          </div>
+          <ul class="d-how" id="dHow"></ul>
+        </div>
+
+        <div>
+          <div class="panel">
+            <p class="lab" id="lab-s"></p>
+            <input id="rng-s" type="range" min="-100" max="100" step="1" value="-70" aria-labelledby="lab-s" />
+            <div class="d-ends">
+              <span><b id="endMinusB"></b><span id="endMinusS"></span></span>
+              <span id="endPlano"></span>
+              <span><b id="endPlusB"></b><span id="endPlusS"></span></span>
+            </div>
+            <label class="chk" style="margin-top:8px"><input type="checkbox" id="chk-guide" checked /> <span id="lab-guide"></span></label>
+          </div>
+          <div class="d-tiles">
+            <button class="d-tile" data-t="barrel" type="button" aria-pressed="false"><canvas id="tBarrel" width="320" height="180"></canvas><b id="tBarrelB"></b><span id="tBarrelS"></span></button>
+            <button class="d-tile" data-t="pin" type="button" aria-pressed="false"><canvas id="tPin" width="320" height="180"></canvas><b id="tPinB"></b><span id="tPinS"></span></button>
+          </div>
+        </div>
+      </div>
+      <p class="d-foot" id="dFoot"></p>
+    </section>
+
+    <section id="viewAdv" role="tabpanel" aria-labelledby="tabAdv" hidden>
     <p class="cap" id="pageCap"></p>
     <div class="controls">
     <p class="lab" id="lab-compare"></p>
@@ -110,6 +214,7 @@
     <p class="capmode" id="modeCap"></p>
     <p class="note" id="noFixed" hidden></p>
     </div>
+    </section>
   </div>
   <script>
 (() => {
@@ -726,6 +831,299 @@
 
   buildControls();
   render();
+})();
+  </script>
+  <script>
+(() => {
+  const I18N_D = {
+    "zh-Hant": {
+      cap: "教育示意 · 不是視力檢查、驗光或配鏡評估。",
+      tabDist: "直線變形", tabAdv: "散光與隱形眼鏡", tabsLabel: "檢視方式",
+      pillL: "未戴鏡（直線）", pillR: "鏡片所見",
+      canvasLabel: "比較線位置。左邊是沒有鏡片的畫面，右邊是透過鏡片所見的畫面。",
+      how: ["左右拖動畫面中的白線", "紅色虛線＝直線應該在的位置", "看格線有沒有向外或向內彎"],
+      labS: "鏡片度數（示意）",
+      endMinusB: "近視眼鏡", endMinusS: "負度", endPlano: "平光", endPlusB: "遠視眼鏡", endPlusS: "正度",
+      guide: "顯示直線參考（紅色虛線）",
+      tileBarrelB: "桶狀變形", tileBarrelS: "近視眼鏡 · 格線向外凸",
+      tilePinB: "枕狀變形", tilePinS: "遠視眼鏡 · 格線向內凹",
+      planoTitle: "平光", planoBody: "沒有鏡片度數，直線保持筆直。向左（近視）或向右（遠視）拖動滑桿。",
+      barrelTitle: "桶狀變形", barrelBody: "近視（負度）鏡片令景物縮小，越近鏡邊縮得越多，直線向外凸出，像木桶。",
+      pinTitle: "枕狀變形", pinBody: "遠視（正度）鏡片令景物放大，越近鏡邊放得越大，直線向內凹，四角被拉開，像枕頭。",
+      barrelSub: "Barrel · {s}近視示意", pinSub: "Pincushion · {s}遠視示意",
+      sLight: "輕度", sMid: "中度", sHigh: "較強",
+      foot: "示意效果已放大，方便觀察。實際感覺因度數、鏡框及鏡片設計而異。滑桿是示意設定，不是你的處方，亦不能預測戴鏡後的感受。不能代替註冊醫生。本站不提供診斷、處方、預約、購買或轉介。",
+    },
+    "zh-Hans": {
+      cap: "教育示意 · 不是视力检查、验光或配镜评估。",
+      tabDist: "直线变形", tabAdv: "散光与隐形眼镜", tabsLabel: "查看方式",
+      pillL: "未戴镜（直线）", pillR: "镜片所见",
+      canvasLabel: "比较线位置。左边是没有镜片的画面，右边是透过镜片所见的画面。",
+      how: ["左右拖动画面中的白线", "红色虚线＝直线应该在的位置", "看格线有没有向外或向内弯"],
+      labS: "镜片度数（示意）",
+      endMinusB: "近视眼镜", endMinusS: "负度", endPlano: "平光", endPlusB: "远视眼镜", endPlusS: "正度",
+      guide: "显示直线参考（红色虚线）",
+      tileBarrelB: "桶状变形", tileBarrelS: "近视眼镜 · 格线向外凸",
+      tilePinB: "枕状变形", tilePinS: "远视眼镜 · 格线向内凹",
+      planoTitle: "平光", planoBody: "没有镜片度数，直线保持笔直。向左（近视）或向右（远视）拖动滑杆。",
+      barrelTitle: "桶状变形", barrelBody: "近视（负度）镜片令景物缩小，越近镜边缩得越多，直线向外凸出，像木桶。",
+      pinTitle: "枕状变形", pinBody: "远视（正度）镜片令景物放大，越近镜边放得越大，直线向内凹，四角被拉开，像枕头。",
+      barrelSub: "Barrel · {s}近视示意", pinSub: "Pincushion · {s}远视示意",
+      sLight: "轻度", sMid: "中度", sHigh: "较强",
+      foot: "示意效果已放大，方便观察。实际感觉因度数、镜框及镜片设计而异。滑杆是示意设定，不是你的处方，也不能预测戴镜后的感受。不能代替注册医生。本站不提供诊断、处方、预约、购买或转介。",
+    },
+    en: {
+      cap: "Education illustration · not a vision test, refraction, or dispensing assessment.",
+      tabDist: "Straight-line distortion", tabAdv: "Astigmatism & contact lenses", tabsLabel: "View",
+      pillL: "No lens (straight)", pillR: "Through the lens",
+      canvasLabel: "Comparison divider. Left: view without a lens. Right: view through the lens.",
+      how: ["Drag the white line left and right", "Red dashed = where the straight lines should be", "Look for grid lines bending outward or inward"],
+      labS: "Lens power (illustration)",
+      endMinusB: "Myopia glasses", endMinusS: "minus", endPlano: "Plano", endPlusB: "Hyperopia glasses", endPlusS: "plus",
+      guide: "Show straight-line guide (red dashed)",
+      tileBarrelB: "Barrel distortion", tileBarrelS: "Myopia glasses · lines bulge outward",
+      tilePinB: "Pincushion distortion", tilePinS: "Hyperopia glasses · lines curve inward",
+      planoTitle: "Plano", planoBody: "No lens power, so straight lines stay straight. Drag the slider left (myopia) or right (hyperopia).",
+      barrelTitle: "Barrel distortion", barrelBody: "Myopia (minus) lenses make things look smaller, and more so toward the edge of the lens, so straight lines bulge outward like a barrel.",
+      pinTitle: "Pincushion distortion", pinBody: "Hyperopia (plus) lenses make things look larger, and more so toward the edge of the lens, so straight lines curve inward and the corners stretch out like a pincushion.",
+      barrelSub: "Barrel · {s} myopia illustration", pinSub: "Pincushion · {s} hyperopia illustration",
+      sLight: "Mild", sMid: "Moderate", sHigh: "Stronger",
+      foot: "The effect is exaggerated so it is easy to see. What you actually notice depends on the power, the frame and the lens design. The slider is an illustration, not your prescription, and cannot predict how glasses will feel. This is not a substitute for a registered doctor. This site does not offer diagnosis, prescriptions, booking, purchase or referral.",
+    },
+    ja: {
+      cap: "教育用図示 · 視力検査、屈折検査、眼鏡合わせではありません。",
+      tabDist: "直線のゆがみ", tabAdv: "乱視とコンタクトレンズ", tabsLabel: "表示",
+      pillL: "レンズなし（直線）", pillR: "レンズ越し",
+      canvasLabel: "比較線の位置。左はレンズなし、右はレンズ越しの見え方です。",
+      how: ["白い線を左右にドラッグ", "赤い破線＝直線があるはずの位置", "格子の線が外や内に曲がっているか見る"],
+      labS: "レンズ度数（図示）",
+      endMinusB: "近視用の眼鏡", endMinusS: "マイナス", endPlano: "正視", endPlusB: "遠視用の眼鏡", endPlusS: "プラス",
+      guide: "直線の目安を表示（赤い破線）",
+      tileBarrelB: "樽型のゆがみ", tileBarrelS: "近視用の眼鏡 · 線が外にふくらむ",
+      tilePinB: "糸巻き型のゆがみ", tilePinS: "遠視用の眼鏡 · 線が内にへこむ",
+      planoTitle: "正視", planoBody: "レンズ度数がないので、直線はまっすぐのままです。スライダーを左（近視）または右（遠視）へ動かしてください。",
+      barrelTitle: "樽型のゆがみ", barrelBody: "近視（マイナス）のレンズは物を小さく見せ、レンズの縁ほど小さくなるため、直線が外にふくらんで樽のように見えます。",
+      pinTitle: "糸巻き型のゆがみ", pinBody: "遠視（プラス）のレンズは物を大きく見せ、レンズの縁ほど大きくなるため、直線が内にへこみ、四隅が引き伸ばされて糸巻きのように見えます。",
+      barrelSub: "Barrel · {s}の近視図示", pinSub: "Pincushion · {s}の遠視図示",
+      sLight: "弱", sMid: "中", sHigh: "強",
+      foot: "見やすいように効果を強調しています。実際の見え方は度数、フレーム、レンズ設計で異なります。スライダーは図示用の設定で、あなたの処方ではなく、眼鏡をかけたときの感覚を予測するものでもありません。登録医の代わりにはなりません。当サイトは診断、処方、予約、購入、紹介を行いません。",
+    },
+  };
+
+  const norm = (raw) => {
+    const v = (raw || "").trim();
+    if (v === "zh" || v === "zh-Hant" || v === "zh-hant") return "zh-Hant";
+    if (v === "zh-Hans" || v === "zh-hans" || v === "zh-CN" || v === "zh-cn") return "zh-Hans";
+    if (v === "ja" || v === "jp") return "ja";
+    if (v === "en") return "en";
+    return "zh-Hant";
+  };
+  const qs = new URLSearchParams(location.search);
+  const D = I18N_D[norm(qs.get("lang"))];
+
+  const VW = 960, VH = 540, SW = 1728, SH = 972, P = 120;
+  const $ = (id) => document.getElementById(id);
+  const mk = (w, h) => { const c = document.createElement("canvas"); c.width = w; c.height = h; return c; };
+
+  const src = mk(SW, SH);
+  (function build() {
+    const x = src.getContext("2d");
+    const g = x.createLinearGradient(0, 0, 0, SH);
+    g.addColorStop(0, "#7fbdf0"); g.addColorStop(0.6, "#d9eeff"); g.addColorStop(0.6, "#a6d28f"); g.addColorStop(1, "#68a85f");
+    x.fillStyle = g; x.fillRect(0, 0, SW, SH);
+    x.fillStyle = "#ffd66b"; x.beginPath(); x.arc(SW * 0.68, SH * 0.3, 78, 0, Math.PI * 2); x.fill();
+    x.fillStyle = "#86b878"; x.beginPath(); x.moveTo(0, SH * 0.62);
+    x.quadraticCurveTo(SW * 0.2, SH * 0.42, SW * 0.45, SH * 0.62); x.quadraticCurveTo(SW * 0.7, SH * 0.5, SW, SH * 0.62);
+    x.lineTo(SW, SH); x.lineTo(0, SH); x.fill();
+    x.fillStyle = "#4f8f4a"; x.fillRect(0, SH * 0.82, SW, SH * 0.18);
+    const cx = SW / 2, cy = SH / 2;
+    x.lineCap = "butt";
+    const lines = (w, col) => {
+      x.lineWidth = w; x.strokeStyle = col; x.beginPath();
+      for (let k = -Math.ceil(cx / P); k <= Math.ceil(cx / P); k++) { x.moveTo(cx + k * P, 0); x.lineTo(cx + k * P, SH); }
+      for (let k = -Math.ceil(cy / P); k <= Math.ceil(cy / P); k++) { x.moveTo(0, cy + k * P); x.lineTo(SW, cy + k * P); }
+      x.stroke();
+    };
+    lines(13, "#2b3340"); lines(6, "#f6f2ea");
+  })();
+  const sd = src.getContext("2d").getImageData(0, 0, SW, SH).data;
+
+  // s in [-1, 1]; negative = minus lens (barrel), positive = plus lens (pincushion).
+  const params = (s) => ({ m: s >= 0 ? 1 + 0.08 * s : 1 + 0.10 * s, pinch: s >= 0 ? 0.20 * s : 0.32 * s });
+
+  function distort(ctx, w, h, s) {
+    const { m, pinch } = params(s);
+    const k = w / VW;
+    const out = ctx.createImageData(w, h), od = out.data;
+    const maxX = SW - 1.001, maxY = SH - 1.001, hw = w / 2, hh = h / 2;
+    for (let y = 0; y < h; y++) {
+      const ny = (y - hh) / hh;
+      for (let x = 0; x < w; x++) {
+        const nx = (x - hw) / hw;
+        let radial = 1 - pinch * (nx * nx + ny * ny);
+        if (radial < 0.45) radial = 0.45; else if (radial > 2) radial = 2;
+        let sx = SW / 2 + ((x - hw) / k) * radial / m;
+        let sy = SH / 2 + ((y - hh) / k) * radial / m;
+        if (sx < 0) sx = 0; else if (sx > maxX) sx = maxX;
+        if (sy < 0) sy = 0; else if (sy > maxY) sy = maxY;
+        const x0 = sx | 0, y0 = sy | 0, fx = sx - x0, fy = sy - y0;
+        const i = (y0 * SW + x0) * 4, j = i + SW * 4;
+        const a = (1 - fx) * (1 - fy), b = fx * (1 - fy), c = (1 - fx) * fy, d = fx * fy;
+        const o = (y * w + x) * 4;
+        od[o] = sd[i] * a + sd[i + 4] * b + sd[j] * c + sd[j + 4] * d;
+        od[o + 1] = sd[i + 1] * a + sd[i + 5] * b + sd[j + 1] * c + sd[j + 5] * d;
+        od[o + 2] = sd[i + 2] * a + sd[i + 6] * b + sd[j + 2] * c + sd[j + 6] * d;
+        od[o + 3] = 255;
+      }
+    }
+    ctx.putImageData(out, 0, 0);
+  }
+
+  function drawGuides(ctx, w, h, s, fromX) {
+    const { m } = params(s);
+    const k = w / VW, step = P * m * k;
+    ctx.save();
+    ctx.beginPath(); ctx.rect(fromX, 0, w - fromX, h); ctx.clip();
+    ctx.setLineDash([10 * k, 8 * k]); ctx.lineWidth = 2.5 * k; ctx.strokeStyle = "#ff5d7a"; ctx.beginPath();
+    for (let i = -12; i <= 12; i++) { ctx.moveTo(w / 2 + i * step, 0); ctx.lineTo(w / 2 + i * step, h); }
+    for (let i = -8; i <= 8; i++) { ctx.moveTo(0, h / 2 + i * step); ctx.lineTo(w, h / 2 + i * step); }
+    ctx.stroke(); ctx.restore();
+  }
+
+  const cv = $("dcv"), cx = cv.getContext("2d");
+  const lensCv = mk(VW, VH), lensCx = lensCv.getContext("2d");
+  const st = { s: -0.7, div: 0.5, guide: true };
+
+  const ICON = {
+    barrel: '<svg viewBox="0 0 36 36" fill="none" stroke="#e7b15a" stroke-width="2.4" stroke-linecap="round"><path d="M9 6Q3 18 9 30M18 5Q18 18 18 31M27 6Q33 18 27 30M7 10Q18 6 29 10M7 18H29M7 26Q18 30 29 26"/></svg>',
+    pin: '<svg viewBox="0 0 36 36" fill="none" stroke="#7eb6e6" stroke-width="2.4" stroke-linecap="round"><path d="M7 6Q13 18 7 30M18 5V31M29 6Q23 18 29 30M7 7Q18 13 29 7M7 18H29M7 29Q18 23 29 29"/></svg>',
+    plano: '<svg viewBox="0 0 36 36" fill="none" stroke="#d7dde6" stroke-width="2.4" stroke-linecap="round"><path d="M8 6V30M18 6V30M28 6V30M6 9H30M6 18H30M6 27H30"/></svg>',
+  };
+
+  function strengthWord() {
+    const a = Math.abs(st.s);
+    return a < 0.34 ? D.sLight : a < 0.67 ? D.sMid : D.sHigh;
+  }
+
+  function verdict() {
+    const a = Math.abs(st.s), v = $("verdict");
+    let kind = "plano", title = D.planoTitle, sub = "", body = D.planoBody;
+    if (a >= 0.05) {
+      if (st.s < 0) { kind = "barrel"; title = D.barrelTitle; sub = D.barrelSub.replace("{s}", strengthWord()); body = D.barrelBody; }
+      else { kind = "pin"; title = D.pinTitle; sub = D.pinSub.replace("{s}", strengthWord()); body = D.pinBody; }
+    }
+    v.dataset.kind = kind;
+    $("dBadge").innerHTML = ICON[kind];
+    const h = $("vTitle");
+    h.textContent = title;
+    if (sub) { const sm = document.createElement("small"); sm.textContent = sub; h.appendChild(sm); }
+    $("vBody").textContent = body;
+    document.querySelectorAll(".d-tile").forEach((t) => t.setAttribute("aria-pressed", String(t.dataset.t === kind)));
+  }
+
+  function arrow(x, y, dir) {
+    cx.beginPath();
+    cx.moveTo(x + dir * 5, y - 8); cx.lineTo(x + dir * 5, y + 8); cx.lineTo(x + dir * 15, y);
+    cx.closePath(); cx.fillStyle = "#1a1206"; cx.fill();
+  }
+
+  function draw() {
+    distort(lensCx, VW, VH, st.s);
+    cx.setTransform(1, 0, 0, 1, 0, 0);
+    const dx = Math.round(st.div * VW);
+    cx.drawImage(src, SW / 2 - VW / 2, SH / 2 - VH / 2, VW, VH, 0, 0, VW, VH);
+    cx.save(); cx.beginPath(); cx.rect(dx, 0, VW - dx, VH); cx.clip(); cx.drawImage(lensCv, 0, 0); cx.restore();
+    if (st.guide && Math.abs(st.s) >= 0.05) drawGuides(cx, VW, VH, st.s, dx);
+    cx.fillStyle = "#fff"; cx.fillRect(dx - 2, 0, 4, VH);
+    cx.beginPath(); cx.arc(dx, VH / 2, 26, 0, Math.PI * 2); cx.fillStyle = "#fff"; cx.fill();
+    cx.lineWidth = 4; cx.strokeStyle = "#1a1206"; cx.stroke();
+    arrow(dx, VH / 2, -1); arrow(dx, VH / 2, 1);
+    cv.setAttribute("aria-valuenow", String(Math.round(st.div * 100)));
+    verdict();
+  }
+
+  let queued = false;
+  const render = () => { if (queued) return; queued = true; requestAnimationFrame(() => { queued = false; draw(); }); };
+
+  function tile(id, s) {
+    const c = $(id), x = c.getContext("2d");
+    distort(x, c.width, c.height, s);
+    drawGuides(x, c.width, c.height, s, 0);
+  }
+
+  function setText() {
+    $("tabDist").textContent = D.tabDist;
+    $("tabAdv").textContent = D.tabAdv;
+    $("tabs").setAttribute("aria-label", D.tabsLabel);
+    $("dCap").textContent = D.cap;
+    $("pillL").textContent = D.pillL;
+    $("pillR").textContent = D.pillR;
+    cv.setAttribute("aria-label", D.canvasLabel);
+    const how = $("dHow");
+    how.replaceChildren();
+    D.how.forEach((t, i) => {
+      const li = document.createElement("li");
+      const b = document.createElement("b");
+      b.textContent = "①②③"[i] + " ";
+      li.appendChild(b);
+      if (i === 1) { const g = document.createElement("span"); g.className = "gd"; li.appendChild(g); }
+      li.appendChild(document.createTextNode(t));
+      how.appendChild(li);
+    });
+    $("lab-s").textContent = D.labS;
+    $("endMinusB").textContent = D.endMinusB; $("endMinusS").textContent = D.endMinusS;
+    $("endPlano").textContent = D.endPlano;
+    $("endPlusB").textContent = D.endPlusB; $("endPlusS").textContent = D.endPlusS;
+    $("lab-guide").textContent = D.guide;
+    $("tBarrelB").textContent = D.tileBarrelB; $("tBarrelS").textContent = D.tileBarrelS;
+    $("tPinB").textContent = D.tilePinB; $("tPinS").textContent = D.tilePinS;
+    $("dFoot").textContent = D.foot;
+  }
+
+  $("rng-s").addEventListener("input", (e) => { st.s = Number(e.target.value) / 100; render(); });
+  $("chk-guide").addEventListener("change", (e) => { st.guide = e.target.checked; render(); });
+  document.querySelectorAll(".d-tile").forEach((t) => t.addEventListener("click", () => {
+    st.s = t.dataset.t === "barrel" ? -0.85 : 0.85; $("rng-s").value = String(Math.round(st.s * 100)); render();
+  }));
+
+  let drag = false;
+  const move = (e) => { const r = cv.getBoundingClientRect(); st.div = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)); render(); };
+  cv.addEventListener("pointerdown", (e) => { drag = true; cv.setPointerCapture(e.pointerId); move(e); });
+  cv.addEventListener("pointermove", (e) => { if (drag) move(e); });
+  cv.addEventListener("pointerup", () => { drag = false; });
+  cv.addEventListener("pointercancel", () => { drag = false; });
+  cv.addEventListener("keydown", (e) => {
+    const step = e.shiftKey ? 0.1 : 0.03;
+    if (e.key === "ArrowLeft" || e.key === "ArrowDown") st.div = Math.max(0, st.div - step);
+    else if (e.key === "ArrowRight" || e.key === "ArrowUp") st.div = Math.min(1, st.div + step);
+    else if (e.key === "Home") st.div = 0;
+    else if (e.key === "End") st.div = 1;
+    else return;
+    e.preventDefault(); render();
+  });
+
+  const tabD = $("tabDist"), tabA = $("tabAdv"), viewD = $("viewDist"), viewA = $("viewAdv");
+  function showTab(which, focus) {
+    const adv = which === "adv";
+    viewD.hidden = adv; viewA.hidden = !adv;
+    tabD.setAttribute("aria-selected", String(!adv)); tabA.setAttribute("aria-selected", String(adv));
+    tabD.tabIndex = adv ? -1 : 0; tabA.tabIndex = adv ? 0 : -1;
+    if (focus) (adv ? tabA : tabD).focus();
+  }
+  tabD.addEventListener("click", () => showTab("dist"));
+  tabA.addEventListener("click", () => showTab("adv"));
+  $("tabs").addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft" || e.key === "Home" || e.key === "End") {
+      e.preventDefault();
+      const toAdv = e.key === "End" || (e.key !== "Home" && tabA.getAttribute("aria-selected") !== "true");
+      showTab(toAdv ? "adv" : "dist", true);
+    }
+  });
+
+  setText();
+  tile("tBarrel", -0.85); tile("tPin", 0.85);
+  showTab(qs.get("view") === "adv" ? "adv" : "dist");
+  draw();
 })();
   </script>
 </body>
