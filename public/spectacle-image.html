@@ -656,15 +656,11 @@
         paintZone(sv, inset);
       } else {
         const aL = LVL[S.add];
-        const sh = [0, 0.045, 0.09, 0.15][aL];
-        const addMag = o.mag * [1, 1.04, 1.09, 1.15][aL];
         const peri = [0, 2, 3, 3][aL];
-        const lookDown = 190;
-        const around = makePlate(photoOf(Math.min(3, peri)), o.mag, o.pinch, 0, 0, sh, 0, 70, 0);
+        const swim = [0, 0.02, 0.04, 0.06][aL];
+        const around = makePlate(photoOf(Math.min(3, peri)), o.mag, o.pinch, 0, 0, swim, 0, 0, 0);
         paintZone(around, inset);
-        const nearScene = smear(photoOf(0), o.ang, o.cylPx);
-        const nearPlate = makePlate(nearScene, addMag, o.pinch, 0, 0, 0, sh, 0, lookDown);
-        paintSoft(nearPlate, inset, maskCorridor);
+        paintSoft(sv, inset, maskCorridor);
         paintSoft(sv, inset, maskDistance);
       }
 
