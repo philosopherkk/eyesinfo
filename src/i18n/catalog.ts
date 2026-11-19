@@ -48,8 +48,8 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     },
     "spectacle-image": {
       title: "鏡片所見畫面示意",
-      blurb: "比較遠視、近視、散光眼鏡，以及隱形眼鏡（不是檢查）",
-      canto: "同一幅山脊，不同鏡片",
+      blurb: "用格線看近視眼鏡的桶狀變形與遠視眼鏡的枕狀變形（不是檢查）",
+      canto: "拖一拖，睇直線點彎",
     },
   },
   "zh-Hans": {
@@ -93,8 +93,8 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     },
     "spectacle-image": {
       title: "镜片所见画面示意",
-      blurb: "比较远视、近视、散光眼镜，以及隐形眼镜（不是检查）",
-      canto: "同一幅山脊，不同镜片",
+      blurb: "用格线看近视眼镜的桶状变形与远视眼镜的枕状变形（不是检查）",
+      canto: "拖一拖，看直线怎样弯",
     },
   },
   en: {
@@ -138,8 +138,8 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     },
     "spectacle-image": {
       title: "What the lens shows",
-      blurb: "Hyperopic, myopic and astigmatism-corrected glasses, plus contact lenses (not a test)",
-      canto: "One ridge, different lenses",
+      blurb: "See barrel distortion with myopia glasses and pincushion distortion with hyperopia glasses on a grid (not a test)",
+      canto: "Drag · watch straight lines bend",
     },
   },
   ja: {
@@ -183,8 +183,8 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     },
     "spectacle-image": {
       title: "レンズの見え方図示",
-      blurb: "遠視・近視・乱視矯正の眼鏡と、コンタクトレンズの比較（検査ではない）",
-      canto: "同じ山稜、違うレンズ",
+      blurb: "格子で、近視眼鏡の樽型ゆがみと遠視眼鏡の糸巻き型ゆがみを見る（検査ではない）",
+      canto: "動かして直線の曲がりを見る",
     },
   },
 };

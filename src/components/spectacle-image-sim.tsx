@@ -71,7 +71,9 @@ export function SpectacleImageSim({ showChrome = true }: SpectacleImageSimProps)
     function watch() {
       try {
         const ready = fit();
-        const sim = el.contentDocument?.getElementById("sim");
+        const frame = iframeRef.current;
+        if (!frame) return false;
+        const sim = frame.contentDocument?.getElementById("sim");
         if (sim && !obs && typeof ResizeObserver !== "undefined") {
           obs = new ResizeObserver(() => fit());
           obs.observe(sim);
