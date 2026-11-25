@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/tissue/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;700&family=Noto+Sans+JP:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f3f0e9" />
+    <meta name="robots" content="noindex" />
+    <meta name="description" content="角膜、晶狀體、黃斑、視神經的組織切面。教育示意，不是檢查。" />
+    <title>組織工具</title>
+    <script type="module" crossorigin src="/tissue/assets/index-CnB4vt_a.js"></script>
+    <link rel="stylesheet" crossorigin href="/tissue/assets/index-QHvvucZS.css">
+  </head>
+  <body>
+    <div id="chrome">
+      <div id="langs" role="group" aria-label="語言">
+        <button type="button" data-locale="zh-Hant" aria-pressed="true">繁</button>
+        <button type="button" data-locale="zh-Hans" aria-pressed="false">简</button>
+        <button type="button" data-locale="en" aria-pressed="false">EN</button>
+        <button type="button" data-locale="ja" aria-pressed="false">日</button>
+      </div>
+      <a id="back" href="#/tools" hidden>全部工具</a>
+    </div>
+    <main id="tools">
+      <header class="tools-head">
+        <p class="kicker">人眼 · 組織尺度</p>
+        <h1>組織工具</h1>
+        <p class="deck">四個活的切面，畫法如同博物館標本。細胞畫得較大，層次才讀得見。</p>
+      </header>
+      <nav class="tool-list" aria-label="組織切面">
+        <a class="tool-card" href="#/cornea" data-tool="cornea">
+          <span class="index">01</span>
+          <h2>角膜</h2>
+          <p>上皮、板層，以及內皮細胞鑲嵌。</p>
+          <span class="stripes" aria-hidden="true">
+            <i style="--swatch: #f6cbb8"></i>
+            <i style="--swatch: #f4f0ea"></i>
+            <i style="--swatch: #f3e4d4"></i>
+            <i style="--swatch: #e4d0ba"></i>
+            <i style="--swatch: #d5e3ea"></i>
+            <i style="--swatch: #e7b7c8"></i>
+          </span>
+        </a>
+        <a class="tool-card" href="#/lens" data-tool="lens">
+          <span class="index">02</span>
+          <h2>晶狀體</h2>
+          <p>囊膜、核弓，以及纖維殼層。</p>
+          <span class="stripes" aria-hidden="true">
+            <i style="--swatch: #f6f1e6"></i>
+            <i style="--swatch: #e7b09a"></i>
+            <i style="--swatch: #f4e6d0"></i>
+            <i style="--swatch: #d0893c"></i>
+            <i style="--swatch: #5c4a78"></i>
+            <i style="--swatch: #efe6d4"></i>
+          </span>
+        </a>
+        <a class="tool-card" href="#/macula" data-tool="macula">
+          <span class="index">03</span>
+          <h2>黃斑</h2>
+          <p>中心凹、視錐，以及脈絡膜。</p>
+          <span class="stripes" aria-hidden="true">
+            <i style="--swatch: #f6eee6"></i>
+            <i style="--swatch: #e39a84"></i>
+            <i style="--swatch: #e0b43e"></i>
+            <i style="--swatch: #3c4c84"></i>
+            <i style="--swatch: #e36b4c"></i>
+            <i style="--swatch: #4a2c22"></i>
+            <i style="--swatch: #c4393e"></i>
+          </span>
+        </a>
+        <a class="tool-card" href="#/nerve" data-tool="nerve">
+          <span class="index">04</span>
+          <h2>視神經</h2>
+          <p>視盤、篩板，以及髓鞘。</p>
+          <span class="stripes" aria-hidden="true">
+            <i style="--swatch: #f6eee6"></i>
+            <i style="--swatch: #e39a84"></i>
+            <i style="--swatch: #e36b4c"></i>
+            <i style="--swatch: #c9c2b6"></i>
+            <i style="--swatch: #f7f4ee"></i>
+            <i style="--swatch: #d64545"></i>
+          </span>
+        </a>
+      </nav>
+    </main>
+    <header id="plate" hidden>
+      <p class="kicker"></p>
+      <h1></h1>
+      <p class="deck"></p>
+    </header>
+    <ul id="key" hidden></ul>
+    <canvas id="scene" hidden></canvas>
+    <p id="fallback" hidden>這個切面需要 WebGL 才能顯示組織。</p>
+  </body>
+</html>

@@ -121,6 +121,11 @@ const STATIC_SOURCES = {
     "src/components/spectacle-image-sim.tsx",
     "public/spectacle-image.html",
   ],
+  "/tools/tissue-sections": [
+    "src/routes/tools.tissue-sections.tsx",
+    "src/components/tissue-sections-sim.tsx",
+    "public/tissue/index.html",
+  ],
   "/tools/warm": ["src/components/care-tools.tsx"],
   "/tools/visit": ["src/components/ask-visit-rx.tsx"],
   "/tools/outdoor": ["src/components/care-tools.tsx"],

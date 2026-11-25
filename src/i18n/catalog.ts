@@ -51,6 +51,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
       blurb: "用格線看近視眼鏡的桶狀變形與遠視眼鏡的枕狀變形（不是檢查）",
       canto: "拖一拖，睇直線點彎",
     },
+    "tissue-sections": {
+      title: "組織切面",
+      blurb: "角膜、晶狀體、黃斑、視神經頭的活體切面。細胞畫大了，層次才讀得見。教育示意，不是檢查。",
+      canto: "細胞畫大了先讀到",
+    },
   },
   "zh-Hans": {
     amsler: { title: "阿姆斯勒方格", blurb: "教育工具 · 自我察觉中央视力", canto: "遮一眼望中央" },
@@ -95,6 +100,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
       title: "镜片所见画面示意",
       blurb: "用格线看近视眼镜的桶状变形与远视眼镜的枕状变形（不是检查）",
       canto: "拖一拖，看直线怎样弯",
+    },
+    "tissue-sections": {
+      title: "组织切面",
+      blurb: "角膜、晶状体、黄斑、视神经头的活体切面。细胞画大了，层次才读得见。教育示意，不是检查。",
+      canto: "细胞画大了才读得到",
     },
   },
   en: {
@@ -141,6 +151,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
       blurb: "See barrel distortion with myopia glasses and pincushion distortion with hyperopia glasses on a grid (not a test)",
       canto: "Drag · watch straight lines bend",
     },
+    "tissue-sections": {
+      title: "Tissue sections",
+      blurb: "Living sections of the cornea, lens, macula and optic nerve head. Cells are drawn larger so the layers can be read. Education only, not an examination.",
+      canto: "Cells enlarged so the layers read",
+    },
   },
   ja: {
     amsler: { title: "アムスラーチャート", blurb: "教育ツール · 中心視力の自己観察", canto: "片眼隠し中央を見る" },
@@ -185,6 +200,11 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
       title: "レンズの見え方図示",
       blurb: "格子で、近視眼鏡の樽型ゆがみと遠視眼鏡の糸巻き型ゆがみを見る（検査ではない）",
       canto: "動かして直線の曲がりを見る",
+    },
+    "tissue-sections": {
+      title: "組織断面",
+      blurb: "角膜・水晶体・黄斑・視神経乳頭の生体断面。細胞は大きく描いてあり、層が読める。教育用の示意であり、検査ではない。",
+      canto: "細胞を大きく描いて層を読む",
     },
   },
 };

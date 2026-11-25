@@ -263,6 +263,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/tools/spectacle-image"/>
   </url>
   <url>
+    <loc>https://www.eyesinfo.org/tools/tissue-sections</loc>
+    <lastmod>2026-09-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/tissue-sections"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.eyesinfo.org/tools/tissue-sections?lang=zh-Hans"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.eyesinfo.org/tools/tissue-sections?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.eyesinfo.org/tools/tissue-sections?lang=ja"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.eyesinfo.org/tools/tissue-sections"/>
+  </url>
+  <url>
     <loc>https://www.eyesinfo.org/tools/warm</loc>
     <lastmod>2026-09-07</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://www.eyesinfo.org/tools/warm"/>
