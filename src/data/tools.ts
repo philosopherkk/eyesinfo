@@ -17,7 +17,8 @@ export type ToolId =
   | "palStairs"
   | "shallow-ac"
   | "tear-film"
-  | "spectacle-image";
+  | "spectacle-image"
+  | "tissue-sections";
 
 export type ToolDef = {
   id: ToolId;
@@ -40,6 +41,13 @@ export const TOOLS: ToolDef[] = [
     home: true,
   },
   { id: "map", title: "眼圖", blurb: "撳部位打開相關專題", canto: "撳眼圖就明", href: "/tools/map", home: true },
+  {
+    id: "tissue-sections",
+    title: "組織切面",
+    blurb: "角膜、晶狀體、黃斑、視神經頭的活體切面。細胞畫大了，層次才讀得見。教育示意，不是檢查。",
+    canto: "細胞畫大了先讀到",
+    href: "/tools/tissue-sections",
+  },
   {
     id: "procedures",
     title: "手術教學示意",

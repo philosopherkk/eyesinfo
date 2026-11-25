@@ -36,6 +36,7 @@ const REQUIRED_TOOL_PATHS = [
   "/tools/shallow-ac",
   "/tools/tear-film",
   "/tools/spectacle-image",
+  "/tools/tissue-sections",
 ];
 
 test("public/sitemap.xml and public/robots.txt exist", () => {
@@ -153,7 +154,7 @@ test("sitemap.xml is a valid urlset covering edu tools including outdoor", () =>
     );
   }
   const urlCount = (xml.match(/<url>/g) || []).length;
-  assert.equal(urlCount, 105, `sitemap expected 105 canonical urls, got ${urlCount}`);
+  assert.equal(urlCount, 106, `sitemap expected 106 canonical urls, got ${urlCount}`);
 
   const lastmods = [...xml.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((m) => m[1]);
   assert.equal(lastmods.length, urlCount);

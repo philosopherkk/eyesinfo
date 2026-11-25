@@ -41,6 +41,7 @@ import { Route as ToolsProceduresRouteImport } from './routes/tools.procedures'
 import { Route as ToolsShallowAcRouteImport } from './routes/tools.shallow-ac'
 import { Route as ToolsSpectacleImageRouteImport } from './routes/tools.spectacle-image'
 import { Route as ToolsTearFilmRouteImport } from './routes/tools.tear-film'
+import { Route as ToolsTissueSectionsRouteImport } from './routes/tools.tissue-sections'
 import { Route as ZhCNIndexRouteImport } from './routes/zh-CN.index'
 import { Route as ZhCNSplatRouteImport } from './routes/zh-CN.$'
 import { Route as ZhHansIndexRouteImport } from './routes/zh-Hans.index'
@@ -206,6 +207,11 @@ const ToolsTearFilmRoute = ToolsTearFilmRouteImport.update({
   path: '/tear-film',
   getParentRoute: () => ToolsRoute,
 } as any)
+const ToolsTissueSectionsRoute = ToolsTissueSectionsRouteImport.update({
+  id: '/tissue-sections',
+  path: '/tissue-sections',
+  getParentRoute: () => ToolsRoute,
+} as any)
 const ZhCNIndexRoute = ZhCNIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -257,6 +263,7 @@ export interface FileRoutesByFullPath {
   '/tools/shallow-ac': typeof ToolsShallowAcRoute
   '/tools/spectacle-image': typeof ToolsSpectacleImageRoute
   '/tools/tear-film': typeof ToolsTearFilmRoute
+  '/tools/tissue-sections': typeof ToolsTissueSectionsRoute
   '/zh-CN/$': typeof ZhCNSplatRoute
   '/zh-Hans/$': typeof ZhHansSplatRoute
   '/en/': typeof EnIndexRoute
@@ -290,6 +297,7 @@ export interface FileRoutesByTo {
   '/tools/shallow-ac': typeof ToolsShallowAcRoute
   '/tools/spectacle-image': typeof ToolsSpectacleImageRoute
   '/tools/tear-film': typeof ToolsTearFilmRoute
+  '/tools/tissue-sections': typeof ToolsTissueSectionsRoute
   '/zh-CN/$': typeof ZhCNSplatRoute
   '/zh-Hans/$': typeof ZhHansSplatRoute
   '/en': typeof EnIndexRoute
@@ -329,6 +337,7 @@ export interface FileRoutesById {
   '/tools/shallow-ac': typeof ToolsShallowAcRoute
   '/tools/spectacle-image': typeof ToolsSpectacleImageRoute
   '/tools/tear-film': typeof ToolsTearFilmRoute
+  '/tools/tissue-sections': typeof ToolsTissueSectionsRoute
   '/zh-CN/$': typeof ZhCNSplatRoute
   '/zh-Hans/$': typeof ZhHansSplatRoute
   '/en/': typeof EnIndexRoute
@@ -369,6 +378,7 @@ export interface FileRouteTypes {
     | '/tools/shallow-ac'
     | '/tools/spectacle-image'
     | '/tools/tear-film'
+    | '/tools/tissue-sections'
     | '/zh-CN/$'
     | '/zh-Hans/$'
     | '/en/'
@@ -402,6 +412,7 @@ export interface FileRouteTypes {
     | '/tools/shallow-ac'
     | '/tools/spectacle-image'
     | '/tools/tear-film'
+    | '/tools/tissue-sections'
     | '/zh-CN/$'
     | '/zh-Hans/$'
     | '/en'
@@ -440,6 +451,7 @@ export interface FileRouteTypes {
     | '/tools/shallow-ac'
     | '/tools/spectacle-image'
     | '/tools/tear-film'
+    | '/tools/tissue-sections'
     | '/zh-CN/$'
     | '/zh-Hans/$'
     | '/en/'
@@ -699,6 +711,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsTearFilmRouteImport
       parentRoute: typeof ToolsRoute
     }
+    '/tools/tissue-sections': {
+      id: '/tools/tissue-sections'
+      path: '/tissue-sections'
+      fullPath: '/tools/tissue-sections'
+      preLoaderRoute: typeof ToolsTissueSectionsRouteImport
+      parentRoute: typeof ToolsRoute
+    }
     '/zh-CN/': {
       id: '/zh-CN/'
       path: '/'
@@ -761,6 +780,7 @@ interface ToolsRouteChildren {
   ToolsShallowAcRoute: typeof ToolsShallowAcRoute
   ToolsSpectacleImageRoute: typeof ToolsSpectacleImageRoute
   ToolsTearFilmRoute: typeof ToolsTearFilmRoute
+  ToolsTissueSectionsRoute: typeof ToolsTissueSectionsRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
 }
 
@@ -771,6 +791,7 @@ const ToolsRouteChildren: ToolsRouteChildren = {
   ToolsShallowAcRoute: ToolsShallowAcRoute,
   ToolsSpectacleImageRoute: ToolsSpectacleImageRoute,
   ToolsTearFilmRoute: ToolsTearFilmRoute,
+  ToolsTissueSectionsRoute: ToolsTissueSectionsRoute,
   ToolsIndexRoute: ToolsIndexRoute,
 }
 

@@ -511,6 +511,11 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
     en: "A window-grid illustration of barrel distortion with myopia glasses and pincushion distortion with hyperopia glasses; drag the divider to compare with and without a lens. Astigmatism and contact-lens comparisons are on a second tab. Sliders are an illustration, not a prescription (education tool, not a test).",
     ja: "窓の格子で、近視眼鏡の樽型ゆがみと遠視眼鏡の糸巻き型ゆがみを図示します。白い線を動かしてレンズの有無を比べられます。乱視とコンタクトレンズの比較は別タブです。スライダーは図示であり処方ではありません（検査ではありません）。",
   },
+  "/tools/tissue-sections": {
+    zh: "角膜、晶狀體、黃斑與視神經頭的活體切面教學。細胞畫大了，顏色與厚度都誇大，層次才讀得見（教育工具，不是檢查或診斷）。",
+    en: "Teaching sections of the cornea, lens, macula and optic nerve head. Cells, colours and thicknesses are exaggerated so the layers can be read (education tool, not an examination or a diagnosis).",
+    ja: "角膜・水晶体・黄斑・視神経乳頭の生体断面。細胞・色・厚みは層が読めるよう誇張しています（教育用であり、検査でも診断でもありません）。",
+  },
   "/tools/tear-film": {
     zh: "淚膜三層（脂質、水液、黏液）與蒸發型／水液不足／黏液不足乾眼機制示意；指標只用相對等級，不是個人檢查。本頁屬非急症機制教育，不能代替面診。",
     en: "Interactive illustration of the three tear-film layers and lipid / aqueous / mucin deficiency mechanisms. Relative teaching labels only—not a personal test. Non-urgent mechanism education; not a substitute for a registered doctor.",

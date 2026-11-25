@@ -116,7 +116,8 @@ function Panel({ id }: { id: ToolId }) {
     case "shallow-ac":
     case "tear-film":
     case "spectacle-image":
-      // Dedicated file routes (`tools.pal-stairs`, `tools.shallow-ac`, `tools.tear-film`, `tools.spectacle-image`, …) own these.
+    case "tissue-sections":
+      // Dedicated file routes (`tools.pal-stairs`, `tools.shallow-ac`, `tools.tear-film`, `tools.spectacle-image`, `tools.tissue-sections`, …) own these.
       return null;
     default: {
       const _exhaustive: never = id;
