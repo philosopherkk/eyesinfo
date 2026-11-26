@@ -512,9 +512,9 @@ export const SEO_DESCRIPTIONS: Record<string, SeoDescription> = {
     ja: "窓の格子で、近視眼鏡の樽型ゆがみと遠視眼鏡の糸巻き型ゆがみを図示します。白い線を動かしてレンズの有無を比べられます。乱視とコンタクトレンズの比較は別タブです。スライダーは図示であり処方ではありません（検査ではありません）。",
   },
   "/tools/tissue-sections": {
-    zh: "角膜、晶狀體、黃斑與視神經頭的活體切面教學。細胞畫大了，顏色與厚度都誇大，層次才讀得見（教育工具，不是檢查或診斷）。",
-    en: "Teaching sections of the cornea, lens, macula and optic nerve head. Cells, colours and thicknesses are exaggerated so the layers can be read (education tool, not an examination or a diagnosis).",
-    ja: "角膜・水晶体・黄斑・視神経乳頭の生体断面。細胞・色・厚みは層が読めるよう誇張しています（教育用であり、検査でも診断でもありません）。",
+    zh: "角膜、晶狀體、黃斑與視神經頭的活體切面，以及水腫、瘢痕、白內障、黃斑前膜、全層裂孔、濕性與乾性老年黃斑退化、青光眼凹陷。細胞、顏色與厚度都誇大（教育工具，不是檢查或診斷）。",
+    en: "Teaching sections of the cornea, lens, macula and optic nerve head, plus edema, scar, cataract, epiretinal membrane, full-thickness macular hole, wet and dry AMD, and glaucomatous cupping. Cells, colours and thicknesses are exaggerated (education tool, not an examination or a diagnosis).",
+    ja: "角膜・水晶体・黄斑・視神経乳頭の生体断面に、浮腫、瘢痕、白内障、網膜前膜、全層円孔、滲出型・萎縮型加齢黄斑変性、緑内障性陥凹を加えた教育用断面。細胞・色・厚みは誇張しています（検査でも診断でもありません）。",
   },
   "/tools/tear-film": {
     zh: "淚膜三層（脂質、水液、黏液）與蒸發型／水液不足／黏液不足乾眼機制示意；指標只用相對等級，不是個人檢查。本頁屬非急症機制教育，不能代替面診。",

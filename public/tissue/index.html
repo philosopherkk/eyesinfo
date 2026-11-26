@@ -13,8 +13,8 @@
     <meta name="theme-color" content="#f3f0e9" />
     <meta name="description" content="角膜、晶狀體、黃斑、視神經的組織切面。教育示意，不是檢查。" />
     <title>組織工具</title>
-    <script type="module" crossorigin src="/tissue/assets/index-DLtQrnee.js"></script>
-    <link rel="stylesheet" crossorigin href="/tissue/assets/index-QHvvucZS.css">
+    <script type="module" crossorigin src="/tissue/assets/index-BQtfz0Gy.js"></script>
+    <link rel="stylesheet" crossorigin href="/tissue/assets/index-CM_NcnRZ.css">
   </head>
   <body>
     <div id="chrome">
@@ -30,10 +30,11 @@
       <header class="tools-head">
         <p class="kicker">人眼 · 組織尺度</p>
         <h1>組織工具</h1>
-        <p class="deck">四個活的切面，畫法如同博物館標本。細胞畫得較大，層次才讀得見。</p>
+        <p class="deck">四個活的切面。點開之後可以改看病變。細胞畫得較大，層次才讀得見。教育示意，不是檢查。</p>
       </header>
       <nav class="tool-list" aria-label="組織切面">
-        <a class="tool-card" href="#/cornea" data-tool="cornea">
+        <article class="tool-card" data-tool="cornea">
+          <a class="tool-open" href="#/cornea">
           <span class="index">01</span>
           <h2>角膜</h2>
           <p>上皮、板層，以及內皮細胞鑲嵌。</p>
@@ -45,8 +46,11 @@
             <i style="--swatch: #d5e3ea"></i>
             <i style="--swatch: #e7b7c8"></i>
           </span>
-        </a>
-        <a class="tool-card" href="#/lens" data-tool="lens">
+          </a>
+          <div class="status-row"></div>
+        </article>
+        <article class="tool-card" data-tool="lens">
+          <a class="tool-open" href="#/lens">
           <span class="index">02</span>
           <h2>晶狀體</h2>
           <p>囊膜、核弓，以及纖維殼層。</p>
@@ -58,8 +62,11 @@
             <i style="--swatch: #5c4a78"></i>
             <i style="--swatch: #efe6d4"></i>
           </span>
-        </a>
-        <a class="tool-card" href="#/macula" data-tool="macula">
+          </a>
+          <div class="status-row"></div>
+        </article>
+        <article class="tool-card" data-tool="macula">
+          <a class="tool-open" href="#/macula">
           <span class="index">03</span>
           <h2>黃斑</h2>
           <p>中心凹、視錐，以及脈絡膜。</p>
@@ -72,8 +79,11 @@
             <i style="--swatch: #4a2c22"></i>
             <i style="--swatch: #c4393e"></i>
           </span>
-        </a>
-        <a class="tool-card" href="#/nerve" data-tool="nerve">
+          </a>
+          <div class="status-row"></div>
+        </article>
+        <article class="tool-card" data-tool="nerve">
+          <a class="tool-open" href="#/nerve">
           <span class="index">04</span>
           <h2>視神經</h2>
           <p>視盤、篩板，以及髓鞘。</p>
@@ -85,13 +95,16 @@
             <i style="--swatch: #f7f4ee"></i>
             <i style="--swatch: #d64545"></i>
           </span>
-        </a>
+          </a>
+          <div class="status-row"></div>
+        </article>
       </nav>
     </main>
     <header id="plate" hidden>
       <p class="kicker"></p>
       <h1></h1>
       <p class="deck"></p>
+      <nav id="states"></nav>
     </header>
     <ul id="key" hidden></ul>
     <canvas id="scene" hidden></canvas>
