@@ -53,7 +53,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     },
     "tissue-sections": {
       title: "組織切面",
-      blurb: "角膜、晶狀體、黃斑、視神經頭的活體切面。細胞畫大了，層次才讀得見。教育示意，不是檢查。",
+      blurb: "角膜、晶狀體、黃斑、視神經頭的活體切面，可改看水腫、瘢痕、白內障、黃斑前膜、全層裂孔、濕性與乾性老年黃斑退化、青光眼凹陷。教育示意，不是檢查。",
       canto: "細胞畫大了先讀到",
     },
   },
@@ -103,7 +103,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     },
     "tissue-sections": {
       title: "组织切面",
-      blurb: "角膜、晶状体、黄斑、视神经头的活体切面。细胞画大了，层次才读得见。教育示意，不是检查。",
+      blurb: "角膜、晶状体、黄斑、视神经头的活体切面，可改看水肿、瘢痕、白内障、黄斑前膜、全层裂孔、湿性与干性老年黄斑变性、青光眼凹陷。教育示意，不是检查。",
       canto: "细胞画大了才读得到",
     },
   },
@@ -153,7 +153,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     },
     "tissue-sections": {
       title: "Tissue sections",
-      blurb: "Living sections of the cornea, lens, macula and optic nerve head. Cells are drawn larger so the layers can be read. Education only, not an examination.",
+      blurb: "Living sections of the cornea, lens, macula and optic nerve head, including edema, scar, cataract, epiretinal membrane, full-thickness hole, wet and dry AMD, and glaucomatous cupping. Education only, not an examination.",
       canto: "Cells enlarged so the layers read",
     },
   },
@@ -203,7 +203,7 @@ export const TOOL_TEXT: L<Record<ToolId, { title: string; blurb: string; canto: 
     },
     "tissue-sections": {
       title: "組織断面",
-      blurb: "角膜・水晶体・黄斑・視神経乳頭の生体断面。細胞は大きく描いてあり、層が読める。教育用の示意であり、検査ではない。",
+      blurb: "角膜・水晶体・黄斑・視神経乳頭の生体断面。浮腫、瘢痕、白内障、網膜前膜、全層円孔、滲出型・萎縮型加齢黄斑変性、緑内障性陥凹に切り替えられます。教育用の示意であり、検査ではない。",
       canto: "細胞を大きく描いて層を読む",
     },
   },

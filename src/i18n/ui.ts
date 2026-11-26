@@ -367,7 +367,7 @@ const zhHant = {
     "示意不是視力檢查或配鏡評估，亦不能預測戴鏡或隱形眼鏡後的視力。滑桿是示意設定，不是你的處方。不能代替註冊醫生。本站不提供診斷、處方、預約、購買或轉介。",
   tissueSectionsSimTitle: "組織切面",
   tissueSectionsSimCaption:
-    "下方四個切面：角膜、晶狀體、黃斑、視神經頭。細胞畫大了，角膜弧度也加深了，層次才讀得見。語言跟隨網站。教育示意，不是檢查。",
+    "下方四個切面：角膜、晶狀體、黃斑、視神經頭。每張卡可改看水腫、瘢痕、白內障、黃斑前膜、全層裂孔、濕性與乾性老年黃斑退化、青光眼凹陷。細胞畫大了，教育示意，不是檢查。",
   tissueSectionsEduBadge: "組織示意 · 不是檢查",
   tissueSectionsEduCaveat: "顏色與厚度都誇大了，不是檢查或診斷。",
   tissueSectionsSimFooter:
@@ -1002,7 +1002,7 @@ const en: Record<Key, string> = {
     "An illustration is not a vision test or a dispensing assessment, and it cannot predict vision with glasses or contact lenses. The sliders are illustration settings, not your prescription. It cannot replace a registered doctor. This site does not diagnose, prescribe, book appointments, sell, or refer.",
   tissueSectionsSimTitle: "Tissue sections",
   tissueSectionsSimCaption:
-    "Four sections below: cornea, lens, macula and optic nerve head. Cells are drawn larger and the corneal arch is deepened so the layers can be read. Language follows the site. Education only, not an examination.",
+    "Four sections below: cornea, lens, macula and optic nerve head. Each card can switch to edema, scar, cataract, epiretinal membrane, a full-thickness hole, wet or dry AMD, or glaucomatous cupping. Cells are drawn larger. Language follows the site. Education only, not an examination.",
   tissueSectionsEduBadge: "Tissue illustration · not an examination",
   tissueSectionsEduCaveat:
     "Colours and thicknesses are exaggerated. This is not an examination or a diagnosis.",
@@ -1630,7 +1630,7 @@ const ja: Record<Key, string> = {
     "図示は視力検査や眼鏡合わせではなく、眼鏡やコンタクトレンズの後の視力を予測できません。スライダーは図示の設定であり、あなたの処方ではありません。登録医の代わりにはなりません。本サイトは診断、処方、予約、販売、紹介を行いません。",
   tissueSectionsSimTitle: "組織断面",
   tissueSectionsSimCaption:
-    "下は四つの断面です：角膜、水晶体、黄斑、視神経乳頭。細胞は大きく、角膜の弧も深く描いてあり、層が読めます。言語はサイトに従います。教育用の示意であり、検査ではありません。",
+    "下は四つの断面です：角膜、水晶体、黄斑、視神経乳頭。各カードから浮腫、瘢痕、白内障、網膜前膜、全層円孔、滲出型・萎縮型加齢黄斑変性、緑内障性陥凹に切り替えられます。言語はサイトに従います。教育用の示意であり、検査ではありません。",
   tissueSectionsEduBadge: "組織の図示 · 検査ではない",
   tissueSectionsEduCaveat: "色と厚みは誇張しています。検査でも診断でもありません。",
   tissueSectionsSimFooter:

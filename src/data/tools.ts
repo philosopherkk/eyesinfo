@@ -44,7 +44,7 @@ export const TOOLS: ToolDef[] = [
   {
     id: "tissue-sections",
     title: "組織切面",
-    blurb: "角膜、晶狀體、黃斑、視神經頭的活體切面。細胞畫大了，層次才讀得見。教育示意，不是檢查。",
+    blurb: "角膜、晶狀體、黃斑、視神經頭的活體切面，可改看水腫、瘢痕、白內障、黃斑前膜、全層裂孔、濕性與乾性老年黃斑退化、青光眼凹陷。教育示意，不是檢查。",
     canto: "細胞畫大了先讀到",
     href: "/tools/tissue-sections",
   },
